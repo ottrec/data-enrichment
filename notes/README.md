@@ -24,6 +24,10 @@ Tooling (from the module root, needs `/tmp/ottrec-data.db`):
 - `go run ./cmd/enrich`: the enrichment itself; latest version as JSON to
   stdout, `-versions 0 -o dir` for one file per version, `-o ""` for stats
   only. Stats always go to stderr.
+- `go run ./cmd/dump-residue > notes/residue.txt`: the unique items the
+  parser couldn't fully resolve (the LLM/manual second-pass candidate set),
+  deduplicated and grouped by failure category. [residue.txt](residue.txt)
+  is a checked-in snapshot over all 315 versions.
 - `go run ./cmd/dump-special` (existing): raw line dump for `sort | uniq -c`.
 - `go run ./cmd/dump-context [-versions n] [-blocks]`: whole blocks
   (newline-escaped) with facility/group/schedule/activity/time context;
