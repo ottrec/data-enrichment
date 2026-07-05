@@ -36,6 +36,7 @@ var categories = []string{
 	"date-garbled",
 	"date-unparsed",
 	"date-range-invalid",
+	"possible-activity-time",
 	"hours-context-unknown",
 	"meridiem-ambiguous",
 }

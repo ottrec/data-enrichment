@@ -57,9 +57,11 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   comma-clause loop (keyword / moved to / changed to / schedule change /
   trailing "only" restriction / phrase parts) → trailing keyword glued
   without comma → allDropinsRe → allClassRe → empty-phrase branch (bare
-  effects, date+clock hours items, date-only items; closureContext and an
-  "hours" section heading decide Closure vs ModifiedHours vs
-  `hours-context-unknown`) → activity match → amenity → freeform.
+  effects, date+clock hours items, date-only items) → activity match →
+  amenity → freeform. Bare date+clock items: closureContext ⇒ Closure; in a
+  schedule_changes block always `possible-activity-time` (never dismissed as
+  facility hours); in special_hours/notifications ⇒ ModifiedHours unless the
+  range exactly equals an activity slot on those dates or is <4h.
   Also here: `resolveClass` (empty segments = "all drop-in activities" ⇒
   whole scope), `gatherSlots` (fixed-date times via `SingleDate` ymd
   equality; weekday times filtered by the spec's weekdays and by schedule

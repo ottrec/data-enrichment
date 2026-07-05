@@ -332,13 +332,52 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 				n.Ambiguities = append(n.Ambiguities, ambNoSubject)
 			}
 		case spec != nil && len(clocks) > 0:
-			n.Scope.Level = "facility"
-			if st.closureContext {
+			n.Scope.Level = defaultLevel
+			switch {
+			case st.closureContext:
 				n.Effects.Closure = true
-			} else if strings.Contains(foldText(st.section), "hours") {
+			case b.grp != nil:
+				// inside a schedule-changes block a bare time is likely an
+				// orphaned activity time change, never ignorable facility
+				// hours
+				n.Scope.Groups = []string{b.grp.label}
+				n.Ambiguities = append(n.Ambiguities, ambPossibleActivityTime)
+			case strings.Contains(foldText(st.section), "hours"):
 				n.Effects.ModifiedHours = true
-			} else {
-				n.Ambiguities = append(n.Ambiguities, ambHoursContext)
+			default:
+				// bare "date, clock range" items are facility hours (which we
+				// don't need to associate further) unless they could be an
+				// orphaned activity time change: a range exactly equal to an
+				// activity slot on those dates, or one too short to plausibly
+				// be facility hours
+				var acts []*actEntry
+				if b.grp != nil {
+					acts = b.grp.acts
+				} else {
+					for _, m := range b.matchers {
+						acts = append(acts, m.acts...)
+					}
+				}
+				slots := gatherSlots(acts, spec)
+				var exact, short bool
+				for _, cm := range clocks {
+					for _, c := range cm.Cands {
+						if c.End-c.Start < 4*60 {
+							short = true
+						}
+						if rel, _ := clockRelation(c, slots); rel == relExact {
+							exact = true
+						}
+					}
+				}
+				switch {
+				case exact:
+					n.Ambiguities = append(n.Ambiguities, ambPossibleActivityTime)
+				case short:
+					n.Ambiguities = append(n.Ambiguities, ambHoursContext)
+				default:
+					n.Effects.ModifiedHours = true
+				}
 			}
 		case spec != nil:
 			n.Scope.Level = "facility"

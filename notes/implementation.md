@@ -64,7 +64,7 @@ matching the sketch in [approaches.md](approaches.md).
 amenity 1,616 / none 1,181 (2.4%). Time relations on activity-scoped items:
 exact 7,138 / within 1,078 / covers 309 / overlaps 193 / novel 1,317 (added) /
 none 554. 6,380 special-duplicates-changes flags; 38 timeChange (end-early),
-3 activity-typo-match.
+3 activity-typo-match, 3,862 modifiedHours.
 
 Marker highlights, spot-checked:
 
@@ -77,8 +77,13 @@ Marker highlights, spot-checked:
 - `meridiem-inferred` 9,170: pervasive because the city writes "9 to 10 am";
   spot-checks all resolve correctly and most are confirmed by exact slot
   matches.
-- `hours-context-unknown` 4,137: bare "date + clock" items outside an
-  "hours" section; emitted with dates+time but no ModifiedHours claim.
+- Bare "date + clock" items in special_hours/notifications resolve to
+  ModifiedHours (facility hours, ignorable for schedule purposes) unless the
+  range exactly equals an activity slot on those dates or is under 4h
+  (`possible-activity-time` 1,254, mostly amenity slots like hot tub that
+  span the whole facility day) or too short to call (`hours-context-unknown`
+  144). Inside a schedule_changes block they are always flagged
+  `possible-activity-time`, never dismissed as hours.
 - `activity-unmatched` 475: novel added activities ("Women's only swim"),
   facilities with no published schedule at the time, typos ("Baddminton").
 - `date-garbled` 103: all the Glen Cairn "July 6 to 10 Friday, July 10"
