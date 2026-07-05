@@ -3,6 +3,7 @@ package enrich
 import (
 	"strings"
 	"unicode"
+	"unicode/utf8"
 )
 
 // normText cleans text extracted from HTML for display: drops zero-width
@@ -107,6 +108,42 @@ func subset(a, b map[string]bool) bool {
 
 func setsEqual(a, b map[string]bool) bool {
 	return len(a) == len(b) && subset(a, b)
+}
+
+// splitSentences splits multi-sentence text at ". " boundaries followed by
+// an uppercase letter, so each sentence gets its own parse ("The 25 m pool
+// is closed between ... am. Lane swim, 7:30 to 8:30 am, cancelled").
+// Abbreviations like "a.m." don't split (the period before the letter).
+func splitSentences(s string) []string {
+	var out []string
+	start := 0
+	for i := 1; i+1 < len(s); i++ {
+		if s[i] != '.' || s[i+1] != ' ' {
+			continue
+		}
+		if p := s[i-1]; !(p >= 'a' && p <= 'z' || p == ')') {
+			continue
+		}
+		if i >= 2 && s[i-2] == '.' {
+			continue
+		}
+		j := i + 1
+		for j < len(s) && s[j] == ' ' {
+			j++
+		}
+		r, _ := utf8.DecodeRuneInString(s[j:])
+		if !unicode.IsUpper(r) {
+			continue
+		}
+		if part := strings.TrimSpace(s[start : i+1]); part != "" {
+			out = append(out, part)
+		}
+		start = j
+	}
+	if part := strings.TrimSpace(s[start:]); part != "" {
+		out = append(out, part)
+	}
+	return out
 }
 
 func joinedLen(m map[string]bool) int {

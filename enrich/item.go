@@ -93,6 +93,41 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 	if spec != nil {
 		n.Ambiguities = append(n.Ambiguities, spec.Ambig...)
 	}
+
+	// multi-sentence items get one parse per sentence ("The 25 m pool is
+	// closed between 7:30 and 10:30 am. Lane swim, 7:30 to 8:30 am,
+	// cancelled"), sharing the raw text and date context
+	if sents := splitSentences(working); len(sents) > 1 {
+		beforeN, beforeU := len(b.out.Notices), len(b.out.Unparsed)
+		for _, s := range sents {
+			nn := n
+			nn.Ambiguities = slices.Clone(n.Ambiguities)
+			b.processSentence(nn, st, spec, s, links)
+		}
+		// per-sentence unparsed records are redundant: the notices carry the
+		// full raw text, and an all-unparsed item needs only one record
+		if len(b.out.Unparsed) > beforeU {
+			for _, u := range b.out.Unparsed[beforeU:] {
+				b.out.Stats["unparsed/"+u.Reason]--
+			}
+			b.out.Unparsed = b.out.Unparsed[:beforeU]
+			if len(b.out.Notices) == beforeN {
+				b.out.Stats["unparsed/freeform"]++
+				b.out.Unparsed = append(b.out.Unparsed, Unparsed{
+					Facility: n.Facility, Group: n.Group, Source: n.Source,
+					BlockHash: n.BlockHash, Section: n.Section, DateText: n.DateText,
+					RawHTML: n.RawHTML, RawText: n.RawText, Reason: "freeform",
+				})
+			}
+		}
+		return
+	}
+	b.processSentence(n, st, spec, working, links)
+}
+
+// processSentence parses one sentence of an item and emits a Notice or an
+// Unparsed record.
+func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, working string, links []anchor) {
 	openEnded := untilNoticeRe.MatchString(working)
 
 	defaultLevel := "facility"
@@ -134,6 +169,16 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 		return
 	}
 
+	// time extraction first, so closure sentences keep their times
+	clocks, remainder := findClockRanges(working)
+	singles, remainder := findSingleEnded(remainder)
+	clocks = append(clocks, singles...)
+	for _, cm := range clocks {
+		if cm.EndEarly {
+			n.Effects.TimeChange = true
+		}
+	}
+
 	fworking := foldText(working)
 
 	// whole-facility closure sentences
@@ -146,7 +191,7 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 			n.Scope.Groups = []string{b.grp.label}
 		}
 		st.closureContext = true
-		emit()
+		b.emitTimes(&n, spec, clocks, emit)
 		return
 	}
 
@@ -171,9 +216,6 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 		return
 	}
 
-	// clause decomposition
-	clocks, remainder := findClockRanges(working)
-
 	// "<subject> is closed ..." sentences: resolve the subject, which may be
 	// the facility itself, an activity, or an amenity (an amenity closure
 	// makes no claims about activities: e.g. one closed arena of two does
@@ -184,7 +226,10 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 		n.Effects.Cancelled = allProgramsRe.MatchString(fremainder)
 		subject := strings.TrimPrefix(strings.TrimSpace(m[1]), "the ")
 		n.Scope.Phrase = subject
-		q, acts, groups := b.matchActivity(subject)
+		q, acts, groups, typo := b.matchActivity(subject)
+		if typo {
+			n.Ambiguities = append(n.Ambiguities, ambActivityTypo)
+		}
 		switch {
 		case subjectIsFacility(subject, b.fac.GetName()):
 			n.Scope.Level = "facility"
@@ -311,7 +356,10 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 	}
 
 	// activity subject
-	q, acts, groups := b.matchActivity(phrase)
+	q, acts, groups, typo := b.matchActivity(phrase)
+	if typo && q != matchNone {
+		n.Ambiguities = append(n.Ambiguities, ambActivityTypo)
+	}
 	switch q {
 	case matchExact, matchNormalized, matchFuzzy:
 		n.Scope.Level = "activity"
@@ -425,14 +473,15 @@ func (b *blockCtx) resolveClass(n *Notice, classPhrase string) []*actEntry {
 
 // matchActivity matches a subject phrase against the block's group (or all
 // groups for facility-level sources).
-func (b *blockCtx) matchActivity(phrase string) (string, []*actEntry, []string) {
+func (b *blockCtx) matchActivity(phrase string) (string, []*actEntry, []string, bool) {
 	if b.grp != nil {
 		r := b.grp.match(phrase)
-		return r.Quality, r.Acts, nil
+		return r.Quality, r.Acts, nil, r.Typo
 	}
 	order := []string{matchExact, matchNormalized, matchFuzzy, matchMultiple}
 	byQ := map[string][]*actEntry{}
 	byQGroups := map[string][]string{}
+	byQTypo := map[string]bool{}
 	for _, m := range b.matchers {
 		r := m.match(phrase)
 		if r.Quality == matchNone {
@@ -440,18 +489,20 @@ func (b *blockCtx) matchActivity(phrase string) (string, []*actEntry, []string) 
 		}
 		byQ[r.Quality] = append(byQ[r.Quality], r.Acts...)
 		byQGroups[r.Quality] = append(byQGroups[r.Quality], m.label)
+		byQTypo[r.Quality] = byQTypo[r.Quality] || r.Typo
 	}
 	for _, q := range order {
 		if len(byQ[q]) == 0 {
 			continue
 		}
 		acts, groups := byQ[q], dedupeStrings(byQGroups[q])
+		typo := byQTypo[q]
 		if q == matchFuzzy && len(acts) > 1 {
 			q = matchMultiple
 		}
-		return q, acts, groups
+		return q, acts, groups, typo
 	}
-	return matchNone, nil, nil
+	return matchNone, nil, nil, false
 }
 
 // isAmenity reports whether the phrase names a facility amenity: qualifier
@@ -812,11 +863,13 @@ func (b *blockCtx) emitTimesWithSlots(n *Notice, spec *dateSpec, clocks []clockM
 			}
 		}
 		nn.Time = &TimeAssoc{
-			Text:     cm.Text,
-			StartMin: int(best.Start),
-			EndMin:   int(best.End),
-			Relation: rel,
-			Slots:    touched,
+			Text:      cm.Text,
+			StartMin:  int(best.Start),
+			EndMin:    int(best.End),
+			OpenStart: cm.OpenStart,
+			OpenEnd:   cm.OpenEnd,
+			Relation:  rel,
+			Slots:     touched,
 		}
 		if len(acts) > 0 {
 			b.out.Stats["time/relation/"+rel]++

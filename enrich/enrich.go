@@ -30,6 +30,7 @@ const (
 	ambHoursContext       = "hours-context-unknown"
 	ambFreeformItem       = "freeform-item"
 	ambDateOutsideSched   = "date-outside-schedule"
+	ambActivityTypo       = "activity-typo-match"
 	ambTimeChangeUnparsed = "time-change-unparsed"
 )
 

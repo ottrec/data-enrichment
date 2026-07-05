@@ -21,11 +21,16 @@ var clockRangeRe = regexp.MustCompile(`(?i)(?:\b|^)(` + clockTokenPat + `)\s*(?:
 var clockSideRe = regexp.MustCompile(`(?i)^(?:(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)?|(noon)|(midnight))$`)
 
 // clockMention is one clock range found in text, with all candidate
-// interpretations when meridiems are missing.
+// interpretations when meridiems are missing. Single-ended mentions
+// ("closed until noon") synthesize the affected portion of the day and set
+// OpenStart/OpenEnd.
 type clockMention struct {
-	Text     string
-	Cands    []schema.ClockRange
-	Inferred bool // a meridiem was missing and had to be inferred
+	Text      string
+	Cands     []schema.ClockRange
+	Inferred  bool // a meridiem was missing and had to be inferred
+	OpenStart bool // "until X": affected from start of day to X
+	OpenEnd   bool // "at/from X on": affected from X to end of day
+	EndEarly  bool // "will end at X": a time change, not a closure
 }
 
 // parseClockSide parses one side of a clock range into minutes from midnight
@@ -151,4 +156,66 @@ func clockCandidates(a, b string) ([]schema.ClockRange, bool) {
 		return int((a.End - a.Start) - (b.End - b.Start))
 	})
 	return cands, true
+}
+
+var (
+	endAtRe       = regexp.MustCompile(`(?i)\b(?:will end|ends|ending)\s+(?:at|by)\s+(` + clockTokenPat + `)`)
+	closedUntilRe = regexp.MustCompile(`(?i)\b(closed|will be closed)\s+until\s+(` + clockTokenPat + `)`)
+	closedAtRe    = regexp.MustCompile(`(?i)\b(closed|closes|will close)\s+at\s+(` + clockTokenPat + `)`)
+)
+
+// findSingleEnded extracts single-ended time mentions ("The pool is closed
+// until noon", "closed at 7:30 pm", "Public swim will end at 6 pm"),
+// synthesizing the affected part of the day. The closure keyword stays in
+// the remainder (it drives the effect); "will end at X" is removed wholesale
+// and flagged EndEarly.
+func findSingleEnded(s string) ([]clockMention, string) {
+	var out []clockMention
+	for {
+		var m []int
+		var openStart, endEarly, keepKeyword bool
+		if m = closedUntilRe.FindStringSubmatchIndex(s); m != nil {
+			openStart, keepKeyword = true, true
+		} else if m = closedAtRe.FindStringSubmatchIndex(s); m != nil {
+			keepKeyword = true
+		} else if m = endAtRe.FindStringSubmatchIndex(s); m != nil {
+			endEarly = true
+		} else {
+			break
+		}
+		clockStr := s[m[len(m)-2]:m[len(m)-1]]
+		v, explicit, ok := parseClockSide(clockStr)
+		var cands []schema.ClockRange
+		if ok && v > 0 && v < 24*60 {
+			vs := []int{v}
+			if !explicit && v+12*60 < 24*60 {
+				vs = append(vs, v+12*60)
+			}
+			for _, x := range vs {
+				if openStart {
+					cands = append(cands, schema.ClockRange{Start: 0, End: schema.ClockTime(x)})
+				} else {
+					cands = append(cands, schema.ClockRange{Start: schema.ClockTime(x), End: 24 * 60})
+				}
+			}
+		}
+		var repl string
+		if keepKeyword {
+			repl = s[m[2]:m[3]]
+		}
+		text := strings.TrimSpace(s[m[0]:m[1]])
+		s = strings.TrimSpace(s[:m[0]] + repl + s[m[1]:])
+		if len(cands) == 0 {
+			continue
+		}
+		out = append(out, clockMention{
+			Text:      text,
+			Cands:     cands,
+			Inferred:  !explicit,
+			OpenStart: openStart,
+			OpenEnd:   !openStart,
+			EndEarly:  endEarly,
+		})
+	}
+	return out, s
 }

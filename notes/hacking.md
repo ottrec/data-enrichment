@@ -135,13 +135,13 @@ saw.
 1. Decide delivery: where the JSON goes (published next to the dataset vs
    consumed directly by the website) and what key the website joins on
    (facility name + group label today; consider source URL).
-2. Golden tests: embed a handful of raw block HTML fixtures (Terry Fox,
-   Glen Cairn, Eva James inverted form, Fred Barrett) and assert full
-   Notice output, so refactors are safe without the corpus.
-3. Single-ended times ("closed until noon", "will end at 6 pm") as
-   half-open TimeAssocs.
-4. Sentence splitting so multi-sentence items don't lose the second
-   sentence's structure.
-5. Guarded edit-distance-1 activity matching ("Baddminton").
-6. The LLM residue pass (approach C in approaches.md) over
+2. The LLM residue pass (approach C in approaches.md) over
    unparsed-freeform + activity-unmatched, behind the same validators.
+   On hold: options to be explored first.
+
+Done since the first corpus run (verified against the full corpus, not
+fixtures — per-feature stats diffs are in the workflow above): single-ended
+times ("closed until noon" OpenStart, "will end at 6 pm" OpenEnd +
+TimeChange), per-sentence parsing of multi-sentence items (sibling unparsed
+records suppressed), and guarded edit-distance-1 typo matching
+(`activity-typo-match`, single-candidate only).

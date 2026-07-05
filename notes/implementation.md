@@ -28,8 +28,13 @@ matching the sketch in [approaches.md](approaches.md).
 4. **Clocks** (`clock.go`): clock-range grammar; missing meridiems produce
    candidate readings (>12h readings dropped when a shorter one exists,
    shortest first), disambiguated against schedule slots where possible,
-   marked `meridiem-inferred`/`meridiem-ambiguous`.
-5. **Items** (`item.go`): sentence-level patterns first (see-schedule,
+   marked `meridiem-inferred`/`meridiem-ambiguous`. Single-ended mentions
+   ("closed until noon", "closed at 7:30 pm", "will end at 6 pm") synthesize
+   the affected part of the day (TimeAssoc OpenStart/OpenEnd; "will end at"
+   also sets TimeChange).
+5. **Items** (`item.go`): multi-sentence items split at sentence boundaries
+   and parse per sentence (sibling freeform sentences don't add redundant
+   unparsed records). Then sentence-level patterns first (see-schedule,
    facility closures, "closed for the season", "Regular season + range",
    "subject is closed" with facility/activity/amenity subject resolution),
    then comma-clause decomposition (keyword clauses, moved/changed-to,
@@ -38,7 +43,9 @@ matching the sketch in [approaches.md](approaches.md).
    activities / groups by title. Amenity subjects (hot tub, one named arena
    of two, ...) never claim activity effects.
 6. **Matching** (`match.go`): exact folded spelling, then equal token sets,
-   then token subset either way (stemmed, stopworded); multiple candidates
+   then token subset either way (stemmed, stopworded), then edit-distance-1
+   token pairing for typos ("Baddminton"), accepted only when it identifies
+   exactly one activity and marked `activity-typo-match`. Multiple candidates
    are kept as candidates with `activity-multiple-candidates`, except when
    the item's exact time+weekday slot uniquely identifies one
    (`activity-time-disambiguated`).
@@ -52,11 +59,12 @@ matching the sketch in [approaches.md](approaches.md).
 
 ## Corpus results (315 versions, 2025-08 to 2026-07)
 
-62,579 items → 49,953 notices + 11,845 boilerplate + 919 unparsed freeform
-(1.5%). Scope: activity 11,214 / class 841 / group 16,061 / facility 19,152 /
-amenity 1,486 / none 1,199 (2.4%). Time relations on activity-scoped items:
-exact 7,138 / within 1,078 / covers 309 / overlaps 154 / novel 1,317 (added) /
-none 554. 6,377 special-duplicates-changes flags.
+62,579 items → 50,089 notices + 11,845 boilerplate + 919 unparsed freeform
+(1.5%). Scope: activity 11,232 / class 842 / group 16,061 / facility 19,157 /
+amenity 1,616 / none 1,181 (2.4%). Time relations on activity-scoped items:
+exact 7,138 / within 1,078 / covers 309 / overlaps 193 / novel 1,317 (added) /
+none 554. 6,380 special-duplicates-changes flags; 38 timeChange (end-early),
+3 activity-typo-match.
 
 Marker highlights, spot-checked:
 
@@ -79,16 +87,12 @@ Marker highlights, spot-checked:
 ## Known limitations / possible next steps
 
 - Prose-embedded dates ("The facility will close at 4:30 pm, Thursday,
-  June 11, and reopen at noon, Friday, June 12.") stay unparsed-freeform.
-- Single-ended times ("will end at 6 pm", "closed until noon") are not
-  extracted as clock ranges.
-- Multi-sentence items only get the first sentence's structure ("The 25 m
-  pool is closed between... . Lane swim, 7:30 to 8:30 am, cancelled" loses
-  the second sentence's cancellation).
-- Typo'd activity names don't match (no edit-distance matching); reworded
-  ones ("adult 18 + skate" vs "adult skate 18+") mostly do via token sets.
+  June 11, and reopen at noon, Friday, June 12.") stay unparsed-freeform
+  (dates are only parsed at the start of a line/sentence).
+- "Reopen at X" is ignored; only the closing side of a closure gets a time.
 - The LLM residue pass (approach C) would target exactly the
   unparsed-freeform + activity-unmatched tail, behind the same validators.
+  Options to be explored before implementing.
 - Caching by block hash (see [matching.md](matching.md)) is not implemented;
   a full run takes ~2 min for all 315 versions, so per-version reruns are
   cheap enough without it.

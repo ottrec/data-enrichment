@@ -108,3 +108,71 @@ func TestSubjectIsFacility(t *testing.T) {
 		}
 	}
 }
+
+func TestFindSingleEnded(t *testing.T) {
+	for _, tc := range []struct {
+		in        string
+		n         int
+		first     schema.ClockRange
+		openStart bool
+		openEnd   bool
+		endEarly  bool
+		rest      string
+	}{
+		{in: "The pool is closed until noon.", n: 1, first: schema.ClockRange{Start: 0, End: 720}, openStart: true, rest: "The pool is closed."},
+		{in: "The hot tub and steam room is closed at 7:30 pm.", n: 1, first: schema.ClockRange{Start: 19*60 + 30, End: 1440}, openEnd: true, rest: "The hot tub and steam room is closed"},
+		{in: "Public swim will end at 6 pm.", n: 1, first: schema.ClockRange{Start: 18 * 60, End: 1440}, openEnd: true, endEarly: true, rest: "Public swim"},
+		{in: "closed until further notice", n: 0, rest: "closed until further notice"},
+		{in: "Lane swim, cancelled", n: 0, rest: "Lane swim, cancelled"},
+	} {
+		t.Run(tc.in, func(t *testing.T) {
+			ms, rest := findSingleEnded(tc.in)
+			if len(ms) != tc.n {
+				t.Fatalf("mentions = %v, want %d", ms, tc.n)
+			}
+			if tc.n > 0 {
+				m := ms[0]
+				if m.Cands[0] != tc.first || m.OpenStart != tc.openStart || m.OpenEnd != tc.openEnd || m.EndEarly != tc.endEarly {
+					t.Errorf("got %+v, want first=%v openStart=%v openEnd=%v endEarly=%v", m, tc.first, tc.openStart, tc.openEnd, tc.endEarly)
+				}
+			}
+			if rest != tc.rest {
+				t.Errorf("rest = %q, want %q", rest, tc.rest)
+			}
+		})
+	}
+}
+
+func TestSplitSentences(t *testing.T) {
+	for _, tc := range []struct {
+		in   string
+		want int
+	}{
+		{"The 25 m pool is closed between 7:30 and 10:30 am. Lane swim, 7:30 to 8:30 am, cancelled", 2},
+		{"Lap pool heater broken. Pool temperature is colder than normal until further notice.", 2},
+		{"Lane swim, 11 am to 3 pm, cancelled", 1},
+		{"See Winter Break schedule.", 1},
+		{"Open 9 a.m. Monday", 1}, // abbreviation must not split
+	} {
+		if got := splitSentences(tc.in); len(got) != tc.want {
+			t.Errorf("splitSentences(%q) = %q, want %d parts", tc.in, got, tc.want)
+		}
+	}
+}
+
+func TestDlLE1(t *testing.T) {
+	for _, tc := range []struct {
+		a, b string
+		want bool
+	}{
+		{"baddminton", "badminton", true},
+		{"therapuetic", "therapeutic", true}, // transposition
+		{"badminton", "badminton", true},
+		{"skating", "swimming", false},
+		{"swim", "swims", true},
+	} {
+		if got := dlLE1(tc.a, tc.b); got != tc.want {
+			t.Errorf("dlLE1(%q, %q) = %v, want %v", tc.a, tc.b, got, tc.want)
+		}
+	}
+}

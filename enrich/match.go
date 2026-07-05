@@ -67,6 +67,7 @@ func newGroupMatcher(grp ottrecidx.ScheduleGroupRef) *groupMatcher {
 type matchResult struct {
 	Quality string
 	Acts    []*actEntry
+	Typo    bool // matched only via edit-distance-1 token pairing
 }
 
 // match matches a subject phrase against the group's activities: exact folded
@@ -105,7 +106,75 @@ func (m *groupMatcher) match(phrase string) matchResult {
 	case len(sub) > 1:
 		return matchResult{Quality: matchMultiple, Acts: sub}
 	}
+	// typo tolerance ("Baddminton"): token pairing within edit distance 1,
+	// only when it identifies exactly one activity
+	var typo []*actEntry
+	for _, e := range m.acts {
+		okPA, t1 := typoCovers(pt, e.toks)
+		okAP, t2 := typoCovers(e.toks, pt)
+		if (okPA && t1) || (okAP && t2) {
+			typo = append(typo, e)
+		}
+	}
+	if len(typo) == 1 {
+		return matchResult{Quality: matchFuzzy, Acts: typo, Typo: true}
+	}
 	return matchResult{Quality: matchNone}
+}
+
+// typoCovers reports whether every token in xs pairs with a token in ys,
+// exactly or (for tokens of 5+ chars on both sides) within edit distance 1;
+// usedTypo is true when at least one pair needed the tolerance.
+func typoCovers(xs, ys map[string]bool) (ok, usedTypo bool) {
+	for x := range xs {
+		if ys[x] {
+			continue
+		}
+		found := false
+		if len(x) >= 5 {
+			for y := range ys {
+				if len(y) >= 5 && dlLE1(x, y) {
+					found, usedTypo = true, true
+					break
+				}
+			}
+		}
+		if !found {
+			return false, false
+		}
+	}
+	return true, usedTypo
+}
+
+// dlLE1 reports whether the Damerau-Levenshtein distance between a and b is
+// at most 1 (one insertion, deletion, substitution, or transposition).
+func dlLE1(a, b string) bool {
+	if a == b {
+		return true
+	}
+	ra, rb := []rune(a), []rune(b)
+	if len(ra) > len(rb) {
+		ra, rb = rb, ra
+	}
+	la, lb := len(ra), len(rb)
+	if lb-la > 1 {
+		return false
+	}
+	i := 0
+	for i < la && ra[i] == rb[i] {
+		i++
+	}
+	if la == lb {
+		if i == la {
+			return true
+		}
+		if slices.Equal(ra[i+1:], rb[i+1:]) {
+			return true // substitution
+		}
+		return i+1 < la && ra[i] == rb[i+1] && ra[i+1] == rb[i] &&
+			slices.Equal(ra[i+2:], rb[i+2:]) // transposition
+	}
+	return slices.Equal(ra[i:], rb[i+1:]) // insertion
 }
 
 // coversGroup reports whether one class segment ("skating", "ice sports")

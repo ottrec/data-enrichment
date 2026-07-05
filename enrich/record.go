@@ -71,6 +71,11 @@ type TimeAssoc struct {
 	Text     string `json:"text,omitempty"`
 	StartMin int    `json:"startMin,omitempty"`
 	EndMin   int    `json:"endMin,omitempty"` // may exceed 1440 for overnight
+	// OpenStart/OpenEnd mark single-ended mentions: "closed until noon" is
+	// open at the start (affected from start of day), "closed at 7:30 pm" /
+	// "will end at 6 pm" open at the end (affected through end of day).
+	OpenStart bool `json:"openStart,omitempty"`
+	OpenEnd   bool `json:"openEnd,omitempty"`
 	// Relation to the matched activity's slots on the resolved dates:
 	// exact | within | covers | overlaps | novel | none | unchecked.
 	Relation string   `json:"relation,omitempty"`
