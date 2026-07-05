@@ -14,9 +14,14 @@ separately).
   activity names and time slots, date resolution, ambiguity taxonomy.
 - [approaches.md](approaches.md): candidate designs, tradeoffs, recommendation,
   and a sketch of the output record format.
+- [implementation.md](implementation.md): status and corpus results of the
+  deterministic parser (approach A), implemented in `enrich/` + `cmd/enrich`.
 
 Tooling (from the module root, needs `/tmp/ottrec-data.db`):
 
+- `go run ./cmd/enrich`: the enrichment itself; latest version as JSON to
+  stdout, `-versions 0 -o dir` for one file per version, `-o ""` for stats
+  only. Stats always go to stderr.
 - `go run ./cmd/dump-special` (existing): raw line dump for `sort | uniq -c`.
 - `go run ./cmd/dump-context [-versions n] [-blocks]`: whole blocks
   (newline-escaped) with facility/group/schedule/activity/time context;
@@ -24,3 +29,7 @@ Tooling (from the module root, needs `/tmp/ottrec-data.db`):
 - `notes/scripts/*.py`: the analysis scripts that produced the numbers in
   these notes. Run them in a directory containing the dump outputs they name
   (see each script's docstring); they parse the escaped `dump-context` output.
+
+A full-corpus run over all versions holds every index in turn; run it under a
+memory cap (`systemd-run --user --scope -p MemoryMax=8G env GOMEMLIMIT=6GiB
+...`) to be safe.

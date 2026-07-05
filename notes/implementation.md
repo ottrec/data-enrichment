@@ -1,0 +1,94 @@
+# Implementation: deterministic parser (approach A)
+
+Package `enrich/` + `cmd/enrich`. Consumes dataset versions through
+`ottrecidx` (data access, `ComputeEffectiveDateRange`, `SingleDate`, TZ) and
+emits one JSON `Output` per version; the record format is `enrich/record.go`,
+matching the sketch in [approaches.md](approaches.md).
+
+## Pipeline
+
+1. **Block split** (`html.go`): x/net/html fragment parse into headings,
+   paragraphs, and (nested) lists. Text is extracted by direct concatenation
+   (split-bold survives), `<br>` becomes a line break, zero-width/nbsp
+   stripped (`text.go`).
+2. **Walk** (`enrich.go`): headings set the section and can set the date
+   context; date-only paragraphs/list-heads set the date context; leaf items
+   (list items, `<br>` lines, paragraphs) become candidate notices. Handles
+   the inverted form (statement head, date children) and garbled date heads
+   (children emitted with a `date-garbled` marker, no dates). An intro line
+   like "The facility is not available on the following dates:" makes the
+   following bare date+time items closures instead of hours.
+3. **Dates** (`date.go`): weekday/month/day/[year] grammar with ranges,
+   enumerations, weekday-only sets, "until further notice". Yearless dates
+   anchor to the facility SourceDate (fallback dataset Updated) as in
+   ottrecidx; the written weekday validates the year. Ranges resolve both
+   endpoints jointly (weekday agreements scored, ties broken by anchor
+   proximity) so one typo'd endpoint can't drag the range a year off. All
+   shortfalls become markers, never guesses.
+4. **Clocks** (`clock.go`): clock-range grammar; missing meridiems produce
+   candidate readings (>12h readings dropped when a shorter one exists,
+   shortest first), disambiguated against schedule slots where possible,
+   marked `meridiem-inferred`/`meridiem-ambiguous`.
+5. **Items** (`item.go`): sentence-level patterns first (see-schedule,
+   facility closures, "closed for the season", "Regular season + range",
+   "subject is closed" with facility/activity/amenity subject resolution),
+   then comma-clause decomposition (keyword clauses, moved/changed-to,
+   trailing "only" restriction, subject phrase). Scope phrases ("all
+   drop-in skating and ice sports") resolve to whole group / class-matched
+   activities / groups by title. Amenity subjects (hot tub, one named arena
+   of two, ...) never claim activity effects.
+6. **Matching** (`match.go`): exact folded spelling, then equal token sets,
+   then token subset either way (stemmed, stopworded); multiple candidates
+   are kept as candidates with `activity-multiple-candidates`, except when
+   the item's exact time+weekday slot uniquely identifies one
+   (`activity-time-disambiguated`).
+7. **Validation**: resolved dates checked against the group's schedule
+   ranges (negative-only semantics); item clock ranges related to actual
+   slots (exact/within/covers/overlaps/novel/none); cancels with no slot
+   overlap marked. "Added" times are expected to be novel.
+8. **Dedup**: special_hours notices repeating a group's schedule_changes
+   (dates+effects+scope key, merged class phrasing matches per-group copies)
+   get `duplicateOfGroups` (flagged, not dropped).
+
+## Corpus results (315 versions, 2025-08 to 2026-07)
+
+62,579 items → 49,953 notices + 11,845 boilerplate + 919 unparsed freeform
+(1.5%). Scope: activity 11,214 / class 841 / group 16,061 / facility 19,152 /
+amenity 1,486 / none 1,199 (2.4%). Time relations on activity-scoped items:
+exact 7,138 / within 1,078 / covers 309 / overlaps 154 / novel 1,317 (added) /
+none 554. 6,377 special-duplicates-changes flags.
+
+Marker highlights, spot-checked:
+
+- `weekday-mismatch` 856: city typos ("Friday, January 4", "Thursday,
+  April 4 to Monday, April 6"); dates still resolve to the intended near
+  year.
+- `no-slot-overlap` 505: mostly holiday-Monday cancellations of times that
+  only existed on unpublished holiday schedules (e.g. Richmond Memorial
+  Thanksgiving); genuinely absent from the data, honestly marked.
+- `meridiem-inferred` 9,170: pervasive because the city writes "9 to 10 am";
+  spot-checks all resolve correctly and most are confirmed by exact slot
+  matches.
+- `hours-context-unknown` 4,137: bare "date + clock" items outside an
+  "hours" section; emitted with dates+time but no ModifiedHours claim.
+- `activity-unmatched` 475: novel added activities ("Women's only swim"),
+  facilities with no published schedule at the time, typos ("Baddminton").
+- `date-garbled` 103: all the Glen Cairn "July 6 to 10 Friday, July 10"
+  family.
+
+## Known limitations / possible next steps
+
+- Prose-embedded dates ("The facility will close at 4:30 pm, Thursday,
+  June 11, and reopen at noon, Friday, June 12.") stay unparsed-freeform.
+- Single-ended times ("will end at 6 pm", "closed until noon") are not
+  extracted as clock ranges.
+- Multi-sentence items only get the first sentence's structure ("The 25 m
+  pool is closed between... . Lane swim, 7:30 to 8:30 am, cancelled" loses
+  the second sentence's cancellation).
+- Typo'd activity names don't match (no edit-distance matching); reworded
+  ones ("adult 18 + skate" vs "adult skate 18+") mostly do via token sets.
+- The LLM residue pass (approach C) would target exactly the
+  unparsed-freeform + activity-unmatched tail, behind the same validators.
+- Caching by block hash (see [matching.md](matching.md)) is not implemented;
+  a full run takes ~2 min for all 315 versions, so per-version reruns are
+  cheap enough without it.

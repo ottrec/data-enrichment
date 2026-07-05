@@ -104,7 +104,7 @@ func (fc *facCtx) processBlock(blockHTML, source string, grp *groupMatcher) {
 			// a heading can itself be the date context ("Wednesday, July 1",
 			// "Notice: December 5")
 			ht := strings.TrimSpace(strings.TrimPrefix(strings.TrimPrefix(part.Text, "Notice:"), "Notice"))
-			if spec, rest, ok := parseLeadingDate(ht, fc.anchor); ok && strings.Trim(rest, " .,") == "" {
+			if spec, rest, ok := parseLeadingDate(ht, fc.anchor); ok && restIsTrivial(rest) {
 				st.head, st.headRaw = &spec, part.Text
 			}
 		case "para":
@@ -113,7 +113,7 @@ func (fc *facCtx) processBlock(blockHTML, source string, grp *groupMatcher) {
 				if line == "" {
 					continue
 				}
-				if spec, rest, ok := parseLeadingDate(line, fc.anchor); ok && strings.Trim(rest, " .,") == "" {
+				if spec, rest, ok := parseLeadingDate(line, fc.anchor); ok && restIsTrivial(rest) {
 					st.head, st.headRaw = &spec, line
 					continue
 				}
@@ -135,7 +135,7 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 		local := *st
 		for i, line := range lines {
 			if i == 0 && len(lines) > 1 {
-				if spec, rest, ok := parseLeadingDate(line, b.anchor); ok && strings.Trim(rest, " .,") == "" {
+				if spec, rest, ok := parseLeadingDate(line, b.anchor); ok && restIsTrivial(rest) {
 					local.head, local.headRaw = &spec, line
 					continue
 				}
@@ -149,7 +149,7 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 	if len(lines) > 0 {
 		head = lines[0]
 	}
-	if spec, rest, ok := parseLeadingDate(head, b.anchor); ok && strings.Trim(rest, " .,") == "" {
+	if spec, rest, ok := parseLeadingDate(head, b.anchor); ok && restIsTrivial(rest) {
 		// date-headed: children are the items
 		local := *st
 		local.head, local.headRaw = &spec, head
@@ -179,7 +179,7 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 			break
 		}
 		spec, rest, ok := parseLeadingDate(sub.Head, b.anchor)
-		if !ok || strings.Trim(rest, " .,") != "" {
+		if !ok || !restIsTrivial(rest) {
 			allDates = false
 			break
 		}

@@ -162,7 +162,7 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 	if m := seasonRe.FindStringSubmatch(working); m != nil {
 		n.Effects.SeasonalHours = true
 		n.Scope = Scope{Level: "facility", MatchQuality: matchScopePhrase, Phrase: normText(m[1])}
-		if own, rest, ok := parseLeadingDate(working[len(m[0]):], b.anchor); ok && strings.Trim(rest, " .,") == "" {
+		if own, rest, ok := parseLeadingDate(working[len(m[0]):], b.anchor); ok && restIsTrivial(rest) {
 			spec = &own
 			n.DateText = own.Raw
 			n.Ambiguities = append(n.Ambiguities, own.Ambig...)

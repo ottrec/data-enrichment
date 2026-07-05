@@ -435,6 +435,14 @@ func resolveRange(from, to partialDate, anchor time.Time) (time.Time, time.Time,
 	return best.f, best.t, amb
 }
 
+// restIsTrivial reports whether the remainder after a date parse is empty or
+// a pure parenthetical ("Monday, February 16 (Family Day)"), i.e. the text
+// was only a date.
+func restIsTrivial(rest string) bool {
+	rest = strings.Trim(rest, " .,")
+	return rest == "" || (strings.HasPrefix(rest, "(") && strings.HasSuffix(rest, ")"))
+}
+
 func nearest(cands []time.Time, anchor time.Time) time.Time {
 	best := cands[0]
 	for _, t := range cands[1:] {
