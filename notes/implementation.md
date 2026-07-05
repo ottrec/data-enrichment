@@ -19,7 +19,8 @@ matching the sketch in [approaches.md](approaches.md).
    like "The facility is not available on the following dates:" makes the
    following bare date+time items closures instead of hours.
 3. **Dates** (`date.go`): weekday/month/day/[year] grammar with ranges,
-   enumerations, weekday-only sets, "until further notice". Yearless dates
+   enumerations, weekday-only sets, trailing weekday restrictions ("April 23
+   to June 15, Monday to Friday"), "until further notice". Yearless dates
    anchor to the facility SourceDate (fallback dataset Updated) as in
    ottrecidx; the written weekday validates the year. Ranges resolve both
    endpoints jointly (weekday agreements scored, ties broken by anchor
@@ -68,9 +69,9 @@ matching the sketch in [approaches.md](approaches.md).
 
 ## Corpus results (315 versions, 2025-08 to 2026-07)
 
-62,579 items → 50,089 notices + 11,845 boilerplate + 919 unparsed freeform
-(1.5%). Scope: activity 11,232 / class 842 / group 16,061 / facility 19,157 /
-amenity 1,616 / none 1,181 (2.4%). Time relations on activity-scoped items:
+62,579 items → 50,106 notices + 11,845 boilerplate + 808 unparsed freeform
+(1.3%). Scope: activity 11,336 / class ~800 / group 16,103 / facility 19,140 /
+amenity 1,712 / none 1,018 (2.0%). Time relations on activity-scoped items:
 exact 7,138 / within 1,078 / covers 309 / overlaps 193 / novel 1,317 (added) /
 none 554. ~6,450 special-duplicates-changes flags; 38 timeChange (end-early),
 3 activity-typo-match, 3,862 modifiedHours, 172 matched-other-group.

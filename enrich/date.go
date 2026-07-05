@@ -239,6 +239,25 @@ func parseLeadingDate(s string, anchor time.Time) (dateSpec, string, bool) {
 		break
 	}
 
+	// a trailing weekday restriction ("April 23 to June 15, Monday to
+	// Friday, 8 am to 4 pm") is part of the date expression, unless a full
+	// date follows the weekdays (then it's a garbled range instead)
+	if j < len(p.words) {
+		if _, isWd := weekdayNames[strings.TrimSuffix(p.words[j], "s")]; isWd {
+			if wds, k, ok := p.parseWeekdaySet(j); ok {
+				_, _, isDate := p.parseSingle(k, false)
+				isMon := false
+				if k < len(p.words) {
+					_, isMon = monthNames[p.words[k]]
+				}
+				if !isDate && !isMon {
+					spec.Weekdays = wds
+					j = k
+				}
+			}
+		}
+	}
+
 	end := min(p.starts[j-1]+len(p.words[j-1]), len(s))
 	spec.Raw = strings.TrimRight(strings.TrimSpace(s[:end]), ",.")
 

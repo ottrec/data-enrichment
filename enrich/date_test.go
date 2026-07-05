@@ -128,3 +128,16 @@ func TestGarbledRangeRepair(t *testing.T) {
 		t.Errorf("repaired a garbled range without weekday validation")
 	}
 }
+
+func TestRangeWithWeekdayRestriction(t *testing.T) {
+	spec, rest, ok := parseLeadingDate("April 23 to June 15, Monday to Friday, 8 am to 4 pm", anchorAt(2026, 5, 1))
+	if !ok {
+		t.Fatalf("not ok: %+v", spec)
+	}
+	if iso(spec.From) != "2026-04-23" || iso(spec.To) != "2026-06-15" || len(spec.Weekdays) != 5 {
+		t.Errorf("got from=%s to=%s wds=%v", iso(spec.From), iso(spec.To), spec.Weekdays)
+	}
+	if rest != "8 am to 4 pm" {
+		t.Errorf("rest = %q", rest)
+	}
+}

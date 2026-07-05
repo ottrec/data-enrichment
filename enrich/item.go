@@ -44,6 +44,7 @@ var amenityCore = map[string]bool{
 	"washroom": true, "washrooms": true,
 	"lawn": true, "hill": true, "room": true, "rooms": true, "ice": true,
 	"heater": true, "centre": true, "center": true,
+	"track": true, "tracks": true, "field": true, "fields": true,
 }
 
 var amenityQualifier = map[string]bool{
