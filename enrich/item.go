@@ -355,6 +355,16 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 func (b *blockCtx) resolveClass(n *Notice, classPhrase string) []*actEntry {
 	segs := classSegments(classPhrase)
 	n.Scope.MatchQuality = matchScopePhrase
+	if len(segs) == 0 {
+		// only stopwords ("all drop-in activities"): everything
+		if b.grp != nil {
+			n.Scope.Level = "group"
+			n.Scope.Groups = []string{b.grp.label}
+			return b.grp.acts
+		}
+		n.Scope.Level = "facility"
+		return nil
+	}
 	if b.grp != nil {
 		for _, seg := range segs {
 			if b.grp.coversGroup(seg) {

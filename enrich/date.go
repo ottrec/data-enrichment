@@ -88,6 +88,9 @@ func newDateParser(s string) *dateParser {
 	for _, loc := range wordRe.FindAllStringIndex(s, -1) {
 		w := strings.ToLower(s[loc[0]:loc[1]])
 		w = strings.Trim(w, ",.;:!()")
+		if w == "" {
+			continue // punctuation-only word ("Wednesday , November 26")
+		}
 		p.words = append(p.words, w)
 		p.starts = append(p.starts, loc[0])
 	}
@@ -155,9 +158,9 @@ func (p *dateParser) parseWeekdaySet(i int) ([]time.Weekday, int, bool) {
 		w := strings.TrimSuffix(p.words[j], "s")
 		if wd, ok := weekdayNames[w]; ok {
 			if rangeTo && len(wds) > 0 {
-				for x := wds[len(wds)-1] + 1; ; x = (x + 7) % 7 {
-					wds = append(wds, x%7)
-					if x%7 == wd {
+				for x := (wds[len(wds)-1] + 1) % 7; ; x = (x + 1) % 7 {
+					wds = append(wds, x)
+					if x == wd {
 						break
 					}
 				}
@@ -236,10 +239,7 @@ func parseLeadingDate(s string, anchor time.Time) (dateSpec, string, bool) {
 		break
 	}
 
-	end := p.starts[j-1] + len(p.words[j-1])
-	if end > len(s) {
-		end = len(s)
-	}
+	end := min(p.starts[j-1]+len(p.words[j-1]), len(s))
 	spec.Raw = strings.TrimRight(strings.TrimSpace(s[:end]), ",.")
 
 	// inherit months for day-only mentions
@@ -254,16 +254,9 @@ func parseLeadingDate(s string, anchor time.Time) (dateSpec, string, bool) {
 
 	// resolve
 	if isRange {
-		from, ambF := resolveDate(parts[0], anchor)
-		to, ambT := resolveDateAfter(parts[1], from, anchor)
-		spec.Ambig = append(spec.Ambig, ambF...)
-		spec.Ambig = append(spec.Ambig, ambT...)
-		if from.IsZero() || to.IsZero() || to.Before(from) {
-			spec.Ambig = append(spec.Ambig, ambDateRangeInvalid)
-			spec.From, spec.To = time.Time{}, time.Time{}
-		} else {
-			spec.From, spec.To = from, to
-		}
+		from, to, amb := resolveRange(parts[0], parts[1], anchor)
+		spec.Ambig = append(spec.Ambig, amb...)
+		spec.From, spec.To = from, to
 	} else {
 		for _, pt := range parts {
 			t, amb := resolveDate(pt, anchor)
@@ -335,6 +328,12 @@ func resolveDate(d partialDate, anchor time.Time) (time.Time, []string) {
 		}
 		switch len(match) {
 		case 1:
+			// a schedule notice a year out is far less likely than a typo'd
+			// weekday on a near date
+			if near := nearest(cands, anchor); absDur(match[0].Sub(anchor)) > 300*24*time.Hour &&
+				absDur(near.Sub(anchor)) < 90*24*time.Hour {
+				return near, []string{ambWeekdayMismatch}
+			}
 			return match[0], nil
 		case 0:
 			return nearest(cands, anchor), []string{ambWeekdayMismatch}
@@ -349,32 +348,91 @@ func resolveDate(d partialDate, anchor time.Time) (time.Time, []string) {
 	return t, nil
 }
 
-// resolveDateAfter resolves the "to" side of a range: at or after from, in
-// from's year or the next (for December-to-January ranges).
-func resolveDateAfter(d partialDate, from time.Time, anchor time.Time) (time.Time, []string) {
-	if from.IsZero() {
-		return resolveDate(d, anchor)
+// resolveRange resolves a from/to date range jointly: each candidate year
+// places both endpoints (the "to" rolling into the next year for ranges like
+// December 20 to January 2), scored by how many written weekdays agree, with
+// ties broken by anchor proximity. A typo in one endpoint's weekday then
+// can't drag the whole range a year away (it just gets marked).
+func resolveRange(from, to partialDate, anchor time.Time) (time.Time, time.Time, []string) {
+	if from.month == 0 || from.day == 0 || to.month == 0 || to.day == 0 {
+		return time.Time{}, time.Time{}, []string{ambDateUnparsed}
 	}
-	if d.month == 0 || d.day == 0 {
-		return time.Time{}, []string{ambDateUnparsed}
+	if from.year != 0 || to.year != 0 {
+		// explicit years: resolve directly
+		f, ambF := resolveDate(from, anchor)
+		t, ambT := resolveDate(to, anchor)
+		if to.year == 0 && !f.IsZero() {
+			t = time.Date(f.Year(), to.month, to.day, 0, 0, 0, 0, ottrecidx.TZ)
+			if t.Before(f) {
+				t = t.AddDate(1, 0, 0)
+			}
+			ambT = nil
+			if to.wd != nil && t.Weekday() != *to.wd {
+				ambT = []string{ambWeekdayMismatch}
+			}
+		}
+		amb := append(ambF, ambT...)
+		if f.IsZero() || t.IsZero() || t.Before(f) {
+			return time.Time{}, time.Time{}, append(amb, ambDateRangeInvalid)
+		}
+		return f, t, amb
 	}
-	if d.year != 0 {
-		return resolveDate(d, anchor)
+	type cand struct {
+		f, t     time.Time
+		score    int
+		mismatch bool
 	}
-	for _, y := range []int{from.Year(), from.Year() + 1} {
-		t := time.Date(y, d.month, d.day, 0, 0, 0, 0, ottrecidx.TZ)
-		if t.Day() != d.day || t.Before(from) {
+	var cands []cand
+	for _, y := range []int{anchor.Year() - 1, anchor.Year(), anchor.Year() + 1} {
+		f := time.Date(y, from.month, from.day, 0, 0, 0, 0, ottrecidx.TZ)
+		if f.Day() != from.day {
 			continue
 		}
-		if t.Sub(from) > 400*24*time.Hour {
-			break
+		ty := y
+		if to.month < from.month || (to.month == from.month && to.day < from.day) {
+			ty = y + 1
 		}
-		if d.wd != nil && t.Weekday() != *d.wd {
-			return t, []string{ambWeekdayMismatch}
+		t := time.Date(ty, to.month, to.day, 0, 0, 0, 0, ottrecidx.TZ)
+		if t.Day() != to.day {
+			continue
 		}
-		return t, nil
+		c := cand{f: f, t: t}
+		if from.wd != nil {
+			if f.Weekday() == *from.wd {
+				c.score++
+			} else {
+				c.mismatch = true
+			}
+		}
+		if to.wd != nil {
+			if t.Weekday() == *to.wd {
+				c.score++
+			} else {
+				c.mismatch = true
+			}
+		}
+		cands = append(cands, c)
 	}
-	return time.Time{}, []string{ambDateRangeInvalid}
+	if len(cands) == 0 {
+		return time.Time{}, time.Time{}, []string{ambDateUnparsed}
+	}
+	best := cands[0]
+	for _, c := range cands[1:] {
+		if c.score > best.score ||
+			(c.score == best.score && absDur(c.f.Sub(anchor)) < absDur(best.f.Sub(anchor))) {
+			best = c
+		}
+	}
+	var amb []string
+	if best.mismatch {
+		amb = append(amb, ambWeekdayMismatch)
+	}
+	if from.wd == nil && to.wd == nil {
+		if d := absDur(best.f.Sub(anchor)); d > 210*24*time.Hour {
+			amb = append(amb, ambYearUnconfirmed)
+		}
+	}
+	return best.f, best.t, amb
 }
 
 func nearest(cands []time.Time, anchor time.Time) time.Time {

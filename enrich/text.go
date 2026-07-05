@@ -57,7 +57,8 @@ var stopTokens = map[string]bool{
 	"in": true, "on": true, "at": true, "to": true, "for": true, "with": true,
 	"drop": true, "ins": true, "all": true, "s": true,
 	"session": true, "sessions": true, "program": true, "programs": true,
-	"activity": true, "activities": true, "times": true,
+	"programming": true,
+	"activity":    true, "activities": true, "times": true,
 	"schedule": true, "schedules": true,
 }
 
