@@ -16,6 +16,8 @@ separately).
   and a sketch of the output record format.
 - [implementation.md](implementation.md): status and corpus results of the
   deterministic parser (approach A), implemented in `enrich/` + `cmd/enrich`.
+- [hacking.md](hacking.md): continuation notes — code map, the
+  no-false-positive invariants, dev workflow, and next steps.
 
 Tooling (from the module root, needs `/tmp/ottrec-data.db`):
 
