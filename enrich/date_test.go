@@ -26,7 +26,8 @@ func TestParseLeadingDate(t *testing.T) {
 	}{
 		{in: "Friday, July 3", anchor: anchorAt(2026, 7, 1), ok: true, dates: []string{"2026-07-03"}},
 		{in: "Monday, July 6 to Friday, July 10", anchor: anchorAt(2026, 7, 1), ok: true, from: "2026-07-06", to: "2026-07-10"},
-		{in: "Monday, July 6 to 10 Friday, July 10", anchor: anchorAt(2026, 7, 1), ok: false},
+		// garbled but repairable: both endpoint weekdays validate
+		{in: "Monday, July 6 to 10 Friday, July 10", anchor: anchorAt(2026, 7, 1), ok: true, from: "2026-07-06", to: "2026-07-10", ambig: []string{ambDateGarbled}},
 		{in: "May 31 to June 28", anchor: anchorAt(2026, 6, 10), ok: true, from: "2026-05-31", to: "2026-06-28"},
 		{in: "December 20 to January 2", anchor: anchorAt(2025, 12, 19), ok: true, from: "2025-12-20", to: "2026-01-02"},
 		{in: "October 31, 2025 to March 13, 2026", anchor: anchorAt(2025, 11, 1), ok: true, from: "2025-10-31", to: "2026-03-13"},
@@ -108,5 +109,22 @@ func TestRestIsTrivial(t *testing.T) {
 		if got := restIsTrivial(in); got != want {
 			t.Errorf("restIsTrivial(%q) = %v, want %v", in, got, want)
 		}
+	}
+}
+
+func TestGarbledRangeRepair(t *testing.T) {
+	spec, rest, ok := parseLeadingDate("Monday, July 6 to 10 Friday, July 10", anchorAt(2026, 7, 1))
+	if !ok || rest != "" {
+		t.Fatalf("ok=%v rest=%q spec=%+v", ok, rest, spec)
+	}
+	if iso(spec.From) != "2026-07-06" || iso(spec.To) != "2026-07-10" {
+		t.Errorf("range = %s..%s, want 2026-07-06..2026-07-10", iso(spec.From), iso(spec.To))
+	}
+	if len(spec.Ambig) != 1 || spec.Ambig[0] != ambDateGarbled {
+		t.Errorf("ambig = %v, want [date-garbled]", spec.Ambig)
+	}
+	// no weekday on the trailing mention: refuse the repair
+	if _, _, ok := parseLeadingDate("Monday, July 6 to 10 July 10", anchorAt(2026, 7, 1)); ok {
+		t.Errorf("repaired a garbled range without weekday validation")
 	}
 }

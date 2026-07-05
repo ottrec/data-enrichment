@@ -23,8 +23,11 @@ matching the sketch in [approaches.md](approaches.md).
    anchor to the facility SourceDate (fallback dataset Updated) as in
    ottrecidx; the written weekday validates the year. Ranges resolve both
    endpoints jointly (weekday agreements scored, ties broken by anchor
-   proximity) so one typo'd endpoint can't drag the range a year off. All
-   shortfalls become markers, never guesses.
+   proximity) so one typo'd endpoint can't drag the range a year off.
+   Garbled ranges ("Monday, July 6 to 10 Friday, July 10") are repaired from
+   the first and last mentions only when both written weekdays validate in
+   the same year; the date-garbled marker stays. All other shortfalls become
+   markers, never guesses.
 4. **Clocks** (`clock.go`): clock-range grammar; missing meridiems produce
    candidate readings (>12h readings dropped when a shorter one exists,
    shortest first), disambiguated against schedule slots where possible,
@@ -48,7 +51,13 @@ matching the sketch in [approaches.md](approaches.md).
    exactly one activity and marked `activity-typo-match`. Multiple candidates
    are kept as candidates with `activity-multiple-candidates`, except when
    the item's exact time+weekday slot uniquely identifies one
-   (`activity-time-disambiguated`).
+   (`activity-time-disambiguated`). The city sometimes posts a change under
+   the wrong group ("Public skating, cancelled" in ice sports, "All drop-in
+   skating" in the swim group): when the posted group has no match, sibling
+   groups are tried and the result marked `matched-other-group`. Class
+   segments also fall back to partial group-title matches ("all gymnasium
+   programming" -> Gymnasium Sports, `class-title-partial`), only after
+   everything stricter failed.
 7. **Validation**: resolved dates checked against the group's schedule
    ranges (negative-only semantics); item clock ranges related to actual
    slots (exact/within/covers/overlaps/novel/none); cancels with no slot
@@ -63,8 +72,10 @@ matching the sketch in [approaches.md](approaches.md).
 (1.5%). Scope: activity 11,232 / class 842 / group 16,061 / facility 19,157 /
 amenity 1,616 / none 1,181 (2.4%). Time relations on activity-scoped items:
 exact 7,138 / within 1,078 / covers 309 / overlaps 193 / novel 1,317 (added) /
-none 554. 6,380 special-duplicates-changes flags; 38 timeChange (end-early),
-3 activity-typo-match, 3,862 modifiedHours.
+none 554. ~6,450 special-duplicates-changes flags; 38 timeChange (end-early),
+3 activity-typo-match, 3,862 modifiedHours, 172 matched-other-group.
+Every "cancelled" item in the corpus now resolves to a dated, scoped notice
+(the residue file contains zero items mentioning cancellation).
 
 Marker highlights, spot-checked:
 
@@ -87,7 +98,7 @@ Marker highlights, spot-checked:
 - `activity-unmatched` 475: novel added activities ("Women's only swim"),
   facilities with no published schedule at the time, typos ("Baddminton").
 - `date-garbled` 103: all the Glen Cairn "July 6 to 10 Friday, July 10"
-  family.
+  family; all repaired (double weekday validation), marker retained.
 
 ## Known limitations / possible next steps
 

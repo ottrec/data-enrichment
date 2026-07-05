@@ -142,8 +142,13 @@ saw.
    On hold: options to be explored first.
 
 Done since the first corpus run (verified against the full corpus, not
-fixtures — per-feature stats diffs are in the workflow above): single-ended
-times ("closed until noon" OpenStart, "will end at 6 pm" OpenEnd +
-TimeChange), per-sentence parsing of multi-sentence items (sibling unparsed
-records suppressed), and guarded edit-distance-1 typo matching
-(`activity-typo-match`, single-candidate only).
+fixtures): single-ended times ("closed until noon" OpenStart, "will end at
+6 pm" OpenEnd + TimeChange), per-sentence parsing of multi-sentence items
+(sibling unparsed records suppressed), guarded edit-distance-1 typo matching
+(`activity-typo-match`), bare date+clock items resolved as facility hours
+only outside schedule_changes blocks and only when not slot-exact/short
+(`possible-activity-time`), cross-group fallbacks for wrong-group postings
+(`matched-other-group`, `class-title-partial`), garbled-range repair with
+double weekday validation, and inverted-form items with mixed range/single
+date children. The driving check: `dump-residue` output should contain no
+items mentioning cancellation.

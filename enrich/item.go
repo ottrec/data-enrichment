@@ -25,19 +25,23 @@ var (
 	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)[. ]*$`)
 	untilNoticeRe = regexp.MustCompile(`(?i)\buntil further notice\b`)
 	// "X is closed ...", "X closed until further notice", "X will be closed"
-	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
-	allProgramsRe   = regexp.MustCompile(`\ball .{0,40}?(?:drop ?ins?|programs)(?: are)? cancelled\b`)
-	genericFacility = map[string]bool{"facility": true, "centre": true, "center": true, "complex": true, "building": true, "hall": true, "community": true, "recreation": true, "park": true, "pool": true, "arena": true, "rink": true, "dome": true}
+	subjectClosedRe    = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
+	allProgramsRe      = regexp.MustCompile(`\ball .{0,40}?(?:drop ?ins?|programs)(?: are)? cancelled\b`)
+	allAmenityClosedRe = regexp.MustCompile(`^(.+?),? (?:are |is )?closed(?: for .+)?$`)
+	genericFacility    = map[string]bool{"facility": true, "centre": true, "center": true, "complex": true, "building": true, "hall": true, "community": true, "recreation": true, "park": true, "pool": true, "arena": true, "rink": true, "dome": true}
 )
 
 // amenityCore are nouns that identify a facility amenity subject; a phrase is
 // an amenity if its leading tokens are qualifiers up to a core noun.
 var amenityCore = map[string]bool{
-	"pool": true, "tub": true, "sauna": true, "steam": true, "whirlpool": true,
-	"board": true, "boards": true, "slide": true, "wall": true, "elevator": true,
-	"changeroom": true, "changerooms": true, "changerooms(s)": true,
-	"court": true, "courts": true, "gym": true, "gymnasium": true,
-	"arena": true, "rink": true, "washroom": true, "washrooms": true,
+	"pool": true, "pools": true, "tub": true, "tubs": true, "sauna": true,
+	"saunas": true, "steam": true, "whirlpool": true, "whirlpools": true,
+	"board": true, "boards": true, "slide": true, "slides": true, "wall": true,
+	"elevator": true, "elevators": true,
+	"changeroom": true, "changerooms": true,
+	"court": true, "courts": true, "gym": true, "gyms": true, "gymnasium": true,
+	"arena": true, "arenas": true, "rink": true, "rinks": true,
+	"washroom": true, "washrooms": true,
 	"lawn": true, "hill": true, "room": true, "rooms": true, "ice": true,
 	"heater": true, "centre": true, "center": true,
 }
@@ -318,6 +322,16 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 		return
 	}
 	if m := allClassRe.FindStringSubmatch(fphrase); m != nil && (n.Effects.any() || spec != nil) {
+		// "All changerooms closed for maintenance": an amenity closure, not
+		// an activity class
+		if cm := allAmenityClosedRe.FindStringSubmatch(m[1]); cm != nil && isAmenity(cm[1]) {
+			n.Effects.Closure = true
+			n.Scope.Level = "amenity"
+			n.Scope.Amenity = amenityName(cm[1])
+			n.Scope.MatchQuality = matchScopePhrase
+			b.emitTimes(&n, spec, clocks, emit)
+			return
+		}
 		acts := b.resolveClass(&n, m[1])
 		b.emitTimesWithSlots(&n, spec, clocks, acts, emit)
 		return
@@ -396,6 +410,14 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 
 	// activity subject
 	q, acts, groups, typo := b.matchActivity(phrase)
+	if q == matchNone && b.grp != nil {
+		// wrong-group postings ("Public skating, cancelled" under ice
+		// sports): match the facility's other groups, marked
+		if q2, acts2, groups2, typo2 := b.matchOtherGroups(phrase); q2 != matchNone {
+			q, acts, groups, typo = q2, acts2, groups2, typo2
+			n.Ambiguities = append(n.Ambiguities, ambOtherGroup)
+		}
+	}
 	if typo && q != matchNone {
 		n.Ambiguities = append(n.Ambiguities, ambActivityTypo)
 	}
@@ -470,6 +492,34 @@ func (b *blockCtx) resolveClass(n *Notice, classPhrase string) []*actEntry {
 			n.Scope.Groups = []string{b.grp.label}
 			return acts
 		}
+		// the city sometimes posts a change under the wrong group ("All
+		// drop-in skating" in the swim group): match sibling groups, marked
+		var groups []string
+		for _, m := range b.matchers {
+			if m == b.grp {
+				continue
+			}
+			for _, seg := range segs {
+				if m.coversGroup(seg) || subset(seg, m.titleToks) {
+					groups = append(groups, m.label)
+					for _, e := range m.acts {
+						acts = append(acts, e)
+					}
+					break
+				}
+				if es := m.matchClass(seg); len(es) > 0 {
+					groups = append(groups, m.label)
+					acts = append(acts, es...)
+				}
+			}
+		}
+		if len(groups) > 0 {
+			n.Scope.Level = "class"
+			n.Scope.Groups = dedupeStrings(groups)
+			n.Scope.Activities = actNames(acts)
+			n.Ambiguities = append(n.Ambiguities, ambOtherGroup)
+			return acts
+		}
 		n.Scope.Level = "class"
 		n.Ambiguities = append(n.Ambiguities, ambClassUnmatched)
 		return nil
@@ -488,6 +538,21 @@ func (b *blockCtx) resolveClass(n *Notice, classPhrase string) []*actEntry {
 			for _, m := range b.matchers {
 				acts = append(acts, m.matchClass(seg)...)
 			}
+		}
+	}
+	if len(groups) == 0 && len(acts) == 0 {
+		// partial title match ("all gymnasium programming" vs the
+		// "Gymnasium Sports" group), only once nothing better matched
+		for _, seg := range segs {
+			for _, m := range b.matchers {
+				if subset(seg, m.titleToks) {
+					groups = append(groups, m.label)
+					acts = append(acts, m.acts...)
+				}
+			}
+		}
+		if len(groups) > 0 {
+			n.Ambiguities = append(n.Ambiguities, ambClassTitlePartial)
 		}
 	}
 	switch {
@@ -542,6 +607,20 @@ func (b *blockCtx) matchActivity(phrase string) (string, []*actEntry, []string, 
 		return q, acts, groups, typo
 	}
 	return matchNone, nil, nil, false
+}
+
+// matchOtherGroups matches a phrase against the facility's groups other
+// than the block's own, for wrong-group postings.
+func (b *blockCtx) matchOtherGroups(phrase string) (string, []*actEntry, []string, bool) {
+	saved := b.grp
+	b.grp = nil
+	defer func() { b.grp = saved }()
+	q, acts, groups, typo := b.matchActivity(phrase)
+	groups = slices.DeleteFunc(groups, func(g string) bool { return g == saved.label })
+	if len(groups) == 0 {
+		return matchNone, nil, nil, false
+	}
+	return q, acts, groups, typo
 }
 
 // isAmenity reports whether the phrase names a facility amenity: qualifier

@@ -96,6 +96,9 @@ func main() {
 			if cat == "" {
 				continue
 			}
+			if cat == "date-garbled" && n.Dates != nil {
+				continue // repaired: dates resolved despite the garble
+			}
 			add(cat, n.Source, n.DateText, n.Section, n.RawText, n.Facility, n.Group, n.Ambiguities)
 		}
 	}

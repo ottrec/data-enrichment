@@ -274,12 +274,15 @@ func parseLeadingDate(s string, anchor time.Time) (dateSpec, string, bool) {
 	rest := p.rest(j)
 	// a date-like leftover right after a parsed date means the text was
 	// garbled ("Monday, July 6 to 10 Friday, July 10"); don't trust the parse
+	// unless it can be repaired from the first and last mentions
 	if rest != "" {
 		if w := strings.Trim(strings.ToLower(wordRe.FindString(rest)), ",.;:"); w != "" {
-			if _, isWd := weekdayNames[strings.TrimSuffix(w, "s")]; isWd {
-				return dateSpec{Raw: spec.Raw, Ambig: []string{ambDateGarbled}}, s, false
-			}
-			if _, isMon := monthNames[w]; isMon {
+			_, isWd := weekdayNames[strings.TrimSuffix(w, "s")]
+			_, isMon := monthNames[w]
+			if isWd || isMon {
+				if rep, ok := p.repairGarbledRange(first, anchor); ok {
+					return rep, "", true
+				}
 				return dateSpec{Raw: spec.Raw, Ambig: []string{ambDateGarbled}}, s, false
 			}
 		}
@@ -346,6 +349,34 @@ func resolveDate(d partialDate, anchor time.Time) (time.Time, []string) {
 		return t, []string{ambYearUnconfirmed}
 	}
 	return t, nil
+}
+
+// repairGarbledRange salvages a garbled range ("Monday, July 6 to 10
+// Friday, July 10") from its first and last date mentions, but only when
+// both carry weekdays that agree with the resolved dates in the same year:
+// that double validation is what makes the repair trustworthy. The
+// date-garbled marker stays on the result.
+func (p *dateParser) repairGarbledRange(first partialDate, anchor time.Time) (dateSpec, bool) {
+	if first.wd == nil || first.month == 0 || first.day == 0 {
+		return dateSpec{}, false
+	}
+	// find the last full single mention that consumes the rest of the text
+	for k := len(p.words) - 1; k > 0; k-- {
+		last, end, ok := p.parseSingle(k, false)
+		if !ok || end != len(p.words) || last.wd == nil {
+			continue // keep scanning for a mention that includes the weekday
+		}
+		from, to, amb := resolveRange(first, last, anchor)
+		if from.IsZero() || to.IsZero() || len(amb) > 0 {
+			return dateSpec{}, false
+		}
+		return dateSpec{
+			From: from, To: to,
+			Raw:   strings.TrimRight(strings.TrimSpace(p.src), ",."),
+			Ambig: []string{ambDateGarbled},
+		}, true
+	}
+	return dateSpec{}, false
 }
 
 // resolveRange resolves a from/to date range jointly: each candidate year

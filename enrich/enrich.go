@@ -32,6 +32,8 @@ const (
 	ambFreeformItem         = "freeform-item"
 	ambDateOutsideSched     = "date-outside-schedule"
 	ambActivityTypo         = "activity-typo-match"
+	ambOtherGroup           = "matched-other-group"
+	ambClassTitlePartial    = "class-title-partial"
 	ambTimeChangeUnparsed   = "time-change-unparsed"
 )
 
@@ -172,8 +174,10 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 		return
 	}
 
-	// inverted form: a statement whose children are all dates
-	var dates dateSpec
+	// inverted form: a statement whose children are all dates. Single dates
+	// merge into one notice; each range child gets its own.
+	var singles dateSpec
+	var ranges []dateSpec
 	allDates := len(li.Items) > 0
 	for _, sub := range li.Items {
 		if len(sub.Items) > 0 {
@@ -185,23 +189,24 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 			allDates = false
 			break
 		}
-		dates.Dates = append(dates.Dates, spec.Dates...)
-		dates.Ambig = append(dates.Ambig, spec.Ambig...)
-		if !spec.From.IsZero() {
-			// a range child: keep as range only if it's the sole child
-			if len(li.Items) == 1 {
-				dates.From, dates.To, dates.OpenEnded = spec.From, spec.To, spec.OpenEnded
-			} else {
-				allDates = false
-				break
-			}
+		if !spec.From.IsZero() || spec.OpenEnded {
+			ranges = append(ranges, spec)
+			continue
 		}
-		dates.Raw = strings.TrimSpace(dates.Raw + " " + spec.Raw)
+		singles.Dates = append(singles.Dates, spec.Dates...)
+		singles.Ambig = append(singles.Ambig, spec.Ambig...)
+		singles.Raw = strings.TrimSpace(singles.Raw + " " + spec.Raw)
 	}
-	if allDates && !dates.empty() {
-		local := *st
-		local.head, local.headRaw = &dates, dates.Raw
-		b.processItem(&local, head, li.HeadHTML, li.Links, nil)
+	if allDates && (!singles.empty() || len(ranges) > 0) {
+		specs := ranges
+		if !singles.empty() {
+			specs = append(specs, singles)
+		}
+		for i := range specs {
+			local := *st
+			local.head, local.headRaw = &specs[i], specs[i].Raw
+			b.processItem(&local, head, li.HeadHTML, li.Links, nil)
+		}
 		return
 	}
 

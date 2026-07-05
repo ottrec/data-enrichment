@@ -75,6 +75,11 @@ var stemMap = map[string]string{
 func tokens(s string) []string {
 	var out []string
 	for _, w := range strings.Fields(foldText(s)) {
+		if w == "+" && len(out) > 0 {
+			// "18 +" is "18+"
+			out[len(out)-1] += "+"
+			continue
+		}
 		if st, ok := stemMap[w]; ok {
 			w = st
 		}
