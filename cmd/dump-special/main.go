@@ -14,17 +14,25 @@ func main() {
 	ctx := context.Background()
 
 	var err error
-	for ver, idx := range versions(ctx, "/tmp/ottrec-data.db")(&err) {
-		fmt.Println(ver.ID, ver.Updated, ver.Revision, idx)
+	for ver, data := range versions(ctx, "/tmp/ottrec-data.db")(&err) {
+		fmt.Println(ver.ID, ver.Updated, ver.Revision, data.Index())
+
+		for fac := range data.Facilities() {
+			fmt.Println(fac.GetSpecialHoursHTML())
+			fmt.Println(fac.GetNotificationsHTML())
+		}
+		for grp := range data.ScheduleGroups() {
+			fmt.Println(grp.GetScheduleChangesHTML())
+		}
 	}
 	if err != nil {
 		panic(err)
 	}
 }
 
-func versions(ctx context.Context, cachePath string) func(*error) iter.Seq2[ottrecdata.DataVersion, *ottrecidx.Index] {
-	return func(err *error) iter.Seq2[ottrecdata.DataVersion, *ottrecidx.Index] {
-		return func(yield func(ottrecdata.DataVersion, *ottrecidx.Index) bool) {
+func versions(ctx context.Context, cachePath string) func(*error) iter.Seq2[ottrecdata.DataVersion, ottrecidx.DataRef] {
+	return func(err *error) iter.Seq2[ottrecdata.DataVersion, ottrecidx.DataRef] {
+		return func(yield func(ottrecdata.DataVersion, ottrecidx.DataRef) bool) {
 			*err = func() error {
 				cache, err := ottrecdata.OpenCacheReadOnly(cachePath)
 				if err != nil {
@@ -61,7 +69,7 @@ func versions(ctx context.Context, cachePath string) func(*error) iter.Seq2[ottr
 						return fmt.Errorf("load %s: %w", ver.ID, err)
 					}
 
-					if !yield(ver, idx) {
+					if !yield(ver, idx.Data()) {
 						break
 					}
 				}
