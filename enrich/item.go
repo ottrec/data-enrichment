@@ -380,7 +380,15 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 						acts = append(acts, m.acts...)
 					}
 				}
-				slots := gatherSlots(acts, spec)
+				// only session-length slots are evidence: all-day slots
+				// (weight room, hot tub) mirror the facility hours, so an
+				// exact match against them carries no signal
+				var slots []slotInfo
+				for _, s := range gatherSlots(acts, spec) {
+					if s.r.End-s.r.Start < 6*60 {
+						slots = append(slots, s)
+					}
+				}
 				var exact, short bool
 				for _, cm := range clocks {
 					for _, c := range cm.Cands {
