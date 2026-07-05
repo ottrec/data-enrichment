@@ -96,8 +96,10 @@ Marker highlights, spot-checked:
   span the whole facility day) or too short to call (`hours-context-unknown`
   144). Inside a schedule_changes block they are always flagged
   `possible-activity-time`, never dismissed as hours.
-- `activity-unmatched` 475: novel added activities ("Women's only swim"),
-  facilities with no published schedule at the time, typos ("Baddminton").
+- `activity-unmatched` 111: mostly facilities with no published schedule at
+  the time. Added sessions whose activity isn't in the schedule ("Women's
+  only swim, added") get scope activity with matchQuality "novel" instead:
+  expected for additions, no marker.
 - `date-garbled` 103: all the Glen Cairn "July 6 to 10 Friday, July 10"
   family; all repaired (double weekday validation), marker retained.
 

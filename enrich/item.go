@@ -439,6 +439,13 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 			n.Scope.Level = "amenity"
 			n.Scope.Amenity = amenityName(fphrase)
 			n.Scope.MatchQuality = matchNone
+		} else if n.Effects.Added && spec != nil {
+			// an added session for an activity not in the published schedule
+			// ("Women's only swim, 8:15 to 9:15 pm, added"): expected for
+			// additions, and worth surfacing as the new activity itself
+			n.Scope.Level = "activity"
+			n.Scope.Activities = []string{fphrase}
+			n.Scope.MatchQuality = matchNovel
 		} else if n.Effects.any() {
 			n.Scope.Level = "none"
 			n.Scope.MatchQuality = matchNone

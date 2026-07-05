@@ -13,6 +13,7 @@ const (
 	matchFuzzy       = "fuzzy"
 	matchMultiple    = "multiple"
 	matchScopePhrase = "scope-phrase"
+	matchNovel       = "novel" // an added activity not in the published schedule
 	matchNone        = "none"
 )
 
