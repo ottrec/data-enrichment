@@ -10,12 +10,14 @@ import (
 	"github.com/ottrec/website/pkg/ottrecidx"
 )
 
+// go run ./cmd/dump-special | sort | uniq -c | sort -n > output.txt
+
 func main() {
 	ctx := context.Background()
 
 	var err error
 	for ver, data := range versions(ctx, "/tmp/ottrec-data.db")(&err) {
-		fmt.Println(ver.ID, ver.Updated, ver.Revision, data.Index())
+		_ = ver
 
 		for fac := range data.Facilities() {
 			fmt.Println(fac.GetSpecialHoursHTML())
