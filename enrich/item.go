@@ -230,6 +230,10 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 		n.Effects.Closure = true
 		n.Effects.Cancelled = allProgramsRe.MatchString(fremainder)
 		subject := strings.TrimPrefix(strings.TrimSpace(m[1]), "the ")
+		if serviceDeskPhrase(subject) && closureOnly(n.Effects) {
+			b.out.Stats["ignored/service-desk"]++
+			return
+		}
 		n.Scope.Phrase = subject
 		q, acts, groups, typo := b.matchActivity(subject)
 		if typo {
@@ -357,6 +361,9 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 				// hours
 				n.Scope.Groups = []string{b.grp.label}
 				n.Ambiguities = append(n.Ambiguities, ambPossibleActivityTime)
+			case strings.Contains(foldText(st.section), "customer service"):
+				b.out.Stats["ignored/service-desk"]++
+				return
 			case strings.Contains(foldText(st.section), "hours"):
 				n.Effects.ModifiedHours = true
 			default:
@@ -406,6 +413,11 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 			return
 		}
 		b.emitTimes(&n, spec, clocks, emit)
+		return
+	}
+
+	if serviceDeskPhrase(phrase) && closureOnly(n.Effects) && n.Effects.Closure {
+		b.out.Stats["ignored/service-desk"]++
 		return
 	}
 
@@ -629,6 +641,36 @@ func (b *blockCtx) matchOtherGroups(phrase string) (string, []*actEntry, []strin
 		return matchNone, nil, nil, false
 	}
 	return q, acts, groups, typo
+}
+
+// serviceDeskPhrase reports whether a phrase unambiguously refers to the
+// customer service desk, closures of which don't affect any schedule and
+// are ignored ("Customer Service is closed.", "Client Services Desk").
+func serviceDeskPhrase(s string) bool {
+	toks := tokens(s)
+	if len(toks) == 0 {
+		return false
+	}
+	core := false
+	for _, t := range toks {
+		switch t {
+		case "service", "services", "desk", "desks":
+			core = true
+		case "customer", "customers", "client", "clients":
+		default:
+			return false
+		}
+	}
+	return core
+}
+
+// closureOnly reports whether the effects carry nothing beyond a closure
+// (and possibly modified hours).
+func closureOnly(e Effects) bool {
+	e.Closure = false
+	e.ModifiedHours = false
+	e.SeasonalHours = false
+	return !e.any()
 }
 
 // isAmenity reports whether the phrase names a facility amenity: qualifier

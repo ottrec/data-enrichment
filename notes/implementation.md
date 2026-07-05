@@ -59,11 +59,15 @@ matching the sketch in [approaches.md](approaches.md).
    segments also fall back to partial group-title matches ("all gymnasium
    programming" -> Gymnasium Sports, `class-title-partial`), only after
    everything stricter failed.
-7. **Validation**: resolved dates checked against the group's schedule
+7. **Ignored**: recognized boilerplate (contact-for-hours, pickleball-moved
+   notices) and unambiguous customer-service-desk closures/hours (subject
+   tokens purely service-desk words, closure-only effects) are dropped with
+   a stats counter; nothing else is.
+8. **Validation**: resolved dates checked against the group's schedule
    ranges (negative-only semantics); item clock ranges related to actual
    slots (exact/within/covers/overlaps/novel/none); cancels with no slot
    overlap marked. "Added" times are expected to be novel.
-8. **Dedup**: special_hours notices repeating a group's schedule_changes
+9. **Dedup**: special_hours notices repeating a group's schedule_changes
    (dates+effects+scope key, merged class phrasing matches per-group copies)
    get `duplicateOfGroups` (flagged, not dropped).
 
