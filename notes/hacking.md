@@ -6,10 +6,12 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
 
 ## Code map
 
-- `record.go` — output JSON types (`Output` > `Notice`/`Unparsed`). Effects
-  booleans are only ever set from literal trigger words. `TimeAssoc`
-  Text/StartMin/EndMin are omitted for whole-activity notices where only the
-  affected slots are known.
+- `record.go` — output JSON types: flat `Objects` + Facility > Group >
+  Activity > Session id-reference tree (see implementation.md "Output
+  shape"), plus the internal `notice`/`scope` intermediate representation the
+  item parser produces before placement. Effects booleans are only ever set
+  from literal trigger words. `TimeAssoc` Text/StartMin/EndMin are omitted
+  for whole-activity notices where only the affected slots are known.
 - `text.go` — `normText` (display text; keeps `\n` from `<br>`, strips
   zero-width/nbsp), `foldText` (lowercase, punctuation folded; kills colons,
   so clock/date parsing must run on normText and only keyword/token work on
@@ -70,16 +72,18 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   overlaps), `maybeDisambiguate` (a `multiple` match narrowed only when
   exactly one candidate has an exact slot), `emitTimesWithSlots` (one
   notice per clock mention; picks the best-relating meridiem candidate).
-- `enrich.go` — version loop, walkState lifetimes (head reset by headings;
-  closureContext reset by headings and after each list), the four `<li>`
-  shapes (leaf with `<br>` lines; date head + children; garbled head —
-  children processed with the marked spec; inverted form: statement head
-  whose children are all dates, a range child only accepted alone;
-  otherwise head emitted with `head-unparsed` and children processed), and
-  `dedupe` (per facility: special_hours notices matching a
-  schedule_changes notice on dates+effects+scope key get
-  DuplicateOfGroups; group/class/facility levels share one "broad" key so
-  the city's merged phrasing matches the per-group copies).
+- `enrich.go` — version loop, per-fragment `rec` collection (`blockCtx.add`
+  assigns block seq + id and every heading/date-context/boilerplate fragment
+  becomes an ignored object), walkState lifetimes (head reset by headings;
+  closureContext reset by headings and after each list), the `<li>` shapes
+  (leaf with `<br>` lines; date head + children; garbled head — children
+  processed with the marked spec; inverted form: statement head whose
+  children are all dates, ranges emitted separately; otherwise head emitted
+  with `head-unparsed` and children processed), `collapse` (special_hours
+  notices matching a schedule_changes notice on dates+effects+scope key
+  become ignored/duplicate stubs; survivors get Sources), and `place`
+  (converts recs to Objects and builds the reference tree; sessions filled
+  from rec.sessions, `added` vs `objects` split by Effects.Added).
 - `cmd/enrich` — `-versions n` (0=all), `-o` stdout/dir/stats-only; stats
   to stderr, aggregated over versions. `internal/dataver` is the shared
   version-cache iterator (same as the dump tools).
@@ -111,7 +115,10 @@ systemd-run --user --scope -p MemoryMax=8G env GOMEMLIMIT=6GiB \
     /tmp/enrich-bin -versions 0 -o "" 2> stats.txt
 ```
 
-The aggregate stats are the regression signal: diff them between runs.
+`cmd/check-coverage` verifies total accounting (every word of every source
+block appears in some object's raw text for that block); run it over the full
+corpus after structural changes. The aggregate stats are the regression
+signal: diff them between runs.
 Watch `unparsed/*`, `scope/none`, and the `amb/*` counts; a new city
 phrasing shows up as a bump there. To inspect a marker class, write per-
 version files (`-o dir`) and sample with a few lines of python (glob the

@@ -2,8 +2,29 @@
 
 Package `enrich/` + `cmd/enrich`. Consumes dataset versions through
 `ottrecidx` (data access, `ComputeEffectiveDateRange`, `SingleDate`, TZ) and
-emits one JSON `Output` per version; the record format is `enrich/record.go`,
-matching the sketch in [approaches.md](approaches.md).
+emits one JSON `Output` per version (`enrich/record.go`).
+
+## Output shape
+
+A flat `objects` list plus a facility > group > activity > session reference
+hierarchy. Every fragment of source text is exactly one object (kind
+`notice`, `unparsed`, or `ignored` with a reason: heading, date-context,
+boilerplate, service-desk, duplicate); `cmd/check-coverage` verifies this
+mechanically over the whole corpus (every word of every block must appear in
+some object's raw text). Objects carry blockHash + seq (block reading order)
+and, when the markup allows tracking, the [start,end) byte offset into the
+source block HTML.
+
+The tree references objects by id at the most specific level the association
+is guaranteed for: facility, group (including unresolved multiple-candidate
+matches, with `candidates`), activity (novel:true for added activities not in
+the published schedule), or concrete per-date sessions. Session refs separate
+`objects` (about published schedule times) from `added` (times added by the
+notice). Special-hours notices that duplicate a group's schedule-changes copy
+collapse into an ignored/duplicate stub pointing at the survivor, which gets
+`sources: [schedule_changes, special_hours]`. Marked-but-validated matches
+(matched-other-group, activity-typo-match, time-disambiguated) descend, since
+they are deterministic; anything ambiguous stays higher up.
 
 ## Pipeline
 
