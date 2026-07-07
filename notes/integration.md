@@ -83,9 +83,9 @@ so avoid re-parsing.
 ## Verification workflow (before/after integration changes)
 
 - `go run ./notes/scripts [version-spec]` (enrichcheck): replays the /today
-  consumer (enrichidx warnings, see-schedule, session cancel/added joins)
-  against one version, anchored at that version's date; dumps the objects
-  behind every warning downgrade. Try a holiday-week version
+  consumer (enrichidx warnings, see-schedule, session cancel/time-change/
+  added joins) against one version, anchored at that version's date; dumps
+  the objects behind every warning downgrade. Try a holiday-week version
   (e.g. `2026-06-29`, `2025-12-29`) to exercise the see-schedule and
   cancel/added paths.
 - `go run ./cmd/report -o report.html`: visual QA for one version (source

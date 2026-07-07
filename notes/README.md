@@ -46,8 +46,8 @@ Tooling (from the module root, needs `/tmp/ottrec-data.db`):
   consumer against one version (default latest; also `latest-8`,
   `2026-06-29`, or an id): per-group warning levels vs the old changes-HTML
   flag with the objects behind every downgrade, see-schedule hits, and
-  per-session cancel/added joins. The check that the enrichidx join keys and
-  window logic actually hit real data.
+  per-session cancel/time-change/added joins. The check that the enrichidx
+  join keys and window logic actually hit real data.
 - `notes/scripts/*.py`: the analysis scripts that produced the numbers in
   these notes. Run them in a directory containing the dump outputs they name
   (see each script's docstring); they parse the escaped `dump-context` output.

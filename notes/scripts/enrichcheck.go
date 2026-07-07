@@ -95,10 +95,10 @@ func check(version string, data ottrecidx.DataRef) {
 	fmt.Printf("version %s, window %s..%s\n", version, feedFrom, feedTo)
 
 	var (
-		groups, oldChanges                int
-		warnNone, warnNotice, warnChanges int
-		downgraded, upgraded              int
-		sessions, cancelled, added        int
+		groups, oldChanges                  int
+		warnNone, warnNotice, warnChanges   int
+		downgraded, upgraded                int
+		sessions, cancelled, changed, added int
 	)
 	for fac := range data.Facilities() {
 		enFac := en.Facility(fac.GetName())
@@ -163,12 +163,19 @@ func check(version string, data ottrecidx.DataRef) {
 						}
 						hit := func(day schema.Date) {
 							sessions++
-							if enGrp.Cancelled(act.GetLabel(), day, int(r.Start), int(r.End)) {
+							m := enGrp.Session(act.GetLabel(), day, int(r.Start), int(r.End))
+							if m.Cancelled {
 								cancelled++
 								if cancelled <= 12 {
 									fmt.Printf("  cancel: %s / %s / %s %s %d-%d\n",
 										fac.GetName(), grp.GetLabel(), act.GetLabel(), day, r.Start, r.End)
 								}
+							}
+							if m.TimeChange {
+								changed++
+								fmt.Printf("  change: %s / %s / %s %s %d-%d new=%v %d-%d\n",
+									fac.GetName(), grp.GetLabel(), act.GetLabel(), day, r.Start, r.End,
+									m.NewTime, m.NewStart, m.NewEnd)
 							}
 						}
 						if d, ok := tm.SingleDate(); ok {
@@ -203,7 +210,7 @@ func check(version string, data ottrecidx.DataRef) {
 	}
 	fmt.Printf("groups=%d oldChanges=%d -> none=%d notice=%d changes=%d (downgraded=%d upgraded=%d)\n",
 		groups, oldChanges, warnNone, warnNotice, warnChanges, downgraded, upgraded)
-	fmt.Printf("sessions=%d cancelled=%d added=%d\n", sessions, cancelled, added)
+	fmt.Printf("sessions=%d cancelled=%d changed=%d added=%d\n", sessions, cancelled, changed, added)
 }
 
 // dumpObjects prints the facility-level objects and the named group's subtree

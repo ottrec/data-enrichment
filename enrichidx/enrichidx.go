@@ -50,6 +50,22 @@ type AddedSession struct {
 	Start, End    int // minutes from midnight; End may exceed 1440
 }
 
+// SessionNotices is what validated session-level notices say about one
+// published session. The zero value means no notices.
+type SessionNotices struct {
+	// Cancelled means a notice cancels or closes the whole published slot.
+	Cancelled bool
+	// TimeChange means a time-change notice affects this session ("will end
+	// at 6 pm", "schedule change").
+	TimeChange bool
+	// NewStart/NewEnd are the session's derived effective time, valid only
+	// when NewTime: a single-ended time-change mention strictly inside the
+	// slot trims it ("will end at 6 pm" against 1 to 7 pm gives 1 to 6 pm).
+	// Anything less clear-cut only sets TimeChange.
+	NewStart, NewEnd int
+	NewTime          bool
+}
+
 // Ref is an indexed enrichment output. The zero Ref is valid and empty.
 type Ref struct {
 	facilities map[string]*facility
@@ -73,9 +89,9 @@ type facility struct {
 }
 
 type group struct {
-	objects   []*epb.Object // whole subtree, deduped
-	cancelled map[sessKey]bool
-	added     []AddedSession
+	objects []*epb.Object // whole subtree, deduped
+	marks   map[sessKey]SessionNotices
+	added   []AddedSession
 }
 
 // sessKey identifies a concrete session; day is YYYYMMDD (weekday stripped).
@@ -109,7 +125,7 @@ func Join(out *epb.Output) Ref {
 		f := &facility{groups: make(map[string]*group, len(ef.GetGroups()))}
 		f.objects = resolve(nil, map[string]bool{}, ef.GetObjects())
 		for _, eg := range ef.GetGroups() {
-			g := &group{cancelled: map[sessKey]bool{}}
+			g := &group{marks: map[sessKey]SessionNotices{}}
 			seen := map[string]bool{}
 			g.objects = resolve(g.objects, seen, eg.GetObjects())
 			for _, ea := range eg.GetActivities() {
@@ -123,10 +139,8 @@ func Join(out *epb.Output) Ref {
 						start: es.GetStart(),
 						end:   es.GetEnd(),
 					}
-					for _, id := range es.GetObjects() {
-						if cancelsWholeSlot(byID[id]) {
-							g.cancelled[key] = true
-						}
+					if m := sessionNotices(byID, es); m != (SessionNotices{}) {
+						g.marks[key] = m
 					}
 					for _, id := range es.GetAdded() {
 						if addsSession(byID[id]) {
@@ -224,14 +238,14 @@ func seeSchedule(objs []*epb.Object, from, to schema.Date) bool {
 	return false
 }
 
-// Cancelled reports whether the published session (raw activity label,
-// concrete date, exact published clock range in minutes) is cancelled or
-// closed for its whole time by a validated session-level notice.
-func (g GroupRef) Cancelled(activityLabel string, date schema.Date, start, end int) bool {
+// Session returns what validated session-level notices say about the
+// published session (raw activity label, concrete date, exact published clock
+// range in minutes).
+func (g GroupRef) Session(activityLabel string, date schema.Date, start, end int) SessionNotices {
 	if g.g == nil {
-		return false
+		return SessionNotices{}
 	}
-	return g.g.cancelled[sessKey{
+	return g.g.marks[sessKey{
 		label: activityLabel,
 		day:   int32(date) / 10,
 		start: int32(start),
@@ -376,14 +390,46 @@ func applies(o *epb.Object, from, to schema.Date) bool {
 	return true
 }
 
+// sessionNotices merges a session's referenced notices into SessionNotices.
+func sessionNotices(byID map[string]*epb.Object, es *epb.Session) SessionNotices {
+	var m SessionNotices
+	for _, id := range es.GetObjects() {
+		o := byID[id]
+		if o == nil || o.GetKind() != epb.Object_NOTICE {
+			continue
+		}
+		if cancelsWholeSlot(o) {
+			m.Cancelled = true
+		}
+		for _, e := range o.GetEffects() {
+			switch e.WhichEffect() {
+			case epb.Effect_TimeChange_case:
+				m.TimeChange = true
+				// derive the effective time only from a single-ended mention
+				// strictly inside the slot: open-end trims the end ("will end
+				// at 6 pm"), open-start trims the start. Everything else
+				// (e.g. a bare "schedule change" whose time equals the slot)
+				// stays a flag with the details in the raw text.
+				if t := o.GetTime(); o.HasTime() && !m.NewTime {
+					start, end := es.GetStart(), es.GetEnd()
+					switch {
+					case t.GetOpenEnd() && t.HasStart() && t.GetStart() > start && t.GetStart() < end:
+						m.NewStart, m.NewEnd, m.NewTime = int(start), int(t.GetStart()), true
+					case t.GetOpenStart() && t.HasEnd() && t.GetEnd() > start && t.GetEnd() < end:
+						m.NewStart, m.NewEnd, m.NewTime = int(t.GetEnd()), int(end), true
+					}
+				}
+			}
+		}
+	}
+	return m
+}
+
 // cancelsWholeSlot reports whether a session-referenced notice cancels or
 // closes the whole published slot: it must carry a cancelled/closure effect
 // and, when it has an extracted time, that time must equal or cover the slot
 // (partial-slot and unvalidated relations only warn, never strike).
 func cancelsWholeSlot(o *epb.Object) bool {
-	if o == nil || o.GetKind() != epb.Object_NOTICE {
-		return false
-	}
 	var cancels bool
 	for _, e := range o.GetEffects() {
 		switch e.WhichEffect() {
