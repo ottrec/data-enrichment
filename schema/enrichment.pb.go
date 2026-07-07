@@ -73,6 +73,180 @@ func (x Object_Kind) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
+// Source names the HTML field of the ottrec.v1 dataset a block came
+// from.
+type Object_Source int32
+
+const (
+	Object_SOURCE_UNSPECIFIED Object_Source = 0
+	Object_SPECIAL_HOURS      Object_Source = 1 // Facility.special_hours_html
+	Object_NOTIFICATIONS      Object_Source = 2 // Facility.notifications_html
+	Object_SCHEDULE_CHANGES   Object_Source = 3 // ScheduleGroup.schedule_changes_html
+)
+
+// Enum value maps for Object_Source.
+var (
+	Object_Source_name = map[int32]string{
+		0: "SOURCE_UNSPECIFIED",
+		1: "SPECIAL_HOURS",
+		2: "NOTIFICATIONS",
+		3: "SCHEDULE_CHANGES",
+	}
+	Object_Source_value = map[string]int32{
+		"SOURCE_UNSPECIFIED": 0,
+		"SPECIAL_HOURS":      1,
+		"NOTIFICATIONS":      2,
+		"SCHEDULE_CHANGES":   3,
+	}
+)
+
+func (x Object_Source) Enum() *Object_Source {
+	p := new(Object_Source)
+	*p = x
+	return p
+}
+
+func (x Object_Source) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Object_Source) Descriptor() protoreflect.EnumDescriptor {
+	return file_enrichment_proto_enumTypes[1].Descriptor()
+}
+
+func (Object_Source) Type() protoreflect.EnumType {
+	return &file_enrichment_proto_enumTypes[1]
+}
+
+func (x Object_Source) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// MatchQuality says how the notice's subject phrase was matched against
+// the schedule. Proto enums are open: a consumer on an older schema sees
+// a value added later as an unrecognized number and must treat it as
+// "unknown quality", not as any particular one.
+type Object_MatchQuality int32
+
+const (
+	Object_MATCH_QUALITY_UNSPECIFIED Object_MatchQuality = 0 // no subject matching applied
+	Object_EXACT                     Object_MatchQuality = 1 // exact label/name spelling
+	Object_NORMALIZED                Object_MatchQuality = 2 // equal token sets after folding/stemming
+	Object_FUZZY                     Object_MatchQuality = 3 // token subset or single-candidate typo match
+	Object_NOVEL                     Object_MatchQuality = 4 // an added activity absent from the published schedule
+	Object_MULTIPLE                  Object_MatchQuality = 5 // several candidates; see candidates, stays at group level
+	Object_SCOPE_PHRASE              Object_MatchQuality = 6 // a whole-scope phrase ("all drop-in skating", "the facility")
+	Object_NONE                      Object_MatchQuality = 7 // a subject was looked for but nothing matched
+)
+
+// Enum value maps for Object_MatchQuality.
+var (
+	Object_MatchQuality_name = map[int32]string{
+		0: "MATCH_QUALITY_UNSPECIFIED",
+		1: "EXACT",
+		2: "NORMALIZED",
+		3: "FUZZY",
+		4: "NOVEL",
+		5: "MULTIPLE",
+		6: "SCOPE_PHRASE",
+		7: "NONE",
+	}
+	Object_MatchQuality_value = map[string]int32{
+		"MATCH_QUALITY_UNSPECIFIED": 0,
+		"EXACT":                     1,
+		"NORMALIZED":                2,
+		"FUZZY":                     3,
+		"NOVEL":                     4,
+		"MULTIPLE":                  5,
+		"SCOPE_PHRASE":              6,
+		"NONE":                      7,
+	}
+)
+
+func (x Object_MatchQuality) Enum() *Object_MatchQuality {
+	p := new(Object_MatchQuality)
+	*p = x
+	return p
+}
+
+func (x Object_MatchQuality) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Object_MatchQuality) Descriptor() protoreflect.EnumDescriptor {
+	return file_enrichment_proto_enumTypes[2].Descriptor()
+}
+
+func (Object_MatchQuality) Type() protoreflect.EnumType {
+	return &file_enrichment_proto_enumTypes[2]
+}
+
+func (x Object_MatchQuality) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Relation describes how the extracted range relates to the matched
+// activity's actual slots on the resolved dates. Like all enums here it
+// is open: treat unrecognized values as unknown.
+type TimeAssoc_Relation int32
+
+const (
+	TimeAssoc_RELATION_UNSPECIFIED TimeAssoc_Relation = 0
+	TimeAssoc_EXACT                TimeAssoc_Relation = 1 // equals a slot
+	TimeAssoc_WITHIN               TimeAssoc_Relation = 2 // inside a slot (partial cancellation/closure)
+	TimeAssoc_COVERS               TimeAssoc_Relation = 3 // covers one or more whole slots
+	TimeAssoc_OVERLAPS             TimeAssoc_Relation = 4 // partially overlaps a slot
+	TimeAssoc_NOVEL                TimeAssoc_Relation = 5 // no such slot (expected for added times)
+	TimeAssoc_NONE                 TimeAssoc_Relation = 6 // no overlap with any slot (suspicious for cancels; marked)
+	TimeAssoc_UNCHECKED            TimeAssoc_Relation = 7 // no activity scope to validate against
+)
+
+// Enum value maps for TimeAssoc_Relation.
+var (
+	TimeAssoc_Relation_name = map[int32]string{
+		0: "RELATION_UNSPECIFIED",
+		1: "EXACT",
+		2: "WITHIN",
+		3: "COVERS",
+		4: "OVERLAPS",
+		5: "NOVEL",
+		6: "NONE",
+		7: "UNCHECKED",
+	}
+	TimeAssoc_Relation_value = map[string]int32{
+		"RELATION_UNSPECIFIED": 0,
+		"EXACT":                1,
+		"WITHIN":               2,
+		"COVERS":               3,
+		"OVERLAPS":             4,
+		"NOVEL":                5,
+		"NONE":                 6,
+		"UNCHECKED":            7,
+	}
+)
+
+func (x TimeAssoc_Relation) Enum() *TimeAssoc_Relation {
+	p := new(TimeAssoc_Relation)
+	*p = x
+	return p
+}
+
+func (x TimeAssoc_Relation) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TimeAssoc_Relation) Descriptor() protoreflect.EnumDescriptor {
+	return file_enrichment_proto_enumTypes[3].Descriptor()
+}
+
+func (TimeAssoc_Relation) Type() protoreflect.EnumType {
+	return &file_enrichment_proto_enumTypes[3]
+}
+
+func (x TimeAssoc_Relation) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 // The enrichment output for one dataset version, derived from the freeform
 // notification/special-hours/schedule-changes HTML of an ottrec.v1.Data
 // snapshot. Every fragment of source text is accounted for by exactly one
@@ -618,9 +792,9 @@ type Object struct {
 	xxx_hidden_Kind         Object_Kind            `protobuf:"varint,2,opt,name=kind,enum=ottrec.enrichment.v1.Object_Kind"`
 	xxx_hidden_Reason       string                 `protobuf:"bytes,3,opt,name=reason"`
 	xxx_hidden_Facility     string                 `protobuf:"bytes,4,opt,name=facility"`
-	xxx_hidden_Source       string                 `protobuf:"bytes,5,opt,name=source"`
+	xxx_hidden_Source       Object_Source          `protobuf:"varint,5,opt,name=source,enum=ottrec.enrichment.v1.Object_Source"`
 	xxx_hidden_SourceGroup  string                 `protobuf:"bytes,6,opt,name=source_group,json=sourceGroup"`
-	xxx_hidden_Sources      []string               `protobuf:"bytes,7,rep,name=sources"`
+	xxx_hidden_Sources      []Object_Source        `protobuf:"varint,7,rep,packed,name=sources,enum=ottrec.enrichment.v1.Object_Source"`
 	xxx_hidden_DuplicateOf  []string               `protobuf:"bytes,8,rep,name=duplicate_of,json=duplicateOf"`
 	xxx_hidden_BlockHash    string                 `protobuf:"bytes,9,opt,name=block_hash,json=blockHash"`
 	xxx_hidden_Seq          int32                  `protobuf:"varint,10,opt,name=seq"`
@@ -633,7 +807,7 @@ type Object struct {
 	xxx_hidden_Dates        *DateSpan              `protobuf:"bytes,17,opt,name=dates"`
 	xxx_hidden_Time         *TimeAssoc             `protobuf:"bytes,18,opt,name=time"`
 	xxx_hidden_Effects      *[]*Effect             `protobuf:"bytes,19,rep,name=effects"`
-	xxx_hidden_MatchQuality string                 `protobuf:"bytes,20,opt,name=match_quality,json=matchQuality"`
+	xxx_hidden_MatchQuality Object_MatchQuality    `protobuf:"varint,20,opt,name=match_quality,json=matchQuality,enum=ottrec.enrichment.v1.Object_MatchQuality"`
 	xxx_hidden_Phrase       string                 `protobuf:"bytes,21,opt,name=phrase"`
 	xxx_hidden_Amenity      string                 `protobuf:"bytes,22,opt,name=amenity"`
 	xxx_hidden_Candidates   []string               `protobuf:"bytes,23,rep,name=candidates"`
@@ -698,11 +872,11 @@ func (x *Object) GetFacility() string {
 	return ""
 }
 
-func (x *Object) GetSource() string {
+func (x *Object) GetSource() Object_Source {
 	if x != nil {
 		return x.xxx_hidden_Source
 	}
-	return ""
+	return Object_SOURCE_UNSPECIFIED
 }
 
 func (x *Object) GetSourceGroup() string {
@@ -712,7 +886,7 @@ func (x *Object) GetSourceGroup() string {
 	return ""
 }
 
-func (x *Object) GetSources() []string {
+func (x *Object) GetSources() []Object_Source {
 	if x != nil {
 		return x.xxx_hidden_Sources
 	}
@@ -805,11 +979,11 @@ func (x *Object) GetEffects() []*Effect {
 	return nil
 }
 
-func (x *Object) GetMatchQuality() string {
+func (x *Object) GetMatchQuality() Object_MatchQuality {
 	if x != nil {
 		return x.xxx_hidden_MatchQuality
 	}
-	return ""
+	return Object_MATCH_QUALITY_UNSPECIFIED
 }
 
 func (x *Object) GetPhrase() string {
@@ -863,7 +1037,7 @@ func (x *Object) SetFacility(v string) {
 	x.xxx_hidden_Facility = v
 }
 
-func (x *Object) SetSource(v string) {
+func (x *Object) SetSource(v Object_Source) {
 	x.xxx_hidden_Source = v
 }
 
@@ -871,7 +1045,7 @@ func (x *Object) SetSourceGroup(v string) {
 	x.xxx_hidden_SourceGroup = v
 }
 
-func (x *Object) SetSources(v []string) {
+func (x *Object) SetSources(v []Object_Source) {
 	x.xxx_hidden_Sources = v
 }
 
@@ -925,7 +1099,7 @@ func (x *Object) SetEffects(v []*Effect) {
 	x.xxx_hidden_Effects = &v
 }
 
-func (x *Object) SetMatchQuality(v string) {
+func (x *Object) SetMatchQuality(v Object_MatchQuality) {
 	x.xxx_hidden_MatchQuality = v
 }
 
@@ -1004,16 +1178,14 @@ type Object_builder struct {
 	// (heading | date-context | boilerplate | service-desk | duplicate).
 	Reason   string
 	Facility string
-	// source names the HTML field the block came from: special_hours |
-	// notifications | schedule_changes.
-	Source string
+	Source   Object_Source
 	// source_group is the schedule group whose block this came from (for
-	// schedule_changes); the object may be placed elsewhere in the tree when
+	// SCHEDULE_CHANGES); the object may be placed elsewhere in the tree when
 	// the city posted it under the wrong group (matched-other-group).
 	SourceGroup string
 	// sources lists all sources that carried this notice when duplicates
-	// were collapsed into it (schedule_changes + special_hours).
-	Sources []string
+	// were collapsed into it (SCHEDULE_CHANGES + SPECIAL_HOURS).
+	Sources []Object_Source
 	// duplicate_of points from a collapsed ignored/duplicate object to the
 	// surviving notice ids.
 	DuplicateOf []string
@@ -1033,16 +1205,20 @@ type Object_builder struct {
 	// stating no recognized effect. A consumer on an older schema sees a new
 	// effect kind as an Effect element whose oneof is unset: treat those as
 	// "unknown effect present", never as no effect.
-	Effects []*Effect
-	// match_quality: exact | normalized | fuzzy | novel | multiple |
-	// scope-phrase | none. candidates holds the raw activity labels of an
-	// unresolved multiple match (the object stays at group level).
-	MatchQuality string
+	Effects      []*Effect
+	MatchQuality Object_MatchQuality
 	Phrase       string
 	Amenity      string
-	Candidates   []string
+	// candidates holds the raw activity labels of an unresolved MULTIPLE
+	// match.
+	Candidates []string
 	// ambiguities are explicit markers for everything short of certain
-	// (see the enrich package docs for the marker vocabulary).
+	// (see the enrich package docs for the marker vocabulary:
+	// "meridiem-inferred", "weekday-mismatch", "possible-activity-time",
+	// ...). Deliberately an open string vocabulary, not an enum: new markers
+	// appear whenever the city invents new phrasing. Consumers must treat
+	// any unrecognized marker as reduced confidence (and may display it
+	// verbatim), never as certainty.
 	Ambiguities []string
 	ProducedBy  string
 }
@@ -1244,7 +1420,7 @@ type TimeAssoc struct {
 	xxx_hidden_End         int32                  `protobuf:"varint,3,opt,name=end"`
 	xxx_hidden_OpenStart   bool                   `protobuf:"varint,4,opt,name=open_start,json=openStart"`
 	xxx_hidden_OpenEnd     bool                   `protobuf:"varint,5,opt,name=open_end,json=openEnd"`
-	xxx_hidden_Relation    string                 `protobuf:"bytes,6,opt,name=relation"`
+	xxx_hidden_Relation    TimeAssoc_Relation     `protobuf:"varint,6,opt,name=relation,enum=ottrec.enrichment.v1.TimeAssoc_Relation"`
 	xxx_hidden_Slots       []string               `protobuf:"bytes,7,rep,name=slots"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
@@ -1312,11 +1488,11 @@ func (x *TimeAssoc) GetOpenEnd() bool {
 	return false
 }
 
-func (x *TimeAssoc) GetRelation() string {
+func (x *TimeAssoc) GetRelation() TimeAssoc_Relation {
 	if x != nil {
 		return x.xxx_hidden_Relation
 	}
-	return ""
+	return TimeAssoc_RELATION_UNSPECIFIED
 }
 
 func (x *TimeAssoc) GetSlots() []string {
@@ -1348,7 +1524,7 @@ func (x *TimeAssoc) SetOpenEnd(v bool) {
 	x.xxx_hidden_OpenEnd = v
 }
 
-func (x *TimeAssoc) SetRelation(v string) {
+func (x *TimeAssoc) SetRelation(v TimeAssoc_Relation) {
 	x.xxx_hidden_Relation = v
 }
 
@@ -1393,10 +1569,8 @@ type TimeAssoc_builder struct {
 	// "will end at 6 pm" open at the end (affected through end of day).
 	OpenStart bool
 	OpenEnd   bool
-	// relation to the matched activity's slots on the resolved dates:
-	// exact | within | covers | overlaps | novel | none | unchecked.
-	Relation string
-	Slots    []string
+	Relation  TimeAssoc_Relation
+	Slots     []string
 }
 
 func (b0 TimeAssoc_builder) Build() *TimeAssoc {
@@ -2511,15 +2685,15 @@ const file_enrichment_proto_rawDesc = "" +
 	"\x05start\x18\x02 \x01(\x05R\x05start\x12\x10\n" +
 	"\x03end\x18\x03 \x01(\x05R\x03end\x12\x18\n" +
 	"\aobjects\x18\x04 \x03(\tR\aobjects\x12\x14\n" +
-	"\x05added\x18\x05 \x03(\tR\x05added\"\x91\a\n" +
+	"\x05added\x18\x05 \x03(\tR\x05added\"\xef\t\n" +
 	"\x06Object\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x125\n" +
 	"\x04kind\x18\x02 \x01(\x0e2!.ottrec.enrichment.v1.Object.KindR\x04kind\x12\x16\n" +
 	"\x06reason\x18\x03 \x01(\tR\x06reason\x12\x1a\n" +
-	"\bfacility\x18\x04 \x01(\tR\bfacility\x12\x16\n" +
-	"\x06source\x18\x05 \x01(\tR\x06source\x12!\n" +
-	"\fsource_group\x18\x06 \x01(\tR\vsourceGroup\x12\x18\n" +
-	"\asources\x18\a \x03(\tR\asources\x12!\n" +
+	"\bfacility\x18\x04 \x01(\tR\bfacility\x12;\n" +
+	"\x06source\x18\x05 \x01(\x0e2#.ottrec.enrichment.v1.Object.SourceR\x06source\x12!\n" +
+	"\fsource_group\x18\x06 \x01(\tR\vsourceGroup\x12=\n" +
+	"\asources\x18\a \x03(\x0e2#.ottrec.enrichment.v1.Object.SourceR\asources\x12!\n" +
 	"\fduplicate_of\x18\b \x03(\tR\vduplicateOf\x12\x1d\n" +
 	"\n" +
 	"block_hash\x18\t \x01(\tR\tblockHash\x12\x10\n" +
@@ -2534,8 +2708,8 @@ const file_enrichment_proto_rawDesc = "" +
 	"\braw_text\x18\x10 \x01(\tR\arawText\x12;\n" +
 	"\x05dates\x18\x11 \x01(\v2\x1e.ottrec.enrichment.v1.DateSpanB\x05\xaa\x01\x02\b\x01R\x05dates\x12:\n" +
 	"\x04time\x18\x12 \x01(\v2\x1f.ottrec.enrichment.v1.TimeAssocB\x05\xaa\x01\x02\b\x01R\x04time\x126\n" +
-	"\aeffects\x18\x13 \x03(\v2\x1c.ottrec.enrichment.v1.EffectR\aeffects\x12#\n" +
-	"\rmatch_quality\x18\x14 \x01(\tR\fmatchQuality\x12\x16\n" +
+	"\aeffects\x18\x13 \x03(\v2\x1c.ottrec.enrichment.v1.EffectR\aeffects\x12N\n" +
+	"\rmatch_quality\x18\x14 \x01(\x0e2).ottrec.enrichment.v1.Object.MatchQualityR\fmatchQuality\x12\x16\n" +
 	"\x06phrase\x18\x15 \x01(\tR\x06phrase\x12\x18\n" +
 	"\aamenity\x18\x16 \x01(\tR\aamenity\x12\x1e\n" +
 	"\n" +
@@ -2549,23 +2723,49 @@ const file_enrichment_proto_rawDesc = "" +
 	"\n" +
 	"\x06NOTICE\x10\x01\x12\f\n" +
 	"\bUNPARSED\x10\x02\x12\v\n" +
-	"\aIGNORED\x10\x03\"\x8d\x01\n" +
+	"\aIGNORED\x10\x03\"\\\n" +
+	"\x06Source\x12\x16\n" +
+	"\x12SOURCE_UNSPECIFIED\x10\x00\x12\x11\n" +
+	"\rSPECIAL_HOURS\x10\x01\x12\x11\n" +
+	"\rNOTIFICATIONS\x10\x02\x12\x14\n" +
+	"\x10SCHEDULE_CHANGES\x10\x03\"\x88\x01\n" +
+	"\fMatchQuality\x12\x1d\n" +
+	"\x19MATCH_QUALITY_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05EXACT\x10\x01\x12\x0e\n" +
+	"\n" +
+	"NORMALIZED\x10\x02\x12\t\n" +
+	"\x05FUZZY\x10\x03\x12\t\n" +
+	"\x05NOVEL\x10\x04\x12\f\n" +
+	"\bMULTIPLE\x10\x05\x12\x10\n" +
+	"\fSCOPE_PHRASE\x10\x06\x12\b\n" +
+	"\x04NONE\x10\a\"\x8d\x01\n" +
 	"\bDateSpan\x12\x14\n" +
 	"\x05dates\x18\x01 \x03(\x05R\x05dates\x12\x19\n" +
 	"\x04from\x18\x02 \x01(\x05B\x05\xaa\x01\x02\b\x01R\x04from\x12\x15\n" +
 	"\x02to\x18\x03 \x01(\x05B\x05\xaa\x01\x02\b\x01R\x02to\x12\x1d\n" +
 	"\n" +
 	"open_ended\x18\x04 \x01(\bR\topenEnded\x12\x1a\n" +
-	"\bweekdays\x18\x05 \x03(\x05R\bweekdays\"\xc1\x01\n" +
+	"\bweekdays\x18\x05 \x03(\x05R\bweekdays\"\xe6\x02\n" +
 	"\tTimeAssoc\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1b\n" +
 	"\x05start\x18\x02 \x01(\x05B\x05\xaa\x01\x02\b\x01R\x05start\x12\x17\n" +
 	"\x03end\x18\x03 \x01(\x05B\x05\xaa\x01\x02\b\x01R\x03end\x12\x1d\n" +
 	"\n" +
 	"open_start\x18\x04 \x01(\bR\topenStart\x12\x19\n" +
-	"\bopen_end\x18\x05 \x01(\bR\aopenEnd\x12\x1a\n" +
-	"\brelation\x18\x06 \x01(\tR\brelation\x12\x14\n" +
-	"\x05slots\x18\a \x03(\tR\x05slots\"\xd8\a\n" +
+	"\bopen_end\x18\x05 \x01(\bR\aopenEnd\x12D\n" +
+	"\brelation\x18\x06 \x01(\x0e2(.ottrec.enrichment.v1.TimeAssoc.RelationR\brelation\x12\x14\n" +
+	"\x05slots\x18\a \x03(\tR\x05slots\"y\n" +
+	"\bRelation\x12\x18\n" +
+	"\x14RELATION_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05EXACT\x10\x01\x12\n" +
+	"\n" +
+	"\x06WITHIN\x10\x02\x12\n" +
+	"\n" +
+	"\x06COVERS\x10\x03\x12\f\n" +
+	"\bOVERLAPS\x10\x04\x12\t\n" +
+	"\x05NOVEL\x10\x05\x12\b\n" +
+	"\x04NONE\x10\x06\x12\r\n" +
+	"\tUNCHECKED\x10\a\"\xd8\a\n" +
 	"\x06Effect\x12F\n" +
 	"\tcancelled\x18\x01 \x01(\v2&.ottrec.enrichment.v1.Effect.CancelledH\x00R\tcancelled\x12:\n" +
 	"\x05added\x18\x02 \x01(\v2\".ottrec.enrichment.v1.Effect.AddedH\x00R\x05added\x12J\n" +
@@ -2598,59 +2798,66 @@ const file_enrichment_proto_rawDesc = "" +
 	"\x03url\x18\x02 \x01(\tR\x03urlB\b\n" +
 	"\x06effectB\x05\x92\x03\x02\b\x02b\beditionsp\xe8\a"
 
-var file_enrichment_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_enrichment_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_enrichment_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_enrichment_proto_goTypes = []any{
 	(Object_Kind)(0),              // 0: ottrec.enrichment.v1.Object.Kind
-	(*Output)(nil),                // 1: ottrec.enrichment.v1.Output
-	(*Facility)(nil),              // 2: ottrec.enrichment.v1.Facility
-	(*Group)(nil),                 // 3: ottrec.enrichment.v1.Group
-	(*Activity)(nil),              // 4: ottrec.enrichment.v1.Activity
-	(*Session)(nil),               // 5: ottrec.enrichment.v1.Session
-	(*Object)(nil),                // 6: ottrec.enrichment.v1.Object
-	(*DateSpan)(nil),              // 7: ottrec.enrichment.v1.DateSpan
-	(*TimeAssoc)(nil),             // 8: ottrec.enrichment.v1.TimeAssoc
-	(*Effect)(nil),                // 9: ottrec.enrichment.v1.Effect
-	nil,                           // 10: ottrec.enrichment.v1.Output.StatsEntry
-	(*Effect_Cancelled)(nil),      // 11: ottrec.enrichment.v1.Effect.Cancelled
-	(*Effect_Added)(nil),          // 12: ottrec.enrichment.v1.Effect.Added
-	(*Effect_TimeChange)(nil),     // 13: ottrec.enrichment.v1.Effect.TimeChange
-	(*Effect_Closure)(nil),        // 14: ottrec.enrichment.v1.Effect.Closure
-	(*Effect_SeasonalHours)(nil),  // 15: ottrec.enrichment.v1.Effect.SeasonalHours
-	(*Effect_ModifiedHours)(nil),  // 16: ottrec.enrichment.v1.Effect.ModifiedHours
-	(*Effect_MovedTo)(nil),        // 17: ottrec.enrichment.v1.Effect.MovedTo
-	(*Effect_ChangedTo)(nil),      // 18: ottrec.enrichment.v1.Effect.ChangedTo
-	(*Effect_Restriction)(nil),    // 19: ottrec.enrichment.v1.Effect.Restriction
-	(*Effect_SeeSchedule)(nil),    // 20: ottrec.enrichment.v1.Effect.SeeSchedule
-	(*timestamppb.Timestamp)(nil), // 21: google.protobuf.Timestamp
+	(Object_Source)(0),            // 1: ottrec.enrichment.v1.Object.Source
+	(Object_MatchQuality)(0),      // 2: ottrec.enrichment.v1.Object.MatchQuality
+	(TimeAssoc_Relation)(0),       // 3: ottrec.enrichment.v1.TimeAssoc.Relation
+	(*Output)(nil),                // 4: ottrec.enrichment.v1.Output
+	(*Facility)(nil),              // 5: ottrec.enrichment.v1.Facility
+	(*Group)(nil),                 // 6: ottrec.enrichment.v1.Group
+	(*Activity)(nil),              // 7: ottrec.enrichment.v1.Activity
+	(*Session)(nil),               // 8: ottrec.enrichment.v1.Session
+	(*Object)(nil),                // 9: ottrec.enrichment.v1.Object
+	(*DateSpan)(nil),              // 10: ottrec.enrichment.v1.DateSpan
+	(*TimeAssoc)(nil),             // 11: ottrec.enrichment.v1.TimeAssoc
+	(*Effect)(nil),                // 12: ottrec.enrichment.v1.Effect
+	nil,                           // 13: ottrec.enrichment.v1.Output.StatsEntry
+	(*Effect_Cancelled)(nil),      // 14: ottrec.enrichment.v1.Effect.Cancelled
+	(*Effect_Added)(nil),          // 15: ottrec.enrichment.v1.Effect.Added
+	(*Effect_TimeChange)(nil),     // 16: ottrec.enrichment.v1.Effect.TimeChange
+	(*Effect_Closure)(nil),        // 17: ottrec.enrichment.v1.Effect.Closure
+	(*Effect_SeasonalHours)(nil),  // 18: ottrec.enrichment.v1.Effect.SeasonalHours
+	(*Effect_ModifiedHours)(nil),  // 19: ottrec.enrichment.v1.Effect.ModifiedHours
+	(*Effect_MovedTo)(nil),        // 20: ottrec.enrichment.v1.Effect.MovedTo
+	(*Effect_ChangedTo)(nil),      // 21: ottrec.enrichment.v1.Effect.ChangedTo
+	(*Effect_Restriction)(nil),    // 22: ottrec.enrichment.v1.Effect.Restriction
+	(*Effect_SeeSchedule)(nil),    // 23: ottrec.enrichment.v1.Effect.SeeSchedule
+	(*timestamppb.Timestamp)(nil), // 24: google.protobuf.Timestamp
 }
 var file_enrichment_proto_depIdxs = []int32{
-	21, // 0: ottrec.enrichment.v1.Output.generated:type_name -> google.protobuf.Timestamp
-	6,  // 1: ottrec.enrichment.v1.Output.objects:type_name -> ottrec.enrichment.v1.Object
-	2,  // 2: ottrec.enrichment.v1.Output.facilities:type_name -> ottrec.enrichment.v1.Facility
-	10, // 3: ottrec.enrichment.v1.Output.stats:type_name -> ottrec.enrichment.v1.Output.StatsEntry
-	3,  // 4: ottrec.enrichment.v1.Facility.groups:type_name -> ottrec.enrichment.v1.Group
-	4,  // 5: ottrec.enrichment.v1.Group.activities:type_name -> ottrec.enrichment.v1.Activity
-	5,  // 6: ottrec.enrichment.v1.Activity.sessions:type_name -> ottrec.enrichment.v1.Session
+	24, // 0: ottrec.enrichment.v1.Output.generated:type_name -> google.protobuf.Timestamp
+	9,  // 1: ottrec.enrichment.v1.Output.objects:type_name -> ottrec.enrichment.v1.Object
+	5,  // 2: ottrec.enrichment.v1.Output.facilities:type_name -> ottrec.enrichment.v1.Facility
+	13, // 3: ottrec.enrichment.v1.Output.stats:type_name -> ottrec.enrichment.v1.Output.StatsEntry
+	6,  // 4: ottrec.enrichment.v1.Facility.groups:type_name -> ottrec.enrichment.v1.Group
+	7,  // 5: ottrec.enrichment.v1.Group.activities:type_name -> ottrec.enrichment.v1.Activity
+	8,  // 6: ottrec.enrichment.v1.Activity.sessions:type_name -> ottrec.enrichment.v1.Session
 	0,  // 7: ottrec.enrichment.v1.Object.kind:type_name -> ottrec.enrichment.v1.Object.Kind
-	7,  // 8: ottrec.enrichment.v1.Object.dates:type_name -> ottrec.enrichment.v1.DateSpan
-	8,  // 9: ottrec.enrichment.v1.Object.time:type_name -> ottrec.enrichment.v1.TimeAssoc
-	9,  // 10: ottrec.enrichment.v1.Object.effects:type_name -> ottrec.enrichment.v1.Effect
-	11, // 11: ottrec.enrichment.v1.Effect.cancelled:type_name -> ottrec.enrichment.v1.Effect.Cancelled
-	12, // 12: ottrec.enrichment.v1.Effect.added:type_name -> ottrec.enrichment.v1.Effect.Added
-	13, // 13: ottrec.enrichment.v1.Effect.time_change:type_name -> ottrec.enrichment.v1.Effect.TimeChange
-	14, // 14: ottrec.enrichment.v1.Effect.closure:type_name -> ottrec.enrichment.v1.Effect.Closure
-	15, // 15: ottrec.enrichment.v1.Effect.seasonal_hours:type_name -> ottrec.enrichment.v1.Effect.SeasonalHours
-	16, // 16: ottrec.enrichment.v1.Effect.modified_hours:type_name -> ottrec.enrichment.v1.Effect.ModifiedHours
-	17, // 17: ottrec.enrichment.v1.Effect.moved_to:type_name -> ottrec.enrichment.v1.Effect.MovedTo
-	18, // 18: ottrec.enrichment.v1.Effect.changed_to:type_name -> ottrec.enrichment.v1.Effect.ChangedTo
-	19, // 19: ottrec.enrichment.v1.Effect.restriction:type_name -> ottrec.enrichment.v1.Effect.Restriction
-	20, // 20: ottrec.enrichment.v1.Effect.see_schedule:type_name -> ottrec.enrichment.v1.Effect.SeeSchedule
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	1,  // 8: ottrec.enrichment.v1.Object.source:type_name -> ottrec.enrichment.v1.Object.Source
+	1,  // 9: ottrec.enrichment.v1.Object.sources:type_name -> ottrec.enrichment.v1.Object.Source
+	10, // 10: ottrec.enrichment.v1.Object.dates:type_name -> ottrec.enrichment.v1.DateSpan
+	11, // 11: ottrec.enrichment.v1.Object.time:type_name -> ottrec.enrichment.v1.TimeAssoc
+	12, // 12: ottrec.enrichment.v1.Object.effects:type_name -> ottrec.enrichment.v1.Effect
+	2,  // 13: ottrec.enrichment.v1.Object.match_quality:type_name -> ottrec.enrichment.v1.Object.MatchQuality
+	3,  // 14: ottrec.enrichment.v1.TimeAssoc.relation:type_name -> ottrec.enrichment.v1.TimeAssoc.Relation
+	14, // 15: ottrec.enrichment.v1.Effect.cancelled:type_name -> ottrec.enrichment.v1.Effect.Cancelled
+	15, // 16: ottrec.enrichment.v1.Effect.added:type_name -> ottrec.enrichment.v1.Effect.Added
+	16, // 17: ottrec.enrichment.v1.Effect.time_change:type_name -> ottrec.enrichment.v1.Effect.TimeChange
+	17, // 18: ottrec.enrichment.v1.Effect.closure:type_name -> ottrec.enrichment.v1.Effect.Closure
+	18, // 19: ottrec.enrichment.v1.Effect.seasonal_hours:type_name -> ottrec.enrichment.v1.Effect.SeasonalHours
+	19, // 20: ottrec.enrichment.v1.Effect.modified_hours:type_name -> ottrec.enrichment.v1.Effect.ModifiedHours
+	20, // 21: ottrec.enrichment.v1.Effect.moved_to:type_name -> ottrec.enrichment.v1.Effect.MovedTo
+	21, // 22: ottrec.enrichment.v1.Effect.changed_to:type_name -> ottrec.enrichment.v1.Effect.ChangedTo
+	22, // 23: ottrec.enrichment.v1.Effect.restriction:type_name -> ottrec.enrichment.v1.Effect.Restriction
+	23, // 24: ottrec.enrichment.v1.Effect.see_schedule:type_name -> ottrec.enrichment.v1.Effect.SeeSchedule
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_enrichment_proto_init() }
@@ -2675,7 +2882,7 @@ func file_enrichment_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enrichment_proto_rawDesc), len(file_enrichment_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      4,
 			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,

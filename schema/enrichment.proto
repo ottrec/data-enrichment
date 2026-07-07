@@ -82,17 +82,24 @@ message Object {
     // (heading | date-context | boilerplate | service-desk | duplicate).
     string reason = 3;
 
+    // Source names the HTML field of the ottrec.v1 dataset a block came
+    // from.
+    enum Source {
+        SOURCE_UNSPECIFIED = 0;
+        SPECIAL_HOURS = 1;    // Facility.special_hours_html
+        NOTIFICATIONS = 2;    // Facility.notifications_html
+        SCHEDULE_CHANGES = 3; // ScheduleGroup.schedule_changes_html
+    }
+
     string facility = 4;
-    // source names the HTML field the block came from: special_hours |
-    // notifications | schedule_changes.
-    string source = 5;
+    Source source = 5;
     // source_group is the schedule group whose block this came from (for
-    // schedule_changes); the object may be placed elsewhere in the tree when
+    // SCHEDULE_CHANGES); the object may be placed elsewhere in the tree when
     // the city posted it under the wrong group (matched-other-group).
     string source_group = 6;
     // sources lists all sources that carried this notice when duplicates
-    // were collapsed into it (schedule_changes + special_hours).
-    repeated string sources = 7;
+    // were collapsed into it (SCHEDULE_CHANGES + SPECIAL_HOURS).
+    repeated Source sources = 7;
     // duplicate_of points from a collapsed ignored/duplicate object to the
     // surviving notice ids.
     repeated string duplicate_of = 8;
@@ -117,16 +124,35 @@ message Object {
     // "unknown effect present", never as no effect.
     repeated Effect effects = 19;
 
-    // match_quality: exact | normalized | fuzzy | novel | multiple |
-    // scope-phrase | none. candidates holds the raw activity labels of an
-    // unresolved multiple match (the object stays at group level).
-    string match_quality = 20;
+    // MatchQuality says how the notice's subject phrase was matched against
+    // the schedule. Proto enums are open: a consumer on an older schema sees
+    // a value added later as an unrecognized number and must treat it as
+    // "unknown quality", not as any particular one.
+    enum MatchQuality {
+        MATCH_QUALITY_UNSPECIFIED = 0; // no subject matching applied
+        EXACT = 1;        // exact label/name spelling
+        NORMALIZED = 2;   // equal token sets after folding/stemming
+        FUZZY = 3;        // token subset or single-candidate typo match
+        NOVEL = 4;        // an added activity absent from the published schedule
+        MULTIPLE = 5;     // several candidates; see candidates, stays at group level
+        SCOPE_PHRASE = 6; // a whole-scope phrase ("all drop-in skating", "the facility")
+        NONE = 7;         // a subject was looked for but nothing matched
+    }
+
+    MatchQuality match_quality = 20;
     string phrase = 21;  // extracted subject phrase
     string amenity = 22; // amenity name for amenity-scoped notices
+    // candidates holds the raw activity labels of an unresolved MULTIPLE
+    // match.
     repeated string candidates = 23;
 
     // ambiguities are explicit markers for everything short of certain
-    // (see the enrich package docs for the marker vocabulary).
+    // (see the enrich package docs for the marker vocabulary:
+    // "meridiem-inferred", "weekday-mismatch", "possible-activity-time",
+    // ...). Deliberately an open string vocabulary, not an enum: new markers
+    // appear whenever the city invents new phrasing. Consumers must treat
+    // any unrecognized marker as reduced confidence (and may display it
+    // verbatim), never as certainty.
     repeated string ambiguities = 24;
     string produced_by = 25; // parser (llm reserved for a residue pass)
 }
@@ -155,9 +181,21 @@ message TimeAssoc {
     // "will end at 6 pm" open at the end (affected through end of day).
     bool open_start = 4;
     bool open_end = 5;
-    // relation to the matched activity's slots on the resolved dates:
-    // exact | within | covers | overlaps | novel | none | unchecked.
-    string relation = 6;
+    // Relation describes how the extracted range relates to the matched
+    // activity's actual slots on the resolved dates. Like all enums here it
+    // is open: treat unrecognized values as unknown.
+    enum Relation {
+        RELATION_UNSPECIFIED = 0;
+        EXACT = 1;     // equals a slot
+        WITHIN = 2;    // inside a slot (partial cancellation/closure)
+        COVERS = 3;    // covers one or more whole slots
+        OVERLAPS = 4;  // partially overlaps a slot
+        NOVEL = 5;     // no such slot (expected for added times)
+        NONE = 6;      // no overlap with any slot (suspicious for cancels; marked)
+        UNCHECKED = 7; // no activity scope to validate against
+    }
+
+    Relation relation = 6;
     repeated string slots = 7; // affected slots, "Weekday HH:MM - HH:MM"
 }
 

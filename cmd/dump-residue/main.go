@@ -86,7 +86,7 @@ func main() {
 		for _, o := range out.GetObjects() {
 			switch o.GetKind() {
 			case epb.Object_UNPARSED:
-				add("unparsed/"+o.GetReason(), o.GetSource(), o.GetDateText(), o.GetSection(), o.GetRawText(), o.GetFacility(), o.GetSourceGroup(), nil)
+				add("unparsed/"+o.GetReason(), srcName(o), o.GetDateText(), o.GetSection(), o.GetRawText(), o.GetFacility(), o.GetSourceGroup(), nil)
 			case epb.Object_NOTICE:
 				cat := ""
 				for _, c := range categories {
@@ -101,7 +101,7 @@ func main() {
 				if cat == "date-garbled" && o.HasDates() {
 					continue // repaired: dates resolved despite the garble
 				}
-				add(cat, o.GetSource(), o.GetDateText(), o.GetSection(), o.GetRawText(), o.GetFacility(), o.GetSourceGroup(), o.GetAmbiguities())
+				add(cat, srcName(o), o.GetDateText(), o.GetSection(), o.GetRawText(), o.GetFacility(), o.GetSourceGroup(), o.GetAmbiguities())
 			}
 		}
 	}
@@ -177,6 +177,10 @@ func main() {
 			fmt.Fprintf(os.Stderr, "warning: uncategorized %q (%d entries)\n", cat, len(byCat[cat]))
 		}
 	}
+}
+
+func srcName(o *epb.Object) string {
+	return strings.ToLower(o.GetSource().String())
 }
 
 func otherMarkers(markers []string, cat string) []string {

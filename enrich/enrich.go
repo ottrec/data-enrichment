@@ -613,9 +613,8 @@ func (fc *facCtx) buildObject(r *rec) *epb.Object {
 		Kind:         objectKind(r.kind),
 		Reason:       r.reason,
 		Facility:     fc.fac.GetName(),
-		Source:       r.n.Source,
+		Source:       sourceToProto(r.n.Source),
 		SourceGroup:  r.n.Group,
-		Sources:      r.sources,
 		DuplicateOf:  r.duplicateOf,
 		BlockHash:    r.blockHash,
 		Seq:          int32(r.seq),
@@ -625,10 +624,13 @@ func (fc *facCtx) buildObject(r *rec) *epb.Object {
 		RawText:      r.n.RawText,
 		Dates:        dateSpanToProto(r.n.Dates),
 		Time:         timeAssocToProto(r.n.Time),
-		MatchQuality: r.n.Scope.MatchQuality,
+		MatchQuality: matchQualityToProto(r.n.Scope.MatchQuality),
 		Phrase:       r.n.Scope.Phrase,
 		Amenity:      r.n.Scope.Amenity,
 		Ambiguities:  r.n.Ambiguities,
+	}
+	for _, s := range r.sources {
+		b.Sources = append(b.Sources, sourceToProto(s))
 	}
 	if r.off != [2]int{} {
 		b.HtmlStart = proto.Int32(int32(r.off[0]))
@@ -642,6 +644,62 @@ func (fc *facCtx) buildObject(r *rec) *epb.Object {
 		}
 	}
 	return b.Build()
+}
+
+// sourceToProto maps the internal source names to the schema enum.
+func sourceToProto(source string) epb.Object_Source {
+	switch source {
+	case "special_hours":
+		return epb.Object_SPECIAL_HOURS
+	case "notifications":
+		return epb.Object_NOTIFICATIONS
+	case "schedule_changes":
+		return epb.Object_SCHEDULE_CHANGES
+	}
+	return epb.Object_SOURCE_UNSPECIFIED
+}
+
+// matchQualityToProto maps the internal match quality names to the schema
+// enum ("" means no subject matching applied).
+func matchQualityToProto(q string) epb.Object_MatchQuality {
+	switch q {
+	case matchExact:
+		return epb.Object_EXACT
+	case matchNormalized:
+		return epb.Object_NORMALIZED
+	case matchFuzzy:
+		return epb.Object_FUZZY
+	case matchNovel:
+		return epb.Object_NOVEL
+	case matchMultiple:
+		return epb.Object_MULTIPLE
+	case matchScopePhrase:
+		return epb.Object_SCOPE_PHRASE
+	case matchNone:
+		return epb.Object_NONE
+	}
+	return epb.Object_MATCH_QUALITY_UNSPECIFIED
+}
+
+// relationToProto maps the internal slot relation names to the schema enum.
+func relationToProto(rel string) epb.TimeAssoc_Relation {
+	switch rel {
+	case relExact:
+		return epb.TimeAssoc_EXACT
+	case relWithin:
+		return epb.TimeAssoc_WITHIN
+	case relCovers:
+		return epb.TimeAssoc_COVERS
+	case relOverlaps:
+		return epb.TimeAssoc_OVERLAPS
+	case relNovel:
+		return epb.TimeAssoc_NOVEL
+	case relNone:
+		return epb.TimeAssoc_NONE
+	case relUnchecked:
+		return epb.TimeAssoc_UNCHECKED
+	}
+	return epb.TimeAssoc_RELATION_UNSPECIFIED
 }
 
 func objectKind(kind string) epb.Object_Kind {
@@ -684,7 +742,7 @@ func timeAssocToProto(t *TimeAssoc) *epb.TimeAssoc {
 		Text:      t.Text,
 		OpenStart: t.OpenStart,
 		OpenEnd:   t.OpenEnd,
-		Relation:  t.Relation,
+		Relation:  relationToProto(t.Relation),
 		Slots:     t.Slots,
 	}
 	if t.Text != "" || t.StartMin != 0 || t.EndMin != 0 {

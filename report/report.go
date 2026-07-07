@@ -33,18 +33,14 @@ func Build(version string, data ottrecidx.DataRef) []byte {
 
 	placements := placementIndex(out)
 
-	var b strings.Builder
-	b.WriteString("<!doctype html>\n<meta charset=\"utf-8\">\n<title>enrichment report ")
-	b.WriteString(html.EscapeString(version))
-	b.WriteString("</title>\n")
-	b.WriteString(pageCSS)
+	// two independently scrolling columns: source blocks left, objects
+	// right, each with its own facility headers
+	var bl, br strings.Builder
 
-	b.WriteString(`<div class="grid">`)
-
-	// header row: version left, stats right
-	fmt.Fprintf(&b, `<div class="cell left meta"><h1>enrichment report</h1><p>version %s &middot; generated %s</p></div>`,
+	fmt.Fprintf(&bl, `<div class="meta"><h1>enrichment report</h1><p>version %s &middot; generated %s</p></div>`,
 		html.EscapeString(version), html.EscapeString(out.GetGenerated().AsTime().Format("2006-01-02 15:04:05 MST")))
-	b.WriteString(`<div class="cell right"><details class="stats" open><summary>stats</summary><table>`)
+	br.WriteString(`<label class="toggle"><input type="checkbox" id="hideignored"> hide ignored</label>`)
+	br.WriteString(`<details class="stats"><summary>stats</summary><table>`)
 	for _, k := range slices.Sorted(func(yield func(string) bool) {
 		for k := range out.GetStats() {
 			if !yield(k) {
@@ -52,11 +48,10 @@ func Build(version string, data ottrecidx.DataRef) []byte {
 			}
 		}
 	}) {
-		fmt.Fprintf(&b, "<tr><td>%d</td><td>%s</td></tr>", out.GetStats()[k], html.EscapeString(k))
+		fmt.Fprintf(&br, "<tr><td>%d</td><td>%s</td></tr>", out.GetStats()[k], html.EscapeString(k))
 	}
-	b.WriteString(`</table></details></div>`)
+	br.WriteString(`</table></details>`)
 
-	// one row per source block, grouped by facility in dataset order
 	for fac := range data.Facilities() {
 		name := fac.GetName()
 		var blocks []struct {
@@ -76,7 +71,8 @@ func Build(version string, data ottrecidx.DataRef) []byte {
 			continue
 		}
 
-		fmt.Fprintf(&b, `<div class="cell fac" style="grid-column: 1 / -1"><h2>%s</h2></div>`, html.EscapeString(name))
+		fmt.Fprintf(&bl, `<h2>%s</h2>`, html.EscapeString(name))
+		fmt.Fprintf(&br, `<h2>%s</h2>`, html.EscapeString(name))
 		for _, blk := range blocks {
 			objs := byBlock[blockKey{name, blk.group, enrich.BlockHash(blk.html)}]
 
@@ -85,16 +81,22 @@ func Build(version string, data ottrecidx.DataRef) []byte {
 				label += " [" + blk.group + "]"
 			}
 			segs, colors := segmentsFor(blk.html, objs)
-			b.WriteString(`<div class="cell left"><div class="blockhead">` + html.EscapeString(label) + `</div><pre class="src">`)
-			writeSegs(&b, blk.html, 0, len(blk.html), segs)
-			b.WriteString(`</pre></div><div class="cell right">`)
+			bl.WriteString(`<div class="blockhead">` + html.EscapeString(label) + `</div><pre class="src">`)
+			writeSegs(&bl, blk.html, 0, len(blk.html), segs)
+			bl.WriteString(`</pre>`)
+			br.WriteString(`<div class="blockhead">` + html.EscapeString(label) + `</div>`)
 			for _, o := range objs {
-				writeCard(&b, o, colors[o.GetId()], placements)
+				writeCard(&br, o, colors[o.GetId()], placements)
 			}
-			b.WriteString(`</div>`)
 		}
 	}
-	b.WriteString(`</div>`)
+
+	var b strings.Builder
+	b.WriteString("<!doctype html>\n<meta charset=\"utf-8\">\n<title>enrichment report ")
+	b.WriteString(html.EscapeString(version))
+	b.WriteString("</title>\n")
+	b.WriteString(pageCSS)
+	b.WriteString(`<div class="col">` + bl.String() + `</div><div class="col">` + br.String() + `</div>`)
 	b.WriteString(pageJS)
 	return []byte(b.String())
 }
@@ -133,10 +135,13 @@ func placementIndex(out *epb.Output) map[string][]string {
 }
 
 // seg is one highlighted byte range of a block (multiple objects can share
-// an identical range, e.g. a date head and the items of one <li>).
+// an identical range, e.g. a date head and the items of one <li>). ignored
+// is set when every object in the range is an ignored one, so the
+// hide-ignored toggle can mute it.
 type seg struct {
 	start, end int
 	ids        []string
+	ignored    bool
 }
 
 // segmentsFor groups the objects' extracted byte ranges into highlight
@@ -147,7 +152,9 @@ type seg struct {
 // disjoint; anything else is skipped defensively by writeSegs.
 func segmentsFor(blockHTML string, objs []*epb.Object) ([]seg, map[string]string) {
 	byRange := map[[2]int][]string{}
+	kinds := map[string]epb.Object_Kind{}
 	for _, o := range objs {
+		kinds[o.GetId()] = o.GetKind()
 		if !o.HasHtmlStart() {
 			continue
 		}
@@ -160,7 +167,13 @@ func segmentsFor(blockHTML string, objs []*epb.Object) ([]seg, map[string]string
 	segs := make([]seg, 0, len(byRange))
 	colors := map[string]string{}
 	for r, ids := range byRange {
-		segs = append(segs, seg{r[0], r[1], ids})
+		ignored := true
+		for _, id := range ids {
+			if kinds[id] != epb.Object_IGNORED {
+				ignored = false
+			}
+		}
+		segs = append(segs, seg{r[0], r[1], ids, ignored})
 		for _, id := range ids {
 			colors[id] = segColor(ids)
 		}
@@ -189,8 +202,12 @@ func writeSegs(b *strings.Builder, src string, pos, end int, segs []seg) {
 			j++
 		}
 		b.WriteString(html.EscapeString(src[pos:s.start]))
-		fmt.Fprintf(b, `<span class="seg" data-ids="%s" style="background:%s">`,
-			html.EscapeString(strings.Join(s.ids, " ")), segColor(s.ids))
+		class := "seg"
+		if s.ignored {
+			class = "seg ig"
+		}
+		fmt.Fprintf(b, `<span class="%s" data-ids="%s" style="background:%s">`,
+			class, html.EscapeString(strings.Join(s.ids, " ")), segColor(s.ids))
 		writeSegs(b, src, s.start, s.end, segs[i+1:j])
 		b.WriteString(`</span>`)
 		pos = s.end
@@ -224,8 +241,8 @@ func writeCard(b *strings.Builder, o *epb.Object, color string, placements map[s
 	}
 	fmt.Fprintf(b, `<div class="cardhead"><span class="badge %s">%s</span> <code>%s</code> seq %d`,
 		kind, html.EscapeString(badge), html.EscapeString(o.GetId()), o.GetSeq())
-	if q := o.GetMatchQuality(); q != "" {
-		fmt.Fprintf(b, ` &middot; match: %s`, html.EscapeString(q))
+	if q := o.GetMatchQuality(); q != epb.Object_MATCH_QUALITY_UNSPECIFIED {
+		fmt.Fprintf(b, ` &middot; match: %s`, html.EscapeString(strings.ToLower(q.String())))
 	}
 	b.WriteString(`</div>`)
 
@@ -249,7 +266,11 @@ func writeCard(b *strings.Builder, o *epb.Object, color string, placements map[s
 	row("candidates", esc(strings.Join(o.GetCandidates(), "; ")))
 	row("ambiguities", esc(strings.Join(o.GetAmbiguities(), ", ")))
 	row("placed", esc(strings.Join(placements[o.GetId()], "; ")))
-	row("sources", esc(strings.Join(o.GetSources(), ", ")))
+	var sources []string
+	for _, s := range o.GetSources() {
+		sources = append(sources, strings.ToLower(s.String()))
+	}
+	row("sources", esc(strings.Join(sources, ", ")))
 	if dup := o.GetDuplicateOf(); len(dup) > 0 {
 		var links []string
 		for _, id := range dup {
@@ -295,8 +316,8 @@ func timeAssocText(t *epb.TimeAssoc) string {
 		}
 		parts = append(parts, r)
 	}
-	if rel := t.GetRelation(); rel != "" {
-		parts = append(parts, "rel="+rel)
+	if rel := t.GetRelation(); rel != epb.TimeAssoc_RELATION_UNSPECIFIED {
+		parts = append(parts, "rel="+strings.ToLower(rel.String()))
 	}
 	if s := t.GetSlots(); len(s) > 0 {
 		parts = append(parts, "slots: "+strings.Join(s, "; "))
@@ -338,10 +359,11 @@ func effectsText(effects []*epb.Effect) string {
 }
 
 const pageCSS = `<style>
-body { margin: 0; font: 13px/1.4 system-ui, sans-serif; color: #222; background: #fff; }
-.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4px 12px; padding: 8px; }
-.cell { min-width: 0; }
-.cell.fac h2 { margin: 14px 0 0; font-size: 14px; border-bottom: 1px solid #ccc; }
+html, body { margin: 0; height: 100%; }
+body { font: 13px/1.4 system-ui, sans-serif; color: #222; background: #fff;
+  display: grid; grid-template-columns: 1fr 1fr; }
+.col { overflow-y: scroll; min-width: 0; padding: 4px 8px; border-left: 1px solid #ccc; }
+h2 { margin: 14px 0 0; font-size: 14px; border-bottom: 1px solid #ccc; }
 .meta h1 { margin: 0; font-size: 14px; }
 .meta p { margin: 0; color: #666; }
 .blockhead { font-size: 11px; color: #666; margin-top: 4px; }
@@ -357,6 +379,9 @@ pre.src { margin: 0; padding: 4px; border: 1px solid #ddd;
 .badge.ignored { color: #888; font-weight: normal; }
 .row { margin: 0; }
 .lbl { display: inline-block; min-width: 78px; color: #999; font-size: 11px; }
+.toggle { font-size: 12px; color: #555; user-select: none; }
+body.hide-ignored .card.kind-ignored { display: none; }
+body.hide-ignored .seg.ig { background: #f0efed !important; color: #999; }
 .stats table { border-collapse: collapse; font-size: 11px; }
 .stats td { padding: 0 8px 0 0; text-align: right; }
 .stats td + td { text-align: left; color: #555; }
@@ -369,6 +394,8 @@ const pageJS = `<script>
 // hover a card: outline its source segment. mouseover with stopPropagation
 // makes the innermost (most specific) segment win.
 const byId = id => document.getElementById('obj-' + id)
+document.getElementById('hideignored').addEventListener('change', e =>
+  document.body.classList.toggle('hide-ignored', e.target.checked))
 document.querySelectorAll('.seg').forEach(seg => {
   const ids = seg.dataset.ids.split(' ')
   seg.addEventListener('mouseover', e => {

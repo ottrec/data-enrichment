@@ -32,7 +32,11 @@ published schedule, labeled by the raw subject phrase), or concrete per-date
 sessions. Session refs separate `objects` (about published schedule times)
 from `added` (times added by the notice). Effects are a repeated oneof so a
 consumer on an older schema sees a new effect kind as an element with an
-unset oneof ("unknown effect present") instead of silently missing it.
+unset oneof ("unknown effect present") instead of silently missing it; the
+closed vocabularies (kind, source, match_quality, time relation) are open
+enums for the same reason, while ambiguities stay strings on purpose (open
+vocabulary; unrecognized markers must read as reduced confidence and can be
+shown verbatim).
 Special-hours notices that duplicate a group's schedule-changes copy
 collapse into an ignored/duplicate stub pointing at the survivor, which gets
 `sources: [schedule_changes, special_hours]`. Marked-but-validated matches
