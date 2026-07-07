@@ -378,7 +378,14 @@ func dedupeKeys(n *notice) []string {
 		if n.Time != nil {
 			t = fmt.Sprintf("%d-%d", n.Time.StartMin, n.Time.EndMin)
 		}
-		sc = "act:" + strings.Join(n.Scope.Activities, ",") + "@" + t
+		// fold and sort the labels: the two copies may have matched
+		// different label spellings of the same activities
+		folded := make([]string, len(n.Scope.Activities))
+		for i, a := range n.Scope.Activities {
+			folded[i] = foldText(a)
+		}
+		slices.Sort(folded)
+		sc = "act:" + strings.Join(slices.Compact(folded), ",") + "@" + t
 	case "amenity":
 		sc = "amenity:" + foldText(n.Scope.Phrase)
 	default:

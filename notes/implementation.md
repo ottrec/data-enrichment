@@ -2,29 +2,42 @@
 
 Package `enrich/` + `cmd/enrich`. Consumes dataset versions through
 `ottrecidx` (data access, `ComputeEffectiveDateRange`, `SingleDate`, TZ) and
-emits one JSON `Output` per version (`enrich/record.go`).
+emits one protobuf `Output` per version.
 
 ## Output shape
 
+The schema is `schema/enrichment.proto` (well-commented; read it first),
+generated with the same buf/protoc-gen-go opaque-API setup as the scraper
+(`go generate ./schema`). It reuses the scraper's encodings: dates are
+YYYYMMDDW int32s (`schema.Date`), clock values are minutes from midnight
+(`schema.ClockTime`); weekday-only patterns are dates with only the weekday
+component set. `cmd/enrich` writes protojson by default, `-format pb` for
+binary.
+
 A flat `objects` list plus a facility > group > activity > session reference
 hierarchy. Every fragment of source text is exactly one object (kind
-`notice`, `unparsed`, or `ignored` with a reason: heading, date-context,
+NOTICE, UNPARSED, or IGNORED with a reason: heading, date-context,
 boilerplate, service-desk, duplicate); `cmd/check-coverage` verifies this
 mechanically over the whole corpus (every word of every block must appear in
 some object's raw text). Objects carry blockHash + seq (block reading order)
 and, when the markup allows tracking, the [start,end) byte offset into the
 source block HTML.
 
-The tree references objects by id at the most specific level the association
-is guaranteed for: facility, group (including unresolved multiple-candidate
-matches, with `candidates`), activity (novel:true for added activities not in
-the published schedule), or concrete per-date sessions. Session refs separate
-`objects` (about published schedule times) from `added` (times added by the
-notice). Special-hours notices that duplicate a group's schedule-changes copy
+The tree joins to the dataset by raw identifiers (facility name, group
+label, raw activity label; the normalized _name is lossy) and references
+objects by id at the most specific level the association is guaranteed for:
+facility, group (including unresolved multiple-candidate matches, with
+`candidates`), activity (novel:true for added activities not in the
+published schedule, labeled by the raw subject phrase), or concrete per-date
+sessions. Session refs separate `objects` (about published schedule times)
+from `added` (times added by the notice). Effects are a repeated oneof so a
+consumer on an older schema sees a new effect kind as an element with an
+unset oneof ("unknown effect present") instead of silently missing it.
+Special-hours notices that duplicate a group's schedule-changes copy
 collapse into an ignored/duplicate stub pointing at the survivor, which gets
 `sources: [schedule_changes, special_hours]`. Marked-but-validated matches
-(matched-other-group, activity-typo-match, time-disambiguated) descend, since
-they are deterministic; anything ambiguous stays higher up.
+(matched-other-group, activity-typo-match, time-disambiguated) descend,
+since they are deterministic; anything ambiguous stays higher up.
 
 ## Pipeline
 

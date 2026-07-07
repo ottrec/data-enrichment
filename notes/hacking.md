@@ -6,12 +6,15 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
 
 ## Code map
 
-- `record.go` — output JSON types: flat `Objects` + Facility > Group >
-  Activity > Session id-reference tree (see implementation.md "Output
-  shape"), plus the internal `notice`/`scope` intermediate representation the
-  item parser produces before placement. Effects booleans are only ever set
-  from literal trigger words. `TimeAssoc` Text/StartMin/EndMin are omitted
-  for whole-activity notices where only the affected slots are known.
+- `schema/enrichment.proto` — the public output schema (flat objects +
+  Facility > Group > Activity > Session id-reference tree; see
+  implementation.md "Output shape"). Regenerate with `go generate ./schema`
+  (buf + go tool protoc-gen-go, opaque API, same setup as the scraper).
+- `record.go` — the internal intermediate representation (`notice`/`scope`,
+  internal DateSpan/TimeAssoc/Effects) the item parser produces before
+  placement converts it to protobuf. Effects booleans are only ever set from
+  literal trigger words; scope.Activities carries raw activity labels (the
+  canonical dataset join key).
 - `text.go` — `normText` (display text; keeps `\n` from `<br>`, strips
   zero-width/nbsp), `foldText` (lowercase, punctuation folded; kills colons,
   so clock/date parsing must run on normText and only keyword/token work on

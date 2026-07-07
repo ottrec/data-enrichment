@@ -11,22 +11,44 @@ import (
 	"github.com/ottrec/website/pkg/ottrecidx"
 )
 
+// The pattern tables below encode the city's phrasing vocabulary, collected
+// from the full dataset history (see notes/data-shape.md). All of them run
+// against foldText'd or normText'd text; see processSentence for the order
+// they apply in, which is load-bearing.
 var (
+	// boilerplateRe matches standing notices with no schedule meaning
+	// (contact-for-hours blurbs, "pickleball moved to the gym schedule");
+	// they become ignored/boilerplate objects.
 	boilerplateRe = regexp.MustCompile(`^(please contact .*(opening hours|washroom)|public skating is not available at this location|the park is open year ?round|.*can now be found in the .*schedule.*|gymnasium sports will resume in the fall)`)
-	seeRe         = regexp.MustCompile(`(?i)\bsee\s+(?:the\s+)?(.{0,80}?schedule)s?\b`)
-	facilityRe    = regexp.MustCompile(`^(?:the )?facility\b.*\b(closed|close|not available|unavailable)\b`)
-	allDropinsRe  = regexp.MustCompile(`^(?:all|both) (?:drop ?ins?|programs)(?: are)?(?: cancelled)?$`)
-	allClassRe    = regexp.MustCompile(`^(?:all|both) (?:drop ?in )?(.+?)(?: drop ?ins?| programs| sessions| activities)?$`)
-	seasonRe      = regexp.MustCompile(`(?i)^(regular season|pre-? ?season)\b[ ,]*`)
-	closedSeason  = regexp.MustCompile(`^closed for the season`)
-	keywordRe     = regexp.MustCompile(`^(?:and |are |is |will be |all )*(cancelled|canceled|added|closed)[. ]*$`)
-	movedRe       = regexp.MustCompile(`(?i)^moved (?:to |inside to )?(.+)$`)
-	changedRe     = regexp.MustCompile(`(?i)^changed to (.+)$`)
+	// "See Winter Break schedule." cross-references (capture: the schedule name)
+	seeRe = regexp.MustCompile(`(?i)\bsee\s+(?:the\s+)?(.{0,80}?schedule)s?\b`)
+	// whole-facility closure sentences ("The facility is closed and all
+	// programs cancelled."); also sets the closure context for following items
+	facilityRe = regexp.MustCompile(`^(?:the )?facility\b.*\b(closed|close|not available|unavailable)\b`)
+	// "All drop-ins cancelled" (whole posted scope)
+	allDropinsRe = regexp.MustCompile(`^(?:all|both) (?:drop ?ins?|programs)(?: are)?(?: cancelled)?$`)
+	// "All <classes> drop-ins" (capture: the class phrase, e.g. "skating and
+	// ice sports"), resolved by resolveClass
+	allClassRe = regexp.MustCompile(`^(?:all|both) (?:drop ?in )?(.+?)(?: drop ?ins?| programs| sessions| activities)?$`)
+	// "Regular season, <date range>" seasonal operating statements
+	seasonRe     = regexp.MustCompile(`(?i)^(regular season|pre-? ?season)\b[ ,]*`)
+	closedSeason = regexp.MustCompile(`^closed for the season`)
+	// a comma clause that is only an effect keyword ("..., cancelled")
+	keywordRe = regexp.MustCompile(`^(?:and |are |is |will be |all )*(cancelled|canceled|added|closed)[. ]*$`)
+	// "moved to <destination>" / "changed to <replacement>" clauses
+	movedRe   = regexp.MustCompile(`(?i)^moved (?:to |inside to )?(.+)$`)
+	changedRe = regexp.MustCompile(`(?i)^changed to (.+)$`)
+	// an effect keyword glued to the phrase without a comma ("All drop-in
+	// skating and ice sports cancelled")
 	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)[. ]*$`)
 	untilNoticeRe = regexp.MustCompile(`(?i)\buntil further notice\b`)
 	// "X is closed ...", "X closed until further notice", "X will be closed"
-	subjectClosedRe    = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
-	allProgramsRe      = regexp.MustCompile(`\ball .{0,40}?(?:drop ?ins?|programs)(?: are)? cancelled\b`)
+	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
+	// "... and all programs cancelled" riding on a subject closure, which
+	// upgrades it to a broad (group/facility) cancellation
+	allProgramsRe = regexp.MustCompile(`\ball .{0,40}?(?:drop ?ins?|programs)(?: are)? cancelled\b`)
+	// "All changerooms closed for maintenance": an amenity closure phrased
+	// through the "all X" form (capture: the amenity phrase)
 	allAmenityClosedRe = regexp.MustCompile(`^(.+?),? (?:are |is )?closed(?: for .+)?$`)
 	genericFacility    = map[string]bool{"facility": true, "centre": true, "center": true, "complex": true, "building": true, "hall": true, "community": true, "recreation": true, "park": true, "pool": true, "arena": true, "rink": true, "dome": true}
 )
@@ -146,6 +168,16 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int,
 }
 
 // processSentence parses one sentence of an item and emits objects for it.
+//
+// The order of checks is load-bearing: see-schedule cross-references, then
+// time extraction (so closure sentences keep their times), then the
+// sentence-level patterns (facility closures, season statements, "<subject>
+// is closed" with facility-name -> activity -> amenity subject resolution),
+// then comma-clause decomposition into effect keywords / moved-changed /
+// trailing "only" restriction / subject phrase, then the "all X" scope
+// phrases, the empty-phrase branch (bare effects, date+clock hours items,
+// date-only items), and finally the activity/amenity/freeform subject
+// resolution with slot validation and session explosion.
 func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, working string, off [2]int, links []anchor) {
 	openEnded := untilNoticeRe.MatchString(working)
 
