@@ -386,14 +386,14 @@ func effectsText(effects []*epb.Effect) string {
 const pageCSS = `<style>
 html, body { margin: 0; height: 100%; }
 body { font: 13px/1.4 system-ui, sans-serif; color: #222; background: #fff;
-  display: grid; grid-template-columns: 1fr 1fr; }
+  display: grid; grid-template-columns: minmax(0, 640px) minmax(0, 1fr); }
 .col { overflow-y: scroll; min-width: 0; padding: 4px 8px; border-left: 1px solid #ccc; }
 h2 { margin: 14px 0 0; font-size: 14px; border-bottom: 1px solid #ccc; }
 .meta h1 { margin: 0; font-size: 14px; }
 .meta p { margin: 0; color: #666; }
 .blockhead { font-size: 11px; color: #666; margin-top: 4px; }
 pre.src { margin: 0; padding: 4px; border: 1px solid #ddd;
-  white-space: pre-wrap; word-break: break-all; font: 11px/1.5 ui-monospace, monospace; }
+  white-space: pre-wrap; overflow-wrap: break-word; font: 11px/1.5 ui-monospace, monospace; }
 .seg { cursor: pointer; }
 .seg.hl { outline: 2px solid #c00; }
 .card { border: 1px solid #ddd; border-left: 4px solid transparent; padding: 2px 6px; margin: 2px 0; }
