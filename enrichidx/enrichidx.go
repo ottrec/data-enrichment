@@ -89,6 +89,7 @@ type facility struct {
 }
 
 type group struct {
+	direct  []*epb.Object // objects placed at the group node itself
 	objects []*epb.Object // whole subtree, deduped
 	marks   map[sessKey]SessionNotices
 	added   []AddedSession
@@ -127,7 +128,8 @@ func Join(out *epb.Output) Ref {
 		for _, eg := range ef.GetGroups() {
 			g := &group{marks: map[sessKey]SessionNotices{}}
 			seen := map[string]bool{}
-			g.objects = resolve(g.objects, seen, eg.GetObjects())
+			g.direct = resolve(nil, seen, eg.GetObjects())
+			g.objects = slices.Clip(g.direct)
 			for _, ea := range eg.GetActivities() {
 				g.objects = resolve(g.objects, seen, ea.GetObjects())
 				for _, es := range ea.GetSessions() {
@@ -201,6 +203,100 @@ func (g GroupRef) Warning(from, to schema.Date) Warning {
 		return WarnNone
 	}
 	return warning(g.g.objects, from, to)
+}
+
+// ScopeCancelled reports whether a facility-scoped whole-scope notice cancels
+// or closes the facility's programming on the given date, overlapping the
+// clock range [start, end) in minutes ("The facility is closed and all
+// programs cancelled.", "All drop-in skating and ice sports, cancelled"). See
+// [scopeCancelled] for what qualifies.
+func (f FacilityRef) ScopeCancelled(date schema.Date, start, end int) bool {
+	if f.f == nil {
+		return false
+	}
+	return scopeCancelled(f.f.objects, date, start, end)
+}
+
+// ScopeCancelled reports whether a whole-scope notice placed at the group
+// level cancels or closes the group's programming on the given date,
+// overlapping the clock range [start, end) in minutes ("All drop-in skating,
+// cancelled"). Objects that descended to the group's activities or sessions
+// are not included (those report through Session).
+func (g GroupRef) ScopeCancelled(date schema.Date, start, end int) bool {
+	if g.g == nil {
+		return false
+	}
+	return scopeCancelled(g.g.direct, date, start, end)
+}
+
+// scopeCancelled reports whether a notice among objs is a whole-scope
+// cancellation or closure that may apply on date, overlapping [start, end).
+// Tree position guarantees the level; this additionally requires the subject
+// to be a scope phrase ("all drop-in skating", "the facility") or absent (a
+// bare dated "cancelled"/"closed" item), so activity-subject notices that
+// merely failed to match (NONE, MULTIPLE) never implicate the whole scope.
+//
+// A cancelled effect always claims the scope (including through an amenity
+// subject: "the pool is closed and all programs cancelled"). A closure-only
+// notice claims it only when the parser extracted no residual subject: whole-
+// scope sentences ("The facility is closed until further notice.") and bare
+// dated "closed" items leave the phrase empty, while a closure of some named
+// part ("The pool is closed for maintenance", "The Great Lawn ... closed")
+// carries its subject and says nothing about the rest of the scope's
+// programming, however the parser leveled it. The notice must also carry a
+// resolved DateSpan (open-ended "until further notice" counts): an undated
+// object applies to every date, which is right for the coarse Warning tier
+// but would paint the whole feed red for list heads like "The facility is
+// not available on the following dates:" whose dates live in the child
+// items (each of which claims its own dates here). Unknown match qualities
+// and effect kinds never add the claim; the Warning tier already covers all
+// of the above, so anything skipped here degrades to that, never below.
+//
+// A scope phrase is still an inference: "all drop-in skating" was matched
+// against the group's title, not each activity, so a true hit means "likely
+// cancelled", not the per-session guarantee SessionNotices.Cancelled carries.
+func scopeCancelled(objs []*epb.Object, date schema.Date, start, end int) bool {
+	for _, o := range objs {
+		if o.GetKind() != epb.Object_NOTICE {
+			continue
+		}
+		switch o.GetMatchQuality() {
+		case epb.Object_SCOPE_PHRASE, epb.Object_MATCH_QUALITY_UNSPECIFIED:
+		default:
+			continue
+		}
+		var cancelled, closure bool
+		for _, e := range o.GetEffects() {
+			switch e.WhichEffect() {
+			case epb.Effect_Cancelled_case:
+				cancelled = true
+			case epb.Effect_Closure_case:
+				closure = true
+			}
+		}
+		if !cancelled && (!closure || o.GetAmenity() != "" || o.GetPhrase() != "") {
+			continue
+		}
+		if o.HasDates() && clockOverlaps(o, start, end) && applies(o, date, date) {
+			return true
+		}
+	}
+	return false
+}
+
+// clockOverlaps reports whether the object's extracted clock window (when it
+// has one) intersects [start, end). Single-ended mentions are already stored
+// as half-day windows ("closed until noon" is 0 to 720); slot-only time
+// associations carry no clock and constrain nothing.
+func clockOverlaps(o *epb.Object, start, end int) bool {
+	if !o.HasTime() {
+		return true
+	}
+	t := o.GetTime()
+	if !t.HasStart() || !t.HasEnd() {
+		return true
+	}
+	return int32(start) < t.GetEnd() && t.GetStart() < int32(end)
 }
 
 // SeeSchedule reports whether a facility-scoped notice deferring to another

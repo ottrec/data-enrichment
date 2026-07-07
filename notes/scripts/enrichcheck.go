@@ -99,6 +99,7 @@ func check(version string, data ottrecidx.DataRef) {
 		warnNone, warnNotice, warnChanges   int
 		downgraded, upgraded                int
 		sessions, cancelled, changed, added int
+		scopeCancelled                      int
 	)
 	for fac := range data.Facilities() {
 		enFac := en.Facility(fac.GetName())
@@ -170,6 +171,15 @@ func check(version string, data ottrecidx.DataRef) {
 									fmt.Printf("  cancel: %s / %s / %s %s %d-%d\n",
 										fac.GetName(), grp.GetLabel(), act.GetLabel(), day, r.Start, r.End)
 								}
+							} else if enFac.ScopeCancelled(day, int(r.Start), int(r.End)) ||
+								enGrp.ScopeCancelled(day, int(r.Start), int(r.End)) {
+								// the likely-cancelled tier, probed like
+								// buildTodayFeed's warning
+								scopeCancelled++
+								if scopeCancelled <= 12 {
+									fmt.Printf("  scopecancel: %s / %s / %s %s %d-%d\n",
+										fac.GetName(), grp.GetLabel(), act.GetLabel(), day, r.Start, r.End)
+								}
 							}
 							if m.TimeChange {
 								changed++
@@ -210,7 +220,7 @@ func check(version string, data ottrecidx.DataRef) {
 	}
 	fmt.Printf("groups=%d oldChanges=%d -> none=%d notice=%d changes=%d (downgraded=%d upgraded=%d)\n",
 		groups, oldChanges, warnNone, warnNotice, warnChanges, downgraded, upgraded)
-	fmt.Printf("sessions=%d cancelled=%d changed=%d added=%d\n", sessions, cancelled, changed, added)
+	fmt.Printf("sessions=%d cancelled=%d changed=%d added=%d scopecancelled=%d\n", sessions, cancelled, changed, added, scopeCancelled)
 }
 
 // dumpObjects prints the facility-level objects and the named group's subtree

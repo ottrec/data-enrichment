@@ -64,6 +64,16 @@ enrichment:
 - session-level `objects` with a `cancelled`/`closure` effect: style the
   matching feed session as cancelled (this is the high-confidence tier:
   slot-validated, date-resolved).
+- group/facility-level whole-scope cancellations ("All drop-in skating,
+  cancelled", "The facility is closed and all programs cancelled."): a red
+  per-session "may be affected" warning via `enrichidx.ScopeCancelled`, one
+  tier below the strike. The scope phrase was matched against the group
+  title, not each activity, so this is "likely cancelled", never certainty.
+  The query requires a dated (or open-ended) notice with a scope-phrase or
+  absent subject, and skips closure-only notices with a residual subject
+  ("The pool is closed for maintenance" at a multi-group complex says
+  nothing about the other groups' programming); everything skipped still
+  reports through the Warning tier.
 - session-level `added` refs: inject a new feed session (activity label from
   the tree; `novel` activities have no dataset row).
 - activity-level objects: a note line on all of that activity's sessions on
@@ -84,8 +94,8 @@ so avoid re-parsing.
 
 - `go run ./notes/scripts [version-spec]` (enrichcheck): replays the /today
   consumer (enrichidx warnings, see-schedule, session cancel/time-change/
-  added joins) against one version, anchored at that version's date; dumps
-  the objects behind every warning downgrade. Try a holiday-week version
+  added/scope-cancelled joins) against one version, anchored at that
+  version's date; dumps the objects behind every warning downgrade. Try a holiday-week version
   (e.g. `2026-06-29`, `2025-12-29`) to exercise the see-schedule and
   cancel/added paths.
 - `go run ./cmd/report -o report.html`: visual QA for one version (source
