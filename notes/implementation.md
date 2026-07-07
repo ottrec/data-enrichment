@@ -109,13 +109,13 @@ since they are deterministic; anything ambiguous stays higher up.
    (dates+effects+scope key, merged class phrasing matches per-group copies)
    get `duplicateOfGroups` (flagged, not dropped).
 
-## Corpus results (315 versions, 2025-08 to 2026-07)
+## Corpus results (319 versions, 2025-08 to 2026-07)
 
 62,579 items → 50,106 notices + 11,845 boilerplate + 808 unparsed freeform
 (1.3%). Scope: activity 11,336 / class ~800 / group 16,103 / facility 19,140 /
 amenity 1,712 / none 1,018 (2.0%). Time relations on activity-scoped items:
 exact 7,138 / within 1,078 / covers 309 / overlaps 193 / novel 1,317 (added) /
-none 554. ~6,450 special-duplicates-changes flags; 38 timeChange (end-early),
+none 554. ~6,540 special-duplicates-changes flags; 38 timeChange (end-early),
 3 activity-typo-match, 3,862 modifiedHours, 172 matched-other-group.
 Every "cancelled" item in the corpus now resolves to a dated, scoped notice
 (the residue file contains zero items mentioning cancellation).

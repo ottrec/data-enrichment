@@ -16,6 +16,9 @@ separately).
   and a sketch of the output record format.
 - [implementation.md](implementation.md): status and corpus results of the
   deterministic parser (approach A), implemented in `enrich/` + `cmd/enrich`.
+- [integration.md](integration.md): how a consumer (the /today page) should
+  read the output — join keys, trust rules, suggested mapping, open
+  decisions. Start here for the website integration work.
 - [hacking.md](hacking.md): continuation notes — code map, the
   no-false-positive invariants, dev workflow, and next steps.
 
@@ -34,7 +37,7 @@ Tooling (from the module root, needs `/tmp/ottrec-data.db`):
 - `go run ./cmd/dump-residue > notes/residue.txt`: the unique items the
   parser couldn't fully resolve (the LLM/manual second-pass candidate set),
   deduplicated and grouped by failure category. [residue.txt](residue.txt)
-  is a checked-in snapshot over all 315 versions.
+  is a checked-in snapshot over the full history.
 - `go run ./cmd/dump-special` (existing): raw line dump for `sort | uniq -c`.
 - `go run ./cmd/dump-context [-versions n] [-blocks]`: whole blocks
   (newline-escaped) with facility/group/schedule/activity/time context;

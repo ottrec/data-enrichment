@@ -207,12 +207,12 @@
        text:    Emergency cooling centre will be open from 10 am to 8 pm.
 
     3x schedule_changes @ Nepean Sportsplex [Drop-in schedule - swim and aquafitness]
-       date:    Sunday, February 22
+       date:    Saturday, February 21
        text:    Public swim, 1 to 3 pm, in 25 m pool only
        markers: meridiem-inferred
 
     3x schedule_changes @ Nepean Sportsplex [Drop-in schedule - swim and aquafitness]
-       date:    Saturday, February 21
+       date:    Sunday, February 22
        text:    Public swim, 1 to 3 pm, in 25 m pool only
        markers: meridiem-inferred
 

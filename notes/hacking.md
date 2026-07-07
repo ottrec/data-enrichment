@@ -148,9 +148,9 @@ saw.
 
 ## Next steps (rough order)
 
-1. Decide delivery: where the JSON goes (published next to the dataset vs
-   consumed directly by the website) and what key the website joins on
-   (facility name + group label today; consider source URL).
+1. Website integration (see integration.md): decide the
+   generation/publishing pipeline, then wire /today to the per-session /
+   per-activity objects, replacing the coarse per-group Changes flag.
 2. The LLM residue pass (approach C in approaches.md) over
    unparsed-freeform + activity-unmatched, behind the same validators.
    On hold: options to be explored first.
