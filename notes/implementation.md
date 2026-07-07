@@ -79,8 +79,10 @@ since they are deterministic; anything ambiguous stays higher up.
    unparsed records). Then sentence-level patterns first (see-schedule,
    facility closures, "closed for the season", "Regular season + range",
    "subject is closed" with facility/activity/amenity subject resolution),
-   then comma-clause decomposition (keyword clauses, moved/changed-to,
-   trailing "only" restriction, subject phrase). Scope phrases ("all
+   then comma-clause decomposition (keyword clauses, moved-to, trailing
+   "only" restriction, subject phrase). ("changed to" items degrade to
+   freeform-item: clock extraction glues the subject onto the clause, and the
+   effect was removed as never-occurring rather than fixed.) Scope phrases ("all
    drop-in skating and ice sports") resolve to whole group / class-matched
    activities / groups by title. Amenity subjects (hot tub, one named arena
    of two, ...) never claim activity effects.

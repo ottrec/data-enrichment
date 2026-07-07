@@ -779,9 +779,6 @@ func effectsToProto(e Effects) []*epb.Effect {
 	if e.MovedTo != "" {
 		add(epb.Effect_builder{MovedTo: epb.Effect_MovedTo_builder{To: e.MovedTo}.Build()})
 	}
-	if e.ChangedTo != "" {
-		add(epb.Effect_builder{ChangedTo: epb.Effect_ChangedTo_builder{To: e.ChangedTo}.Build()})
-	}
 	if e.Restriction != "" {
 		add(epb.Effect_builder{Restriction: epb.Effect_Restriction_builder{Text: e.Restriction}.Build()})
 	}

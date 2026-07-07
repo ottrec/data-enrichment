@@ -216,9 +216,8 @@ message Effect {
     // The session (see Session.added) or activity is added on the object's
     // dates; the time is not part of the published schedule.
     message Added {}
-    // The time changed ("schedule change", "will end at 6 pm", or a
-    // changed-to with new times); details are in the object's time and
-    // raw text.
+    // The time changed ("schedule change", "will end at 6 pm"); details are
+    // in the object's time and raw text.
     message TimeChange {}
     // The scope (facility, amenity, or activity subject) is closed. With
     // dates and/or a time this is bounded; combined with
@@ -233,12 +232,6 @@ message Effect {
     // The activity moved elsewhere ("moved to the 25m pool"); to is the raw
     // destination text.
     message MovedTo {
-        string to = 1;
-    }
-    // The activity changed to something else ("changed to Lane swim -
-    // shared pool"); to is the raw replacement text (may name an activity
-    // or new times).
-    message ChangedTo {
         string to = 1;
     }
     // A restriction applies ("25m pool only", "short course only"); text is
@@ -260,8 +253,7 @@ message Effect {
         SeasonalHours seasonal_hours = 5;
         ModifiedHours modified_hours = 6;
         MovedTo moved_to = 7;
-        ChangedTo changed_to = 8;
-        Restriction restriction = 9;
-        SeeSchedule see_schedule = 10;
+        Restriction restriction = 8;
+        SeeSchedule see_schedule = 9;
     }
 }

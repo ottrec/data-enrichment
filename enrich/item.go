@@ -35,9 +35,8 @@ var (
 	closedSeason = regexp.MustCompile(`^closed for the season`)
 	// a comma clause that is only an effect keyword ("..., cancelled")
 	keywordRe = regexp.MustCompile(`^(?:and |are |is |will be |all )*(cancelled|canceled|added|closed)[. ]*$`)
-	// "moved to <destination>" / "changed to <replacement>" clauses
-	movedRe   = regexp.MustCompile(`(?i)^moved (?:to |inside to )?(.+)$`)
-	changedRe = regexp.MustCompile(`(?i)^changed to (.+)$`)
+	// "moved to <destination>" clauses
+	movedRe = regexp.MustCompile(`(?i)^moved (?:to |inside to )?(.+)$`)
 	// an effect keyword glued to the phrase without a comma ("All drop-in
 	// skating and ice sports cancelled")
 	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)[. ]*$`)
@@ -330,10 +329,6 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			n.Effects.MovedTo = strings.Trim(normText(m[1]), " .")
 			continue
 		}
-		if m := changedRe.FindStringSubmatch(clause); m != nil {
-			n.Effects.ChangedTo = strings.Trim(normText(m[1]), " .")
-			continue
-		}
 		if fc == "schedule change" || fc == "schedule changes" {
 			n.Effects.TimeChange = true
 			continue
@@ -349,9 +344,6 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	if m := trailingKwRe.FindStringSubmatch(phrase); m != nil {
 		setKeyword(&n.Effects, strings.ToLower(m[1]))
 		phrase = strings.Trim(phrase[:len(phrase)-len(m[0])], " .,")
-	}
-	if n.Effects.ChangedTo != "" && len(clocks) >= 2 {
-		n.Effects.TimeChange = true
 	}
 	if openEnded && strings.Contains(fworking, "closed") {
 		n.Effects.Closure = true
@@ -805,8 +797,7 @@ func countEffects(stats map[string]int, e Effects) {
 		"cancelled": e.Cancelled, "added": e.Added, "timeChange": e.TimeChange,
 		"closure": e.Closure, "seasonalHours": e.SeasonalHours,
 		"modifiedHours": e.ModifiedHours, "movedTo": e.MovedTo != "",
-		"changedTo": e.ChangedTo != "", "restriction": e.Restriction != "",
-		"seeSchedule": e.SeeSchedule != "",
+		"restriction": e.Restriction != "", "seeSchedule": e.SeeSchedule != "",
 	} {
 		if v {
 			stats["effect/"+k]++
