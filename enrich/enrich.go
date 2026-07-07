@@ -14,7 +14,11 @@ import (
 	"strings"
 	"time"
 
+	epb "github.com/ottrec/data-enrichment/schema"
+	"github.com/ottrec/scraper/schema"
 	"github.com/ottrec/website/pkg/ottrecidx"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // Ambiguity markers beyond the date/clock ones.
@@ -42,8 +46,8 @@ const producedByParser = "parser"
 
 // sessKey identifies one concrete session: a date plus clock range.
 type sessKey struct {
-	date       string // ISO
-	start, end int    // minutes from midnight
+	date       schema.Date // full YYYYMMDDW date
+	start, end int         // minutes from midnight
 }
 
 // rec is one extracted fragment before placement.
@@ -61,13 +65,17 @@ type rec struct {
 	duplicateOf []string
 }
 
+// builder accumulates the output while a version is processed; EnrichVersion
+// converts it to the protobuf Output at the end.
+type builder struct {
+	Objects    []*epb.Object
+	Facilities []*epb.Facility
+	Stats      map[string]int
+}
+
 // EnrichVersion builds the enrichment output for one dataset version.
-func EnrichVersion(version string, data ottrecidx.DataRef) *Output {
-	out := &Output{
-		Version:   version,
-		Generated: time.Now(),
-		Stats:     map[string]int{},
-	}
+func EnrichVersion(version string, data ottrecidx.DataRef) *epb.Output {
+	out := &builder{Stats: map[string]int{}}
 	for fac := range data.Facilities() {
 		fc := &facCtx{out: out, fac: fac}
 		fc.anchor = fac.GetSourceDate()
@@ -85,11 +93,21 @@ func EnrichVersion(version string, data ottrecidx.DataRef) *Output {
 		fc.collapse()
 		fc.place()
 	}
-	return out
+	stats := make(map[string]int32, len(out.Stats))
+	for k, v := range out.Stats {
+		stats[k] = int32(v)
+	}
+	return epb.Output_builder{
+		Version:    version,
+		Generated:  timestamppb.New(time.Now()),
+		Objects:    out.Objects,
+		Facilities: out.Facilities,
+		Stats:      stats,
+	}.Build()
 }
 
 type facCtx struct {
-	out      *Output
+	out      *builder
 	fac      ottrecidx.FacilityRef
 	anchor   time.Time
 	matchers []*groupMatcher
@@ -346,7 +364,7 @@ func (fc *facCtx) collapse() {
 func dedupeKeys(n *notice) []string {
 	var d string
 	if n.Dates != nil {
-		d = strings.Join(n.Dates.Dates, ",") + "|" + n.Dates.From + "|" + n.Dates.To + "|" + fmt.Sprint(n.Dates.OpenEnded) + "|" + strings.Join(n.Dates.Weekdays, ",")
+		d = fmt.Sprint(n.Dates.Dates, "|", n.Dates.From, "|", n.Dates.To, "|", n.Dates.OpenEnded, "|", n.Dates.Weekdays)
 	}
 	e := n.Effects
 	e.SeeURL = ""
@@ -370,27 +388,33 @@ func dedupeKeys(n *notice) []string {
 }
 
 // place converts this facility's recs into flat Objects plus the reference
-// hierarchy, descending each notice to the most specific guaranteed level.
+// hierarchy, descending each notice to the most specific guaranteed level:
+// facility, group (including unresolved multiple-candidate matches),
+// activity (raw label; novel for activities absent from the published
+// schedule), or concrete per-date sessions (with added times referenced
+// separately from published ones).
 func (fc *facCtx) place() {
 	if len(fc.recs) == 0 {
 		return
 	}
-	facName := fc.fac.GetName()
-	f := Facility{Name: facName}
 
-	// group/activity builders, in stable first-reference order
+	// raw activity labels per group, for validating placement targets
 	actsByGroup := map[string]map[string]bool{}
 	for _, m := range fc.matchers {
 		set := map[string]bool{}
 		for _, e := range m.acts {
-			set[e.name] = true
+			for _, l := range e.labels {
+				set[l] = true
+			}
 		}
 		actsByGroup[m.label] = set
 	}
+
+	// tree builders, in stable first-reference order
 	type actB struct {
 		novel    bool
 		objects  []string
-		sessions map[sessKey]*Session
+		sessions map[sessKey]*epb.Session_builder
 		sessOrd  []sessKey
 	}
 	type grpB struct {
@@ -398,6 +422,7 @@ func (fc *facCtx) place() {
 		acts    map[string]*actB
 		actOrd  []string
 	}
+	var facObjects []string
 	groups := map[string]*grpB{}
 	var grpOrd []string
 	grp := func(label string) *grpB {
@@ -413,7 +438,7 @@ func (fc *facCtx) place() {
 		g := grp(label)
 		a := g.acts[name]
 		if a == nil {
-			a = &actB{sessions: map[sessKey]*Session{}}
+			a = &actB{sessions: map[sessKey]*epb.Session_builder{}}
 			g.acts[name] = a
 			g.actOrd = append(g.actOrd, name)
 		}
@@ -425,8 +450,7 @@ func (fc *facCtx) place() {
 
 	for i := range fc.recs {
 		r := &fc.recs[i]
-		obj := fc.buildObject(r)
-		fc.out.Objects = append(fc.out.Objects, obj)
+		fc.out.Objects = append(fc.out.Objects, fc.buildObject(r))
 
 		if r.kind != "notice" {
 			// structural/ignored/unparsed fragments live where posted
@@ -434,7 +458,7 @@ func (fc *facCtx) place() {
 				g := grp(r.n.Group)
 				g.objects = append(g.objects, r.id)
 			} else {
-				f.Objects = append(f.Objects, r.id)
+				facObjects = append(facObjects, r.id)
 			}
 			continue
 		}
@@ -444,29 +468,30 @@ func (fc *facCtx) place() {
 		case "activity", "class":
 			if sc.MatchQuality == matchMultiple {
 				// candidates only; stays at group level
-				for _, gl := range targetGroups(sc, r.n.Group) {
+				gls := targetGroups(sc, r.n.Group)
+				if len(gls) == 0 {
+					facObjects = append(facObjects, r.id)
+				}
+				for _, gl := range gls {
 					g := grp(gl)
 					g.objects = append(g.objects, r.id)
-				}
-				if len(targetGroups(sc, r.n.Group)) == 0 {
-					f.Objects = append(f.Objects, r.id)
 				}
 				continue
 			}
 			gls := targetGroups(sc, r.n.Group)
 			placedAny := false
-			for _, name := range sc.Activities {
+			for _, label := range sc.Activities {
 				for _, gl := range gls {
-					if !actsByGroup[gl][name] && !r.novel {
+					if !actsByGroup[gl][label] && !r.novel {
 						continue
 					}
-					a := act(gl, name, r.novel)
+					a := act(gl, label, r.novel)
 					placedAny = true
 					if len(r.sessions) > 0 {
 						for _, sk := range r.sessions {
 							s := a.sessions[sk]
 							if s == nil {
-								s = &Session{Date: sk.date, StartMin: sk.start, EndMin: sk.end}
+								s = &epb.Session_builder{Date: int32(sk.date), Start: int32(sk.start), End: int32(sk.end)}
 								a.sessions[sk] = s
 								a.sessOrd = append(a.sessOrd, sk)
 							}
@@ -489,24 +514,24 @@ func (fc *facCtx) place() {
 						g.objects = append(g.objects, r.id)
 					}
 				} else {
-					f.Objects = append(f.Objects, r.id)
+					facObjects = append(facObjects, r.id)
 				}
 			}
 		case "group":
 			gls := targetGroups(sc, r.n.Group)
 			if len(gls) == 0 {
-				f.Objects = append(f.Objects, r.id)
+				facObjects = append(facObjects, r.id)
 			}
 			for _, gl := range gls {
 				g := grp(gl)
 				g.objects = append(g.objects, r.id)
 			}
 		default: // facility, amenity, none
-			f.Objects = append(f.Objects, r.id)
+			facObjects = append(facObjects, r.id)
 		}
 	}
 
-	// finalize the tree, matcher order first for groups
+	// finalize the tree, matcher (schedule) order first for groups
 	var order []string
 	for _, m := range fc.matchers {
 		if _, ok := groups[m.label]; ok {
@@ -518,29 +543,43 @@ func (fc *facCtx) place() {
 			order = append(order, gl)
 		}
 	}
+	var pbGroups []*epb.Group
 	for _, gl := range order {
 		gb := groups[gl]
-		g := Group{Label: gl, Objects: gb.objects}
+		var pbActs []*epb.Activity
 		for _, name := range gb.actOrd {
 			ab := gb.acts[name]
-			a := Activity{Name: name, Novel: ab.novel, Objects: ab.objects}
 			slices.SortFunc(ab.sessOrd, func(x, y sessKey) int {
 				if x.date != y.date {
-					return strings.Compare(x.date, y.date)
+					return int(x.date - y.date)
 				}
 				if x.start != y.start {
 					return x.start - y.start
 				}
 				return x.end - y.end
 			})
+			var sessions []*epb.Session
 			for _, sk := range ab.sessOrd {
-				a.Sessions = append(a.Sessions, *ab.sessions[sk])
+				sessions = append(sessions, ab.sessions[sk].Build())
 			}
-			g.Activities = append(g.Activities, a)
+			pbActs = append(pbActs, epb.Activity_builder{
+				Label:    name,
+				Novel:    ab.novel,
+				Objects:  ab.objects,
+				Sessions: sessions,
+			}.Build())
 		}
-		f.Groups = append(f.Groups, g)
+		pbGroups = append(pbGroups, epb.Group_builder{
+			Label:      gl,
+			Objects:    gb.objects,
+			Activities: pbActs,
+		}.Build())
 	}
-	fc.out.Facilities = append(fc.out.Facilities, f)
+	fc.out.Facilities = append(fc.out.Facilities, epb.Facility_builder{
+		Name:    fc.fac.GetName(),
+		Objects: facObjects,
+		Groups:  pbGroups,
+	}.Build())
 }
 
 // targetGroups picks the group labels a scoped notice applies to.
@@ -554,32 +593,128 @@ func targetGroups(sc scope, posted string) []string {
 	return nil
 }
 
-func (fc *facCtx) buildObject(r *rec) Object {
-	obj := Object{
-		ID: r.id, Kind: r.kind, Reason: r.reason,
-		Facility: fc.fac.GetName(), Source: r.n.Source, SourceGroup: r.n.Group,
-		Sources: r.sources, DuplicateOf: r.duplicateOf,
-		BlockHash: r.blockHash, Seq: r.seq,
-		Section: r.n.Section, DateText: r.n.DateText,
-		RawHTML: r.n.RawHTML, RawText: r.n.RawText,
-		Dates: r.n.Dates, Time: r.n.Time,
+func (fc *facCtx) buildObject(r *rec) *epb.Object {
+	b := epb.Object_builder{
+		Id:           r.id,
+		Kind:         objectKind(r.kind),
+		Reason:       r.reason,
+		Facility:     fc.fac.GetName(),
+		Source:       r.n.Source,
+		SourceGroup:  r.n.Group,
+		Sources:      r.sources,
+		DuplicateOf:  r.duplicateOf,
+		BlockHash:    r.blockHash,
+		Seq:          int32(r.seq),
+		Section:      r.n.Section,
+		DateText:     r.n.DateText,
+		RawHtml:      r.n.RawHTML,
+		RawText:      r.n.RawText,
+		Dates:        dateSpanToProto(r.n.Dates),
+		Time:         timeAssocToProto(r.n.Time),
 		MatchQuality: r.n.Scope.MatchQuality,
 		Phrase:       r.n.Scope.Phrase,
 		Amenity:      r.n.Scope.Amenity,
 		Ambiguities:  r.n.Ambiguities,
 	}
 	if r.off != [2]int{} {
-		obj.HTMLOffset = []int{r.off[0], r.off[1]}
+		b.HtmlStart = proto.Int32(int32(r.off[0]))
+		b.HtmlEnd = proto.Int32(int32(r.off[1]))
 	}
 	if r.kind == "notice" {
-		obj.ProducedBy = producedByParser
-		if r.n.Effects.any() {
-			e := r.n.Effects
-			obj.Effects = &e
-		}
+		b.ProducedBy = producedByParser
+		b.Effects = effectsToProto(r.n.Effects)
 		if r.n.Scope.MatchQuality == matchMultiple {
-			obj.Candidates = r.n.Scope.Activities
+			b.Candidates = r.n.Scope.Activities
 		}
 	}
-	return obj
+	return b.Build()
+}
+
+func objectKind(kind string) epb.Object_Kind {
+	switch kind {
+	case "notice":
+		return epb.Object_NOTICE
+	case "unparsed":
+		return epb.Object_UNPARSED
+	case "ignored":
+		return epb.Object_IGNORED
+	}
+	return epb.Object_KIND_UNSPECIFIED
+}
+
+func dateSpanToProto(d *DateSpan) *epb.DateSpan {
+	if d == nil {
+		return nil
+	}
+	b := epb.DateSpan_builder{OpenEnded: d.OpenEnded}
+	for _, x := range d.Dates {
+		b.Dates = append(b.Dates, int32(x))
+	}
+	if !d.From.IsZero() {
+		b.From = proto.Int32(int32(d.From))
+	}
+	if !d.To.IsZero() {
+		b.To = proto.Int32(int32(d.To))
+	}
+	for _, wd := range d.Weekdays {
+		b.Weekdays = append(b.Weekdays, int32(schema.MakeDate(0, 0, 0, wd)))
+	}
+	return b.Build()
+}
+
+func timeAssocToProto(t *TimeAssoc) *epb.TimeAssoc {
+	if t == nil {
+		return nil
+	}
+	b := epb.TimeAssoc_builder{
+		Text:      t.Text,
+		OpenStart: t.OpenStart,
+		OpenEnd:   t.OpenEnd,
+		Relation:  t.Relation,
+		Slots:     t.Slots,
+	}
+	if t.Text != "" || t.StartMin != 0 || t.EndMin != 0 {
+		b.Start = proto.Int32(int32(t.StartMin))
+		b.End = proto.Int32(int32(t.EndMin))
+	}
+	return b.Build()
+}
+
+// effectsToProto converts the internal effect flags to the schema's
+// repeated-oneof form (one Effect element per active flag, so consumers on
+// older schemas see unknown kinds as elements with an unset oneof).
+func effectsToProto(e Effects) []*epb.Effect {
+	var out []*epb.Effect
+	add := func(b epb.Effect_builder) { out = append(out, b.Build()) }
+	if e.Cancelled {
+		add(epb.Effect_builder{Cancelled: &epb.Effect_Cancelled{}})
+	}
+	if e.Added {
+		add(epb.Effect_builder{Added: &epb.Effect_Added{}})
+	}
+	if e.TimeChange {
+		add(epb.Effect_builder{TimeChange: &epb.Effect_TimeChange{}})
+	}
+	if e.Closure {
+		add(epb.Effect_builder{Closure: &epb.Effect_Closure{}})
+	}
+	if e.SeasonalHours {
+		add(epb.Effect_builder{SeasonalHours: &epb.Effect_SeasonalHours{}})
+	}
+	if e.ModifiedHours {
+		add(epb.Effect_builder{ModifiedHours: &epb.Effect_ModifiedHours{}})
+	}
+	if e.MovedTo != "" {
+		add(epb.Effect_builder{MovedTo: epb.Effect_MovedTo_builder{To: e.MovedTo}.Build()})
+	}
+	if e.ChangedTo != "" {
+		add(epb.Effect_builder{ChangedTo: epb.Effect_ChangedTo_builder{To: e.ChangedTo}.Build()})
+	}
+	if e.Restriction != "" {
+		add(epb.Effect_builder{Restriction: epb.Effect_Restriction_builder{Text: e.Restriction}.Build()})
+	}
+	if e.SeeSchedule != "" {
+		add(epb.Effect_builder{SeeSchedule: epb.Effect_SeeSchedule_builder{Name: e.SeeSchedule, Url: e.SeeURL}.Build()})
+	}
+	return out
 }

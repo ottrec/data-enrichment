@@ -1,0 +1,229 @@
+edition = "2023";
+
+package ottrec.enrichment.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option features.field_presence = IMPLICIT;
+
+// The enrichment output for one dataset version, derived from the freeform
+// notification/special-hours/schedule-changes HTML of an ottrec.v1.Data
+// snapshot. Every fragment of source text is accounted for by exactly one
+// Object in the flat list; the facility hierarchy references objects by id at
+// the most specific level the association is guaranteed for.
+//
+// Date fields are encoded as in ottrec.v1 (YYYYMMDDW ints, see
+// ottrec.v1.Schedule._daydates); clock fields are minutes from 00:00 as in
+// ottrec.v1.TimeRange.
+message Output {
+    string version = 1; // dataset version id
+    google.protobuf.Timestamp generated = 2;
+    repeated Object objects = 3;
+    repeated Facility facilities = 4;
+    map<string, int32> stats = 5; // parse/marker counters, not a stable API
+}
+
+// Facility mirrors an ottrec.v1.Facility (joined by name), holding
+// facility-scoped object refs and the schedule groups that have content.
+message Facility {
+    string name = 1;
+    repeated string objects = 2; // facility-scoped object ids
+    repeated Group groups = 3;
+}
+
+// Group mirrors an ottrec.v1.ScheduleGroup (joined by label).
+message Group {
+    string label = 1;
+    repeated string objects = 2; // group-scoped object ids
+    repeated Activity activities = 3;
+}
+
+// Activity mirrors an ottrec.v1.Schedule.Activity, joined by its raw
+// unnormalized label (the canonical identifier of an activity within its
+// group; the normalized _name is lossy). novel marks activities that only
+// exist in a change notice ("Women's only swim, added"), not in the
+// published schedule; a novel label is the raw subject phrase of that
+// notice.
+message Activity {
+    string label = 1;
+    bool novel = 2;
+    repeated string objects = 3; // whole-activity object ids
+    repeated Session sessions = 4;
+}
+
+// Session is one concrete date + clock range. objects reference notices
+// about a published schedule time (cancellations, closures, changes); added
+// reference notices that add this time (it is not in the published
+// schedule).
+message Session {
+    int32 date = 1;  // YYYYMMDDW
+    int32 start = 2; // minutes from 00:00
+    int32 end = 3;   // minutes from 00:00, may exceed 1440 for overnight
+    repeated string objects = 4;
+    repeated string added = 5;
+}
+
+// Object is one extracted fragment of source text.
+message Object {
+    enum Kind {
+        KIND_UNSPECIFIED = 0;
+        // A parsed notice carrying associations and effects.
+        NOTICE = 1;
+        // Freeform text nothing could be extracted from.
+        UNPARSED = 2;
+        // Structure and boilerplate kept only so the output accounts for
+        // every fragment of the source: headings, date-context lines,
+        // contact blurbs, collapsed duplicates (see reason).
+        IGNORED = 3;
+    }
+    string id = 1;
+    Kind kind = 2;
+    // reason subdivides unparsed (freeform | parse-error) and ignored
+    // (heading | date-context | boilerplate | service-desk | duplicate).
+    string reason = 3;
+
+    string facility = 4;
+    // source names the HTML field the block came from: special_hours |
+    // notifications | schedule_changes.
+    string source = 5;
+    // source_group is the schedule group whose block this came from (for
+    // schedule_changes); the object may be placed elsewhere in the tree when
+    // the city posted it under the wrong group (matched-other-group).
+    string source_group = 6;
+    // sources lists all sources that carried this notice when duplicates
+    // were collapsed into it (schedule_changes + special_hours).
+    repeated string sources = 7;
+    // duplicate_of points from a collapsed ignored/duplicate object to the
+    // surviving notice ids.
+    repeated string duplicate_of = 8;
+
+    string block_hash = 9; // identifies the containing HTML block
+    int32 seq = 10;        // order within the block
+    // html_start/html_end are the [start, end) byte range in the source
+    // block HTML this fragment was extracted from, when it could be tracked.
+    int32 html_start = 11 [features.field_presence = EXPLICIT];
+    int32 html_end = 12 [features.field_presence = EXPLICIT];
+
+    string section = 13;   // nearest heading text
+    string date_text = 14; // raw date-context text
+    string raw_html = 15;
+    string raw_text = 16;
+
+    DateSpan dates = 17 [features.field_presence = EXPLICIT];
+    TimeAssoc time = 18 [features.field_presence = EXPLICIT];
+    // The notice's effects. Empty for non-notice objects and for notices
+    // stating no recognized effect. A consumer on an older schema sees a new
+    // effect kind as an Effect element whose oneof is unset: treat those as
+    // "unknown effect present", never as no effect.
+    repeated Effect effects = 19;
+
+    // match_quality: exact | normalized | fuzzy | novel | multiple |
+    // scope-phrase | none. candidates holds the raw activity labels of an
+    // unresolved multiple match (the object stays at group level).
+    string match_quality = 20;
+    string phrase = 21;  // extracted subject phrase
+    string amenity = 22; // amenity name for amenity-scoped notices
+    repeated string candidates = 23;
+
+    // ambiguities are explicit markers for everything short of certain
+    // (see the enrich package docs for the marker vocabulary).
+    repeated string ambiguities = 24;
+    string produced_by = 25; // parser (llm reserved for a residue pass)
+}
+
+// DateSpan is a resolved date association.
+message DateSpan {
+    repeated int32 dates = 1; // enumerated dates (YYYYMMDDW)
+    int32 from = 2 [features.field_presence = EXPLICIT]; // YYYYMMDDW
+    int32 to = 3 [features.field_presence = EXPLICIT];   // YYYYMMDDW
+    bool open_ended = 4;
+    // weekday-only patterns ("Monday to Friday"), encoded as YYYYMMDDW dates
+    // with only the weekday component set.
+    repeated int32 weekdays = 5;
+}
+
+// TimeAssoc is a clock range extracted from a notice and its relation to the
+// schedule's actual time slots.
+message TimeAssoc {
+    // text/start/end are absent for whole-activity notices where only the
+    // affected slots are known.
+    string text = 1;
+    int32 start = 2 [features.field_presence = EXPLICIT]; // minutes from 00:00
+    int32 end = 3 [features.field_presence = EXPLICIT];   // may exceed 1440 for overnight
+    // open_start/open_end mark single-ended mentions: "closed until noon" is
+    // open at the start (affected from start of day), "closed at 7:30 pm" /
+    // "will end at 6 pm" open at the end (affected through end of day).
+    bool open_start = 4;
+    bool open_end = 5;
+    // relation to the matched activity's slots on the resolved dates:
+    // exact | within | covers | overlaps | novel | none | unchecked.
+    string relation = 6;
+    repeated string slots = 7; // affected slots, "Weekday HH:MM - HH:MM"
+}
+
+// Effect is one best-effort parsed effect of a notice. An effect is only
+// ever emitted when its trigger word appears in the raw text, and applies to
+// whatever the object's position in the hierarchy scopes it to (a session, a
+// whole activity, a group, or the facility) on the object's dates.
+//
+// Effects are a repeated oneof so the vocabulary can grow: a consumer built
+// against an older schema still receives an Effect element for a new kind,
+// with the oneof unset (the payload is retained in the unknown fields).
+// Callers must therefore treat an Effect with an unset oneof as "an effect
+// this consumer doesn't understand" rather than dropping it, e.g. by falling
+// back to showing the object's raw text.
+message Effect {
+    // The session/activity/scope is cancelled on the object's dates.
+    message Cancelled {}
+    // The session (see Session.added) or activity is added on the object's
+    // dates; the time is not part of the published schedule.
+    message Added {}
+    // The time changed ("schedule change", "will end at 6 pm", or a
+    // changed-to with new times); details are in the object's time and
+    // raw text.
+    message TimeChange {}
+    // The scope (facility, amenity, or activity subject) is closed. With
+    // dates and/or a time this is bounded; combined with
+    // DateSpan.open_ended it is "until further notice".
+    message Closure {}
+    // The object's dates are a seasonal operating range ("Regular season,
+    // June 29 to August 30", "Closed for the season").
+    message SeasonalHours {}
+    // The object's dates+time are the facility's operating hours for those
+    // dates (holiday/modified hours), not an activity time.
+    message ModifiedHours {}
+    // The activity moved elsewhere ("moved to the 25m pool"); to is the raw
+    // destination text.
+    message MovedTo {
+        string to = 1;
+    }
+    // The activity changed to something else ("changed to Lane swim -
+    // shared pool"); to is the raw replacement text (may name an activity
+    // or new times).
+    message ChangedTo {
+        string to = 1;
+    }
+    // A restriction applies ("25m pool only", "short course only"); text is
+    // the raw restriction clause.
+    message Restriction {
+        string text = 1;
+    }
+    // The notice defers to another schedule ("See Winter Break schedule").
+    message SeeSchedule {
+        string name = 1; // referenced schedule name as written
+        string url = 2;  // link target when the notice carried one
+    }
+
+    oneof effect {
+        Cancelled cancelled = 1;
+        Added added = 2;
+        TimeChange time_change = 3;
+        Closure closure = 4;
+        SeasonalHours seasonal_hours = 5;
+        ModifiedHours modified_hours = 6;
+        MovedTo moved_to = 7;
+        ChangedTo changed_to = 8;
+        Restriction restriction = 9;
+        SeeSchedule see_schedule = 10;
+    }
+}

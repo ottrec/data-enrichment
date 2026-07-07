@@ -476,9 +476,10 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		} else if n.Effects.Added && spec != nil {
 			// an added session for an activity not in the published schedule
 			// ("Women's only swim, 8:15 to 9:15 pm, added"): expected for
-			// additions, and worth surfacing as the new activity itself
+			// additions, and worth surfacing as the new activity itself,
+			// labeled by the raw subject phrase
 			n.Scope.Level = "activity"
-			n.Scope.Activities = []string{fphrase}
+			n.Scope.Activities = []string{phrase}
 			n.Scope.MatchQuality = matchNovel
 		} else if n.Effects.any() {
 			n.Scope.Level = "none"
@@ -790,17 +791,15 @@ func toDateSpan(spec *dateSpec, openEnded bool) *DateSpan {
 	}
 	ds := &DateSpan{OpenEnded: spec.OpenEnded || openEnded}
 	for _, d := range spec.Dates {
-		ds.Dates = append(ds.Dates, iso(d))
+		ds.Dates = append(ds.Dates, schema.MakeDateFromGo(d))
 	}
 	if !spec.From.IsZero() {
-		ds.From = iso(spec.From)
+		ds.From = schema.MakeDateFromGo(spec.From)
 	}
 	if !spec.To.IsZero() {
-		ds.To = iso(spec.To)
+		ds.To = schema.MakeDateFromGo(spec.To)
 	}
-	for _, wd := range spec.Weekdays {
-		ds.Weekdays = append(ds.Weekdays, wd.String())
-	}
+	ds.Weekdays = append(ds.Weekdays, spec.Weekdays...)
 	return ds
 }
 
@@ -961,7 +960,7 @@ func explode(spec *dateSpec, slots []slotInfo) []sessKey {
 		for _, s := range slots {
 			switch {
 			case s.fixed != 0 && s.fixed/10 == dd, s.hasWd && s.wd == d.Weekday():
-				out = append(out, sessKey{date: iso(d), start: int(s.r.Start), end: int(s.r.End)})
+				out = append(out, sessKey{date: schema.MakeDateFromGo(d), start: int(s.r.Start), end: int(s.r.End)})
 			}
 		}
 	}
@@ -976,7 +975,7 @@ func explodeClock(spec *dateSpec, r schema.ClockRange) []sessKey {
 	}
 	var out []sessKey
 	for _, d := range spec.allDates(45) {
-		out = append(out, sessKey{date: iso(d), start: int(r.Start), end: int(r.End)})
+		out = append(out, sessKey{date: schema.MakeDateFromGo(d), start: int(r.Start), end: int(r.End)})
 	}
 	return dedupeSess(out)
 }
@@ -984,7 +983,7 @@ func explodeClock(spec *dateSpec, r schema.ClockRange) []sessKey {
 func dedupeSess(s []sessKey) []sessKey {
 	slices.SortFunc(s, func(a, b sessKey) int {
 		if a.date != b.date {
-			return strings.Compare(a.date, b.date)
+			return int(a.date - b.date)
 		}
 		if a.start != b.start {
 			return a.start - b.start

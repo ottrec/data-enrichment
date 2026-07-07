@@ -17,12 +17,17 @@ const (
 	matchNone        = "none"
 )
 
-// actEntry is one distinct activity (by normalized name) within a group.
+// actEntry is one distinct activity within a group. Entries merge by
+// normalized name (so spelling variants across schedules match together)
+// but record every raw label they cover: the raw label is the canonical
+// identifier of an activity in the dataset, and is what placement and the
+// output use.
 type actEntry struct {
-	name  string          // normalized display name
-	folds map[string]bool // folded label and name spellings
-	toks  map[string]bool // union of label/name tokens
-	refs  []ottrecidx.ActivityRef
+	name   string          // normalized name (matching identity)
+	labels []string        // raw labels covered, in first-seen order
+	folds  map[string]bool // folded label and name spellings
+	toks   map[string]bool // union of label/name tokens
+	refs   []ottrecidx.ActivityRef
 }
 
 // groupMatcher matches phrases against one schedule group's activities.
@@ -52,6 +57,9 @@ func newGroupMatcher(grp ottrecidx.ScheduleGroupRef) *groupMatcher {
 			m.acts = append(m.acts, e)
 		}
 		e.refs = append(e.refs, act)
+		if l := act.GetLabel(); l != "" && !slices.Contains(e.labels, l) {
+			e.labels = append(e.labels, l)
+		}
 		for _, s := range []string{act.GetLabel(), name} {
 			if f := foldText(s); f != "" {
 				e.folds[f] = true
@@ -214,10 +222,17 @@ func classSegments(phrase string) []map[string]bool {
 	return segs
 }
 
+// actNames returns the raw activity labels the entries cover (the canonical
+// join keys into the dataset), sorted and deduplicated. Entries without a
+// label (novel or label-less rows) contribute their normalized name.
 func actNames(acts []*actEntry) []string {
-	names := make([]string, len(acts))
-	for i, e := range acts {
-		names[i] = e.name
+	var names []string
+	for _, e := range acts {
+		if len(e.labels) == 0 {
+			names = append(names, e.name)
+			continue
+		}
+		names = append(names, e.labels...)
 	}
 	slices.Sort(names)
 	return slices.Compact(names)

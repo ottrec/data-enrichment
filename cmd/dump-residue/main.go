@@ -16,6 +16,7 @@ import (
 
 	"github.com/ottrec/data-enrichment/enrich"
 	"github.com/ottrec/data-enrichment/internal/dataver"
+	epb "github.com/ottrec/data-enrichment/schema"
 )
 
 var (
@@ -82,14 +83,14 @@ func main() {
 		versions++
 
 		out := enrich.EnrichVersion(ver.ID, data)
-		for _, o := range out.Objects {
-			switch o.Kind {
-			case "unparsed":
-				add("unparsed/"+o.Reason, o.Source, o.DateText, o.Section, o.RawText, o.Facility, o.SourceGroup, nil)
-			case "notice":
+		for _, o := range out.GetObjects() {
+			switch o.GetKind() {
+			case epb.Object_UNPARSED:
+				add("unparsed/"+o.GetReason(), o.GetSource(), o.GetDateText(), o.GetSection(), o.GetRawText(), o.GetFacility(), o.GetSourceGroup(), nil)
+			case epb.Object_NOTICE:
 				cat := ""
 				for _, c := range categories {
-					if slices.Contains(o.Ambiguities, c) {
+					if slices.Contains(o.GetAmbiguities(), c) {
 						cat = c
 						break
 					}
@@ -97,10 +98,10 @@ func main() {
 				if cat == "" {
 					continue
 				}
-				if cat == "date-garbled" && o.Dates != nil {
+				if cat == "date-garbled" && o.HasDates() {
 					continue // repaired: dates resolved despite the garble
 				}
-				add(cat, o.Source, o.DateText, o.Section, o.RawText, o.Facility, o.SourceGroup, o.Ambiguities)
+				add(cat, o.GetSource(), o.GetDateText(), o.GetSection(), o.GetRawText(), o.GetFacility(), o.GetSourceGroup(), o.GetAmbiguities())
 			}
 		}
 	}

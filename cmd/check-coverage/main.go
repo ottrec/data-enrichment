@@ -56,14 +56,14 @@ func main() {
 
 		out := enrich.EnrichVersion(ver.ID, data)
 		covered := map[string]map[string]bool{} // facility\x00blockHash -> words
-		for _, o := range out.Objects {
-			key := o.Facility + "\x00" + o.BlockHash
+		for _, o := range out.GetObjects() {
+			key := o.GetFacility() + "\x00" + o.GetBlockHash()
 			m := covered[key]
 			if m == nil {
 				m = map[string]bool{}
 				covered[key] = m
 			}
-			for w := range words(o.RawText + " " + o.DateText) {
+			for w := range words(o.GetRawText() + " " + o.GetDateText()) {
 				m[w] = true
 			}
 		}

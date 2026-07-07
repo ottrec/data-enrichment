@@ -8,7 +8,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"maps"
@@ -18,12 +17,15 @@ import (
 
 	"github.com/ottrec/data-enrichment/enrich"
 	"github.com/ottrec/data-enrichment/internal/dataver"
+	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 )
 
 var (
 	cachePath = flag.String("cache", "/tmp/ottrec-data.db", "ottrecdata cache path")
 	nVersions = flag.Int("versions", 1, "number of most recent versions to process (0 = all)")
 	outPath   = flag.String("o", "-", `output: "-" for stdout (single version only), a directory for one file per version, "" for stats only`)
+	format    = flag.String("format", "json", `output format: "json" (protojson) or "pb" (binary protobuf)`)
 )
 
 func main() {
@@ -40,10 +42,24 @@ func main() {
 		n++
 
 		out := enrich.EnrichVersion(ver.ID, data)
-		for k, v := range out.Stats {
-			agg[k] += v
+		for k, v := range out.GetStats() {
+			agg[k] += int(v)
 		}
 
+		marshal := func() []byte {
+			if *format == "pb" {
+				buf, err := proto.Marshal(out)
+				if err != nil {
+					panic(err)
+				}
+				return buf
+			}
+			buf, err := protojson.MarshalOptions{Multiline: true, Indent: "  "}.Marshal(out)
+			if err != nil {
+				panic(err)
+			}
+			return append(buf, '\n')
+		}
 		switch {
 		case *outPath == "":
 		case *outPath == "-":
@@ -51,21 +67,12 @@ func main() {
 				fmt.Fprintln(os.Stderr, "stdout output requires -versions 1; use -o dir")
 				os.Exit(2)
 			}
-			enc := json.NewEncoder(os.Stdout)
-			enc.SetIndent("", "  ")
-			enc.SetEscapeHTML(false)
-			if err := enc.Encode(out); err != nil {
-				panic(err)
-			}
+			os.Stdout.Write(marshal())
 		default:
 			if err := os.MkdirAll(*outPath, 0o777); err != nil {
 				panic(err)
 			}
-			buf, err := json.MarshalIndent(out, "", "  ")
-			if err != nil {
-				panic(err)
-			}
-			if err := os.WriteFile(filepath.Join(*outPath, ver.ID+".json"), append(buf, '\n'), 0o666); err != nil {
+			if err := os.WriteFile(filepath.Join(*outPath, ver.ID+"."+*format), marshal(), 0o666); err != nil {
 				panic(err)
 			}
 		}

@@ -7,6 +7,7 @@ require (
 	github.com/ottrec/website v0.0.0-20260704205528-cb10e228699c
 	golang.org/x/net v0.56.0
 	golang.org/x/text v0.39.0
+	google.golang.org/protobuf v1.36.11
 )
 
 require (
@@ -19,5 +20,6 @@ require (
 	github.com/ncruces/julianday v1.0.0 // indirect
 	golang.org/x/image v0.42.0 // indirect
 	golang.org/x/sys v0.46.0 // indirect
-	google.golang.org/protobuf v1.36.11 // indirect
 )
+
+tool google.golang.org/protobuf/cmd/protoc-gen-go
