@@ -20,6 +20,8 @@ github.com/ottrec/scraper v0.0.0-20260617053659-f8e60d2d1db7 h1:8AxbCJOV2J75BOjm
 github.com/ottrec/scraper v0.0.0-20260617053659-f8e60d2d1db7/go.mod h1:axOX9DkOQAdWiwOjC9+PTFG1corxutSFNlHMWjYWUtM=
 github.com/ottrec/website v0.0.0-20260704205528-cb10e228699c h1:SIR04bQvb+QWN8C/nh/z/fro8oiBX0uFqafZvn3GDC4=
 github.com/ottrec/website v0.0.0-20260704205528-cb10e228699c/go.mod h1:LJ78wjJkVBn28EVk7vHqzAKHSlWWLLYIZa/xGdbB9po=
+github.com/ottrec/website v0.0.0-20260706152339-ffdd5bfc4f73 h1:ixrPVxHopxPxG8U59ND/mvujI60/NJCnKhvaX+DNb14=
+github.com/ottrec/website v0.0.0-20260706152339-ffdd5bfc4f73/go.mod h1:Uf/zwyxPWNSExWeyiCxMktOLVrVaHZy1mvKpb/J2A1w=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=

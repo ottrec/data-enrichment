@@ -1,10 +1,10 @@
 module github.com/ottrec/data-enrichment
 
-go 1.26.3
+go 1.27rc1
 
 require (
 	github.com/ottrec/scraper v0.0.0-20260617053659-f8e60d2d1db7
-	github.com/ottrec/website v0.0.0-20260704205528-cb10e228699c
+	github.com/ottrec/website v0.0.0-20260706152339-ffdd5bfc4f73
 	golang.org/x/net v0.56.0
 	golang.org/x/text v0.39.0
 	google.golang.org/protobuf v1.36.11
