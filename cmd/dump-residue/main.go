@@ -82,24 +82,26 @@ func main() {
 		versions++
 
 		out := enrich.EnrichVersion(ver.ID, data)
-		for _, u := range out.Unparsed {
-			add("unparsed/"+u.Reason, u.Source, u.DateText, u.Section, u.RawText, u.Facility, u.Group, nil)
-		}
-		for _, n := range out.Notices {
-			cat := ""
-			for _, c := range categories {
-				if slices.Contains(n.Ambiguities, c) {
-					cat = c
-					break
+		for _, o := range out.Objects {
+			switch o.Kind {
+			case "unparsed":
+				add("unparsed/"+o.Reason, o.Source, o.DateText, o.Section, o.RawText, o.Facility, o.SourceGroup, nil)
+			case "notice":
+				cat := ""
+				for _, c := range categories {
+					if slices.Contains(o.Ambiguities, c) {
+						cat = c
+						break
+					}
 				}
+				if cat == "" {
+					continue
+				}
+				if cat == "date-garbled" && o.Dates != nil {
+					continue // repaired: dates resolved despite the garble
+				}
+				add(cat, o.Source, o.DateText, o.Section, o.RawText, o.Facility, o.SourceGroup, o.Ambiguities)
 			}
-			if cat == "" {
-				continue
-			}
-			if cat == "date-garbled" && n.Dates != nil {
-				continue // repaired: dates resolved despite the garble
-			}
-			add(cat, n.Source, n.DateText, n.Section, n.RawText, n.Facility, n.Group, n.Ambiguities)
 		}
 	}
 	if err != nil {

@@ -2,40 +2,102 @@ package enrich
 
 import "time"
 
-// Output is the enrichment result for one dataset version.
+// Output is the enrichment result for one dataset version. Every fragment of
+// text in the source HTML fields is accounted for by exactly one Object in
+// the flat list; the facility hierarchy references objects by ID at the most
+// specific level the association is guaranteed for.
 type Output struct {
-	Version   string         `json:"version"`
-	Generated time.Time      `json:"generated"`
-	Notices   []Notice       `json:"notices"`
-	Unparsed  []Unparsed     `json:"unparsed,omitempty"`
-	Stats     map[string]int `json:"stats"`
+	Version    string         `json:"version"`
+	Generated  time.Time      `json:"generated"`
+	Objects    []Object       `json:"objects"`
+	Facilities []Facility     `json:"facilities"`
+	Stats      map[string]int `json:"stats"`
 }
 
-// Notice is one extracted item: raw text plus whatever associations and
-// effects could be established without guessing. Flags are only set when
-// backed by a trigger word in the raw text; everything short of certain is
-// listed in Ambiguities instead.
-type Notice struct {
+// Facility mirrors the dataset facility, holding facility-scoped object refs
+// and the schedule groups that have content.
+type Facility struct {
+	Name    string   `json:"name"`
+	Objects []string `json:"objects,omitempty"` // facility-scoped object ids
+	Groups  []Group  `json:"groups,omitempty"`
+}
+
+// Group mirrors a schedule group (by label).
+type Group struct {
+	Label      string     `json:"label"`
+	Objects    []string   `json:"objects,omitempty"` // group-scoped object ids
+	Activities []Activity `json:"activities,omitempty"`
+}
+
+// Activity mirrors a schedule activity (by normalized name). Novel marks
+// activities that only exist in a change notice ("Women's only swim, added"),
+// not in the published schedule.
+type Activity struct {
+	Name     string    `json:"name"`
+	Novel    bool      `json:"novel,omitempty"`
+	Objects  []string  `json:"objects,omitempty"` // whole-activity object ids
+	Sessions []Session `json:"sessions,omitempty"`
+}
+
+// Session is one concrete date + clock range. Objects reference notices about
+// a published schedule time (cancellations, closures, changes); Added
+// reference notices that add this time (it is not in the published schedule).
+type Session struct {
+	Date     string   `json:"date"` // ISO, Ottawa time
+	StartMin int      `json:"startMin"`
+	EndMin   int      `json:"endMin"`
+	Objects  []string `json:"objects,omitempty"`
+	Added    []string `json:"added,omitempty"`
+}
+
+// Object is one extracted fragment of source text. Kind "notice" carries
+// parsed associations and effects; "unparsed" is freeform text nothing could
+// be extracted from; "ignored" is structure and boilerplate (headings,
+// date-context lines, contact blurbs, collapsed duplicates) kept so that the
+// output accounts for every fragment of the source.
+type Object struct {
+	ID     string `json:"id"`
+	Kind   string `json:"kind"`             // notice | unparsed | ignored
+	Reason string `json:"reason,omitempty"` // unparsed: freeform | parse-error; ignored: heading | date-context | boilerplate | service-desk | duplicate
+
 	Facility string `json:"facility"`
-	Group    string `json:"group,omitempty"` // schedule group label
-	Source   string `json:"source"`          // special_hours | notifications | schedule_changes
-	// BlockHash identifies the containing HTML block (cache/dedup key).
+	Source   string `json:"source"` // special_hours | notifications | schedule_changes
+	// SourceGroup is the schedule group whose block this came from (for
+	// schedule_changes); the object may be placed elsewhere in the tree when
+	// the city posted it under the wrong group (matched-other-group).
+	SourceGroup string `json:"sourceGroup,omitempty"`
+	// Sources lists all sources that carried this notice when duplicates
+	// were collapsed into it (e.g. schedule_changes + special_hours).
+	Sources []string `json:"sources,omitempty"`
+	// DuplicateOf points from a collapsed ignored/duplicate object to the
+	// surviving notice ids.
+	DuplicateOf []string `json:"duplicateOf,omitempty"`
+
 	BlockHash string `json:"blockHash"`
-	Section   string `json:"section,omitempty"`  // nearest heading text
-	DateText  string `json:"dateText,omitempty"` // the raw date-context text
-	RawHTML   string `json:"rawHTML"`
-	RawText   string `json:"rawText"`
+	Seq       int    `json:"seq"` // order within the block
+	// HTMLOffset is the [start, end) byte range in the source block HTML
+	// this fragment was extracted from, when it could be tracked.
+	HTMLOffset []int `json:"htmlOffset,omitempty"`
+
+	Section  string `json:"section,omitempty"`  // nearest heading text
+	DateText string `json:"dateText,omitempty"` // raw date-context text
+	RawHTML  string `json:"rawHTML,omitempty"`
+	RawText  string `json:"rawText"`
 
 	Dates   *DateSpan  `json:"dates,omitempty"`
-	Scope   Scope      `json:"scope"`
 	Time    *TimeAssoc `json:"time,omitempty"`
-	Effects Effects    `json:"effects"`
+	Effects *Effects   `json:"effects,omitempty"`
+
+	// MatchQuality: exact | normalized | fuzzy | novel | multiple |
+	// scope-phrase | none. Candidates holds the activity names of an
+	// unresolved multiple match (the object stays at group level).
+	MatchQuality string   `json:"matchQuality,omitempty"`
+	Phrase       string   `json:"phrase,omitempty"`
+	Amenity      string   `json:"amenity,omitempty"`
+	Candidates   []string `json:"candidates,omitempty"`
 
 	Ambiguities []string `json:"ambiguities,omitempty"`
-	// DuplicateOfGroups is set on special_hours notices that repeat one of
-	// the facility's schedule_changes notices (labels of those groups).
-	DuplicateOfGroups []string `json:"duplicateOfGroups,omitempty"`
-	ProducedBy        string   `json:"producedBy"`
+	ProducedBy  string   `json:"producedBy,omitempty"`
 }
 
 // DateSpan is a resolved date association (ISO dates, Ottawa time).
@@ -45,22 +107,6 @@ type DateSpan struct {
 	To        string   `json:"to,omitempty"`
 	OpenEnded bool     `json:"openEnded,omitempty"`
 	Weekdays  []string `json:"weekdays,omitempty"` // weekday-only patterns
-}
-
-// Scope is what the notice applies to.
-type Scope struct {
-	// Level is the most specific target established: activity, class, group,
-	// facility, amenity, or none.
-	Level string `json:"level"`
-	// Groups are affected schedule group labels (facility-level notices).
-	Groups []string `json:"groups,omitempty"`
-	// Activities are normalized activity names: the resolved targets, or the
-	// candidates when MatchQuality is "multiple".
-	Activities []string `json:"activities,omitempty"`
-	Amenity    string   `json:"amenity,omitempty"`
-	Phrase     string   `json:"phrase,omitempty"` // the extracted subject phrase
-	// MatchQuality: exact | normalized | fuzzy | multiple | scope-phrase | none.
-	MatchQuality string `json:"matchQuality,omitempty"`
 }
 
 // TimeAssoc is a clock range extracted from the notice and its relation to
@@ -102,15 +148,31 @@ func (e Effects) any() bool {
 	return e != Effects{}
 }
 
-// Unparsed is an item nothing could be extracted from, kept raw.
-type Unparsed struct {
-	Facility  string `json:"facility"`
-	Group     string `json:"group,omitempty"`
-	Source    string `json:"source"`
-	BlockHash string `json:"blockHash"`
-	Section   string `json:"section,omitempty"`
-	DateText  string `json:"dateText,omitempty"`
-	RawHTML   string `json:"rawHTML"`
-	RawText   string `json:"rawText"`
-	Reason    string `json:"reason"`
+// notice is the intermediate representation the item parser produces before
+// placement; scope describes where in the hierarchy the record belongs.
+type notice struct {
+	Group    string // group label the block was posted under
+	Source   string
+	Section  string
+	DateText string
+	RawHTML  string
+	RawText  string
+
+	Dates   *DateSpan
+	Scope   scope
+	Time    *TimeAssoc
+	Effects Effects
+
+	Ambiguities []string
+}
+
+// scope is what a parsed notice applies to, before placement.
+type scope struct {
+	// Level: activity, class, group, facility, amenity, or none.
+	Level        string
+	Groups       []string // affected group labels
+	Activities   []string // normalized activity names (or candidates for multiple)
+	Amenity      string
+	Phrase       string
+	MatchQuality string
 }

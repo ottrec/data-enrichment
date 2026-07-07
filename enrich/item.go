@@ -59,8 +59,8 @@ var amenityQualifier = map[string]bool{
 	"country": true, "ski": true,
 }
 
-// processItem parses one extracted line/item and emits a Notice or Unparsed.
-func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anchor, extraAmbig []string) {
+// processItem parses one extracted line/item and emits objects for it.
+func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int, links []anchor, extraAmbig []string) {
 	t := strings.TrimSpace(text)
 	if t == "" {
 		return
@@ -69,22 +69,18 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 	folded := foldText(t)
 	if boilerplateRe.MatchString(folded) {
 		b.out.Stats["boilerplate"]++
+		b.add("ignored", "boilerplate", notice{
+			Section: st.section, DateText: st.headRaw, RawHTML: itemHTML, RawText: t,
+		}, off, nil, false)
 		return
 	}
 
-	n := Notice{
-		Facility:    b.fac.GetName(),
-		Source:      b.source,
-		BlockHash:   b.blockHash,
+	n := notice{
 		Section:     st.section,
 		DateText:    st.headRaw,
 		RawHTML:     itemHTML,
 		RawText:     t,
-		ProducedBy:  producedByParser,
 		Ambiguities: slices.Clone(extraAmbig),
-	}
-	if b.grp != nil {
-		n.Group = b.grp.label
 	}
 
 	// dates: the item's own leading date wins over the head context
@@ -103,36 +99,54 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, links []anc
 	// closed between 7:30 and 10:30 am. Lane swim, 7:30 to 8:30 am,
 	// cancelled"), sharing the raw text and date context
 	if sents := splitSentences(working); len(sents) > 1 {
-		beforeN, beforeU := len(b.out.Notices), len(b.out.Unparsed)
+		mark := len(b.recs)
 		for _, s := range sents {
 			nn := n
 			nn.Ambiguities = slices.Clone(n.Ambiguities)
-			b.processSentence(nn, st, spec, s, links)
+			b.processSentence(nn, st, spec, s, off, links)
 		}
 		// per-sentence unparsed records are redundant: the notices carry the
 		// full raw text, and an all-unparsed item needs only one record
-		if len(b.out.Unparsed) > beforeU {
-			for _, u := range b.out.Unparsed[beforeU:] {
-				b.out.Stats["unparsed/"+u.Reason]--
+		notices, unparsed := 0, 0
+		for _, r := range b.recs[mark:] {
+			switch r.kind {
+			case "notice":
+				notices++
+			case "unparsed":
+				unparsed++
 			}
-			b.out.Unparsed = b.out.Unparsed[:beforeU]
-			if len(b.out.Notices) == beforeN {
-				b.out.Stats["unparsed/freeform"]++
-				b.out.Unparsed = append(b.out.Unparsed, Unparsed{
-					Facility: n.Facility, Group: n.Group, Source: n.Source,
-					BlockHash: n.BlockHash, Section: n.Section, DateText: n.DateText,
-					RawHTML: n.RawHTML, RawText: n.RawText, Reason: "freeform",
-				})
+		}
+		if unparsed > 0 && (notices > 0 || unparsed > 1) {
+			kept := b.recs[:mark]
+			first := true
+			for _, r := range b.recs[mark:] {
+				if r.kind != "unparsed" {
+					kept = append(kept, r)
+					continue
+				}
+				b.out.Stats["unparsed/"+r.reason]--
+				b.out.Stats["object/unparsed"]--
+				b.out.Stats["object/unparsed/"+r.reason]--
+				if notices == 0 && first {
+					// collapse to a single whole-item record
+					first = false
+					r.reason = "freeform"
+					r.n.RawText = n.RawText
+					b.out.Stats["unparsed/freeform"]++
+					b.out.Stats["object/unparsed"]++
+					b.out.Stats["object/unparsed/freeform"]++
+					kept = append(kept, r)
+				}
 			}
+			b.recs = kept
 		}
 		return
 	}
-	b.processSentence(n, st, spec, working, links)
+	b.processSentence(n, st, spec, working, off, links)
 }
 
-// processSentence parses one sentence of an item and emits a Notice or an
-// Unparsed record.
-func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, working string, links []anchor) {
+// processSentence parses one sentence of an item and emits objects for it.
+func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, working string, off [2]int, links []anchor) {
 	openEnded := untilNoticeRe.MatchString(working)
 
 	defaultLevel := "facility"
@@ -140,6 +154,7 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 		defaultLevel = "group"
 	}
 
+	var sessions []sessKey
 	emit := func() {
 		n.Dates = toDateSpan(spec, openEnded)
 		n.Ambiguities = dedupeStrings(n.Ambiguities)
@@ -149,15 +164,11 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 		for _, a := range n.Ambiguities {
 			b.out.Stats["amb/"+a]++
 		}
-		b.out.Notices = append(b.out.Notices, n)
+		b.add("notice", "", n, off, sessions, n.Scope.MatchQuality == matchNovel)
 	}
 	unparsed := func(reason string) {
 		b.out.Stats["unparsed/"+reason]++
-		b.out.Unparsed = append(b.out.Unparsed, Unparsed{
-			Facility: n.Facility, Group: n.Group, Source: n.Source,
-			BlockHash: n.BlockHash, Section: n.Section, DateText: n.DateText,
-			RawHTML: n.RawHTML, RawText: n.RawText, Reason: reason,
-		})
+		b.add("unparsed", reason, n, off, nil, false)
 	}
 
 	// "See X schedule" cross-references
@@ -169,7 +180,7 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 				break
 			}
 		}
-		n.Scope = Scope{Level: defaultLevel, MatchQuality: matchScopePhrase}
+		n.Scope = scope{Level: defaultLevel, MatchQuality: matchScopePhrase}
 		emit()
 		return
 	}
@@ -190,13 +201,13 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 	if facilityRe.MatchString(fworking) {
 		n.Effects.Closure = true
 		n.Effects.Cancelled = strings.Contains(fworking, "cancelled") || strings.Contains(fworking, "canceled")
-		n.Scope = Scope{Level: "facility", MatchQuality: matchScopePhrase}
+		n.Scope = scope{Level: "facility", MatchQuality: matchScopePhrase}
 		if b.grp != nil {
 			n.Scope.Level = "group" // scoped by where the city posted it
 			n.Scope.Groups = []string{b.grp.label}
 		}
 		st.closureContext = true
-		b.emitTimes(&n, spec, clocks, emit)
+		b.emitTimes(&n, spec, clocks, &sessions, emit)
 		return
 	}
 
@@ -204,14 +215,14 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 	if closedSeason.MatchString(fworking) {
 		n.Effects.Closure = true
 		n.Effects.SeasonalHours = true
-		n.Scope = Scope{Level: defaultLevel, MatchQuality: matchScopePhrase}
+		n.Scope = scope{Level: defaultLevel, MatchQuality: matchScopePhrase}
 		openEnded = true
 		emit()
 		return
 	}
 	if m := seasonRe.FindStringSubmatch(working); m != nil {
 		n.Effects.SeasonalHours = true
-		n.Scope = Scope{Level: "facility", MatchQuality: matchScopePhrase, Phrase: normText(m[1])}
+		n.Scope = scope{Level: "facility", MatchQuality: matchScopePhrase, Phrase: normText(m[1])}
 		if own, rest, ok := parseLeadingDate(working[len(m[0]):], b.anchor); ok && restIsTrivial(rest) {
 			spec = &own
 			n.DateText = own.Raw
@@ -232,6 +243,7 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 		subject := strings.TrimPrefix(strings.TrimSpace(m[1]), "the ")
 		if serviceDeskPhrase(subject) && closureOnly(n.Effects) {
 			b.out.Stats["ignored/service-desk"]++
+			b.add("ignored", "service-desk", n, off, nil, false)
 			return
 		}
 		n.Scope.Phrase = subject
@@ -256,7 +268,7 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 			n.Scope.Activities = actNames(acts)
 			n.Scope.Groups = groups
 			n.Scope.MatchQuality = q
-			b.emitTimesWithSlots(&n, spec, clocks, acts, emit)
+			b.emitTimesWithSlots(&n, spec, clocks, acts, &sessions, emit)
 			return
 		case isAmenity(subject):
 			n.Scope.Level = "amenity"
@@ -267,7 +279,7 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 			n.Scope.MatchQuality = matchNone
 			n.Ambiguities = append(n.Ambiguities, ambActivityUnmatched)
 		}
-		b.emitTimes(&n, spec, clocks, emit)
+		b.emitTimes(&n, spec, clocks, &sessions, emit)
 		return
 	}
 
@@ -334,11 +346,11 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 			n.Scope.Level = "amenity"
 			n.Scope.Amenity = amenityName(cm[1])
 			n.Scope.MatchQuality = matchScopePhrase
-			b.emitTimes(&n, spec, clocks, emit)
+			b.emitTimes(&n, spec, clocks, &sessions, emit)
 			return
 		}
 		acts := b.resolveClass(&n, m[1])
-		b.emitTimesWithSlots(&n, spec, clocks, acts, emit)
+		b.emitTimesWithSlots(&n, spec, clocks, acts, &sessions, emit)
 		return
 	}
 
@@ -363,6 +375,7 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 				n.Ambiguities = append(n.Ambiguities, ambPossibleActivityTime)
 			case strings.Contains(foldText(st.section), "customer service"):
 				b.out.Stats["ignored/service-desk"]++
+				b.add("ignored", "service-desk", n, off, nil, false)
 				return
 			case strings.Contains(foldText(st.section), "hours"):
 				n.Effects.ModifiedHours = true
@@ -420,12 +433,13 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 			unparsed("empty")
 			return
 		}
-		b.emitTimes(&n, spec, clocks, emit)
+		b.emitTimes(&n, spec, clocks, &sessions, emit)
 		return
 	}
 
 	if serviceDeskPhrase(phrase) && closureOnly(n.Effects) && n.Effects.Closure {
 		b.out.Stats["ignored/service-desk"]++
+		b.add("ignored", "service-desk", n, off, nil, false)
 		return
 	}
 
@@ -483,13 +497,13 @@ func (b *blockCtx) processSentence(n Notice, st *walkState, spec *dateSpec, work
 		b.checkDateInSchedules(&n, spec, acts)
 		acts = b.maybeDisambiguate(&n, spec, clocks, acts)
 	}
-	b.emitTimesWithSlots(&n, spec, clocks, acts, emit)
+	b.emitTimesWithSlots(&n, spec, clocks, acts, &sessions, emit)
 }
 
 // resolveClass applies an "all <classes>" phrase: whole group when a segment
 // covers the group (or the group titles it matches for facility-level
 // notices), otherwise the activities matching a segment.
-func (b *blockCtx) resolveClass(n *Notice, classPhrase string) []*actEntry {
+func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 	segs := classSegments(classPhrase)
 	n.Scope.MatchQuality = matchScopePhrase
 	if len(segs) == 0 {
@@ -803,6 +817,9 @@ func dedupeStrings(s []string) []string {
 type slotInfo struct {
 	label string
 	r     schema.ClockRange
+	wd    time.Weekday
+	hasWd bool
+	fixed schema.Date // non-zero for fixed-date (holiday) slots
 }
 
 // gatherSlots collects the matched activities' slots that could fall on the
@@ -835,7 +852,7 @@ func gatherSlots(acts []*actEntry, spec *dateSpec) []slotInfo {
 					if all || slices.ContainsFunc(dates, func(d time.Time) bool {
 						return schema.MakeDateFromGo(d)/10 == sd/10
 					}) {
-						slots = append(slots, slotInfo{label: fmt.Sprintf("%s %s", sd, r), r: r})
+						slots = append(slots, slotInfo{label: fmt.Sprintf("%s %s", sd, r), r: r, fixed: sd})
 					}
 					continue
 				}
@@ -853,7 +870,7 @@ func gatherSlots(acts []*actEntry, spec *dateSpec) []slotInfo {
 						continue
 					}
 				}
-				slots = append(slots, slotInfo{label: fmt.Sprintf("%s %s", wd, r), r: r})
+				slots = append(slots, slotInfo{label: fmt.Sprintf("%s %s", wd, r), r: r, wd: wd, hasWd: true})
 			}
 		}
 	}
@@ -899,9 +916,9 @@ func relRank(rel string) int {
 
 // clockRelation computes how a clock range relates to the slots, and which
 // slots it touches.
-func clockRelation(c schema.ClockRange, slots []slotInfo) (string, []string) {
+func clockRelation(c schema.ClockRange, slots []slotInfo) (string, []slotInfo) {
 	rel := relNone
-	var touched []string
+	var touched []slotInfo
 	for _, s := range slots {
 		var r string
 		switch {
@@ -916,7 +933,7 @@ func clockRelation(c schema.ClockRange, slots []slotInfo) (string, []string) {
 		default:
 			continue
 		}
-		touched = append(touched, s.label)
+		touched = append(touched, s)
 		if relRank(r) > relRank(rel) {
 			rel = r
 		}
@@ -924,9 +941,62 @@ func clockRelation(c schema.ClockRange, slots []slotInfo) (string, []string) {
 	return rel, touched
 }
 
+func slotLabels(slots []slotInfo) []string {
+	var out []string
+	for _, s := range slots {
+		out = append(out, s.label)
+	}
+	return dedupeStrings(out)
+}
+
+// explode enumerates the concrete sessions the spec's dates select from the
+// slots (nil when the dates can't be enumerated).
+func explode(spec *dateSpec, slots []slotInfo) []sessKey {
+	if spec == nil {
+		return nil
+	}
+	var out []sessKey
+	for _, d := range spec.allDates(45) {
+		dd := schema.MakeDateFromGo(d) / 10
+		for _, s := range slots {
+			switch {
+			case s.fixed != 0 && s.fixed/10 == dd, s.hasWd && s.wd == d.Weekday():
+				out = append(out, sessKey{date: iso(d), start: int(s.r.Start), end: int(s.r.End)})
+			}
+		}
+	}
+	return dedupeSess(out)
+}
+
+// explodeClock enumerates sessions for an explicit clock range on the spec's
+// dates (added times).
+func explodeClock(spec *dateSpec, r schema.ClockRange) []sessKey {
+	if spec == nil {
+		return nil
+	}
+	var out []sessKey
+	for _, d := range spec.allDates(45) {
+		out = append(out, sessKey{date: iso(d), start: int(r.Start), end: int(r.End)})
+	}
+	return dedupeSess(out)
+}
+
+func dedupeSess(s []sessKey) []sessKey {
+	slices.SortFunc(s, func(a, b sessKey) int {
+		if a.date != b.date {
+			return strings.Compare(a.date, b.date)
+		}
+		if a.start != b.start {
+			return a.start - b.start
+		}
+		return a.end - b.end
+	})
+	return slices.Compact(s)
+}
+
 // checkDateInSchedules marks activity-scoped notices whose resolved dates
 // fall outside every schedule range the matched activities appear in.
-func (b *blockCtx) checkDateInSchedules(n *Notice, spec *dateSpec, acts []*actEntry) {
+func (b *blockCtx) checkDateInSchedules(n *notice, spec *dateSpec, acts []*actEntry) {
 	if spec == nil {
 		return
 	}
@@ -956,7 +1026,7 @@ func (b *blockCtx) checkDateInSchedules(n *Notice, spec *dateSpec, acts []*actEn
 
 // maybeDisambiguate narrows a multiple-candidate activity match when exactly
 // one candidate has an exact slot for the item's time on the item's dates.
-func (b *blockCtx) maybeDisambiguate(n *Notice, spec *dateSpec, clocks []clockMention, acts []*actEntry) []*actEntry {
+func (b *blockCtx) maybeDisambiguate(n *notice, spec *dateSpec, clocks []clockMention, acts []*actEntry) []*actEntry {
 	if n.Scope.MatchQuality != matchMultiple || len(clocks) != 1 || n.Effects.Added {
 		return acts
 	}
@@ -982,22 +1052,21 @@ func (b *blockCtx) maybeDisambiguate(n *Notice, spec *dateSpec, clocks []clockMe
 
 // emitTimes emits the notice once per clock mention (or once with none),
 // without slot validation (no activity scope).
-func (b *blockCtx) emitTimes(n *Notice, spec *dateSpec, clocks []clockMention, emit func()) {
-	b.emitTimesWithSlots(n, spec, clocks, nil, emit)
+func (b *blockCtx) emitTimes(n *notice, spec *dateSpec, clocks []clockMention, sessOut *[]sessKey, emit func()) {
+	b.emitTimesWithSlots(n, spec, clocks, nil, sessOut, emit)
 }
 
 // emitTimesWithSlots emits the notice once per clock mention, attaching the
-// best-relating candidate interpretation and its slot relation.
-func (b *blockCtx) emitTimesWithSlots(n *Notice, spec *dateSpec, clocks []clockMention, acts []*actEntry, emit func()) {
+// best-relating candidate interpretation, its slot relation, and the
+// concrete sessions the notice descends to.
+func (b *blockCtx) emitTimesWithSlots(n *notice, spec *dateSpec, clocks []clockMention, acts []*actEntry, sessOut *[]sessKey, emit func()) {
 	if len(clocks) == 0 {
+		*sessOut = nil
 		if len(acts) > 0 && (n.Effects.Cancelled || n.Effects.Closure) {
-			// whole-activity cancellation: note the affected slots
+			// whole-activity cancellation: all its slots on those dates
 			if slots := gatherSlots(acts, spec); len(slots) > 0 {
-				var labels []string
-				for _, s := range slots {
-					labels = append(labels, s.label)
-				}
-				n.Time = &TimeAssoc{Relation: relCovers, Slots: dedupeStrings(labels)}
+				n.Time = &TimeAssoc{Relation: relCovers, Slots: slotLabels(slots)}
+				*sessOut = explode(spec, slots)
 			}
 		}
 		emit()
@@ -1012,7 +1081,7 @@ func (b *blockCtx) emitTimesWithSlots(n *Notice, spec *dateSpec, clocks []clockM
 		nn := base
 		nn.Ambiguities = slices.Clone(base.Ambiguities)
 		best := cm.Cands[0]
-		rel, touched := relUnchecked, []string(nil)
+		rel, touched := relUnchecked, []slotInfo(nil)
 		if len(acts) > 0 {
 			rel, touched = clockRelation(best, slots)
 			for _, c := range cm.Cands[1:] {
@@ -1045,7 +1114,16 @@ func (b *blockCtx) emitTimesWithSlots(n *Notice, spec *dateSpec, clocks []clockM
 			OpenStart: cm.OpenStart,
 			OpenEnd:   cm.OpenEnd,
 			Relation:  rel,
-			Slots:     touched,
+			Slots:     slotLabels(touched),
+		}
+		switch {
+		case nn.Effects.Added:
+			// the added time itself is the session
+			*sessOut = explodeClock(spec, best)
+		case len(touched) > 0:
+			*sessOut = explode(spec, touched)
+		default:
+			*sessOut = nil
 		}
 		if len(acts) > 0 {
 			b.out.Stats["time/relation/"+rel]++

@@ -1,37 +1,93 @@
 package enrich
 
 import (
+	"slices"
 	"strings"
 	"unicode"
 	"unicode/utf8"
+
+	"golang.org/x/text/unicode/norm"
 )
 
-// normText cleans text extracted from HTML for display: drops zero-width
-// characters, folds whitespace runs (including nbsp) to single spaces, and
-// trims. Newlines are preserved as line separators for later splitting.
+// normText cleans text extracted from HTML for display, keeping newlines as
+// line separators for later splitting.
 func normText(s string) string {
-	var b strings.Builder
-	var space, nl bool
-	for _, r := range s {
-		switch {
-		case r == '\u200b' || r == '\u200c' || r == '\u200d' || r == '\ufeff':
-		case r == '\n':
-			space, nl = true, true
-		case unicode.IsSpace(r):
-			space = true
-		default:
-			if space && b.Len() > 0 {
-				if nl {
-					b.WriteByte('\n')
-				} else {
-					b.WriteByte(' ')
-				}
-			}
-			space, nl = false, false
-			b.WriteRune(r)
+	return normalizeText(s, true, false)
+}
+
+// normalizeText performs various transformations on s:
+//   - remove invisible characters
+//   - collapse some kinds of consecutive whitespace (excluding newlines unless requested, but including nbsp)
+//   - replace all kinds of dashes with "-"
+//   - perform unicode NFKC normalization
+//   - optionally lowercase the string
+//   - remove leading and trailing whitespace
+//
+// Copied verbatim from the scraper (scraper/scraper/main.go) so both sides
+// normalize text identically.
+func normalizeText(s string, newlines, lower bool) string {
+	// normalize the string
+	s = norm.NFKC.String(s)
+
+	// transform characters
+	s = strings.Map(func(r rune) rune {
+
+		// remove zero-width spaces
+		switch r {
+		case '\u200b', '\ufeff', '\u200d', '\u200c':
+			return -1
 		}
-	}
-	return b.String()
+
+		// replace some whitespace for collapsing later
+		switch r {
+		case '\n':
+			if newlines {
+				return r
+			}
+			fallthrough
+		case ' ', '\t', '\v', '\f', '\u00a0':
+			return ' '
+		}
+		if unicode.Is(unicode.Zs, r) {
+			return ' '
+		}
+
+		// replace smart punctuation
+		switch r {
+		case '“', '”', '‟':
+			return '"'
+		case '\u2018', '\u2019', '\u201b':
+			return '\''
+		case '\u2039':
+			return '<'
+		case '\u203a':
+			return '>'
+		}
+
+		// normalize all kinds of dashes
+		if unicode.Is(unicode.Pd, r) {
+			return '-'
+		}
+
+		// remove invisible characters
+		if !unicode.IsGraphic(r) {
+			return -1
+		}
+
+		// lowercase (or not)
+		if lower {
+			return unicode.ToLower(r)
+		}
+		return r
+	}, s)
+
+	// collapse consecutive whitespace
+	s = string(slices.CompactFunc([]rune(s), func(a, b rune) bool {
+		return a == ' ' && a == b
+	}))
+
+	// remove leading/trailing whitespace
+	return strings.TrimSpace(s)
 }
 
 // foldText lowercases s and folds punctuation to spaces for matching, keeping
