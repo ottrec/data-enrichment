@@ -322,7 +322,7 @@ func severity(o *epb.Object) Warning {
 				return WarnChanges
 			}
 		default:
-			// cancelled/added/time change/moved/restriction/
+			// cancelled/added/time change/restriction/
 			// see-schedule/modified hours, or an effect kind this consumer is
 			// too old to understand (unset oneof)
 			return WarnChanges

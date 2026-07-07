@@ -1690,15 +1690,6 @@ func (x *Effect) GetModifiedHours() *Effect_ModifiedHours {
 	return nil
 }
 
-func (x *Effect) GetMovedTo() *Effect_MovedTo {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Effect.(*effect_MovedTo_); ok {
-			return x.MovedTo
-		}
-	}
-	return nil
-}
-
 func (x *Effect) GetRestriction() *Effect_Restriction {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Effect.(*effect_Restriction_); ok {
@@ -1763,14 +1754,6 @@ func (x *Effect) SetModifiedHours(v *Effect_ModifiedHours) {
 		return
 	}
 	x.xxx_hidden_Effect = &effect_ModifiedHours_{v}
-}
-
-func (x *Effect) SetMovedTo(v *Effect_MovedTo) {
-	if v == nil {
-		x.xxx_hidden_Effect = nil
-		return
-	}
-	x.xxx_hidden_Effect = &effect_MovedTo_{v}
 }
 
 func (x *Effect) SetRestriction(v *Effect_Restriction) {
@@ -1844,14 +1827,6 @@ func (x *Effect) HasModifiedHours() bool {
 	return ok
 }
 
-func (x *Effect) HasMovedTo() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Effect.(*effect_MovedTo_)
-	return ok
-}
-
 func (x *Effect) HasRestriction() bool {
 	if x == nil {
 		return false
@@ -1908,12 +1883,6 @@ func (x *Effect) ClearModifiedHours() {
 	}
 }
 
-func (x *Effect) ClearMovedTo() {
-	if _, ok := x.xxx_hidden_Effect.(*effect_MovedTo_); ok {
-		x.xxx_hidden_Effect = nil
-	}
-}
-
 func (x *Effect) ClearRestriction() {
 	if _, ok := x.xxx_hidden_Effect.(*effect_Restriction_); ok {
 		x.xxx_hidden_Effect = nil
@@ -1933,9 +1902,8 @@ const Effect_TimeChange_case case_Effect_Effect = 3
 const Effect_Closure_case case_Effect_Effect = 4
 const Effect_SeasonalHours_case case_Effect_Effect = 5
 const Effect_ModifiedHours_case case_Effect_Effect = 6
-const Effect_MovedTo_case case_Effect_Effect = 7
-const Effect_Restriction_case case_Effect_Effect = 8
-const Effect_SeeSchedule_case case_Effect_Effect = 9
+const Effect_Restriction_case case_Effect_Effect = 7
+const Effect_SeeSchedule_case case_Effect_Effect = 8
 
 func (x *Effect) WhichEffect() case_Effect_Effect {
 	if x == nil {
@@ -1954,8 +1922,6 @@ func (x *Effect) WhichEffect() case_Effect_Effect {
 		return Effect_SeasonalHours_case
 	case *effect_ModifiedHours_:
 		return Effect_ModifiedHours_case
-	case *effect_MovedTo_:
-		return Effect_MovedTo_case
 	case *effect_Restriction_:
 		return Effect_Restriction_case
 	case *effect_SeeSchedule_:
@@ -1975,7 +1941,6 @@ type Effect_builder struct {
 	Closure       *Effect_Closure
 	SeasonalHours *Effect_SeasonalHours
 	ModifiedHours *Effect_ModifiedHours
-	MovedTo       *Effect_MovedTo
 	Restriction   *Effect_Restriction
 	SeeSchedule   *Effect_SeeSchedule
 	// -- end of xxx_hidden_Effect
@@ -2002,9 +1967,6 @@ func (b0 Effect_builder) Build() *Effect {
 	}
 	if b.ModifiedHours != nil {
 		x.xxx_hidden_Effect = &effect_ModifiedHours_{b.ModifiedHours}
-	}
-	if b.MovedTo != nil {
-		x.xxx_hidden_Effect = &effect_MovedTo_{b.MovedTo}
 	}
 	if b.Restriction != nil {
 		x.xxx_hidden_Effect = &effect_Restriction_{b.Restriction}
@@ -2053,16 +2015,12 @@ type effect_ModifiedHours_ struct {
 	ModifiedHours *Effect_ModifiedHours `protobuf:"bytes,6,opt,name=modified_hours,json=modifiedHours,oneof"`
 }
 
-type effect_MovedTo_ struct {
-	MovedTo *Effect_MovedTo `protobuf:"bytes,7,opt,name=moved_to,json=movedTo,oneof"`
-}
-
 type effect_Restriction_ struct {
-	Restriction *Effect_Restriction `protobuf:"bytes,8,opt,name=restriction,oneof"`
+	Restriction *Effect_Restriction `protobuf:"bytes,7,opt,name=restriction,oneof"`
 }
 
 type effect_SeeSchedule_ struct {
-	SeeSchedule *Effect_SeeSchedule `protobuf:"bytes,9,opt,name=see_schedule,json=seeSchedule,oneof"`
+	SeeSchedule *Effect_SeeSchedule `protobuf:"bytes,8,opt,name=see_schedule,json=seeSchedule,oneof"`
 }
 
 func (*effect_Cancelled_) isEffect_Effect() {}
@@ -2076,8 +2034,6 @@ func (*effect_Closure_) isEffect_Effect() {}
 func (*effect_SeasonalHours_) isEffect_Effect() {}
 
 func (*effect_ModifiedHours_) isEffect_Effect() {}
-
-func (*effect_MovedTo_) isEffect_Effect() {}
 
 func (*effect_Restriction_) isEffect_Effect() {}
 
@@ -2353,65 +2309,6 @@ func (b0 Effect_ModifiedHours_builder) Build() *Effect_ModifiedHours {
 	return m0
 }
 
-// The activity moved elsewhere ("moved to the 25m pool"); to is the raw
-// destination text.
-type Effect_MovedTo struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_To string                 `protobuf:"bytes,1,opt,name=to"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Effect_MovedTo) Reset() {
-	*x = Effect_MovedTo{}
-	mi := &file_enrichment_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Effect_MovedTo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Effect_MovedTo) ProtoMessage() {}
-
-func (x *Effect_MovedTo) ProtoReflect() protoreflect.Message {
-	mi := &file_enrichment_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *Effect_MovedTo) GetTo() string {
-	if x != nil {
-		return x.xxx_hidden_To
-	}
-	return ""
-}
-
-func (x *Effect_MovedTo) SetTo(v string) {
-	x.xxx_hidden_To = v
-}
-
-type Effect_MovedTo_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	To string
-}
-
-func (b0 Effect_MovedTo_builder) Build() *Effect_MovedTo {
-	m0 := &Effect_MovedTo{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_To = b.To
-	return m0
-}
-
 // A restriction applies ("25m pool only", "short course only"); text is
 // the raw restriction clause.
 type Effect_Restriction struct {
@@ -2423,7 +2320,7 @@ type Effect_Restriction struct {
 
 func (x *Effect_Restriction) Reset() {
 	*x = Effect_Restriction{}
-	mi := &file_enrichment_proto_msgTypes[17]
+	mi := &file_enrichment_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2435,7 +2332,7 @@ func (x *Effect_Restriction) String() string {
 func (*Effect_Restriction) ProtoMessage() {}
 
 func (x *Effect_Restriction) ProtoReflect() protoreflect.Message {
-	mi := &file_enrichment_proto_msgTypes[17]
+	mi := &file_enrichment_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2482,7 +2379,7 @@ type Effect_SeeSchedule struct {
 
 func (x *Effect_SeeSchedule) Reset() {
 	*x = Effect_SeeSchedule{}
-	mi := &file_enrichment_proto_msgTypes[18]
+	mi := &file_enrichment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2494,7 +2391,7 @@ func (x *Effect_SeeSchedule) String() string {
 func (*Effect_SeeSchedule) ProtoMessage() {}
 
 func (x *Effect_SeeSchedule) ProtoReflect() protoreflect.Message {
-	mi := &file_enrichment_proto_msgTypes[18]
+	mi := &file_enrichment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2660,7 +2557,7 @@ const file_enrichment_proto_rawDesc = "" +
 	"\bOVERLAPS\x10\x04\x12\t\n" +
 	"\x05NOVEL\x10\x05\x12\b\n" +
 	"\x04NONE\x10\x06\x12\r\n" +
-	"\tUNCHECKED\x10\a\"\xf2\x06\n" +
+	"\tUNCHECKED\x10\a\"\x94\x06\n" +
 	"\x06Effect\x12F\n" +
 	"\tcancelled\x18\x01 \x01(\v2&.ottrec.enrichment.v1.Effect.CancelledH\x00R\tcancelled\x12:\n" +
 	"\x05added\x18\x02 \x01(\v2\".ottrec.enrichment.v1.Effect.AddedH\x00R\x05added\x12J\n" +
@@ -2668,19 +2565,16 @@ const file_enrichment_proto_rawDesc = "" +
 	"timeChange\x12@\n" +
 	"\aclosure\x18\x04 \x01(\v2$.ottrec.enrichment.v1.Effect.ClosureH\x00R\aclosure\x12S\n" +
 	"\x0eseasonal_hours\x18\x05 \x01(\v2*.ottrec.enrichment.v1.Effect.SeasonalHoursH\x00R\rseasonalHours\x12S\n" +
-	"\x0emodified_hours\x18\x06 \x01(\v2*.ottrec.enrichment.v1.Effect.ModifiedHoursH\x00R\rmodifiedHours\x12A\n" +
-	"\bmoved_to\x18\a \x01(\v2$.ottrec.enrichment.v1.Effect.MovedToH\x00R\amovedTo\x12L\n" +
-	"\vrestriction\x18\b \x01(\v2(.ottrec.enrichment.v1.Effect.RestrictionH\x00R\vrestriction\x12M\n" +
-	"\fsee_schedule\x18\t \x01(\v2(.ottrec.enrichment.v1.Effect.SeeScheduleH\x00R\vseeSchedule\x1a\v\n" +
+	"\x0emodified_hours\x18\x06 \x01(\v2*.ottrec.enrichment.v1.Effect.ModifiedHoursH\x00R\rmodifiedHours\x12L\n" +
+	"\vrestriction\x18\a \x01(\v2(.ottrec.enrichment.v1.Effect.RestrictionH\x00R\vrestriction\x12M\n" +
+	"\fsee_schedule\x18\b \x01(\v2(.ottrec.enrichment.v1.Effect.SeeScheduleH\x00R\vseeSchedule\x1a\v\n" +
 	"\tCancelled\x1a\a\n" +
 	"\x05Added\x1a\f\n" +
 	"\n" +
 	"TimeChange\x1a\t\n" +
 	"\aClosure\x1a\x0f\n" +
 	"\rSeasonalHours\x1a\x0f\n" +
-	"\rModifiedHours\x1a\x19\n" +
-	"\aMovedTo\x12\x0e\n" +
-	"\x02to\x18\x01 \x01(\tR\x02to\x1a!\n" +
+	"\rModifiedHours\x1a!\n" +
 	"\vRestriction\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x1a3\n" +
 	"\vSeeSchedule\x12\x12\n" +
@@ -2689,7 +2583,7 @@ const file_enrichment_proto_rawDesc = "" +
 	"\x06effectB\x05\x92\x03\x02\b\x02b\beditionsp\xe8\a"
 
 var file_enrichment_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_enrichment_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_enrichment_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_enrichment_proto_goTypes = []any{
 	(Object_Kind)(0),              // 0: ottrec.enrichment.v1.Object.Kind
 	(Object_Source)(0),            // 1: ottrec.enrichment.v1.Object.Source
@@ -2711,13 +2605,12 @@ var file_enrichment_proto_goTypes = []any{
 	(*Effect_Closure)(nil),        // 17: ottrec.enrichment.v1.Effect.Closure
 	(*Effect_SeasonalHours)(nil),  // 18: ottrec.enrichment.v1.Effect.SeasonalHours
 	(*Effect_ModifiedHours)(nil),  // 19: ottrec.enrichment.v1.Effect.ModifiedHours
-	(*Effect_MovedTo)(nil),        // 20: ottrec.enrichment.v1.Effect.MovedTo
-	(*Effect_Restriction)(nil),    // 21: ottrec.enrichment.v1.Effect.Restriction
-	(*Effect_SeeSchedule)(nil),    // 22: ottrec.enrichment.v1.Effect.SeeSchedule
-	(*timestamppb.Timestamp)(nil), // 23: google.protobuf.Timestamp
+	(*Effect_Restriction)(nil),    // 20: ottrec.enrichment.v1.Effect.Restriction
+	(*Effect_SeeSchedule)(nil),    // 21: ottrec.enrichment.v1.Effect.SeeSchedule
+	(*timestamppb.Timestamp)(nil), // 22: google.protobuf.Timestamp
 }
 var file_enrichment_proto_depIdxs = []int32{
-	23, // 0: ottrec.enrichment.v1.Output.generated:type_name -> google.protobuf.Timestamp
+	22, // 0: ottrec.enrichment.v1.Output.generated:type_name -> google.protobuf.Timestamp
 	9,  // 1: ottrec.enrichment.v1.Output.objects:type_name -> ottrec.enrichment.v1.Object
 	5,  // 2: ottrec.enrichment.v1.Output.facilities:type_name -> ottrec.enrichment.v1.Facility
 	13, // 3: ottrec.enrichment.v1.Output.stats:type_name -> ottrec.enrichment.v1.Output.StatsEntry
@@ -2738,14 +2631,13 @@ var file_enrichment_proto_depIdxs = []int32{
 	17, // 18: ottrec.enrichment.v1.Effect.closure:type_name -> ottrec.enrichment.v1.Effect.Closure
 	18, // 19: ottrec.enrichment.v1.Effect.seasonal_hours:type_name -> ottrec.enrichment.v1.Effect.SeasonalHours
 	19, // 20: ottrec.enrichment.v1.Effect.modified_hours:type_name -> ottrec.enrichment.v1.Effect.ModifiedHours
-	20, // 21: ottrec.enrichment.v1.Effect.moved_to:type_name -> ottrec.enrichment.v1.Effect.MovedTo
-	21, // 22: ottrec.enrichment.v1.Effect.restriction:type_name -> ottrec.enrichment.v1.Effect.Restriction
-	22, // 23: ottrec.enrichment.v1.Effect.see_schedule:type_name -> ottrec.enrichment.v1.Effect.SeeSchedule
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	20, // 21: ottrec.enrichment.v1.Effect.restriction:type_name -> ottrec.enrichment.v1.Effect.Restriction
+	21, // 22: ottrec.enrichment.v1.Effect.see_schedule:type_name -> ottrec.enrichment.v1.Effect.SeeSchedule
+	23, // [23:23] is the sub-list for method output_type
+	23, // [23:23] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_enrichment_proto_init() }
@@ -2760,7 +2652,6 @@ func file_enrichment_proto_init() {
 		(*effect_Closure_)(nil),
 		(*effect_SeasonalHours_)(nil),
 		(*effect_ModifiedHours_)(nil),
-		(*effect_MovedTo_)(nil),
 		(*effect_Restriction_)(nil),
 		(*effect_SeeSchedule_)(nil),
 	}
@@ -2770,7 +2661,7 @@ func file_enrichment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enrichment_proto_rawDesc), len(file_enrichment_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   19,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

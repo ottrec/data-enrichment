@@ -59,7 +59,7 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   st.closureContext) → "closed for the season" → "Regular season, <range>"
   → findClockRanges → subjectClosedRe ("X is closed", skipped for "all "
   prefixes; subject resolved facility-name → activity → amenity → none) →
-  comma-clause loop (keyword / moved to / schedule change /
+  comma-clause loop (keyword / schedule change /
   trailing "only" restriction / phrase parts) → trailing keyword glued
   without comma → allDropinsRe → allClassRe → empty-phrase branch (bare
   effects, date+clock hours items, date-only items) → activity match →

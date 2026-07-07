@@ -50,7 +50,6 @@ type Effects struct {
 	Closure       bool
 	SeasonalHours bool   // "Regular season, June 29 to August 30"
 	ModifiedHours bool   // facility hours on specific dates
-	MovedTo       string // "moved to the 25m pool"
 	Restriction   string // "25m pool only" etc.
 	SeeSchedule   string // referenced schedule name
 	SeeURL        string

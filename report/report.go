@@ -368,8 +368,6 @@ func effectsText(effects []*epb.Effect) string {
 			parts = append(parts, "seasonal-hours")
 		case epb.Effect_ModifiedHours_case:
 			parts = append(parts, "modified-hours")
-		case epb.Effect_MovedTo_case:
-			parts = append(parts, "moved-to("+e.GetMovedTo().GetTo()+")")
 		case epb.Effect_Restriction_case:
 			parts = append(parts, "restriction("+e.GetRestriction().GetText()+")")
 		case epb.Effect_SeeSchedule_case:

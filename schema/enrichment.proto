@@ -229,11 +229,6 @@ message Effect {
     // The object's dates+time are the facility's operating hours for those
     // dates (holiday/modified hours), not an activity time.
     message ModifiedHours {}
-    // The activity moved elsewhere ("moved to the 25m pool"); to is the raw
-    // destination text.
-    message MovedTo {
-        string to = 1;
-    }
     // A restriction applies ("25m pool only", "short course only"); text is
     // the raw restriction clause.
     message Restriction {
@@ -252,8 +247,7 @@ message Effect {
         Closure closure = 4;
         SeasonalHours seasonal_hours = 5;
         ModifiedHours modified_hours = 6;
-        MovedTo moved_to = 7;
-        Restriction restriction = 8;
-        SeeSchedule see_schedule = 9;
+        Restriction restriction = 7;
+        SeeSchedule see_schedule = 8;
     }
 }

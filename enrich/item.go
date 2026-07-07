@@ -35,8 +35,6 @@ var (
 	closedSeason = regexp.MustCompile(`^closed for the season`)
 	// a comma clause that is only an effect keyword ("..., cancelled")
 	keywordRe = regexp.MustCompile(`^(?:and |are |is |will be |all )*(cancelled|canceled|added|closed)[. ]*$`)
-	// "moved to <destination>" clauses
-	movedRe = regexp.MustCompile(`(?i)^moved (?:to |inside to )?(.+)$`)
 	// an effect keyword glued to the phrase without a comma ("All drop-in
 	// skating and ice sports cancelled")
 	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)[. ]*$`)
@@ -172,8 +170,8 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int,
 // time extraction (so closure sentences keep their times), then the
 // sentence-level patterns (facility closures, season statements, "<subject>
 // is closed" with facility-name -> activity -> amenity subject resolution),
-// then comma-clause decomposition into effect keywords / moved-changed /
-// trailing "only" restriction / subject phrase, then the "all X" scope
+// then comma-clause decomposition into effect keywords / trailing "only"
+// restriction / subject phrase, then the "all X" scope
 // phrases, the empty-phrase branch (bare effects, date+clock hours items,
 // date-only items), and finally the activity/amenity/freeform subject
 // resolution with slot validation and session explosion.
@@ -323,10 +321,6 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		fc := foldText(clause)
 		if m := keywordRe.FindStringSubmatch(fc); m != nil {
 			setKeyword(&n.Effects, m[1])
-			continue
-		}
-		if m := movedRe.FindStringSubmatch(clause); m != nil {
-			n.Effects.MovedTo = strings.Trim(normText(m[1]), " .")
 			continue
 		}
 		if fc == "schedule change" || fc == "schedule changes" {
@@ -796,7 +790,7 @@ func countEffects(stats map[string]int, e Effects) {
 	for k, v := range map[string]bool{
 		"cancelled": e.Cancelled, "added": e.Added, "timeChange": e.TimeChange,
 		"closure": e.Closure, "seasonalHours": e.SeasonalHours,
-		"modifiedHours": e.ModifiedHours, "movedTo": e.MovedTo != "",
+		"modifiedHours": e.ModifiedHours,
 		"restriction": e.Restriction != "", "seeSchedule": e.SeeSchedule != "",
 	} {
 		if v {
