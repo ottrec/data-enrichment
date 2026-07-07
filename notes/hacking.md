@@ -87,9 +87,13 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   become ignored/duplicate stubs; survivors get Sources), and `place`
   (converts recs to Objects and builds the reference tree; sessions filled
   from rec.sessions, `added` vs `objects` split by Effects.Added).
-- `cmd/enrich` — `-versions n` (0=all), `-o` stdout/dir/stats-only; stats
-  to stderr, aggregated over versions. `internal/dataver` is the shared
-  version-cache iterator (same as the dump tools).
+- `cmd/enrich` — `-versions n` (0=all), `-o` stdout/dir/stats-only,
+  `-format json|pb`; stats to stderr, aggregated over versions.
+  `internal/dataver` is the shared version-cache iterator (same as the dump
+  tools).
+- `report/` + `cmd/report` — the HTML debugging report (source blocks with
+  highlighted extraction ranges beside their objects, hover-paired). The
+  fastest way to eyeball parser behavior on a version.
 
 ## Invariants (the no-false-positive contract)
 

@@ -44,6 +44,14 @@ const (
 
 const producedByParser = "parser"
 
+// BlockHash returns the identifier used in Object.block_hash for a source
+// block's HTML, so consumers can key objects back to the blocks they came
+// from.
+func BlockHash(blockHTML string) string {
+	sum := sha256.Sum256([]byte(blockHTML))
+	return hex.EncodeToString(sum[:8])
+}
+
 // sessKey identifies one concrete session: a date plus clock range.
 type sessKey struct {
 	date       schema.Date // full YYYYMMDDW date
@@ -165,8 +173,7 @@ func (fc *facCtx) processBlock(blockHTML, source string, grp *groupMatcher) {
 		return
 	}
 	fc.out.Stats["block/"+source]++
-	sum := sha256.Sum256([]byte(blockHTML))
-	b := &blockCtx{facCtx: fc, grp: grp, source: source, blockHash: hex.EncodeToString(sum[:8])}
+	b := &blockCtx{facCtx: fc, grp: grp, source: source, blockHash: BlockHash(blockHTML)}
 	parts, ok := splitBlock(blockHTML)
 	if !ok {
 		b.add("unparsed", "parse-error", notice{RawHTML: blockHTML, RawText: normText(blockHTML)}, [2]int{0, len(blockHTML)}, nil, false)

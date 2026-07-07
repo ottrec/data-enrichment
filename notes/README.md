@@ -25,6 +25,10 @@ Tooling (from the module root, needs `/tmp/ottrec-data.db`):
   to stdout (`-format pb` for binary protobuf; the schema is
   `schema/enrichment.proto`), `-versions 0 -o dir` for one file per version,
   `-o ""` for stats only. Stats always go to stderr.
+- `go run ./cmd/report -o report.html`: a self-contained HTML debugging
+  report for one version (default latest): source blocks on the left with
+  each object's extracted byte range highlighted, object cards on the right,
+  paired by hover, stats at the top.
 - `go run ./cmd/check-coverage`: verifies every word of source text is
   accounted for by an output object (the total-accounting guarantee).
 - `go run ./cmd/dump-residue > notes/residue.txt`: the unique items the
