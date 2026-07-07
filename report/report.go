@@ -81,10 +81,14 @@ func Build(version string, data ottrecidx.DataRef) []byte {
 				label += " [" + blk.group + "]"
 			}
 			segs, colors := segmentsFor(blk.html, objs)
-			bl.WriteString(`<div class="blockhead">` + html.EscapeString(label) + `</div><pre class="src">`)
+			bl.WriteString(`<div class="blockhead">`)
+			bl.WriteString(html.EscapeString(label))
+			bl.WriteString(`</div><pre class="src">`)
 			writeSegs(&bl, blk.html, 0, len(blk.html), segs)
 			bl.WriteString(`</pre>`)
-			br.WriteString(`<div class="blockhead">` + html.EscapeString(label) + `</div>`)
+			br.WriteString(`<div class="blockhead">`)
+			br.WriteString(html.EscapeString(label))
+			br.WriteString(`</div>`)
 			for _, o := range objs {
 				writeCard(&br, o, colors[o.GetId()], placements)
 			}
@@ -96,7 +100,11 @@ func Build(version string, data ottrecidx.DataRef) []byte {
 	b.WriteString(html.EscapeString(version))
 	b.WriteString("</title>\n")
 	b.WriteString(pageCSS)
-	b.WriteString(`<div class="col">` + bl.String() + `</div><div class="col">` + br.String() + `</div>`)
+	b.WriteString(`<div class="col">`)
+	b.WriteString(bl.String())
+	b.WriteString(`</div><div class="col">`)
+	b.WriteString(br.String())
+	b.WriteString(`</div>`)
 	b.WriteString(pageJS)
 	return []byte(b.String())
 }
