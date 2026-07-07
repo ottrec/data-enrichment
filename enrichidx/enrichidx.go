@@ -189,6 +189,41 @@ func (g GroupRef) Warning(from, to schema.Date) Warning {
 	return warning(g.g.objects, from, to)
 }
 
+// SeeSchedule reports whether a facility-scoped notice deferring to another
+// schedule ("See Canada Day schedule") may apply within the inclusive date
+// window [from, to].
+func (f FacilityRef) SeeSchedule(from, to schema.Date) bool {
+	if f.f == nil {
+		return false
+	}
+	return seeSchedule(f.f.objects, from, to)
+}
+
+// SeeSchedule reports whether a notice associated with the group defers to
+// another schedule within the inclusive date window [from, to].
+func (g GroupRef) SeeSchedule(from, to schema.Date) bool {
+	if g.g == nil {
+		return false
+	}
+	return seeSchedule(g.g.objects, from, to)
+}
+
+// seeSchedule reports whether any notice with a see-schedule effect may apply
+// within the window.
+func seeSchedule(objs []*epb.Object, from, to schema.Date) bool {
+	for _, o := range objs {
+		if o.GetKind() != epb.Object_NOTICE {
+			continue
+		}
+		for _, e := range o.GetEffects() {
+			if e.WhichEffect() == epb.Effect_SeeSchedule_case && applies(o, from, to) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 // Cancelled reports whether the published session (raw activity label,
 // concrete date, exact published clock range in minutes) is cancelled or
 // closed for its whole time by a validated session-level notice.
