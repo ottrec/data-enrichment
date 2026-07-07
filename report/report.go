@@ -39,7 +39,7 @@ func Build(version string, data ottrecidx.DataRef) []byte {
 
 	fmt.Fprintf(&bl, `<div class="meta"><h1>enrichment report</h1><p>version %s &middot; generated %s</p></div>`,
 		html.EscapeString(version), html.EscapeString(out.GetGenerated().AsTime().Format("2006-01-02 15:04:05 MST")))
-	br.WriteString(`<label class="toggle"><input type="checkbox" id="hideignored"> hide ignored</label>`)
+	br.WriteString(`<label class="toggle"><input type="checkbox" id="showignored" autocomplete="off"> show ignored</label>`)
 	br.WriteString(`<details class="stats"><summary>stats</summary><table>`)
 	for _, k := range slices.Sorted(func(yield func(string) bool) {
 		for k := range out.GetStats() {
@@ -142,6 +142,7 @@ type seg struct {
 	start, end int
 	ids        []string
 	ignored    bool
+	tip        string // ignore reasons, for the hover tooltip
 }
 
 // segmentsFor groups the objects' extracted byte ranges into highlight
@@ -164,16 +165,36 @@ func segmentsFor(blockHTML string, objs []*epb.Object) ([]seg, map[string]string
 		}
 		byRange[r] = append(byRange[r], o.GetId())
 	}
+	tipFor := map[string]string{}
+	for _, o := range objs {
+		var t string
+		switch o.GetKind() {
+		case epb.Object_IGNORED, epb.Object_UNPARSED:
+			t = strings.ToLower(o.GetKind().String()) + "/" + o.GetReason()
+		default:
+			if t = effectsText(o.GetEffects()); t == "" {
+				t = "notice (no effects)"
+			}
+		}
+		if amb := o.GetAmbiguities(); len(amb) > 0 {
+			t += " (" + strings.Join(amb, ", ") + ")"
+		}
+		tipFor[o.GetId()] = t
+	}
 	segs := make([]seg, 0, len(byRange))
 	colors := map[string]string{}
 	for r, ids := range byRange {
 		ignored := true
+		var tips []string
 		for _, id := range ids {
 			if kinds[id] != epb.Object_IGNORED {
 				ignored = false
 			}
+			if t := tipFor[id]; !slices.Contains(tips, t) {
+				tips = append(tips, t)
+			}
 		}
-		segs = append(segs, seg{r[0], r[1], ids, ignored})
+		segs = append(segs, seg{start: r[0], end: r[1], ids: ids, ignored: ignored, tip: strings.Join(tips, ", ")})
 		for _, id := range ids {
 			colors[id] = segColor(ids)
 		}
@@ -206,8 +227,12 @@ func writeSegs(b *strings.Builder, src string, pos, end int, segs []seg) {
 		if s.ignored {
 			class = "seg ig"
 		}
-		fmt.Fprintf(b, `<span class="%s" data-ids="%s" style="background:%s">`,
-			class, html.EscapeString(strings.Join(s.ids, " ")), segColor(s.ids))
+		tip := ""
+		if s.tip != "" {
+			tip = fmt.Sprintf(` data-tip="%s"`, html.EscapeString(s.tip))
+		}
+		fmt.Fprintf(b, `<span class="%s" data-ids="%s"%s style="background:%s">`,
+			class, html.EscapeString(strings.Join(s.ids, " ")), tip, segColor(s.ids))
 		writeSegs(b, src, s.start, s.end, segs[i+1:j])
 		b.WriteString(`</span>`)
 		pos = s.end
@@ -380,6 +405,11 @@ pre.src { margin: 0; padding: 4px; border: 1px solid #ddd;
 .row { margin: 0; }
 .lbl { display: inline-block; min-width: 78px; color: #999; font-size: 11px; }
 .toggle { font-size: 12px; color: #555; user-select: none; }
+.seg[data-tip] { position: relative; }
+.seg[data-tip]:hover:not(:has(.seg:hover))::after {
+  content: attr(data-tip); position: absolute; left: 0; top: 100%;
+  z-index: 2; background: #333; color: #fff; padding: 1px 5px;
+  font: 11px system-ui, sans-serif; white-space: nowrap; }
 body.hide-ignored .card.kind-ignored { display: none; }
 body.hide-ignored .seg.ig { background: #f0efed !important; color: #999; }
 .stats table { border-collapse: collapse; font-size: 11px; }
@@ -394,8 +424,13 @@ const pageJS = `<script>
 // hover a card: outline its source segment. mouseover with stopPropagation
 // makes the innermost (most specific) segment win.
 const byId = id => document.getElementById('obj-' + id)
-document.getElementById('hideignored').addEventListener('change', e =>
-  document.body.classList.toggle('hide-ignored', e.target.checked))
+// ignored hidden by default; browsers restore checkbox state across
+// reloads, so reset it explicitly
+document.body.classList.add('hide-ignored')
+const showIgnored = document.getElementById('showignored')
+showIgnored.checked = false
+showIgnored.addEventListener('change', e =>
+  document.body.classList.toggle('hide-ignored', !e.target.checked))
 document.querySelectorAll('.seg').forEach(seg => {
   const ids = seg.dataset.ids.split(' ')
   seg.addEventListener('mouseover', e => {
@@ -415,7 +450,10 @@ document.querySelectorAll('.seg').forEach(seg => {
 document.querySelectorAll('.card').forEach(card => {
   const id = card.dataset.id
   const segs = [...document.querySelectorAll('.seg')].filter(s => s.dataset.ids.split(' ').includes(id))
-  card.addEventListener('mouseenter', () => segs.forEach(s => s.classList.add('hl')))
+  card.addEventListener('mouseenter', () => segs.forEach((s, i) => {
+    s.classList.add('hl')
+    if (i === 0) s.scrollIntoView({ block: 'nearest' })
+  }))
   card.addEventListener('mouseleave', () => segs.forEach(s => s.classList.remove('hl')))
 })
 </script>
