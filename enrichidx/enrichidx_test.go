@@ -2,6 +2,7 @@ package enrichidx
 
 import (
 	"testing"
+	"time"
 
 	epb "github.com/ottrec/data-enrichment/schema"
 )
@@ -245,5 +246,108 @@ func TestScopeCancelled(t *testing.T) {
 	}
 	if !g.ScopeCancelled(202607106, 1080, 1200) {
 		t.Error("a slot-only time association must not constrain the clock range")
+	}
+}
+
+// TestItems covers the listing derivation: which objects are kept, how they
+// classify, and the first applicable date. Query date 2026-07-08 (Wednesday, encoded 202607084).
+func TestItems(t *testing.T) {
+	i32 := func(v int32) *int32 { return &v }
+	cancelled := []*epb.Effect{epb.Effect_builder{Cancelled: &epb.Effect_Cancelled{}}.Build()}
+	closed := []*epb.Effect{epb.Effect_builder{Closure: &epb.Effect_Closure{}}.Build()}
+	out := epb.Output_builder{
+		Objects: []*epb.Object{
+			// future dated cancel: listed on its date
+			epb.Object_builder{
+				Id: "future", Kind: epb.Object_NOTICE,
+				RawText: "Public swim cancelled on July 12.",
+				Dates:   epb.DateSpan_builder{Dates: []int32{202607121}}.Build(),
+				Effects: cancelled,
+			}.Build(),
+			// past dated cancel: determinably irrelevant, dropped
+			epb.Object_builder{
+				Id: "past", Kind: epb.Object_NOTICE,
+				RawText: "Public swim cancelled on July 1.",
+				Dates:   epb.DateSpan_builder{Dates: []int32{202607014}}.Build(),
+				Effects: cancelled,
+			}.Build(),
+			// freeform text: always kept, never classified
+			epb.Object_builder{
+				Id: "free", Kind: epb.Object_UNPARSED,
+				RawText: "Some freeform note about the facility.",
+			}.Build(),
+			// amenity closure: a plain notice, not a cancellation
+			epb.Object_builder{
+				Id: "hottub", Kind: epb.Object_NOTICE,
+				RawText: "The hot tub is closed.",
+				Amenity: "hot tub",
+				Effects: closed,
+			}.Build(),
+			// boilerplate: dropped
+			epb.Object_builder{
+				Id: "head", Kind: epb.Object_IGNORED,
+				RawText: "Notices",
+			}.Build(),
+			// range covering the query date: first applicable = query date
+			epb.Object_builder{
+				Id: "range", Kind: epb.Object_NOTICE,
+				RawText: "Lane swim cancelled until July 20.",
+				Dates:   epb.DateSpan_builder{To: i32(202607202)}.Build(),
+				Effects: cancelled,
+			}.Build(),
+			// weekday-restricted range: span + raw date text exposed for
+			// faithful labeling; first applicable = first Friday in range
+			epb.Object_builder{
+				Id: "fridays", Kind: epb.Object_NOTICE,
+				RawText:  "Aquafit cancelled Fridays until July 24.",
+				DateText: "Fridays until July 24",
+				Dates:    epb.DateSpan_builder{To: i32(202607246), Weekdays: []int32{6}}.Build(),
+				Effects:  cancelled,
+			}.Build(),
+		},
+		Facilities: []*epb.Facility{
+			epb.Facility_builder{
+				Name:    "Fac",
+				Objects: []string{"future", "past", "free", "hottub", "head", "range", "fridays"},
+			}.Build(),
+		},
+	}.Build()
+
+	items := Join(out).Facility("Fac").Items(202607084)
+	byID := map[string]Item{}
+	for _, it := range items {
+		byID[it.ID] = it
+	}
+	if len(items) != 5 {
+		t.Errorf("got %d items (%v), want 5", len(items), byID)
+	}
+	if it := byID["future"]; !it.Cancelled || !it.Dated || it.Date != 202607121 {
+		t.Errorf("future cancel: got %+v", it)
+	}
+	if _, ok := byID["past"]; ok {
+		t.Error("past-dated cancel must be dropped")
+	}
+	if it := byID["free"]; !it.Unparsed || it.Cancelled || it.Dated {
+		t.Errorf("freeform: got %+v", it)
+	}
+	if it := byID["hottub"]; it.Cancelled || it.Unparsed || it.Dated {
+		t.Errorf("amenity closure: got %+v", it)
+	}
+	if _, ok := byID["head"]; ok {
+		t.Error("ignored object must be dropped")
+	}
+	if it := byID["range"]; !it.Cancelled || !it.Dated || it.Date != 202607084 || it.To != 202607202 || it.From != 0 || len(it.Dates) != 0 {
+		t.Errorf("range cancel: got %+v", it)
+	}
+	if it := byID["future"]; len(it.Dates) != 1 || it.Dates[0] != 202607121 {
+		t.Errorf("future cancel span: got %+v", it)
+	}
+	if it := byID["fridays"]; !it.Cancelled || !it.Dated || it.Date != 202607106 ||
+		len(it.Weekdays) != 1 || it.Weekdays[0] != time.Friday || it.WeekdaysPartial ||
+		it.To != 202607246 || it.DateText != "Fridays until July 24" {
+		t.Errorf("weekday-restricted cancel: got %+v", it)
+	}
+	if got := (FacilityRef{}).Items(202607084); got != nil {
+		t.Errorf("zero FacilityRef must list nothing, got %v", got)
 	}
 }

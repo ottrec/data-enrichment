@@ -17,6 +17,7 @@ package enrichidx
 
 import (
 	"slices"
+	"strings"
 	"time"
 
 	epb "github.com/ottrec/data-enrichment/schema"
@@ -368,6 +369,159 @@ func (g GroupRef) Added(from, to schema.Date) []AddedSession {
 		return a.Start - b.Start
 	})
 	return out
+}
+
+// Item is one posted object surfaced for a chronological listing (e.g. a
+// category page's upcoming cancellations and notices): the source text as
+// posted, how it classifies for listing, and the first date on or after the
+// query date it may apply. Ordering and grouping are left to the consumer.
+type Item struct {
+	// ID is the object id, unique within the output, for deduplicating an
+	// object reachable through more than one scope.
+	ID string
+	// Text is the source text as posted.
+	Text string
+	// Unparsed marks freeform text nothing could be extracted from (or an
+	// object kind this consumer doesn't recognize); it can never be ruled out
+	// and carries no further classification.
+	Unparsed bool
+	// Cancelled marks a notice carrying a cancellation effect or a closure
+	// broader than a named amenity.
+	Cancelled bool
+	// Dated reports the posted dates resolved; Date is then the first date on
+	// or after the query date the object may apply.
+	Dated bool
+	Date  schema.Date
+	// The resolved span as posted, for labeling: explicit Dates (which may
+	// include past ones), or a From/To range (either side may be zero),
+	// possibly OpenEnded ("until further notice") and/or restricted to
+	// Weekdays. WeekdaysPartial reports that some posted weekday values did
+	// not resolve, so Weekdays understates the restriction; a consumer that
+	// can't express the span faithfully should fall back to DateText.
+	Dates           []schema.Date
+	From, To        schema.Date
+	OpenEnded       bool
+	Weekdays        []time.Weekday
+	WeekdaysPartial bool
+	// DateText is the raw date-context text as posted (may be ""), the
+	// fallback when the resolved span can't be expressed faithfully. It is
+	// set even when nothing resolved.
+	DateText string
+}
+
+// Items lists the facility-scoped objects that may still be relevant on or
+// after the given date. Objects placed under a specific group are not
+// included; query the group.
+func (f FacilityRef) Items(from schema.Date) []Item {
+	if f.f == nil {
+		return nil
+	}
+	return items(f.f.objects, from)
+}
+
+// Items lists everything associated with the group (its own objects and those
+// of its activities and sessions) that may still be relevant on or after the
+// given date.
+func (g GroupRef) Items(from schema.Date) []Item {
+	if g.g == nil {
+		return nil
+	}
+	return items(g.g.objects, from)
+}
+
+// items builds the listing for objs: IGNORED objects are dropped, UNPARSED
+// (and unknown-kind) objects are always kept since nothing can rule them out,
+// and parsed notices are kept unless their resolved dates all fall before
+// from. A dated object with no applicable day within a year of from is
+// dropped as stale rather than listed undated.
+func items(objs []*epb.Object, from schema.Date) []Item {
+	var out []Item
+	for _, o := range objs {
+		it := Item{
+			ID:       o.GetId(),
+			Text:     strings.TrimSpace(o.GetRawText()),
+			DateText: strings.TrimSpace(o.GetDateText()),
+		}
+		if it.Text == "" {
+			continue
+		}
+		switch o.GetKind() {
+		case epb.Object_IGNORED:
+			continue
+		case epb.Object_NOTICE:
+			var cancelled, closure bool
+			for _, e := range o.GetEffects() {
+				switch e.WhichEffect() {
+				case epb.Effect_Cancelled_case:
+					cancelled = true
+				case epb.Effect_Closure_case:
+					closure = true
+				}
+			}
+			// an amenity closure (hot tub, sauna, ...) reads as a plain
+			// notice; any broader closure reads as a cancellation
+			it.Cancelled = cancelled || (closure && o.GetAmenity() == "")
+		default:
+			// UNPARSED, or a kind this consumer doesn't recognize
+			it.Unparsed = true
+		}
+		if dated(o) {
+			d, ok := firstApplies(o, from)
+			if !ok {
+				continue
+			}
+			it.Dated, it.Date = true, d
+			ds := o.GetDates()
+			for _, x := range ds.GetDates() {
+				it.Dates = append(it.Dates, schema.Date(x))
+			}
+			if ds.HasFrom() {
+				it.From = schema.Date(ds.GetFrom())
+			}
+			if ds.HasTo() {
+				it.To = schema.Date(ds.GetTo())
+			}
+			it.OpenEnded = ds.GetOpenEnded()
+			for _, x := range ds.GetWeekdays() {
+				if wd, ok := schema.Date(x).Weekday(); ok {
+					if !slices.Contains(it.Weekdays, wd) {
+						it.Weekdays = append(it.Weekdays, wd)
+					}
+				} else {
+					it.WeekdaysPartial = true
+				}
+			}
+		}
+		out = append(out, it)
+	}
+	return out
+}
+
+// dated reports whether the object carries any resolved dates, mirroring what
+// [applies] can actually rule in or out.
+func dated(o *epb.Object) bool {
+	if !o.HasDates() {
+		return false
+	}
+	d := o.GetDates()
+	return len(d.GetDates()) > 0 || d.HasFrom() || d.HasTo() || d.GetOpenEnded() || len(d.GetWeekdays()) > 0
+}
+
+// firstApplies returns the first date on or after from the object may apply,
+// probing day by day (matching the [applies] semantics exactly) for a year.
+func firstApplies(o *epb.Object, from schema.Date) (schema.Date, bool) {
+	t, ok := from.GoTime(time.UTC)
+	if !ok {
+		return from, true // can't probe; keep the object rather than dropping it
+	}
+	for range 366 {
+		d := schema.MakeDateFromGo(t)
+		if applies(o, d, d) {
+			return d, true
+		}
+		t = t.AddDate(0, 0, 1)
+	}
+	return 0, false
 }
 
 // warning returns the highest severity among objects that may apply within
