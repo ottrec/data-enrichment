@@ -41,6 +41,14 @@ func TestParseLeadingDate(t *testing.T) {
 		{in: "Wednesday , November 26", anchor: anchorAt(2025, 11, 20), ok: true, dates: []string{"2025-11-26"}},
 		{in: "Monday, February 16 (Family Day)", anchor: anchorAt(2026, 2, 1), ok: true, dates: []string{"2026-02-16"}, rest: "(Family Day)"},
 		{in: "Thursday, June 25, 9 am to 8 pm", anchor: anchorAt(2026, 6, 20), ok: true, dates: []string{"2026-06-25"}, rest: "9 am to 8 pm"},
+		// leading holiday label is stripped when a single date follows
+		{in: "Civic Holiday, Monday, August 3", anchor: anchorAt(2026, 7, 20), ok: true, dates: []string{"2026-08-03"}},
+		{in: "Civic Holiday, Monday, August 3, closed", anchor: anchorAt(2026, 7, 20), ok: true, dates: []string{"2026-08-03"}, rest: "closed"},
+		{in: "Canada Day, Wednesday, July 1", anchor: anchorAt(2026, 6, 20), ok: true, dates: []string{"2026-07-01"}},
+		{in: "Good Friday, April 3", anchor: anchorAt(2026, 3, 20), ok: true, dates: []string{"2026-04-03"}},
+		{in: "Easter Monday, April 6", anchor: anchorAt(2026, 3, 20), ok: true, dates: []string{"2026-04-06"}},
+		// not a holiday label: capitalized non-holiday lead stays unparsed
+		{in: "Closed Monday, August 3", anchor: anchorAt(2026, 7, 20), ok: false},
 		{in: "Lane swim, 11 am to 3 pm, cancelled", anchor: anchorAt(2026, 6, 20), ok: false},
 		{in: "The facility is closed.", anchor: anchorAt(2026, 6, 20), ok: false},
 	} {

@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode"
 
 	"github.com/ottrec/website/pkg/ottrecidx"
 )
@@ -68,6 +69,57 @@ var monthNames = map[string]time.Month{
 }
 
 var wordRe = regexp.MustCompile(`\S+`)
+
+// holidayTerms mark a leading Title Case phrase as a holiday label ("Civic
+// Holiday", "Canada Day", "Christmas Eve"): a generic marker (holiday/eve/day)
+// or a specific holiday name. Weekday names are deliberately absent, so a bare
+// "Monday, ..." is never treated as a label. Ambiguous activity words (e.g.
+// "family") are left out; Family Day is caught by the generic "day" instead.
+var holidayTerms = map[string]bool{
+	"holiday": true, "eve": true, "day": true,
+	"civic": true, "canada": true, "victoria": true, "christmas": true,
+	"thanksgiving": true, "remembrance": true, "labour": true, "labor": true,
+	"boxing": true, "easter": true, "good": true, "new": true,
+	"year": true, "years": true,
+}
+
+// stripHolidayLabel removes a leading holiday label of the form "<Title Case
+// words>, <date>" ("Civic Holiday, Monday, August 3"), returning the remainder
+// starting at the date. The leading run must be Title Case, stop at the first
+// date token (weekday/month/number), and contain a holidayTerm. The caller
+// only keeps the result when a single date parses from what follows, so a
+// non-holiday capitalized lead that slips through can't misfire.
+func stripHolidayLabel(s string) (string, bool) {
+	hasTerm := false
+	end := -1
+	for _, loc := range wordRe.FindAllStringIndex(s, -1) {
+		w := s[loc[0]:loc[1]]
+		lw := strings.Trim(strings.ToLower(w), ",.;:!()'")
+		if lw == "" {
+			continue // punctuation-only
+		}
+		if _, isWd := weekdayNames[strings.TrimSuffix(lw, "s")]; isWd {
+			break
+		}
+		if _, isMon := monthNames[lw]; isMon {
+			break
+		}
+		if _, err := strconv.Atoi(lw); err == nil {
+			break
+		}
+		if r := []rune(w); len(r) == 0 || !unicode.IsUpper(r[0]) {
+			return "", false // label words must be Title Case
+		}
+		if holidayTerms[strings.TrimSuffix(lw, "'s")] {
+			hasTerm = true
+		}
+		end = loc[1]
+	}
+	if !hasTerm || end < 0 {
+		return "", false
+	}
+	return strings.TrimLeft(s[end:], " ,.;:"), true
+}
 
 // partialDate is a parsed but unresolved date mention.
 type partialDate struct {
@@ -192,6 +244,17 @@ func (p *dateParser) parseWeekdaySet(i int) ([]time.Weekday, int, bool) {
 // years against anchor (in ottrecidx.TZ). It returns the resolved spec, the
 // unconsumed remainder of s, and whether a date was found at all.
 func parseLeadingDate(s string, anchor time.Time) (dateSpec, string, bool) {
+	// a leading holiday label ("Civic Holiday, Monday, August 3") precedes the
+	// real date; strip it, but only trust the result when a single date
+	// follows (holidays name a specific day, never a range or weekday set).
+	if rest, ok := stripHolidayLabel(s); ok {
+		if spec, rem, ok := parseLeadingDate(rest, anchor); ok &&
+			len(spec.Dates) == 1 && spec.From.IsZero() && spec.To.IsZero() &&
+			!spec.OpenEnded && len(spec.Weekdays) == 0 {
+			return spec, rem, true
+		}
+	}
+
 	p := newDateParser(s)
 	var spec dateSpec
 
