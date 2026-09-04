@@ -147,6 +147,29 @@ to 424. The Sandy Hill drop is the interesting one: those were the
 and they were the enrichment matching a poorly resolved phrase against the wrong
 table rather than anything about the dates.
 
+### Two smaller scope losses, found by scanning the residue
+
+Both cost a whole-group cancellation and both were marked, so nothing was
+silently wrong, but neither reached a session.
+
+**A class segment naming part of the group's own title.** South Fallingbrook
+posts `All drop-in sports are cancelled.` on a `gymnasium sports` group.
+`coversGroup` wants the group's title tokens inside the segment, and `{sports}`
+does not contain `{gymnasium, sports}`, so it failed; the reverse direction is
+what matches here, and it is the same partial match the facility-level path
+already made. 46 objects over the corpus, all this one notice, now group-scoped
+with `class-title-partial`.
+
+**A preposition stranded by clock removal.** `findClockRanges` lifts the range
+out of the middle of the sentence, so `From 11 am to 2 pm, all drop-in programs
+are cancelled` became the phrase `From all drop-in programs`, which matches
+nothing. Stripping a leading `from`/`between` when a clock was actually removed
+leaves `all drop-in programs`, which scopes to the group, and the 11 am to 2 pm
+window then restricts which sessions it reaches. 7 objects, all Richelieu
+Vanier. **Only those two words**: `beginning` and `starting` introduce dates as
+well (`Fridays and Sundays beginning July 3`), and stripping those edits the
+date language instead, which the corpus diff showed on 66 Fairfields objects.
+
 ### The city writes the block, not the row
 
 A third shape, and the one that changes output. Canterbury publishes

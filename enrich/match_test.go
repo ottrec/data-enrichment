@@ -1,6 +1,9 @@
 package enrich
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 // TestStemSkatings covers the Tom Brown Arena spelling: one item of a December
 // list writes "skatings" where its siblings write "skating", and before the
@@ -209,5 +212,48 @@ func TestMatchActivityParts(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+// TestDanglingPrep covers the preposition findClockRanges strands when it
+// lifts a range out of the middle of a sentence. "beginning" and "starting"
+// are deliberately not stripped: they introduce dates too.
+func TestDanglingPrep(t *testing.T) {
+	for _, tt := range []struct{ in, want string }{
+		{"From all drop-in programs", "all drop-in programs"},
+		{"Between all drop-in programs", "all drop-in programs"},
+		{"beginning July to 5 pm", "beginning July to 5 pm"},
+		{"starting July 3", "starting July 3"},
+		{"all drop-in programs", "all drop-in programs"},
+		{"Family skating", "Family skating"},
+	} {
+		if got := danglingPrepRe.ReplaceAllString(tt.in, ""); got != tt.want {
+			t.Errorf("strip(%q) = %q, want %q", tt.in, got, tt.want)
+		}
+	}
+}
+
+// TestKeywordReason covers an effect keyword followed by the reason the city
+// sometimes gives for it, which the end-anchored patterns otherwise miss.
+func TestKeywordReason(t *testing.T) {
+	for _, tt := range []struct {
+		in   string
+		want string // "" for no match
+	}{
+		{"All group fitness drop-ins are cancelled due to annual maintenance", "cancelled"},
+		{"All changerooms closed for maintenance", "closed"},
+		{"Lane swim are cancelled because of a meet", "cancelled"},
+		{"All drop-in skating and ice sports cancelled", "cancelled"},
+		{"Public skating", ""},
+		{"The pool is closed for the season", "closed"},
+	} {
+		m := trailingKwRe.FindStringSubmatch(tt.in)
+		got := ""
+		if m != nil {
+			got = strings.ToLower(m[1])
+		}
+		if got != tt.want {
+			t.Errorf("trailingKwRe(%q) = %q, want %q", tt.in, got, tt.want)
+		}
 	}
 }

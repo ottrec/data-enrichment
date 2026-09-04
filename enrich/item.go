@@ -43,6 +43,12 @@ var (
 	// skating and ice sports cancelled")
 	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)` + kwReason + `[. ]*$`)
 	untilNoticeRe = regexp.MustCompile(`(?i)\buntil further notice\b`)
+	// a preposition left stranded at the front once its clock range was
+	// removed from the middle of the sentence. Only the two that introduce a
+	// clock and nothing else: "beginning"/"starting" introduce dates too
+	// ("Fridays and Sundays beginning July 3"), and stripping those edits the
+	// date language instead.
+	danglingPrepRe = regexp.MustCompile(`(?i)^(?:from|between)\s+`)
 	// "X is closed ...", "X closed until further notice", "X will be closed"
 	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
 	// "... and all programs cancelled" riding on a subject closure, which
@@ -346,6 +352,13 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	if openEnded && strings.Contains(fworking, "closed") {
 		n.Effects.Closure = true
 	}
+	// findClockRanges lifts the range out of the middle of the sentence, so a
+	// leading preposition that introduced it is left dangling: "From 11 am to
+	// 2 pm, all drop-in programs are cancelled" becomes "From all drop-in
+	// programs", which matches nothing. Only when a clock was actually removed.
+	if len(clocks) > 0 {
+		phrase = danglingPrepRe.ReplaceAllString(phrase, "")
+	}
 	n.Scope.Phrase = phrase
 	fphrase := foldText(phrase)
 
@@ -618,6 +631,18 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 			n.Scope.Activities = actNames(acts)
 			n.Ambiguities = append(n.Ambiguities, ambOtherGroup)
 			return acts
+		}
+		// the segment names part of this group's own title ("all drop-in
+		// sports" on a gymnasium sports group). coversGroup wants the title
+		// inside the segment; this is the other direction, and it is the same
+		// partial match the facility-level path already makes.
+		for _, seg := range segs {
+			if subset(seg, b.grp.titleToks) {
+				n.Scope.Level = "group"
+				n.Scope.Groups = []string{b.grp.label}
+				n.Ambiguities = append(n.Ambiguities, ambClassTitlePartial)
+				return b.grp.acts
+			}
 		}
 		// last resort: the hard-coded ice-class vocabulary, for a facility
 		// that names a class no group of its titles and no activity of its
