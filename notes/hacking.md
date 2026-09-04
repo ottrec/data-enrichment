@@ -51,6 +51,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   normalized activity name with folded spellings + token sets from label and
   name). `match`: exact folded string → equal token sets → subset either
   direction; 2+ candidates always come back as `multiple`, never picked.
+  `matchActivity` (item.go) wraps `matchActivityWhole` with
+  `matchActivityParts`, which splits a subject naming several activities
+  (`subjectParts`); matching.md has the three rules that keep it off a single
+  activity whose label contains "and".
   `coversGroup` (group title tokens ⊆ class segment tokens) and
   `matchClass` (segment tokens ⊆ activity tokens) drive "all X" phrases;
   `classSegments` splits on commas and " and ". `iceClassVocab` +

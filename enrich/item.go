@@ -698,6 +698,134 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 // matchActivity matches a subject phrase against the block's group (or all
 // groups for facility-level sources).
 func (b *blockCtx) matchActivity(phrase string) (string, []*actEntry, []string, bool) {
+	q, acts, groups, typo := b.matchActivityWhole(phrase)
+	if pq, pacts, pgroups, ptypo, ok := b.matchActivityParts(phrase, q, acts); ok {
+		b.out.Stats["match/phrase-split"]++
+		return pq, pacts, pgroups, ptypo
+	}
+	return q, acts, groups, typo
+}
+
+// subjectParts splits a subject phrase naming several activities into its
+// parts, on the same boundaries classSegments uses.
+func subjectParts(phrase string) []string {
+	var out []string
+	for _, part := range strings.Split(phrase, ",") {
+		for _, p := range strings.Split(part, " and ") {
+			if p = strings.TrimSpace(p); p != "" {
+				out = append(out, p)
+			}
+		}
+	}
+	return out
+}
+
+// matchActivityParts handles a subject naming more than one activity, which
+// matching the whole phrase reads as at most one.
+//
+// Bernard Grandmaître's "Figure skating and hockey 35+, cancelled" is the case:
+// the phrase's tokens are a superset of "Hockey 35+"'s and so match it alone
+// and confidently, while "Figure Skating (6+)" is excluded by its age
+// qualifier. One of the two named activities was silently left running.
+//
+// It is deliberately hard to trigger. Every part must resolve to exactly one
+// activity on its own, and the parts together must name more activities than
+// the whole phrase did, so a single activity whose own label contains "and"
+// ("Weight and cardio room", "Stick and Puck - Preschool and Child") keeps the
+// whole-phrase match: its parts either fail to resolve or resolve back to the
+// same activity. Nothing is picked from among candidates, so this does not
+// weaken the never-guess invariant.
+func (b *blockCtx) matchActivityParts(phrase, wholeQ string, whole []*actEntry) (string, []*actEntry, []string, bool, bool) {
+	// if the phrase as written IS an activity, it is not a list. Plenty of
+	// activity names carry "and" ("Cardio and strength", "Weight and cardio
+	// room", "Stick and Puck", "Step and strength"), and splitting those
+	// cancels a neighbouring row the notice never named. An exact or equal-
+	// token-set match on the whole phrase settles that it names one thing.
+	if wholeQ == matchExact || wholeQ == matchNormalized {
+		return "", nil, nil, false, false
+	}
+	parts := subjectParts(phrase)
+	if len(parts) < 2 {
+		return "", nil, nil, false, false
+	}
+	if b.grp == nil {
+		// a facility-level copy of a notice matches across every group, so a
+		// part naming an activity two groups both publish ("figure skating",
+		// in skating and in ice sports) is ambiguous here and unambiguous in
+		// the group-scoped twin. Splitting within each group in turn keeps the
+		// two copies agreeing, which is what lets collapse still pair them.
+		var got []struct {
+			q      string
+			acts   []*actEntry
+			groups []string
+			typo   bool
+		}
+		saved := b.grp
+		for _, m := range b.matchers {
+			b.grp = m
+			// the group's own whole-phrase match, not the facility's: a
+			// phrase that is only a fuzzy match across the facility can name
+			// a group's activity exactly, and then it is not a list
+			mq, mwhole, _, _ := b.matchActivityWhole(phrase)
+			q, a, _, ty, ok := b.matchActivityParts(phrase, mq, mwhole)
+			if ok {
+				got = append(got, struct {
+					q      string
+					acts   []*actEntry
+					groups []string
+					typo   bool
+				}{q, a, []string{m.label}, ty})
+			}
+		}
+		b.grp = saved
+		if len(got) != 1 {
+			return "", nil, nil, false, false // none, or no way to choose
+		}
+		return got[0].q, got[0].acts, got[0].groups, got[0].typo, true
+	}
+	var acts []*actEntry
+	var groups []string
+	q, typo := matchExact, false
+	for _, p := range parts {
+		pq, pacts, pgroups, ptypo := b.matchActivityWhole(p)
+		if len(pacts) != 1 {
+			return "", nil, nil, false, false // ambiguous or unmatched: no split
+		}
+		if !slices.Contains(acts, pacts[0]) {
+			acts = append(acts, pacts[0])
+		}
+		groups = append(groups, pgroups...)
+		if matchRank(pq) > matchRank(q) {
+			q = pq
+		}
+		typo = typo || ptypo
+	}
+	// worth taking only when it says something the whole phrase did not:
+	// either it names more activities, or the whole phrase was ambiguous and
+	// the parts resolve it. Every part resolved uniquely to get here, so an
+	// ambiguous whole ("Lane swim" against three lane swim rows) is never
+	// overridden unless the phrase genuinely has parts.
+	if len(acts) <= len(whole) && wholeQ != matchMultiple {
+		return "", nil, nil, false, false
+	}
+	return q, acts, dedupeStrings(groups), typo, true
+}
+
+// matchRank orders match qualities weakest-last, so a split phrase reports the
+// weakest of its parts.
+func matchRank(q string) int {
+	switch q {
+	case matchExact:
+		return 0
+	case matchNormalized:
+		return 1
+	case matchFuzzy:
+		return 2
+	}
+	return 3
+}
+
+func (b *blockCtx) matchActivityWhole(phrase string) (string, []*actEntry, []string, bool) {
 	if b.grp != nil {
 		r := b.grp.match(phrase)
 		return r.Quality, r.Acts, nil, r.Typo

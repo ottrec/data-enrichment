@@ -96,6 +96,57 @@ city files them under skating, and matching them from an "all ice sports"
 notice would cancel sessions the notice does not name — the no-false-positive
 contract, applied to a taxonomy rather than to a parse.
 
+### A subject naming more than one activity
+
+`Figure skating and hockey 35+, cancelled` at Bernard Grandmaître cancelled only
+the hockey. The whole phrase's tokens `{figure, skate, hockey, 35+}` are a
+superset of `Hockey 35+`'s, so `match` returned it alone and confidently, while
+`Figure Skating (6+)` was excluded by its age qualifier. One of the two named
+activities was left running, with **no ambiguity marker**, so nothing downstream
+could tell.
+
+`matchActivityParts` splits the subject on the boundaries `classSegments` uses
+and matches each part on its own. Three rules keep it from over-reaching, and
+the middle one is the important one:
+
+- **At least two parts**, and every part must resolve to exactly one activity.
+  A part that is ambiguous or unmatched refuses the whole split rather than
+  cancelling the half that did match.
+- **A phrase that exactly names an activity is not a list.** Plenty of labels
+  carry "and": `Cardio and strength`, `Weight and cardio room`, `Step and
+  strength`, `Stick and Puck`. An earlier version omitted this and split
+  `Cardio and strength, 9 to 10 am, cancelled` into `Cardio` + `strength`,
+  which at a facility running a separate `Strength` row cancelled a session the
+  notice never named. An exact or equal-token-set match on the whole phrase now
+  settles that it names one thing. This was caught by the corpus diff, not by a
+  test, which is what the corpus diff is for.
+- **It must say something the whole phrase did not**: either more activities, or
+  the whole phrase was `multiple` and the parts resolve it. Nothing is ever
+  picked from among candidates, so the never-guess invariant is untouched.
+
+At facility level the split runs **within each group in turn**, not across all
+of them. A part naming an activity two groups publish (`figure skating`, in
+skating and in ice sports) is ambiguous facility-wide and unambiguous inside a
+group, so without this the facility-level copy of a notice split differently
+from its group-scoped twin and the two stopped collapsing — 70 duplicated
+notices over the corpus, then 34, now none.
+
+Over all 444 versions it changes **319 objects across 4 distinct phrases**, and
+**no object loses a slot or gains an ambiguity**:
+
+| facility | phrase | effect |
+| --- | --- | --- |
+| Sandy Hill | `Youth hockey and speed skating` | 204x, no slots and `date-outside-schedule` to a real slot and no marker |
+| Bernard Grandmaître | `Figure skating and hockey 35+` | 72x, one slot to both |
+| Jim Durrell | `Family skating and public skating` | 36x, same slots, `multiple` to `exact` |
+| Bob MacQuarrie | `Public skating and figure skating` | 7x, same slots, `multiple` to `exact` |
+
+`amb/activity-multiple-candidates` 319 to 276, `amb/date-outside-schedule` 628
+to 424. The Sandy Hill drop is the interesting one: those were the
+`date-outside-schedule` warns the Dates section calls a false-positive shape,
+and they were the enrichment matching a poorly resolved phrase against the wrong
+table rather than anything about the dates.
+
 ### The city writes the block, not the row
 
 A third shape, and the one that changes output. Canterbury publishes
