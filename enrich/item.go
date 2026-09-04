@@ -33,11 +33,15 @@ var (
 	// "Regular season, <date range>" seasonal operating statements
 	seasonRe     = regexp.MustCompile(`(?i)^(regular season|pre-? ?season)\b[ ,]*`)
 	closedSeason = regexp.MustCompile(`^closed for the season`)
+	// a reason the city sometimes appends after the effect word ("cancelled
+	// due to annual maintenance"), which otherwise hides the keyword from the
+	// end-anchored patterns below and loses the effect entirely
+	kwReason = `(?:\s+(?:due to|because of|owing to|for)\s+[^.,;]+)?`
 	// a comma clause that is only an effect keyword ("..., cancelled")
-	keywordRe = regexp.MustCompile(`^(?:and |are |is |will be |all )*(cancelled|canceled|added|closed)[. ]*$`)
+	keywordRe = regexp.MustCompile(`^(?:and |are |is |will be |all )*(cancelled|canceled|added|closed)` + kwReason + `[. ]*$`)
 	// an effect keyword glued to the phrase without a comma ("All drop-in
 	// skating and ice sports cancelled")
-	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)[. ]*$`)
+	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)` + kwReason + `[. ]*$`)
 	untilNoticeRe = regexp.MustCompile(`(?i)\buntil further notice\b`)
 	// "X is closed ...", "X closed until further notice", "X will be closed"
 	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
@@ -358,11 +362,20 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	}
 	if m := allClassRe.FindStringSubmatch(fphrase); m != nil && (n.Effects.any() || spec != nil) {
 		// "All changerooms closed for maintenance": an amenity closure, not
-		// an activity class
-		if cm := allAmenityClosedRe.FindStringSubmatch(m[1]); cm != nil && isAmenity(cm[1]) {
+		// an activity class. The closure word may already have been taken off
+		// the phrase as a trailing keyword, so a bare amenity with the closure
+		// effect set reads the same way.
+		amenityPhrase := ""
+		switch cm := allAmenityClosedRe.FindStringSubmatch(m[1]); {
+		case cm != nil:
+			amenityPhrase = cm[1]
+		case n.Effects.Closure:
+			amenityPhrase = m[1]
+		}
+		if amenityPhrase != "" && isAmenity(amenityPhrase) {
 			n.Effects.Closure = true
 			n.Scope.Level = "amenity"
-			n.Scope.Amenity = amenityName(cm[1])
+			n.Scope.Amenity = amenityName(amenityPhrase)
 			n.Scope.MatchQuality = matchScopePhrase
 			b.emitTimes(&n, spec, clocks, &sessions, emit)
 			return
@@ -978,7 +991,7 @@ func countEffects(stats map[string]int, e Effects) {
 		"cancelled": e.Cancelled, "added": e.Added, "timeChange": e.TimeChange,
 		"closure": e.Closure, "seasonalHours": e.SeasonalHours,
 		"modifiedHours": e.ModifiedHours,
-		"restriction": e.Restriction != "", "seeSchedule": e.SeeSchedule != "",
+		"restriction":   e.Restriction != "", "seeSchedule": e.SeeSchedule != "",
 	} {
 		if v {
 			stats["effect/"+k]++

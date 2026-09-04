@@ -153,6 +153,14 @@ saw.
   Friday") and OOM'd the machine — anything iterating weekday/date math
   deserves a bounds check and a capped corpus run.
 - `foldText` removes colons; never fold before clock parsing.
+- The effect keyword can carry a reason after it ("cancelled due to annual
+  maintenance", "closed for maintenance"), and `keywordRe`/`trailingKwRe` are
+  end-anchored, so without `kwReason` the effect is lost entirely and the item
+  resolves scope with no effect at all. Stripping the reason also takes the
+  closure word off the phrase, which is why the `allClassRe` amenity branch
+  accepts a bare amenity when `Effects.Closure` is already set: without that,
+  "All changerooms closed for maintenance" stopped being an amenity closure and
+  became 37 class-unmatched items. Both halves were caught by the corpus diff.
 - Item dates override head dates by design ("December 27, 8:30 am to 9 pm"
   under a "Winter Break" range head).
 - The same block HTML can resolve differently under a different anchor year
