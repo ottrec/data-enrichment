@@ -215,7 +215,18 @@ func (f FacilityRef) ScopeCancelled(date schema.Date, start, end int) bool {
 	if f.f == nil {
 		return false
 	}
-	return scopeCancelled(f.f.objects, date, start, end)
+	return scopeCancelled(f.f.objects, date, start, end, false)
+}
+
+// ScopeCancelledStated is [FacilityRef.ScopeCancelled] restricted to notices
+// whose own text states the cancellation, which is the difference between "the
+// facility is closed and all programs cancelled" and a bare closure the scope
+// only implies.
+func (f FacilityRef) ScopeCancelledStated(date schema.Date, start, end int) bool {
+	if f.f == nil {
+		return false
+	}
+	return scopeCancelled(f.f.objects, date, start, end, true)
 }
 
 // ScopeCancelled reports whether a whole-scope notice placed at the group
@@ -227,7 +238,16 @@ func (g GroupRef) ScopeCancelled(date schema.Date, start, end int) bool {
 	if g.g == nil {
 		return false
 	}
-	return scopeCancelled(g.g.direct, date, start, end)
+	return scopeCancelled(g.g.direct, date, start, end, false)
+}
+
+// ScopeCancelledStated is [GroupRef.ScopeCancelled] restricted to notices whose
+// own text states the cancellation.
+func (g GroupRef) ScopeCancelledStated(date schema.Date, start, end int) bool {
+	if g.g == nil {
+		return false
+	}
+	return scopeCancelled(g.g.direct, date, start, end, true)
 }
 
 // scopeCancelled reports whether a notice among objs is a whole-scope
@@ -256,7 +276,13 @@ func (g GroupRef) ScopeCancelled(date schema.Date, start, end int) bool {
 // A scope phrase is still an inference: "all drop-in skating" was matched
 // against the group's title, not each activity, so a true hit means "likely
 // cancelled", not the per-session guarantee SessionNotices.Cancelled carries.
-func scopeCancelled(objs []*epb.Object, date schema.Date, start, end int) bool {
+//
+// stated drops the closure-only half, leaving the notices that say a
+// cancellation happened rather than the ones a closure implies. Those still
+// generalize from a scope phrase to its sessions, but the cancellation itself
+// is the city's word and not an inference, which is what lets a consumer treat
+// a whole-facility closure as cancelling the sessions under it.
+func scopeCancelled(objs []*epb.Object, date schema.Date, start, end int, stated bool) bool {
 	for _, o := range objs {
 		if o.GetKind() != epb.Object_NOTICE {
 			continue
@@ -274,6 +300,9 @@ func scopeCancelled(objs []*epb.Object, date schema.Date, start, end int) bool {
 			case epb.Effect_Closure_case:
 				closure = true
 			}
+		}
+		if stated && !cancelled {
+			continue
 		}
 		if !cancelled && (!closure || o.GetAmenity() != "" || o.GetPhrase() != "") {
 			continue

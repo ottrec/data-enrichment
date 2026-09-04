@@ -64,11 +64,24 @@ enrichment:
 - session-level `objects` with a `cancelled`/`closure` effect: style the
   matching feed session as cancelled (this is the high-confidence tier:
   slot-validated, date-resolved).
-- group/facility-level whole-scope cancellations ("All drop-in skating,
-  cancelled", "The facility is closed and all programs cancelled."): a red
-  per-session "may be affected" warning via `enrichidx.ScopeCancelled`, one
-  tier below the strike. The scope phrase was matched against the group
-  title, not each activity, so this is "likely cancelled", never certainty.
+- group/facility-level whole-scope cancellations split into two tiers.
+  `enrichidx.ScopeCancelledStated` is the half whose text **states** the
+  cancellation ("The facility is closed and all programs cancelled.", "All
+  drop-in skating, cancelled"): the scope is still an inference but the
+  cancellation is the city's own word, so /today strikes those sessions. The
+  rest, a closure the scope only implies, keeps the softer per-session "may be
+  affected" warning via `ScopeCancelled`, one tier below the strike, because
+  the scope phrase was matched against the group title rather than each
+  activity.
+
+  **Almost all of it arrives at group level, not facility level.** The city
+  posts "The facility is closed and all programs cancelled." into each group's
+  schedule_changes, so that is where the enrichment places it; the
+  facility-level copy usually says only "closed" and stays in the soft tier. On
+  2026-09-07 (Labour Day) the stated tier covers 234 of 560 sessions at 19
+  facilities, every one of them placed at group level and none at facility
+  level, with 17 left soft. A consumer that consults only the facility tier
+  gets nothing.
   The query requires a dated (or open-ended) notice with a scope-phrase or
   absent subject, and skips closure-only notices with a residual subject
   ("The pool is closed for maintenance" at a multi-group complex says

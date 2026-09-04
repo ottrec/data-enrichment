@@ -241,6 +241,22 @@ func TestScopeCancelled(t *testing.T) {
 	if !g.ScopeCancelled(202607095, 540, 720) {
 		t.Error("morning closure must apply to a morning session")
 	}
+	// the stated tier: "cancelled" is the city's word, a bare closure is not
+	if !g.ScopeCancelledStated(202607051, 540, 720) {
+		t.Error("group scope cancel: want stated (the notice says cancelled)")
+	}
+	if g.ScopeCancelledStated(202607062, 540, 720) {
+		t.Error("bare dated closed: want NOT stated, only implied by the closure")
+	}
+	if !f.ScopeCancelledStated(202607073, 540, 720) {
+		t.Error("pool closed and all programs cancelled: want stated")
+	}
+	if zero := (GroupRef{}); zero.ScopeCancelledStated(202607051, 540, 720) {
+		t.Error("zero group: want no stated cancel")
+	}
+	if zero := (FacilityRef{}); zero.ScopeCancelledStated(202607051, 540, 720) {
+		t.Error("zero facility: want no stated cancel")
+	}
 	if g.ScopeCancelled(202607095, 1080, 1200) {
 		t.Error("morning closure must not apply to an evening session")
 	}
