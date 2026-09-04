@@ -74,14 +74,22 @@ enrichment:
   the scope phrase was matched against the group title rather than each
   activity.
 
-  **Almost all of it arrives at group level, not facility level.** The city
-  posts "The facility is closed and all programs cancelled." into each group's
-  schedule_changes, so that is where the enrichment places it; the
-  facility-level copy usually says only "closed" and stays in the soft tier. On
-  2026-09-07 (Labour Day) the stated tier covers 234 of 560 sessions at 19
-  facilities, every one of them placed at group level and none at facility
-  level, with 17 left soft. A consumer that consults only the facility tier
-  gets nothing.
+  **Most of it arrives at group level, so consult both tiers.** The city posts
+  "The facility is closed and all programs cancelled." into each group's
+  schedule_changes, so that is where the enrichment usually places it, and the
+  facility-level copy often says only "closed" and stays soft. Simulated over
+  the sessions actually in effect on each day:
+
+  | day | struck, facility tier | struck, group tier | left soft | sessions |
+  | --- | --- | --- | --- | --- |
+  | 2026-09-07 Labour Day | 0 | 103 | 1 | 241 |
+  | 2026-04-03 Good Friday | 0 | 166 | 25 | 395 |
+  | 2026-07-01 Canada Day | 47 | 115 | 21 | 363 |
+  | 2026-11-11 ordinary Wednesday | 0 | 0 | 0 | 377 |
+
+  A consumer that consults only the facility tier gets nothing on two of those
+  three holidays. The ordinary Wednesday is the negative control: the tier adds
+  no strikes on a day with no notices.
   The query requires a dated (or open-ended) notice with a scope-phrase or
   absent subject, and skips closure-only notices with a residual subject
   ("The pool is closed for maintenance" at a multi-group complex says
