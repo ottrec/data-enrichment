@@ -515,6 +515,31 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	if n.Scope.Level == "activity" {
 		b.checkDateInSchedules(&n, spec, acts)
 		acts = b.maybeDisambiguate(&n, spec, clocks, acts)
+		// a skating notice whose clock window reaches past the named row: the
+		// city writes the block, not the row (see skateSiblings). Only with a
+		// clock, which is what bounds what the widening can reach.
+		//
+		// Widened through every matcher owning one of the matched activities,
+		// not just b.grp, so the facility-level copy of a notice widens the
+		// same way its group-scoped twin does and the two still collapse.
+		if len(clocks) > 0 {
+			var sib []*actEntry
+			for _, m := range b.matchers {
+				if m.owns(acts) {
+					sib = append(sib, m.skateSiblings(acts)...)
+				}
+			}
+			// only widen where a sibling actually falls inside the window.
+			// Most skating groups have a sibling and most notices do not
+			// reach it, and marking those would put a confidence marker on
+			// thousands of objects the widening never touched.
+			if wide := append(slices.Clone(acts), sib...); len(sib) > 0 &&
+				!sameSlots(touchedBy(clocks, acts, spec), touchedBy(clocks, wide, spec)) {
+				acts = wide
+				n.Scope.Activities = actNames(acts)
+				n.Ambiguities = append(n.Ambiguities, ambSkateWidened)
+			}
+		}
 	}
 	b.emitTimesWithSlots(&n, spec, clocks, acts, &sessions, emit)
 }
@@ -1109,6 +1134,28 @@ func (b *blockCtx) emitTimes(n *notice, spec *dateSpec, clocks []clockMention, s
 // emitTimesWithSlots emits the notice once per clock mention, attaching the
 // best-relating candidate interpretation, its slot relation, and the
 // concrete sessions the notice descends to.
+// touchedBy returns the labels of every slot of acts that any clock candidate
+// relates to, which is what emitTimesWithSlots would end up reporting.
+func touchedBy(clocks []clockMention, acts []*actEntry, spec *dateSpec) []string {
+	if len(acts) == 0 {
+		return nil
+	}
+	slots := gatherSlots(acts, spec)
+	var out []string
+	for _, cm := range clocks {
+		for _, c := range cm.Cands {
+			if _, touched := clockRelation(c, slots); len(touched) > 0 {
+				out = append(out, slotLabels(touched)...)
+			}
+		}
+	}
+	slices.Sort(out)
+	return slices.Compact(out)
+}
+
+// sameSlots compares two sorted, deduplicated slot label lists.
+func sameSlots(a, b []string) bool { return slices.Equal(a, b) }
+
 func (b *blockCtx) emitTimesWithSlots(n *notice, spec *dateSpec, clocks []clockMention, acts []*actEntry, sessOut *[]sessKey, emit func()) {
 	if len(clocks) == 0 {
 		*sessOut = nil

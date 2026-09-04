@@ -40,6 +40,7 @@ const (
 	ambOtherGroup           = "matched-other-group"
 	ambClassTitlePartial    = "class-title-partial"
 	ambClassVocabulary      = "class-matched-by-vocabulary"
+	ambSkateWidened         = "skating-widened-to-window"
 	ambTimeChangeUnparsed   = "time-change-unparsed"
 )
 

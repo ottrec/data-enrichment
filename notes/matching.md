@@ -96,6 +96,40 @@ city files them under skating, and matching them from an "all ice sports"
 notice would cancel sessions the notice does not name — the no-false-positive
 contract, applied to a taxonomy rather than to a parse.
 
+### The city writes the block, not the row
+
+A third shape, and the one that changes output. Canterbury publishes
+`Public Skating, 11 am to 1 pm, cancelled` for Wednesday September 9, and Brian
+Kilrea Arena runs `Adult skating` 11 to noon and `Public skating` noon to 1.
+Matching the phrase literally cancels the second hour and leaves the first
+running, so half the window the city gave is ignored.
+
+`skateSiblings` widens a matched skate activity to the group's other skate
+activities, and `touchedBy` then keeps the widening only where a sibling's slot
+actually falls inside the notice's clock window. Two rules bound it:
+
+- **Only with a clock.** A bare `Public skating, cancelled` must not take the
+  whole skating class with it; the window is what authorizes the reach.
+- **Only when it changes the slots.** Most skating groups have a sibling and
+  most notices do not reach it. Marking those would put a confidence marker on
+  thousands of objects the widening never touched: over the corpus the
+  unguarded version marked 2,549 objects to change 12.
+
+Over all 444 versions it changes **12 objects in 2 cases**, and marks exactly
+those 12 with `skating-widened-to-window`:
+
+| facility | notice | before | after |
+| --- | --- | --- | --- |
+| Canterbury | `Public Skating, 11 am to 1 pm, cancelled` | the noon slot only | both the 11 am and noon slots |
+| Metcalfe | `Public skating, 4 to 4:50 pm, cancelled` | nothing, `no-slot-overlap` | the Thursday 4 pm slot |
+
+The Metcalfe case is the one to watch, and it is why the marker exists. There is
+no Public skating at 4 pm that day; `Family skating` is the only session at that
+clock, so the widening cancels an activity the notice does not name. With an
+exact clock and a single candidate that is very likely what the city meant, and
+the previous behaviour marked nothing at all, but it is a judgement the marker
+hands to the consumer rather than hides.
+
 It runs only after `coversGroup`, `matchClass` and the sibling-group fallback
 have all found nothing, and always marks `class-matched-by-vocabulary`, because
 it asserts a classification the page never stated. **Over all 444 versions it

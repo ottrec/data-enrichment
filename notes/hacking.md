@@ -56,7 +56,11 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   `classSegments` splits on commas and " and ". `iceClassVocab` +
   `matchClassVocab` are the last-resort hard-coded taxonomy for "all skating"
   and "all ice sports" (see matching.md); they run only after everything else
-  has failed and always mark `class-matched-by-vocabulary`.
+  has failed and always mark `class-matched-by-vocabulary`. `skateSiblings` +
+  `owns` widen a matched skate activity to its group's other skate activities,
+  for a notice whose clock window reaches past the row it names; `owns` is what
+  makes the facility-level copy widen the same way its group-scoped twin does,
+  so the two still collapse.
 - `item.go` — `processItem` is the heart; **the order of checks is load-
   bearing**: boilerplate → item's own leading date (beats head context) →
   see-schedule → facilityRe (whole-facility sentences; sets
@@ -179,3 +183,9 @@ gaining their slot; `amb/class-unmatched` 76 → 58, those 18 moving to
 `scope/group`. The vocabulary fallback itself fired **zero** times, so it is
 an untested guard, and `claude-qc`'s `city-ice-class-vocabulary` is what will
 say when the city's vocabulary drifts past it.
+
+The skate widening (matching.md) is separate and does change output: 12 objects
+over the corpus, in 2 cases, each marked `skating-widened-to-window`. It is
+gated on a clock being present and on the widening actually changing the slot
+set — `touchedBy` replays what `emitTimesWithSlots` would report, because the
+unguarded version marked 2,549 objects to change 12.

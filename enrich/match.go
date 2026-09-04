@@ -222,6 +222,10 @@ func (m *groupMatcher) matchClass(segToks map[string]bool) []*actEntry {
 // skating are deliberately NOT ice sports: the city files them under skating,
 // and matching them from an "ice sports" notice would cancel sessions the
 // notice does not name.
+//
+// skateCovers is named because the widening below shares it.
+func skateCovers(act map[string]bool) bool { return act["skate"] }
+
 var iceClassVocab = []struct {
 	// Selects reports whether a class segment names this class.
 	Selects func(seg map[string]bool) bool
@@ -231,7 +235,7 @@ var iceClassVocab = []struct {
 	{
 		// "all drop-in skating": every skate/skating variant
 		Selects: func(seg map[string]bool) bool { return len(seg) == 1 && seg["skate"] },
-		Covers:  func(act map[string]bool) bool { return act["skate"] },
+		Covers:  skateCovers,
 	},
 	{
 		// "all ice sports": the puck-and-blade activities, and the two
@@ -260,6 +264,49 @@ func (m *groupMatcher) matchClassVocab(segToks map[string]bool) []*actEntry {
 			if v.Covers(e.toks) {
 				out = append(out, e)
 			}
+		}
+	}
+	return out
+}
+
+// owns reports whether any of acts belongs to this group.
+func (m *groupMatcher) owns(acts []*actEntry) bool {
+	for _, e := range acts {
+		if slices.Contains(m.acts, e) {
+			return true
+		}
+	}
+	return false
+}
+
+// skateSiblings returns the group's other skate activities, for a notice that
+// names one of them and then gives a clock window reaching past its slots.
+//
+// The city writes the block, not the row: Canterbury's
+// "Public Skating, 11 am to 1 pm, cancelled" names one activity and a window
+// covering two, because Brian Kilrea Arena runs Adult skating 11 to noon and
+// Public skating noon to 1. Taking the phrase literally cancels half of what
+// the window says.
+//
+// Callers must only widen when a clock range is present, and the slots the
+// widened activities contribute are still filtered by that window. Without a
+// clock, "Public skating, cancelled" would take the whole skating class with
+// it, which is the false positive this is not allowed to make.
+func (m *groupMatcher) skateSiblings(have []*actEntry) []*actEntry {
+	var anySkate bool
+	for _, e := range have {
+		if skateCovers(e.toks) {
+			anySkate = true
+			break
+		}
+	}
+	if !anySkate {
+		return nil
+	}
+	var out []*actEntry
+	for _, e := range m.acts {
+		if skateCovers(e.toks) && !slices.Contains(have, e) {
+			out = append(out, e)
 		}
 	}
 	return out
