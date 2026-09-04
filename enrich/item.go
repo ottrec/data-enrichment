@@ -49,6 +49,9 @@ var (
 	// ("Fridays and Sundays beginning July 3"), and stripping those edits the
 	// date language instead.
 	danglingPrepRe = regexp.MustCompile(`(?i)^(?:from|between)\s+`)
+	// the end-of-season dog swim the city adds at outdoor pools, which is
+	// never a row in any published table
+	dogSwimRe = regexp.MustCompile(`(?i)\bdogs?\s+swim`)
 	// "X is closed ...", "X closed until further notice", "X will be closed"
 	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
 	// "... and all programs cancelled" riding on a subject closure, which
@@ -513,7 +516,19 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		n.Scope.MatchQuality = q
 		n.Ambiguities = append(n.Ambiguities, ambActivityMultiple)
 	default:
-		if isAmenity(phrase) {
+		if dogSwimRe.MatchString(fphrase) && spec != nil && len(clocks) > 0 {
+			// a dog swim is never in the published schedule: the city runs one
+			// at the end of an outdoor pool's season and announces it with a
+			// date and a time. Without this it reads as unexplained facility
+			// hours ("Dogs swim free, 4:30 to 5:30 pm") or as freeform prose.
+			// The effect is deliberately left unset when the city does not
+			// write one: inventing "added" here would break the rule that an
+			// effect comes only from a trigger word in the text.
+			n.Scope.Level = "activity"
+			n.Scope.Activities = []string{phrase}
+			n.Scope.MatchQuality = matchNovel
+			n.Ambiguities = append(n.Ambiguities, ambDogSwim)
+		} else if isAmenity(phrase) {
 			n.Scope.Level = "amenity"
 			n.Scope.Amenity = amenityName(fphrase)
 			n.Scope.MatchQuality = matchNone

@@ -95,7 +95,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   (leaf with `<br>` lines; date head + children; garbled head — children
   processed with the marked spec; inverted form: statement head whose
   children are all dates, ranges emitted separately; otherwise head emitted
-  with `head-unparsed` and children processed), `collapse` (special_hours
+  with `head-unparsed` and children processed, unless `allSupplementary` says
+  the children are only cross-references and the head is therefore complete),
+  `collapse` (special_hours
   notices matching a schedule_changes notice on dates+effects+scope key
   become ignored/duplicate stubs; survivors get Sources), and `place`
   (converts recs to Objects and builds the reference tree; sessions filled

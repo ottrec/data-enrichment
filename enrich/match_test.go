@@ -257,3 +257,51 @@ func TestKeywordReason(t *testing.T) {
 		}
 	}
 }
+
+// TestDogSwimRe pins what counts as a dog swim. It is deliberately narrow:
+// the outdoor pools that announce the same event as a bare date and time say
+// nothing about dogs, and are left as unexplained hours rather than guessed at.
+func TestDogSwimRe(t *testing.T) {
+	for _, tt := range []struct {
+		in   string
+		want bool
+	}{
+		{"end of season dog swim", true},
+		{"dogs swim free", true},
+		{"dog swim", true},
+		{"sunday august 30 5 to 6 pm", false},
+		{"lane swim", false},
+		{"public swim", false},
+		{"doggy paddle", false},
+	} {
+		if got := dogSwimRe.MatchString(tt.in); got != tt.want {
+			t.Errorf("dogSwimRe(%q) = %v, want %v", tt.in, got, tt.want)
+		}
+	}
+}
+
+// TestAllSupplementary covers the child list that makes a head a complete item
+// rather than an unrecognized one.
+func TestAllSupplementary(t *testing.T) {
+	link := []anchor{{Href: "https://ottawa.ca/x"}}
+	for _, tt := range []struct {
+		name  string
+		items []liNode
+		want  bool
+	}{
+		{"see-link child", []liNode{{Head: "See Outdoor Pools for more information.", Links: link}}, true},
+		{"details-link child", []liNode{{Head: "Details: Outdoor pools", Links: link}}, true},
+		{"no children", nil, false},
+		{"child with no link", []liNode{{Head: "See Outdoor Pools"}}, false},
+		{"child that says something", []liNode{{Head: "Lane swim, 3 to 4 pm, cancelled", Links: link}}, false},
+		{"child with its own list", []liNode{{Head: "See Outdoor Pools", Links: link, Items: []liNode{{Head: "x"}}}}, false},
+		{"one supplementary, one not", []liNode{
+			{Head: "See Outdoor Pools", Links: link},
+			{Head: "Family hockey, 12:15 to 2 pm, moved inside", Links: link},
+		}, false},
+	} {
+		if got := allSupplementary(tt.items); got != tt.want {
+			t.Errorf("%s: allSupplementary = %v, want %v", tt.name, got, tt.want)
+		}
+	}
+}

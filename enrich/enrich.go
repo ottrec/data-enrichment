@@ -10,6 +10,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"regexp"
 	"slices"
 	"strings"
 	"time"
@@ -41,6 +42,7 @@ const (
 	ambClassTitlePartial    = "class-title-partial"
 	ambClassVocabulary      = "class-matched-by-vocabulary"
 	ambSkateWidened         = "skating-widened-to-window"
+	ambDogSwim              = "dog-swim-session"
 	ambTimeChangeUnparsed   = "time-change-unparsed"
 )
 
@@ -303,13 +305,38 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 		return
 	}
 
-	// unrecognized head: emit it as an item and process children normally
+	// a head whose children are only a supplementary reference ("See Outdoor
+	// Pools for more information.", "Details: Outdoor pools") is a complete
+	// item in its own right, not an unrecognized one. The children still get
+	// processed below and land wherever they land.
 	if head != "" {
-		b.processItem(st, head, li.HeadHTML, li.Off, li.Links, []string{ambHeadUnparsed})
+		amb := []string{ambHeadUnparsed}
+		if allSupplementary(li.Items) {
+			amb = nil
+		}
+		b.processItem(st, head, li.HeadHTML, li.Off, li.Links, amb)
 	}
 	for _, sub := range li.Items {
 		b.processLi(st, sub)
 	}
+}
+
+// supplementaryRe matches a child that only points somewhere else.
+var supplementaryRe = regexp.MustCompile(`(?i)^(?:see|details:?|more information|for more information)\b`)
+
+// allSupplementary reports whether every child is a bare cross-reference with
+// a link and no nested list of its own.
+func allSupplementary(items []liNode) bool {
+	if len(items) == 0 {
+		return false
+	}
+	for _, sub := range items {
+		if len(sub.Items) > 0 || len(sub.Links) == 0 ||
+			!supplementaryRe.MatchString(strings.TrimSpace(sub.Head)) {
+			return false
+		}
+	}
+	return true
 }
 
 func splitLines(s string) []string {

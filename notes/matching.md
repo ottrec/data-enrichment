@@ -147,6 +147,34 @@ to 424. The Sandy Hill drop is the interesting one: those were the
 and they were the enrichment matching a poorly resolved phrase against the wrong
 table rather than anything about the dates.
 
+### The dog swim, and the head that only looked unparsed
+
+The city runs an end-of-season dog swim at outdoor pools and announces it in
+two forms, neither of which was reaching anything.
+
+Crestview's schedule_changes writes `End of season dog swim, 4:30 to 5:30 pm,
+added`, which resolved correctly (novel activity, added, dated, timed) and was
+still marked `head-unparsed`. Its special_hours writes `Dogs swim free, 4:30 to
+5:30 pm`, with no "added", which fell through to `freeform-item` with no scope
+at all. `dogSwimRe` scopes both as the novel activity they name, marked
+`dog-swim-session`. **The effect is left unset where the city writes no trigger
+word**: inventing `added` would break invariant 1, and the marker is what tells
+a consumer this is a one-off session rather than a schedule row.
+
+**Eight other outdoor pools announce what is almost certainly the same event as
+a bare date and time** (`Sunday, August 30, 5 to 6 pm`) with a `See Outdoor
+Pools` link and nothing else. The page never says "dog", so they stay
+`hours-context-unknown`: the only evidence is the link target and the time of
+year, and that is a guess, not a parse. If they should be dog swims, the rule
+has to come from somewhere other than the page.
+
+The second half is `allSupplementary`. A `<li>` whose children are only a
+cross-reference (`See Outdoor Pools for more information.`, `Details: Outdoor
+pools`) is a complete item, not an unrecognized one, so its head no longer
+carries `head-unparsed`. That marker drops from 239 to 46 over the corpus, and
+what remains is the shapes that really are unrecognized, including the
+partial-day closures below.
+
 ### Two smaller scope losses, found by scanning the residue
 
 Both cost a whole-group cancellation and both were marked, so nothing was
