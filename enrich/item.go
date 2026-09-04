@@ -581,6 +581,26 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 			n.Ambiguities = append(n.Ambiguities, ambOtherGroup)
 			return acts
 		}
+		// last resort: the hard-coded ice-class vocabulary, for a facility
+		// that names a class no group of its titles and no activity of its
+		// own spells ("all ice sports" where the arena files hockey and
+		// ringette under skating)
+		acts, groups = nil, nil
+		for _, m := range b.matchers {
+			for _, seg := range segs {
+				if es := m.matchClassVocab(seg); len(es) > 0 {
+					groups = append(groups, m.label)
+					acts = append(acts, es...)
+				}
+			}
+		}
+		if len(acts) > 0 {
+			n.Scope.Level = "class"
+			n.Scope.Groups = dedupeStrings(groups)
+			n.Scope.Activities = actNames(acts)
+			n.Ambiguities = append(n.Ambiguities, ambClassVocabulary)
+			return acts
+		}
 		n.Scope.Level = "class"
 		n.Ambiguities = append(n.Ambiguities, ambClassUnmatched)
 		return nil
@@ -630,7 +650,21 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 		n.Scope.Groups = dedupeStrings(groups)
 		n.Scope.Activities = actNames(acts)
 	default:
+		for _, m := range b.matchers {
+			for _, seg := range segs {
+				if es := m.matchClassVocab(seg); len(es) > 0 {
+					groups = append(groups, m.label)
+					acts = append(acts, es...)
+				}
+			}
+		}
 		n.Scope.Level = "class"
+		if len(acts) > 0 {
+			n.Scope.Groups = dedupeStrings(groups)
+			n.Scope.Activities = actNames(acts)
+			n.Ambiguities = append(n.Ambiguities, ambClassVocabulary)
+			break
+		}
 		n.Ambiguities = append(n.Ambiguities, ambClassUnmatched)
 	}
 	return acts

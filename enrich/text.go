@@ -121,7 +121,7 @@ var stopTokens = map[string]bool{
 
 // stemMap folds trivial variants the city alternates between.
 var stemMap = map[string]string{
-	"skating": "skate", "skates": "skate",
+	"skating": "skate", "skates": "skate", "skatings": "skate",
 	"swimming": "swim", "swims": "swim",
 	"canceled": "cancelled",
 	"aqua":     "aquafit", "aquafitness": "aquafit",

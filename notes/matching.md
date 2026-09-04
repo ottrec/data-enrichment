@@ -64,6 +64,47 @@ stays ambiguous.
 - On SPECIAL (no group), "all skating and ice sports" maps to groups by
   title/name tokens.
 
+### The ice classes, and the hard-coded fallback
+
+Two wrinkles, both found on the 2026-09-04 dataset.
+
+**`skatings`.** Tom Brown Arena writes `All drop-in skatings, cancelled` in one
+item of a December list whose other items all write `skating`. `skatings` was
+not in the stemMap, so the segment token stayed `skatings`, matched no group
+title and no activity, and the notice resolved to `class-unmatched` — nothing
+cancelled. It is now stemmed to `skate` alongside `skating`/`skates`. Over the
+full corpus this is 18 objects at that one facility, every one of them then
+scoping to the whole skating group and picking up its slot.
+
+**`iceClassVocab`.** The fallback for the other direction: a facility naming a
+class that no group of its titles and no activity of its own spells. The
+vocabulary is measured, not guessed. Over all 416 dataset versions
+(2025-10-06 to 2026-09-04), every activity ever published in an `ice sports`
+group reduces to hockey (including pick-up, child and youth hockey), ringette,
+stick and puck, figure skating and speed skating; every activity ever published
+in a `skating` group is a skate/skating variant except pick-up hockey.
+
+So the taxonomy is:
+
+| class segment | matches an activity whose tokens hold |
+| --- | --- |
+| `{skate}` | `skate` |
+| `{ice, sports}` | `hockey`, `ringette`, `puck` or `shinny`; or `skate` with `figure` or `speed` |
+
+**Plain public, family and adult skating are deliberately not ice sports.** The
+city files them under skating, and matching them from an "all ice sports"
+notice would cancel sessions the notice does not name — the no-false-positive
+contract, applied to a taxonomy rather than to a parse.
+
+It runs only after `coversGroup`, `matchClass` and the sibling-group fallback
+have all found nothing, and always marks `class-matched-by-vocabulary`, because
+it asserts a classification the page never stated. **Over all 444 versions it
+fires zero times**, so it is an untested guard rather than a measured rule; the
+18-object corpus change above is entirely the stem. What keeps it honest as the
+city's vocabulary drifts is `claude-qc`'s `city-ice-class-vocabulary`, which
+warns when a skating or ice sports table gains an activity this table does not
+cover, or one that lands in the wrong half of it.
+
 ## Time slot matching
 
 For items with an exact activity match, a parseable single-date head, and a

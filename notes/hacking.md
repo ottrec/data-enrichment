@@ -21,7 +21,8 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   folded), `tokens`/`tokenSet` (stemmed + stopworded). The `stemMap`
   (skating→skate, aqua→aquafit, ...) and `stopTokens` (drop/ins/all/
   programming/...) feed activity matching, class segments, and
-  `subjectIsFacility` alike; edit with care.
+  `subjectIsFacility` alike; edit with care. `skatings` is in the stemMap
+  because Tom Brown Arena writes it (see matching.md).
 - `html.go` — `splitBlock` → `blockPart` (heading/para/list) and nested
   `liNode`s. `nodeText` concatenates text nodes with no separator (the city
   splits bold mid-word: `<strong>T</strong>hursday`), `<br>` → `\n`. A
@@ -52,7 +53,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   direction; 2+ candidates always come back as `multiple`, never picked.
   `coversGroup` (group title tokens ⊆ class segment tokens) and
   `matchClass` (segment tokens ⊆ activity tokens) drive "all X" phrases;
-  `classSegments` splits on commas and " and ".
+  `classSegments` splits on commas and " and ". `iceClassVocab` +
+  `matchClassVocab` are the last-resort hard-coded taxonomy for "all skating"
+  and "all ice sports" (see matching.md); they run only after everything else
+  has failed and always mark `class-matched-by-vocabulary`.
 - `item.go` — `processItem` is the heart; **the order of checks is load-
   bearing**: boilerplate → item's own leading date (beats head context) →
   see-schedule → facilityRe (whole-facility sentences; sets
@@ -68,7 +72,8 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   facility hours); in special_hours/notifications ⇒ ModifiedHours unless the
   range exactly equals an activity slot on those dates or is <4h.
   Also here: `resolveClass` (empty segments = "all drop-in activities" ⇒
-  whole scope), `gatherSlots` (fixed-date times via `SingleDate` ymd
+  whole scope; both of its `class-unmatched` exits try `matchClassVocab`
+  first), `gatherSlots` (fixed-date times via `SingleDate` ymd
   equality; weekday times filtered by the spec's weekdays and by schedule
   effective ranges as negative-only evidence; ranges enumerate ≤45 days,
   longer ⇒ all weekdays), `clockRelation` (exact > within > covers >
@@ -166,3 +171,11 @@ only outside schedule_changes blocks and only when not slot-exact/short
 double weekday validation, and inverted-form items with mixed range/single
 date children. The driving check: `dump-residue` output should contain no
 items mentioning cancellation.
+
+Also done: the `skatings` stem and the `iceClassVocab` fallback (matching.md).
+Corpus effect, 444 versions and 131,631 objects: exactly 18 objects changed,
+all Tom Brown's `All drop-in skatings, cancelled` losing `class-unmatched` and
+gaining their slot; `amb/class-unmatched` 76 → 58, those 18 moving to
+`scope/group`. The vocabulary fallback itself fired **zero** times, so it is
+an untested guard, and `claude-qc`'s `city-ice-class-vocabulary` is what will
+say when the city's vocabulary drifts past it.

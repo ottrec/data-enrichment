@@ -39,6 +39,7 @@ const (
 	ambActivityTypo         = "activity-typo-match"
 	ambOtherGroup           = "matched-other-group"
 	ambClassTitlePartial    = "class-title-partial"
+	ambClassVocabulary      = "class-matched-by-vocabulary"
 	ambTimeChangeUnparsed   = "time-change-unparsed"
 )
 

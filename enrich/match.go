@@ -208,6 +208,63 @@ func (m *groupMatcher) matchClass(segToks map[string]bool) []*actEntry {
 	return out
 }
 
+// iceClassVocab hard-codes the activity vocabulary of the two ice classes, for
+// the case where a facility posts "all drop-in skating cancelled" or "all ice
+// sports cancelled" but publishes no group the phrase covers and no activity
+// whose own tokens contain the class word. Without it such a notice resolves to
+// nothing at all, which is what "class-unmatched" means.
+//
+// Measured over all 416 dataset versions (2025-10-06 to 2026-09-04): every
+// activity ever published in an "ice sports" group reduces to hockey (including
+// pick-up, child and youth hockey), ringette, stick and puck, figure skating and
+// speed skating; every activity ever published in a "skating" group is a
+// skate/skating variant except pick-up hockey. Plain public, family and adult
+// skating are deliberately NOT ice sports: the city files them under skating,
+// and matching them from an "ice sports" notice would cancel sessions the
+// notice does not name.
+var iceClassVocab = []struct {
+	// Selects reports whether a class segment names this class.
+	Selects func(seg map[string]bool) bool
+	// Covers reports whether an activity's tokens name a member of it.
+	Covers func(act map[string]bool) bool
+}{
+	{
+		// "all drop-in skating": every skate/skating variant
+		Selects: func(seg map[string]bool) bool { return len(seg) == 1 && seg["skate"] },
+		Covers:  func(act map[string]bool) bool { return act["skate"] },
+	},
+	{
+		// "all ice sports": the puck-and-blade activities, and the two
+		// qualified skating disciplines the city files under ice sports
+		Selects: func(seg map[string]bool) bool { return seg["ice"] && seg["sports"] },
+		Covers: func(act map[string]bool) bool {
+			if act["hockey"] || act["ringette"] || act["puck"] || act["shinny"] {
+				return true
+			}
+			return act["skate"] && (act["figure"] || act["speed"])
+		},
+	},
+}
+
+// matchClassVocab matches a class segment against the group's activities using
+// the hard-coded vocabulary above, for segments the group's own tokens do not
+// cover. Callers use it only once ordinary matching has found nothing, and mark
+// what it returns, since it asserts a taxonomy the page never stated.
+func (m *groupMatcher) matchClassVocab(segToks map[string]bool) []*actEntry {
+	var out []*actEntry
+	for _, v := range iceClassVocab {
+		if !v.Selects(segToks) {
+			continue
+		}
+		for _, e := range m.acts {
+			if v.Covers(e.toks) {
+				out = append(out, e)
+			}
+		}
+	}
+	return out
+}
+
 // classSegments splits an "all X and Y" class phrase into per-class token
 // sets ("skating and ice sports" -> {skate}, {ice sports}).
 func classSegments(phrase string) []map[string]bool {
