@@ -90,7 +90,13 @@ since they are deterministic; anything ambiguous stays higher up.
 6. **Matching** (`match.go`): exact folded spelling, then equal token sets,
    then token subset either way (stemmed, stopworded), then edit-distance-1
    token pairing for typos ("Baddminton"), accepted only when it identifies
-   exactly one activity and marked `activity-typo-match`. Multiple candidates
+   exactly one activity and marked `activity-typo-match`.
+   A subject naming some but not all of the numbered units its matched
+   activity runs on ("Squash court 3" against "Squash courts 1, 2, 3, 5, 7
+   and 9") is narrowed back to an amenity and marked
+   `activity-narrowed-to-amenity`: numbers are meaning, not spelling, and the
+   row keeps running on the other courts (`subjectNamesUnitOfActivity`).
+   Multiple candidates
    are kept as candidates with `activity-multiple-candidates`, except when
    the item's exact time+weekday slot uniquely identifies one
    (`activity-time-disambiguated`). The city sometimes posts a change under

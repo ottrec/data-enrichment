@@ -305,6 +305,13 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			if b.grp != nil {
 				n.Scope.Groups = []string{b.grp.label}
 			}
+		case subjectNamesUnitOfActivity(subject, acts):
+			// one court of six: the row keeps running on the rest, so this
+			// closes a place and not a programme
+			n.Scope.Level = "amenity"
+			n.Scope.Amenity = amenityName(subject)
+			n.Scope.MatchQuality = matchNone
+			n.Ambiguities = append(n.Ambiguities, ambActivityNarrowed)
 		case q == matchExact || q == matchNormalized || q == matchFuzzy:
 			n.Scope.Level = "activity"
 			n.Scope.Activities = actNames(acts)
@@ -502,6 +509,13 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	}
 	if typo && q != matchNone {
 		n.Ambiguities = append(n.Ambiguities, ambActivityTypo)
+	}
+	if q != matchNone && q != matchMultiple && subjectNamesUnitOfActivity(phrase, acts) {
+		// the subject names some but not all of the row's numbered units, so
+		// it is a place and not the programme; fall through to the amenity
+		// branch below rather than claiming the activity
+		q, acts, groups = matchNone, nil, nil
+		n.Ambiguities = append(n.Ambiguities, ambActivityNarrowed)
 	}
 	switch q {
 	case matchExact, matchNormalized, matchFuzzy:
@@ -970,6 +984,65 @@ func isAmenity(phrase string) bool {
 		}
 	}
 	return false
+}
+
+// numberToks returns a phrase's numeric tokens. The city enumerates physical
+// units with them ("courts 1, 2, 3, 5, 7 and 9").
+func numberToks(s string) map[string]bool {
+	m := map[string]bool{}
+	for _, t := range tokens(s) {
+		if t != "" && t[0] >= '0' && t[0] <= '9' {
+			m[t] = true
+		}
+	}
+	return m
+}
+
+// subjectNamesUnitOfActivity reports whether a closure subject names some but
+// not all of the numbered units its matched activity covers: Bob MacQuarrie's
+// "Squash court 3 is closed until further notice." against the row
+// "Squash courts 1, 2, 3, 5, 7 and 9". The drop-in keeps running on the other
+// five courts, so the notice is an amenity closure and must not claim the
+// activity (invariant 5).
+//
+// The match that gets here is the edit-distance one, which pairs court with
+// courts and ignores the numbers either side of them. Numbers are meaning,
+// not spelling: without this the whole row closes, for as long as the city
+// leaves an open-ended notice up.
+//
+// Both halves of the test are load-bearing. The subject must name a physical
+// unit, so an age range ("hockey 18+") is never read as a unit count. Its
+// numbers must be a non-empty proper subset of every matched activity's, so a
+// subject naming no units, or the same ones the row does, still scopes to the
+// activity: Nepean Sportsplex publishes "Squash court 3" as a row of its own
+// beside "Squash - courts 1, 2, and 4", and closing that one really does close
+// the drop-in.
+func subjectNamesUnitOfActivity(subject string, acts []*actEntry) bool {
+	if len(acts) == 0 || !isAmenity(subject) {
+		return false
+	}
+	sub := numberToks(subject)
+	if len(sub) == 0 {
+		return false
+	}
+	for _, a := range acts {
+		for t := range sub {
+			if !a.toks[t] {
+				return false
+			}
+		}
+		covers := false
+		for t := range a.toks {
+			if t != "" && t[0] >= '0' && t[0] <= '9' && !sub[t] {
+				covers = true
+				break
+			}
+		}
+		if !covers {
+			return false
+		}
+	}
+	return true
 }
 
 // amenityName trims an amenity phrase to its leading noun phrase (through

@@ -38,6 +38,7 @@ const (
 	ambFreeformItem         = "freeform-item"
 	ambDateOutsideSched     = "date-outside-schedule"
 	ambActivityTypo         = "activity-typo-match"
+	ambActivityNarrowed     = "activity-narrowed-to-amenity"
 	ambOtherGroup           = "matched-other-group"
 	ambClassTitlePartial    = "class-title-partial"
 	ambClassVocabulary      = "class-matched-by-vocabulary"

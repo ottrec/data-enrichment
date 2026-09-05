@@ -367,3 +367,34 @@ func TestItems(t *testing.T) {
 		t.Errorf("zero FacilityRef must list nothing, got %v", got)
 	}
 }
+
+// TestPartialCourtClosureIsANotice pins the consumer end of the enrichment's
+// activity-narrowed-to-amenity rule: Bob MacQuarrie's "Squash court 3 is
+// closed until further notice." closes one of the six courts its drop-in row
+// runs on, so it must reach /today as a plain notice and never strike a
+// session. Before the rule it resolved to the activity and carried 93 slots,
+// open-ended, which struck every squash session for as long as the city left
+// the notice up.
+func TestPartialCourtClosureIsANotice(t *testing.T) {
+	closure := []*epb.Effect{epb.Effect_builder{Closure: &epb.Effect_Closure{}}.Build()}
+	o := epb.Object_builder{
+		Id: "court", Kind: epb.Object_NOTICE,
+		RawText:      "Squash court 3 is closed until further notice.",
+		Amenity:      "squash court",
+		Phrase:       "squash court 3",
+		MatchQuality: epb.Object_NONE,
+		Dates:        epb.DateSpan_builder{OpenEnded: true}.Build(),
+		Effects:      closure,
+	}.Build()
+
+	if got := severity(o); got != WarnNotice {
+		t.Errorf("severity = %v, want WarnNotice", got)
+	}
+	objs := []*epb.Object{o}
+	if scopeCancelled(objs, 202609043, 600, 660, false) {
+		t.Error("a closure of part of a row must not cancel the scope")
+	}
+	if scopeCancelled(objs, 202609043, 600, 660, true) {
+		t.Error("a closure is not a stated cancellation")
+	}
+}

@@ -70,7 +70,8 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   see-schedule → facilityRe (whole-facility sentences; sets
   st.closureContext) → "closed for the season" → "Regular season, <range>"
   → findClockRanges → subjectClosedRe ("X is closed", skipped for "all "
-  prefixes; subject resolved facility-name → activity → amenity → none) →
+  prefixes; subject resolved facility-name → all-programs → part-of-a-row →
+  activity → amenity → none) →
   comma-clause loop (keyword / schedule change /
   trailing "only" restriction / phrase parts) → trailing keyword glued
   without comma → allDropinsRe → allClassRe → empty-phrase branch (bare
@@ -122,7 +123,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
    include) — same as the CLAUDE.md dataset gotcha.
 5. Amenity scope never claims activities. "X is closed and all programs
    cancelled" upgrades to broad scope with the amenity noted; a bare
-   amenity closure (Roger Sénécal Arena) cancels nothing.
+   amenity closure (Roger Sénécal Arena) cancels nothing. A subject naming
+   part of what a row runs on is an amenity for the same reason:
+   `subjectNamesUnitOfActivity` narrows "Squash court 3" back off the six-court
+   row it matched.
 6. Dates: no year is guessed against a written weekday without a marker;
    garbled heads produce no dates at all.
 
@@ -182,7 +186,7 @@ Done since the first corpus run (verified against the full corpus, not
 fixtures): single-ended times ("closed until noon" OpenStart, "will end at
 6 pm" OpenEnd + TimeChange), per-sentence parsing of multi-sentence items
 (sibling unparsed records suppressed), guarded edit-distance-1 typo matching
-(`activity-typo-match`), bare date+clock items resolved as facility hours
+(`activity-typo-match`), the unit-of-a-row narrowing below, bare date+clock items resolved as facility hours
 only outside schedule_changes blocks and only when not slot-exact/short
 (`possible-activity-time`), cross-group fallbacks for wrong-group postings
 (`matched-other-group`, `class-title-partial`), garbled-range repair with
@@ -203,3 +207,39 @@ over the corpus, in 2 cases, each marked `skating-widened-to-window`. It is
 gated on a clock being present and on the widening actually changing the slot
 set — `touchedBy` replays what `emitTimesWithSlots` would report, because the
 unguarded version marked 2,549 objects to change 12.
+
+The unit-of-a-row narrowing (`subjectNamesUnitOfActivity`,
+`activity-narrowed-to-amenity`) is the newest, and it fixes a real
+over-application rather than adding a marker. The city closes some of the
+courts a single drop-in row runs on, the matcher lands on the row, and the
+notice closed the whole row: Bob MacQuarrie's open-ended
+`Squash court 3 is closed until further notice.` carried **93 slots** against
+`Squash courts 1, 2, 3, 5, 7 and 9` on the newest version, so /today struck
+every squash session for as long as the city left the notice up.
+
+Corpus effect, 445 versions: **42 objects changed, in 42 versions, and nothing
+else moved.** `scope/activity` 14,335 → 14,293 and `scope/amenity` 2,855 →
+2,897, the same 42 either way; no object was added or removed; the only fields
+that changed anywhere are the four this rule touches (`ambiguities`,
+`amenity`, `matchQuality`, `time`). check-coverage still reports 0 uncovered
+blocks over 58,405.
+
+The 42 are one defect at two facilities, 21 versions each:
+
+| facility | notice | row | slots dropped |
+| --- | --- | --- | --- |
+| Bob MacQuarrie | `Squash court 3 is closed until further notice.` | `Squash courts 1, 2, 3, 5, 7 and 9` | 15, then 93 once the fall table landed |
+| Walter Baker | `Squash courts 3 and 4 are closed until further notice.` | `Squash Courts 2, 3, 4, and 5` | 7 |
+
+**Do not gate this on the typo flag.** The two reach the row by different
+routes: MacQuarrie through the edit-distance pairing of court with courts,
+Walter Baker through the plain token-subset match, which carries no marker at
+all. A first cut keyed on `activity-typo-match` and would have fixed half of
+it. The test in `match_test.go` pins both shapes for that reason.
+
+The negative cases matter as much: Nepean Sportsplex publishes `Squash court 3`
+as a row of its own beside `Squash - courts 1, 2, and 4`, and closing that one
+really does close the drop-in. The rule needs the subject's numbers to be a
+**non-empty proper subset** of the row's, and the subject to be `isAmenity`, so
+a subject naming every unit the row runs on, no units at all, or an age range
+(`hockey 50+`) all still scope to the activity.

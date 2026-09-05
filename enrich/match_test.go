@@ -305,3 +305,54 @@ func TestAllSupplementary(t *testing.T) {
 		}
 	}
 }
+
+// TestSubjectNamesUnitOfActivity covers the two shapes in the corpus where the
+// city closes some of the courts a single drop-in row runs on. Both used to
+// resolve to the whole activity and, being open-ended, closed every squash
+// session for as long as the notice stood.
+func TestSubjectNamesUnitOfActivity(t *testing.T) {
+	act := func(labels ...string) []*actEntry {
+		out := make([]*actEntry, len(labels))
+		for i, l := range labels {
+			out[i] = &actEntry{name: l, labels: []string{l}, toks: tokenSet(l)}
+		}
+		return out
+	}
+	for _, tt := range []struct {
+		subject string
+		acts    []*actEntry
+		want    bool
+		why     string
+	}{
+		// Bob MacQuarrie: one court of six, reached by the court/courts typo
+		{"squash court 3", act("Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required"), true,
+			"one of six courts"},
+		// Walter Baker: two of four, reached by the plain subset match, which
+		// is why this must not be gated on the typo flag
+		{"squash courts 3 and 4", act("Squash Courts 2, 3, 4, and 5"), true,
+			"two of four courts"},
+		// Nepean gives the closed court its own row, so closing it really does
+		// close the drop-in
+		{"squash court 3", act("Squash court 3"), false,
+			"the row is the unit"},
+		{"squash courts 1, 2, and 4", act("Squash - courts 1, 2, and 4"), false,
+			"names every unit the row runs on"},
+		// no numbers on one side or the other
+		{"the weight and cardio room", act("Weight and cardio room"), false,
+			"no unit numbers at all"},
+		{"the pool", act("Lane swim"), false, "no unit numbers in the subject"},
+		// numbers that are not unit counts
+		{"hockey 50+", act("Hockey 50+ and 18+"), false, "an age range, not a unit"},
+		// a unit the row does not run on says nothing about the row
+		{"squash court 6", act("Squash courts 1, 2, 3, 5, 7 and 9"), false,
+			"the subject's unit is not one of the row's"},
+	} {
+		if got := subjectNamesUnitOfActivity(tt.subject, tt.acts); got != tt.want {
+			t.Errorf("subjectNamesUnitOfActivity(%q, %q) = %v, want %v (%s)",
+				tt.subject, tt.acts[0].name, got, tt.want, tt.why)
+		}
+	}
+	if subjectNamesUnitOfActivity("squash court 3", nil) {
+		t.Error("no matched activity must never narrow")
+	}
+}
