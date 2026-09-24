@@ -55,8 +55,9 @@ var (
 	// "X is closed ...", "X closed until further notice", "X will be closed"
 	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
 	// "... and all programs cancelled" riding on a subject closure, which
-	// upgrades it to a broad (group/facility) cancellation
-	allProgramsRe = regexp.MustCompile(`\ball .{0,40}?(?:drop ?ins?|programs)(?: are)? cancelled\b`)
+	// upgrades it to a cancellation (capture: the class it names, if any,
+	// "group fitness " in "all group fitness drop ins are cancelled")
+	allProgramsRe = regexp.MustCompile(`\ball (.{0,40}?)(?:drop ?ins?|programs)(?: are)? cancelled\b`)
 	// "All changerooms closed for maintenance": an amenity closure phrased
 	// through the "all X" form (capture: the amenity phrase)
 	allAmenityClosedRe = regexp.MustCompile(`^(.+?),? (?:are |is )?closed(?: for .+)?$`)
@@ -294,16 +295,37 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			n.Ambiguities = append(n.Ambiguities, ambActivityTypo)
 		}
 		switch {
-		case subjectIsFacility(subject, b.fac.GetName()):
+		case subjectIsFacility(subject, b.fac.GetName()) && !(n.Effects.Cancelled && namesPartOfFacility(b.matchers, subject)):
 			n.Scope.Level = "facility"
 			n.Scope.MatchQuality = matchScopePhrase
-		case n.Effects.Cancelled:
-			// "the pool is closed and all programs cancelled": group-wide
-			n.Scope.Level = defaultLevel
+		case n.Effects.Cancelled && b.grp != nil:
+			// "the pool is closed and all programs cancelled" posted under a
+			// group: the group is the scope
+			n.Scope.Level = "group"
 			n.Scope.Amenity = subject
 			n.Scope.MatchQuality = matchScopePhrase
-			if b.grp != nil {
-				n.Scope.Groups = []string{b.grp.label}
+			n.Scope.Groups = []string{b.grp.label}
+		case n.Effects.Cancelled:
+			// posted for the whole facility, where "all programs" means the
+			// closed part's programs and not the facility's. A class named in
+			// the cancellation is what the city says is cancelled ("the weight
+			// and cardio room is closed, and all group fitness drop-ins are
+			// cancelled"); otherwise the part names its groups ("squash and
+			// racquetball courts", "the pool"); otherwise nothing is claimed
+			n.Scope.Amenity = subject
+			if c := allProgramsRe.FindStringSubmatch(fremainder); c != nil && len(classSegments(c[1])) > 0 {
+				acts := b.resolveClass(&n, c[1])
+				b.emitTimesWithSlots(&n, spec, clocks, acts, &sessions, emit)
+				return
+			}
+			if gls := groupsForPart(b.matchers, subject); len(gls) > 0 {
+				n.Scope.Level = "group"
+				n.Scope.Groups = gls
+				n.Scope.MatchQuality = matchScopePhrase
+			} else {
+				n.Scope.Level = "amenity"
+				n.Scope.MatchQuality = matchNone
+				n.Ambiguities = append(n.Ambiguities, ambPartUnmatched)
 			}
 		case subjectNamesUnitOfActivity(subject, acts):
 			// one court of six: the row keeps running on the rest, so this
@@ -697,7 +719,10 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 		n.Ambiguities = append(n.Ambiguities, ambClassUnmatched)
 		return nil
 	}
-	var groups []string
+	// actGroups are the groups of activities matched by class, which placement
+	// needs to find their nodes; without them a matched class fell back to the
+	// facility node and read there as a whole-facility scope phrase
+	var groups, actGroups []string
 	var acts []*actEntry
 	for _, seg := range segs {
 		matched := false
@@ -709,7 +734,10 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 		}
 		if !matched {
 			for _, m := range b.matchers {
-				acts = append(acts, m.matchClass(seg)...)
+				if es := m.matchClass(seg); len(es) > 0 {
+					actGroups = append(actGroups, m.label)
+					acts = append(acts, es...)
+				}
 			}
 		}
 	}
@@ -739,7 +767,7 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 		}
 	case len(groups) > 0 || len(acts) > 0:
 		n.Scope.Level = "class"
-		n.Scope.Groups = dedupeStrings(groups)
+		n.Scope.Groups = dedupeStrings(append(groups, actGroups...))
 		n.Scope.Activities = actNames(acts)
 	default:
 		for _, m := range b.matchers {
@@ -757,9 +785,66 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 			n.Ambiguities = append(n.Ambiguities, ambClassVocabulary)
 			break
 		}
+		// a class the facility does not run claims nothing: placed on the
+		// facility node as a scope phrase it would read as the whole facility
+		n.Scope.MatchQuality = matchNone
 		n.Ambiguities = append(n.Ambiguities, ambClassUnmatched)
 	}
 	return acts
+}
+
+// partGenericTokens are words a closed part's name carries that no group
+// title does ("squash and racquetball courts", "weight and cardio room").
+var partGenericTokens = map[string]bool{"court": true, "courts": true, "room": true, "rooms": true}
+
+// groupsForPart returns the groups whose title names every other word of a
+// closed part of the facility, reading pool as swim since no group title says
+// pool. A part naming anything no title does ("the therapeutic pool", "the
+// arena") matches nothing. Failing that, a list of parts ("the pool and
+// gymnasium") claims the groups of the parts that match: a part with no group
+// has no drop-ins to cancel.
+func groupsForPart(matchers []*groupMatcher, part string) []string {
+	if gls := groupsForOnePart(matchers, part); len(gls) > 0 {
+		return gls
+	}
+	var gls []string
+	for p := range strings.SplitSeq(strings.ReplaceAll(part, " and ", ","), ",") {
+		if strings.TrimSpace(p) != part {
+			gls = append(gls, groupsForOnePart(matchers, p)...)
+		}
+	}
+	return dedupeStrings(gls)
+}
+
+// namesPartOfFacility reports whether a subject subjectIsFacility accepts on a
+// generic word ("the pool") names only some of the facility's groups: the
+// whole of Deborah Anne Kirwan Pool, but one part of Richcraft.
+func namesPartOfFacility(matchers []*groupMatcher, subject string) bool {
+	gls := groupsForPart(matchers, subject)
+	return len(gls) > 0 && len(gls) < len(matchers)
+}
+
+func groupsForOnePart(matchers []*groupMatcher, part string) []string {
+	toks := map[string]bool{}
+	for _, t := range tokens(part) {
+		switch {
+		case partGenericTokens[t]:
+		case t == "pool" || t == "pools":
+			toks["swim"] = true
+		default:
+			toks[t] = true
+		}
+	}
+	if len(toks) == 0 {
+		return nil
+	}
+	var gls []string
+	for _, m := range matchers {
+		if subset(toks, m.titleToks) {
+			gls = append(gls, m.label)
+		}
+	}
+	return gls
 }
 
 // matchActivity matches a subject phrase against the block's group (or all

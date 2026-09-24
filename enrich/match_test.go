@@ -1,6 +1,7 @@
 package enrich
 
 import (
+	"slices"
 	"strings"
 	"testing"
 )
@@ -354,5 +355,84 @@ func TestSubjectNamesUnitOfActivity(t *testing.T) {
 	}
 	if subjectNamesUnitOfActivity("squash court 3", nil) {
 		t.Error("no matched activity must never narrow")
+	}
+}
+
+// TestGroupsForPart pins the facility-level "X is closed and all programs
+// cancelled" routing: the closed part claims the groups whose title names it,
+// and a part no title names claims nothing rather than the whole facility.
+// Bob MacQuarrie's squash closure struck every session at the complex before.
+func TestGroupsForPart(t *testing.T) {
+	var ms []*groupMatcher
+	for _, l := range []string{
+		"Drop-in schedule - swim and aquafitness",
+		"Drop-in schedule - weight and cardio room",
+		"Drop-in schedule - group fitness",
+		"Drop-in schedule - squash and racquetball",
+		"Drop-in schedule - skating",
+		"Drop-in schedule - gymnasium sports",
+	} {
+		ms = append(ms, &groupMatcher{label: l, titleToks: tokenSet(l)})
+	}
+	for _, tt := range []struct {
+		part string
+		want []string
+	}{
+		{"squash and racquetball courts", []string{"Drop-in schedule - squash and racquetball"}},
+		{"pool", []string{"Drop-in schedule - swim and aquafitness"}},
+		{"weight and cardio room", []string{"Drop-in schedule - weight and cardio room"}},
+		{"pool and gymnasium", []string{"Drop-in schedule - gymnasium sports", "Drop-in schedule - swim and aquafitness"}},
+		{"pool and arena", []string{"Drop-in schedule - swim and aquafitness"}},
+		{"arena and sauna", nil},
+		{"therapeutic pool", nil},
+		{"arena", nil},
+		{"room", nil},
+	} {
+		if got := groupsForPart(ms, tt.part); !slices.Equal(got, tt.want) {
+			t.Errorf("groupsForPart(%q) = %q, want %q", tt.part, got, tt.want)
+		}
+	}
+}
+
+func TestAllProgramsClass(t *testing.T) {
+	for in, want := range map[string]string{
+		"the pool is closed and all programs cancelled":                                     "",
+		"squash and racquetball courts are closed and all drop ins cancelled":               "",
+		"the weight and cardio room is closed and all group fitness drop ins are cancelled": "group fitness",
+		"the pool is closed and all swim and aquafit drop ins are cancelled":                "swim and aquafit",
+		"the gym is closed and all drop in programs cancelled":                              "",
+	} {
+		m := allProgramsRe.FindStringSubmatch(in)
+		if m == nil {
+			t.Errorf("%q: no match", in)
+			continue
+		}
+		if want == "" && len(classSegments(m[1])) > 0 {
+			t.Errorf("%q: class %q, want none", in, m[1])
+		}
+		if want != "" && strings.TrimSpace(m[1]) != want {
+			t.Errorf("%q: class %q, want %q", in, m[1], want)
+		}
+	}
+}
+
+func TestNamesPartOfFacility(t *testing.T) {
+	ms := func(labels ...string) []*groupMatcher {
+		var ms []*groupMatcher
+		for _, l := range labels {
+			ms = append(ms, &groupMatcher{label: l, titleToks: tokenSet(l)})
+		}
+		return ms
+	}
+	pool := ms("Drop-in schedule - swim")
+	complex := ms("Drop-in schedule - swim and aquafitness", "Drop-in schedule - skating")
+	if namesPartOfFacility(pool, "pool") {
+		t.Error("the pool of a pool is the facility")
+	}
+	if !namesPartOfFacility(complex, "pool") {
+		t.Error("the pool of a complex is a part")
+	}
+	if namesPartOfFacility(complex, "arena") {
+		t.Error("a subject no title names is not a part")
 	}
 }

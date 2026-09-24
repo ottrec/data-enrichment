@@ -88,7 +88,13 @@ enrichment:
   | 2026-11-11 ordinary Wednesday | 0 | 0 | 0 | 377 |
 
   A consumer that consults only the facility tier gets nothing on two of those
-  three holidays. The ordinary Wednesday is the negative control: the tier adds
+  three holidays. The Canada Day facility-tier figure predates the
+  part-of-facility scoping (hacking.md): most of it was Bob MacQuarrie's and
+  Plant's `The pool is closed and all programs cancelled.` striking every
+  group at the facility. Re-measured with the in-effect count in
+  `claude-qc/scratch/scopecancel`, which runs slightly below this table's,
+  Canada Day moves from 60 facility-tier and 125 group-tier strikes to 0 and
+  153, and the other three days do not move. The ordinary Wednesday is the negative control: the tier adds
   no strikes on a day with no notices.
   The query requires a dated (or open-ended) notice with a scope-phrase or
   absent subject, and skips closure-only notices with a residual subject

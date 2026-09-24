@@ -27,6 +27,7 @@ const (
 	ambActivityUnmatched    = "activity-unmatched"
 	ambActivityMultiple     = "activity-multiple-candidates"
 	ambClassUnmatched       = "class-unmatched"
+	ambPartUnmatched        = "closed-part-unmatched"
 	ambNoSlotOverlap        = "no-slot-overlap"
 	ambAddedScheduled       = "added-time-already-scheduled"
 	ambTimeDisambiguated    = "activity-time-disambiguated"

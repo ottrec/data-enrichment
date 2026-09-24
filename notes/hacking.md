@@ -71,7 +71,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   st.closureContext) → "closed for the season" → "Regular season, <range>"
   → findClockRanges → subjectClosedRe ("X is closed", skipped for "all "
   prefixes; subject resolved facility-name → all-programs → part-of-a-row →
-  activity → amenity → none) →
+  activity → amenity → none; a generic facility word that names only some of
+  the facility's groups, "the pool" at a complex, is a part and not the
+  facility when the item cancels) →
   comma-clause loop (keyword / schedule change /
   trailing "only" restriction / phrase parts) → trailing keyword glued
   without comma → allDropinsRe → allClassRe → empty-phrase branch (bare
@@ -122,8 +124,12 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
 4. Schedule date ranges are negative-only evidence (they exclude, never
    include) — same as the CLAUDE.md dataset gotcha.
 5. Amenity scope never claims activities. "X is closed and all programs
-   cancelled" upgrades to broad scope with the amenity noted; a bare
-   amenity closure (Roger Sénécal Arena) cancels nothing. A subject naming
+   cancelled" posted under a group scopes to that group with the amenity
+   noted. Posted for the whole facility, "all programs" means the part's
+   programs: a class named in the cancellation resolves as a class, otherwise
+   the part claims the groups whose title names it (`groupsForPart`, pool read
+   as swim), otherwise nothing (`closed-part-unmatched`). A bare amenity
+   closure (Roger Sénécal Arena) cancels nothing. A subject naming
    part of what a row runs on is an amenity for the same reason:
    `subjectNamesUnitOfActivity` narrows "Squash court 3" back off the six-court
    row it matched.
@@ -208,8 +214,50 @@ gated on a clock being present and on the widening actually changing the slot
 set — `touchedBy` replays what `emitTimesWithSlots` would report, because the
 unguarded version marked 2,549 objects to change 12.
 
+The part-of-facility scoping (`groupsForPart`, `namesPartOfFacility`,
+`closed-part-unmatched`) is the newest, and it fixes the same kind of
+over-application one level up. A facility-level cancellation naming a part
+(`Squash and racquetball courts are closed and all drop-ins cancelled.`,
+`The pool is closed and all programs cancelled.`) resolved to the whole
+facility, and since /today's stated tier strikes those, every session at Bob
+MacQuarrie showed cancelled for the squash closure, September 14 to October 5.
+Three routes led there and all three are closed:
+
+- the `subjectClosedRe` cancelled case widened a facility-level item to the
+  facility; it now takes the named class, else the part's groups, else nothing
+- `subjectIsFacility` accepts `pool` (and `arena`, `rink`) as the facility,
+  right for Deborah Anne Kirwan Pool and wrong for a complex; a cancelling item
+  whose generic subject names a proper subset of the groups is now a part,
+  group-posted items included (Bob MacQuarrie's July 1 swim-group copy was
+  facility-wide)
+- `resolveClass`'s facility path recorded no groups for activities it matched
+  by class, so placement found no node and hung the object on the facility,
+  where a scope phrase reads as the whole facility (Richcraft's
+  `All swim drop-ins are cancelled.`, September 8 to 27); it now records them,
+  and a facility-level class matching nothing is `NONE` rather than a scope
+  phrase
+
+Corpus effect, 485 versions: **279 objects changed and nothing was added or
+removed**; the only fields that moved are placement, `time`, `amenity` and
+`matchQuality`, and the only stats that moved are `scope/facility` 27,853 →
+27,646, `scope/group` 29,979 → 30,111, `scope/class` 1,074 → 1,149.
+check-coverage still reports 0 uncovered blocks over 63,212. Replaying /today's
+marks over every version (`claude-qc/scratch/strikediff`), 541 sessions lose a
+strike and none gains one or changes tier; every one is a session in a group
+the notice did not name, except two `Sauna` rows in Richcraft's swim group
+that `all swim and aquafitness drop-ins` does not name either. The new marker
+fires nowhere on the corpus: Plant's `The pool and gymnasium are closed ...`,
+the one list of parts, claims the swim group and skips the gymnasium, which
+has no drop-in group there.
+
+The group-title match is conservative by construction: every significant word
+of the part must be in one title (`therapeutic pool`, `arena` match nothing),
+and pool→swim is the one synonym, the only one the corpus needed. A
+facility-level `The arena is closed and all programs cancelled.` at a complex
+would now degrade to a notice rather than strike the skating.
+
 The unit-of-a-row narrowing (`subjectNamesUnitOfActivity`,
-`activity-narrowed-to-amenity`) is the newest, and it fixes a real
+`activity-narrowed-to-amenity`) came before, and it fixes a real
 over-application rather than adding a marker. The city closes some of the
 courts a single drop-in row runs on, the matcher lands on the row, and the
 notice closed the whole row: Bob MacQuarrie's open-ended
