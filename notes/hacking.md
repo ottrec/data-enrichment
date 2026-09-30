@@ -141,7 +141,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   `collapse` (special_hours
   notices matching a schedule_changes notice on dates, effect kinds and
   scope become ignored/duplicate stubs, provided the matching copies claim
-  every group the notice names (`coveredBy`); survivors get Sources. The
+  every group the notice names that may run on its dates (`coveredBy`,
+  `groupMayRun`: effective ranges only rule a group out); survivors get
+  Sources. The
   broad scope bucket ignores groups so the facility's merged phrasing
   matches the per-group copies; effects compare by kind so "25 m" and "25m"
   restrictions match), and `place`
@@ -344,13 +346,13 @@ the parser saw; `cmd/report` renders one version as HTML.
   cancellation vanished: Sandy Hill and Jim Durrell's "All drop-in skating
   and ice sports, cancelled" against the skating group's "All drop-in
   skating, cancelled", CARDELREC's July 1 swim cancellation against the
-  other groups' copies. 133 objects over the corpus, silent for as long as
-  the bucket existed; `coveredBy` fixed it. A notice whose `Scope.Groups`
-  includes a holiday group that does not run on its date (Winter Break on
-  December 5, Thanksgiving weekend on October 10) also stops collapsing,
-  46 of the 133, because the class resolved to that group too; it only adds
-  a warning on a day the group has no sessions and a second listing on the
-  activity pages.
+  other groups' copies. 87 notices over the corpus, silent for as long as
+  the bucket existed; `coveredBy` fixed it. The first cut also un-collapsed
+  46 notices whose class resolved to a holiday group as well (Winter Break
+  on December 5, Thanksgiving weekend on October 10), which only added
+  warnings on days those groups have no sessions and a second listing on the
+  activity pages; `groupMayRun` leaves out a group none of whose schedules
+  can run on the notice's dates.
 
 ## Next steps
 

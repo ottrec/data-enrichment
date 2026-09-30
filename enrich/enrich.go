@@ -466,7 +466,7 @@ func (fc *facCtx) collapse() {
 			if !ok {
 				continue
 			}
-			if !coveredBy(&r.n, survivors) {
+			if !fc.coveredBy(&r.n, survivors) {
 				fc.out.Stats["dedupe/special-uncovered"]++
 				continue
 			}
@@ -493,8 +493,10 @@ func (fc *facCtx) collapse() {
 // groups, so without this "All drop-in skating and ice sports, cancelled"
 // collapsed into a skating group copy alone and the ice sports cancellation
 // was lost. Only a notice that names its groups (a class resolved to groups)
-// is checked; one claiming the whole facility collapses as before.
-func coveredBy(n *notice, survivors []*rec) bool {
+// is checked; one claiming the whole facility collapses as before. A named
+// group none of whose schedules can run on the notice's dates (a holiday
+// group the class also resolved to) needs no copy.
+func (fc *facCtx) coveredBy(n *notice, survivors []*rec) bool {
 	switch n.Scope.Level {
 	case "group", "class", "facility":
 	default:
@@ -514,11 +516,48 @@ func coveredBy(n *notice, survivors []*rec) bool {
 		}
 	}
 	for _, g := range n.Scope.Groups {
-		if !have[g] {
+		if !have[g] && fc.groupMayRun(g, n.Dates) {
 			return false
 		}
 	}
 	return true
+}
+
+// groupMayRun reports whether the group's schedules may run on some date of
+// ds. Effective ranges are negative-only evidence: the group is ruled out
+// only when every schedule has a known range and none overlaps the dates.
+// Undated or weekday-only spans rule nothing out.
+func (fc *facCtx) groupMayRun(label string, ds *DateSpan) bool {
+	if ds == nil || (len(ds.Dates) == 0 && ds.From.IsZero() && ds.To.IsZero()) {
+		return true
+	}
+	day := func(d schema.Date) int { return int(d) / 10 }
+	for _, m := range fc.matchers {
+		if m.grp.GetLabel() != label {
+			continue
+		}
+		for sch := range m.grp.Schedules() {
+			er, ok := sch.ComputeEffectiveDateRange()
+			if !ok {
+				return true
+			}
+			in := func(lo, hi int) bool { // [lo, hi] overlaps er; 0 is open
+				return (er.To.IsZero() || lo == 0 || lo <= day(er.To)) &&
+					(er.From.IsZero() || hi == 0 || hi >= day(er.From))
+			}
+			if len(ds.Dates) > 0 {
+				for _, d := range ds.Dates {
+					if in(day(d), day(d)) {
+						return true
+					}
+				}
+			} else if in(day(ds.From), day(ds.To)) {
+				return true
+			}
+		}
+		return false
+	}
+	return true // not a group of this facility; cannot rule it out
 }
 
 // dedupeKeys builds comparison keys for a notice: dates + effect kinds +

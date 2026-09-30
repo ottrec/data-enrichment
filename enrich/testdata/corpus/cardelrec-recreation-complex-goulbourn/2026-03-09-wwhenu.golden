@@ -8,6 +8,7 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All drop-in Aquafit General - Shallow/deep combo"
+    sources: schedule_changes special_hours
     at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Shallow/deep combo" sessions 2026-03-11 Wed 08:15-09:15, 2026-03-11 Wed 09:15-10:15
 - IGNORED date-context "Monday, March 16 to Sunday, March 22"
     at: group "Drop-in schedule - swim and aquafitness"
@@ -63,15 +64,14 @@
 == CARDELREC Recreation Complex Goulbourn special_hours
 - IGNORED date-context "Wednesday, March 11"
     at: facility
-- NOTICE "All drop-in Aquafit General - Shallow/deep combo, cancelled"
+- IGNORED duplicate "All drop-in Aquafit General - Shallow/deep combo, cancelled"
     date text: "Wednesday, March 11"
     dates: 2026-03-11 Wed
     time: "" covers [Wednesday 8:15 - 9:15am; Wednesday 9:15 - 10:15am]
-    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All drop-in Aquafit General - Shallow/deep combo"
-    at: group "Drop-in schedule - March Break" activity "Aquafit General - shallow/deep combo" sessions 2026-03-11 Wed 08:15-09:15, 2026-03-11 Wed 09:15-10:15
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Shallow/deep combo" sessions 2026-03-11 Wed 08:15-09:15, 2026-03-11 Wed 09:15-10:15
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "All drop-in Aquafit General - Shallow/deep combo, cancelled"
+    at: facility
 
 == CARDELREC Recreation Complex Goulbourn notifications
 - IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
