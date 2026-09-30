@@ -137,6 +137,32 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   for a notice whose clock window reaches past the row it names; `owns` is what
   makes the facility-level copy widen the same way its group-scoped twin does,
   so the two still collapse.
+- `subject.go` — `resolveClosureSubject(subject, cancelled, fremainder)`,
+  the subject of a "<subject> is closed" sentence resolved to a kind and
+  the reason that decided it, counted as `subject/closure/<reason>` in the
+  stats (not in the output). The kinds: facility (`facility-generic`: only
+  generic words, "the facility", "the pool" at a pool; `facility-name-token`:
+  a distinctive word of the facility's name), posted-group
+  (`cancelled-under-group`: a cancelling closure posted under a group),
+  class (`class-named`: the class the cancellation names, "all group fitness
+  drop-ins"), part (`part-groups`: a cancelling closure of a part whose
+  groups `groupsForPart` finds, "squash and racquetball courts", "the pool"
+  at a complex), part-unmatched (`part-unmatched`, the marker
+  `closed-part-unmatched`), unit (`unit-of-row`: some of the numbered units
+  a row runs on, `subjectNamesUnitOfActivity`), activity (`activity-exact`,
+  `-normalized`, `-fuzzy`), amenity (`amenity-core`, `isAmenity`), none
+  (`unmatched`, the marker `activity-unmatched`). The closure form's order
+  is facility, the cancelling cases, unit, activity, amenity, and it is not
+  the clause form's (the fold in `processSentence`: activity with the other
+  groups, unit, dog swim, amenity, novel, none). The two differ on purpose:
+  a closure names a place, so the facility and its parts come before the
+  activities and a match with several candidates falls through to amenity
+  ("The steam room is closed" beside a "Hot tub and steam room" row would
+  otherwise be a multiple-candidate warning); a clause names an activity
+  ("Public swim, 1 to 3 pm, cancelled"), so it never considers the facility
+  (Splash Wave Pool's "wave pool" would close it) and keeps a multiple match
+  as candidates. d.md of the structural review measured both unifications
+  and rejected them.
 - `item.go` — `processItem` is the heart; **the order of checks is load-
   bearing**: boilerplate → item's own leading date (beats head context) →
   see-schedule → facilityRe (whole-facility sentences; sets
@@ -152,10 +178,8 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   → `claimClockRanges` and `claimSingleEnded` over the unclaimed segments,
   after which the sentence-level patterns read the sentence with the date
   blanked and the subject and clause rules read `remainder()` → subjectClosedRe ("X is closed", skipped for "all "
-  prefixes; subject resolved facility-name → all-programs → part-of-a-row →
-  activity → amenity → none; a generic facility word that names only some of
-  the facility's groups, "the pool" at a complex, is a part and not the
-  facility when the item cancels) →
+  prefixes; the subject resolved by `resolveClosureSubject` in the closure
+  order, subject.go, and the kind mapped to a scope) →
   the typed clause fold: `sentence.clauses()` types each comma segment
   (see sentence.go) and the loop folds them, a keyword into its effect, a
   time change into TimeChange, an hours label ("Modified hours", "facility

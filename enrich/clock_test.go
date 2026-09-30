@@ -142,7 +142,7 @@ func TestSubjectIsFacility(t *testing.T) {
 		{"rink", "Jim Tubman Chevrolet Rink", true},
 		{"mooney's bay cross country ski centre", "Mooney's Bay Park", true},
 	} {
-		if got := subjectIsFacility(tc.subject, tc.fac); got != tc.want {
+		if got, _ := subjectIsFacility(tc.subject, tc.fac); got != tc.want {
 			t.Errorf("subjectIsFacility(%q, %q) = %v, want %v", tc.subject, tc.fac, got, tc.want)
 		}
 	}

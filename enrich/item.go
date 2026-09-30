@@ -333,10 +333,10 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		return
 	}
 
-	// "<subject> is closed ..." sentences: resolve the subject, which may be
-	// the facility itself, an activity, or an amenity (an amenity closure
-	// makes no claims about activities: e.g. one closed arena of two does
-	// not cancel the skating in the other)
+	// "<subject> is closed ..." sentences: the subject resolves to the
+	// facility, a part of it, an activity or an amenity (subject.go; an
+	// amenity closure makes no claims about activities: one closed arena of
+	// two does not cancel the skating in the other)
 	fremainder := foldText(sent.remainder())
 	if m := subjectClosedRe.FindStringSubmatch(fremainder); m != nil && !strings.HasPrefix(fremainder, "all ") {
 		n.Effects.Closure = true
@@ -348,60 +348,50 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			return
 		}
 		n.Scope.Phrase = subject
-		q, acts, groups, typo := b.matchActivity(subject)
-		if typo {
+		sj := b.resolveClosureSubject(subject, n.Effects.Cancelled, fremainder)
+		b.out.Stats["subject/closure/"+sj.Reason]++
+		if sj.Typo {
 			n.Ambiguities = append(n.Ambiguities, ambActivityTypo)
 		}
-		switch {
-		case subjectIsFacility(subject, b.fac.GetName()) && !(n.Effects.Cancelled && namesPartOfFacility(b.matchers, subject)):
+		switch sj.Kind {
+		case subjFacility:
 			n.Scope.Level = "facility"
 			n.Scope.MatchQuality = matchScopePhrase
-		case n.Effects.Cancelled && b.grp != nil:
-			// "the pool is closed and all programs cancelled" posted under a
-			// group: the group is the scope
+		case subjPostedGroup:
 			n.Scope.Level = "group"
 			n.Scope.Amenity = subject
 			n.Scope.MatchQuality = matchScopePhrase
 			n.Scope.Groups = []string{b.grp.label}
-		case n.Effects.Cancelled:
-			// posted for the whole facility, where "all programs" means the
-			// closed part's programs and not the facility's. A class named in
-			// the cancellation is what the city says is cancelled ("the weight
-			// and cardio room is closed, and all group fitness drop-ins are
-			// cancelled"); otherwise the part names its groups ("squash and
-			// racquetball courts", "the pool"); otherwise nothing is claimed
+		case subjClass:
 			n.Scope.Amenity = subject
-			if c := allProgramsRe.FindStringSubmatch(fremainder); c != nil && len(classSegments(c[1])) > 0 {
-				acts := b.resolveClass(&n, c[1])
-				b.emitTimesWithSlots(&n, spec, clocks, acts, &sessions, emit)
-				return
-			}
-			if gls := groupsForPart(b.matchers, subject); len(gls) > 0 {
-				n.Scope.Level = "group"
-				n.Scope.Groups = gls
-				n.Scope.MatchQuality = matchScopePhrase
-			} else {
-				n.Scope.Level = "amenity"
-				n.Scope.MatchQuality = matchNone
-				n.Ambiguities = append(n.Ambiguities, ambPartUnmatched)
-			}
-		case subjectNamesUnitOfActivity(subject, acts):
-			// one court of six: the row keeps running on the rest, so this
-			// closes a place and not a programme
-			n.Scope.Level = "amenity"
-			n.Scope.Amenity = amenityName(subject)
-			n.Scope.MatchQuality = matchNone
-			n.Ambiguities = append(n.Ambiguities, ambActivityNarrowed)
-		case q == matchExact || q == matchNormalized || q == matchFuzzy:
-			n.Scope.Level = "activity"
-			n.Scope.Activities = actNames(acts)
-			n.Scope.Groups = groups
-			n.Scope.MatchQuality = q
+			acts := b.resolveClass(&n, sj.Class)
 			b.emitTimesWithSlots(&n, spec, clocks, acts, &sessions, emit)
 			return
-		case isAmenity(subject):
+		case subjPart:
+			n.Scope.Amenity = subject
+			n.Scope.Level = "group"
+			n.Scope.Groups = sj.Groups
+			n.Scope.MatchQuality = matchScopePhrase
+		case subjPartUnmatched:
+			n.Scope.Amenity = subject
 			n.Scope.Level = "amenity"
-			n.Scope.Amenity = amenityName(subject)
+			n.Scope.MatchQuality = matchNone
+			n.Ambiguities = append(n.Ambiguities, ambPartUnmatched)
+		case subjUnit:
+			n.Scope.Level = "amenity"
+			n.Scope.Amenity = sj.Amenity
+			n.Scope.MatchQuality = matchNone
+			n.Ambiguities = append(n.Ambiguities, ambActivityNarrowed)
+		case subjActivity:
+			n.Scope.Level = "activity"
+			n.Scope.Activities = actNames(sj.Acts)
+			n.Scope.Groups = sj.Groups
+			n.Scope.MatchQuality = sj.Quality
+			b.emitTimesWithSlots(&n, spec, clocks, sj.Acts, &sessions, emit)
+			return
+		case subjAmenity:
+			n.Scope.Level = "amenity"
+			n.Scope.Amenity = sj.Amenity
 			n.Scope.MatchQuality = matchNone
 		default:
 			n.Scope.Level = "none"
@@ -1190,33 +1180,6 @@ func amenityName(phrase string) string {
 		}
 	}
 	return strings.Join(toks, " ")
-}
-
-// subjectIsFacility reports whether a closure subject names the facility
-// itself: either generic facility words only, or sharing a distinctive
-// (non-generic) token with the facility name.
-func subjectIsFacility(subject, facName string) bool {
-	st := tokens(subject)
-	if len(st) == 0 {
-		return false
-	}
-	generic := true
-	for _, t := range st {
-		if !genericFacility[t] {
-			generic = false
-			break
-		}
-	}
-	if generic {
-		return true
-	}
-	ft := tokenSet(facName)
-	for _, t := range st {
-		if ft[t] && !genericFacility[t] {
-			return true
-		}
-	}
-	return false
 }
 
 func setKeyword(e *Effects, kw string) {

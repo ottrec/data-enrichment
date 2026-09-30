@@ -241,6 +241,43 @@ city's vocabulary drifts is `claude-qc`'s `city-ice-class-vocabulary`, which
 warns when a skating or ice sports table gains an activity this table does not
 cover, or one that lands in the wrong half of it.
 
+## Closure subjects
+
+The subject of a "<subject> is closed" sentence goes through
+`resolveClosureSubject` (`subject.go`), which returns a kind and the reason
+that decided it. The reason is a stats counter (`subject/closure/<reason>`),
+so a change in how subjects resolve shows in the stats diff before anyone
+reads the objects; it is not in the output.
+
+| kind | reason | rule | example |
+| --- | --- | --- | --- |
+| facility | `facility-generic` | every token is a generic facility word | "the facility", "the pool" at Deborah Anne Kirwan Pool |
+| facility | `facility-name-token` | a distinctive word of the facility's name | "Fairfields Heritage House", "the museum" at Cumberland Heritage Village Museum |
+| posted-group | `cancelled-under-group` | cancelling, posted under a group | "The pool is closed and all programs cancelled." in a swim group's changes |
+| class | `class-named` | cancelling, the cancellation names a class | "the weight and cardio room is closed, and all group fitness drop-ins are cancelled" |
+| part | `part-groups` | cancelling, the part's words name some group titles (`groupsForPart`, pool read as swim) | "Squash and racquetball courts are closed and all drop-ins cancelled." |
+| part-unmatched | `part-unmatched` | cancelling, no title names the part; marked `closed-part-unmatched` | "The arena is closed and all programs cancelled." at a complex with no arena group |
+| unit | `unit-of-row` | some of the numbered units the matched row runs on (`subjectNamesUnitOfActivity`) | "Squash court 3" against "Squash courts 1, 2, 3, 5, 7 and 9" |
+| activity | `activity-exact`, `-normalized`, `-fuzzy` | one activity of the schedule | "Squash court 3" at Nepean Sportsplex, a row of its own |
+| amenity | `amenity-core` | qualifiers up to a core amenity noun (`isAmenity`) | "Roger Sénécal Arena", "the steam room" |
+| none | `unmatched` | nothing above; marked `activity-unmatched` | "The museum" at Billings Estate |
+
+A generic word that names only some of the facility's groups ("the pool" at
+a complex) is the facility for a closure and a part when the sentence also
+cancels: the cancellation is the part's programs, not the facility's
+(hacking.md invariant 5).
+
+The order is the closure form's: facility, the cancelling cases, unit,
+activity, amenity. The clause form (a subject clause after the fold,
+"Public swim, 1 to 3 pm, cancelled") resolves in another order, activity
+first with the facility never considered and a multiple match kept as
+candidates, and the two are kept apart on purpose: in the closure form a
+multiple match is an amenity ("The steam room is closed" beside "Hot tub
+and steam room" and "Sauna and steam room"), and in the clause form the
+facility check would close Splash Wave Pool from "Public Swim - wave tank
+and warm pool, cancelled". The structural review's d.md measured both
+unifications (20 and 3 objects, all wrong).
+
 ## Time slot matching
 
 For items with an exact activity match, a parseable single-date head, and a

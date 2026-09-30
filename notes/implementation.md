@@ -110,7 +110,9 @@ since they are deterministic; anything ambiguous stays higher up.
    which a comma is a clause boundary wherever the city wrote one. Then
    sentence-level patterns first (see-schedule,
    facility closures, "closed for the season", "Regular season + range",
-   "subject is closed" with facility/activity/amenity subject resolution),
+   "subject is closed", whose subject `resolveClosureSubject` (`subject.go`)
+   resolves to the facility, a part of it, an activity or an amenity, with
+   the reason counted in the stats),
    then the typed clauses (`clauses()`: keyword, time change, hours label,
    restriction, conjunction, subject) folded into effects and the subject
    phrase. ("changed to" items degrade to fuzzy-matched effectless notices;
