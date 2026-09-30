@@ -14,7 +14,7 @@
     at: group "Drop-in schedule - swim and aquafit"
 - NOTICE "The sauna is closed until further notice."
     date text: "November 3"
-    dates: 2025-11-03 Mon; open-ended
+    dates: 2025-11-03 Mon to; open-ended
     effects: closure
     match: NONE
     phrase: "sauna"
@@ -37,7 +37,7 @@
     at: facility
 - IGNORED duplicate "The sauna is closed until further notice"
     date text: "November 3"
-    dates: 2025-11-03 Mon; open-ended
+    dates: 2025-11-03 Mon to; open-ended
     match: NONE
     phrase: "sauna"
     amenity: "sauna"

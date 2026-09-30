@@ -45,7 +45,7 @@
     at: facility
 - NOTICE "Squash court 3 is closed until further notice."
     date text: "Friday, August 28"
-    dates: 2026-08-28 Fri; open-ended
+    dates: 2026-08-28 Fri to; open-ended
     effects: closure
     match: NONE
     phrase: "squash court 3"

@@ -1,5 +1,6 @@
 == Splash Wave Pool special_hours
 - NOTICE "Lap pool heater broken. Pool temperature is colder than normal until further notice."
+    dates: open-ended
     match: NONE
     phrase: "Lap pool heater broken"
     amenity: "lap pool"

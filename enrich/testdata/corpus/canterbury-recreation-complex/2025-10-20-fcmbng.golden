@@ -3,7 +3,7 @@
     at: facility
 - NOTICE "The Canterbury Community Center will be closed until further notice due to a water outage."
     date text: "Monday, October 20"
-    dates: 2025-10-20 Mon; open-ended
+    dates: 2025-10-20 Mon to; open-ended
     effects: closure
     match: SCOPE_PHRASE
     phrase: "canterbury community center"

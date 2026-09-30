@@ -27,7 +27,7 @@
     at: facility
 - NOTICE "The pool is closed for maintenance until further notice."
     date text: "Saturday, January 24"
-    dates: 2026-01-24 Sat; open-ended
+    dates: 2026-01-24 Sat to; open-ended
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"

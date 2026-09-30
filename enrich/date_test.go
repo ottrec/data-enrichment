@@ -1,6 +1,7 @@
 package enrich
 
 import (
+	"fmt"
 	"slices"
 	"testing"
 	"time"
@@ -234,5 +235,40 @@ func TestFindEmbeddedDate(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+// TestUntilFurtherNoticeStarts pins the head-date reading of "until further
+// notice": under a single date it is a start, not the one day it applies;
+// under a range or several dates the dates stand.
+func TestUntilFurtherNoticeStarts(t *testing.T) {
+	anchor := anchorAt(2026, time.January, 20)
+	for _, tc := range []struct {
+		head, want string
+	}{
+		{"Saturday, January 24", "from 20260124 open"},
+		{"January 24 to 26", "20260124-20260126 open"},
+		{"January 24 and 25", "dates 2 open"},
+	} {
+		spec, _, ok := parseLeadingDate(tc.head, anchor)
+		if !ok {
+			t.Fatalf("%q: no date", tc.head)
+		}
+		ds := toDateSpan(&spec, true)
+		var got string
+		switch {
+		case len(ds.Dates) > 0:
+			got = fmt.Sprintf("dates %d", len(ds.Dates))
+		case ds.To.IsZero():
+			got = fmt.Sprintf("from %d", ds.From/10)
+		default:
+			got = fmt.Sprintf("%d-%d", ds.From/10, ds.To/10)
+		}
+		if ds.OpenEnded {
+			got += " open"
+		}
+		if got != tc.want {
+			t.Errorf("%q: got %q, want %q", tc.head, got, tc.want)
+		}
 	}
 }

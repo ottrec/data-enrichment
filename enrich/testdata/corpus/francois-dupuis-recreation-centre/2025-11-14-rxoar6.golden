@@ -47,7 +47,7 @@
 - NOTICE "The therapeutic pool ramp is closed until further notice."
     section: "Notice: November 13"
     date text: "Notice: November 13"
-    dates: 2025-11-13 Thu; open-ended
+    dates: 2025-11-13 Thu to; open-ended
     effects: closure
     match: NONE
     phrase: "therapeutic pool ramp"

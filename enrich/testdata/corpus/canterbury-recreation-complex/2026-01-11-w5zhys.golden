@@ -14,7 +14,7 @@
     at: group "Drop-in schedule - swim and aquafitness"
 - NOTICE "The pool is closed for maintenance until further notice."
     date text: "Saturday, January 24"
-    dates: 2026-01-24 Sat; open-ended
+    dates: 2026-01-24 Sat to; open-ended
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
@@ -36,7 +36,7 @@
     at: facility
 - IGNORED duplicate "The pool is closed for maintenance until further notice."
     date text: "Saturday, January 24"
-    dates: 2026-01-24 Sat; open-ended
+    dates: 2026-01-24 Sat to; open-ended
     match: SCOPE_PHRASE
     phrase: "pool"
     duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The pool is closed for maintenance until further notice."

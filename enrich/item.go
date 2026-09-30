@@ -136,6 +136,10 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int,
 	if spec != nil {
 		n.Ambiguities = append(n.Ambiguities, spec.Ambig...)
 	}
+	// "until further notice" holds for the whole item: in "The pool is
+	// closed until further notice. All swim and aquafitness drop-ins are
+	// cancelled." the cancellation lasts as long as the closure
+	untilNotice := untilNoticeRe.MatchString(t)
 
 	// multi-sentence items get one parse per sentence ("The 25 m pool is
 	// closed between 7:30 and 10:30 am. Lane swim, 7:30 to 8:30 am,
@@ -145,7 +149,7 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int,
 		for _, s := range sents {
 			nn := n
 			nn.Ambiguities = slices.Clone(n.Ambiguities)
-			b.processSentence(nn, st, spec, s, off, links)
+			b.processSentence(nn, st, spec, s, untilNotice, off, links)
 		}
 		// per-sentence unparsed records are redundant: the notices carry the
 		// full raw text, and an all-unparsed item needs only one record
@@ -184,7 +188,7 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int,
 		}
 		return
 	}
-	b.processSentence(n, st, spec, working, off, links)
+	b.processSentence(n, st, spec, working, untilNotice, off, links)
 }
 
 // processSentence parses one sentence of an item and emits objects for it.
@@ -197,9 +201,10 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int,
 // restriction / subject phrase, then the "all X" scope
 // phrases, the empty-phrase branch (bare effects, date+clock hours items,
 // date-only items), and finally the activity/amenity/freeform subject
-// resolution with slot validation and session explosion.
-func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, working string, off [2]int, links []anchor) {
-	openEnded := untilNoticeRe.MatchString(working)
+// resolution with slot validation and session explosion. untilNotice is set
+// when the item says "until further notice" in any of its sentences.
+func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, working string, untilNotice bool, off [2]int, links []anchor) {
+	openEnded := untilNotice
 
 	defaultLevel := "facility"
 	if b.grp != nil {
@@ -1243,6 +1248,11 @@ func countEffects(stats map[string]int, e Effects) {
 	}
 }
 
+// toDateSpan converts the item's date spec. openEnded is the sentence's
+// "until further notice" (or "closed for the season"): under a single date
+// with no range, that date is when it starts ("Saturday, January 24" over
+// "The pool is closed for maintenance until further notice."), not the one
+// day it applies.
 func toDateSpan(spec *dateSpec, openEnded bool) *DateSpan {
 	if spec == nil || spec.empty() {
 		if openEnded {
@@ -1251,6 +1261,11 @@ func toDateSpan(spec *dateSpec, openEnded bool) *DateSpan {
 		return nil
 	}
 	ds := &DateSpan{OpenEnded: spec.OpenEnded || openEnded}
+	if openEnded && len(spec.Dates) == 1 && spec.From.IsZero() && spec.To.IsZero() {
+		ds.From = schema.MakeDateFromGo(spec.Dates[0])
+		ds.Weekdays = append(ds.Weekdays, spec.Weekdays...)
+		return ds
+	}
 	for _, d := range spec.Dates {
 		ds.Dates = append(ds.Dates, schema.MakeDateFromGo(d))
 	}

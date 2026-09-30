@@ -111,6 +111,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   schedule_changes block always `possible-activity-time` (never dismissed as
   facility hours); in special_hours/notifications ⇒ ModifiedHours unless the
   range exactly equals an activity slot on those dates or is <4h.
+  "Until further notice" is read once per item and holds for every
+  sentence of it; `toDateSpan` turns it (and "closed for the season") under
+  a single date into a From with an open end.
   Also here: `resolveClass` (empty segments = "all drop-in activities" ⇒
   whole scope; both of its `class-unmatched` exits try `matchClassVocab`
   first), `gatherSlots` (fixed-date times via `SingleDate` ymd
@@ -340,6 +343,13 @@ the parser saw; `cmd/report` renders one version as HTML.
 - The same block HTML can resolve differently under a different anchor year
   or schedule; don't cache on block hash alone (see matching.md).
 - Stats keys are ad-hoc, not API.
+- "Until further notice" was a sentence flag that only set OpenEnded, so
+  under a head date it gave Dates=[head] plus an open end, and enrichidx's
+  `applies` reads explicit Dates first: Canterbury's "The pool is closed for
+  maintenance until further notice." under "Saturday, January 24" warned on
+  January 24 only and dropped out of the listings after it. Eight closures,
+  247 objects over the corpus, including CARDELREC's second sentence ("All
+  swim and aquafitness drop-ins are cancelled."), which never saw the flag.
 - The `broad` collapse bucket compared dates, effects and "some broad
   scope", never groups, so a facility cancellation naming two groups
   collapsed into a copy posted in one of them and the other group's
