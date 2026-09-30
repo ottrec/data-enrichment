@@ -28,6 +28,19 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   splits bold mid-word: `<strong>T</strong>hursday`), `<br>` → `\n`. A
   liNode's Head excludes nested lists; Links collected per node (see-schedule
   URLs).
+- `sentence.go` — `sentence{src, spans}`: one sentence of an item and the
+  byte spans its finders claimed over it (the embedded date, the clock
+  ranges, the single-ended mentions). The text is never rewritten; a finder
+  scans `masked()` (the claimed spans blanked to spaces, offsets kept) and
+  `claim` records only the unclaimed pieces of a match, so spans never
+  overlap. `remainder()` is the text for the clause split, and its comment
+  is the rule for what each kind of span takes with it: a clock range takes
+  the spaces and commas on both sides and leaves one comma when it had one
+  on each side (a clause of its own) and a space otherwise, leaving the
+  preposition or conjunction that introduced it; a date takes the space
+  before it and the spaces and commas after it and leaves one space; a
+  single-ended mention takes nothing. These are the rules the old string
+  rewrites had as side effects; entry 12 changes them.
 - `date.go` — `parseLeadingDate(s, anchor) (dateSpec, rest, ok)`. dateSpec
   carries exactly one form: enumerated Dates, From/To range, Weekdays set,
   or OpenEnded; `restIsTrivial` decides "the text was only a date"
@@ -62,16 +75,24 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   by a weekday/month name, optionally introduced by a from/until/between
   word (which decides the side of the span), never one after a reopening
   cue (reopen/return/resume), and "July 3 - 10 am" is a date and a clock.
-  It returns the sentence with the date and its preposition removed.
-- `clock.go` — `findClockRanges(s) ([]clockMention, remainder)`. A match
-  needs a meridiem/noon/midnight/colon on at least one side ("December 13
-  and 14" is not a clock). Missing meridiems produce candidates: >12h
-  readings dropped when a shorter exists, sorted shortest-first, `Inferred`
-  set. A range that was a clause of its own leaves one comma behind
-  ("Aquafit, 8:05 to 9 am, cancelled" → "Aquafit, cancelled"), so the
-  clauses around it stay separate; that is what lets "Public swim, 1 to 3
-  pm, 25m pool only" reach the restriction clause. The clause loop drops a
-  bare conjunction left over ("Lane swim, 12:30 to 1 pm, and 8 to 9 pm").
+  It returns the span of the expression with its preposition; `remainder()`
+  takes it out.
+- `clock.go` — `findClockRanges(s) []clockMention`, each with its `Span`,
+  and `findSingleEnded(s)`, which also returns the spans it claimed (a
+  mention with no plausible reading has a span and no mention); neither
+  rewrites s. A match needs a meridiem/noon/midnight/colon on at least one
+  side ("December 13 and 14" is not a clock). Missing meridiems produce
+  candidates: >12h readings dropped when a shorter exists, sorted
+  shortest-first, `Inferred` set. What a clock span takes with it is
+  `remainder()`'s rule: a range that was a clause of its own leaves one
+  comma, so the clauses around it stay separate ("Aquafit, 8:05 to 9 am,
+  cancelled" reads "Aquafit, cancelled", which is what lets "Public swim, 1
+  to 3 pm, 25m pool only" reach the restriction clause), and what introduced
+  it stays behind: the clause loop skips the bare conjunction ("Lane swim,
+  12:30 to 1 pm, and 8 to 9 pm") and `danglingPrepRe` takes the preposition
+  off the phrase ("From 11 am to 2 pm, all drop-in programs are
+  cancelled"). `onlyClocks` is the walk's test for a line that is nothing
+  but clock ranges.
 - `match.go` — `groupMatcher` (one per schedule group; actEntry per
   normalized activity name with folded spellings + token sets from label and
   name). `match`: exact folded string → equal token sets → subset either
@@ -102,7 +123,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   (or one led by a weekday set, which merges) takes it as its own date; a
   head date context is never overridden ("...and return to regular hours
   Friday, June 12" under "Thursday, June 11" is about the 11th)
-  → findClockRanges → subjectClosedRe ("X is closed", skipped for "all "
+  → findClockRanges and findSingleEnded, claimed as spans, after which the
+  sentence-level patterns read the sentence with the date blanked and the
+  subject and clause rules read `remainder()` → subjectClosedRe ("X is closed", skipped for "all "
   prefixes; subject resolved facility-name → all-programs → part-of-a-row →
   activity → amenity → none; a generic facility word that names only some of
   the facility's groups, "the pool" at a complex, is a part and not the

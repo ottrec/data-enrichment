@@ -176,36 +176,36 @@ func TestFindEmbeddedDate(t *testing.T) {
 		from, to string
 		open     bool
 		wds      int
-		rem      string
+		span     string // the text of the span: the expression with its preposition
 		ambig    []string
 		notAmbig []string
 	}{
-		{in: "The pool is closed from Monday, March 23 to Sunday, April 12.", anchor: anchorAt(2026, 3, 2), ok: true, from: "2026-03-23", to: "2026-04-12", rem: "The pool is closed."},
-		{in: "The pool is closed between November 3, 2025 and February 1, 2026.", anchor: anchorAt(2025, 10, 24), ok: true, from: "2025-11-03", to: "2026-02-01", rem: "The pool is closed."},
-		{in: "The facility will be closed starting May 1 until September 2026.", anchor: anchorAt(2026, 4, 25), ok: true, from: "2026-05-01", to: "2026-09-30", rem: "The facility will be closed.", ambig: []string{ambDateMonthOnly}},
-		{in: "The pool is closed for maintenance until Monday, September 21 at 4 pm.", anchor: anchorAt(2026, 9, 1), ok: true, to: "2026-09-21", rem: "The pool is closed for maintenance at 4 pm."},
-		{in: "The rink is closed until December 1 for ice installation.", anchor: anchorAt(2025, 11, 1), ok: true, to: "2025-12-01", rem: "The rink is closed for ice installation."},
-		{in: "The facility is closed until July 19.", anchor: anchorAt(2026, 7, 1), ok: true, to: "2026-07-19", rem: "The facility is closed."},
-		{in: "Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-21", to: "2026-05-22", rem: "Facility is closed at 5:30 pm."},
-		{in: "Pool closed for annual maintenance August 17 to September 8.", anchor: anchorAt(2026, 8, 1), ok: true, from: "2026-08-17", to: "2026-09-08", rem: "Pool closed for annual maintenance."},
-		{in: "The facility is closed from August 22 to spring 2028 for renovations.", anchor: anchorAt(2026, 9, 1), ok: true, from: "2026-08-22", open: true, rem: "The facility is closed to spring 2028 for renovations.", ambig: []string{ambDateEndUnstated}},
-		{in: "Regular season ends August 23.", anchor: anchorAt(2026, 8, 1), ok: true, to: "2026-08-23", rem: "Regular season ends."},
-		{in: "Public swim is cancelled on Monday, October 12.", anchor: anchorAt(2026, 10, 1), ok: true, dates: []string{"2026-10-12"}, rem: "Public swim is cancelled."},
+		{in: "The pool is closed from Monday, March 23 to Sunday, April 12.", anchor: anchorAt(2026, 3, 2), ok: true, from: "2026-03-23", to: "2026-04-12", span: "from Monday, March 23 to Sunday, April 12"},
+		{in: "The pool is closed between November 3, 2025 and February 1, 2026.", anchor: anchorAt(2025, 10, 24), ok: true, from: "2025-11-03", to: "2026-02-01", span: "between November 3, 2025 and February 1, 2026"},
+		{in: "The facility will be closed starting May 1 until September 2026.", anchor: anchorAt(2026, 4, 25), ok: true, from: "2026-05-01", to: "2026-09-30", span: "starting May 1 until September 2026", ambig: []string{ambDateMonthOnly}},
+		{in: "The pool is closed for maintenance until Monday, September 21 at 4 pm.", anchor: anchorAt(2026, 9, 1), ok: true, to: "2026-09-21", span: "until Monday, September 21"},
+		{in: "The rink is closed until December 1 for ice installation.", anchor: anchorAt(2025, 11, 1), ok: true, to: "2025-12-01", span: "until December 1"},
+		{in: "The facility is closed until July 19.", anchor: anchorAt(2026, 7, 1), ok: true, to: "2026-07-19", span: "until July 19"},
+		{in: "Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-21", to: "2026-05-22", span: "between Thursday, May 21 at 5 pm and Friday, May 22"},
+		{in: "Pool closed for annual maintenance August 17 to September 8.", anchor: anchorAt(2026, 8, 1), ok: true, from: "2026-08-17", to: "2026-09-08", span: "August 17 to September 8"},
+		{in: "The facility is closed from August 22 to spring 2028 for renovations.", anchor: anchorAt(2026, 9, 1), ok: true, from: "2026-08-22", open: true, span: "from August 22", ambig: []string{ambDateEndUnstated}},
+		{in: "Regular season ends August 23.", anchor: anchorAt(2026, 8, 1), ok: true, to: "2026-08-23", span: "August 23"},
+		{in: "Public swim is cancelled on Monday, October 12.", anchor: anchorAt(2026, 10, 1), ok: true, dates: []string{"2026-10-12"}, span: "on Monday, October 12"},
 		{in: "Programs may be cancelled without notice.", anchor: anchorAt(2026, 10, 1), ok: false},
 		{in: "The facility will close at 4:30 pm and return to regular hours Friday, June 12.", anchor: anchorAt(2026, 6, 1), ok: false},
 		{in: "The museum will reopen to daily visitors beginning Sunday, May 10, 2026.", anchor: anchorAt(2026, 4, 1), ok: false},
-		{in: "beginning May 24 - 10 am to 5 pm", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-24", open: true, rem: "- 10 am to 5 pm", ambig: []string{ambDateEndUnstated}},
-		{in: "Starting May 1, the pool is closed until further notice.", anchor: anchorAt(2026, 4, 25), ok: true, from: "2026-05-01", open: true, rem: "the pool is closed until further notice.", notAmbig: []string{ambDateEndUnstated}},
-		{in: "The facility is closed until October.", anchor: anchorAt(2026, 8, 7), ok: true, to: "2026-10-31", rem: "The facility is closed.", ambig: []string{ambDateMonthOnly}},
-		{in: "The facility is closed until October.", anchor: anchorAt(2026, 11, 2), ok: true, to: "2027-10-31", rem: "The facility is closed.", ambig: []string{ambDateMonthOnly}},
-		{in: "The facility is closed until October for repairs.", anchor: anchorAt(2026, 10, 2), ok: true, to: "2026-10-31", rem: "The facility is closed for repairs.", ambig: []string{ambDateMonthOnly}},
+		{in: "beginning May 24 - 10 am to 5 pm", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-24", open: true, span: "beginning May 24", ambig: []string{ambDateEndUnstated}},
+		{in: "Starting May 1, the pool is closed until further notice.", anchor: anchorAt(2026, 4, 25), ok: true, from: "2026-05-01", open: true, span: "Starting May 1", notAmbig: []string{ambDateEndUnstated}},
+		{in: "The facility is closed until October.", anchor: anchorAt(2026, 8, 7), ok: true, to: "2026-10-31", span: "until October", ambig: []string{ambDateMonthOnly}},
+		{in: "The facility is closed until October.", anchor: anchorAt(2026, 11, 2), ok: true, to: "2027-10-31", span: "until October", ambig: []string{ambDateMonthOnly}},
+		{in: "The facility is closed until October for repairs.", anchor: anchorAt(2026, 10, 2), ok: true, to: "2026-10-31", span: "until October", ambig: []string{ambDateMonthOnly}},
 		{in: "Lane swim, 1 to 3 pm, cancelled", anchor: anchorAt(2026, 10, 1), ok: false},
 		{in: "The pool is closed until further notice.", anchor: anchorAt(2026, 10, 1), ok: false},
 	} {
 		t.Run(tc.in, func(t *testing.T) {
-			spec, rem, ok := findEmbeddedDate(tc.in, tc.anchor)
+			spec, sp, ok := findEmbeddedDate(tc.in, tc.anchor)
 			if ok != tc.ok {
-				t.Fatalf("ok = %v, want %v (spec %+v rem %q)", ok, tc.ok, spec, rem)
+				t.Fatalf("ok = %v, want %v (spec %+v span %v)", ok, tc.ok, spec, sp)
 			}
 			if !ok {
 				return
@@ -231,8 +231,8 @@ func TestFindEmbeddedDate(t *testing.T) {
 			if got(spec.From) != tc.from || got(spec.To) != tc.to || spec.OpenEnded != tc.open || len(spec.Weekdays) != tc.wds {
 				t.Errorf("span = %s..%s open=%v wds=%v, want %s..%s open=%v wds=%d", got(spec.From), got(spec.To), spec.OpenEnded, spec.Weekdays, tc.from, tc.to, tc.open, tc.wds)
 			}
-			if rem != tc.rem {
-				t.Errorf("rem = %q, want %q", rem, tc.rem)
+			if got := tc.in[sp.start:sp.end]; got != tc.span || spec.Raw != tc.span {
+				t.Errorf("span = %q, raw = %q, want %q", got, spec.Raw, tc.span)
 			}
 			for _, a := range tc.ambig {
 				if !slices.Contains(spec.Ambig, a) {

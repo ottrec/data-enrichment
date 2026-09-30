@@ -26,6 +26,7 @@ var clockSideRe = regexp.MustCompile(`(?i)^(?:(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?
 // OpenStart/OpenEnd.
 type clockMention struct {
 	Text      string
+	Span      span // where in the text it was found
 	Cands     []schema.ClockRange
 	Inferred  bool // a meridiem was missing and had to be inferred
 	OpenStart bool // "until X": affected from start of day to X
@@ -69,45 +70,52 @@ func parseClockSide(s string) (minutes int, explicit bool, ok bool) {
 	return h%12*60 + mm, false, true
 }
 
-// findClockRanges extracts all clock ranges from s, returning the mentions
-// and s with the matches removed. A match must have an explicit meridiem,
+// findClockRanges finds the clock ranges in s and returns them with their
+// spans; s is left alone. A match must have an explicit meridiem,
 // noon/midnight, or minutes on at least one side (so "December 13 and 14"
-// is not a clock range).
-func findClockRanges(s string) ([]clockMention, string) {
+// is not a clock range). s may be a masked sentence, and a match may run
+// across a blank; the mention's text is its words.
+func findClockRanges(s string) []clockMention {
 	var out []clockMention
-	var kept strings.Builder
-	rest := s
-	for rest != "" {
-		loc := clockRangeRe.FindStringSubmatchIndex(rest)
+	pos := 0
+	for pos < len(s) {
+		loc := clockRangeRe.FindStringSubmatchIndex(s[pos:])
 		if loc == nil {
-			kept.WriteString(rest)
 			break
 		}
-		a, b := rest[loc[2]:loc[3]], rest[loc[4]:loc[5]]
+		a, b := s[pos+loc[2]:pos+loc[3]], s[pos+loc[4]:pos+loc[5]]
 		var cands []schema.ClockRange
 		var inferred bool
 		if clockish(a) || clockish(b) {
 			cands, inferred = clockCandidates(a, b)
 		}
+		start, end := pos+loc[0], pos+loc[1]
+		pos = end
 		if len(cands) == 0 {
-			// not a clock range; keep the text and continue after it
-			kept.WriteString(rest[:loc[1]])
-			rest = rest[loc[1]:]
-			continue
+			continue // not a clock range
 		}
-		out = append(out, clockMention{Text: strings.TrimSpace(rest[loc[0]:loc[1]]), Cands: cands, Inferred: inferred})
-		before := strings.TrimRight(rest[:loc[0]], " ")
-		after := strings.TrimLeft(rest[loc[1]:], " ")
-		kept.WriteString(strings.TrimRight(before, " ,"))
-		if strings.HasSuffix(before, ",") && strings.HasPrefix(after, ",") {
-			// a range that was a clause of its own leaves the clauses around
-			// it separated ("Public swim, 1 to 3 pm, 25m pool only")
-			kept.WriteByte(',')
-		}
-		kept.WriteByte(' ')
-		rest = strings.TrimLeft(after, " ,")
+		out = append(out, clockMention{
+			Text:     strings.Join(strings.Fields(s[start:end]), " "),
+			Span:     span{start, end, spanClock},
+			Cands:    cands,
+			Inferred: inferred,
+		})
 	}
-	return out, strings.TrimSpace(kept.String())
+	return out
+}
+
+// onlyClocks reports whether s is clock ranges and nothing else, punctuation
+// aside ("11:45 am to 12:45 pm", "8 to 9 am, 10 to 11 am").
+func onlyClocks(s string) bool {
+	clocks := findClockRanges(s)
+	if len(clocks) == 0 {
+		return false
+	}
+	sent := &sentence{src: s}
+	for _, cm := range clocks {
+		sent.claim(cm.Span)
+	}
+	return strings.Trim(sent.masked(), " .,") == ""
 }
 
 // clockish reports whether one side of a range looks unambiguously like a
@@ -173,13 +181,18 @@ var (
 	openAtRe = regexp.MustCompile(`(?i)\b(will open|opens|opening)\s+at\s+(` + clockTokenPat + `)`)
 )
 
-// findSingleEnded extracts single-ended time mentions ("The pool is closed
-// until noon", "closed at 7:30 pm", "Public swim will end at 6 pm"),
-// synthesizing the affected part of the day. The closure keyword stays in
-// the remainder (it drives the effect); "will end at X" is removed wholesale
-// and flagged EndEarly.
-func findSingleEnded(s string) ([]clockMention, string) {
+// findSingleEnded finds single-ended time mentions in s ("The pool is
+// closed until noon", "closed at 7:30 pm", "Public swim will end at 6 pm"),
+// synthesizing the affected part of the day. The span of a closure mention
+// leaves the keyword out (it drives the effect); "will end at X" is spanned
+// wholesale and flagged EndEarly. s is scanned again with each span blanked,
+// so a mention is found once and a later pattern may match across an earlier
+// span. The second result is every span found, including one whose time has
+// no plausible reading and yields no mention.
+func findSingleEnded(s string) ([]clockMention, []span) {
 	var out []clockMention
+	var spans []span
+	buf := []byte(s)
 	for {
 		var m []int
 		var openStart, endEarly, keepKeyword bool
@@ -210,17 +223,22 @@ func findSingleEnded(s string) ([]clockMention, string) {
 				}
 			}
 		}
-		var repl string
+		sp := span{m[0], m[1], spanSingle}
 		if keepKeyword {
-			repl = s[m[2]:m[3]]
+			sp.start = m[3]
 		}
-		text := strings.TrimSpace(s[m[0]:m[1]])
-		s = strings.TrimSpace(s[:m[0]] + repl + s[m[1]:])
+		text := strings.Join(strings.Fields(s[m[0]:m[1]]), " ")
+		for i := sp.start; i < sp.end; i++ {
+			buf[i] = ' '
+		}
+		s = string(buf)
+		spans = append(spans, sp)
 		if len(cands) == 0 {
 			continue
 		}
 		out = append(out, clockMention{
 			Text:      text,
+			Span:      sp,
 			Cands:     cands,
 			Inferred:  !explicit,
 			OpenStart: openStart,
@@ -228,5 +246,5 @@ func findSingleEnded(s string) ([]clockMention, string) {
 			EndEarly:  endEarly,
 		})
 	}
-	return out, s
+	return out, spans
 }

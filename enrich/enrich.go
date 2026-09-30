@@ -328,7 +328,7 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 			break
 		}
 		if !restIsTrivial(rest) {
-			if clocks, rem := findClockRanges(rest); len(clocks) == 0 || strings.Trim(rem, " .,") != "" {
+			if !onlyClocks(rest) {
 				allDates = false
 				break
 			}
@@ -404,11 +404,7 @@ func allClocks(items []liNode) bool {
 		return false
 	}
 	for _, sub := range items {
-		if len(sub.Items) > 0 {
-			return false
-		}
-		clocks, rest := findClockRanges(sub.Head)
-		if len(clocks) == 0 || strings.Trim(rest, " .,") != "" {
+		if len(sub.Items) > 0 || !onlyClocks(sub.Head) {
 			return false
 		}
 	}

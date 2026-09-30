@@ -713,12 +713,12 @@ const (
 )
 
 // findEmbeddedDate finds a date expression inside a sentence, as opposed to
-// leading it, and returns the resolved span, the sentence with the date (and
-// its introducing preposition) removed, and whether one was found. Only
-// expressions led by a weekday or month name (optionally introduced by a
-// from/until/between word) are considered, so "may be cancelled" and clock
+// leading it, and returns the resolved spec, the span of the expression
+// together with its introducing preposition, and whether one was found.
+// Only expressions led by a weekday or month name (optionally introduced by
+// a from/until/between word) are considered, so "may be cancelled" and clock
 // ranges are not dates.
-func findEmbeddedDate(s string, anchor time.Time) (dateSpec, string, bool) {
+func findEmbeddedDate(s string, anchor time.Time) (dateSpec, span, bool) {
 	locs := wordRe.FindAllStringIndex(s, -1)
 	word := func(i int) string {
 		return strings.Trim(strings.ToLower(s[locs[i][0]:locs[i][1]]), ",.;:!()")
@@ -848,11 +848,7 @@ func findEmbeddedDate(s string, anchor time.Time) (dateSpec, string, bool) {
 			continue
 		}
 		spec.Raw = strings.TrimSpace(s[cut:end])
-
-		rem := strings.TrimSpace(s[:cut]) + " " + strings.TrimLeft(s[end:], " ,")
-		rem = strings.TrimSpace(strings.ReplaceAll(rem, "  ", " "))
-		rem = strings.ReplaceAll(rem, " .", ".")
-		return spec, rem, true
+		return spec, span{cut, end, spanDate}, true
 	}
-	return dateSpec{}, s, false
+	return dateSpec{}, span{}, false
 }

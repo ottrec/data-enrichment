@@ -51,11 +51,11 @@ var (
 	// skating and ice sports cancelled")
 	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)` + kwReason + `[. ]*$`)
 	untilNoticeRe = regexp.MustCompile(`(?i)\buntil further notice\b`)
-	// a preposition left stranded at the front once its clock range was
-	// removed from the middle of the sentence. Only the two that introduce a
-	// clock and nothing else: "beginning"/"starting" introduce dates too
-	// ("Fridays and Sundays beginning July 3"), and stripping those edits the
-	// date language instead.
+	// a preposition left at the front of the phrase once the clock range it
+	// introduced was taken out (see sentence.remainder). Only the two that
+	// introduce a clock and nothing else: "beginning"/"starting" introduce
+	// dates too ("Fridays and Sundays beginning July 3"), and stripping those
+	// edits the date language instead.
 	danglingPrepRe = regexp.MustCompile(`(?i)^(?:from|between)\s+`)
 	// the end-of-season dog swim the city adds at outdoor pools, which is
 	// never a row in any published table
@@ -258,9 +258,10 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	// and return to regular hours Friday, June 12" under "Thursday, June 11"
 	// is about the 11th. A leading weekday set merges with it ("Sundays,
 	// beginning May 24 - 10 am to 5 pm").
+	sent := &sentence{src: working}
 	ownLeading := spec != nil && spec != st.head
 	if spec == nil || (ownLeading && len(spec.Weekdays) > 0 && len(spec.Dates) == 0 && spec.From.IsZero() && spec.To.IsZero()) {
-		if em, rem, ok := findEmbeddedDate(working, b.anchor); ok && len(em.Weekdays) == 0 {
+		if em, sp, ok := findEmbeddedDate(working, b.anchor); ok && len(em.Weekdays) == 0 {
 			b.out.Stats["date/embedded"]++
 			if spec != nil {
 				em.Weekdays = spec.Weekdays
@@ -269,13 +270,19 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			spec = &em
 			n.DateText = em.Raw
 			n.Ambiguities = append(n.Ambiguities, em.Ambig...)
-			working = rem
+			sent.claim(sp)
 		}
 	}
 
 	// time extraction first, so closure sentences keep their times
-	clocks, remainder := findClockRanges(working)
-	singles, remainder := findSingleEnded(remainder)
+	clocks := findClockRanges(sent.masked())
+	for _, cm := range clocks {
+		sent.claim(cm.Span)
+	}
+	singles, claimed := findSingleEnded(sent.masked())
+	for _, sp := range claimed {
+		sent.claim(sp)
+	}
 	clocks = append(clocks, singles...)
 	for _, cm := range clocks {
 		if cm.EndEarly {
@@ -283,6 +290,10 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		}
 	}
 
+	// the sentence-level patterns read the sentence with only the date
+	// blanked; the clause code reads it without its clocks either
+	working = sent.masked(spanDate)
+	remainder := sent.remainder()
 	fworking := foldText(working)
 
 	// whole-facility closure sentences
@@ -407,7 +418,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		}
 		fc := foldText(clause)
 		if fc == "" || fc == "and" || fc == "or" {
-			continue // a conjunction left behind by a lifted clock range
+			continue // a conjunction a clock range left as a clause of its own (see remainder)
 		}
 		if m := keywordRe.FindStringSubmatch(fc); m != nil {
 			setKeyword(&n.Effects, m[1])
@@ -436,10 +447,10 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	if openEnded && strings.Contains(fworking, "closed") {
 		n.Effects.Closure = true
 	}
-	// findClockRanges lifts the range out of the middle of the sentence, so a
-	// leading preposition that introduced it is left dangling: "From 11 am to
-	// 2 pm, all drop-in programs are cancelled" becomes "From all drop-in
-	// programs", which matches nothing. Only when a clock was actually removed.
+	// a clock range leaves the preposition that introduced it behind (see
+	// remainder): "From 11 am to 2 pm, all drop-in programs are cancelled"
+	// reads "From all drop-in programs", which matches nothing. Only when a
+	// clock was actually taken out.
 	if len(clocks) > 0 {
 		phrase = danglingPrepRe.ReplaceAllString(phrase, "")
 	}

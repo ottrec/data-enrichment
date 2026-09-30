@@ -77,10 +77,18 @@ since they are deterministic; anything ambiguous stays higher up.
    marked `meridiem-inferred`/`meridiem-ambiguous`. Single-ended mentions
    ("closed until noon", "closed at 7:30 pm", "will end at 6 pm") synthesize
    the affected part of the day (TimeAssoc OpenStart/OpenEnd; "will end at"
-   also sets TimeChange).
+   also sets TimeChange). The finders return spans over the sentence and
+   never rewrite it.
 5. **Items** (`item.go`): multi-sentence items split at sentence boundaries
    and parse per sentence (sibling freeform sentences don't add redundant
-   unparsed records). Then sentence-level patterns first (see-schedule,
+   unparsed records). A sentence is a `sentence` (`sentence.go`): the
+   embedded date, the clock ranges and the single-ended mentions are
+   claimed as byte spans over the source text; the sentence-level patterns
+   read the text with the date blanked, and the clause split reads
+   `remainder()`, which takes each span out under a fixed punctuation rule
+   (a clock range that was a clause of its own leaves one comma, a date
+   leaves one space, a single-ended mention leaves its keyword). Then
+   sentence-level patterns first (see-schedule,
    facility closures, "closed for the season", "Regular season + range",
    "subject is closed" with facility/activity/amenity subject resolution),
    then comma-clause decomposition (keyword clauses, trailing "only"
