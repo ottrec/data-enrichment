@@ -33,6 +33,8 @@ var contractSentences = []string{
 	"The facility will be closed starting May 1 until September 2026.",
 	"The rink is closed until December 1 for ice installation.",
 	"Public swim is cancelled on Monday, October 12.",
+	"Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.",
+	"The pool is closed for maintenance until Monday, September 21 at 4 pm.",
 }
 
 func countClauses(s string) int {
@@ -113,6 +115,22 @@ func TestPrepositionGoesWithSpan(t *testing.T) {
 			if w == "from" || w == "between" {
 				t.Errorf("%q: %q left in %q", in, w, rest)
 			}
+		}
+	}
+}
+
+// The spans lie inside the sentence and never overlap: each finder matched
+// inside one unclaimed segment.
+func TestSpansDisjoint(t *testing.T) {
+	anchor := anchorAt(2026, 9, 1)
+	for _, in := range append(contractSentences, "The pool is closed on Monday, October 12 at 5 pm.") {
+		sent := claimSpans(in, anchor)
+		pos := 0
+		for _, sp := range sent.spans {
+			if sp.start < pos || sp.end <= sp.start || sp.end > len(sent.src) {
+				t.Errorf("%q: span %v out of order or bounds in %v", in, sp, sent.spans)
+			}
+			pos = sp.end
 		}
 	}
 }

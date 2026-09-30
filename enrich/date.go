@@ -28,8 +28,58 @@ type dateSpec struct {
 	From, To  time.Time      // range
 	OpenEnded bool           // "until further notice"-style open end
 	Weekdays  []time.Weekday // weekday-only patterns ("Monday to Friday")
-	Raw       string
-	Ambig     []string
+	// the clocks written on the ends of a range ("between Thursday, May 21
+	// at 5 pm and Friday, May 22 at 5:30 pm", "until Monday, September 21
+	// at 4 pm"): the range runs from StartClock on From to EndClock on To.
+	// pieces() reads them.
+	StartClock, EndClock *clockMention
+	Raw                  string
+	Ambig                []string
+}
+
+// piece is one notice a range with a clock on an end makes: its dates and
+// the clock that bounds them, nil for the days between.
+type piece struct {
+	spec   dateSpec
+	clocks []clockMention
+}
+
+// pieces splits a range with a clock on an end into the notices it makes:
+// the start day from its clock (open-end), the days between whole, and the
+// end day until its clock (open-start); a one-sided range keeps its open
+// side. nil when no end has a clock, and for a same-day range, whose
+// clocks then stay out of the reading (a day closed from 5 pm and until
+// 5:30 pm would strike the whole day).
+func (d *dateSpec) pieces() []piece {
+	if d.StartClock == nil && d.EndClock == nil {
+		return nil
+	}
+	if !d.From.IsZero() && !d.To.IsZero() && !d.From.Before(d.To) {
+		return nil
+	}
+	base := *d
+	base.StartClock, base.EndClock = nil, nil
+	day := func(t time.Time) dateSpec {
+		p := base
+		p.Dates, p.From, p.To, p.OpenEnded = []time.Time{t}, time.Time{}, time.Time{}, false
+		return p
+	}
+	var out []piece
+	mid := base
+	if d.StartClock != nil {
+		out = append(out, piece{day(d.From), []clockMention{*d.StartClock}})
+		mid.From = d.From.AddDate(0, 0, 1)
+	}
+	if d.EndClock != nil {
+		mid.To = d.To.AddDate(0, 0, -1)
+	}
+	if mid.From.IsZero() || mid.To.IsZero() || !mid.To.Before(mid.From) {
+		out = append(out, piece{spec: mid})
+	}
+	if d.EndClock != nil {
+		out = append(out, piece{day(d.To), []clockMention{*d.EndClock}})
+	}
+	return out
 }
 
 func (d dateSpec) empty() bool {
@@ -695,10 +745,34 @@ var (
 	embeddedDropWords = map[string]bool{"from": true, "starting": true, "beginning": true, "effective": true, "until": true, "till": true, "through": true, "between": true, "on": true}
 )
 
-// embeddedSecondRe matches the joiner to a second date after the first
-// mention of a two-sided span, tolerating a clock on the first date
-// ("between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm").
-var embeddedSecondRe = regexp.MustCompile(`^[ ,]*(?:at\s+\d{1,2}(?::\d{2})?\s*(?:am|pm|a\.m\.|p\.m\.|noon)?[ ,]*)?(?:and|to|until|through)\s+`)
+// embeddedJoinRe matches the joiner to the second date of a two-sided span.
+var embeddedJoinRe = regexp.MustCompile(`^[ ,]*(?:and|to|until|through)\s+`)
+
+// edgeClockRe matches a clock written on the end of a date ("May 21 at 5
+// pm"); edgeClockRangeRe is what makes it the start of a range instead
+// ("at 5 pm to 7 pm").
+var (
+	edgeClockRe      = regexp.MustCompile(`(?i)^[ ,]*at\s+(` + clockTokenPat + `)\b`)
+	edgeClockRangeRe = regexp.MustCompile(`(?i)^\s*(?:to|until|through|-|–|—)\s*` + clockTokenPat + `\b`)
+)
+
+// edgeClock reads a clock written on the end of a date at the start of s,
+// as the single-ended mention it makes for that day (open-end for a start,
+// open-start for an end), and the length of text it takes: nil and 0 when
+// there is none or it starts a clock range, nil and the length when it has
+// no plausible reading (the date's text still holds it). The mention has
+// no span of its own: the date span holds it.
+func edgeClock(s string, openStart bool) (*clockMention, int) {
+	m := edgeClockRe.FindStringSubmatchIndex(s)
+	if m == nil || edgeClockRangeRe.MatchString(s[m[1]:]) {
+		return nil, 0
+	}
+	cm, ok := singleEndedMention(strings.Join(strings.Fields(s[:m[1]]), " "), s[m[2]:m[3]], openStart, false)
+	if !ok {
+		return nil, m[1]
+	}
+	return &cm, m[1]
+}
 
 // embeddedMonthYearRe matches a month-only end ("until September 2026").
 var embeddedMonthYearRe = regexp.MustCompile(`(?i)^([a-z]+)\s+(20\d\d)\b`)
@@ -807,22 +881,28 @@ func findEmbeddedDate(s string, anchor time.Time) (dateSpec, span, bool) {
 		}
 
 		// the second side of a two-sided span, possibly a month-only end
-		// ("starting May 1 until September 2026")
+		// ("starting May 1 until September 2026"); a clock on the first
+		// date is the start clock of the range ("between Thursday, May 21
+		// at 5 pm and Friday, May 22 ...") and is taken only when a second
+		// date follows
 		if (embeddedBetweenWords[intro] || embeddedFromWords[intro]) && len(spec.Dates) == 1 && spec.From.IsZero() {
-			if m := embeddedSecondRe.FindString(s[end:]); m != "" {
-				tail := s[end+len(m):]
+			startClock, clockLen := edgeClock(s[end:], false)
+			if m := embeddedJoinRe.FindString(s[end+clockLen:]); m != "" {
+				tail := s[end+clockLen+len(m):]
 				if second, _, ok := parseLeadingDate(tail, anchor); ok && len(second.Dates) == 1 {
 					spec.From, spec.To = spec.Dates[0], second.Dates[0]
 					spec.Dates = nil
 					spec.Ambig = append(spec.Ambig, second.Ambig...)
-					end += len(m) + len(second.Raw)
+					spec.StartClock = startClock
+					end += clockLen + len(m) + len(second.Raw)
 				} else if my := embeddedMonthYearRe.FindStringSubmatch(tail); my != nil {
 					if mon, ok := monthNames[strings.ToLower(my[1])]; ok {
 						y, _ := strconv.Atoi(my[2])
 						spec.From, spec.To = spec.Dates[0], time.Date(y, mon+1, 0, 0, 0, 0, 0, ottrecidx.TZ)
 						spec.Dates = nil
 						spec.Ambig = append(spec.Ambig, ambDateMonthOnly)
-						end += len(m) + len(my[0])
+						spec.StartClock = startClock
+						end += clockLen + len(m) + len(my[0])
 					}
 				}
 			}
@@ -846,6 +926,13 @@ func findEmbeddedDate(s string, anchor time.Time) (dateSpec, span, bool) {
 		}
 		if spec.empty() {
 			continue
+		}
+		// a clock on the end date is the end clock of the range ("until
+		// Monday, September 21 at 4 pm"); a month has no clock
+		if !spec.To.IsZero() && !slices.Contains(spec.Ambig, ambDateMonthOnly) {
+			var n int
+			spec.EndClock, n = edgeClock(s[end:], true)
+			end += n
 		}
 		spec.Raw = strings.TrimSpace(s[cut:end])
 		return spec, span{cut, end, spanDate}, true

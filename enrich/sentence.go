@@ -8,10 +8,11 @@ import (
 // A sentence is one sentence of an item together with the byte spans its
 // finders have claimed over it: the embedded date, the clock ranges, the
 // single-ended clock mentions. The text is never rewritten. A finder runs
-// over the sentence with the spans claimed so far blanked out (masked), so
-// every match is at its offset in the source, and the rules after the
-// finders read the masked text, remainder() (the text with the spans taken
-// out) or clauses() (the remainder split at its commas and typed).
+// over each unclaimed segment of the sentence on its own (segments()), so
+// every match is at its offset in the source and no pattern reads across a
+// span, and the rules after the finders read the masked text, remainder()
+// (the text with the spans taken out) or clauses() (the remainder split at
+// its commas and typed).
 type sentence struct {
 	src   string
 	spans []span // sorted by start, never overlapping
@@ -26,33 +27,38 @@ type span struct {
 type spanKind uint8
 
 const (
-	spanDate   spanKind = iota + 1 // an embedded date expression, with its preposition
+	spanDate   spanKind = iota + 1 // an embedded date expression, with its preposition and the clocks on its ends
 	spanClock                      // a clock range, with its preposition
 	spanSingle                     // a single-ended clock mention, without its keyword
 )
 
-// claim records the span. A finder scans the masked text, and a pattern
-// with \s+ in it can match across a blank ("closed [between May 21 ...
-// May 22] at 5:30 pm" matches "closed at 5:30 pm"), so a claim may overlap
-// an earlier span; only its unclaimed pieces are recorded, and spans never
-// overlap.
+// claim records the span. A finder matches inside one unclaimed segment, so
+// a claim never overlaps a span; an empty one is nothing to record.
 func (s *sentence) claim(sp span) {
-	for _, have := range s.spans {
-		if sp.start < have.end && have.start < sp.end {
-			if sp.start < have.start {
-				s.claim(span{sp.start, have.start, sp.kind})
-			}
-			if have.end < sp.end {
-				s.claim(span{have.end, sp.end, sp.kind})
-			}
-			return
-		}
-	}
 	if sp.start >= sp.end {
 		return
 	}
 	s.spans = append(s.spans, sp)
 	slices.SortFunc(s.spans, func(a, b span) int { return a.start - b.start })
+}
+
+// segments returns the unclaimed ranges of the sentence, in order. A finder
+// scans each on its own, so a pattern with \s+ in it cannot match across a
+// claimed span: "closed [between May 21 and May 22] at 5:30 pm" is not
+// "closed at 5:30 pm".
+func (s *sentence) segments() []span {
+	var out []span
+	pos := 0
+	for _, sp := range s.spans {
+		if sp.start > pos {
+			out = append(out, span{start: pos, end: sp.start})
+		}
+		pos = sp.end
+	}
+	if pos < len(s.src) {
+		out = append(out, span{start: pos, end: len(s.src)})
+	}
+	return out
 }
 
 // masked returns the source with the claimed spans of the given kinds (all

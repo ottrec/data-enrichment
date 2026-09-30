@@ -1,8 +1,15 @@
 == Canterbury Recreation Complex special_hours
 - NOTICE "Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm."
-    date text: "between Thursday, May 21 at 5 pm and Friday, May 22"
-    dates: 2026-05-21 Thu to 2026-05-22 Fri
-    time: "closed at 5:30 pm." 17:30-24:00 open-end unchecked
+    date text: "between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm"
+    dates: 2026-05-21 Thu
+    time: "at 5 pm" 17:00-24:00 open-end unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- NOTICE "Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm."
+    date text: "between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm"
+    dates: 2026-05-22 Fri
+    time: "at 5:30 pm" 00:00-17:30 open-start unchecked
     effects: closure
     match: SCOPE_PHRASE
     at: facility

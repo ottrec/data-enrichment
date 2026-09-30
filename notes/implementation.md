@@ -83,7 +83,11 @@ since they are deterministic; anything ambiguous stays higher up.
    proximity) so one typo'd endpoint can't drag the range a year off.
    Garbled ranges ("Monday, July 6 to 10 Friday, July 10") are repaired from
    the first and last mentions only when both written weekdays validate in
-   the same year; the date-garbled marker stays. All other shortfalls become
+   the same year; the date-garbled marker stays. A clock on an end of a
+   range written into a sentence ("between Thursday, May 21 at 5 pm and
+   Friday, May 22 at 5:30 pm", "until Monday, September 21 at 4 pm") is the
+   clock on that end, and the notice is emitted in pieces: the end days
+   with their clocks, the days between whole. All other shortfalls become
    markers, never guesses.
 4. **Clocks** (`clock.go`): clock-range grammar; missing meridiems produce
    candidate readings (>12h readings dropped when a shorter one exists,
@@ -92,13 +96,15 @@ since they are deterministic; anything ambiguous stays higher up.
    ("closed until noon", "closed at 7:30 pm", "will end at 6 pm") synthesize
    the affected part of the day (TimeAssoc OpenStart/OpenEnd; "will end at"
    also sets TimeChange). The finders return spans over the sentence and
-   never rewrite it.
+   never rewrite it, and each runs over the unclaimed segments of the
+   sentence, so no pattern reads across a claimed span.
 5. **Items** (`item.go`): multi-sentence items split at sentence boundaries
    and parse per sentence (sibling freeform sentences don't add redundant
    unparsed records). A sentence is a `sentence` (`sentence.go`): the
-   embedded date, the clock ranges (each with the "from" or "between" that
-   introduced it) and the single-ended mentions are claimed as byte spans
-   over the source text, which is never rewritten; the sentence-level
+   embedded date (with the clocks on its ends), the clock ranges (each with
+   the "from" or "between" that introduced it) and the single-ended mentions
+   are claimed as byte spans over the source text, which is never
+   rewritten, each finder over the segments the earlier ones left; the sentence-level
    patterns read the text with the date blanked, and the clause rules read
    `remainder()`, the text with the spans out and the blanks closed up, in
    which a comma is a clause boundary wherever the city wrote one. Then

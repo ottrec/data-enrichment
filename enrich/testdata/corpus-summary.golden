@@ -1,6 +1,6 @@
 # golden corpus summary
 
-2515 fixtures, 20446 objects
+2515 fixtures, 20448 objects
 
 ## kind
 
@@ -11,7 +11,7 @@
     723 ignored/heading
      12 ignored/service-desk
      24 ignored/supplementary
-  10172 notice
+  10174 notice
     116 unparsed
     116 unparsed/freeform
 
@@ -19,7 +19,7 @@
 
     250 added
    3161 cancelled
-   3101 closure
+   3103 closure
    1227 modified-hours
     190 restriction
     204 seasonal-hours
@@ -34,7 +34,7 @@
     621 none
     116 normalized
      61 novel
-   5431 scope_phrase
+   5433 scope_phrase
 
 ## relation
 
@@ -43,7 +43,7 @@
     136 none
     327 novel
      84 overlaps
-   1647 unchecked
+   1649 unchecked
     323 within
 
 ## marker
@@ -209,7 +209,7 @@ A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect 
 
 ## stray-date: 7
 
-A notice or unparsed item that names a month and day its resolved dates do not include (claude-qc's enrich-stray-date).
+A notice or unparsed item that names a month and day its resolved dates do not include (claude-qc's enrich-stray-date); the dated notices one text makes (a range read in pieces) count together.
 
 - Billings Estate National Historic Site: "The museum will be closed from December 22, 2025 through January 4, 2026. Winter hours of operation will begin on Monday, January 5." (Jan 5)
     billings-estate-national-historic-site/2025-12-22-hwq7hx

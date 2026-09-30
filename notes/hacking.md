@@ -31,11 +31,14 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   liNode's Head excludes nested lists; Links collected per node (see-schedule
   URLs).
 - `sentence.go` — `sentence{src, spans}`: one sentence of an item and the
-  byte spans its finders claimed over it (the embedded date, the clock
-  ranges, the single-ended mentions). The text is never rewritten; a finder
-  scans `masked()` (the claimed spans blanked to spaces, offsets kept) and
-  `claim` records only the unclaimed pieces of a match, so spans never
-  overlap. `remainder()` is the masked text with its blanks closed up
+  byte spans its finders claimed over it (the embedded date with the clocks
+  on its ends, the clock ranges, the single-ended mentions). The text is
+  never rewritten; a finder runs over each unclaimed segment on its own
+  (`segments()`), so a pattern with `\s+` in it cannot match across a
+  claimed span, and `claim` only records the span and keeps the list
+  sorted (an empty span is dropped; nothing can overlap). `masked()` is
+  the source with the claimed spans blanked to spaces, offsets kept, which
+  the sentence-level patterns read. `remainder()` is the masked text with its blanks closed up
   (`clauseText`: runs of spaces become one, a space before a period or a
   comma goes): a span takes nothing but itself, so a comma is a clause
   boundary wherever the city wrote it ("Public swim, 1 to 3 pm, 25m pool
@@ -88,11 +91,26 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   word (which decides the side of the span), never one after a reopening
   cue (reopen/return/resume), and "July 3 - 10 am" is a date and a clock.
   It returns the span of the expression with its preposition; `remainder()`
-  takes it out.
+  takes it out. A clock written on an end of a range ("between Thursday,
+  May 21 at 5 pm and Friday, May 22 at 5:30 pm", "until Monday, September
+  21 at 4 pm"; `edgeClock`: "at <clock>" that does not start a clock
+  range) is in the span and on the spec as `StartClock` and `EndClock`,
+  and `pieces()` reads such a spec as the notices it makes: the start day
+  from its clock (open-end), the days between whole, the end day until its
+  clock (open-start); a one-sided range keeps its open side; a same-day
+  range is not split and its clocks stay out of the reading. A start clock
+  is taken only when a second date follows it ("from May 21 at 5 pm" alone
+  is a From with the clock outside the span).
 - `clock.go` — `findClockRanges(s) []clockMention`, each with its `Span`,
-  and `findSingleEnded(s)`, which also returns the spans it claimed (a
-  mention with no plausible reading has a span and no mention); neither
-  rewrites s. A match needs a meridiem/noon/midnight/colon on at least one
+  over one segment, and the per-segment drivers on the sentence:
+  `claimClockRanges` (the ranges of every unclaimed segment, claimed) and
+  `claimSingleEnded` (the `singleEndedPats` table tried pattern by pattern
+  over the unclaimed segments, the first match claimed, then again on what
+  is left, so a mention is found once and no pattern reads across a span; a
+  mention with no plausible reading is claimed and yields nothing).
+  `singleEndedMention` builds the mention for a clock on one side of the
+  day, and the date grammar uses it for the clocks on a range's ends.
+  A match needs a meridiem/noon/midnight/colon on at least one
   side ("December 13 and 14" is not a clock). Missing meridiems produce
   candidates: >12h readings dropped when a shorter exists, sorted
   shortest-first, `Inferred` set. A range's span takes the "from" or
@@ -131,9 +149,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   (or one led by a weekday set, which merges) takes it as its own date; a
   head date context is never overridden ("...and return to regular hours
   Friday, June 12" under "Thursday, June 11" is about the 11th)
-  → findClockRanges and findSingleEnded, claimed as spans, after which the
-  sentence-level patterns read the sentence with the date blanked and the
-  subject and clause rules read `remainder()` → subjectClosedRe ("X is closed", skipped for "all "
+  → `claimClockRanges` and `claimSingleEnded` over the unclaimed segments,
+  after which the sentence-level patterns read the sentence with the date
+  blanked and the subject and clause rules read `remainder()` → subjectClosedRe ("X is closed", skipped for "all "
   prefixes; subject resolved facility-name → all-programs → part-of-a-row →
   activity → amenity → none; a generic facility word that names only some of
   the facility's groups, "the pool" at a complex, is a part and not the
@@ -165,7 +183,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   `clockRelation` (exact > within > covers >
   overlaps), `maybeDisambiguate` (a `multiple` match narrowed only when
   exactly one candidate has an exact slot), `emitTimesWithSlots` (one
-  notice per clock mention; picks the best-relating meridiem candidate).
+  notice per clock mention; picks the best-relating meridiem candidate;
+  `emit` takes the spec the notice is dated by, and a range with a clock on
+  an end is emitted in its `pieces()`, each end day with its own clock and
+  the days between with the sentence's clocks).
 - `enrich.go` — version loop, per-fragment `rec` collection (`blockCtx.add`
   assigns block seq + id and every heading/date-context/boilerplate fragment
   becomes an ignored object), walkState lifetimes (head reset by headings;
@@ -482,6 +503,14 @@ the parser saw; `cmd/report` renders one version as HTML.
   cancelled"). 58dacdd noticed. The spans (`sentence.go`) leave the commas
   where they are, and the clause contract in `rewrite_contract_test.go`
   fails on the old join for 9 of 11 sentences.
+- A pattern with `\s+` in it matched across a blanked date span. Canterbury's
+  "Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22
+  at 5:30 pm." reached `closedAtRe` as "closed [blank] at 5:30 pm", a
+  closure from 5:30 pm on both days, for as long as spans existed, and the
+  string rewrites before them manufactured the same adjacency by cutting the
+  date out: the May 22 evening sessions were struck and the 21st's evening
+  was not. The finders now run per unclaimed segment (`segments()`), and a
+  clock on an end of a range belongs to the date grammar (`pieces()`).
 - The effect keyword can carry a reason after it ("cancelled due to annual
   maintenance", "closed for maintenance"), and `keywordRe`/`trailingKwRe` are
   end-anchored, so without `kwReason` the effect is lost entirely and the item

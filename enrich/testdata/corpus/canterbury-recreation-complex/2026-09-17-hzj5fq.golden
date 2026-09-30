@@ -1,7 +1,15 @@
 == Canterbury Recreation Complex special_hours
 - NOTICE "The pool is closed for maintenance until Monday, September 21 at 4 pm."
-    date text: "until Monday, September 21"
-    dates: to 2026-09-21 Mon
+    date text: "until Monday, September 21 at 4 pm"
+    dates: to 2026-09-20 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- NOTICE "The pool is closed for maintenance until Monday, September 21 at 4 pm."
+    date text: "until Monday, September 21 at 4 pm"
+    dates: 2026-09-21 Mon
+    time: "at 4 pm" 00:00-16:00 open-start unchecked
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"

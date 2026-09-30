@@ -81,8 +81,8 @@ func parseClockSide(s string) (minutes int, explicit bool, ok bool) {
 // "between" ("between 7:30 and 10:30 am"; "Lane swim at 7 and 8 pm" has no
 // range). The span takes the "from" or "between" that introduced the range
 // with it, so the preposition goes with its object; the mention's text is
-// the range's words. s may be a masked sentence, and a match may run
-// across a blank.
+// the range's words. s is one unclaimed segment of a sentence
+// (claimClockRanges), so a span is an offset into that segment.
 func findClockRanges(s string) []clockMention {
 	var out []clockMention
 	pos := 0
@@ -119,13 +119,9 @@ func findClockRanges(s string) []clockMention {
 // aside ("11:45 am to 12:45 pm", "8 to 9 am, 10 to 11 am", "from 8 to 9
 // am").
 func onlyClocks(s string) bool {
-	clocks := findClockRanges(s)
-	if len(clocks) == 0 {
-		return false
-	}
 	sent := &sentence{src: s}
-	for _, cm := range clocks {
-		sent.claim(cm.Span)
+	if len(sent.claimClockRanges()) == 0 {
+		return false
 	}
 	return strings.Trim(sent.masked(), " .,") == ""
 }
@@ -185,6 +181,21 @@ func clockCandidates(a, b string) ([]schema.ClockRange, bool) {
 	return cands, true
 }
 
+// claimClockRanges finds the clock ranges in each unclaimed segment of the
+// sentence and claims them.
+func (s *sentence) claimClockRanges() []clockMention {
+	var out []clockMention
+	for _, seg := range s.segments() {
+		for _, cm := range findClockRanges(s.src[seg.start:seg.end]) {
+			cm.Span.start += seg.start
+			cm.Span.end += seg.start
+			s.claim(cm.Span)
+			out = append(out, cm)
+		}
+	}
+	return out
+}
+
 var (
 	endAtRe       = regexp.MustCompile(`(?i)\b(?:will end|ends|ending)\s+(?:at|by)\s+(` + clockTokenPat + `)`)
 	closedUntilRe = regexp.MustCompile(`(?i)\b(closed|will be closed)\s+until\s+(` + clockTokenPat + `)`)
@@ -193,70 +204,90 @@ var (
 	openAtRe = regexp.MustCompile(`(?i)\b(will open|opens|opening)\s+at\s+(` + clockTokenPat + `)`)
 )
 
-// findSingleEnded finds single-ended time mentions in s ("The pool is
-// closed until noon", "closed at 7:30 pm", "Public swim will end at 6 pm"),
-// synthesizing the affected part of the day. The span of a closure mention
-// leaves the keyword out (it drives the effect); "will end at X" is spanned
-// wholesale and flagged EndEarly. s is scanned again with each span blanked,
-// so a mention is found once and a later pattern may match across an earlier
-// span. The second result is every span found, including one whose time has
-// no plausible reading and yields no mention.
-func findSingleEnded(s string) ([]clockMention, []span) {
+// singleEndedPats are the single-ended mention patterns in the order they
+// are tried. keepKeyword leaves the keyword out of the span (it drives the
+// effect); "will end at X" is spanned wholesale and flagged EndEarly.
+var singleEndedPats = []struct {
+	re                               *regexp.Regexp
+	openStart, endEarly, keepKeyword bool
+}{
+	{closedUntilRe, true, false, true},
+	{closedAtRe, false, false, true},
+	{openAtRe, true, false, true},
+	{endAtRe, false, true, false},
+}
+
+// claimSingleEnded finds the single-ended time mentions in the unclaimed
+// segments of the sentence ("The pool is closed until noon", "closed at
+// 7:30 pm", "Public swim will end at 6 pm") and claims them. Each pattern
+// is tried in every segment before the next pattern, the first match is
+// claimed, and the search starts over on what is left, so a mention is
+// found once and no pattern reads across a span. A mention whose time has
+// no plausible reading is claimed and yields nothing.
+func (s *sentence) claimSingleEnded() []clockMention {
 	var out []clockMention
-	var spans []span
-	buf := []byte(s)
 	for {
-		var m []int
-		var openStart, endEarly, keepKeyword bool
-		if m = closedUntilRe.FindStringSubmatchIndex(s); m != nil {
-			openStart, keepKeyword = true, true
-		} else if m = closedAtRe.FindStringSubmatchIndex(s); m != nil {
-			keepKeyword = true
-		} else if m = openAtRe.FindStringSubmatchIndex(s); m != nil {
-			openStart, keepKeyword = true, true
-		} else if m = endAtRe.FindStringSubmatchIndex(s); m != nil {
-			endEarly = true
-		} else {
+		cm, sp, ok := s.firstSingleEnded()
+		if !ok || sp.start >= sp.end {
 			break
 		}
-		clockStr := s[m[len(m)-2]:m[len(m)-1]]
-		v, explicit, ok := parseClockSide(clockStr)
-		var cands []schema.ClockRange
-		if ok && v > 0 && v < 24*60 {
-			vs := []int{v}
-			if !explicit && v+12*60 < 24*60 {
-				vs = append(vs, v+12*60)
+		s.claim(sp)
+		if len(cm.Cands) > 0 {
+			out = append(out, cm)
+		}
+	}
+	return out
+}
+
+// firstSingleEnded returns the first single-ended mention in the unclaimed
+// segments, pattern by pattern, with the span to claim for it.
+func (s *sentence) firstSingleEnded() (clockMention, span, bool) {
+	for _, p := range singleEndedPats {
+		for _, seg := range s.segments() {
+			m := p.re.FindStringSubmatchIndex(s.src[seg.start:seg.end])
+			if m == nil {
+				continue
 			}
-			for _, x := range vs {
-				if openStart {
-					cands = append(cands, schema.ClockRange{Start: 0, End: schema.ClockTime(x)})
-				} else {
-					cands = append(cands, schema.ClockRange{Start: schema.ClockTime(x), End: 24 * 60})
+			for i := range m {
+				if m[i] >= 0 {
+					m[i] += seg.start
 				}
 			}
+			sp := span{m[0], m[1], spanSingle}
+			if p.keepKeyword {
+				sp.start = m[3]
+			}
+			text := strings.Join(strings.Fields(s.src[m[0]:m[1]]), " ")
+			cm, _ := singleEndedMention(text, s.src[m[len(m)-2]:m[len(m)-1]], p.openStart, p.endEarly)
+			cm.Span = sp
+			return cm, sp, true
 		}
-		sp := span{m[0], m[1], spanSingle}
-		if keepKeyword {
-			sp.start = m[3]
-		}
-		text := strings.Join(strings.Fields(s[m[0]:m[1]]), " ")
-		for i := sp.start; i < sp.end; i++ {
-			buf[i] = ' '
-		}
-		s = string(buf)
-		spans = append(spans, sp)
-		if len(cands) == 0 {
-			continue
-		}
-		out = append(out, clockMention{
-			Text:      text,
-			Span:      sp,
-			Cands:     cands,
-			Inferred:  !explicit,
-			OpenStart: openStart,
-			OpenEnd:   !openStart,
-			EndEarly:  endEarly,
-		})
 	}
-	return out, spans
+	return clockMention{}, span{}, false
+}
+
+// singleEndedMention builds the mention for a single-ended time: the part
+// of the day from clockStr to its end (open-end) or from the start of the
+// day to it (open-start), with both meridiems as candidates when it has
+// none. ok is false when the clock has no plausible reading (midnight, an
+// hour past 12), and the mention then has no candidates.
+func singleEndedMention(text, clockStr string, openStart, endEarly bool) (clockMention, bool) {
+	cm := clockMention{Text: text, OpenStart: openStart, OpenEnd: !openStart, EndEarly: endEarly}
+	v, explicit, ok := parseClockSide(clockStr)
+	if !ok || v <= 0 || v >= 24*60 {
+		return cm, false
+	}
+	vs := []int{v}
+	if !explicit && v+12*60 < 24*60 {
+		vs = append(vs, v+12*60)
+	}
+	for _, x := range vs {
+		if openStart {
+			cm.Cands = append(cm.Cands, schema.ClockRange{Start: 0, End: schema.ClockTime(x)})
+		} else {
+			cm.Cands = append(cm.Cands, schema.ClockRange{Start: schema.ClockTime(x), End: 24 * 60})
+		}
+	}
+	cm.Inferred = !explicit
+	return cm, true
 }

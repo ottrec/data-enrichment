@@ -222,7 +222,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	}
 
 	var sessions []sessKey
-	emit := func() {
+	emit := func(spec *dateSpec) {
 		n.Dates = toDateSpan(spec, openEnded)
 		n.Ambiguities = dedupeStrings(n.Ambiguities)
 		b.out.Stats["notice"]++
@@ -248,7 +248,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			}
 		}
 		n.Scope = scope{Level: defaultLevel, MatchQuality: matchScopePhrase}
-		emit()
+		emit(spec)
 		return
 	}
 
@@ -283,16 +283,10 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		}
 	}
 
-	// time extraction first, so closure sentences keep their times
-	clocks := findClockRanges(sent.masked())
-	for _, cm := range clocks {
-		sent.claim(cm.Span)
-	}
-	singles, claimed := findSingleEnded(sent.masked())
-	for _, sp := range claimed {
-		sent.claim(sp)
-	}
-	clocks = append(clocks, singles...)
+	// time extraction first, so closure sentences keep their times; the
+	// finders run per unclaimed segment, so neither reads across the date
+	clocks := sent.claimClockRanges()
+	clocks = append(clocks, sent.claimSingleEnded()...)
 	for _, cm := range clocks {
 		if cm.EndEarly {
 			n.Effects.TimeChange = true
@@ -324,7 +318,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		n.Effects.SeasonalHours = true
 		n.Scope = scope{Level: defaultLevel, MatchQuality: matchScopePhrase}
 		openEnded = true
-		emit()
+		emit(spec)
 		return
 	}
 	if m := seasonRe.FindStringSubmatch(working); m != nil {
@@ -335,7 +329,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			n.DateText = own.Raw
 			n.Ambiguities = append(n.Ambiguities, own.Ambig...)
 		}
-		emit()
+		emit(spec)
 		return
 	}
 
@@ -454,7 +448,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		if b.grp != nil {
 			n.Scope.Groups = []string{b.grp.label}
 		}
-		emit()
+		emit(spec)
 		return
 	}
 	if m := allClassRe.FindStringSubmatch(fphrase); m != nil && (n.Effects.any() || spec != nil) {
@@ -1537,13 +1531,10 @@ func (b *blockCtx) maybeDisambiguate(n *notice, spec *dateSpec, clocks []clockMe
 
 // emitTimes emits the notice once per clock mention (or once with none),
 // without slot validation (no activity scope).
-func (b *blockCtx) emitTimes(n *notice, spec *dateSpec, clocks []clockMention, sessOut *[]sessKey, emit func()) {
+func (b *blockCtx) emitTimes(n *notice, spec *dateSpec, clocks []clockMention, sessOut *[]sessKey, emit func(*dateSpec)) {
 	b.emitTimesWithSlots(n, spec, clocks, nil, sessOut, emit)
 }
 
-// emitTimesWithSlots emits the notice once per clock mention, attaching the
-// best-relating candidate interpretation, its slot relation, and the
-// concrete sessions the notice descends to.
 // touchedBy returns the labels of every slot of acts that any clock candidate
 // relates to, which is what emitTimesWithSlots would end up reporting.
 func touchedBy(clocks []clockMention, acts []*actEntry, spec *dateSpec) []string {
@@ -1566,7 +1557,25 @@ func touchedBy(clocks []clockMention, acts []*actEntry, spec *dateSpec) []string
 // sameSlots compares two sorted, deduplicated slot label lists.
 func sameSlots(a, b []string) bool { return slices.Equal(a, b) }
 
-func (b *blockCtx) emitTimesWithSlots(n *notice, spec *dateSpec, clocks []clockMention, acts []*actEntry, sessOut *[]sessKey, emit func()) {
+// emitTimesWithSlots emits the notice once per clock mention, attaching the
+// best-relating candidate interpretation, its slot relation, and the
+// concrete sessions the notice descends to; emit takes the spec the notice
+// is dated by. A range with a clock on an end is emitted in pieces (see
+// dateSpec.pieces): each end day with its own clock, the days between with
+// the sentence's clocks.
+func (b *blockCtx) emitTimesWithSlots(n *notice, spec *dateSpec, clocks []clockMention, acts []*actEntry, sessOut *[]sessKey, emit func(*dateSpec)) {
+	if spec != nil {
+		if pieces := spec.pieces(); pieces != nil {
+			for _, p := range pieces {
+				pc := p.clocks
+				if pc == nil {
+					pc = clocks
+				}
+				b.emitTimesWithSlots(n, &p.spec, pc, acts, sessOut, emit)
+			}
+			return
+		}
+	}
 	if len(clocks) == 0 {
 		*sessOut = nil
 		if len(acts) > 0 && (n.Effects.Cancelled || n.Effects.Closure) {
@@ -1576,7 +1585,7 @@ func (b *blockCtx) emitTimesWithSlots(n *notice, spec *dateSpec, clocks []clockM
 				*sessOut = explode(spec, slots)
 			}
 		}
-		emit()
+		emit(spec)
 		return
 	}
 	var slots []slotInfo
@@ -1638,7 +1647,7 @@ func (b *blockCtx) emitTimesWithSlots(n *notice, spec *dateSpec, clocks []clockM
 		nn.Ambiguities = dedupeStrings(nn.Ambiguities)
 		save := *n
 		*n = nn
-		emit()
+		emit(spec)
 		*n = save
 	}
 }

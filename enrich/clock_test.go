@@ -33,8 +33,6 @@ func TestFindClockRanges(t *testing.T) {
 		{in: "The 25 m pool is closed between 7:30 and 10:30 am.", first: schema.ClockRange{Start: 7*60 + 30, End: 10*60 + 30}, spans: []string{"between 7:30 and 10:30 am"}, text: "7:30 and 10:30 am", cands: 1, inferred: true},
 		{in: "Lane swim at 7 and 8 pm"},
 		{in: "Lane swim at 7 and 8 pm, 9 to 10 pm", first: schema.ClockRange{Start: 21 * 60, End: 22 * 60}, spans: []string{"9 to 10 pm"}, cands: 1, inferred: true},
-		// a match across a blank (a claimed date) is one mention
-		{in: "closed from 5 pm                  to 7 pm", first: schema.ClockRange{Start: 17 * 60, End: 19 * 60}, spans: []string{"from 5 pm                  to 7 pm"}, text: "5 pm to 7 pm", cands: 1},
 	} {
 		t.Run(tc.in, func(t *testing.T) {
 			ms := findClockRanges(tc.in)
@@ -167,7 +165,8 @@ func TestFindSingleEnded(t *testing.T) {
 		{in: "Lane swim, cancelled"},
 	} {
 		t.Run(tc.in, func(t *testing.T) {
-			ms, spans := findSingleEnded(tc.in)
+			sent := &sentence{src: tc.in}
+			ms := sent.claimSingleEnded()
 			var want []string
 			if tc.span != "" {
 				want = []string{tc.span}
@@ -175,8 +174,8 @@ func TestFindSingleEnded(t *testing.T) {
 			if got := spanTexts(tc.in, ms); !slices.Equal(got, want) {
 				t.Fatalf("spans = %q, want %q", got, want)
 			}
-			if len(spans) != len(ms) {
-				t.Errorf("claimed %d spans for %d mentions", len(spans), len(ms))
+			if len(sent.spans) != len(ms) {
+				t.Errorf("claimed %d spans for %d mentions", len(sent.spans), len(ms))
 			}
 			if len(ms) > 0 {
 				m := ms[0]
@@ -187,9 +186,14 @@ func TestFindSingleEnded(t *testing.T) {
 		})
 	}
 	// a time with no plausible reading yields no mention but is still claimed
-	ms, spans := findSingleEnded("The pool is closed until midnight.")
-	if len(ms) != 0 || len(spans) != 1 || spans[0] != (span{18, 33, spanSingle}) {
-		t.Errorf("midnight: mentions %v, spans %v", ms, spans)
+	sent := &sentence{src: "The pool is closed until midnight."}
+	if ms := sent.claimSingleEnded(); len(ms) != 0 || len(sent.spans) != 1 || sent.spans[0] != (span{18, 33, spanSingle}) {
+		t.Errorf("midnight: mentions %v, spans %v", ms, sent.spans)
+	}
+	// two mentions: each claimed before the next is looked for
+	sent = &sentence{src: "The pool is closed until noon and will close at 8 pm."}
+	if ms := sent.claimSingleEnded(); len(ms) != 2 || !ms[0].OpenStart || !ms[1].OpenEnd || len(sent.spans) != 2 {
+		t.Errorf("two mentions: %+v, spans %v", ms, sent.spans)
 	}
 }
 

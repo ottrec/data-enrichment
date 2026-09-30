@@ -1,8 +1,10 @@
 package enrich
 
 import (
+	"cmp"
 	"fmt"
 	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -179,14 +181,22 @@ func TestFindEmbeddedDate(t *testing.T) {
 		span     string // the text of the span: the expression with its preposition
 		ambig    []string
 		notAmbig []string
+		clocks   string // the clocks on the range's ends, "<start>|<end>" as the mentions read them
 	}{
 		{in: "The pool is closed from Monday, March 23 to Sunday, April 12.", anchor: anchorAt(2026, 3, 2), ok: true, from: "2026-03-23", to: "2026-04-12", span: "from Monday, March 23 to Sunday, April 12"},
 		{in: "The pool is closed between November 3, 2025 and February 1, 2026.", anchor: anchorAt(2025, 10, 24), ok: true, from: "2025-11-03", to: "2026-02-01", span: "between November 3, 2025 and February 1, 2026"},
 		{in: "The facility will be closed starting May 1 until September 2026.", anchor: anchorAt(2026, 4, 25), ok: true, from: "2026-05-01", to: "2026-09-30", span: "starting May 1 until September 2026", ambig: []string{ambDateMonthOnly}},
-		{in: "The pool is closed for maintenance until Monday, September 21 at 4 pm.", anchor: anchorAt(2026, 9, 1), ok: true, to: "2026-09-21", span: "until Monday, September 21"},
+		{in: "The pool is closed for maintenance until Monday, September 21 at 4 pm.", anchor: anchorAt(2026, 9, 1), ok: true, to: "2026-09-21", span: "until Monday, September 21 at 4 pm", clocks: "|at 4 pm 0-960 open-start"},
 		{in: "The rink is closed until December 1 for ice installation.", anchor: anchorAt(2025, 11, 1), ok: true, to: "2025-12-01", span: "until December 1"},
 		{in: "The facility is closed until July 19.", anchor: anchorAt(2026, 7, 1), ok: true, to: "2026-07-19", span: "until July 19"},
-		{in: "Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-21", to: "2026-05-22", span: "between Thursday, May 21 at 5 pm and Friday, May 22"},
+		// a clock on an end of a range is the clock on that end
+		{in: "Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-21", to: "2026-05-22", span: "between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm", clocks: "at 5 pm 1020-1440 open-end|at 5:30 pm 0-1050 open-start"},
+		{in: "The arena is closed from Friday, May 22 at noon to Monday, May 25.", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-22", to: "2026-05-25", span: "from Friday, May 22 at noon to Monday, May 25", clocks: "at noon 720-1440 open-end|"},
+		{in: "The arena is closed from May 22 to May 25 at 6.", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-22", to: "2026-05-25", span: "from May 22 to May 25 at 6", clocks: "|at 6 0-360 open-start"},
+		// a clock that starts a range, or has no reading, is not an end clock
+		{in: "Public swim is cancelled from Monday, October 12 at 5 pm to 7 pm.", anchor: anchorAt(2026, 10, 1), ok: true, from: "2026-10-12", open: true, span: "from Monday, October 12", ambig: []string{ambDateEndUnstated}},
+		{in: "The rink is closed until December 1 at 4 pm to 6 pm.", anchor: anchorAt(2025, 11, 1), ok: true, to: "2025-12-01", span: "until December 1"},
+		{in: "The rink is closed until December 1 at 13 pm.", anchor: anchorAt(2025, 11, 1), ok: true, to: "2025-12-01", span: "until December 1 at 13 pm"},
 		{in: "Pool closed for annual maintenance August 17 to September 8.", anchor: anchorAt(2026, 8, 1), ok: true, from: "2026-08-17", to: "2026-09-08", span: "August 17 to September 8"},
 		{in: "The facility is closed from August 22 to spring 2028 for renovations.", anchor: anchorAt(2026, 9, 1), ok: true, from: "2026-08-22", open: true, span: "from August 22", ambig: []string{ambDateEndUnstated}},
 		{in: "Regular season ends August 23.", anchor: anchorAt(2026, 8, 1), ok: true, to: "2026-08-23", span: "August 23"},
@@ -230,6 +240,22 @@ func TestFindEmbeddedDate(t *testing.T) {
 			}
 			if got(spec.From) != tc.from || got(spec.To) != tc.to || spec.OpenEnded != tc.open || len(spec.Weekdays) != tc.wds {
 				t.Errorf("span = %s..%s open=%v wds=%v, want %s..%s open=%v wds=%d", got(spec.From), got(spec.To), spec.OpenEnded, spec.Weekdays, tc.from, tc.to, tc.open, tc.wds)
+			}
+			clock := func(cm *clockMention) string {
+				if cm == nil {
+					return ""
+				}
+				s := fmt.Sprintf("%s %d-%d", cm.Text, cm.Cands[0].Start, cm.Cands[0].End)
+				if cm.OpenStart {
+					s += " open-start"
+				}
+				if cm.OpenEnd {
+					s += " open-end"
+				}
+				return s
+			}
+			if got := clock(spec.StartClock) + "|" + clock(spec.EndClock); got != cmp.Or(tc.clocks, "|") {
+				t.Errorf("clocks = %q, want %q", got, tc.clocks)
 			}
 			if got := tc.in[sp.start:sp.end]; got != tc.span || spec.Raw != tc.span {
 				t.Errorf("span = %q, raw = %q, want %q", got, spec.Raw, tc.span)
@@ -317,6 +343,61 @@ func TestYearUnderAnchorShift(t *testing.T) {
 		}
 		if got != tc.want || !slices.Equal(spec.Ambig, tc.amb) {
 			t.Errorf("%q at %s: got %s %v, want %s %v", tc.text, ymd(tc.anchor), got, spec.Ambig, tc.want, tc.amb)
+		}
+	}
+}
+
+// TestPieces pins how a range with a clock on an end is read: the start
+// day from its clock, the days between whole, the end day until its clock;
+// a one-sided range keeps its open side; a same-day range and a range with
+// no end clock are not split.
+func TestPieces(t *testing.T) {
+	day := func(y int, m time.Month, d int) time.Time { return time.Date(y, m, d, 0, 0, 0, 0, ottrecidx.TZ) }
+	start := &clockMention{Text: "at 5 pm", OpenEnd: true}
+	end := &clockMention{Text: "at 5:30 pm", OpenStart: true}
+	show := func(ps []piece) []string {
+		var out []string
+		for _, p := range ps {
+			var parts []string
+			for _, d := range p.spec.Dates {
+				parts = append(parts, iso(d))
+			}
+			if !p.spec.From.IsZero() {
+				parts = append(parts, "from "+iso(p.spec.From))
+			}
+			if !p.spec.To.IsZero() {
+				parts = append(parts, "to "+iso(p.spec.To))
+			}
+			if p.spec.OpenEnded {
+				parts = append(parts, "open")
+			}
+			for _, cm := range p.clocks {
+				parts = append(parts, cm.Text)
+			}
+			out = append(out, strings.Join(parts, " "))
+		}
+		return out
+	}
+	for _, tc := range []struct {
+		name string
+		spec dateSpec
+		want []string
+	}{
+		{"two days, both clocks", dateSpec{From: day(2026, 5, 21), To: day(2026, 5, 22), StartClock: start, EndClock: end},
+			[]string{"2026-05-21 at 5 pm", "2026-05-22 at 5:30 pm"}},
+		{"five days, both clocks", dateSpec{From: day(2026, 5, 21), To: day(2026, 5, 25), StartClock: start, EndClock: end},
+			[]string{"2026-05-21 at 5 pm", "from 2026-05-22 to 2026-05-24", "2026-05-25 at 5:30 pm"}},
+		{"three days, start clock", dateSpec{From: day(2026, 5, 21), To: day(2026, 5, 23), StartClock: start},
+			[]string{"2026-05-21 at 5 pm", "from 2026-05-22 to 2026-05-23"}},
+		{"to only, end clock", dateSpec{To: day(2026, 9, 21), EndClock: end},
+			[]string{"to 2026-09-20", "2026-09-21 at 5:30 pm"}},
+		{"from only, start clock", dateSpec{From: day(2026, 5, 21), OpenEnded: true, StartClock: start},
+			[]string{"2026-05-21 at 5 pm", "from 2026-05-22 open"}},
+		{"same day", dateSpec{From: day(2026, 5, 21), To: day(2026, 5, 21), StartClock: start, EndClock: end}, nil},
+		{"no clock", dateSpec{From: day(2026, 5, 21), To: day(2026, 5, 22)}, nil},
+	} {
+		if got := show(tc.spec.pieces()); !slices.Equal(got, tc.want) {
+			t.Errorf("%s: pieces %q, want %q", tc.name, got, tc.want)
 		}
 	}
 }

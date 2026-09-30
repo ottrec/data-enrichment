@@ -63,13 +63,16 @@ func TestCorpusProperties(t *testing.T) {
 	var objects int
 	for _, name := range slices.Sorted(maps.Keys(outs)) {
 		fo := outs[name]
-		fx := &fixtureCtx{withEffect: map[string]bool{}}
+		fx := &fixtureCtx{withEffect: map[string]bool{}, dates: map[string][]*epb.DateSpan{}}
 		for fac := range fo.Data.Facilities() {
 			fx.anchor = fac.GetSourceDate()
 		}
 		for _, o := range fo.Out.GetObjects() {
 			if len(o.GetEffects()) > 0 {
 				fx.withEffect[o.GetRawText()] = true
+			}
+			if o.GetKind() == epb.Object_NOTICE && o.HasDates() {
+				fx.dates[o.GetRawText()] = append(fx.dates[o.GetRawText()], o.GetDates())
 			}
 		}
 		byID := map[string]*epb.Object{}
@@ -190,6 +193,10 @@ type fixtureCtx struct {
 	// withEffect holds the raw text of every object with an effect; the
 	// sentences of one item share it
 	withEffect map[string]bool
+	// dates holds the resolved dates of every dated notice by raw text: a
+	// range with a clock on an end is read in pieces, several notices of
+	// one text whose dates count together
+	dates map[string][]*epb.DateSpan
 }
 
 var triggerRe = regexp.MustCompile(`(?i)\b(cancel\w*|clos(e|ed|ing|ure)|added)\b`)
@@ -225,14 +232,18 @@ var properties = []property{
 	},
 	{
 		name: "stray-date",
-		doc:  "A notice or unparsed item that names a month and day its resolved dates do not include (claude-qc's enrich-stray-date).",
-		object: func(o *epb.Object, _ *fixtureCtx) (string, bool) {
+		doc:  "A notice or unparsed item that names a month and day its resolved dates do not include (claude-qc's enrich-stray-date); the dated notices one text makes (a range read in pieces) count together.",
+		object: func(o *epb.Object, fx *fixtureCtx) (string, bool) {
 			if o.GetKind() == epb.Object_IGNORED {
 				return "", false
 			}
+			spans := []*epb.DateSpan{o.GetDates()}
+			if o.HasDates() {
+				spans = fx.dates[o.GetRawText()]
+			}
 			var miss []string
 			for _, x := range dateMentions(o.GetRawText()) {
-				if !spanCovers(o.GetDates(), x) {
+				if !slices.ContainsFunc(spans, func(sp *epb.DateSpan) bool { return spanCovers(sp, x) }) {
 					miss = append(miss, fmt.Sprintf("%s %d", x.m.String()[:3], x.d))
 				}
 			}

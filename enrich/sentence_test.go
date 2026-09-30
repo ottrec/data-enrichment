@@ -1,7 +1,9 @@
 package enrich
 
 import (
+	"fmt"
 	"slices"
+	"strings"
 	"testing"
 	"time"
 )
@@ -18,13 +20,8 @@ func claimSpans(s string, anchor time.Time) *sentence {
 	if em, sp, ok := findEmbeddedDate(s, anchor); ok && len(em.Weekdays) == 0 {
 		sent.claim(sp)
 	}
-	for _, cm := range findClockRanges(sent.masked()) {
-		sent.claim(cm.Span)
-	}
-	_, claimed := findSingleEnded(sent.masked())
-	for _, sp := range claimed {
-		sent.claim(sp)
-	}
+	sent.claimClockRanges()
+	sent.claimSingleEnded()
 	return sent
 }
 
@@ -61,9 +58,9 @@ func TestRemainder(t *testing.T) {
 		{"The pool is closed until noon.", "The pool is closed."},
 		{"The hot tub and steam room is closed at 7:30 pm.", "The hot tub and steam room is closed"},
 		{"Public swim will end at 6 pm.", "Public swim"},
-		// a mention across a date: the pieces around the date are claimed
-		{"Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.", "Facility is closed"},
-		{"The pool is closed for maintenance until Monday, September 21 at 4 pm.", "The pool is closed for maintenance at 4 pm."},
+		// a clock on the end of a range goes with the date
+		{"Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.", "Facility is closed."},
+		{"The pool is closed for maintenance until Monday, September 21 at 4 pm.", "The pool is closed for maintenance."},
 		// nothing claimed
 		{"See Winter Break schedule.", "See Winter Break schedule."},
 	} {
@@ -151,24 +148,133 @@ func TestBareOnlyClaimsNoActivity(t *testing.T) {
 	}
 }
 
-func TestSentenceClaim(t *testing.T) {
+// TestSegments pins the unclaimed segments and that a claim keeps the
+// spans sorted; no claim can overlap, since a finder matches inside one
+// segment.
+func TestSegments(t *testing.T) {
 	sent := &sentence{src: "abcdefghij"}
+	sent.claim(span{6, 8, spanClock})
 	sent.claim(span{3, 6, spanDate})
-	sent.claim(span{1, 8, spanClock})  // across the date: the pieces around it
-	sent.claim(span{4, 5, spanSingle}) // inside the date: nothing
-	want := []span{{1, 3, spanClock}, {3, 6, spanDate}, {6, 8, spanClock}}
-	if len(sent.spans) != len(want) {
-		t.Fatalf("spans = %v, want %v", sent.spans, want)
+	sent.claim(span{9, 9, spanSingle}) // empty: nothing
+	if want := []span{{3, 6, spanDate}, {6, 8, spanClock}}; !slices.Equal(sent.spans, want) {
+		t.Errorf("spans = %v, want %v", sent.spans, want)
 	}
-	for i := range want {
-		if sent.spans[i] != want[i] {
-			t.Errorf("spans = %v, want %v", sent.spans, want)
-		}
+	if want := []span{{start: 0, end: 3}, {start: 8, end: 10}}; !slices.Equal(sent.segments(), want) {
+		t.Errorf("segments = %v, want %v", sent.segments(), want)
 	}
 	if got := sent.masked(spanDate); got != "abc   ghij" {
 		t.Errorf("masked(date) = %q", got)
 	}
-	if got := sent.masked(); got != "a       ij" {
+	if got := sent.masked(); got != "abc     ij" {
 		t.Errorf("masked() = %q", got)
+	}
+}
+
+// TestNoMatchAcrossSpan pins that a finder cannot match across a claimed
+// span: with the date claimed, "closed [on Monday, October 12] at 5 pm"
+// is not "closed at 5 pm" and "from 5 pm [on Monday, October 12] to 7 pm"
+// is not a range, though each pattern's \s+ would take the blank.
+func TestNoMatchAcrossSpan(t *testing.T) {
+	anchor := anchorAt(2026, 10, 1)
+	for _, tc := range []struct {
+		in    string
+		spans []spanKind
+		rest  string
+	}{
+		{"The pool is closed on Monday, October 12 at 5 pm.", []spanKind{spanDate}, "The pool is closed at 5 pm."},
+		{"The pool is closed from 5 pm on Monday, October 12 to 7 pm.", []spanKind{spanDate}, "The pool is closed from 5 pm to 7 pm."},
+		// the same words with nothing between them are the mentions
+		{"The pool is closed at 5 pm.", []spanKind{spanSingle}, "The pool is closed"},
+		{"The pool is closed from 5 pm to 7 pm.", []spanKind{spanClock}, "The pool is closed."},
+	} {
+		sent := claimSpans(tc.in, anchor)
+		var kinds []spanKind
+		for _, sp := range sent.spans {
+			kinds = append(kinds, sp.kind)
+		}
+		if !slices.Equal(kinds, tc.spans) {
+			t.Errorf("%q: spans %v, want kinds %v", tc.in, sent.spans, tc.spans)
+		}
+		if got := sent.remainder(); got != tc.rest {
+			t.Errorf("%q: remainder %q, want %q", tc.in, got, tc.rest)
+		}
+	}
+}
+
+// TestEndClockNotices pins the notices a range with a clock on an end
+// makes (the Canterbury sentence): the start day from its clock, open-end;
+// the end day until its clock, open-start; the days between, when there
+// are any, whole; the To-only form the same way. Both days are facility
+// closures, so the consumer strikes May 21 after 5 pm and May 22 before
+// 5:30 pm and nothing else.
+func TestEndClockNotices(t *testing.T) {
+	for _, tc := range []struct {
+		html string
+		want []string
+	}{
+		{
+			`<p>Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.</p>`,
+			[]string{
+				`closure facility 20260521 "at 5 pm" 1020-1440 open-end [between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm]`,
+				`closure facility 20260522 "at 5:30 pm" 0-1050 open-start [between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm]`,
+			},
+		},
+		{
+			`<p>Facility is closed between Thursday, May 21 at 5 pm and Monday, May 25 at 5:30 pm.</p>`,
+			[]string{
+				`closure facility 20260521 "at 5 pm" 1020-1440 open-end [between Thursday, May 21 at 5 pm and Monday, May 25 at 5:30 pm]`,
+				`closure facility 20260522-20260524 [between Thursday, May 21 at 5 pm and Monday, May 25 at 5:30 pm]`,
+				`closure facility 20260525 "at 5:30 pm" 0-1050 open-start [between Thursday, May 21 at 5 pm and Monday, May 25 at 5:30 pm]`,
+			},
+		},
+		{
+			`<p>The pool is closed for maintenance until Monday, September 21 at 4 pm.</p>`,
+			[]string{
+				`closure facility until 20260920 [until Monday, September 21 at 4 pm]`,
+				`closure facility 20260921 "at 4 pm" 0-960 open-start [until Monday, September 21 at 4 pm]`,
+			},
+		},
+	} {
+		fac := testFacility(t, tc.html)
+		fc := &facCtx{out: &builder{Stats: map[string]int{}}, fac: fac, anchor: fac.GetSourceDate()}
+		fc.processBlock(tc.html, "special_hours", nil)
+		var got []string
+		for _, r := range fc.recs {
+			if r.kind != "notice" {
+				continue
+			}
+			s := ""
+			if r.n.Effects.Closure {
+				s += "closure "
+			}
+			s += r.n.Scope.Level
+			if d := r.n.Dates; d != nil {
+				for _, x := range d.Dates {
+					s += fmt.Sprintf(" %d", x/10)
+				}
+				switch {
+				case !d.From.IsZero() && !d.To.IsZero():
+					s += fmt.Sprintf(" %d-%d", d.From/10, d.To/10)
+				case !d.To.IsZero():
+					s += fmt.Sprintf(" until %d", d.To/10)
+				case !d.From.IsZero():
+					s += fmt.Sprintf(" from %d", d.From/10)
+				}
+			}
+			if tm := r.n.Time; tm != nil {
+				s += fmt.Sprintf(" %q %d-%d", tm.Text, tm.StartMin, tm.EndMin)
+				if tm.OpenStart {
+					s += " open-start"
+				}
+				if tm.OpenEnd {
+					s += " open-end"
+				}
+			}
+			s += " [" + r.n.DateText + "]"
+			got = append(got, s)
+		}
+		if !slices.Equal(got, tc.want) {
+			t.Errorf("%s:\n  %s\nwant:\n  %s", tc.html, strings.Join(got, "\n  "), strings.Join(tc.want, "\n  "))
+		}
 	}
 }
