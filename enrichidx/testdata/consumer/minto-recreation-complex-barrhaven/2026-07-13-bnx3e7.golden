@@ -1,0 +1,26 @@
+== Minto Recreation Complex - Barrhaven, 2026-07-06 Mon to 2026-08-24 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-07-18 Sat
+  2026-07-18 Sat 11:00-18:00 "Public Swim": added
+  2026-07-18 Sat 12:00-14:30 "Lane swim": cancelled
+  2026-07-18 Sat 12:00-14:30 "Preschool Swim": cancelled
+  2026-07-18 Sat 14:30-18:00 "Public Swim": cancelled
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-07-08 Wed, changes 2026-07-15 Wed, changes 2026-07-18 Sat
+  2026-07-08 Wed 16:15-17:15 "Drums Fitness": cancelled
+  2026-07-08 Wed 16:15-17:15 "Strength circuit": added
+  2026-07-15 Wed 16:15-17:15 "Drums Fitness": cancelled
+  2026-07-15 Wed 16:15-17:15 "Strength circuit": added
+  2026-07-18 Sat 08:00-09:00 "HIIT": group scope stated
+  2026-07-18 Sat 09:15-10:15 "Indoor cycling": group scope stated
+  2026-07-18 Sat 10:30-11:30 "Zumba®": group scope stated
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-07-18 Sat
+  2026-07-18 Sat 09:00-11:00 "Kinderplay": group scope stated
+  2026-07-18 Sat 11:45-12:45 "Soccer - youth": group scope stated
+  2026-07-18 Sat 13:15-14:15 "Badminton": group scope stated
+  2026-07-18 Sat 14:20-15:20 "Badminton": group scope stated
+  2026-07-18 Sat 15:45-16:45 "Basketball - family (6 to 14 years old)": group scope stated
+  2026-07-18 Sat 16:50-17:50 "Basketball - adult": group scope stated
+  2026-07-18 Sat 18:15-19:15 "Pickleball": group scope stated
+  2026-07-18 Sat 19:20-20:20 "Pickleball": group scope stated

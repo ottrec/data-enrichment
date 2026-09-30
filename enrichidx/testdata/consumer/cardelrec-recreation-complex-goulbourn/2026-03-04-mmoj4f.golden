@@ -1,0 +1,18 @@
+== CARDELREC Recreation Complex Goulbourn, 2026-02-25 Wed to 2026-04-15 Wed
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-03-16 Mon to 2026-03-22 Sun
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-03-16 Mon to 2026-03-22 Sun
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-03-05 Thu, changes 2026-03-16 Mon to 2026-03-22 Sun
+  2026-03-05 Thu 09:00-10:00 "Drums Alive": cancelled
+  2026-03-05 Thu 10:15-11:15 "Cardio and strength": cancelled
+  2026-03-05 Thu 11:30-12:30 "Cardio and strength 50+": cancelled
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-03-05 Thu, changes 2026-03-16 Mon to 2026-03-22 Sun
+  2026-03-05 Thu 12:45-13:45 "Pickleball - adult (18+)": cancelled
+  2026-03-05 Thu 13:45-14:45 "Pickleball - adult (18+)": cancelled
+group "Drop-in schedule - Kinderplay"
+  warning: changes 2026-03-16 Mon to 2026-03-22 Sun
+group "Drop-in schedule - skating"
+  warning: changes 2026-03-16 Mon to 2026-03-22 Sun

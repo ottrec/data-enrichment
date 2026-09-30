@@ -1,0 +1,26 @@
+== St. Laurent Complex, 2026-06-23 Tue to 2026-08-11 Tue
+warning: changes 2026-07-01 Wed
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 07:00-08:00 "Aquafit - general deep": facility scope, group scope stated
+  2026-07-01 Wed 07:00-08:00 "Aquafit - general shallow": facility scope, group scope stated
+  2026-07-01 Wed 07:00-09:00 "Sauna": facility scope, group scope stated
+  2026-07-01 Wed 08:00-09:00 "Lane Swim": facility scope, group scope stated
+  2026-07-01 Wed 13:00-14:00 "Lane Swim": facility scope, group scope stated
+  2026-07-01 Wed 13:00-16:30 "Sauna": facility scope, group scope stated
+  2026-07-01 Wed 14:00-16:30 "Public swim *Reservations not required": facility scope, group scope stated
+  2026-07-01 Wed 19:30-21:30 "Lane Swim": facility scope, group scope stated
+  2026-07-01 Wed 20:30-21:30 "Sauna": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 07:00-22:00 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 08:30-09:45 "Cardio and strength 50+": facility scope, group scope stated
+  2026-07-01 Wed 10:00-10:55 "Yoga": facility scope, group scope stated
+  2026-07-01 Wed 18:00-19:00 "Zumba": facility scope, group scope stated
+  2026-07-01 Wed 19:15-20:15 "Yoga": facility scope, group scope stated
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 18:00-19:00 "Badminton - parent with child": facility scope, group scope stated
+  2026-07-01 Wed 19:00-21:00 "Badminton - adult": facility scope, group scope stated

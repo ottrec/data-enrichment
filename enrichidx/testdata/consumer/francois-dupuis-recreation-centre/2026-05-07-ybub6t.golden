@@ -1,0 +1,43 @@
+== François Dupuis Recreation Centre, 2026-04-30 Thu to 2026-06-18 Thu
+warning: changes 2026-05-18 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon
+  2026-05-18 Mon 07:30-08:25 "Lane swim": facility scope, group scope stated
+  2026-05-18 Mon 07:30-15:30 "Sauna": facility scope, group scope stated
+  2026-05-18 Mon 08:30-09:25 "Aquafit General - Deep": facility scope, group scope stated
+  2026-05-18 Mon 08:30-09:25 "Aquafit General - Shallow": facility scope, group scope stated
+  2026-05-18 Mon 08:30-11:30 "Lane swim -shared pool": facility scope, group scope stated
+  2026-05-18 Mon 09:30-10:25 "Aquafit General - Deep": facility scope, group scope stated
+  2026-05-18 Mon 09:30-10:25 "Aquafit General - Shallow": facility scope, group scope stated
+  2026-05-18 Mon 09:30-10:30 "Preschool swim -therapeutic pool": facility scope, group scope stated
+  2026-05-18 Mon 11:30-13:00 "Lane swim": facility scope, group scope stated
+  2026-05-18 Mon 11:30-14:30 "Public swim -therapeutic pool": facility scope, group scope stated
+  2026-05-18 Mon 13:00-14:30 "Lane swim -shared pool": facility scope, group scope stated
+  2026-05-18 Mon 13:00-14:30 "Public swim - 25m pool": facility scope, group scope stated
+  2026-05-18 Mon 14:30-15:25 "Aquafit Lite - warm pool": facility scope, group scope stated
+  2026-05-18 Mon 14:30-15:30 "Lane swim": facility scope, group scope stated
+  2026-05-18 Mon 20:00-21:00 "Lane swim": facility scope, group scope stated
+  2026-05-18 Mon 20:00-21:00 "Sauna": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon
+  2026-05-18 Mon 07:15-21:15 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon
+  2026-05-18 Mon 11:45-12:45 "Yoga": facility scope, group scope stated
+  2026-05-18 Mon 13:00-14:00 "Pilates 50+": facility scope, group scope stated
+  2026-05-18 Mon 16:30-17:30 "Pilates": facility scope, group scope stated
+  2026-05-18 Mon 18:30-19:30 "HIIT": facility scope, group scope stated
+  2026-05-18 Mon 18:30-19:30 "Zumba®": facility scope, group scope stated
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon
+  2026-05-18 Mon 07:30-08:30 "Pickleball - Intermediate 16+": facility scope, group scope stated
+  2026-05-18 Mon 08:40-09:40 "Pickleball - Intermediate 16+": facility scope, group scope stated
+  2026-05-18 Mon 09:50-10:50 "Pickleball 50+": facility scope, group scope stated
+  2026-05-18 Mon 11:00-12:00 "Pickleball 50+": facility scope, group scope stated
+  2026-05-18 Mon 12:10-13:10 "Pickleball 50+": facility scope, group scope stated
+  2026-05-18 Mon 13:20-14:20 "Pickleball 50+": facility scope, group scope stated
+  2026-05-18 Mon 14:30-15:30 "Pickleball 50+": facility scope, group scope stated
+  2026-05-18 Mon 16:00-17:00 "Basketball 12+": facility scope, group scope stated
+  2026-05-18 Mon 17:30-18:30 "Pickleball 16+": facility scope, group scope stated
+  2026-05-18 Mon 18:40-19:40 "Pickleball 16+": facility scope, group scope stated
+  2026-05-18 Mon 19:50-20:50 "Pickleball - Intermediate 16+": facility scope, group scope stated

@@ -1,0 +1,56 @@
+== Minto Recreation Complex - Barrhaven, 2026-09-22 Tue to 2026-11-10 Tue
+warning: changes 2026-09-29 Tue to 2026-09-30 Wed, notice 2026-10-01 Thu to 2026-10-04 Sun, changes 2026-10-12 Mon, notice 2026-10-16 Fri, notice 2026-10-26 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-09-29 Tue to 2026-10-04 Sun, changes 2026-10-10 Sat to 2026-10-12 Mon, changes 2026-10-16 Fri, changes 2026-10-26 Mon
+  2026-09-29 Tue 18:15-19:15 "Pickleball": cancelled
+  2026-09-29 Tue 19:20-20:20 "Pickleball": cancelled
+  2026-09-29 Tue 19:55-20:55 "Pickleball": added
+  2026-09-29 Tue 20:25-21:25 "Pickleball": cancelled
+  2026-09-29 Tue 21:00-22:00 "Pickleball": added
+  2026-09-30 Wed 08:45-09:45 "Pickleball": added
+  2026-09-30 Wed 09:50-10:50 "Pickleball": added
+  2026-09-30 Wed 10:55-11:55 "Pickleball": added
+  2026-09-30 Wed 11:45-12:45 "Pickleball": cancelled
+  2026-09-30 Wed 12:00-13:00 "Pickleball": added
+  2026-09-30 Wed 12:50-13:50 "Pickleball": cancelled
+  2026-09-30 Wed 13:55-14:55 "Pickleball": cancelled
+  2026-09-30 Wed 15:00-16:00 "Pickleball": cancelled
+  2026-10-01 Thu 09:00-11:00 "Kinderplay": group scope stated
+  2026-10-01 Thu 11:45-12:45 "Pickleball": group scope stated
+  2026-10-01 Thu 12:50-13:50 "Pickleball": group scope stated
+  2026-10-01 Thu 13:55-14:55 "Pickleball": group scope stated
+  2026-10-01 Thu 15:00-16:00 "Pickleball": group scope stated
+  2026-10-01 Thu 20:15-21:15 "Basketball - youth": group scope stated
+  2026-10-02 Fri 09:00-11:00 "Kinderplay": group scope stated
+  2026-10-02 Fri 11:45-12:45 "Pickleball": group scope stated
+  2026-10-02 Fri 12:50-13:50 "Pickleball": group scope stated
+  2026-10-02 Fri 13:55-14:55 "Pickleball": group scope stated
+  2026-10-02 Fri 18:35-19:35 "Badminton": group scope stated
+  2026-10-02 Fri 19:40-20:40 "Badminton": group scope stated
+  2026-10-02 Fri 20:45-21:45 "Badminton": group scope stated
+  2026-10-03 Sat 16:45-18:15 "Basketball - family (6 to 14 years old)": group scope stated
+  2026-10-03 Sat 18:45-19:45 "Badminton": group scope stated
+  2026-10-03 Sat 19:50-20:50 "Badminton": group scope stated
+  2026-10-04 Sun 17:00-18:00 "Kinderplay": group scope stated
+  2026-10-04 Sun 18:30-19:30 "Volleyball - family (8 to 14 years old)": group scope stated
+  2026-10-16 Fri 09:00-11:00 "Kinderplay": group scope stated
+  2026-10-16 Fri 11:45-12:45 "Pickleball": group scope stated
+  2026-10-16 Fri 12:50-13:50 "Pickleball": group scope stated
+  2026-10-16 Fri 13:55-14:55 "Pickleball": group scope stated
+  2026-10-16 Fri 18:35-19:35 "Badminton": group scope stated
+  2026-10-16 Fri 19:40-20:40 "Badminton": group scope stated
+  2026-10-16 Fri 20:45-21:45 "Badminton": group scope stated
+  2026-10-26 Mon 09:00-11:00 "Kinderplay": group scope stated
+  2026-10-26 Mon 11:45-12:45 "Pickleball": group scope stated
+  2026-10-26 Mon 12:50-13:50 "Pickleball": group scope stated
+  2026-10-26 Mon 13:55-14:55 "Pickleball": group scope stated
+  2026-10-26 Mon 15:00-16:00 "Pickleball": group scope stated
+  2026-10-26 Mon 20:35-21:35 "Volleyball": group scope stated
+group "Drop-in schedule - skating"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon

@@ -1,0 +1,34 @@
+== Walter Baker Sports Centre, 2026-09-22 Tue to 2026-11-10 Tue
+warning: changes 2026-10-10 Sat to 2026-10-12 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-10-02 Fri, changes 2026-10-10 Sat to 2026-10-12 Mon
+  2026-10-02 Fri 19:30-21:00 "Lane Swim": cancelled
+  2026-10-12 Mon 07:30-08:30 "Aquafit general - Shallow *Reservations required": facility scope, group scope stated
+  2026-10-12 Mon 07:30-09:30 "Half Lane Swim": facility scope, group scope stated
+  2026-10-12 Mon 07:30-14:00 "Hot tub and Steam Room": facility scope, group scope stated
+  2026-10-12 Mon 08:30-09:30 "Aquafit general - Shallow *Reservations required": facility scope, group scope stated
+  2026-10-12 Mon 08:30-10:00 "Preschool Swim": facility scope, group scope stated
+  2026-10-12 Mon 09:30-10:30 "Aquafit general - Deep *Reservations required": facility scope, group scope stated
+  2026-10-12 Mon 09:30-10:45 "Lane Swim": facility scope, group scope stated
+  2026-10-12 Mon 10:45-11:45 "Aquafit Lite *Reservations required": facility scope, group scope stated
+  2026-10-12 Mon 10:45-11:45 "Half Lane Swim": facility scope, group scope stated
+  2026-10-12 Mon 11:45-13:00 "Lane Swim": facility scope, group scope stated
+  2026-10-12 Mon 13:00-14:00 "Aquafit Lite *Reservations required": facility scope, group scope stated
+  2026-10-12 Mon 20:00-21:00 "Hot tub and Steam Room": facility scope, group scope stated
+  2026-10-12 Mon 20:00-21:00 "Lane Swim": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon
+  2026-10-12 Mon 06:30-21:00 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon
+  2026-10-12 Mon 09:15-10:15 "Cardio and strength - older adult": facility scope, group scope stated
+  2026-10-12 Mon 09:30-10:30 "Cardio and strength - older adult lite": facility scope, group scope stated
+  2026-10-12 Mon 10:20-11:20 "Strength TMC - older adult": facility scope, group scope stated
+  2026-10-12 Mon 10:35-11:35 "Yoga": facility scope, group scope stated
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon
+group "Drop-in schedule - squash"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon
+  2026-10-12 Mon 06:30-20:30 "Squash Courts 2, 3, 4, and 5": facility scope, group scope stated
+group "Drop-in schedule - skating"
+  warning: changes 2026-10-10 Sat to 2026-10-12 Mon

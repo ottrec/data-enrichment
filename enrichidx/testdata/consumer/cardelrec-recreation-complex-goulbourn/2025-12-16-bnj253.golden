@@ -1,0 +1,28 @@
+== CARDELREC Recreation Complex Goulbourn, 2025-12-09 Tue to 2026-01-27 Tue
+warning: changes 2025-12-24 Wed to 2025-12-26 Fri, changes 2025-12-31 Wed to 2026-01-01 Thu
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-12-20 Sat to 2026-01-04 Sun
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2025-12-20 Sat to 2026-01-04 Sun
+  2025-12-24 Wed 07:00-21:30 "Weight and cardio room": facility scope
+  2025-12-25 Thu 07:00-21:30 "Weight and cardio room": facility scope
+  2025-12-26 Fri 07:00-21:30 "Weight and cardio room": facility scope
+  2026-01-01 Thu 07:00-21:30 "Weight and cardio room": facility scope
+group "Drop-in schedule - group fitness"
+  warning: changes 2025-12-20 Sat to 2026-01-04 Sun
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2025-12-20 Sat to 2026-01-04 Sun
+group "Drop-in schedule - skating"
+  warning: changes 2025-12-20 Sat to 2026-01-04 Sun
+  2025-12-24 Wed 16:15-17:05 "Family skate": facility scope
+  2025-12-24 Wed 17:15-18:05 "Public skate": facility scope
+  2025-12-25 Thu 10:15-11:05 "50+ skate": facility scope
+  2025-12-25 Thu 11:15-12:05 "Adult skate": facility scope
+  2025-12-25 Thu 12:15-13:05 "Pick-up hockey 35+ *Reservations required.": facility scope
+  2025-12-25 Thu 13:15-14:05 "Family skate": facility scope
+  2025-12-26 Fri 18:15-19:05 "Family skate": facility scope
+  2025-12-26 Fri 19:15-20:05 "Public skate": facility scope
+  2026-01-01 Thu 10:15-11:05 "50+ skate": facility scope
+  2026-01-01 Thu 11:15-12:05 "Adult skate": facility scope
+  2026-01-01 Thu 12:15-13:05 "Pick-up hockey 35+ *Reservations required.": facility scope
+  2026-01-01 Thu 13:15-14:05 "Family skate": facility scope

@@ -1,0 +1,22 @@
+== François Dupuis Recreation Centre, 2026-07-18 Sat to 2026-09-05 Sat
+warning: changes 2026-07-18 Sat to 2026-09-05 Sat
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-07-29 Wed to 2026-07-31 Fri, changes 2026-08-02 Sun to 2026-08-07 Fri
+  2026-07-29 Wed 08:30-09:00 "Lane swim -shared pool": cancelled
+  2026-07-29 Wed 12:00-13:30 "Lane swim -shared pool": added
+  2026-07-30 Thu 08:30-09:00 "Lane swim -shared pool": cancelled
+  2026-07-30 Thu 12:00-13:30 "Lane swim -shared pool": added
+  2026-07-31 Fri 08:30-09:00 "Lane swim -shared pool": cancelled
+  2026-07-31 Fri 12:00-13:30 "Lane swim -shared pool": added
+  2026-08-04 Tue 08:30-09:00 "Lane swim -shared pool": cancelled
+  2026-08-04 Tue 12:00-13:30 "Lane swim -shared pool": added
+  2026-08-05 Wed 08:30-09:00 "Lane swim -shared pool": cancelled
+  2026-08-05 Wed 12:00-13:30 "Lane swim -shared pool": added
+  2026-08-06 Thu 08:30-09:00 "Lane swim -shared pool": cancelled
+  2026-08-06 Thu 12:00-13:30 "Lane swim -shared pool": added
+  2026-08-07 Fri 08:30-09:00 "Lane swim -shared pool": cancelled
+  2026-08-07 Fri 12:00-13:30 "Lane swim -shared pool": added
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-08-02 Sun to 2026-08-03 Mon
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-08-02 Sun to 2026-08-03 Mon

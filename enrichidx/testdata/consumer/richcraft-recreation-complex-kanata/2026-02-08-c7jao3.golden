@@ -1,0 +1,34 @@
+== Richcraft Recreation Complex-Kanata, 2026-02-01 Sun to 2026-03-22 Sun
+warning: changes 2026-02-14 Sat to 2026-02-16 Mon
+group "Drop-in schedule - Family Day"
+  warning: changes 2026-02-14 Sat to 2026-02-15 Sun
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-02-14 Sat to 2026-02-16 Mon
+  2026-02-14 Sat 08:30-09:30 "Lane swim*Reservations not required.": cancelled
+  2026-02-14 Sat 08:30-09:30 "Public swim - leisure pool only*Reservations not required.": cancelled
+  2026-02-14 Sat 12:30-13:30 "Lane swim*Reservations not required.": cancelled
+  2026-02-14 Sat 12:30-13:30 "Public swim - leisure pool only*Reservations not required.": cancelled
+  2026-02-14 Sat 13:30-16:00 "Public swim *Reservations not required.": cancelled
+  2026-02-14 Sat 19:00-20:00 "Aquafit Zumba®": cancelled
+  2026-02-15 Sun 08:30-10:30 "Lane swim*Reservations not required.": cancelled
+  2026-02-15 Sun 08:30-10:30 "Public swim - leisure pool only*Reservations not required.": cancelled
+  2026-02-15 Sun 13:30-16:00 "Public swim *Reservations not required.": cancelled
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-02-16 Mon
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-02-16 Mon
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-02-13 Fri, changes 2026-02-16 Mon
+  2026-02-13 Fri 07:30-08:30 "Pickleball - rotations": cancelled
+  2026-02-13 Fri 08:30-09:30 "Pickleball - rotations": cancelled
+  2026-02-13 Fri 08:30-09:30 "Pickleball - rotations (intermediate)": cancelled
+  2026-02-13 Fri 09:30-10:30 "Pickleball - rotations": cancelled
+  2026-02-13 Fri 09:30-10:30 "Pickleball - rotations (intermediate)": cancelled
+  2026-02-13 Fri 11:00-12:00 "Badminton doubles - adult": cancelled
+  2026-02-13 Fri 11:00-12:00 "Basketball - adult": cancelled
+  2026-02-13 Fri 12:00-13:00 "Badminton doubles - adult": cancelled
+  2026-02-13 Fri 12:00-13:00 "Basketball - adult": cancelled
+  2026-02-13 Fri 13:30-14:30 "Pickleball - rotations": cancelled
+  2026-02-13 Fri 13:30-14:30 "Pickleball - rotations (intermediate)": cancelled
+  2026-02-13 Fri 14:30-15:30 "Pickleball - rotations": cancelled
+  2026-02-13 Fri 14:30-15:30 "Pickleball - rotations (intermediate)": cancelled

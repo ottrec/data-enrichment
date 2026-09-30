@@ -1,0 +1,33 @@
+== Walter Baker Sports Centre, 2025-10-02 Thu to 2025-11-20 Thu
+warning: notice 2025-10-02 Thu to 2025-10-12 Sun, changes 2025-10-13 Mon, notice 2025-10-14 Tue to 2025-11-20 Thu
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-10-11 Sat to 2025-10-13 Mon
+  2025-10-13 Mon 07:30-08:30 "Aquafit general - shallow": facility scope, group scope stated
+  2025-10-13 Mon 07:30-09:30 "Half lane swim": facility scope, group scope stated
+  2025-10-13 Mon 07:30-14:00 "Hot tub and steam room": facility scope, group scope stated
+  2025-10-13 Mon 08:30-09:30 "Aquafit general - shallow": facility scope, group scope stated
+  2025-10-13 Mon 08:30-10:00 "Preschool swim": facility scope, group scope stated
+  2025-10-13 Mon 09:30-10:30 "Aquafit general - deep": facility scope, group scope stated
+  2025-10-13 Mon 09:30-10:45 "Lane swim": facility scope, group scope stated
+  2025-10-13 Mon 10:45-11:45 "Aquafit lite": facility scope, group scope stated
+  2025-10-13 Mon 10:45-11:45 "Half lane swim": facility scope, group scope stated
+  2025-10-13 Mon 11:45-13:00 "Lane swim": facility scope, group scope stated
+  2025-10-13 Mon 13:00-14:00 "Aquafit lite": facility scope, group scope stated
+  2025-10-13 Mon 20:00-21:00 "Hot tub and steam room": facility scope, group scope stated
+  2025-10-13 Mon 20:00-21:00 "Lane swim": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2025-10-13 Mon
+  2025-10-13 Mon 06:30-21:00 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2025-10-13 Mon
+  2025-10-13 Mon 09:15-10:15 "Cardio and strength - older adult": facility scope, group scope stated
+  2025-10-13 Mon 09:30-10:30 "Cardio and strength - older adult lite": facility scope, group scope stated
+  2025-10-13 Mon 10:20-11:20 "Strength TMC - older adult": facility scope, group scope stated
+  2025-10-13 Mon 10:35-11:35 "Yoga": facility scope, group scope stated
+group "Drop-in schedule - racquet sports"
+  warning: changes 2025-10-13 Mon
+  2025-10-13 Mon 06:30-20:30 "Squash Courts 2, 3, 4, and 5": facility scope, group scope stated
+group "Drop-in schedule - sports"
+  warning: changes 2025-10-13 Mon
+group "Drop-in schedule - skating"
+  warning: changes 2025-10-13 Mon

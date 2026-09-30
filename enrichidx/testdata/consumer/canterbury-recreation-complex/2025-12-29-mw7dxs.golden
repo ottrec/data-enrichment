@@ -1,0 +1,27 @@
+== Canterbury Recreation Complex, 2025-12-22 Mon to 2026-02-09 Mon
+warning: changes 2025-12-22 Mon to 2026-02-09 Mon
+group "Drop-in schedule - Winter Break December 20 to Sunday, January 4"
+  2025-12-29 Mon 07:30-08:55 "Lane swim": facility scope
+  2025-12-29 Mon 09:00-10:00 "Aquafit": facility scope
+  2025-12-29 Mon 10:05-13:30 "Lane swim": facility scope
+  2025-12-29 Mon 11:00-12:00 "Adult skating": facility scope
+  2025-12-29 Mon 12:00-13:00 "Public skating": facility scope
+  2025-12-29 Mon 14:30-17:25 "Lane swim": facility scope
+  2025-12-29 Mon 17:30-19:25 "Public swim *Reservations not required.": facility scope
+  2025-12-29 Mon 19:30-20:30 "Aquafit": facility scope
+  2025-12-29 Mon 20:35-21:30 "Lane swim": facility scope
+  2025-12-30 Tue 07:30-08:55 "Lane swim": facility scope
+  2025-12-30 Tue 09:00-10:00 "Aquafit": facility scope
+  2025-12-30 Tue 10:00-11:00 "Public swim *Reservations not required.": facility scope
+  2025-12-30 Tue 11:05-13:30 "Lane swim": facility scope
+  2025-12-30 Tue 14:30-17:30 "Lane swim": facility scope
+  2025-12-30 Tue 17:30-20:30 "Public swim *Reservations not required.": facility scope
+  2025-12-30 Tue 20:30-21:30 "Lane swim": facility scope
+  2025-12-31 Wed 07:30-08:55 "Lane swim": facility scope
+  2025-12-31 Wed 09:00-10:00 "Aquafit": facility scope
+  2025-12-31 Wed 10:00-11:00 "Public swim *Reservations not required.": facility scope
+  2025-12-31 Wed 11:05-13:30 "Lane swim": facility scope
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-12-22 Mon to 2026-01-04 Sun
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2025-12-22 Mon to 2026-01-04 Sun

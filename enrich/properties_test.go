@@ -61,16 +61,16 @@ func TestCorpusProperties(t *testing.T) {
 	for _, name := range slices.Sorted(maps.Keys(outs)) {
 		fo := outs[name]
 		fx := &fixtureCtx{withEffect: map[string]bool{}}
-		for fac := range fo.data.Facilities() {
+		for fac := range fo.Data.Facilities() {
 			fx.anchor = fac.GetSourceDate()
 		}
-		for _, o := range fo.out.GetObjects() {
+		for _, o := range fo.Out.GetObjects() {
 			if len(o.GetEffects()) > 0 {
 				fx.withEffect[o.GetRawText()] = true
 			}
 		}
 		byID := map[string]*epb.Object{}
-		for _, o := range fo.out.GetObjects() {
+		for _, o := range fo.Out.GetObjects() {
 			objects++
 			byID[o.GetId()] = o
 			kind := strings.ToLower(o.GetKind().String())
@@ -285,13 +285,13 @@ type sessionViolation struct{ id, detail string }
 // sessionsOutsideSchedule finds session refs (not added times) dated where no
 // schedule listing the activity is in effect, when every such schedule has a
 // known range.
-func sessionsOutsideSchedule(fo fixtureOutput) []sessionViolation {
+func sessionsOutsideSchedule(fo golden.Fixture) []sessionViolation {
 	type ranges struct {
 		known bool
 		rs    []schema.DateRange
 	}
 	byAct := map[[2]string]*ranges{}
-	for grp := range fo.data.ScheduleGroups() {
+	for grp := range fo.Data.ScheduleGroups() {
 		for sched := range grp.Schedules() {
 			er, ok := sched.ComputeEffectiveDateRange()
 			for act := range sched.Activities() {
@@ -309,7 +309,7 @@ func sessionsOutsideSchedule(fo fixtureOutput) []sessionViolation {
 		}
 	}
 	var out []sessionViolation
-	for _, f := range fo.out.GetFacilities() {
+	for _, f := range fo.Out.GetFacilities() {
 		for _, g := range f.GetGroups() {
 			for _, a := range g.GetActivities() {
 				r := byAct[[2]string{g.GetLabel(), a.GetLabel()}]

@@ -1,0 +1,9 @@
+== John G. Mlacak Centre, 2025-12-12 Fri to 2026-01-30 Fri
+group "Drop-in schedule - ice sports"
+  warning: changes 2025-12-25 Thu
+  2025-12-25 Thu 20:00-20:50 "Figure skating - 18+": cancelled
+group "Drop-in schedule - skating"
+  warning: changes 2025-12-25 Thu, changes 2025-12-27 Sat
+  2025-12-25 Thu 19:00-19:50 "Public skating": cancelled
+  2025-12-27 Sat 18:00-18:50 "Family skating": cancelled
+  2025-12-27 Sat 19:00-19:50 "Public skating": cancelled

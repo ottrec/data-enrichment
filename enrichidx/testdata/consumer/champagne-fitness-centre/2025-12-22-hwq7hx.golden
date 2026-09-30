@@ -1,0 +1,8 @@
+== Champagne Fitness Centre, 2025-12-15 Mon to 2026-02-02 Mon
+warning: changes 2025-12-24 Wed to 2025-12-26 Fri, changes 2025-12-31 Wed to 2026-01-01 Thu
+group "Drop-in schedule - swim"
+  warning: changes 2025-12-22 Mon to 2026-01-04 Sun
+group "Drop-in schedule - weight and cardio room"
+  2025-12-25 Thu 06:30-21:30 "Weight and cardio room": facility scope
+  2025-12-26 Fri 06:30-21:30 "Weight and cardio room": facility scope
+  2026-01-01 Thu 06:30-21:30 "Weight and cardio room": facility scope

@@ -1,0 +1,16 @@
+== Walter Baker Sports Centre, 2025-12-24 Wed to 2026-02-11 Wed
+warning: notice 2025-12-24 Wed to 2025-12-30 Tue, changes 2025-12-31 Wed to 2026-01-01 Thu, notice 2026-01-02 Fri to 2026-02-11 Wed
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-12-24 Wed to 2026-01-04 Sun
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2025-12-24 Wed to 2026-01-04 Sun
+  2025-12-31 Wed 06:30-21:00 "Weight and cardio room": facility scope
+  2026-01-01 Thu 06:30-21:00 "Weight and cardio room": facility scope
+group "Drop-in schedule - group fitness"
+  warning: changes 2025-12-24 Wed to 2026-01-04 Sun
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2025-12-24 Wed to 2026-01-04 Sun
+group "Drop-in schedule - squash"
+  warning: changes 2025-12-24 Wed to 2026-01-04 Sun
+group "Drop-in schedule - skating"
+  warning: changes 2025-12-24 Wed to 2026-01-04 Sun

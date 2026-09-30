@@ -1,22 +1,16 @@
 package enrich_test
 
 import (
-	"errors"
 	"flag"
-	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
-	"runtime"
 	"slices"
 	"strings"
 	"sync"
 	"testing"
 
-	"github.com/ottrec/data-enrichment/enrich"
 	"github.com/ottrec/data-enrichment/internal/golden"
-	epb "github.com/ottrec/data-enrichment/schema"
-	"github.com/ottrec/website/pkg/ottrecidx"
 )
 
 var update = flag.Bool("update", false, "rewrite the golden files from the current parser output")
@@ -48,7 +42,7 @@ func TestGolden(t *testing.T) {
 	for _, name := range fixtures {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
-			got := golden.Render(outs[name].out)
+			got := golden.Render(outs[name].Out)
 			path := filepath.Join(corpusDir, name+".golden")
 			if *update {
 				if err := os.WriteFile(path, []byte(got), 0o666); err != nil {
@@ -70,21 +64,10 @@ func TestGolden(t *testing.T) {
 // corpusFixtures lists the fixture names, relative to corpusDir and without
 // the extension.
 func corpusFixtures(t testing.TB) []string {
-	var names []string
-	err := filepath.WalkDir(corpusDir, func(p string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return err
-		}
-		if !d.IsDir() && strings.HasSuffix(p, ".pb") {
-			rel, _ := filepath.Rel(corpusDir, p)
-			names = append(names, strings.TrimSuffix(rel, ".pb"))
-		}
-		return nil
-	})
-	if err != nil && !os.IsNotExist(err) {
+	names, err := golden.Fixtures(corpusDir)
+	if err != nil {
 		t.Fatal(err)
 	}
-	slices.Sort(names)
 	return names
 }
 
@@ -104,48 +87,22 @@ func removeStale(t testing.TB, fixtures []string) {
 	})
 }
 
-type fixtureOutput struct {
-	data ottrecidx.DataRef
-	out  *epb.Output
-}
-
 var corpus struct {
 	once sync.Once
-	outs map[string]fixtureOutput
+	outs map[string]golden.Fixture
 	err  error
 }
 
 // corpusOutputs runs the parser over every fixture once per test binary.
-func corpusOutputs(t testing.TB) map[string]fixtureOutput {
+func corpusOutputs(t testing.TB) map[string]golden.Fixture {
 	corpus.once.Do(func() {
 		names := corpusFixtures(t)
-		outs := make([]fixtureOutput, len(names))
-		errs := make([]error, len(names))
-		var wg sync.WaitGroup
-		sem := make(chan struct{}, runtime.GOMAXPROCS(0))
-		for i, name := range names {
-			wg.Go(func() {
-				sem <- struct{}{}
-				defer func() { <-sem }()
-				buf, err := os.ReadFile(filepath.Join(corpusDir, name+".pb"))
-				if err != nil {
-					errs[i] = err
-					return
-				}
-				idx, err := new(ottrecidx.Indexer).Load(buf)
-				if err != nil {
-					errs[i] = fmt.Errorf("load %s: %w", name, err)
-					return
-				}
-				outs[i] = fixtureOutput{idx.Data(), enrich.EnrichVersion(name, idx.Data())}
-			})
+		fx, err := golden.Load(corpusDir, names)
+		corpus.outs = map[string]golden.Fixture{}
+		for _, f := range fx {
+			corpus.outs[f.Name] = f
 		}
-		wg.Wait()
-		corpus.outs = map[string]fixtureOutput{}
-		for i, name := range names {
-			corpus.outs[name] = outs[i]
-		}
-		corpus.err = errors.Join(errs...)
+		corpus.err = err
 	})
 	if corpus.err != nil {
 		t.Fatal(corpus.err)

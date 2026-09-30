@@ -1,0 +1,10 @@
+== Minto Recreation Complex - Barrhaven, 2026-06-27 Sat to 2026-08-15 Sat
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-07-08 Wed, changes 2026-07-15 Wed
+  2026-07-08 Wed 16:15-17:15 "Drums Fitness": cancelled
+  2026-07-08 Wed 16:15-17:15 "Strength circuit": added
+  2026-07-15 Wed 16:15-17:15 "Drums Fitness": cancelled
+  2026-07-15 Wed 16:15-17:15 "Strength circuit": added
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-07-18 Sat
+  2026-07-18 Sat 09:00-11:00 "Kinderplay": cancelled

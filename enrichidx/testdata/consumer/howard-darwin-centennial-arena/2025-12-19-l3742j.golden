@@ -1,0 +1,9 @@
+== Howard Darwin Centennial Arena, 2025-12-12 Fri to 2026-01-30 Fri
+group "Drop-in schedule - ice sports"
+  warning: changes 2025-12-26 Fri
+  2025-12-26 Fri 20:00-20:50 "Figure skating": cancelled
+group "Drop-in schedule - skating"
+  warning: changes 2025-12-22 Mon, changes 2025-12-26 Fri
+  2025-12-22 Mon 15:00-15:50 "Family skating": added
+  2025-12-22 Mon 16:00-16:50 "Public skating": added
+  2025-12-26 Fri 19:00-19:50 "Family skating": cancelled

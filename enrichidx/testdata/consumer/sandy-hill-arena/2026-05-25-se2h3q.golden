@@ -1,0 +1,15 @@
+== Sandy Hill Arena, 2026-05-18 Mon to 2026-07-06 Mon
+group "Drop-in schedule - skating"
+  warning: changes 2026-05-31 Sun to 2026-06-02 Tue, changes 2026-06-05 Fri, changes 2026-06-08 Mon
+  2026-05-31 Sun 15:00-15:50 "Family skating": group scope stated
+  2026-06-01 Mon 16:00-16:50 "Adult skating (18+)": group scope stated
+  2026-06-02 Tue 21:00-21:50 "Adult skating (18+)": group scope stated
+  2026-06-05 Fri 17:00-17:50 "Family skating": group scope stated
+  2026-06-05 Fri 18:00-18:50 "Public skating": group scope stated
+  2026-06-08 Mon 16:00-16:50 "Adult skating (18+)": group scope stated
+group "Drop-in schedule - ice sports"
+  warning: changes 2026-05-31 Sun to 2026-06-02 Tue, changes 2026-06-08 Mon
+  2026-05-31 Sun 16:00-16:50 "Speed skating": group scope stated
+  2026-06-01 Mon 17:00-17:50 "Figure skating": group scope stated
+  2026-06-02 Tue 20:00-20:50 "Figure skating": group scope stated
+  2026-06-08 Mon 17:00-17:50 "Figure skating": group scope stated

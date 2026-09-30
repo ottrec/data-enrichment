@@ -1,0 +1,24 @@
+== Tony Graham Recreation Complex - Kanata, 2025-12-16 Tue to 2026-02-03 Tue
+warning: changes 2025-12-22 Mon, changes 2025-12-24 Wed to 2026-01-01 Thu
+group "Drop-in schedule - Winter Break"
+  2025-12-27 Sat 10:00-10:50 "Public skating *Reservations not required.": facility scope
+  2025-12-27 Sat 11:00-11:50 "Public skating *Reservations not required.": facility scope
+  2025-12-28 Sun 12:15-13:05 "Public skating *Reservations not required.": facility scope
+  2025-12-28 Sun 13:15-14:05 "Public skating *Reservations not required.": facility scope
+group "Drop-in schedule - skating"
+  warning: changes 2025-12-21 Sun to 2026-01-03 Sat
+  2025-12-24 Wed 13:00-13:50 "Public skating": facility scope
+  2025-12-25 Thu 13:00-13:50 "Public skating": facility scope
+  2025-12-26 Fri 19:15-20:05 "Public skating": facility scope
+  2025-12-28 Sun 12:15-13:05 "Public skating": facility scope
+  2025-12-28 Sun 13:15-14:05 "Public skating": facility scope
+  2025-12-30 Tue 13:15-14:05 "Public skating": facility scope
+  2025-12-31 Wed 13:00-13:50 "Public skating": facility scope
+  2026-01-01 Thu 13:00-13:50 "Public skating": facility scope
+group "Drop-in schedule - ice sports"
+  warning: changes 2025-12-21 Sun to 2026-01-03 Sat
+  2025-12-24 Wed 12:00-12:50 "18+ Pick-up hockey": facility scope
+  2025-12-25 Thu 12:00-12:50 "18+ Pick-up hockey": facility scope
+  2025-12-30 Tue 12:15-13:05 "18+ Pick-up hockey": facility scope
+  2025-12-31 Wed 12:00-12:50 "18+ Pick-up hockey": facility scope
+  2026-01-01 Thu 12:00-12:50 "18+ Pick-up hockey": facility scope

@@ -1,0 +1,16 @@
+== Nepean Sportsplex, 2026-09-21 Mon to 2026-11-09 Mon
+warning: notice 2026-09-21 Mon to 2026-11-09 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-10-12 Mon, changes 2026-10-17 Sat to 2026-10-18 Sun, changes 2026-10-24 Sat to 2026-10-25 Sun
+  2026-10-17 Sat 11:00-15:00 "Lane swim - 50m short course": cancelled
+  2026-10-18 Sun 11:00-15:00 "Lane swim - 50m short course": cancelled
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-10-12 Mon
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-10-12 Mon
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-10-12 Mon
+group "Drop-in schedule - squash"
+  warning: changes 2026-10-12 Mon
+group "Drop-in schedule - skating"
+  warning: changes 2026-10-12 Mon

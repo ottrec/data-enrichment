@@ -1,0 +1,50 @@
+== Ray Friel Recreation Complex, 2026-08-20 Thu to 2026-10-08 Thu
+warning: notice 2026-08-20 Thu to 2026-10-08 Thu
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-09-05 Sat to 2026-09-07 Mon
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-09-05 Sat to 2026-09-13 Sun
+  2026-09-08 Tue 06:00-21:00 "Weight and cardio room": cancelled
+  2026-09-09 Wed 06:00-21:00 "Weight and cardio room": cancelled
+  2026-09-10 Thu 06:00-21:00 "Weight and cardio room": cancelled
+  2026-09-11 Fri 06:00-21:00 "Weight and cardio room": cancelled
+  2026-09-12 Sat 08:00-20:00 "Weight and cardio room": cancelled
+  2026-09-13 Sun 08:00-20:00 "Weight and cardio room": cancelled
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-09-05 Sat to 2026-09-13 Sun
+  2026-09-08 Tue 08:30-09:25 "TMC": group scope stated
+  2026-09-08 Tue 09:30-10:25 "20 - 20 - 20": group scope stated
+  2026-09-08 Tue 10:30-11:25 "Yoga - older adult": group scope stated
+  2026-09-08 Tue 11:30-12:25 "Yin Yoga": group scope stated
+  2026-09-08 Tue 16:30-17:25 "TRX": group scope stated
+  2026-09-08 Tue 17:30-18:25 "Bootcamp": group scope stated
+  2026-09-08 Tue 18:30-19:25 "Indoor cycling": group scope stated
+  2026-09-08 Tue 18:30-19:25 "Yoga": group scope stated
+  2026-09-09 Wed 09:30-10:25 "Pilates": group scope stated
+  2026-09-09 Wed 10:30-11:25 "Yin Yoga": group scope stated
+  2026-09-09 Wed 13:00-13:55 "Cardio and strength - older adult": group scope stated
+  2026-09-09 Wed 14:00-14:55 "Strength and balance - older adult": group scope stated
+  2026-09-09 Wed 16:30-17:25 "HIIT": group scope stated
+  2026-09-09 Wed 18:30-19:25 "Indoor cycling": group scope stated
+  2026-09-09 Wed 19:30-20:25 "Yoga": group scope stated
+  2026-09-10 Thu 11:00-11:55 "Yoga - QiGong": group scope stated
+  2026-09-10 Thu 12:00-12:55 "Yoga - older adult": group scope stated
+  2026-09-10 Thu 16:30-17:25 "Core conditioning": group scope stated
+  2026-09-10 Thu 17:30-18:25 "Strength": group scope stated
+  2026-09-10 Thu 18:30-19:25 "Indoor cycling": group scope stated
+  2026-09-11 Fri 04:30-05:25 "Bootcamp": group scope stated
+  2026-09-11 Fri 09:00-09:55 "Indoor cycling": group scope stated
+  2026-09-11 Fri 09:00-09:55 "Pilates": group scope stated
+  2026-09-11 Fri 10:15-11:10 "Yoga": group scope stated
+  2026-09-11 Fri 11:30-12:25 "Strength": group scope stated
+  2026-09-11 Fri 13:00-13:55 "Zumba® Gold": group scope stated
+  2026-09-11 Fri 14:00-14:55 "Strength and balance - older adult": group scope stated
+  2026-09-11 Fri 17:30-18:25 "Cardio and strength": group scope stated
+  2026-09-11 Fri 18:30-19:25 "Yoga": group scope stated
+  2026-09-12 Sat 09:00-10:00 "Sport conditioning": group scope stated
+  2026-09-12 Sat 09:15-10:10 "Indoor cycling": group scope stated
+  2026-09-12 Sat 10:15-11:10 "Yoga": group scope stated
+  2026-09-13 Sun 10:15-11:10 "Cardio and strength": group scope stated
+  2026-09-13 Sun 11:30-12:25 "Step and strength": group scope stated
+group "Drop-in schedule - skating"
+  warning: changes 2026-09-05 Sat to 2026-09-07 Mon

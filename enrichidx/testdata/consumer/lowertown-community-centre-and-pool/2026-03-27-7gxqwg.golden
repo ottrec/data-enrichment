@@ -1,0 +1,20 @@
+== Lowertown Community Centre and Pool, 2026-03-20 Fri to 2026-05-08 Fri
+warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+group "Drop-in schedule - Easter weekend"
+  warning: changes 2026-03-25 Wed
+group "Drop-in schedule - swimming"
+  warning: changes 2026-03-26 Thu, changes 2026-04-02 Thu to 2026-04-06 Mon, changes 2026-04-09 Thu
+  2026-03-26 Thu 13:00-14:00 "Public swim": cancelled
+  2026-04-02 Thu 13:00-14:00 "Public swim": cancelled
+  2026-04-03 Fri 06:30-10:00 "Lane swim": facility scope, group scope stated
+  2026-04-03 Fri 10:00-11:00 "50+ Vitality": facility scope, group scope stated
+  2026-04-03 Fri 11:00-13:00 "Lane swim": facility scope, group scope stated
+  2026-04-03 Fri 14:00-15:30 "Lane swim": facility scope, group scope stated
+  2026-04-03 Fri 16:30-19:00 "Public swim": facility scope, group scope stated
+  2026-04-09 Thu 13:00-14:00 "Public swim": cancelled
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-03-25 Wed to 2026-03-26 Thu, changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-03-25 Wed 08:30-12:30 "Pickleball *Reservations required.": cancelled
+  2026-03-26 Thu 09:00-10:00 "Pickleball *Reservations required.": cancelled
+  2026-04-03 Fri 08:30-10:30 "Pickleball *Reservations required.": facility scope, group scope stated
+  2026-04-03 Fri 17:45-18:45 "Open gym": facility scope, group scope stated

@@ -1,0 +1,27 @@
+== Diane Deans Greenboro Community Centre, 2026-03-16 Mon to 2026-05-04 Mon
+warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 07:30-21:00 "Weight and cardio room": facility scope, group scope stated
+  2026-04-05 Sun 08:00-20:00 "Weight and cardio room": facility scope, group scope stated
+  2026-04-06 Mon 07:30-21:00 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 09:00-10:00 "Cardio and strength": facility scope, group scope stated
+  2026-04-03 Fri 09:00-10:00 "Indoor cycling": facility scope, group scope stated
+  2026-04-03 Fri 09:15-10:15 "Strength 50+": facility scope, group scope stated
+  2026-04-03 Fri 10:45-11:45 "Strength 50+": facility scope, group scope stated
+  2026-04-05 Sun 09:00-10:00 "Cardio and strength": facility scope, group scope stated
+  2026-04-06 Mon 09:00-10:00 "Indoor cycling": facility scope, group scope stated
+  2026-04-06 Mon 09:15-10:15 "Pilates": facility scope, group scope stated
+  2026-04-06 Mon 09:15-10:15 "Zumba Gold": facility scope, group scope stated
+  2026-04-06 Mon 10:45-11:45 "Cardio and strength 50+": facility scope, group scope stated
+  2026-04-06 Mon 12:00-13:00 "Cardio and strength": facility scope, group scope stated
+  2026-04-06 Mon 17:45-18:45 "HIIT": facility scope, group scope stated
+  2026-04-06 Mon 19:15-20:15 "Yoga": facility scope, group scope stated
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 12:30-13:30 "Pickleball": facility scope, group scope stated
+  2026-04-04 Sat 09:35-11:00 "Kinderplay*Reservations not required.": group scope stated
+  2026-04-05 Sun 10:30-11:30 "Pickleball": facility scope, group scope stated
+  2026-04-06 Mon 12:30-13:30 "Badminton": facility scope, group scope stated

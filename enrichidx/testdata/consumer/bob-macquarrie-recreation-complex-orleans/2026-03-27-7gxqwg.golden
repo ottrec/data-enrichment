@@ -1,0 +1,44 @@
+== Bob MacQuarrie Recreation Complex - Orléans, 2026-03-20 Fri to 2026-05-08 Fri
+warning: notice 2026-03-30 Mon to 2026-04-02 Thu, changes 2026-04-03 Fri, notice 2026-04-04 Sat to 2026-05-08 Fri
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 06:00-21:00 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+group "Drop-in schedule - squash and racquetball"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": facility scope, group scope stated
+  2026-04-03 Fri 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": facility scope, group scope stated
+group "Drop-in schedule - skating"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 19:15-20:05 "Public skating": facility scope, group scope stated
+  2026-04-03 Fri 20:15-21:05 "Figure skating": facility scope, group scope stated

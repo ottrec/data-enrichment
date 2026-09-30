@@ -1,0 +1,36 @@
+== Canterbury Recreation Complex, 2025-12-05 Fri to 2026-01-23 Fri
+warning: changes 2025-12-05 Fri to 2026-01-23 Fri
+group "Drop-in schedule - Winter Break"
+  2025-12-24 Wed 07:30-08:55 "Lane swim": facility scope
+  2025-12-24 Wed 09:00-10:00 "Aquafit": facility scope
+  2025-12-24 Wed 10:00-11:00 "Public swim *Reservations not required.": facility scope
+  2025-12-24 Wed 11:05-13:30 "Lane swim": facility scope
+  2025-12-26 Fri 09:00-10:00 "Aquafit": facility scope
+  2025-12-27 Sat 09:00-11:55 "Lane swim": facility scope
+  2025-12-27 Sat 12:00-15:00 "Public swim *Reservations not required.": facility scope
+  2025-12-27 Sat 15:05-17:30 "Lane swim": facility scope
+  2025-12-28 Sun 09:00-11:55 "Lane swim": facility scope
+  2025-12-28 Sun 12:00-15:00 "Public swim *Reservations not required.": facility scope
+  2025-12-28 Sun 15:05-17:30 "Lane swim": facility scope
+  2025-12-29 Mon 07:30-08:55 "Lane swim": facility scope
+  2025-12-29 Mon 09:00-10:00 "Aquafit": facility scope
+  2025-12-29 Mon 10:05-13:30 "Lane swim": facility scope
+  2025-12-29 Mon 14:30-17:25 "Lane swim": facility scope
+  2025-12-29 Mon 17:30-19:25 "Public swim *Reservations not required.": facility scope
+  2025-12-29 Mon 19:30-20:30 "Aquafit": facility scope
+  2025-12-29 Mon 20:35-21:30 "Lane swim": facility scope
+  2025-12-30 Tue 07:30-08:55 "Lane swim": facility scope
+  2025-12-30 Tue 09:00-10:00 "Aquafit": facility scope
+  2025-12-30 Tue 10:00-11:00 "Public swim *Reservations not required.": facility scope
+  2025-12-30 Tue 11:05-13:30 "Lane swim": facility scope
+  2025-12-30 Tue 14:30-17:30 "Lane swim": facility scope
+  2025-12-30 Tue 17:30-20:30 "Public swim *Reservations not required.": facility scope
+  2025-12-30 Tue 20:30-21:30 "Lane swim": facility scope
+  2025-12-31 Wed 07:30-08:55 "Lane swim": facility scope
+  2025-12-31 Wed 09:00-10:00 "Aquafit": facility scope
+  2025-12-31 Wed 10:00-11:00 "Public swim *Reservations not required.": facility scope
+  2025-12-31 Wed 11:05-13:30 "Lane swim": facility scope
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-12-20 Sat to 2026-01-04 Sun
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2025-12-20 Sat to 2026-01-04 Sun

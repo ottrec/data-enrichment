@@ -1,0 +1,14 @@
+== Kanata Leisure Centre and Wave Pool, 2025-09-29 Mon to 2025-11-17 Mon
+warning: changes 2025-10-13 Mon
+group "Drop-in schedule - Thanksgiving Day"
+  warning: changes 2025-10-11 Sat to 2025-10-12 Sun
+  2025-10-11 Sat 12:00-17:00 "Hot tub and sauna": added
+  2025-10-12 Sun 12:00-17:00 "Hot tub and sauna": added
+group "Drop-in schedules - swim and aquafit"
+  warning: changes 2025-10-11 Sat to 2025-10-13 Mon
+  2025-10-11 Sat 12:00-17:00 "Hot tub and sauna": added
+  2025-10-12 Sun 12:00-17:00 "Hot tub and sauna": added
+group "Drop-in schedules - weight and cardio room"
+  warning: changes 2025-10-13 Mon
+group "Drop-in schedules - group fitness"
+  warning: changes 2025-10-13 Mon

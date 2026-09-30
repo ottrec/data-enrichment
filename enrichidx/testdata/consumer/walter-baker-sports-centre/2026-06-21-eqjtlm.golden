@@ -1,0 +1,39 @@
+== Walter Baker Sports Centre, 2026-06-14 Sun to 2026-08-02 Sun
+warning: changes 2026-06-14 Sun to 2026-06-28 Sun, changes 2026-07-01 Wed
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-06-14 Sun to 2026-08-02 Sun
+  2026-07-01 Wed 07:15-08:15 "Aquafit general - Shallow": facility scope, group scope stated
+  2026-07-01 Wed 07:15-08:30 "Half Lane Swim": facility scope, group scope stated
+  2026-07-01 Wed 07:15-13:00 "Hot tub and Steam Room": facility scope, group scope stated
+  2026-07-01 Wed 08:15-09:15 "Aquafit Lite": facility scope, group scope stated
+  2026-07-01 Wed 09:15-10:15 "Aquafit general - Deep": facility scope, group scope stated
+  2026-07-01 Wed 11:00-12:00 "Half Lane Swim": facility scope, group scope stated
+  2026-07-01 Wed 12:00-13:00 "Lane Swim": facility scope, group scope stated
+  2026-07-01 Wed 14:00-16:00 "Public Swim": facility scope, group scope stated
+  2026-07-01 Wed 14:00-21:00 "Hot tub and Steam Room": facility scope, group scope stated
+  2026-07-01 Wed 16:00-17:30 "Lane Swim": facility scope, group scope stated
+  2026-07-01 Wed 17:30-19:30 "Public Swim": facility scope, group scope stated
+  2026-07-01 Wed 19:30-21:00 "Lane Swim": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 06:30-21:00 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 09:00-10:00 "Cardio and strength - older adult": facility scope, group scope stated
+  2026-07-01 Wed 10:00-11:00 "Strength TMC -older adult": facility scope, group scope stated
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-07-01 Wed
+group "Drop-in schedule - squash"
+  warning: changes 2026-06-14 Sun to 2026-06-24 Wed, changes 2026-07-01 Wed
+  2026-06-14 Sun 08:30-19:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-15 Mon 06:30-20:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-16 Tue 06:30-20:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-17 Wed 06:30-20:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-18 Thu 06:30-20:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-19 Fri 06:30-20:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-20 Sat 08:30-19:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-21 Sun 08:30-19:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-22 Mon 06:30-20:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-23 Tue 06:30-20:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-06-24 Wed 06:30-20:30 "Squash Courts 2, 3, 4, and 5": cancelled
+  2026-07-01 Wed 06:30-20:30 "Squash Courts 2, 3, 4, and 5": facility scope, group scope stated

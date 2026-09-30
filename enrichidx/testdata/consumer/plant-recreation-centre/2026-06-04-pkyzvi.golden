@@ -1,0 +1,20 @@
+== Plant Recreation Centre, 2026-05-28 Thu to 2026-07-16 Thu
+warning: changes 2026-06-04 Thu
+group "Drop-in schedule - swim and aquafitness"
+  2026-06-04 Thu 09:00-10:00 "Aquafit General": facility scope
+  2026-06-04 Thu 09:00-10:30 "Lane swim - reduced capacity": facility scope
+  2026-06-04 Thu 09:00-17:00 "Hot tub and steam room": facility scope
+  2026-06-04 Thu 10:30-13:00 "Lane swim": facility scope
+  2026-06-04 Thu 10:30-13:00 "Public swim - leisure pool only": facility scope
+  2026-06-04 Thu 13:00-14:00 "Public swim": facility scope
+  2026-06-04 Thu 13:00-15:00 "Lane swim - reduced capacity": facility scope
+  2026-06-04 Thu 15:00-17:00 "Lane swim": facility scope
+  2026-06-04 Thu 16:00-17:00 "Public swim - leisure pool only": facility scope
+  2026-06-04 Thu 19:30-20:30 "Aquafit General": facility scope
+  2026-06-04 Thu 20:30-21:30 "Hot tub and steam room": facility scope
+  2026-06-04 Thu 20:30-21:30 "Lane swim": facility scope
+group "Drop-in schedule - weight and cardio room"
+  2026-06-04 Thu 08:30-21:30 "Weight and cardio room": facility scope
+group "Drop-in schedule - group fitness"
+  2026-06-04 Thu 12:00-13:00 "Strength": facility scope
+  2026-06-04 Thu 17:30-18:30 "Yoga": facility scope

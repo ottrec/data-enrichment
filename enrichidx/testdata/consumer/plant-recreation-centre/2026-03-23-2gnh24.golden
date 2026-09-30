@@ -1,0 +1,40 @@
+== Plant Recreation Centre, 2026-03-16 Mon to 2026-05-04 Mon
+warning: changes 2026-04-03 Fri, notice 2026-04-04 Sat to 2026-04-05 Sun, changes 2026-04-06 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 07:00-09:00 "Lane swim": facility scope, group scope stated
+  2026-04-03 Fri 07:00-21:30 "Hot tub and steam room": facility scope, group scope stated
+  2026-04-03 Fri 09:00-10:00 "Aquafit General": facility scope, group scope stated
+  2026-04-03 Fri 09:00-11:30 "Lane swim - reduced capacity": facility scope, group scope stated
+  2026-04-03 Fri 10:00-11:00 "Aquafit General": facility scope, group scope stated
+  2026-04-03 Fri 10:30-13:00 "Public swim - leisure pool only": facility scope, group scope stated
+  2026-04-03 Fri 11:30-13:00 "Lane swim": facility scope, group scope stated
+  2026-04-03 Fri 13:00-14:00 "Lane swim - reduced capacity": facility scope, group scope stated
+  2026-04-03 Fri 13:00-14:00 "Public swim": facility scope, group scope stated
+  2026-04-03 Fri 14:00-18:00 "Lane swim": facility scope, group scope stated
+  2026-04-03 Fri 16:00-20:00 "Public swim - leisure pool only": facility scope, group scope stated
+  2026-04-03 Fri 19:00-20:00 "Public swim": facility scope, group scope stated
+  2026-04-03 Fri 20:30-21:30 "Lane swim": facility scope, group scope stated
+  2026-04-06 Mon 07:00-09:00 "Lane swim": facility scope, group scope stated
+  2026-04-06 Mon 07:00-17:00 "Hot tub and steam room": facility scope, group scope stated
+  2026-04-06 Mon 09:00-10:00 "Aquafit General": facility scope, group scope stated
+  2026-04-06 Mon 09:00-11:30 "Lane swim - reduced capacity": facility scope, group scope stated
+  2026-04-06 Mon 10:00-11:00 "Aquafit General": facility scope, group scope stated
+  2026-04-06 Mon 10:30-13:00 "Public swim - leisure pool only": facility scope, group scope stated
+  2026-04-06 Mon 11:30-13:00 "Lane swim": facility scope, group scope stated
+  2026-04-06 Mon 13:00-15:00 "Lane swim - reduced capacity": facility scope, group scope stated
+  2026-04-06 Mon 15:00-17:00 "Lane swim": facility scope, group scope stated
+  2026-04-06 Mon 16:00-17:00 "Public swim - leisure pool only": facility scope, group scope stated
+  2026-04-06 Mon 17:00-18:00 "Aquafit General": facility scope, group scope stated
+  2026-04-06 Mon 20:30-21:30 "Hot tub and steam room": facility scope, group scope stated
+  2026-04-06 Mon 20:30-21:30 "Lane swim": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 06:45-21:30 "Weight and cardio room": facility scope, group scope stated
+  2026-04-06 Mon 06:45-21:30 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-03 Fri 12:00-13:00 "Cardio and strength": facility scope, group scope stated
+  2026-04-03 Fri 17:30-18:30 "Zumba ®": facility scope, group scope stated
+  2026-04-06 Mon 12:00-13:00 "Balance and stretch": facility scope, group scope stated
+  2026-04-06 Mon 17:30-18:30 "HIIT": facility scope, group scope stated

@@ -1,0 +1,14 @@
+== Canterbury Recreation Complex, 2025-10-09 Thu to 2025-11-27 Thu
+warning: changes 2025-10-09 Thu to 2025-11-27 Thu
+group "Drop-in schedule - swim and aquafit"
+  2025-10-20 Mon 06:30-08:55 "Lane swim": facility scope
+  2025-10-20 Mon 09:00-10:00 "Aquafit": facility scope
+  2025-10-20 Mon 10:00-11:00 "Public swim *Reservations not required": facility scope
+  2025-10-20 Mon 11:05-13:30 "Lane swim": facility scope
+group "Drop-in schedule - sports"
+  2025-10-20 Mon 09:00-10:00 "Table tennis": facility scope
+  2025-10-20 Mon 10:00-11:00 "Table tennis": facility scope
+  2025-10-20 Mon 11:00-12:00 "Table tennis": facility scope
+group "Drop-in schedule - skating"
+  2025-10-20 Mon 11:00-12:00 "Adult skating": facility scope
+  2025-10-20 Mon 12:00-13:00 "Public skating": facility scope

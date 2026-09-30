@@ -1,0 +1,8 @@
+== Kanata Leisure Centre and Wave Pool, 2026-01-19 Mon to 2026-03-09 Mon
+warning: changes 2026-01-19 Mon to 2026-03-09 Mon
+group "Drop-in schedules - weight and cardio room"
+  2026-02-05 Thu 07:00-21:00 "Weight and cardio room": facility scope
+group "Drop-in schedules - group fitness"
+  warning: changes 2026-01-26 Mon
+  2026-01-26 Mon 09:00-10:00 "Strength": cancelled
+  2026-02-05 Thu 10:30-11:30 "Yoga": facility scope

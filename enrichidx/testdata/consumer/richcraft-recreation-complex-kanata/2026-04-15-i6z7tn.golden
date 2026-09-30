@@ -1,0 +1,12 @@
+== Richcraft Recreation Complex-Kanata, 2026-04-08 Wed to 2026-05-27 Wed
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-04-16 Thu, changes 2026-04-21 Tue, changes 2026-04-28 Tue
+  2026-04-16 Thu 14:00-15:00 "Reduced lane swim *Reservations not required.": added
+  2026-04-21 Tue 15:00-16:00 "Lane swim*Reservations not required.": cancelled
+  2026-04-21 Tue 15:00-16:00 "Reduced lane swim *Reservations not required.": added
+  2026-04-28 Tue 15:00-16:00 "Lane swim*Reservations not required.": cancelled
+  2026-04-28 Tue 15:00-16:00 "Reduced lane swim *Reservations not required.": added
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-04-16 Thu
+  2026-04-16 Thu 12:00-13:00 "Indoor cycling": cancelled
+  2026-04-16 Thu 13:00-14:00 "TRX": cancelled

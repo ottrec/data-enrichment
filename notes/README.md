@@ -31,9 +31,9 @@ Tooling (from the module root, needs `/tmp/ottrec-data.db`):
   for one file per version, `-o ""` for stats only. Stats always go to
   stderr.
 - `go run ./cmd/mkcorpus`: refreshes the golden corpus fixtures under
-  `enrich/testdata/corpus` from the cache; `go test ./enrich -run Golden
-  -update` then writes the goldens for the new ones (hacking.md
-  "Workflow").
+  `enrich/testdata/corpus` from the cache; `go test ./enrich ./enrichidx
+  -run 'Golden|CorpusProp' -update` then writes the goldens for the new
+  ones (hacking.md "Workflow").
 - `go run ./cmd/report -o report.html`: a self-contained HTML debugging
   report for one version (default latest): source blocks on the left with
   each object's extracted byte range highlighted, object cards on the right,

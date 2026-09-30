@@ -1,0 +1,15 @@
+== Minto Recreation Complex - Barrhaven, 2025-10-02 Thu to 2025-11-20 Thu
+warning: changes 2025-10-02 Thu to 2025-11-20 Thu
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-10-11 Sat to 2025-10-13 Mon
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2025-10-11 Sat to 2025-10-13 Mon
+group "Drop-in schedule - group fitness"
+  warning: changes 2025-10-11 Sat to 2025-10-13 Mon
+group "Drop-in schedule - racquet sports"
+  warning: changes 2025-10-10 Fri to 2025-10-13 Mon
+group "Drop-in schedule - sports"
+  warning: changes 2025-10-10 Fri to 2025-10-13 Mon
+  2025-10-10 Fri 09:00-11:00 "Kindergym": group scope
+group "Drop-in schedule - skating"
+  warning: changes 2025-10-11 Sat to 2025-10-13 Mon

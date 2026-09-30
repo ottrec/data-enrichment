@@ -1,0 +1,23 @@
+== Plant Recreation Centre, 2026-08-24 Mon to 2026-10-12 Mon
+warning: notice 2026-09-05 Sat to 2026-09-06 Sun, changes 2026-09-07 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-09-05 Sat to 2026-09-07 Mon
+  2026-09-07 Mon 07:00-08:00 "Lane swim": facility scope, group scope stated
+  2026-09-07 Mon 07:00-09:00 "Hot tub and Steam Room": facility scope, group scope stated
+  2026-09-07 Mon 08:00-09:00 "Aquafit - General": facility scope, group scope stated
+  2026-09-07 Mon 08:00-09:00 "Lane swim - reduced capacity": facility scope, group scope stated
+  2026-09-07 Mon 09:00-10:00 "Aquafit - General": facility scope, group scope stated
+  2026-09-07 Mon 11:00-14:00 "Lane swim": facility scope, group scope stated
+  2026-09-07 Mon 11:00-21:30 "Hot tub and Steam Room": facility scope, group scope stated
+  2026-09-07 Mon 11:30-14:00 "Public swim - leisure pool only": facility scope, group scope stated
+  2026-09-07 Mon 14:00-17:00 "Public swim": facility scope, group scope stated
+  2026-09-07 Mon 17:00-18:00 "Aquafit - General": facility scope, group scope stated
+  2026-09-07 Mon 17:00-18:00 "Lane swim - reduced capacity": facility scope, group scope stated
+  2026-09-07 Mon 18:00-21:30 "Lane swim": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-09-05 Sat to 2026-09-07 Mon
+  2026-09-07 Mon 06:45-21:30 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-09-05 Sat to 2026-09-07 Mon
+  2026-09-07 Mon 12:00-13:00 "Balance and strength": facility scope, group scope stated
+  2026-09-07 Mon 17:30-18:30 "HIIT": facility scope, group scope stated

@@ -1,0 +1,11 @@
+== Bell Centennial Arena, 2025-12-12 Fri to 2026-01-30 Fri
+group "Drop-in schedule - ice sports"
+  warning: changes 2025-12-24 Wed, changes 2025-12-31 Wed
+  2025-12-24 Wed 17:00-17:50 "Ringette (10 to 14 years)": cancelled
+  2025-12-31 Wed 17:00-17:50 "Ringette (10 to 14 years)": cancelled
+group "Drop-in schedule - skating"
+  warning: changes 2025-12-24 Wed, changes 2025-12-30 Tue to 2025-12-31 Wed
+  2025-12-24 Wed 16:00-16:50 "Public skating": cancelled
+  2025-12-30 Tue 14:00-14:50 "Family Skate": added novel
+  2025-12-30 Tue 15:00-15:50 "Public skating": added
+  2025-12-31 Wed 16:00-16:50 "Public skating": cancelled

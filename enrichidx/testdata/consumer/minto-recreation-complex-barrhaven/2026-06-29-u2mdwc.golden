@@ -1,0 +1,28 @@
+== Minto Recreation Complex - Barrhaven, 2026-06-22 Mon to 2026-08-10 Mon
+warning: changes 2026-07-01 Wed
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 06:15-07:15 "Lane swim": facility scope, group scope stated
+  2026-07-01 Wed 07:15-08:15 "Aquafit General -Deep/shallow combo*Reservations are required": facility scope, group scope stated
+  2026-07-01 Wed 07:15-08:15 "Lane swim - reduced capacity(shared pool)": facility scope, group scope stated
+  2026-07-01 Wed 08:15-09:15 "Aquafit General -Deep/shallow combo*Reservations are required": facility scope, group scope stated
+  2026-07-01 Wed 11:30-13:00 "Lane swim - reduced capacity(shared pool)": facility scope, group scope stated
+  2026-07-01 Wed 11:30-13:00 "Preschool Swim": facility scope, group scope stated
+  2026-07-01 Wed 14:30-16:30 "Public Swim": facility scope, group scope stated
+  2026-07-01 Wed 18:00-20:00 "Public Swim": facility scope, group scope stated
+  2026-07-01 Wed 20:00-22:00 "Lane swim": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 06:30-21:30 "Cardio and weight room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 09:15-10:15 "Zumba®": facility scope, group scope stated
+  2026-07-01 Wed 10:30-11:30 "Cardio and strength": facility scope, group scope stated
+  2026-07-01 Wed 12:00-13:00 "Balance and stability - Heartwise (older adult)": facility scope, group scope stated
+  2026-07-01 Wed 13:05-14:05 "Stretch and strength": facility scope, group scope stated
+  2026-07-01 Wed 16:15-17:15 "Drums Fitness": facility scope, group scope stated
+  2026-07-01 Wed 17:30-18:30 "TRX": facility scope, group scope stated
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-07-01 Wed
+group "Drop-in schedule - skating"
+  warning: changes 2026-07-01 Wed

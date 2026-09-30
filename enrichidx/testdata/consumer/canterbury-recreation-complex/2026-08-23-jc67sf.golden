@@ -1,0 +1,7 @@
+== Canterbury Recreation Complex, 2026-08-16 Sun to 2026-10-04 Sun
+warning: changes 2026-08-16 Sun to 2026-10-04 Sun
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-09-07 Mon
+group "Drop-in schedule - skating"
+  2026-09-07 Mon 11:00-12:00 "Adult skating": facility scope
+  2026-09-07 Mon 12:00-13:00 "Public skating": facility scope

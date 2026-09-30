@@ -1,0 +1,27 @@
+== Ray Friel Recreation Complex, 2026-06-18 Thu to 2026-08-06 Thu
+warning: notice 2026-06-18 Thu to 2026-06-30 Tue, changes 2026-07-01 Wed, notice 2026-07-02 Thu to 2026-08-06 Thu
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 06:00-07:30 "Lane swim": facility scope, group scope stated
+  2026-07-01 Wed 07:35-08:30 "Aquafit": facility scope, group scope stated
+  2026-07-01 Wed 08:35-09:30 "Aquafit": facility scope, group scope stated
+  2026-07-01 Wed 12:00-13:00 "Lane swim": facility scope, group scope stated
+  2026-07-01 Wed 12:00-13:00 "Preschool swim": facility scope, group scope stated
+  2026-07-01 Wed 14:00-17:00 "Wave swim": facility scope, group scope stated
+  2026-07-01 Wed 18:30-20:00 "Public swim": facility scope, group scope stated
+  2026-07-01 Wed 20:00-21:00 "Lane swim": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 06:00-21:00 "Weight and cardio room": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 09:30-10:25 "Pilates": facility scope, group scope stated
+  2026-07-01 Wed 10:30-11:25 "Yin Yoga": facility scope, group scope stated
+  2026-07-01 Wed 13:00-13:55 "Cardio and strength - older adult": facility scope, group scope stated
+  2026-07-01 Wed 14:15-15:10 "Strength and balance - older adult": facility scope, group scope stated
+  2026-07-01 Wed 17:30-18:25 "HIIT": facility scope, group scope stated
+  2026-07-01 Wed 18:30-19:25 "Indoor cycling": facility scope, group scope stated
+  2026-07-01 Wed 19:30-20:25 "Yoga": facility scope, group scope stated
+group "Drop-in schedule - skating"
+  warning: changes 2026-07-01 Wed
+  2026-07-01 Wed 12:00-13:20 "Pick-up hockey 18+": facility scope, group scope stated

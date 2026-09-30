@@ -1,0 +1,28 @@
+== Pinecrest Recreation Complex, 2026-01-29 Thu to 2026-03-19 Thu
+warning: changes 2026-02-16 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-02-16 Mon
+  2026-02-16 Mon 07:30-08:30 "Lane Swim": facility scope, group scope stated
+  2026-02-16 Mon 08:30-09:30 "Aqua General - Shallow/deep combo": facility scope, group scope stated
+  2026-02-16 Mon 09:30-10:30 "Aqua General - Shallow/deep combo": facility scope, group scope stated
+  2026-02-16 Mon 10:30-11:30 "Lane Swim": facility scope, group scope stated
+  2026-02-16 Mon 11:30-12:30 "Lane Swim": facility scope, group scope stated
+  2026-02-16 Mon 16:00-17:00 "Lane Swim": facility scope, group scope stated
+  2026-02-16 Mon 20:00-21:00 "Lane Swim": facility scope, group scope stated
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-02-16 Mon
+  2026-02-16 Mon 07:30-21:00 "Weight and cardio room *Reservations not required.": facility scope, group scope stated
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-02-16 Mon
+  2026-02-16 Mon 09:30-10:30 "Core Conditioning 50+": facility scope, group scope stated
+  2026-02-16 Mon 12:00-13:00 "Yoga": facility scope, group scope stated
+  2026-02-16 Mon 13:30-14:30 "Cardio and Strength 50+": facility scope, group scope stated
+  2026-02-16 Mon 19:15-20:15 "Yoga": facility scope, group scope stated
+group "Drop-in schedule - skating"
+  warning: changes 2026-02-16 Mon
+  2026-02-16 Mon 11:00-11:50 "Public skate 50+": facility scope, group scope stated
+  2026-02-16 Mon 13:00-13:50 "Public skate": facility scope, group scope stated
+group "Drop-in schedule - ice sports"
+  warning: changes 2026-02-16 Mon
+  2026-02-16 Mon 10:00-10:50 "Pick-up Hockey 50+": facility scope, group scope stated
+  2026-02-16 Mon 12:00-12:50 "Pick-up Hockey 18+": facility scope, group scope stated

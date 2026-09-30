@@ -1,0 +1,21 @@
+== Ray Friel Recreation Complex, 2026-03-20 Fri to 2026-05-08 Fri
+warning: notice 2026-03-20 Fri to 2026-04-05 Sun, changes 2026-04-06 Mon, notice 2026-04-07 Tue to 2026-05-08 Fri
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-03-26 Thu, changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-03-26 Thu 17:00-19:30 "Public swim": cancelled
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-06 Mon 06:00-21:00 "Weight and cardio room": facility scope
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-06 Mon 09:00-09:55 "Pilates": facility scope
+  2026-04-06 Mon 10:00-10:55 "Yoga": facility scope
+  2026-04-06 Mon 13:00-13:55 "Cardio and strength - older adult": facility scope
+  2026-04-06 Mon 14:15-15:10 "Strength and balance - older adult": facility scope
+  2026-04-06 Mon 16:30-17:25 "20 - 20 - 20": facility scope
+  2026-04-06 Mon 17:30-18:25 "Pilates": facility scope
+  2026-04-06 Mon 18:30-19:25 "Indoor cycling": facility scope
+  2026-04-06 Mon 18:30-19:25 "Zumba®": facility scope
+group "Drop-in schedule - skating"
+  warning: changes 2026-04-03 Fri to 2026-04-06 Mon
+  2026-04-06 Mon 12:00-13:20 "Pick-up hockey 18+": facility scope

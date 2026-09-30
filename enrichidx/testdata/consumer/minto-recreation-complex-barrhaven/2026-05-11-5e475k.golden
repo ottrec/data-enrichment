@@ -1,0 +1,12 @@
+== Minto Recreation Complex - Barrhaven, 2026-05-04 Mon to 2026-06-22 Mon
+warning: changes 2026-05-18 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-05-13 Wed, changes 2026-05-16 Sat to 2026-05-18 Mon
+  2026-05-13 Wed 18:45-19:45 "Drums Alive®": cancelled
+  2026-05-13 Wed 18:45-19:45 "Zumba®": added
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon
+group "Drop-in schedule - skating"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon

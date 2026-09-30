@@ -1,0 +1,595 @@
+== Bob MacQuarrie Recreation Complex - Orléans, 2026-09-01 Tue to 2026-10-20 Tue
+warning: changes 2026-09-01 Tue to 2026-09-20 Sun, notice 2026-09-21 Mon to 2026-10-20 Tue
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-09-14 Mon to 2026-10-05 Mon
+  2026-09-14 Mon 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-15 Tue 06:30-07:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-16 Wed 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-17 Thu 06:30-07:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-18 Fri 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-21 Mon 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-22 Tue 06:30-07:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-23 Wed 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-24 Thu 06:30-07:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-25 Fri 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-28 Mon 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-29 Tue 06:30-07:25 "Indoor cycling *Reservations required": cancelled
+  2026-09-30 Wed 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+  2026-10-01 Thu 06:30-07:25 "Indoor cycling *Reservations required": cancelled
+  2026-10-02 Fri 08:30-09:25 "Indoor cycling *Reservations required": cancelled
+group "Drop-in schedule - squash and racquetball"
+  warning: changes 2026-09-14 Mon to 2026-10-05 Mon
+  2026-09-14 Mon 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-14 Mon 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-14 Mon 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-15 Tue 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-15 Tue 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-16 Wed 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-16 Wed 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-17 Thu 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-17 Thu 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-18 Fri 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-18 Fri 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-19 Sat 08:00-09:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-19 Sat 09:00-10:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-19 Sat 10:00-11:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 11:00-12:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 12:00-13:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-19 Sat 13:00-14:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-19 Sat 14:00-15:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-19 Sat 15:00-16:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-19 Sat 16:00-17:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-19 Sat 17:00-18:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-19 Sat 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 08:00-09:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 09:00-10:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 10:00-11:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 11:00-12:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 12:00-13:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 13:00-14:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 14:00-15:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 15:00-16:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 16:00-17:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-20 Sun 17:00-18:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-20 Sun 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-21 Mon 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-21 Mon 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-22 Tue 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-22 Tue 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-23 Wed 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-23 Wed 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-24 Thu 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-24 Thu 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-25 Fri 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-25 Fri 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-26 Sat 08:00-09:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-26 Sat 09:00-10:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-26 Sat 10:00-11:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 11:00-12:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 12:00-13:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-26 Sat 13:00-14:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-26 Sat 14:00-15:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-26 Sat 15:00-16:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-26 Sat 16:00-17:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-26 Sat 17:00-18:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-26 Sat 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 08:00-09:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 09:00-10:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 10:00-11:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 11:00-12:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 12:00-13:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 13:00-14:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 14:00-15:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 15:00-16:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 16:00-17:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-27 Sun 17:00-18:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-27 Sun 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-28 Mon 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-28 Mon 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-29 Tue 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-29 Tue 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-09-30 Wed 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-09-30 Wed 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-01 Thu 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-01 Thu 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 18:15-19:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-02 Fri 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-02 Fri 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-03 Sat 08:00-09:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-03 Sat 09:00-10:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-03 Sat 10:00-11:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 11:00-12:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 12:00-13:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-03 Sat 13:00-14:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-03 Sat 14:00-15:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-03 Sat 15:00-16:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-03 Sat 16:00-17:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-03 Sat 17:00-18:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-03 Sat 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 08:00-09:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 09:00-10:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 10:00-11:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 11:00-12:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 12:00-13:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 13:00-14:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 14:00-15:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 15:00-16:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 16:00-17:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-04 Sun 17:00-18:00 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-04 Sun 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 06:00-07:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 06:15-07:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 07:00-08:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 07:15-08:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 08:00-09:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 08:15-09:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 09:00-10:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 09:15-10:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 10:00-11:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 10:15-11:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 11:00-12:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 11:15-12:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 12:00-13:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 12:15-13:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 13:00-14:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 13:15-14:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 14:00-15:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 14:15-15:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 15:00-16:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 15:15-16:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 16:00-17:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 16:15-17:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 17:00-18:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 17:15-18:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 18:00-19:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 19:00-20:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated
+  2026-10-05 Mon 19:15-20:15 "Racquetball - courts 4, 6, and 8 *Reservations required": group scope stated
+  2026-10-05 Mon 20:00-21:00 "Squash courts 1, 2, 3, 5, 7 and 9 *Reservations required": group scope stated

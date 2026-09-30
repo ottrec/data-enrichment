@@ -1,0 +1,16 @@
+== Walter Baker Sports Centre, 2026-04-27 Mon to 2026-06-15 Mon
+warning: changes 2026-05-11 Mon to 2026-06-15 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-04-27 Mon to 2026-06-15 Mon
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-05-18 Mon
+  2026-05-18 Mon 09:15-10:15 "Cardio and strength - older adult": group scope stated
+  2026-05-18 Mon 09:30-10:30 "Cardio and strength - older adult lite": group scope stated
+  2026-05-18 Mon 10:20-11:20 "Strength TMC -older adult": group scope stated
+  2026-05-18 Mon 10:35-11:35 "Yoga": group scope stated
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon
+group "Drop-in schedule - squash"
+  warning: changes 2026-05-16 Sat to 2026-05-18 Mon

@@ -1,0 +1,14 @@
+== Minto Recreation Complex - Barrhaven, 2026-07-26 Sun to 2026-09-13 Sun
+warning: changes 2026-08-03 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-08-01 Sat to 2026-08-03 Mon
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-08-01 Sat to 2026-08-03 Mon
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-08-01 Sat to 2026-08-03 Mon, changes 2026-08-08 Sat, changes 2026-08-15 Sat
+  2026-08-08 Sat 09:15-10:15 "Indoor cycling": cancelled
+  2026-08-15 Sat 09:15-10:15 "Indoor cycling": cancelled
+group "Drop-in schedule - gymnasium sports"
+  warning: changes 2026-08-01 Sat to 2026-08-03 Mon
+group "Drop-in schedule - skating"
+  warning: changes 2026-08-01 Sat to 2026-08-03 Mon

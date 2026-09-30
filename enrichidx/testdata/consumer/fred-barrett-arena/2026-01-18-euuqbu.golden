@@ -1,0 +1,12 @@
+== Fred Barrett Arena, 2026-01-11 Sun to 2026-03-01 Sun
+group "Drop-in schedule - skating"
+  warning: changes 2026-01-16 Fri, changes 2026-01-18 Sun
+  2026-01-16 Fri 19:00-19:50 "Public skating": cancelled
+  2026-01-18 Sun 13:00-13:50 "Family skating": group scope stated
+  2026-01-18 Sun 14:00-14:50 "Public skating": group scope stated
+group "Drop-in schedule - ice sports"
+  warning: changes 2026-01-16 Fri
+  2026-01-16 Fri 15:00-15:50 "Figure skating": group scope stated
+  2026-01-16 Fri 16:00-16:50 "Youth hockey (13 to 17 years)": group scope stated
+  2026-01-16 Fri 17:00-17:50 "Child hockey (6 to 12 years)": group scope stated
+  2026-01-16 Fri 18:00-18:50 "Ringette (12 to 16 years)": group scope stated

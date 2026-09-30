@@ -1,0 +1,13 @@
+== Ray Friel Recreation Complex, 2026-03-13 Fri to 2026-05-01 Fri
+warning: notice 2026-03-13 Fri to 2026-05-01 Fri
+group "Drop-in schedule - March Break"
+  warning: changes 2026-03-26 Thu
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-03-16 Mon to 2026-03-22 Sun, changes 2026-03-26 Thu
+  2026-03-26 Thu 17:00-19:30 "Public swim": cancelled
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2026-03-16 Mon to 2026-03-22 Sun
+group "Drop-in schedule - group fitness"
+  warning: changes 2026-03-16 Mon to 2026-03-22 Sun
+group "Drop-in schedule - skating"
+  warning: changes 2026-03-16 Mon to 2026-03-22 Sun

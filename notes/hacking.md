@@ -152,12 +152,24 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   activity; ids, seq, offsets, raw HTML and block hashes left out) and
   `Diff` (the changed region with the block and object headers above it).
   Shared by the golden test, the corpus properties and `-format golden`.
+  `Fixtures` and `Load` read and enrich the corpus for both test binaries.
+  `Consumer` renders enrichidx's answers for one fixture: its published
+  sessions enumerated through ottrecidx over a window of a week before to
+  six weeks after the anchor (weekday times inside their schedule's
+  effective range, fixed-date times on their date), with per-day facility
+  and group `Warning` runs, per-session `Session` and facility and group
+  `ScopeCancelled` / `ScopeCancelledStated`, and `Added`; only non-empty
+  answers are written. It records the answers, not /today's use of them.
 - `enrich/golden_test.go` + `enrich/properties_test.go` — `TestGolden` (one
   parallel subtest per fixture, `-run 'Golden/minto-.*'` works) and
   `TestCorpusProperties` (the summary golden); `cmd/mkcorpus` writes the
   fixtures, oldest version per distinct facility snapshot, trimmed of
   description, address, coordinates, errors and links; `-blocks-only` drops
   the schedule structure from the key. See Workflow.
+- `enrichidx/golden_test.go` — `TestConsumerGolden`, the consumer golden:
+  `golden.Consumer` per fixture against `enrichidx/testdata/consumer`, a
+  file only for fixtures with an answer (2,294 of 2,511). The one golden a
+  trust-rule change in enrichidx shows up in.
 - `report/` + `cmd/report` — the HTML debugging report (source blocks with
   highlighted extraction ranges beside their objects, hover-paired). The
   fastest way to eyeball parser behavior on a version.
@@ -192,21 +204,24 @@ single-facility dataset protobuf per distinct (facility, blocks, schedule
 structure) over the cache's history (2,511 fixtures, written by
 `cmd/mkcorpus`), each with a `.golden` rendering of its objects and their
 placement beside it, and `corpus-summary.golden` with the counts and
-property lists over all of them. `go test ./...` runs the lot in about a
-second.
+property lists over all of them. `enrichidx/testdata/consumer` holds what
+enrichidx answers for each fixture's sessions (see `golden.Consumer`), so a
+trust-rule change is a golden diff too. `go test ./...` runs the lot in
+about a second.
 
 ```sh
 go test ./...                                     # goldens, properties, unit tests
-go test ./enrich -run 'Golden|CorpusProp' -update # rewrite after a reviewed change
-git diff --stat enrich/testdata                   # which fixtures moved
+go test ./enrich ./enrichidx -run 'Golden|CorpusProp' -update # rewrite after a reviewed change
+git diff --stat enrich/testdata enrichidx/testdata # which fixtures moved
 git diff enrich/testdata/corpus-summary.golden    # what the counts and lists say
 go run ./cmd/mkcorpus                             # after the cache grows, then -update
 ```
 
 A change is done when its golden diff has been read in full: for a
-refactor the diff is empty; for a behaviour change every changed object is
-classified in the commit message. `-update` is a flag of the enrich test
-binary, so it goes with `./enrich`, not `./...`. The summary's lists
+refactor the diff is empty; for a behaviour change every changed object,
+and every changed consumer answer, is classified in the commit message.
+`-update` is a flag of the enrich and enrichidx test binaries only, so it
+goes with `./enrich ./enrichidx`, not `./...`. The summary's lists
 (undated-effect, no-effect, stray-date, far-date, head-unparsed-trigger,
 unparsed, session-outside-schedule) are where a gap shows before anyone
 goes looking; its hard assertion is that every effect kind fires

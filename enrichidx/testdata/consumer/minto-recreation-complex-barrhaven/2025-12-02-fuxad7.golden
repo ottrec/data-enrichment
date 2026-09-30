@@ -1,0 +1,33 @@
+== Minto Recreation Complex - Barrhaven, 2025-11-25 Tue to 2026-01-13 Tue
+warning: changes 2025-12-24 Wed to 2025-12-26 Fri, changes 2025-12-28 Sun, changes 2025-12-31 Wed to 2026-01-01 Thu, changes 2026-01-04 Sun
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-12-22 Mon to 2026-01-04 Sun
+group "Drop-in schedule - weight and cardio room"
+  warning: changes 2025-12-22 Mon to 2026-01-04 Sun
+  2025-12-25 Thu 06:30-21:30 "Cardio and weight room": facility scope
+  2025-12-26 Fri 06:30-21:30 "Cardio and weight room": facility scope
+  2026-01-01 Thu 06:30-21:30 "Cardio and weight room": facility scope
+group "Drop-in schedule - group fitness"
+  warning: changes 2025-12-22 Mon to 2026-01-04 Sun
+  2025-12-25 Thu 09:15-10:15 "Yoga": facility scope
+  2025-12-25 Thu 10:30-11:30 "Dance": facility scope
+  2025-12-25 Thu 11:45-12:45 "Strength": facility scope
+  2025-12-25 Thu 18:00-19:00 "Cardio and strength": facility scope
+  2025-12-25 Thu 19:15-20:15 "Zumba®": facility scope
+  2025-12-26 Fri 10:30-11:30 "Stretch and strength": facility scope
+  2025-12-26 Fri 11:35-12:35 "Balance and stability - Heartwise (older adult)": facility scope
+  2025-12-26 Fri 17:00-18:00 "Strength circuit": facility scope
+  2025-12-26 Fri 21:30-22:30 "Strength": facility scope
+group "Drop-in schedule - racquet sports"
+  warning: changes 2025-12-05 Fri, changes 2025-12-22 Mon to 2026-01-04 Sun
+  2025-12-05 Fri 11:45-12:45 "Pickleball": cancelled
+  2025-12-05 Fri 12:50-13:50 "Pickleball": cancelled
+  2025-12-05 Fri 13:55-14:55 "Pickleball": cancelled
+  2025-12-05 Fri 15:00-16:00 "Pickleball": cancelled
+group "Drop-in schedule - sports"
+  warning: changes 2025-12-05 Fri, changes 2025-12-22 Mon to 2026-01-04 Sun
+  2025-12-05 Fri 09:00-11:00 "Kinderplay": cancelled
+group "Drop-in schedule - skating"
+  warning: changes 2025-12-22 Mon to 2026-01-04 Sun
+  2025-12-25 Thu 09:00-09:50 "Family skating": facility scope
+  2025-12-25 Thu 10:00-10:50 "Public skating": facility scope
