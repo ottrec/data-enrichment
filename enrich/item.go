@@ -54,8 +54,10 @@ var (
 	// the end-of-season dog swim the city adds at outdoor pools, which is
 	// never a row in any published table
 	dogSwimRe = regexp.MustCompile(`(?i)\bdogs?\s+swim`)
-	// "X is closed ...", "X closed until further notice", "X will be closed"
-	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|closes|closing|will close|not available|unavailable)\b`)
+	// "X is closed ...", "X closed until further notice", "X will be closed",
+	// "X will remain closed", "X is currently unavailable" (capture: the
+	// subject, without the verb and the adverb)
+	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be| will remain| remains?)?(?: temporarily| now| also| currently| still)? (?:closed|closes|closing|will close|not available|unavailable)\b`)
 	// "... and all programs cancelled" riding on a subject closure, which
 	// upgrades it to a cancellation (capture: the class it names, if any,
 	// "group fitness " in "all group fitness drop ins are cancelled")
@@ -394,7 +396,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			n.Scope.MatchQuality = sj.Quality
 			b.emitTimesWithSlots(&n, spec, clocks, sj.Acts, &sessions, emit)
 			return
-		case subjAmenity:
+		case subjAmenity, subjOtherFacility:
 			n.Scope.Level = "amenity"
 			n.Scope.Amenity = sj.Amenity
 			n.Scope.MatchQuality = matchNone

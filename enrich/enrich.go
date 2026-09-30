@@ -110,8 +110,13 @@ type builder struct {
 // EnrichVersion builds the enrichment output for one dataset version.
 func EnrichVersion(version string, data ottrecidx.DataRef) *epb.Output {
 	out := &builder{Stats: map[string]int{}}
+	var names []string
 	for fac := range data.Facilities() {
-		fc := &facCtx{out: out, fac: fac}
+		names = append(names, fac.GetName())
+	}
+	others := otherFacilities(names)
+	for fac := range data.Facilities() {
+		fc := &facCtx{out: out, fac: fac, others: others}
 		fc.anchor = fac.GetSourceDate()
 		if fc.anchor.IsZero() {
 			fc.anchor = data.Index().Updated()
@@ -145,6 +150,7 @@ type facCtx struct {
 	fac      ottrecidx.FacilityRef
 	anchor   time.Time
 	matchers []*groupMatcher
+	others   []otherFacility // every facility of the version, for subjects naming one
 	recs     []rec
 }
 

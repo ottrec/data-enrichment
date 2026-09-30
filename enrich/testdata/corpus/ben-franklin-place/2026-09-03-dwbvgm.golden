@@ -2,8 +2,8 @@
 - NOTICE "The building, library and all services are open. Meridian Theatres @ Centrepointe remains closed for flood restoration."
     effects: closure
     match: NONE
-    phrase: "meridian theatres centrepointe remains"
-    ambiguities: activity-unmatched
+    phrase: "meridian theatres centrepointe"
+    amenity: "Meridian Theatres at Centrepointe"
     at: facility
 - IGNORED heading "Labour Day"
     section: "Labour Day"

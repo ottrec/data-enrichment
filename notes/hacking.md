@@ -140,9 +140,14 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
 - `subject.go` — `resolveClosureSubject(subject, cancelled, fremainder)`,
   the subject of a "<subject> is closed" sentence resolved to a kind and
   the reason that decided it, counted as `subject/closure/<reason>` in the
-  stats (not in the output). The kinds: facility (`facility-generic`: only
+  stats (not in the output). The subject is what `subjectClosedRe` leaves
+  after "the": the verb and the adverb come off in the regex ("will
+  remain", "remains", "is currently", "still"), so the last word of the
+  subject is the subject's. The kinds: facility (`facility-generic`: only
   generic words, "the facility", "the pool" at a pool; `facility-name-token`:
-  a distinctive word of the facility's name), posted-group
+  a distinctive word of the facility's name; `facility-list-with-desk`: a
+  list of the facility and its service desk, "the complex and client
+  services", `facilityWithDesk`), posted-group
   (`cancelled-under-group`: a cancelling closure posted under a group),
   class (`class-named`: the class the cancellation names, "all group fitness
   drop-ins"), part (`part-groups`: a part whose groups `groupsForPart`
@@ -151,9 +156,13 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   amenity), part-unmatched (`part-unmatched`, the marker
   `closed-part-unmatched`), unit (`unit-of-row`: some of the numbered units
   a row runs on, `subjectNamesUnitOfActivity`), activity (`activity-exact`,
-  `-normalized`, `-fuzzy`), amenity (`amenity-core`, `isAmenity`), none
-  (`unmatched`, the marker `activity-unmatched`). The closure form's order
-  is facility, the cancelling cases, unit, activity, amenity, and it is not
+  `-normalized`, `-fuzzy`), other-facility (`other-facility`: every
+  distinctive token of another facility's name, at least two of them,
+  `namesOtherFacility` over the version's names; "Meridian Theatres @
+  Centrepointe" at Ben Franklin Place is an amenity named after that
+  facility), amenity (`amenity-core`, `isAmenity`), none (`unmatched`, the
+  marker `activity-unmatched`). The closure form's order is facility, the
+  cancelling cases, unit, activity, other facility, amenity, and it is not
   the clause form's (the fold in `processSentence`: activity with the other
   groups, unit, dog swim, amenity, novel, none). The two differ on purpose:
   a closure names a place, so the facility and its parts come before the
@@ -254,8 +263,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   parallel subtest per fixture, `-run 'Golden/minto-.*'` works) and
   `TestCorpusProperties` (the summary golden); `cmd/mkcorpus` writes the
   fixtures, oldest version per distinct facility snapshot, trimmed of
-  description, address, coordinates, errors and links; `-blocks-only` drops
-  the schedule structure from the key. See Workflow.
+  description, address, coordinates, errors and links, with the version's
+  other facilities beside it by name alone (a subject can name one of
+  them); `-blocks-only` drops the schedule structure from the key. See
+  Workflow.
 - `enrichidx/golden_test.go` — `TestConsumerGolden`, the consumer golden:
   `golden.Consumer` per fixture against `enrichidx/testdata/consumer`, a
   file only for fixtures with an answer (2,294 of 2,511). The one golden a
@@ -584,6 +595,14 @@ the parser saw; `cmd/report` renders one version as HTML.
   activity pages; `groupMayRun` leaves out a group none of whose schedules
   can run on the notice's dates.
 
+- `wheelchair` was dead on arrival. 647596b added it to `amenityQualifier`
+  and `ramp` to `amenityCore` for St. Laurent's "The pool's wheelchair ramp
+  is currently unavailable.", and the notice stayed `activity-unmatched`
+  for the next year: `subjectClosedRe` left "is currently" on the subject,
+  so its last token was `currently` and `isAmenity` never reached the ramp.
+  Nothing checked that the phrase behind the entry resolved once the entry
+  was in. The verb and the adverb now come off in the regex, and D3's
+  motivation table (next steps) is the check.
 - The `<li>` walk was a ladder of eight shapes, each an all-or-nothing
   predicate over a head's children, tried in a fixed order. A layout the
   city had not posted before fell to the last rung, `head-unparsed`, and its

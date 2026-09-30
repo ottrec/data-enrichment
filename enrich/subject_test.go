@@ -42,11 +42,14 @@ func testClosureCtx(t *testing.T, name string, groups []*groupMatcher, others ..
 		t.Fatal(err)
 	}
 	fc := &facCtx{out: &builder{Stats: map[string]int{}}, matchers: groups}
+	var names []string
 	for fac := range idx.Data().Facilities() {
+		names = append(names, fac.GetName())
 		if fac.GetName() == name {
 			fc.fac = fac
 		}
 	}
+	fc.others = otherFacilities(names)
 	fc.anchor = fc.fac.GetSourceDate()
 	return &blockCtx{facCtx: fc}
 }
@@ -72,7 +75,7 @@ func TestResolveClosureSubject(t *testing.T) {
 	kanata := testClosureCtx(t, "Kanata Leisure Centre and Wave Pool", []*groupMatcher{
 		testGroup("Drop-in schedule - swim", "Hot tub and steam room", "Sauna and steam room", "Public swim"),
 	})
-	benFranklin := testClosureCtx(t, "Ben Franklin Place", nil, "Meridian Theatres at Centrepointe", "Nepean Sportsplex")
+	benFranklin := testClosureCtx(t, "Ben Franklin Place", nil, "Meridian Theatres at Centrepointe", "Nepean Sportsplex", "Entrance Pool")
 	stLaurent := testClosureCtx(t, "St. Laurent Complex", []*groupMatcher{
 		testGroup("Drop-in schedule - swim", "Lane swim"),
 		testGroup("Drop-in schedule - skating", "Public skating"),
@@ -112,9 +115,13 @@ func TestResolveClosureSubject(t *testing.T) {
 		{"a court that is a row of its own", nepean, "squash court 3", false, subjActivity, "activity-exact", "Squash court 3"},
 		{"the wave pool of a wave pool", splash, "wave pool", false, subjFacility, "facility-name-token", ""},
 		{"a multiple match is an amenity, not candidates", kanata, "steam room", false, subjAmenity, "amenity-core", "steam room"},
-		{"another facility, with the verb", benFranklin, "meridian theatres centrepointe will remain", false, subjNone, "unmatched", ""},
-		{"the ramp, with the verb", stLaurent, "pool's wheelchair ramp is currently", false, subjNone, "unmatched", ""},
-		{"the complex and the desk, with the verb", tonyGraham, "complex and client services remain", false, subjNone, "unmatched", ""},
+		{"another facility", benFranklin, "meridian theatres centrepointe", false, subjOtherFacility, "other-facility", "Meridian Theatres at Centrepointe"},
+		{"another facility and a library", benFranklin, "meridian theatres centrepointe and the nepean centrepointe branch of the ottawa public library", false, subjOtherFacility, "other-facility", "Meridian Theatres at Centrepointe"},
+		{"a facility name with one distinctive word names nothing", benFranklin, "entrance pool", false, subjAmenity, "amenity-core", "entrance pool"},
+		{"the ramp (647596b)", stLaurent, "pool's wheelchair ramp", false, subjAmenity, "amenity-core", "pool's wheelchair ramp"},
+		{"the complex and the desk", tonyGraham, "complex and client services", false, subjFacility, "facility-list-with-desk", ""},
+		{"the desk alone is not the facility", tonyGraham, "client services", false, subjNone, "unmatched", ""},
+		{"a list with something else in it", tonyGraham, "complex and the parking lot", false, subjNone, "unmatched", ""},
 		// the residue
 		{"the community centre of a complex", cardelrec, "community centre", false, subjFacility, "facility-generic", ""},
 		{"the lawn and the hill", lansdowne, "great lawn and the sledding hill", false, subjAmenity, "amenity-core", "great lawn sledding hill"},
@@ -136,12 +143,39 @@ func TestResolveClosureSubject(t *testing.T) {
 			detail = strings.Join(s.Groups, ", ")
 		case subjActivity:
 			detail = strings.Join(actNames(s.Acts), ", ")
-		case subjUnit, subjAmenity:
+		case subjUnit, subjAmenity, subjOtherFacility:
 			detail = s.Amenity
 		}
 		if detail != tc.detail {
 			t.Errorf("%s: %q carries %q, want %q", tc.name, tc.subject, detail, tc.detail)
 		}
+	}
+}
+
+// TestSubjectClosedRe pins what the regex leaves as the subject: the verb
+// and the adverb come off, so "will remain", "remains" and "is currently"
+// do not hide the last word of the subject from the amenity list (the
+// wheelchair ramp, 647596b) or the facility's name from the token match.
+func TestSubjectClosedRe(t *testing.T) {
+	for in, want := range map[string]string{
+		"the pool is closed for maintenance":                                  "the pool",
+		"squash court 3 is closed until further notice":                       "squash court 3",
+		"the pool's wheelchair ramp is currently unavailable":                 "the pool's wheelchair ramp",
+		"meridian theatres centrepointe will remain closed for continued":     "meridian theatres centrepointe",
+		"meridian theatres centrepointe remains closed for flood restoration": "meridian theatres centrepointe",
+		"the complex and client services remain closed":                       "the complex and client services",
+		"the sauna is still closed":                                           "the sauna",
+		"the arena will be temporarily closed":                                "the arena",
+	} {
+		m := subjectClosedRe.FindStringSubmatch(in)
+		if m == nil {
+			t.Errorf("%q: no match", in)
+		} else if m[1] != want {
+			t.Errorf("%q: subject %q, want %q", in, m[1], want)
+		}
+	}
+	if subjectClosedRe.MatchString("the pool remains open") {
+		t.Error("\"remains open\" is not a closure")
 	}
 }
 

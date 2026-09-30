@@ -8,7 +8,9 @@
 //
 // A fixture keeps what the parser reads (name, source date, blocks, schedule
 // groups and their schedules) and drops the rest (description, address,
-// coordinates, errors, links). Keying on the schedule as well as the blocks
+// coordinates, errors, links), and carries the version's other facilities by
+// name alone, since a closure subject can name one of them ("Meridian
+// Theatres @ Centrepointe" at Ben Franklin Place). Keying on the schedule as well as the blocks
 // keeps the variants where the same block matched different slots. Picking
 // the oldest version keeps existing fixtures stable as the cache grows, and
 // puts the anchor closest to when the city posted the block.
@@ -62,6 +64,12 @@ func main() {
 				continue
 			}
 			t := trim(fac)
+			facs := []*schema.Facility{t}
+			for _, o := range data.GetFacilities() {
+				if o != fac {
+					facs = append(facs, schema.Facility_builder{Name: o.GetName()}.Build())
+				}
+			}
 			if !*blockOnly {
 				key += "\x00" + scheduleKey(t)
 			}
@@ -71,7 +79,7 @@ func main() {
 				panic(fmt.Errorf("%s: %q has no source date", ver.ID, fac.GetName()))
 			}
 			buf, err := proto.MarshalOptions{Deterministic: true}.Marshal(schema.Data_builder{
-				Facilities: []*schema.Facility{t},
+				Facilities: facs,
 			}.Build())
 			if err != nil {
 				panic(err)
@@ -88,7 +96,8 @@ func main() {
 	}
 
 	// replace the .pb files; the test's -update removes golden files whose
-	// fixture is gone
+	// fixture is gone. Fixtures under invented/ are written by hand for
+	// layouts the city has not posted and are left alone.
 	want := map[string]bool{}
 	for _, f := range fixtures {
 		p := filepath.Join(*outDir, f.name+".pb")
@@ -98,6 +107,9 @@ func main() {
 		want[p] = true
 	}
 	err = filepath.WalkDir(*outDir, func(p string, d fs.DirEntry, err error) error {
+		if err == nil && d.IsDir() && d.Name() == "invented" {
+			return filepath.SkipDir
+		}
 		if err == nil && !d.IsDir() && strings.HasSuffix(p, ".pb") && !want[p] {
 			err = os.Remove(p)
 		}

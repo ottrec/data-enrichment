@@ -31,10 +31,10 @@
    2338 exact
     689 fuzzy
     133 multiple
-    621 none
+    620 none
     116 normalized
      61 novel
-   5433 scope_phrase
+   5434 scope_phrase
 
 ## relation
 
@@ -52,7 +52,7 @@
      20 activity-narrowed-to-amenity
     215 activity-time-disambiguated
      19 activity-typo-match
-     18 activity-unmatched
+      5 activity-unmatched
       9 added-time-already-scheduled
      20 class-title-partial
       3 class-unmatched

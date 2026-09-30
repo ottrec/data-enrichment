@@ -2,6 +2,6 @@
 - NOTICE "Meridian Theatres @ Centrepointe and the Nepean Centrepointe branch of the Ottawa Public Library will remain closed for continued recovery and restoration efforts, and all sections of the lower level of the building remain restricted."
     effects: closure
     match: NONE
-    phrase: "meridian theatres centrepointe and the nepean centrepointe branch of the ottawa public library will remain"
-    ambiguities: activity-unmatched
+    phrase: "meridian theatres centrepointe and the nepean centrepointe branch of the ottawa public library"
+    amenity: "Meridian Theatres at Centrepointe"
     at: facility

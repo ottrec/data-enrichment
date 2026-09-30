@@ -22,6 +22,6 @@
     section: "Notice - August 14"
     effects: closure
     match: NONE
-    phrase: "pool's wheelchair ramp is currently"
-    ambiguities: activity-unmatched
+    phrase: "pool's wheelchair ramp"
+    amenity: "pool's wheelchair ramp"
     at: facility

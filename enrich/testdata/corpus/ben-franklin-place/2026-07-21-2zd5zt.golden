@@ -11,6 +11,6 @@
     section: "Closure"
     effects: closure
     match: NONE
-    phrase: "meridian theatres centrepointe and the nepean centrepointe branch of the ottawa public library will remain"
-    ambiguities: activity-unmatched
+    phrase: "meridian theatres centrepointe and the nepean centrepointe branch of the ottawa public library"
+    amenity: "Meridian Theatres at Centrepointe"
     at: facility

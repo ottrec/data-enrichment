@@ -12,9 +12,8 @@
     date text: "Tuesday, October 13:"
     dates: 2026-10-13 Tue
     effects: closure
-    match: NONE
-    phrase: "complex and client services remain"
-    ambiguities: activity-unmatched
+    match: SCOPE_PHRASE
+    phrase: "complex and client services"
     at: facility
 - NOTICE "*See the drop-in schedules for times and payment methods."
     effects: see-schedule "drop-in schedule"

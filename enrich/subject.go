@@ -1,5 +1,7 @@
 package enrich
 
+import "strings"
+
 // subjectKind is what the subject of a "<subject> is closed" sentence
 // resolved to. The caller maps it to a scope; the reason beside it names the
 // rule that decided and is counted as subject/closure/<reason>.
@@ -14,6 +16,7 @@ const (
 	subjUnit          subjectKind = "unit"           // some of the numbered units a row runs on
 	subjActivity      subjectKind = "activity"       // an activity of the schedule
 	subjAmenity       subjectKind = "amenity"        // a place with no drop-ins of its own
+	subjOtherFacility subjectKind = "other-facility" // another facility of the dataset, named
 	subjNone          subjectKind = "none"           // nothing the parser knows
 )
 
@@ -23,7 +26,8 @@ type closureSubject struct {
 	Reason string
 	// Class is the class phrase to resolve (subjClass); Groups the groups
 	// the part names (subjPart); Acts, Groups and Quality the activity match
-	// (subjActivity); Amenity the amenity name (subjUnit, subjAmenity).
+	// (subjActivity); Amenity the amenity name (subjUnit, subjAmenity) or
+	// the other facility's name (subjOtherFacility).
 	Class   string
 	Groups  []string
 	Acts    []*actEntry
@@ -48,6 +52,9 @@ func (b *blockCtx) resolveClosureSubject(subject string, cancelled bool, fremain
 	q, acts, groups, typo := b.matchActivity(subject)
 	s := closureSubject{Typo: typo}
 	isFac, facReason := subjectIsFacility(subject, b.fac.GetName())
+	if !isFac {
+		isFac, facReason = b.facilityWithDesk(subject)
+	}
 	// a generic word that names only some of the facility's groups ("the
 	// pool" at a complex) is a part of it, not the facility: closed, it
 	// closes the swim group; cancelling, it cancels the part's programs
@@ -83,6 +90,11 @@ func (b *blockCtx) resolveClosureSubject(subject string, cancelled bool, fremain
 	case q == matchExact || q == matchNormalized || q == matchFuzzy:
 		s.Kind, s.Reason = subjActivity, "activity-"+q
 		s.Acts, s.Groups, s.Quality = acts, groups, q
+	case b.namesOtherFacility(subject) != "":
+		// "Meridian Theatres @ Centrepointe will remain closed" at Ben
+		// Franklin Place: a facility of its own in the dataset, so a place
+		// here, with no drop-ins of this one's
+		s.Kind, s.Reason, s.Amenity = subjOtherFacility, "other-facility", b.namesOtherFacility(subject)
 	case isAmenity(subject):
 		s.Kind, s.Reason, s.Amenity = subjAmenity, "amenity-core", amenityName(subject)
 	default:
@@ -117,4 +129,78 @@ func subjectIsFacility(subject, facName string) (bool, string) {
 		}
 	}
 	return false, ""
+}
+
+// facilityWithDesk reports whether a list subject names the facility and
+// its service desk ("the complex and client services"), which is the
+// facility: subjectIsFacility reads the list as one phrase, and the desk's
+// words are not the facility's.
+func (b *blockCtx) facilityWithDesk(subject string) (bool, string) {
+	parts := subjectParts(subject)
+	if len(parts) < 2 {
+		return false, ""
+	}
+	fac := false
+	for _, p := range parts {
+		p = strings.TrimPrefix(p, "the ")
+		if serviceDeskPhrase(p) {
+			continue
+		}
+		if ok, _ := subjectIsFacility(p, b.fac.GetName()); !ok {
+			return false, ""
+		}
+		fac = true
+	}
+	if !fac {
+		return false, ""
+	}
+	return true, "facility-list-with-desk"
+}
+
+// otherFacility is a facility of the dataset a closure subject can name:
+// its name and the name's distinctive tokens (the non-generic ones, at
+// least two: "Entrance Pool" has one and names nothing).
+type otherFacility struct {
+	name string
+	toks []string
+}
+
+// otherFacilities lists the facilities of the version a subject can name.
+func otherFacilities(names []string) []otherFacility {
+	var out []otherFacility
+	for _, name := range names {
+		var toks []string
+		for _, t := range tokens(name) {
+			if !genericFacility[t] {
+				toks = append(toks, t)
+			}
+		}
+		if len(toks) >= 2 {
+			out = append(out, otherFacility{name, toks})
+		}
+	}
+	return out
+}
+
+// namesOtherFacility returns the name of another facility of the dataset
+// whose every distinctive token the subject has ("Meridian Theatres @
+// Centrepointe" names Meridian Theatres at Centrepointe), or "".
+func (b *blockCtx) namesOtherFacility(subject string) string {
+	st := tokenSet(subject)
+	for _, f := range b.others {
+		if f.name == b.fac.GetName() {
+			continue
+		}
+		all := true
+		for _, t := range f.toks {
+			if !st[t] {
+				all = false
+				break
+			}
+		}
+		if all {
+			return f.name
+		}
+	}
+	return ""
 }

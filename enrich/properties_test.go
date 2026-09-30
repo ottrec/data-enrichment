@@ -65,7 +65,10 @@ func TestCorpusProperties(t *testing.T) {
 		fo := outs[name]
 		fx := &fixtureCtx{withEffect: map[string]bool{}, dates: map[string][]*epb.DateSpan{}}
 		for fac := range fo.Data.Facilities() {
-			fx.anchor = fac.GetSourceDate()
+			// the fixture's facility; the others are there by name alone
+			if d := fac.GetSourceDate(); !d.IsZero() {
+				fx.anchor = d
+			}
 		}
 		for _, o := range fo.Out.GetObjects() {
 			if len(o.GetEffects()) > 0 {
