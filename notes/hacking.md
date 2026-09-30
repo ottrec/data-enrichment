@@ -217,14 +217,43 @@ saw.
   or schedule; don't cache on block hash alone (see matching.md).
 - Stats keys are ad-hoc, not API.
 
-## Next steps (rough order)
+## Next steps
 
-1. Website integration (see integration.md): decide the
-   generation/publishing pipeline, then wire /today to the per-session /
-   per-activity objects, replacing the coarse per-group Changes flag.
-2. The LLM residue pass (approach C in approaches.md) over
-   unparsed-freeform + activity-unmatched, behind the same validators.
-   On hold: options to be explored first.
+The implementation queue from the structural review (approaches.md
+"Structural review"). One entry per commit series, in this order, each
+behind the oracle: `go test ./...`, the golden diff read in full, `go vet`,
+and for behaviour changes the full-corpus rendering diff against the
+previous entry plus `check-coverage -versions 0`. Notes updated in the same
+commit. "corpus" is the 497-version full run; "golden" the fixture corpus.
+Parser logic runs on Fable, the rest on Opus.
+
+| # | entry | contains | expected effect | website |
+| --- | --- | --- | --- | --- |
+| 0 | notes | this queue and the decisions in approaches.md | none | |
+| 1 | oracle bookkeeping | website go.mod pin bumped so the goldens pass with `GOWORK=off`; golden renderer out of the test file; `cmd/enrich -format golden`; the corpus diff becomes `diff -r` of that rendering, placement included; Workflow below rewritten around `go test` | empty | |
+| 2 | O4 consumer golden | per fixture, sessions enumerated over the schedules' effective ranges in a window around the anchor (via ottrecidx, not a copy of /today); `ScopeCancelled`, `ScopeCancelledStated`, `Session`, `Added`, `Warning` written for non-empty answers into `enrichidx/testdata` | empty | |
+| 3 | C1 | `enrich.Markers()` registry; `time-change-unparsed` removed; `markerPolicy` table, `LikelyCancelled`, `AddedSession.Uncertain`; O3 property "every marker occurs or is listed"; `class-title-partial` and `activity-time-disambiguated` stated, `weekday-mismatch` likely | 0 objects; O4: ~140 session-days struck to likely, 16 adds uncertain, 2 dropped | bump; `today.go` strikes on `LikelyCancelled`, a chip for `Uncertain` |
+| 4 | F3c + F3d | coverage check in `collapse` (a special_hours notice survives when no survivor covers its groups); effect kinds folded in the key | 248 objects, 96 versions; 133 cancellations survive, 320 session refs return; `session-outside-schedule` 37 to 50 until entry 6 | |
+| 5 | E4 | "until further notice" under a single head date is a From; the flag lifted to item level | 246 objects, 120 versions, 8 texts; 47 warning raises, 0 strike changes | |
+| 6 | E3a + E3b + F10 + placement provenance | `slotInfo` carries its schedule; `explode` clips per date; no fixed cap (bounded at 366 days); `explode` and `gatherSlots` honour `Weekdays`; a session hangs only on the label whose schedule produced the slot | 3 objects (Kanata) plus tree: -66 refs, +18; `session-outside-schedule` to 0 | |
+| 7 | E1b + E1c | a weekday-agreed resolution more than 183 days from the anchor is marked; a range containing the anchor wins | 0 objects; anchor-shift tests | |
+| 8 | E2a + "until <Month>" | `date-end-unstated` marker, row likely; `findEmbeddedDate` takes a bare month as a month-only To | 251 objects gain the marker; "closed until October" count read at landing | bump; chip falls back to `DateText` for `date-end-unstated` and `date-month-only` |
+| 9 | A1 compat | `sentence{src, spans}`, span finders, `remainder()` with the old comma rules written down; wrapper tests rewritten to spans | empty, stats byte-identical | |
+| 10 | B2 + F11 | `reading`, `flatten`, `resolve`, `completeHead`; To-only and weekday children complete a head as ranges do; four invented fixtures; `li/*` stats kept | 7 objects, 1 version (Minto mixed list) | |
+| 11 | F2 + colon | `RawText` verbatim, `reading` field (`Object.reading = 26`); the completion strips the trailing colon; `RawHTML` no longer repeats the child; `dedupeKeys` keys on the reading | 121 objects, 27 versions, `raw_text` only | bump; `pre-line` on the activity change text |
+| 12 | A1 natural + A2-lite + F12 | commas are boundaries, preposition absorbed; typed clause list; the bare "only" restriction rule (text as written); `rewrite_contract_test.go`; `clockRangeRe` takes "and" only after "between"; the walk hands `processItem` the reading | 372 objects, 256 versions, 12 texts, all modifications; 130 heritage hours objects become `modifiedHours` | |
+| 13 | per-segment finders | no pattern crosses a claimed span; the two-sided span with a clock on each end (Canterbury) | 1 fixture | |
+| 14 | D2 + `allProgramsRe` + `facility-except-programs` | `resolveClosureSubject` with kind and reason and `subject/closure/<reason>` stats; part, grammar and other-facility variants; "programs are cancelled" without "all"; mkcorpus keeps every facility's name; the marker (row likely) for a facility closure with an "except" clause | refactor 0; then 1,701 objects in 487 versions (1,508 placement); no strike changes | bump |
+| 15 | D3 | motivation table with a `want` column, 58 rows; 85 dead entries deleted | empty | |
+
+Deferred, in the order they would be taken up: the A2 dispatcher with E6's
+span type and B1-strict (after entry 14, decided on what the A1 natural
+review shows); E2b end kind on the DateSpan; F1b content ids (when a
+consumer keeps ids across versions); F3b guarded collapse (if double
+listing is wanted gone); C2 (if a second consumer appears); the
+`weekday-mismatch` split into typo and stale year (when drift appears in
+O3's far-date list). The LLM residue pass (approach C in approaches.md)
+stays on hold.
 
 Done since the first corpus run (verified against the full corpus, not
 fixtures): single-ended times ("closed until noon" OpenStart, "will end at
