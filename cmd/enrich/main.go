@@ -4,6 +4,7 @@
 //	go run ./cmd/enrich                     # latest version, JSON to stdout
 //	go run ./cmd/enrich -versions 0 -o dir  # all versions, one file each
 //	go run ./cmd/enrich -versions 0 -o ""   # stats only
+//	go run ./cmd/enrich -versions 0 -o dir -format golden   # the corpus diff rendering
 package main
 
 import (
@@ -17,6 +18,7 @@ import (
 
 	"github.com/ottrec/data-enrichment/enrich"
 	"github.com/ottrec/data-enrichment/internal/dataver"
+	"github.com/ottrec/data-enrichment/internal/golden"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
@@ -25,7 +27,7 @@ var (
 	cachePath = flag.String("cache", "/tmp/ottrec-data.db", "ottrecdata cache path")
 	nVersions = flag.Int("versions", 1, "number of most recent versions to process (0 = all)")
 	outPath   = flag.String("o", "-", `output: "-" for stdout (single version only), a directory for one file per version, "" for stats only`)
-	format    = flag.String("format", "json", `output format: "json" (protojson) or "pb" (binary protobuf)`)
+	format    = flag.String("format", "json", `output format: "json" (protojson), "pb" (binary protobuf) or "golden" (the golden corpus rendering, for diff -r between full runs)`)
 )
 
 func main() {
@@ -47,7 +49,10 @@ func main() {
 		}
 
 		marshal := func() []byte {
-			if *format == "pb" {
+			switch *format {
+			case "golden":
+				return []byte(golden.Render(out))
+			case "pb":
 				buf, err := proto.Marshal(out)
 				if err != nil {
 					panic(err)

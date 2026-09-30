@@ -26,8 +26,14 @@ Tooling (from the module root, needs `/tmp/ottrec-data.db`):
 
 - `go run ./cmd/enrich`: the enrichment itself; latest version as protojson
   to stdout (`-format pb` for binary protobuf; the schema is
-  `schema/enrichment.proto`), `-versions 0 -o dir` for one file per version,
-  `-o ""` for stats only. Stats always go to stderr.
+  `schema/enrichment.proto`; `-format golden` for the golden corpus
+  rendering, which `diff -r` between two full runs), `-versions 0 -o dir`
+  for one file per version, `-o ""` for stats only. Stats always go to
+  stderr.
+- `go run ./cmd/mkcorpus`: refreshes the golden corpus fixtures under
+  `enrich/testdata/corpus` from the cache; `go test ./enrich -run Golden
+  -update` then writes the goldens for the new ones (hacking.md
+  "Workflow").
 - `go run ./cmd/report -o report.html`: a self-contained HTML debugging
   report for one version (default latest): source blocks on the left with
   each object's extracted byte range highlighted, object cards on the right,

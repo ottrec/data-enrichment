@@ -12,6 +12,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/ottrec/data-enrichment/internal/golden"
 	epb "github.com/ottrec/data-enrichment/schema"
 	"github.com/ottrec/scraper/schema"
 	"github.com/ottrec/website/pkg/ottrecidx"
@@ -78,7 +79,7 @@ func TestCorpusProperties(t *testing.T) {
 				count("kind", kind+"/"+r)
 			}
 			for _, e := range o.GetEffects() {
-				count("effect", effectKind(e))
+				count("effect", golden.EffectKind(e))
 			}
 			for _, a := range o.GetAmbiguities() {
 				count("marker", a)
@@ -140,7 +141,7 @@ func TestCorpusProperties(t *testing.T) {
 		}
 	} else if want, err := os.ReadFile(summaryPath); err != nil {
 		t.Errorf("%v (run go test ./enrich -run Golden -update)", err)
-	} else if d := lineDiff(string(want), got); d != "" {
+	} else if d := golden.Diff(string(want), got); d != "" {
 		t.Errorf("%s changed (-want +got):\n%s", summaryPath, d)
 	}
 
@@ -179,7 +180,7 @@ var properties = []property{
 			}
 			var ks []string
 			for _, e := range o.GetEffects() {
-				switch k := effectKind(e); k {
+				switch k := golden.EffectKind(e); k {
 				case "cancelled", "closure", "added":
 					ks = append(ks, k)
 				}
@@ -239,7 +240,7 @@ var properties = []property{
 					continue
 				}
 				if days := int(tm.Sub(fx.anchor).Hours() / 24); days > farDays || days < -farDays {
-					far = append(far, fmt.Sprintf("%s is %+d days", fmtDate(x), days))
+					far = append(far, fmt.Sprintf("%s is %+d days", golden.Date(x), days))
 				}
 			}
 			return strings.Join(far, ", "), len(far) > 0
@@ -323,7 +324,7 @@ func sessionsOutsideSchedule(fo fixtureOutput) []sessionViolation {
 						continue
 					}
 					for _, id := range s.GetObjects() {
-						out = append(out, sessionViolation{id, fmt.Sprintf("%q %s", a.GetLabel(), fmtDate(s.GetDate()))})
+						out = append(out, sessionViolation{id, fmt.Sprintf("%q %s", a.GetLabel(), golden.Date(s.GetDate()))})
 					}
 				}
 			}

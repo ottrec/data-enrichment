@@ -144,9 +144,20 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   (converts recs to Objects and builds the reference tree; sessions filled
   from rec.sessions, `added` vs `objects` split by Effects.Added).
 - `cmd/enrich` — `-versions n` (0=all), `-o` stdout/dir/stats-only,
-  `-format json|pb`; stats to stderr, aggregated over versions.
+  `-format json|pb|golden`; stats to stderr, aggregated over versions.
   `internal/dataver` is the shared version-cache iterator (same as the dump
-  tools).
+  tools); `EachPB` yields the raw protobuf, which `cmd/mkcorpus` uses.
+- `internal/golden` — `Render` (the golden rendering: objects by block, only
+  the fields that are set, one `at:` line per placement, sessions per
+  activity; ids, seq, offsets, raw HTML and block hashes left out) and
+  `Diff` (the changed region with the block and object headers above it).
+  Shared by the golden test, the corpus properties and `-format golden`.
+- `enrich/golden_test.go` + `enrich/properties_test.go` — `TestGolden` (one
+  parallel subtest per fixture, `-run 'Golden/minto-.*'` works) and
+  `TestCorpusProperties` (the summary golden); `cmd/mkcorpus` writes the
+  fixtures, oldest version per distinct facility snapshot, trimmed of
+  description, address, coordinates, errors and links; `-blocks-only` drops
+  the schedule structure from the key. See Workflow.
 - `report/` + `cmd/report` — the HTML debugging report (source blocks with
   highlighted extraction ranges beside their objects, hover-paired). The
   fastest way to eyeball parser behavior on a version.
@@ -176,26 +187,56 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
 
 ## Workflow
 
+The oracle is the golden corpus: `enrich/testdata/corpus` holds one trimmed
+single-facility dataset protobuf per distinct (facility, blocks, schedule
+structure) over the cache's history (2,511 fixtures, written by
+`cmd/mkcorpus`), each with a `.golden` rendering of its objects and their
+placement beside it, and `corpus-summary.golden` with the counts and
+property lists over all of them. `go test ./...` runs the lot in about a
+second.
+
 ```sh
-go test ./enrich/                    # grammar unit tests (corpus nasties)
-go run ./cmd/enrich | less           # latest version, eyeball JSON
-# full corpus: ~2 min; run under a cap (a runaway loop here once OOM'd the box)
-go build -o /tmp/enrich-bin ./cmd/enrich
-systemd-run --user --scope -p MemoryMax=8G env GOMEMLIMIT=6GiB \
-    /tmp/enrich-bin -versions 0 -o "" 2> stats.txt
+go test ./...                                     # goldens, properties, unit tests
+go test ./enrich -run 'Golden|CorpusProp' -update # rewrite after a reviewed change
+git diff --stat enrich/testdata                   # which fixtures moved
+git diff enrich/testdata/corpus-summary.golden    # what the counts and lists say
+go run ./cmd/mkcorpus                             # after the cache grows, then -update
 ```
 
-`cmd/check-coverage` verifies total accounting (every word of every source
-block appears in some object's raw text for that block); run it over the full
-corpus after structural changes. The aggregate stats are the regression
-signal: diff them between runs.
-Watch `unparsed/*`, `scope/none`, and the `amb/*` counts; a new city
-phrasing shows up as a bump there. To inspect a marker class, write per-
-version files (`-o dir`) and sample with a few lines of python (glob the
-JSONs, collect notices by marker, print facility/dateText/rawText/scope) —
-that loop found every bug so far. `cmd/dump-context` shows raw blocks with
-their schedule/activity/time context when you need to see what the parser
-saw.
+A change is done when its golden diff has been read in full: for a
+refactor the diff is empty; for a behaviour change every changed object is
+classified in the commit message. `-update` is a flag of the enrich test
+binary, so it goes with `./enrich`, not `./...`. The summary's lists
+(undated-effect, no-effect, stray-date, far-date, head-unparsed-trigger,
+unparsed, session-outside-schedule) are where a gap shows before anyone
+goes looking; its hard assertion is that every effect kind fires
+somewhere. The goldens depend on ottrecidx (effective date ranges, slots),
+so they follow the website module the build resolves: the workspace's
+under go.work, the go.mod pin otherwise; keep the pin current enough that
+both agree.
+
+The full corpus is the pre-merge check for a behaviour change, since the
+fixtures do not cover anchor-only variants (same blocks and schedule, a
+different source date):
+
+```sh
+go build -o ~/src/ottrec/tmp/enrich-scratch/bin/enrich-x ./cmd/enrich
+# ~2 min; run under a cap (a runaway loop here once OOM'd the box)
+systemd-run --user --scope -p MemoryMax=8G env GOMEMLIMIT=6GiB \
+    ~/src/ottrec/tmp/enrich-scratch/bin/enrich-x -versions 0 -o out-x -format golden 2> stats-x.txt
+diff -r out-before out-x                          # the same rendering the goldens use
+go run ./cmd/check-coverage -versions 0           # total accounting, 0 uncovered
+```
+
+`-format golden` writes the golden rendering per version, so `diff -r`
+between two runs shows exactly what a golden diff shows, placement
+included; `diff` the stats files too. `cmd/check-coverage` verifies that
+every word of every source block appears in some object's raw text for
+that block. To inspect a marker class, write JSON per version (`-o dir`)
+and sample with a few lines of python (glob the JSONs, collect notices by
+marker, print facility/dateText/rawText/scope). `cmd/dump-context` shows raw
+blocks with their schedule/activity/time context when you need to see what
+the parser saw; `cmd/report` renders one version as HTML.
 
 ## Things that bit us already
 
