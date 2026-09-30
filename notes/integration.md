@@ -175,6 +175,22 @@ with a go.mod bump:
   added times. `.activity-change-text` has `white-space: pre-line` so the
   two lines show as posted. Arrives with the bump after this change; the
   CSS rule does not depend on it.
+- The subject resolver (entry 14 of the structural review; no API or
+  schema change, the bump alone). A closure-only "the pool is closed" at a
+  complex is placed at the swim group instead of the facility, so /today's
+  changes warning narrows to that group at 15 facilities (Canterbury,
+  Walter Baker, Kanata Leisure, CARDELREC, François Dupuis, Richcraft,
+  Minto, Bob MacQuarrie, Pinecrest, Brewer, Ray Friel, Plant, Jack
+  Purcell, Lowertown, St. Laurent) and the activity pages stop listing a
+  pool closure under skating or the gym. Ben Franklin Place's Meridian
+  Theatres notices and St. Laurent's wheelchair ramp become amenity
+  closures (WarnNotice, the notices list) instead of unmatched changes
+  warnings; Tony Graham's "The complex and Client Services remain closed."
+  is a facility closure. Pinecrest's "The pool is closed and programs are
+  cancelled until further notice." strikes the swim group's sessions
+  again. `facility-except-programs` (likely) marks a facility closure
+  with an exception, at Cumberland and Fairfields today, which publish no
+  drop-ins.
 
 ## Open decisions
 

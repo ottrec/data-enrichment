@@ -270,6 +270,17 @@ and the cancellation is the part's programs, not the facility's (hacking.md
 invariant 5). A closure alone carries no amenity, since an amenity closure
 reads as a notice about a place and this one is the group's.
 
+A facility closure that states an exception ("The museum is closed to
+daily visitors for the winter season, except for programs and special
+events.", "with the exception of special programs and events", "but
+programs") is marked `facility-except-programs`, on this path and on the
+"the facility is closed" one. The heritage sites write it (Cumberland,
+Fairfields) and publish no drop-ins today; the day one does, the marker's
+row (likely) keeps the closure from striking them. There is no museum
+rule: Billings and Nepean Museum are their museum, Cumberland and
+Fairfields are open for programs, Pinhey's park stays open, and a word
+cannot tell them apart.
+
 The subject is what `subjectClosedRe` leaves after "the", with the verb
 and the adverb taken off ("will remain", "remains", "is currently",
 "still"): "The pool's wheelchair ramp is currently unavailable." resolved

@@ -3,4 +3,5 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "museum"
+    ambiguities: facility-except-programs
     at: facility

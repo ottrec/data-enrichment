@@ -41,6 +41,10 @@ var (
 	// "X only" clauses
 	noteClauseRe = regexp.MustCompile(`^(?:(?:moved|relocated)(?: inside| outside)? to .+|reduced capacity|half capacity|no instructor)$`)
 	closedSeason = regexp.MustCompile(`^closed for the season`)
+	// an exception on a facility closure ("closed to daily visitors, except
+	// for programs and special events", "with the exception of special
+	// programs"), which marks the closure facility-except-programs
+	exceptProgramsRe = regexp.MustCompile(`\b(?:except|exception|but programs)\b`)
 	// a reason the city sometimes appends after the effect word ("cancelled
 	// due to annual maintenance"), which otherwise hides the keyword from the
 	// end-anchored patterns below and loses the effect entirely
@@ -311,6 +315,9 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			n.Scope.Level = "group" // scoped by where the city posted it
 			n.Scope.Groups = []string{b.grp.label}
 		}
+		if exceptProgramsRe.MatchString(fworking) {
+			n.Ambiguities = append(n.Ambiguities, ambFacilityExceptPrograms)
+		}
 		st.closureContext = true
 		b.emitTimes(&n, spec, clocks, &sessions, emit)
 		return
@@ -361,6 +368,12 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		case subjFacility:
 			n.Scope.Level = "facility"
 			n.Scope.MatchQuality = matchScopePhrase
+			if exceptProgramsRe.MatchString(fworking) {
+				// "The museum is closed to daily visitors, except for
+				// programs and special events": closed to whom the text
+				// says, so the day the site publishes a drop-in this warns
+				n.Ambiguities = append(n.Ambiguities, ambFacilityExceptPrograms)
+			}
 		case subjPostedGroup:
 			n.Scope.Level = "group"
 			n.Scope.Amenity = subject

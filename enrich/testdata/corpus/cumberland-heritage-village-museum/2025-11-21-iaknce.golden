@@ -3,6 +3,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "museum"
+    ambiguities: facility-except-programs
     at: facility
 - IGNORED heading "Vintage Village of Lights"
     section: "Vintage Village of Lights"

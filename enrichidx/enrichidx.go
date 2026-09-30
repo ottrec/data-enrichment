@@ -122,6 +122,7 @@ var markerPolicy = map[string]trust{
 	"class-matched-by-vocabulary":  trustLikely, // a class the page never spells, from the ice taxonomy
 	"skating-widened-to-window":    trustLikely, // siblings the notice does not name
 	"dog-swim-session":             trustStated, // a classification, not a doubt
+	"facility-except-programs":     trustLikely, // a facility closure with an exception: closed to visitors, maybe not to its programs
 	// structure
 	"head-unparsed":                trustLikely, // the item's head was not understood
 	"no-subject":                   trustWarn,   // (cannot)

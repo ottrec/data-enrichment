@@ -453,6 +453,7 @@ markers applies):
 | `class-title-partial` | the class names part of the title of the group it was posted under | stated |
 | `activity-narrowed-to-amenity` | narrowed off a row to the courts it names | stated |
 | `dog-swim-session` | a classification | stated |
+| `facility-except-programs` | a facility closure with an exception ("except for programs and special events", "with the exception of", "but programs"): closed to visitors, maybe not to its programs | likely |
 | `activity-typo-match` | one edit from a label | likely |
 | `matched-other-group` | posted under another group | likely |
 | `class-matched-by-vocabulary` | a class from the ice taxonomy, never spelled on the page | likely |

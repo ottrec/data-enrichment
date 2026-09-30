@@ -239,3 +239,39 @@ func TestPartProgramsCancelled(t *testing.T) {
 		}
 	}
 }
+
+// TestFacilityExceptPrograms pins the marker on a facility closure with an
+// exception, on both the facility-sentence and the subject paths, and its
+// absence on a plain closure and on a closure that is not the facility's.
+func TestFacilityExceptPrograms(t *testing.T) {
+	for _, tc := range []struct {
+		fac, text string
+		facility  bool
+		marker    bool
+	}{
+		{"Cumberland Heritage Village Museum", "The museum is closed to daily visitors for the winter season, except for programs and special events.", true, true},
+		{"Fairfields Heritage House", "Fairfields Heritage House is closed for the winter season, with the exception of special programs and events.", true, true},
+		{"Fairfields Heritage House", "The facility is closed, but programs and special events are offered year-round.", true, true},
+		{"Pinhey's Point Historic Site", "The museum at Pinhey's Point Historic Site is closed for the winter season.", true, false},
+		{"Fairfields Heritage House", "The museum is closed to daily visitors, but programs and special events are offered year-round.", false, false},
+	} {
+		b := testClosureCtx(t, tc.fac, nil)
+		b.processItem(&walkState{}, b.read(tc.text), "", "", [2]int{}, nil, nil)
+		var notices []notice
+		for _, r := range b.recs {
+			if r.kind == "notice" {
+				notices = append(notices, r.n)
+			}
+		}
+		if len(notices) != 1 {
+			t.Fatalf("%q: %d notices, want 1", tc.text, len(notices))
+		}
+		n := notices[0]
+		if got := n.Scope.Level == "facility" && n.Scope.MatchQuality == matchScopePhrase; got != tc.facility {
+			t.Errorf("%q: facility closure %v, want %v (%s %s)", tc.text, got, tc.facility, n.Scope.Level, n.Scope.MatchQuality)
+		}
+		if got := slices.Contains(n.Ambiguities, ambFacilityExceptPrograms); got != tc.marker {
+			t.Errorf("%q: marker %v, want %v", tc.text, got, tc.marker)
+		}
+	}
+}

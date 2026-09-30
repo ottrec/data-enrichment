@@ -45,6 +45,10 @@ const (
 	ambClassVocabulary      = "class-matched-by-vocabulary"
 	ambSkateWidened         = "skating-widened-to-window"
 	ambDogSwim              = "dog-swim-session"
+	// a facility closure with an exception ("except for programs and
+	// special events"): the facility may be closed to visitors and open for
+	// its programs, so the closure warns rather than cancels
+	ambFacilityExceptPrograms = "facility-except-programs"
 )
 
 // allMarkers is every ambiguity marker the parser can emit. enrichidx's
@@ -59,7 +63,7 @@ var allMarkers = []string{
 	ambDateOnlyItem, ambNoSubject, ambHoursContext, ambPossibleActivityTime,
 	ambFreeformItem, ambDateOutsideSched, ambActivityTypo, ambActivityNarrowed,
 	ambOtherGroup, ambClassTitlePartial, ambClassVocabulary, ambSkateWidened,
-	ambDogSwim,
+	ambDogSwim, ambFacilityExceptPrograms,
 }
 
 // Markers returns every ambiguity marker the parser can emit.
