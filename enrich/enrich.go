@@ -45,8 +45,25 @@ const (
 	ambClassVocabulary      = "class-matched-by-vocabulary"
 	ambSkateWidened         = "skating-widened-to-window"
 	ambDogSwim              = "dog-swim-session"
-	ambTimeChangeUnparsed   = "time-change-unparsed"
 )
+
+// allMarkers is every ambiguity marker the parser can emit. enrichidx's
+// policy table and the corpus properties are checked against it, so a new
+// marker comes with a decision about what it costs the consumer.
+var allMarkers = []string{
+	ambDateUnparsed, ambDateGarbled, ambWeekdayMismatch, ambYearUnconfirmed,
+	ambYearAmbiguous, ambDateRangeInvalid, ambDateMonthOnly,
+	ambMeridiemInferred, ambMeridiemAmbiguous,
+	ambActivityUnmatched, ambActivityMultiple, ambClassUnmatched, ambPartUnmatched,
+	ambNoSlotOverlap, ambAddedScheduled, ambTimeDisambiguated, ambHeadUnparsed,
+	ambDateOnlyItem, ambNoSubject, ambHoursContext, ambPossibleActivityTime,
+	ambFreeformItem, ambDateOutsideSched, ambActivityTypo, ambActivityNarrowed,
+	ambOtherGroup, ambClassTitlePartial, ambClassVocabulary, ambSkateWidened,
+	ambDogSwim,
+}
+
+// Markers returns every ambiguity marker the parser can emit.
+func Markers() []string { return slices.Clone(allMarkers) }
 
 const producedByParser = "parser"
 

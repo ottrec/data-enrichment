@@ -72,6 +72,18 @@
       8 skating-widened-to-window
     178 weekday-mismatch
 
+## silent-marker: 7
+
+A marker the parser can emit (enrich.Markers) that occurs nowhere in the golden corpus.
+
+- class-matched-by-vocabulary
+- closed-part-unmatched
+- date-range-invalid
+- date-unparsed
+- date-year-ambiguous
+- date-year-unconfirmed
+- no-subject
+
 ## undated-effect: 36
 
 A notice that cancels, closes or adds with no date, which applies on every day it is posted.

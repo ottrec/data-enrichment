@@ -171,7 +171,8 @@ func check(version string, data ottrecidx.DataRef) {
 									fmt.Printf("  cancel: %s / %s / %s %s %d-%d\n",
 										fac.GetName(), grp.GetLabel(), act.GetLabel(), day, r.Start, r.End)
 								}
-							} else if enFac.ScopeCancelled(day, int(r.Start), int(r.End)) ||
+							} else if m.LikelyCancelled ||
+								enFac.ScopeCancelled(day, int(r.Start), int(r.End)) ||
 								enGrp.ScopeCancelled(day, int(r.Start), int(r.End)) {
 								// the likely-cancelled tier, probed like
 								// buildTodayFeed's warning

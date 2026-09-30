@@ -68,6 +68,9 @@ func Consumer(data ottrecidx.DataRef, out *epb.Output) string {
 				if m.Cancelled {
 					ans = append(ans, "cancelled")
 				}
+				if m.LikelyCancelled {
+					ans = append(ans, "likely cancelled")
+				}
 				if m.TimeChange {
 					ans = append(ans, "time-change")
 				}
@@ -97,6 +100,9 @@ func Consumer(data ottrecidx.DataRef, out *epb.Output) string {
 				s := sessionLine{label: a.ActivityLabel, date: a.Date, start: a.Start, end: a.End, answer: "added"}
 				if a.Novel {
 					s.answer += " novel"
+				}
+				if a.Uncertain {
+					s.answer += " uncertain"
 				}
 				lines = append(lines, s)
 			}

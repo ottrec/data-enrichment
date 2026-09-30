@@ -41,8 +41,14 @@ All join keys are the raw dataset identifiers, never normalized forms:
    unrecognized enum value (`kind`, `source`, `match_quality`, `relation`),
    means the consumer is older than the data. Fall back to showing the
    object's `raw_text`; never drop it and never guess.
-4. **`ambiguities` weaken, never strengthen.** Any unrecognized marker =
-   reduced confidence. Markers worth branching on today:
+4. **`ambiguities` weaken, never strengthen.** enrichidx reads them through
+   `markerPolicy` (hacking.md "Marker vocabulary"): a marker rated likely
+   turns a strike into `SessionNotices.LikelyCancelled` or the implied
+   `ScopeCancelled` tier and an add into `AddedSession.Uncertain`; one rated
+   warn, or one with no row (a newer parser), blocks strikes and adds and
+   leaves only the warning. A consumer of enrichidx gets this for free; one
+   reading the raw output should treat any unrecognized marker as reduced
+   confidence. Markers worth branching on when reading the output directly:
    - `possible-activity-time`: a bare date+time that may be an orphaned
      activity change; show as a note, don't treat as facility hours.
    - `no-slot-overlap`: a cancel whose time matches no published slot
@@ -63,7 +69,11 @@ enrichment:
 
 - session-level `objects` with a `cancelled`/`closure` effect: style the
   matching feed session as cancelled (this is the high-confidence tier:
-  slot-validated, date-resolved).
+  slot-validated, date-resolved). Through enrichidx that is
+  `SessionNotices.Cancelled`; `LikelyCancelled` is the same notice resting on
+  a marked inference (a repaired range, a mismatched weekday, a wrong-group
+  posting) and gets the "may be affected" tier, not the strike. /today folds
+  it into `EnrichedScopeCancelled`.
 - group/facility-level whole-scope cancellations split into two tiers.
   `enrichidx.ScopeCancelledStated` is the half whose text **states** the
   cancellation ("The facility is closed and all programs cancelled.", "All
@@ -102,7 +112,9 @@ enrichment:
   nothing about the other groups' programming); everything skipped still
   reports through the Warning tier.
 - session-level `added` refs: inject a new feed session (activity label from
-  the tree; `novel` activities have no dataset row).
+  the tree; `novel` activities have no dataset row). `AddedSession.Uncertain`
+  marks an add resting on a marked inference; /today says "may have been
+  added" and the activity pages' chip reads "added?".
 - activity-level objects: a note line on all of that activity's sessions on
   the object's dates (`dates` may be open-ended or weekday-restricted).
 - group/facility-level objects with `closure`+dates: a banner on the
@@ -133,6 +145,18 @@ so avoid re-parsing.
   can't resolve; diff against the checked-in snapshot.
 - Aggregate stats (`cmd/enrich -versions 0 -o ""`) are the regression
   signal; see hacking.md.
+
+## API changes and website bumps
+
+The website consumes enrichidx in-process, so an API change lands there
+with a go.mod bump:
+
+- `SessionNotices.LikelyCancelled` and `AddedSession.Uncertain` (the marker
+  policy table). `Cancelled` and `ScopeCancelledStated` became stated-only;
+  without the website change the likely-rated sessions lose the strike and
+  show only the group's changes warning. `today.go` adds `LikelyCancelled`
+  to `EnrichedScopeCancelled` and carries `Uncertain` into the added note and
+  the "added?" chip.
 
 ## Open decisions
 

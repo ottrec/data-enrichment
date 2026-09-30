@@ -12,7 +12,8 @@
 // call sites: tree position is the guarantee, only sufficiently validated
 // session refs report cancellation, unknown kinds/effects (from a newer
 // schema) can never rule anything out, and amenity-scoped notices never claim
-// schedule effects.
+// schedule effects. What an ambiguity marker costs is one row of markerPolicy:
+// stated, likely (one tier down) or warn; an unknown marker is warn.
 package enrichidx
 
 import (
@@ -49,13 +50,23 @@ type AddedSession struct {
 	Novel         bool   // the activity itself is not in the published schedule
 	Date          schema.Date
 	Start, End    int // minutes from midnight; End may exceed 1440
+	// Uncertain means the notice carries a marker the policy table rates
+	// likely rather than stated (a typo match, a wrong-group posting): the
+	// session is probably real, and a consumer should say so.
+	Uncertain bool
 }
 
 // SessionNotices is what validated session-level notices say about one
 // published session. The zero value means no notices.
 type SessionNotices struct {
-	// Cancelled means a notice cancels or closes the whole published slot.
+	// Cancelled means a notice cancels or closes the whole published slot,
+	// and the notice carries no marker the policy table rates below stated.
 	Cancelled bool
+	// LikelyCancelled is Cancelled for a notice the policy table rates likely
+	// (its match or date rests on an inference the parser marked): the same
+	// tier as a scope-implied cancellation, never a strike. Both can be set
+	// when two notices reach the session; Cancelled is the stronger answer.
+	LikelyCancelled bool
 	// TimeChange means a time-change notice affects this session ("will end
 	// at 6 pm", "schedule change").
 	TimeChange bool
@@ -65,6 +76,72 @@ type SessionNotices struct {
 	// Anything less clear-cut only sets TimeChange.
 	NewStart, NewEnd int
 	NewTime          bool
+}
+
+// trust is the most this consumer does with an object, given its ambiguity
+// markers: the weakest of its markers' rows in markerPolicy. A marker with no
+// row (a newer parser than this consumer) is trustWarn, which is what the
+// schema says an unrecognized marker means.
+type trust int
+
+const (
+	trustStated trust = iota // strikes sessions, cancels a scope as stated, adds sessions
+	trustLikely              // the same, one tier down: LikelyCancelled, the implied scope tier, Uncertain adds
+	trustWarn                // warns only; never strikes, cancels a scope or adds
+)
+
+// markerPolicy has a row for every marker the parser can emit
+// (enrich.Markers; TestMarkerPolicyCoversParser keeps the two in step). A
+// row marked "cannot" is a marker that never reaches a strike or an add; the
+// row records what it means rather than changing anything.
+var markerPolicy = map[string]trust{
+	// dates
+	"date-unparsed":         trustWarn,   // no date resolved (cannot)
+	"date-garbled":          trustLikely, // a garbled range repaired from its ends, both weekdays agreeing
+	"weekday-mismatch":      trustLikely, // the written weekday fits no year: a typo'd weekday or a stale year
+	"date-year-unconfirmed": trustLikely, // no weekday to confirm a date far from the anchor
+	"date-year-ambiguous":   trustWarn,   // two years fit the weekday (cannot)
+	"date-range-invalid":    trustWarn,   // the range did not resolve (cannot)
+	"date-month-only":       trustStated, // an end bounded by its month; see monthOnlyEnd
+	"date-outside-schedule": trustStated, // no schedule listing the activity covers the date: never a strike, and where an add is expected
+	"date-only-item":        trustWarn,   // a date with nothing said about it (cannot)
+	// clocks
+	"meridiem-inferred":  trustStated, // the only reading, or the one a slot confirms
+	"meridiem-ambiguous": trustWarn,   // several readings fit and no slot decides
+	// subjects
+	"activity-unmatched":           trustWarn,   // (cannot)
+	"activity-multiple-candidates": trustWarn,   // (cannot)
+	"activity-typo-match":          trustLikely, // one edit away from a label
+	"activity-time-disambiguated":  trustStated, // one of several candidates, the only one with the exact slot (invariant 2's deterministic exception)
+	"activity-narrowed-to-amenity": trustStated, // narrowing off a row is the conservative direction
+	"matched-other-group":          trustLikely, // posted under another group
+	"class-unmatched":              trustWarn,   // (cannot)
+	"closed-part-unmatched":        trustWarn,   // (cannot)
+	"class-title-partial":          trustStated, // the class names part of the title of the group it was posted under
+	"class-matched-by-vocabulary":  trustLikely, // a class the page never spells, from the ice taxonomy
+	"skating-widened-to-window":    trustLikely, // siblings the notice does not name
+	"dog-swim-session":             trustStated, // a classification, not a doubt
+	// structure
+	"head-unparsed":                trustLikely, // the item's head was not understood
+	"no-subject":                   trustWarn,   // (cannot)
+	"hours-context-unknown":        trustWarn,   // (cannot)
+	"possible-activity-time":       trustWarn,   // (cannot)
+	"freeform-item":                trustWarn,   // (cannot)
+	"no-slot-overlap":              trustWarn,   // a cancellation whose time meets no slot
+	"added-time-already-scheduled": trustWarn,   // an added time the schedule already has
+}
+
+// objectTrust is the weakest trust among the object's markers.
+func objectTrust(o *epb.Object) trust {
+	t := trustStated
+	for _, m := range o.GetAmbiguities() {
+		p, ok := markerPolicy[m]
+		if !ok {
+			p = trustWarn
+		}
+		t = max(t, p)
+	}
+	return t
 }
 
 // Ref is an indexed enrichment output. The zero Ref is valid and empty.
@@ -146,13 +223,14 @@ func Join(out *epb.Output) Ref {
 						g.marks[key] = m
 					}
 					for _, id := range es.GetAdded() {
-						if addsSession(byID[id]) {
+						if ok, uncertain := addsSession(byID[id]); ok {
 							g.added = append(g.added, AddedSession{
 								ActivityLabel: ea.GetLabel(),
 								Novel:         ea.GetNovel(),
 								Date:          schema.Date(es.GetDate()),
 								Start:         int(es.GetStart()),
 								End:           int(es.GetEnd()),
+								Uncertain:     uncertain,
 							})
 						}
 					}
@@ -282,6 +360,9 @@ func (g GroupRef) ScopeCancelledStated(date schema.Date, start, end int) bool {
 // generalize from a scope phrase to its sessions, but the cancellation itself
 // is the city's word and not an inference, which is what lets a consumer treat
 // a whole-facility closure as cancelling the sessions under it.
+//
+// The object's markers can lower it: rated likely, a stated cancellation
+// answers only the implied tier; rated warn, the object is left to Warning.
 func scopeCancelled(objs []*epb.Object, date schema.Date, start, end int, stated bool) bool {
 	for _, o := range objs {
 		if o.GetKind() != epb.Object_NOTICE {
@@ -305,6 +386,11 @@ func scopeCancelled(objs []*epb.Object, date schema.Date, start, end int, stated
 			continue
 		}
 		if !cancelled && (!closure || o.GetAmenity() != "" || o.GetPhrase() != "") {
+			continue
+		}
+		// a marker rated likely drops a stated cancellation to the implied
+		// tier; one rated warn leaves the object to Warning
+		if t := objectTrust(o); t == trustWarn || (stated && t != trustStated) {
 			continue
 		}
 		if o.HasDates() && clockOverlaps(o, start, end) && applies(o, date, date) && !monthOnlyEnd(o, date) {
@@ -688,8 +774,14 @@ func sessionNotices(byID map[string]*epb.Object, es *epb.Session) SessionNotices
 		if o == nil || o.GetKind() != epb.Object_NOTICE {
 			continue
 		}
+		trust := objectTrust(o)
 		if cancelsWholeSlot(o) {
-			m.Cancelled = true
+			switch trust {
+			case trustStated:
+				m.Cancelled = true
+			case trustLikely:
+				m.LikelyCancelled = true
+			}
 		}
 		for _, e := range o.GetEffects() {
 			switch e.WhichEffect() {
@@ -699,8 +791,9 @@ func sessionNotices(byID map[string]*epb.Object, es *epb.Session) SessionNotices
 				// strictly inside the slot: open-end trims the end ("will end
 				// at 6 pm"), open-start trims the start. Everything else
 				// (e.g. a bare "schedule change" whose time equals the slot)
-				// stays a flag with the details in the raw text.
-				if t := o.GetTime(); o.HasTime() && !m.NewTime {
+				// stays a flag with the details in the raw text. A trimmed
+				// time is an assertion, so only a stated notice makes one.
+				if t := o.GetTime(); o.HasTime() && !m.NewTime && trust == trustStated {
 					start, end := es.GetStart(), es.GetEnd()
 					switch {
 					case t.GetOpenEnd() && t.HasStart() && t.GetStart() > start && t.GetStart() < end:
@@ -742,19 +835,21 @@ func cancelsWholeSlot(o *epb.Object) bool {
 }
 
 // addsSession reports whether a notice referenced from a Session.added list
-// should inject that session: it must carry an added effect and not be
-// flagged as duplicating an already-published time.
-func addsSession(o *epb.Object) bool {
+// should inject that session, and whether only as an uncertain one: it must
+// carry an added effect and no marker the policy table rates warn (which is
+// where "added-time-already-scheduled" lives).
+func addsSession(o *epb.Object) (ok, uncertain bool) {
 	if o == nil || o.GetKind() != epb.Object_NOTICE {
-		return false
+		return false, false
 	}
-	if slices.Contains(o.GetAmbiguities(), "added-time-already-scheduled") {
-		return false
+	t := objectTrust(o)
+	if t == trustWarn {
+		return false, false
 	}
 	for _, e := range o.GetEffects() {
 		if e.WhichEffect() == epb.Effect_Added_case {
-			return true
+			return true, t == trustLikely
 		}
 	}
-	return false
+	return false, false
 }

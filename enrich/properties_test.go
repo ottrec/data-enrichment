@@ -12,6 +12,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/ottrec/data-enrichment/enrich"
 	"github.com/ottrec/data-enrichment/internal/golden"
 	epb "github.com/ottrec/data-enrichment/schema"
 	"github.com/ottrec/scraper/schema"
@@ -31,6 +32,8 @@ const farDays = 300
 // facility and text. A property with known exceptions is listed rather than
 // asserted, so a new exception shows up in the diff. Every effect kind
 // occurring at least once is asserted: a rule that never fires is dead.
+// Every registered marker either occurs or is listed as silent, and every
+// marker that occurs must be registered.
 func TestCorpusProperties(t *testing.T) {
 	outs := corpusOutputs(t)
 	if len(outs) == 0 {
@@ -111,6 +114,19 @@ func TestCorpusProperties(t *testing.T) {
 			fmt.Fprintf(&b, "%7d %s\n", counts[table][k], k)
 		}
 	}
+	var silent []string
+	for _, m := range slices.Sorted(slices.Values(enrich.Markers())) {
+		if counts["marker"][m] == 0 {
+			silent = append(silent, m)
+		}
+	}
+	fmt.Fprintf(&b, "\n## silent-marker: %d\n\nA marker the parser can emit (enrich.Markers) that occurs nowhere in the golden corpus.\n", len(silent))
+	if len(silent) > 0 {
+		b.WriteByte('\n')
+	}
+	for _, m := range silent {
+		fmt.Fprintf(&b, "- %s\n", m)
+	}
 	for _, p := range properties {
 		vs := violations[p.name]
 		fmt.Fprintf(&b, "\n## %s: %d\n\n%s\n", p.name, len(vs), p.doc)
@@ -143,6 +159,14 @@ func TestCorpusProperties(t *testing.T) {
 		t.Errorf("%v (run go test ./enrich -run Golden -update)", err)
 	} else if d := golden.Diff(string(want), got); d != "" {
 		t.Errorf("%s changed (-want +got):\n%s", summaryPath, d)
+	}
+
+	// every marker that occurs must be registered, or enrichidx has no row
+	// for it
+	for m := range counts["marker"] {
+		if !slices.Contains(enrich.Markers(), m) {
+			t.Errorf("marker %s occurs in the golden corpus but is not in enrich.Markers", m)
+		}
 	}
 
 	// every effect kind must fire somewhere in the corpus

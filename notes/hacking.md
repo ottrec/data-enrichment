@@ -170,6 +170,13 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   `golden.Consumer` per fixture against `enrichidx/testdata/consumer`, a
   file only for fixtures with an answer (2,294 of 2,511). The one golden a
   trust-rule change in enrichidx shows up in.
+- `enrichidx/` — the consumer API and trust rules: `Join` indexes an output
+  by facility, group and session; `Session`, `ScopeCancelled` /
+  `ScopeCancelledStated`, `Added`, `Warning` and `Items` are what the website
+  asks. `markerPolicy` rates every marker stated, likely or warn and
+  `objectTrust` takes the weakest of an object's rows (see Marker
+  vocabulary); `monthOnlyEnd` is the one date-conditional marker rule beside
+  the table.
 - `report/` + `cmd/report` — the HTML debugging report (source blocks with
   highlighted extraction ranges beside their objects, hover-paired). The
   fastest way to eyeball parser behavior on a version.
@@ -196,6 +203,61 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
    row it matched.
 6. Dates: no year is guessed against a written weekday without a marker;
    garbled heads produce no dates at all.
+7. The consumer's side: a marker costs what its `markerPolicy` row says,
+   and a marker with no row is warn, so a marker from a newer parser can
+   never strike or add.
+
+## Marker vocabulary
+
+`enrich.Markers()` is the registry of every marker the parser can emit.
+`TestMarkersRegistered` checks it against the package's `amb*` constants,
+enrichidx's `TestMarkerPolicyCoversParser` against `markerPolicy`, and the
+corpus summary lists the registered markers the golden corpus never shows
+(`silent-marker`) and fails on one it shows that is not registered. A new
+marker therefore needs a row, which is where its cost gets decided.
+
+What each costs, from `markerPolicy` (the weakest row among an object's
+markers applies):
+
+- stated: strikes (`Cancelled`, `ScopeCancelledStated`), adds, trims a
+  session's time.
+- likely: one tier down. A session cancellation answers `LikelyCancelled`,
+  a stated scope cancellation answers only `ScopeCancelled`, an add is
+  `Uncertain`, no trimmed time.
+- warn: none of those; the object reaches the consumer only through
+  `Warning` and `Items`.
+
+| marker | means | costs |
+| --- | --- | --- |
+| `meridiem-inferred` | missing am/pm, the only reading or the one a slot confirms | stated |
+| `meridiem-ambiguous` | several readings fit, no slot decides | warn |
+| `date-month-only` | an end given as a month, taken as its last day | stated; `monthOnlyEnd` keeps a scope cancellation from striking inside that month |
+| `date-outside-schedule` | no schedule listing the activity covers the date | stated (never reaches a strike; an add is expected there) |
+| `date-garbled` | a range repaired from its ends, both weekdays agreeing | likely |
+| `weekday-mismatch` | the written weekday fits no year: a typo'd weekday or a stale year | likely |
+| `date-year-unconfirmed` | no weekday to confirm a date far from the anchor | likely |
+| `date-unparsed`, `date-year-ambiguous`, `date-range-invalid`, `date-only-item` | no usable date | warn |
+| `activity-time-disambiguated` | one of several candidates, the only one with the exact slot (invariant 2) | stated |
+| `class-title-partial` | the class names part of the title of the group it was posted under | stated |
+| `activity-narrowed-to-amenity` | narrowed off a row to the courts it names | stated |
+| `dog-swim-session` | a classification | stated |
+| `activity-typo-match` | one edit from a label | likely |
+| `matched-other-group` | posted under another group | likely |
+| `class-matched-by-vocabulary` | a class from the ice taxonomy, never spelled on the page | likely |
+| `skating-widened-to-window` | skate siblings the notice does not name | likely |
+| `head-unparsed` | the item's list head was not understood | likely |
+| `activity-unmatched`, `activity-multiple-candidates`, `class-unmatched`, `closed-part-unmatched`, `no-subject` | no single subject | warn |
+| `no-slot-overlap` | a cancellation whose time meets no slot | warn |
+| `added-time-already-scheduled` | an added time the schedule already has | warn |
+| `hours-context-unknown`, `possible-activity-time`, `freeform-item` | not an effect on a session | warn |
+
+`class-title-partial` and `activity-time-disambiguated` are stated because
+every corpus instance reads correctly and both are deterministic; rated
+likely they would move 356 more session-days off the strike (c.md's replay).
+`weekday-mismatch` stays likely because it cannot tell a typo from a stale
+year. The warn rows other than `meridiem-ambiguous` and
+`added-time-already-scheduled` never reach a strike or an add; they record
+what the marker means.
 
 ## Workflow
 
