@@ -159,21 +159,8 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
 - `enrich.go` — version loop, per-fragment `rec` collection (`blockCtx.add`
   assigns block seq + id and every heading/date-context/boilerplate fragment
   becomes an ignored object), walkState lifetimes (head reset by headings;
-  closureContext reset by headings and after each list), the `<li>` shapes
-  (leaf with `<br>` lines; date head + children; date head carrying more
-  than the date ("Sunday, August 23, 5 to 6 pm", "Monday, July 27 to
-  Friday, July 31, between 9 am and 4 pm") + children: the head is an item
-  and the children still get its date, which is what keeps a child
-  cancellation from going undated; garbled head — children
-  processed with the marked spec; inverted form: statement head whose
-  children are all dates, ranges emitted separately, and a date+clock child
-  ("PD Day Public Swim" over "Friday, October 2, 8:30 to 10 am") emitted on
-  its own as "<head>, <clock>" under that date; time analogue
-  (`allClocks`): statement head whose children are all bare clock ranges
-  ("Pickleball cancelled:" over "11:45 am to 12:45 pm", ...) is re-read as
-  "<head sans colon>, <child>" per child, so the usual clause code applies; otherwise head emitted
-  with `head-unparsed` and children processed, unless `allSupplementary` says
-  the children are only cross-references and the head is therefore complete),
+  closureContext reset by headings and after each list), the list walk as
+  flatten then resolve (the completion rule, next section),
   `collapse` (special_hours
   notices matching a schedule_changes notice on dates, effect kinds and
   scope become ignored/duplicate stubs, provided the matching copies claim
@@ -224,6 +211,103 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
 - `report/` + `cmd/report` — the HTML debugging report (source blocks with
   highlighted extraction ranges beside their objects, hover-paired). The
   fastest way to eyeball parser behavior on a version.
+
+### The list walk
+
+A list is read in two steps. `flatten` turns the `<li>` tree into units in
+document order, one per line (a `<br>` line is a unit of its own), each
+with its `reading` from the walk-level parsers (`parseLeadingDate`,
+`onlyClocks`): a date alone, a date with a rest that is a bare clock or a
+statement, a garbled date, a bare clock, or a statement. A unit's kind
+follows from its reading and whether it has lines under it: a date with
+lines under it is a context (the children inherit the date, the line
+itself is an ignored `date-context`), a date carrying more than the date
+("Sunday, August 23, 5 to 6 pm", "Monday, July 27 to Friday, July 31,
+between 9 am and 4 pm") is an item that also dates its children, a
+statement with lines under it is a head, and anything else is a leaf.
+`resolve` then emits the units in order with a `walkState` per unit copied
+from its parent's (the lines of one `<li>` share one), so a date context
+reaches everything under it and nothing beside it.
+
+The completion rule replaces the shape ladder that was here. A statement
+head is a context for everything under it, through any number of date
+contexts. A leaf carrying only a date, only a clock, or a date and a clock
+completes the nearest statement above it (`nearestStmt`: the parent chain
+through date contexts to the first head, or dated head whose rest is a
+statement). A leaf with a statement of its own is an item of its own under
+whatever date it inherits. A head nothing completes is an item marked
+`head-unparsed`, unless its children are only cross-references with a link
+("See Outdoor Pools for more information.", "Details: Outdoor pools"),
+which make it a complete item. `completeHead` emits a completed head in the
+order the inverted form always had: its bare date children as date
+contexts, then the statement once per range child and once for all the
+single date children together ("The facility is closed, and all programs
+cancelled:" over dates); a To-only child ("Until August 21"), a weekday set
+and an open end are ranges here, one notice each (the ladder dropped the
+first two). A clock child is emitted when the walk reaches it (`complete`),
+as `withStmt`'s "<statement sans colon>, <clock>" ("Pickleball cancelled:"
+over "11:45 am to 12:45 pm"), under its own date when it carries one ("PD
+Day Public Swim" over "Friday, October 2, 8:30 to 10 am") and the inherited
+one otherwise. `withStmt` is the one place the parser reads a sentence the
+city did not write. A head's `<br>` lines are leaves under it in every
+case.
+
+The census of top-level `<li>` shapes over the golden corpus's 2,042
+unique blocks (head class from the walk-level parsers, children as a set;
+b.md of the structural review) and what the rule does with each:
+
+| shape | unique `<li>` | rule |
+| --- | --- | --- |
+| date{stmt} | 2,287 | context; the statements are items under the date |
+| date+clock (leaf) | 695 | item |
+| date+rest (leaf) | 438 | item |
+| date{supp} | 280 | context; the cross-references are items under it |
+| stmt (leaf) | 168 | item |
+| date{clock} | 23 | context; the clocks are items (`possible-activity-time`), no statement above |
+| date (leaf) | 12 | item (`date-only-item`) |
+| date+clock{supp} | 7 | item that dates its children; its rest is a clock, so it offers no statement |
+| stmt{date} | 4 | completed: the statement once per range and once for the singles ("The facility is closed, and all programs cancelled:") |
+| stmt{date+rest} | 4 | `head-unparsed`; the child is an item with its own date ("Civic Holiday" over "Monday, August 3, 8 am to 4 pm, facility hours") |
+| date{stmt\|supp} | 4 | context |
+| stmt{date+clock} | 3 | completed: "<head>, <clock>" under the child's date ("PD Day Public Swim - training and whale pools only") |
+| date{stmt{clock}} | 3 | context over a completed head: "<head>, <clock>" under the date ("Pickleball cancelled:" under "Wednesday, September 30") |
+| date{stmt\|stmt{supp}} | 3 | context; the inner head is complete by its cross-references |
+| stmt{supp} | 3 | complete by its cross-references, no marker ("Dogs swim free, 4:30 to 5:30 pm") |
+| date+rest{stmt} | 2 | item that dates its children ("Monday, July 27 to Friday, July 31, between 9 am and 4 pm"); its rest is a statement, so a clock child would complete it |
+| date{stmt{stmt}} | 2 | context over a `head-unparsed` head; the child is an item ("The 25 m pool is closed between 7:30 and 10:30 am.") |
+| date{date+clock} | 2 | context; the child is an item with its own date ("June 20 to 28" over "Monday to Friday, 1:45 to 7 pm") |
+| stmt{stmt} | 1 | `head-unparsed`; the child is an item ("The rink is closed from noon to 4 pm") |
+| date{stmt{clock\|stmt}} | 1 | the mixed list, below |
+| supp, date{stmt{supp}}, date+br | 1 each | |
+
+Depth: 3,946 top-level nodes, 3,490 at depth 2, 32 at depth 3, none
+deeper.
+
+The mixed list is Minto's "Pickleball drop-ins:" over three clock ranges
+and "Noon 1 pm" (fixture minto-recreation-complex-barrhaven/2026-09-25):
+the ladder had no shape for it, so the head was `head-unparsed` and the
+three clocks bare `possible-activity-time` notices. Under the rule the
+clocks complete the head ("Pickleball drop-ins, 8:45 to 9:45 am", matched
+to Pickleball, no effect since the head has no trigger word) and "Noon 1
+pm" stays the item it was. Layouts the city has not posted are fixtures
+under `enrich/testdata/corpus/invented/`: a statement over date heads over
+clocks (completed through the date contexts, four exact cancellations), a
+statement over date heads over items of their own (the head stays
+`head-unparsed`, the items resolve on their own), a date over a statement
+over clocks, and a statement over mixed children (a bare date, a date and
+clock, an item of its own). A head completed by a bare date keeps its colon
+in the text the sentence parser reads, so "Pickleball cancelled:" over
+"Wednesday, September 30" carries no effect until entry 11 strips it.
+
+The `li/*` stats count what `flatten` found: `li/leaf` (a leaf `<li>` that
+is an item of its own), `li/leaf-date-line`, `li/date-head`,
+`li/dated-head-item`, `li/garbled-head`, `li/headless` (an `<li>` with no
+text of its own); per completed statement `li/head-dates` (a date-led
+completion, bare date or date and clock: the inverted form),
+`li/head-dated-times`, `li/head-times` and `li/head-nested` (completed
+through a date context); `li/head-supplementary` and `li/head-unparsed`
+for the rest. `TestFlatten` pins the units and stats for every shape
+above, `TestNearestStmt` the chain, `TestCompleteHead` the notices.
 
 ## Invariants (the no-false-positive contract)
 
@@ -414,6 +498,16 @@ the parser saw; `cmd/report` renders one version as HTML.
   warnings on days those groups have no sessions and a second listing on the
   activity pages; `groupMayRun` leaves out a group none of whose schedules
   can run on the notice's dates.
+
+- The `<li>` walk was a ladder of eight shapes, each an all-or-nothing
+  predicate over a head's children, tried in a fixed order. A layout the
+  city had not posted before fell to the last rung, `head-unparsed`, and its
+  children lost the head's context: a cancellation stated once in the head
+  was lost for every child. Three incidents were new rungs (a statement over
+  clocks, c531ea9; over a date and clock, 7132ea1; a date head carrying more
+  than a date, 647596b), and a mixed list (Minto's "Pickleball drop-ins:"
+  over three clocks and "Noon 1 pm") matched no rung at all. The completion
+  rule under "The list walk" replaced it.
 
 ## Next steps
 

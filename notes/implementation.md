@@ -51,15 +51,21 @@ since they are deterministic; anything ambiguous stays higher up.
    (split-bold survives), `<br>` becomes a line break, zero-width/nbsp
    stripped (`text.go`).
 2. **Walk** (`enrich.go`): headings set the section and can set the date
-   context; date-only paragraphs/list-heads set the date context; leaf items
-   (list items, `<br>` lines, paragraphs) become candidate notices. Handles
-   the inverted form (statement head, date children, or date+clock children
-   read as "<head>, <clock>" under each date), its time analogue
-   (statement head, bare clock children: each child becomes "<head>, <time>"),
-   and garbled date heads (children emitted with a `date-garbled` marker, no
-   dates). An intro line
-   like "The facility is not available on the following dates:" makes the
-   following bare date+time items closures instead of hours.
+   context; date-only paragraphs set the date context; paragraph lines
+   become candidate notices. A list is flattened into units in document
+   order (one per line, with its reading: a date, a date and clock, a date
+   and statement, a garbled date, a clock, a statement) and resolved in
+   order under a state copied from each unit's parent's. A statement head
+   is a context for everything under it, through any number of date
+   contexts; a leaf carrying only a date, only a clock, or a date and a
+   clock completes the nearest statement above it (a date dates it, a clock
+   times it as "<head>, <clock>"); a leaf with a statement of its own is an
+   item of its own under the date it inherits; a head nothing completes is
+   marked `head-unparsed`, unless its children are only cross-references.
+   Garbled date heads context their children with a `date-garbled` marker
+   and no dates. An intro line like "The facility is not available on the
+   following dates:" makes the following bare date+time items closures
+   instead of hours.
 3. **Dates** (`date.go`): weekday/month/day/[year] grammar with ranges,
    enumerations, weekday-only sets, trailing weekday restrictions ("April 23
    to June 15, Monday to Friday"), "until further notice". Yearless dates

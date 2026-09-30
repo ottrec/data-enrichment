@@ -233,182 +233,366 @@ func (fc *facCtx) processBlock(blockHTML, source string, grp *groupMatcher) {
 				b.processItem(st, line, part.HTML, part.Off, part.Links, nil)
 			}
 		case "list":
-			for _, li := range part.Items {
-				b.processLi(st, li)
-			}
+			b.resolve(st, b.flatten(part.Items))
 			st.closureContext = false
 		}
 	}
 }
 
-func (b *blockCtx) processLi(st *walkState, li liNode) {
-	lines := splitLines(li.Head)
-	if len(li.Items) == 0 {
-		// leaf: possibly "date<br>item<br>item"
-		local := *st
-		for i, line := range lines {
-			if i == 0 && len(lines) > 1 {
-				if spec, rest, ok := parseLeadingDate(line, b.anchor); ok && restIsTrivial(rest) {
-					local.head, local.headRaw = &spec, line
-					b.addIgnored("date-context", line, li.HeadHTML, li.Off, &local, nil)
-					continue
+// reading is what the walk knows about one line before the sentence parser
+// sees it: a date alone (spec), a date with a rest that is a bare clock
+// (spec and clock) or a statement (spec and stmt), a garbled date
+// (garbled), a bare clock (clock), or a statement (stmt).
+type reading struct {
+	text    string    // the line as written
+	spec    *dateSpec // its leading date, when one parsed
+	garbled []string  // the markers of a date-like line that did not parse
+	clock   string    // the rest after any date, when it is nothing but clock ranges
+	stmt    string    // the rest after any date, otherwise
+}
+
+// dateOnly reports whether the line was only a date.
+func (r reading) dateOnly() bool { return r.spec != nil && r.clock == "" && r.stmt == "" }
+
+// read classifies one line with the walk-level parsers only; processItem
+// parses it again when it becomes an item.
+func (b *blockCtx) read(line string) reading {
+	r := reading{text: line}
+	spec, rest, ok := parseLeadingDate(line, b.anchor)
+	switch {
+	case ok && restIsTrivial(rest):
+		r.spec = &spec
+		return r
+	case ok:
+		r.spec = &spec
+		rest = strings.Trim(rest, " .,")
+	case len(spec.Ambig) > 0:
+		r.garbled = spec.Ambig
+		return r
+	default:
+		rest = strings.TrimSpace(line)
+	}
+	if onlyClocks(rest) {
+		r.clock = rest
+	} else {
+		r.stmt = rest
+	}
+	return r
+}
+
+type unitKind uint8
+
+const (
+	uContext unitKind = iota // a date, or a garbled date, with lines under it: dates them, is no item itself
+	uHead                    // a statement with lines under it
+	uItem                    // a date carrying more than the date, with lines under it: an item of its own that also dates them
+	uLeaf                    // a line with nothing under it
+)
+
+// unit is one line of a list after flattening: its reading, the unit it
+// sits under, and what the walk decided for it. A unit's context is the
+// chain of its parents, which precede it; resolve reads the units in order
+// and nothing else.
+type unit struct {
+	kind   unitKind
+	r      reading
+	html   string // the <li>'s HTML; empty for a context with children, whose lines carry their own
+	off    [2]int
+	links  []anchor
+	parent int  // the enclosing unit, -1 at the top of the list
+	first  bool // the first line of its <li>; a <br> line is not
+	// a head: a leaf below completes it, or its children are only
+	// cross-references
+	completed, supp bool
+	// a leaf: it completes the statement at stmt, and completeHead emits it
+	// with that head (a bare date among the head's own children)
+	completes, withHead bool
+	stmt                int
+}
+
+// statement is the text a completing leaf reads with: a head's line, or
+// what followed a dated head's date.
+func (u *unit) statement() string {
+	if u.kind == uItem {
+		return u.r.stmt
+	}
+	return u.r.text
+}
+
+// flatten turns a list's <li> tree into units in document order and
+// decides what completes what. The rule: a statement with lines under it
+// is a context for everything under it, through any number of date
+// contexts; a leaf carrying only a date, only a clock, or a date and a
+// clock completes the nearest statement above it; a leaf with a statement
+// of its own is an item of its own under whatever date it inherits; a head
+// nothing completes is an item marked head-unparsed, unless its children
+// are only cross-references. A pure function of the list and the anchor;
+// the li/* stats count what it found.
+func (b *blockCtx) flatten(items []liNode) []unit {
+	var units []unit
+	var leaves []int // the first item line of each leaf <li>
+	var walk func(items []liNode, parent int)
+	walk = func(items []liNode, parent int) {
+		for _, li := range items {
+			lines := splitLines(li.Head)
+			if len(lines) == 0 {
+				// nothing of its own: its list is its parent's
+				b.out.Stats["li/headless"]++
+				walk(li.Items, parent)
+				continue
+			}
+			idx := len(units)
+			r := b.read(lines[0])
+			u := unit{r: r, html: li.HeadHTML, off: li.Off, links: li.Links, parent: parent, first: true, stmt: -1}
+			if len(li.Items) == 0 {
+				// a leaf: its lines are items, under the first when that is
+				// only a date ("date<br>item<br>item")
+				p, rest, first := parent, lines, true
+				if r.dateOnly() && len(lines) > 1 {
+					b.out.Stats["li/leaf-date-line"]++
+					u.kind = uContext
+					units = append(units, u)
+					p, rest, first = idx, lines[1:], false
 				}
+				leaves = append(leaves, len(units))
+				for _, line := range rest {
+					units = append(units, unit{kind: uLeaf, r: b.read(line), html: li.HeadHTML, off: li.Off, links: li.Links, parent: p, first: first, stmt: -1})
+					first = false
+				}
+				continue
 			}
-			b.processItem(&local, line, li.HeadHTML, li.Off, li.Links, nil)
-		}
-		return
-	}
-
-	head := ""
-	if len(lines) > 0 {
-		head = lines[0]
-	}
-	if spec, rest, ok := parseLeadingDate(head, b.anchor); ok && restIsTrivial(rest) {
-		// date-headed: children are the items
-		local := *st
-		local.head, local.headRaw = &spec, head
-		b.addIgnored("date-context", head, "", li.Off, &local, nil)
-		for _, line := range lines[1:] {
-			b.processItem(&local, line, li.HeadHTML, li.Off, li.Links, nil)
-		}
-		for _, sub := range li.Items {
-			b.processLi(&local, sub)
-		}
-		return
-	} else if ok && len(li.Items) > 0 {
-		// date head carrying more than the date ("Monday, July 27 to Friday,
-		// July 31, between 9 am and 4 pm", "Sunday, August 23, 5 to 6 pm"):
-		// the head is an item of its own, and its date still contexts the
-		// children
-		b.out.Stats["li/dated-head-item"]++
-		b.processItem(st, head, li.HeadHTML, li.Off, li.Links, nil)
-		local := *st
-		local.head, local.headRaw = &spec, spec.Raw
-		for _, line := range lines[1:] {
-			b.processItem(&local, line, li.HeadHTML, li.Off, li.Links, nil)
-		}
-		for _, sub := range li.Items {
-			b.processLi(&local, sub)
-		}
-		return
-	} else if len(spec.Ambig) > 0 {
-		// garbled date head: children still get the head text, marked
-		local := *st
-		local.head, local.headRaw = &spec, head
-		b.addIgnored("date-context", head, "", li.Off, &local, spec.Ambig)
-		for _, sub := range li.Items {
-			b.processLi(&local, sub)
-		}
-		return
-	}
-
-	// inverted form: a statement whose children are all dates. Single dates
-	// merge into one notice; each range child gets its own. A child that is
-	// a date plus a bare clock ("PD Day Public Swim" over "Friday, October 2,
-	// 8:30 to 10 am") gets its own too, read as "<head>, <clock>" under that
-	// date.
-	type timedChild struct {
-		spec  dateSpec
-		clock string
-		sub   liNode
-	}
-	var singles dateSpec
-	var ranges []dateSpec
-	var timed []timedChild
-	var childIgnored []liNode
-	allDates := len(li.Items) > 0
-	for _, sub := range li.Items {
-		if len(sub.Items) > 0 {
-			allDates = false
-			break
-		}
-		spec, rest, ok := parseLeadingDate(sub.Head, b.anchor)
-		if !ok {
-			allDates = false
-			break
-		}
-		if !restIsTrivial(rest) {
-			if !onlyClocks(rest) {
-				allDates = false
-				break
+			switch {
+			case r.dateOnly():
+				b.out.Stats["li/date-head"]++
+				u.kind, u.html = uContext, ""
+			case r.spec != nil:
+				// "Sunday, August 23, 5 to 6 pm", "Monday, July 27 to
+				// Friday, July 31, between 9 am and 4 pm": an item whose
+				// date still reaches the children, so a child cancellation
+				// does not go undated
+				b.out.Stats["li/dated-head-item"]++
+				u.kind = uItem
+			case r.garbled != nil:
+				b.out.Stats["li/garbled-head"]++
+				u.kind, u.html = uContext, ""
+			default:
+				u.kind, u.supp = uHead, allSupplementary(li.Items)
 			}
-			timed = append(timed, timedChild{spec: spec, clock: strings.Trim(rest, " .,"), sub: sub})
+			units = append(units, u)
+			for _, line := range lines[1:] {
+				units = append(units, unit{kind: uLeaf, r: b.read(line), html: li.HeadHTML, off: li.Off, links: li.Links, parent: idx, stmt: -1})
+			}
+			walk(li.Items, idx)
+		}
+	}
+	walk(items, -1)
+
+	for i := range units {
+		u := &units[i]
+		if u.kind != uLeaf || !(u.r.dateOnly() || u.r.clock != "") {
 			continue
 		}
-		childIgnored = append(childIgnored, sub)
-		if !spec.From.IsZero() || spec.OpenEnded {
-			ranges = append(ranges, spec)
+		h := nearestStmt(units, i)
+		if h < 0 {
 			continue
 		}
-		singles.Dates = append(singles.Dates, spec.Dates...)
-		singles.Ambig = append(singles.Ambig, spec.Ambig...)
-		singles.Raw = strings.TrimSpace(singles.Raw + " " + spec.Raw)
-	}
-	if allDates && (!singles.empty() || len(ranges) > 0 || len(timed) > 0) {
-		for _, sub := range childIgnored {
-			b.addIgnored("date-context", sub.Head, sub.HeadHTML, sub.Off, st, nil)
+		u.completes, u.stmt = true, h
+		if units[h].kind == uHead {
+			units[h].completed = true
+			u.withHead = u.r.dateOnly() && u.parent == h
 		}
-		specs := ranges
-		if !singles.empty() {
-			specs = append(specs, singles)
-		}
-		for i := range specs {
-			local := *st
-			local.head, local.headRaw = &specs[i], specs[i].Raw
-			b.processItem(&local, head, li.HeadHTML, li.Off, li.Links, nil)
-		}
-		if len(timed) > 0 {
-			b.out.Stats["li/head-dated-times"]++
-		}
-		for i := range timed {
-			local := *st
-			local.head, local.headRaw = &timed[i].spec, timed[i].spec.Raw
-			text := strings.TrimRight(strings.TrimSpace(head), ":") + ", " + timed[i].clock
-			b.processItem(&local, text, li.HeadHTML+timed[i].sub.HeadHTML, li.Off, append(slices.Clone(li.Links), timed[i].sub.Links...), nil)
-		}
-		return
 	}
 
-	// the time analogue: a statement whose children are all bare clock
-	// ranges ("Pickleball cancelled:" over "11:45 am to 12:45 pm", ...). Each
-	// child becomes the head sentence with that time, one notice apiece.
-	if head != "" && allClocks(li.Items) {
-		b.out.Stats["li/head-times"]++
-		for _, sub := range li.Items {
-			text := strings.TrimRight(strings.TrimSpace(head), ":") + ", " + strings.TrimSpace(sub.Head)
-			b.processItem(st, text, li.HeadHTML+sub.HeadHTML, li.Off, append(slices.Clone(li.Links), sub.Links...), nil)
-		}
-		return
+	// li/head-dates counts a statement completed by a date-led leaf (the
+	// inverted form, bare date or date and clock), li/head-dated-times and
+	// li/head-times one completed by a date and clock or a bare clock, and
+	// li/head-nested one completed through a date context; a statement
+	// counts once per key. li/leaf counts a leaf <li> that is an item of
+	// its own.
+	type perStmt struct {
+		h   int
+		key string
 	}
+	counted := map[perStmt]bool{}
+	count := func(h int, key string) {
+		if k := (perStmt{h, key}); !counted[k] {
+			counted[k] = true
+			b.out.Stats[key]++
+		}
+	}
+	for i := range units {
+		u := &units[i]
+		switch {
+		case u.kind == uHead && !u.completed && u.supp:
+			b.out.Stats["li/head-supplementary"]++
+		case u.kind == uHead && !u.completed:
+			b.out.Stats["li/head-unparsed"]++
+		case u.completes:
+			if u.r.spec != nil {
+				count(u.stmt, "li/head-dates")
+			}
+			switch {
+			case u.r.clock == "":
+			case u.r.spec != nil:
+				count(u.stmt, "li/head-dated-times")
+			default:
+				count(u.stmt, "li/head-times")
+			}
+			if u.parent != u.stmt {
+				count(u.stmt, "li/head-nested")
+			}
+		}
+	}
+	for _, i := range leaves {
+		if !units[i].completes {
+			b.out.Stats["li/leaf"]++
+		}
+	}
+	return units
+}
 
-	// a head whose children are only a supplementary reference ("See Outdoor
-	// Pools for more information.", "Details: Outdoor pools") is a complete
-	// item in its own right, not an unrecognized one. The children still get
-	// processed below and land wherever they land.
-	if head != "" {
-		amb := []string{ambHeadUnparsed}
-		if allSupplementary(li.Items) {
-			amb = nil
+// nearestStmt is the statement a leaf at i would complete: the nearest
+// head or dated head above it, looked for through date contexts only, when
+// it has a statement to complete (a dated head whose rest is a clock has
+// none). -1 when there is none. Parents precede their children, so each
+// step goes strictly up and the walk ends.
+func nearestStmt(units []unit, i int) int {
+	prev := i
+	for p := units[i].parent; p >= 0 && p < prev; prev, p = p, units[p].parent {
+		switch units[p].kind {
+		case uContext:
+			continue
+		case uHead:
+			return p
+		case uItem:
+			if units[p].r.stmt != "" {
+				return p
+			}
 		}
-		b.processItem(st, head, li.HeadHTML, li.Off, li.Links, amb)
+		return -1
 	}
-	for _, sub := range li.Items {
-		b.processLi(st, sub)
+	return -1
+}
+
+// resolve emits the units in order. A unit's state is a copy of its
+// parent's, so a date context reaches everything under it and nothing
+// beside it; the lines of one <li> share a state, so a closure context set
+// by one reaches the <br> lines after it.
+func (b *blockCtx) resolve(st *walkState, units []unit) {
+	states := make([]*walkState, len(units))
+	for i := range units {
+		u := &units[i]
+		var s *walkState
+		switch {
+		case !u.first:
+			s = states[i-1]
+		case u.parent < 0:
+			s = &walkState{}
+			*s = *st
+		default:
+			s = &walkState{}
+			*s = *states[u.parent]
+		}
+		states[i] = s
+		switch u.kind {
+		case uContext:
+			if u.r.garbled != nil {
+				// children still get the head text, marked
+				s.head = &dateSpec{Ambig: u.r.garbled}
+			} else {
+				s.head = u.r.spec
+			}
+			s.headRaw = u.r.text
+			b.addIgnored("date-context", u.r.text, u.html, u.off, s, u.r.garbled)
+		case uItem:
+			b.processItem(s, u.r.text, u.html, u.off, u.links, nil)
+			s.head, s.headRaw = u.r.spec, u.r.spec.Raw
+		case uHead:
+			if u.completed {
+				b.completeHead(s, units, i)
+				continue
+			}
+			// "See Outdoor Pools for more information.", "Details: Outdoor
+			// pools" under a head make it a complete item, not an
+			// unrecognized one; the children land wherever they land
+			amb := []string{ambHeadUnparsed}
+			if u.supp {
+				amb = nil
+			}
+			b.processItem(s, u.r.text, u.html, u.off, u.links, amb)
+		case uLeaf:
+			switch {
+			case u.withHead:
+				// emitted by completeHead
+			case u.completes:
+				b.complete(s, &units[u.stmt], u)
+			default:
+				b.processItem(s, u.r.text, u.html, u.off, u.links, nil)
+			}
+		}
 	}
 }
 
-// allClocks reports whether every child is a bare clock expression with no
-// nested list of its own.
-func allClocks(items []liNode) bool {
-	if len(items) == 0 {
-		return false
-	}
-	for _, sub := range items {
-		if len(sub.Items) > 0 || !onlyClocks(sub.Head) {
-			return false
+// completeHead emits a statement head its children complete, in the order
+// the inverted form always had ("The facility is closed, and all programs
+// cancelled:" over dates): each bare date child as a date context, then
+// the statement once per range child and once for all the single date
+// children together. A To-only child ("Until August 21"), a weekday set
+// and an open end are ranges here, one notice each. Clock children, and
+// dates nested deeper, are emitted when the walk reaches them (complete).
+func (b *blockCtx) completeHead(s *walkState, units []unit, h int) {
+	var singles dateSpec
+	var specs []dateSpec
+	for j := h + 1; j < len(units); j++ {
+		u := &units[j]
+		if !u.withHead || u.stmt != h {
+			continue
 		}
+		b.addIgnored("date-context", u.r.text, u.html, u.off, s, nil)
+		spec := *u.r.spec
+		if len(spec.Dates) > 0 && spec.From.IsZero() && spec.To.IsZero() && !spec.OpenEnded && len(spec.Weekdays) == 0 {
+			singles.Dates = append(singles.Dates, spec.Dates...)
+			singles.Ambig = append(singles.Ambig, spec.Ambig...)
+			singles.Raw = strings.TrimSpace(singles.Raw + " " + spec.Raw)
+			continue
+		}
+		specs = append(specs, spec)
 	}
-	return true
+	if !singles.empty() {
+		specs = append(specs, singles)
+	}
+	head := &units[h]
+	for i := range specs {
+		local := *s
+		local.head, local.headRaw = &specs[i], specs[i].Raw
+		b.processItem(&local, head.r.text, head.html, head.off, head.links, nil)
+	}
+}
+
+// complete emits a leaf that completes the statement above it. A clock
+// times the statement: "Pickleball cancelled:" over "11:45 am to 12:45 pm"
+// reads "Pickleball cancelled, 11:45 am to 12:45 pm", under the leaf's own
+// date when it carries one ("PD Day Public Swim" over "Friday, October 2,
+// 8:30 to 10 am") and the inherited one otherwise. A bare date below the
+// head's own children dates the statement as completeHead does.
+func (b *blockCtx) complete(s *walkState, stmt, u *unit) {
+	if u.r.dateOnly() {
+		b.addIgnored("date-context", u.r.text, u.html, u.off, s, nil)
+		s.head, s.headRaw = u.r.spec, u.r.spec.Raw
+		b.processItem(s, stmt.statement(), stmt.html, stmt.off, stmt.links, nil)
+		return
+	}
+	if u.r.spec != nil {
+		s.head, s.headRaw = u.r.spec, u.r.spec.Raw
+	}
+	b.processItem(s, withStmt(stmt.statement(), u.r.clock), stmt.html+u.html, stmt.off, append(slices.Clone(stmt.links), u.links...), nil)
+}
+
+// withStmt is the text a clock leaf reads as under the statement it
+// completes: the statement without its trailing colon, a comma, the clock.
+// The one place the parser reads a sentence the city did not write.
+func withStmt(stmt, clock string) string {
+	return strings.TrimRight(strings.TrimSpace(stmt), ":") + ", " + clock
 }
 
 // supplementaryRe matches a child that only points somewhere else.

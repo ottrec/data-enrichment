@@ -1,49 +1,49 @@
 # golden corpus summary
 
-2511 fixtures, 20409 objects
+2515 fixtures, 20446 objects
 
 ## kind
 
-  10144 ignored
+  10158 ignored
     784 ignored/boilerplate
-   6913 ignored/date-context
+   6927 ignored/date-context
    1688 ignored/duplicate
     723 ignored/heading
      12 ignored/service-desk
      24 ignored/supplementary
-  10149 notice
+  10172 notice
     116 unparsed
     116 unparsed/freeform
 
 ## effect
 
     250 added
-   3146 cancelled
-   3097 closure
+   3160 cancelled
+   3101 closure
    1222 modified-hours
     185 restriction
     204 seasonal-hours
-   2677 see-schedule
+   2681 see-schedule
      31 time-change
 
 ## match
 
-   2320 exact
-    697 fuzzy
+   2329 exact
+    698 fuzzy
     133 multiple
-    623 none
-    114 normalized
+    628 none
+    116 normalized
      61 novel
-   5422 scope_phrase
+   5431 scope_phrase
 
 ## relation
 
-   1317 covers
-   1999 exact
-    134 none
+   1322 covers
+   2008 exact
+    136 none
     327 novel
-     83 overlaps
-   1646 unchecked
+     84 overlaps
+   1647 unchecked
     323 within
 
 ## marker
@@ -54,7 +54,7 @@
      19 activity-typo-match
      18 activity-unmatched
       9 added-time-already-scheduled
-     15 class-title-partial
+     20 class-title-partial
       3 class-unmatched
       3 date-end-unstated
      12 date-garbled
@@ -67,9 +67,9 @@
      35 hours-context-unknown
      41 matched-other-group
       3 meridiem-ambiguous
-   2332 meridiem-inferred
+   2338 meridiem-inferred
      92 no-slot-overlap
-    107 possible-activity-time
+    104 possible-activity-time
       8 skating-widened-to-window
     178 weekday-mismatch
 
@@ -85,7 +85,7 @@ A marker the parser can emit (enrich.Markers) that occurs nowhere in the golden 
 - date-year-unconfirmed
 - no-subject
 
-## undated-effect: 35
+## undated-effect: 36
 
 A notice that cancels, closes or adds with no date, which applies on every day it is posted.
 
@@ -127,6 +127,8 @@ A notice that cancels, closes or adds with no date, which applies on every day i
     lansdowne-park/2025-12-24-nfqsp7 and 5 more
 - Lansdowne Park: "The sledding hill at Lansdowne Park is closed due to construction." (closure)
     lansdowne-park/2025-12-11-ryinoz and 1 more
+- Minto Recreation Complex - Barrhaven: "Badminton, 6:35 to 7:35 pm, cancelled" (cancelled)
+    invented/stmt-over-mixed
 - Minto Recreation Complex - Barrhaven: "The facility is closed, 6:15 to 10 am. All programs are cancelled." (cancelled)
     minto-recreation-complex-barrhaven/2025-10-09-aqli6r
 - Minto Recreation Complex - Barrhaven: "The facility is closed, 6:15 to 10 am. All programs are cancelled." (closure)
@@ -160,7 +162,7 @@ A notice that cancels, closes or adds with no date, which applies on every day i
 - Walter Baker Sports Centre: "The whirlpool is temporarily closed." (closure)
     walter-baker-sports-centre/2026-01-11-w5zhys
 
-## no-effect: 20
+## no-effect: 21
 
 A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect word list) and has none, nor does any other sentence of the item.
 
@@ -172,6 +174,8 @@ A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect 
     fairfields-heritage-house/2025-10-06-tk7ech
 - Genest Pool: "Closed until the 2027 Summer season." (closed)
     genest-pool/2026-08-31-imjgcl
+- Minto Recreation Complex - Barrhaven: "Pickleball cancelled:" (cancelled)
+    invented/stmt-over-mixed
 - Nepean Sportsplex: "The Athletics change rooms are now open." (open)
     nepean-sportsplex/2026-08-07-sytkfb and 3 more
 - Nepean Sportsplex: "The diving boards are open during Public Swim." (open)

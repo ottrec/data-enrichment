@@ -1,31 +1,30 @@
 == Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
 - IGNORED date-context "Wednesday, September 30"
     at: group "Drop-in schedule - gymnasium sports"
-- NOTICE "Pickleball drop-ins:"
+- NOTICE "Pickleball drop-ins, 8:45 to 9:45 am"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
+    time: "8:45 to 9:45 am" 08:45-09:45 none
     match: NORMALIZED
-    phrase: "Pickleball drop-ins:"
-    ambiguities: head-unparsed
+    phrase: "Pickleball drop-ins"
+    ambiguities: meridiem-inferred
     at: group "Drop-in schedule - gymnasium sports" activity "Pickleball"
-- NOTICE "8:45 to 9:45 am"
+- NOTICE "Pickleball drop-ins, 9:50 to 10:50 am"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
-    time: "8:45 to 9:45 am" 08:45-09:45 unchecked
-    ambiguities: meridiem-inferred possible-activity-time
-    at: group "Drop-in schedule - gymnasium sports"
-- NOTICE "9:50 to 10:50 am"
+    time: "9:50 to 10:50 am" 09:50-10:50 none
+    match: NORMALIZED
+    phrase: "Pickleball drop-ins"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball"
+- NOTICE "Pickleball drop-ins, 10:55 to 11:55 am"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
-    time: "9:50 to 10:50 am" 09:50-10:50 unchecked
-    ambiguities: meridiem-inferred possible-activity-time
-    at: group "Drop-in schedule - gymnasium sports"
-- NOTICE "10:55 to 11:55 am"
-    date text: "Wednesday, September 30"
-    dates: 2026-09-30 Wed
-    time: "10:55 to 11:55 am" 10:55-11:55 unchecked
-    ambiguities: meridiem-inferred possible-activity-time
-    at: group "Drop-in schedule - gymnasium sports"
+    time: "10:55 to 11:55 am" 10:55-11:55 overlaps [Wednesday 11:45am - 12:45pm]
+    match: NORMALIZED
+    phrase: "Pickleball drop-ins"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-09-30 Wed 11:45-12:45
 - NOTICE "Noon 1 pm"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed

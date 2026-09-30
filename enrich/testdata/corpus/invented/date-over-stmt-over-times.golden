@@ -1,0 +1,56 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, September 30"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball cancelled, 11:45 am to 12:45 pm"
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    time: "11:45 am to 12:45 pm" 11:45-12:45 exact [Wednesday 11:45am - 12:45pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball"
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-09-30 Wed 11:45-12:45
+- NOTICE "Pickleball cancelled, 12:50 to 1:50 pm"
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    time: "12:50 to 1:50 pm" 12:50-13:50 exact [Wednesday 12:50 - 1:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-09-30 Wed 12:50-13:50
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Wednesday, September 30"
+    at: facility
+- NOTICE "See the gymnasium drop-in chart for pickleball schedule changes."
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    effects: see-schedule "gymnasium drop-in chart for pickleball schedule"
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED date-context "October 1, 2, 3, 4, 16, and 26"
+    at: facility
+- NOTICE "All gymnasium activities are cancelled."
+    date text: "October 1, 2, 3, 4, 16, and 26"
+    dates: 2026-10-01 Thu 2026-10-02 Fri 2026-10-03 Sat 2026-10-04 Sun 2026-10-16 Fri 2026-10-26 Mon
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 6:35 - 7:35pm; Friday 7:40 - 8:40pm; Friday 8:45 - 9:45pm; Friday 9:00 - 11:00am; Monday 11:45am - 12:45pm; Monday 12:50 - 1:50pm; Monday 1:55 - 2:55pm; Monday 3:00 - 4:00pm; Monday 8:35 - 9:35pm; Monday 9:00 - 11:00am; Saturday 4:45 - 6:15pm; Saturday 6:45 - 7:45pm; Saturday 7:50 - 8:50pm; Sunday 5:00 - 6:00pm; Sunday 6:30 - 7:30pm; Thursday 11:45am - 12:45pm; Thursday 12:50 - 1:50pm; Thursday 1:55 - 2:55pm; Thursday 3:00 - 4:00pm; Thursday 8:15 - 9:15pm; Thursday 9:00 - 11:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium activities"
+    ambiguities: class-title-partial
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-10-01 Thu 11:45-12:45, 2026-10-01 Thu 12:50-13:50, 2026-10-01 Thu 13:55-14:55, 2026-10-01 Thu 15:00-16:00, 2026-10-02 Fri 11:45-12:45, 2026-10-02 Fri 12:50-13:50, 2026-10-02 Fri 13:55-14:55, 2026-10-16 Fri 11:45-12:45, 2026-10-16 Fri 12:50-13:50, 2026-10-16 Fri 13:55-14:55, 2026-10-26 Mon 11:45-12:45, 2026-10-26 Mon 12:50-13:50, 2026-10-26 Mon 13:55-14:55, 2026-10-26 Mon 15:00-16:00
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton" sessions 2026-10-02 Fri 18:35-19:35, 2026-10-02 Fri 19:40-20:40, 2026-10-02 Fri 20:45-21:45, 2026-10-03 Sat 18:45-19:45, 2026-10-03 Sat 19:50-20:50, 2026-10-16 Fri 18:35-19:35, 2026-10-16 Fri 19:40-20:40, 2026-10-16 Fri 20:45-21:45
+    at: group "Drop-in schedule - gymnasium sports" activity "Basketball - family (6 to 14 years old)" sessions 2026-10-03 Sat 16:45-18:15
+    at: group "Drop-in schedule - gymnasium sports" activity "Basketball - youth" sessions 2026-10-01 Thu 20:15-21:15
+    at: group "Drop-in schedule - gymnasium sports" activity "Kinderplay" sessions 2026-10-01 Thu 09:00-11:00, 2026-10-02 Fri 09:00-11:00, 2026-10-04 Sun 17:00-18:00, 2026-10-16 Fri 09:00-11:00, 2026-10-26 Mon 09:00-11:00
+    at: group "Drop-in schedule - gymnasium sports" activity "Volleyball" sessions 2026-10-26 Mon 20:35-21:35
+    at: group "Drop-in schedule - gymnasium sports" activity "Volleyball - family (8 to 14 years old)" sessions 2026-10-04 Sun 18:30-19:30
+- NOTICE "The walking track is closed from 10 am to 8 pm."
+    date text: "October 1, 2, 3, 4, 16, and 26"
+    dates: 2026-10-01 Thu 2026-10-02 Fri 2026-10-03 Sat 2026-10-04 Sun 2026-10-16 Fri 2026-10-26 Mon
+    time: "10 am to 8 pm" 10:00-20:00 unchecked
+    effects: closure
+    match: NONE
+    phrase: "walking track"
+    amenity: "walking track"
+    at: facility
