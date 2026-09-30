@@ -103,6 +103,7 @@ var markerPolicy = map[string]trust{
 	"date-year-ambiguous":   trustWarn,   // two years fit the weekday (cannot)
 	"date-range-invalid":    trustWarn,   // the range did not resolve (cannot)
 	"date-month-only":       trustStated, // an end bounded by its month; see monthOnlyEnd
+	"date-end-unstated":     trustLikely, // a start with no end found; the open end is the parser's, not the city's
 	"date-outside-schedule": trustStated, // no schedule listing the activity covers the date: never a strike, and where an add is expected
 	"date-only-item":        trustWarn,   // a date with nothing said about it (cannot)
 	// clocks
@@ -533,6 +534,11 @@ type Item struct {
 	// fallback when the resolved span can't be expressed faithfully. It is
 	// set even when nothing resolved.
 	DateText string
+	// EndInexact reports that the resolved end is not the posted one: a
+	// month taken as its last day ("until September 2026"), or a start with
+	// no end found ("from August 22 to spring 2028"). A label should use
+	// DateText rather than the resolved span.
+	EndInexact bool
 }
 
 // Items lists the facility-scoped objects that may still be relevant on or
@@ -597,6 +603,9 @@ func items(objs []*epb.Object, from schema.Date) []Item {
 				continue
 			}
 			it.Dated, it.Date = true, d
+			it.EndInexact = slices.ContainsFunc(o.GetAmbiguities(), func(a string) bool {
+				return a == "date-month-only" || a == "date-end-unstated"
+			})
 			ds := o.GetDates()
 			for _, x := range ds.GetDates() {
 				it.Dates = append(it.Dates, schema.Date(x))

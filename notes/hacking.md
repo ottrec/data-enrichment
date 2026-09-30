@@ -54,7 +54,11 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   into a sentence ("The pool is closed from Monday, March 23 to Sunday,
   April 12.", "closed between November 3, 2025 and February 1, 2026",
   "closed until December 1", "starting May 1 until September 2026", which
-  takes the month's last day with `date-month-only`): only expressions led
+  takes the month's last day with `date-month-only`, as does a bare "until
+  October", read as the first such month ending on or after the anchor): a
+  start with no end found ("from August 22 to spring 2028") is open and
+  marked `date-end-unstated` unless the sentence says until further notice.
+  Only expressions led
   by a weekday/month name, optionally introduced by a from/until/between
   word (which decides the side of the span), never one after a reopening
   cue (reopen/return/resume), and "July 3 - 10 am" is a date and a clock.
@@ -251,7 +255,8 @@ markers applies):
 | --- | --- | --- |
 | `meridiem-inferred` | missing am/pm, the only reading or the one a slot confirms | stated |
 | `meridiem-ambiguous` | several readings fit, no slot decides | warn |
-| `date-month-only` | an end given as a month, taken as its last day | stated; `monthOnlyEnd` keeps a scope cancellation from striking inside that month |
+| `date-month-only` | an end given as a month, taken as its last day | stated; `monthOnlyEnd` keeps a scope cancellation from striking inside that month; `Item.EndInexact` |
+| `date-end-unstated` | a start with no end found; the open end is the parser's, not the city's | likely; `Item.EndInexact` |
 | `date-outside-schedule` | no schedule listing the activity covers the date | stated (never reaches a strike; an add is expected there) |
 | `date-garbled` | a range repaired from its ends, both weekdays agreeing | likely |
 | `weekday-mismatch` | the written weekday fits no year: a typo'd weekday or a stale year | likely |

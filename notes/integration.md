@@ -160,6 +160,11 @@ with a go.mod bump:
   show only the group's changes warning. `today.go` adds `LikelyCancelled`
   to `EnrichedScopeCancelled` and carries `Uncertain` into the added note and
   the "added?" chip.
+- `Item.EndInexact`: the resolved end is a month taken as its last day
+  (`date-month-only`) or a start with no end found (`date-end-unstated`).
+  The activity pages' date chip falls back to `DateText`, so "until
+  September 2026" and "from August 22 to spring 2028" show as posted rather
+  than as "to Wed, Sep 30" and "from Sat, Aug 22".
 
 ## Open decisions
 

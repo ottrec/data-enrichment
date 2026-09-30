@@ -56,8 +56,9 @@
       9 added-time-already-scheduled
      15 class-title-partial
       3 class-unmatched
+      3 date-end-unstated
      12 date-garbled
-      2 date-month-only
+      3 date-month-only
      12 date-only-item
      91 date-outside-schedule
      11 dog-swim-session
@@ -84,7 +85,7 @@ A marker the parser can emit (enrich.Markers) that occurs nowhere in the golden 
 - date-year-unconfirmed
 - no-subject
 
-## undated-effect: 36
+## undated-effect: 35
 
 A notice that cancels, closes or adds with no date, which applies on every day it is posted.
 
@@ -150,8 +151,6 @@ A notice that cancels, closes or adds with no date, which applies on every day i
     terry-fox-athletic-facility/2026-03-17-fk3yd6 and 6 more
 - Terry Fox Athletic Facility: "Track and field is now closed for the season and the facility will reopen in January for cross-country skiing." (closure)
     terry-fox-athletic-facility/2025-11-10-zersph
-- Tony Graham Recreation Complex - Kanata: "The facility is closed until October." (closure)
-    tony-graham-recreation-complex-kanata/2026-08-07-sytkfb
 - Walter Baker Sports Centre: "3m diving board closed." (closure)
     walter-baker-sports-centre/2025-11-21-iaknce
 - Walter Baker Sports Centre: "All Aquafit Lite and Aquafit - shallow, cancelled." (cancelled)

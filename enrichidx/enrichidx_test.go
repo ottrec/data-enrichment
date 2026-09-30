@@ -338,11 +338,20 @@ func TestItems(t *testing.T) {
 				Dates:    epb.DateSpan_builder{To: i32(202607246), Weekdays: []int32{6}}.Build(),
 				Effects:  cancelled,
 			}.Build(),
+			// month-only end: the resolved last day is not what was posted
+			epb.Object_builder{
+				Id: "monthonly", Kind: epb.Object_NOTICE,
+				RawText:     "The facility is closed until October.",
+				DateText:    "until October",
+				Dates:       epb.DateSpan_builder{To: i32(202610316)}.Build(),
+				Effects:     closed,
+				Ambiguities: []string{"date-month-only"},
+			}.Build(),
 		},
 		Facilities: []*epb.Facility{
 			epb.Facility_builder{
 				Name:    "Fac",
-				Objects: []string{"future", "past", "free", "hottub", "head", "range", "fridays"},
+				Objects: []string{"future", "past", "free", "hottub", "head", "range", "fridays", "monthonly"},
 			}.Build(),
 		},
 	}.Build()
@@ -352,8 +361,11 @@ func TestItems(t *testing.T) {
 	for _, it := range items {
 		byID[it.ID] = it
 	}
-	if len(items) != 5 {
-		t.Errorf("got %d items (%v), want 5", len(items), byID)
+	if len(items) != 6 {
+		t.Errorf("got %d items (%v), want 6", len(items), byID)
+	}
+	if it := byID["monthonly"]; !it.Dated || !it.EndInexact || byID["range"].EndInexact {
+		t.Errorf("month-only end: got %+v", it)
 	}
 	if it := byID["future"]; !it.Cancelled || !it.Dated || it.Date != 202607121 {
 		t.Errorf("future cancel: got %+v", it)

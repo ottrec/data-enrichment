@@ -703,7 +703,14 @@ var embeddedSecondRe = regexp.MustCompile(`^[ ,]*(?:at\s+\d{1,2}(?::\d{2})?\s*(?
 // embeddedMonthYearRe matches a month-only end ("until September 2026").
 var embeddedMonthYearRe = regexp.MustCompile(`(?i)^([a-z]+)\s+(20\d\d)\b`)
 
-const ambDateMonthOnly = "date-month-only" // an end given as a month, taken as its last day
+// embeddedMonthRe matches a bare month-only end ("until October."): a word
+// followed by punctuation, the end, or another word, never a day or a year.
+var embeddedMonthRe = regexp.MustCompile(`(?i)^([a-z]+)(?:\s*$|\s*[.,;:!)]|\s+[a-z])`)
+
+const (
+	ambDateMonthOnly   = "date-month-only"   // an end given as a month, taken as its last day
+	ambDateEndUnstated = "date-end-unstated" // a start with no end found ("from August 22 to spring 2028")
+)
 
 // findEmbeddedDate finds a date expression inside a sentence, as opposed to
 // leading it, and returns the resolved span, the sentence with the date (and
@@ -775,6 +782,19 @@ func findEmbeddedDate(s string, anchor time.Time) (dateSpec, string, bool) {
 					spec.Ambig = []string{ambDateMonthOnly}
 					end = locs[dateAt][0] + len(m[0])
 				}
+			} else if m := embeddedMonthRe.FindStringSubmatch(sub); m != nil {
+				// "closed until October": the first such month ending on
+				// or after the anchor, since "until" looks ahead
+				if mon, ok := monthNames[strings.ToLower(m[1])]; ok {
+					y := anchor.Year()
+					if mon < anchor.Month() {
+						y++
+					}
+					spec.To = time.Date(y, mon+1, 0, 0, 0, 0, 0, ottrecidx.TZ)
+					spec.Raw = m[1]
+					spec.Ambig = []string{ambDateMonthOnly}
+					end = locs[dateAt][0] + len(m[1])
+				}
 			}
 		}
 		if end == 0 {
@@ -815,9 +835,14 @@ func findEmbeddedDate(s string, anchor time.Time) (dateSpec, string, bool) {
 			spec.To = spec.Dates[0]
 			spec.Dates = nil
 		case embeddedFromWords[intro] && len(spec.Dates) == 1:
+			// a start with no end found: open, and marked unless the
+			// sentence says until further notice
 			spec.From = spec.Dates[0]
 			spec.Dates = nil
 			spec.OpenEnded = true
+			if !untilNoticeRe.MatchString(s) {
+				spec.Ambig = append(spec.Ambig, ambDateEndUnstated)
+			}
 		}
 		if spec.empty() {
 			continue

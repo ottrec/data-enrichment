@@ -7,6 +7,7 @@
     dates: 2026-05-24 Sun to; open-ended; weekdays Sun
     time: "10 am to 5 pm" 10:00-17:00 unchecked
     effects: modified-hours
+    ambiguities: date-end-unstated
     at: facility
 - UNPARSED freeform "July and August:"
     phrase: "July and August:"
@@ -16,6 +17,7 @@
     dates: 2026-07-03 Fri to; open-ended; weekdays Fri Sat Sun
     time: "10 am to 5 pm" 10:00-17:00 unchecked
     effects: modified-hours
+    ambiguities: date-end-unstated
     at: facility
 - UNPARSED freeform "*Hours may vary for programs and special events."
     phrase: "*Hours may vary for programs and special events"

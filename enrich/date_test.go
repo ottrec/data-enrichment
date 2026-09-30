@@ -178,6 +178,7 @@ func TestFindEmbeddedDate(t *testing.T) {
 		wds      int
 		rem      string
 		ambig    []string
+		notAmbig []string
 	}{
 		{in: "The pool is closed from Monday, March 23 to Sunday, April 12.", anchor: anchorAt(2026, 3, 2), ok: true, from: "2026-03-23", to: "2026-04-12", rem: "The pool is closed."},
 		{in: "The pool is closed between November 3, 2025 and February 1, 2026.", anchor: anchorAt(2025, 10, 24), ok: true, from: "2025-11-03", to: "2026-02-01", rem: "The pool is closed."},
@@ -187,13 +188,17 @@ func TestFindEmbeddedDate(t *testing.T) {
 		{in: "The facility is closed until July 19.", anchor: anchorAt(2026, 7, 1), ok: true, to: "2026-07-19", rem: "The facility is closed."},
 		{in: "Facility is closed between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-21", to: "2026-05-22", rem: "Facility is closed at 5:30 pm."},
 		{in: "Pool closed for annual maintenance August 17 to September 8.", anchor: anchorAt(2026, 8, 1), ok: true, from: "2026-08-17", to: "2026-09-08", rem: "Pool closed for annual maintenance."},
-		{in: "The facility is closed from August 22 to spring 2028 for renovations.", anchor: anchorAt(2026, 9, 1), ok: true, from: "2026-08-22", open: true, rem: "The facility is closed to spring 2028 for renovations."},
+		{in: "The facility is closed from August 22 to spring 2028 for renovations.", anchor: anchorAt(2026, 9, 1), ok: true, from: "2026-08-22", open: true, rem: "The facility is closed to spring 2028 for renovations.", ambig: []string{ambDateEndUnstated}},
 		{in: "Regular season ends August 23.", anchor: anchorAt(2026, 8, 1), ok: true, to: "2026-08-23", rem: "Regular season ends."},
 		{in: "Public swim is cancelled on Monday, October 12.", anchor: anchorAt(2026, 10, 1), ok: true, dates: []string{"2026-10-12"}, rem: "Public swim is cancelled."},
 		{in: "Programs may be cancelled without notice.", anchor: anchorAt(2026, 10, 1), ok: false},
 		{in: "The facility will close at 4:30 pm and return to regular hours Friday, June 12.", anchor: anchorAt(2026, 6, 1), ok: false},
 		{in: "The museum will reopen to daily visitors beginning Sunday, May 10, 2026.", anchor: anchorAt(2026, 4, 1), ok: false},
-		{in: "beginning May 24 - 10 am to 5 pm", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-24", open: true, rem: "- 10 am to 5 pm"},
+		{in: "beginning May 24 - 10 am to 5 pm", anchor: anchorAt(2026, 5, 1), ok: true, from: "2026-05-24", open: true, rem: "- 10 am to 5 pm", ambig: []string{ambDateEndUnstated}},
+		{in: "Starting May 1, the pool is closed until further notice.", anchor: anchorAt(2026, 4, 25), ok: true, from: "2026-05-01", open: true, rem: "the pool is closed until further notice.", notAmbig: []string{ambDateEndUnstated}},
+		{in: "The facility is closed until October.", anchor: anchorAt(2026, 8, 7), ok: true, to: "2026-10-31", rem: "The facility is closed.", ambig: []string{ambDateMonthOnly}},
+		{in: "The facility is closed until October.", anchor: anchorAt(2026, 11, 2), ok: true, to: "2027-10-31", rem: "The facility is closed.", ambig: []string{ambDateMonthOnly}},
+		{in: "The facility is closed until October for repairs.", anchor: anchorAt(2026, 10, 2), ok: true, to: "2026-10-31", rem: "The facility is closed for repairs.", ambig: []string{ambDateMonthOnly}},
 		{in: "Lane swim, 1 to 3 pm, cancelled", anchor: anchorAt(2026, 10, 1), ok: false},
 		{in: "The pool is closed until further notice.", anchor: anchorAt(2026, 10, 1), ok: false},
 	} {
@@ -232,6 +237,11 @@ func TestFindEmbeddedDate(t *testing.T) {
 			for _, a := range tc.ambig {
 				if !slices.Contains(spec.Ambig, a) {
 					t.Errorf("ambig = %v, want to contain %q", spec.Ambig, a)
+				}
+			}
+			for _, a := range tc.notAmbig {
+				if slices.Contains(spec.Ambig, a) {
+					t.Errorf("ambig = %v, want no %q", spec.Ambig, a)
 				}
 			}
 		})

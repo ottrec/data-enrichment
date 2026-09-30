@@ -52,7 +52,7 @@ const (
 // marker comes with a decision about what it costs the consumer.
 var allMarkers = []string{
 	ambDateUnparsed, ambDateGarbled, ambWeekdayMismatch, ambYearUnconfirmed,
-	ambYearAmbiguous, ambDateRangeInvalid, ambDateMonthOnly,
+	ambYearAmbiguous, ambDateRangeInvalid, ambDateMonthOnly, ambDateEndUnstated,
 	ambMeridiemInferred, ambMeridiemAmbiguous,
 	ambActivityUnmatched, ambActivityMultiple, ambClassUnmatched, ambPartUnmatched,
 	ambNoSlotOverlap, ambAddedScheduled, ambTimeDisambiguated, ambHeadUnparsed,

@@ -4,4 +4,5 @@
     dates: 2026-08-22 Sat to; open-ended
     effects: closure
     match: SCOPE_PHRASE
+    ambiguities: date-end-unstated
     at: facility
