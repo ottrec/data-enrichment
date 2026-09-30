@@ -307,11 +307,22 @@ func scopeCancelled(objs []*epb.Object, date schema.Date, start, end int, stated
 		if !cancelled && (!closure || o.GetAmenity() != "" || o.GetPhrase() != "") {
 			continue
 		}
-		if o.HasDates() && clockOverlaps(o, start, end) && applies(o, date, date) {
+		if o.HasDates() && clockOverlaps(o, start, end) && applies(o, date, date) && !monthOnlyEnd(o, date) {
 			return true
 		}
 	}
 	return false
+}
+
+// monthOnlyEnd reports whether the object's end date was given only as a
+// month ("until September 2026", marked date-month-only) and date falls in
+// that month: the closure is certain up to the month before and only bounded
+// within it, so it still warns there but does not strike sessions.
+func monthOnlyEnd(o *epb.Object, date schema.Date) bool {
+	if !slices.Contains(o.GetAmbiguities(), "date-month-only") || !o.GetDates().HasTo() {
+		return false
+	}
+	return int(date)/1000 == int(o.GetDates().GetTo())/1000 // same YYYYMM
 }
 
 // clockOverlaps reports whether the object's extracted clock window (when it

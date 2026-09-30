@@ -178,6 +178,15 @@ func TestScopeCancelled(t *testing.T) {
 					Relation: epb.TimeAssoc_UNCHECKED,
 				}.Build(),
 			}.Build(),
+			// month-only end ("closed starting November 1 until December 2026"):
+			// the December bound is inferred, so no strike in December
+			epb.Object_builder{
+				Id: "monthend", Kind: epb.Object_NOTICE,
+				MatchQuality: epb.Object_SCOPE_PHRASE,
+				Dates:        epb.DateSpan_builder{From: i32(202611011), To: i32(202612315)}.Build(),
+				Effects:      closed,
+				Ambiguities:  []string{"date-month-only"},
+			}.Build(),
 			// whole-activity cancel with slot-only time association (Sandy
 			// Hill shape: relation COVERS, no extracted clock)
 			epb.Object_builder{
@@ -198,7 +207,7 @@ func TestScopeCancelled(t *testing.T) {
 				Groups: []*epb.Group{
 					epb.Group_builder{
 						Label:   "Grp",
-						Objects: []string{"grpcancel", "bareclosed", "morning", "slotsonly"},
+						Objects: []string{"grpcancel", "bareclosed", "morning", "slotsonly", "monthend"},
 						Activities: []*epb.Activity{
 							epb.Activity_builder{
 								Label: "Act",
@@ -262,6 +271,15 @@ func TestScopeCancelled(t *testing.T) {
 	}
 	if !g.ScopeCancelled(202607106, 1080, 1200) {
 		t.Error("a slot-only time association must not constrain the clock range")
+	}
+	if !g.ScopeCancelled(202611151, 540, 720) {
+		t.Error("month-only end: November is inside the stated closure")
+	}
+	if g.ScopeCancelled(202612083, 540, 720) {
+		t.Error("month-only end: December is only bounded, must not strike")
+	}
+	if g.Warning(202612083, 202612083) != WarnChanges {
+		t.Error("month-only end: December must still warn")
 	}
 }
 
