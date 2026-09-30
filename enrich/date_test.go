@@ -33,6 +33,15 @@ func TestParseLeadingDate(t *testing.T) {
 		{in: "October 31, 2025 to March 13, 2026", anchor: anchorAt(2025, 11, 1), ok: true, from: "2025-10-31", to: "2026-03-13"},
 		{in: "December 13 and 14", anchor: anchorAt(2025, 12, 1), ok: true, dates: []string{"2025-12-13", "2025-12-14"}},
 		{in: "Thursday, March 12 and Saturday, March 14", anchor: anchorAt(2026, 2, 20), ok: true, dates: []string{"2026-03-12", "2026-03-14"}},
+		// comma-enumerated days
+		{in: "October 1, 2, 3, 4, 16, and 26", anchor: anchorAt(2026, 9, 29), ok: true, dates: []string{"2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-16", "2026-10-26"}},
+		{in: "December 13, 14 and 21", anchor: anchorAt(2025, 12, 1), ok: true, dates: []string{"2025-12-13", "2025-12-14", "2025-12-21"}},
+		{in: "December 24, 25, 26 and January 1", anchor: anchorAt(2025, 12, 1), ok: true, dates: []string{"2025-12-24", "2025-12-25", "2025-12-26", "2026-01-01"}},
+		// a comma-led number that reads as a clock is not a day
+		{in: "Monday, October 12, 7 am to 4 pm", anchor: anchorAt(2026, 9, 29), ok: true, dates: []string{"2026-10-12"}, rest: "7 am to 4 pm"},
+		{in: "October 12, 7 to 9 pm", anchor: anchorAt(2026, 9, 29), ok: true, dates: []string{"2026-10-12"}, rest: "7 to 9 pm"},
+		{in: "October 12, 7 and 8 pm", anchor: anchorAt(2026, 9, 29), ok: true, dates: []string{"2026-10-12"}, rest: "7 and 8 pm"},
+		{in: "January 3 and 4, noon to 4 pm", anchor: anchorAt(2025, 12, 20), ok: true, dates: []string{"2026-01-03", "2026-01-04"}, rest: "noon to 4 pm"},
 		{in: "November 25 until further notice", anchor: anchorAt(2025, 11, 20), ok: true, from: "2025-11-25", open: true},
 		{in: "Monday to Friday", anchor: anchorAt(2026, 1, 1), ok: true, wds: 5},
 		{in: "Fridays, Saturdays, and Sundays", anchor: anchorAt(2026, 1, 1), ok: true, wds: 3},

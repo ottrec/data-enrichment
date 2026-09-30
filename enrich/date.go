@@ -157,6 +157,44 @@ func (p *dateParser) rest(i int) string {
 	return strings.TrimLeft(strings.Trim(p.src[p.starts[i]:], " ,.;:"), " ")
 }
 
+// commaAfter reports whether word i is written with a trailing comma
+// ("October 1, 2, 3"), which is what separates an enumerated day from a
+// clock hour that happens to follow a date ("October 12, 7 am to 4 pm").
+func (p *dateParser) commaAfter(i int) bool {
+	if i >= len(p.words) {
+		return false
+	}
+	tok := p.src[p.starts[i]:]
+	if sp := strings.IndexAny(tok, " \t\n"); sp >= 0 {
+		tok = tok[:sp]
+	}
+	return strings.HasSuffix(tok, ",")
+}
+
+// clockAfterAnd reports whether word i starts an "and N <clock>" tail
+// ("October 12, 7 and 8 pm"), so the number before it is an hour too.
+func (p *dateParser) clockAfterAnd(i int) bool {
+	if i >= len(p.words) || p.words[i] != "and" {
+		return false
+	}
+	_, k, ok := p.parseSingle(i+1, true)
+	return ok && p.clockAhead(k)
+}
+
+// clockAhead reports whether word i reads as the continuation of a clock
+// expression, which makes the number before it an hour and not a day. A
+// comma in between keeps the day ("January 3 and 4, noon to 4 pm").
+func (p *dateParser) clockAhead(i int) bool {
+	if i >= len(p.words) || p.commaAfter(i-1) {
+		return false
+	}
+	switch p.words[i] {
+	case "am", "pm", "a.m", "p.m", "noon", "midnight", "to":
+		return true
+	}
+	return false
+}
+
 func isDateJoiner(w string) bool {
 	switch w {
 	case "to", "-", "–", "—", "through", "until":
@@ -292,7 +330,19 @@ func parseLeadingDate(s string, anchor time.Time) (dateSpec, string, bool) {
 		}
 		if w == "and" || w == "" {
 			next, k, ok := p.parseSingle(j+1, len(parts) > 0)
-			if !ok {
+			if !ok || p.clockAhead(k) {
+				break
+			}
+			parts = append(parts, next)
+			j = k
+			continue
+		}
+		// comma-enumerated days ("October 1, 2, 3, 4, 16, and 26",
+		// "December 13, 14 and 21"): a bare day after a comma continues
+		// the list unless it reads as a clock ("October 12, 7 am to 4 pm")
+		if !isRange && p.commaAfter(j-1) {
+			next, k, ok := p.parseSingle(j, true)
+			if !ok || next.wd != nil || next.month != 0 || p.clockAhead(k) || p.clockAfterAnd(k) {
 				break
 			}
 			parts = append(parts, next)

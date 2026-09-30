@@ -39,7 +39,11 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   `resolveRange` (joint: each candidate year places both endpoints, scored
   by weekday agreements, ties to anchor proximity — one typo'd endpoint
   can't drag the range a year off). Words are punctuation-trimmed and
-  empties skipped ("Wednesday , November 26").
+  empties skipped ("Wednesday , November 26"); `commaAfter` looks at the
+  source token, so comma-enumerated days ("October 1, 2, 3, 4, 16, and 26")
+  extend the list while `clockAhead`/`clockAfterAnd` stop it at an hour
+  ("October 12, 7 am to 4 pm", "October 12, 7 and 8 pm"); a comma before
+  the clock word keeps the day ("January 3 and 4, noon to 4 pm").
 - `clock.go` — `findClockRanges(s) ([]clockMention, remainder)`. A match
   needs a meridiem/noon/midnight/colon on at least one side ("December 13
   and 14" is not a clock). Missing meridiems produce candidates: >12h
@@ -97,7 +101,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   closureContext reset by headings and after each list), the `<li>` shapes
   (leaf with `<br>` lines; date head + children; garbled head — children
   processed with the marked spec; inverted form: statement head whose
-  children are all dates, ranges emitted separately; otherwise head emitted
+  children are all dates, ranges emitted separately; time analogue
+  (`allClocks`): statement head whose children are all bare clock ranges
+  ("Pickleball cancelled:" over "11:45 am to 12:45 pm", ...) is re-read as
+  "<head sans colon>, <child>" per child, so the usual clause code applies; otherwise head emitted
   with `head-unparsed` and children processed, unless `allSupplementary` says
   the children are only cross-references and the head is therefore complete),
   `collapse` (special_hours

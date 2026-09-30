@@ -307,6 +307,18 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 		return
 	}
 
+	// the time analogue: a statement whose children are all bare clock
+	// ranges ("Pickleball cancelled:" over "11:45 am to 12:45 pm", ...). Each
+	// child becomes the head sentence with that time, one notice apiece.
+	if head != "" && allClocks(li.Items) {
+		b.out.Stats["li/head-times"]++
+		for _, sub := range li.Items {
+			text := strings.TrimRight(strings.TrimSpace(head), ":") + ", " + strings.TrimSpace(sub.Head)
+			b.processItem(st, text, li.HeadHTML+sub.HeadHTML, li.Off, append(slices.Clone(li.Links), sub.Links...), nil)
+		}
+		return
+	}
+
 	// a head whose children are only a supplementary reference ("See Outdoor
 	// Pools for more information.", "Details: Outdoor pools") is a complete
 	// item in its own right, not an unrecognized one. The children still get
@@ -321,6 +333,24 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 	for _, sub := range li.Items {
 		b.processLi(st, sub)
 	}
+}
+
+// allClocks reports whether every child is a bare clock expression with no
+// nested list of its own.
+func allClocks(items []liNode) bool {
+	if len(items) == 0 {
+		return false
+	}
+	for _, sub := range items {
+		if len(sub.Items) > 0 {
+			return false
+		}
+		clocks, rest := findClockRanges(sub.Head)
+		if len(clocks) == 0 || strings.Trim(rest, " .,") != "" {
+			return false
+		}
+	}
+	return true
 }
 
 // supplementaryRe matches a child that only points somewhere else.

@@ -133,7 +133,9 @@ Dates (usually no year):
   bit for year inference).
 - Ranges: "Friday, April 3 to Monday, April 6", "May 31 to June 28",
   "December 20 to January 2" (wraps year), "December 13 and 14".
-- Enumerations: "Thursday, March 12 and Saturday, March 14".
+- Enumerations: "Thursday, March 12 and Saturday, March 14", "October 1, 2,
+  3, 4, 16, and 26" (Minto; a bare day after a comma continues the list
+  unless it reads as a clock, "October 12, 7 am to 4 pm").
 - Explicit years occasionally: "October 31, 2025 to March 13, 2026".
 - Open-ended: "November 25 until further notice".
 - Garbled: "Monday, July 6 to 10 Friday, July 10".
