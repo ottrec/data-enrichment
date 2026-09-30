@@ -145,7 +145,13 @@ Dates (usually no year):
 - Garbled: "Monday, July 6 to 10 Friday, July 10".
 - Prose-embedded: "The facility will close at 4:30 pm, Thursday, June 11,
   and reopen at noon, Friday, June 12.", "Facility is closed between
-  Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm."
+  Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm.", "The pool is
+  closed from Monday, March 23 to Sunday, April 12.", "The pool is closed
+  between November 3, 2025 and February 1, 2026.", "The facility will be
+  closed starting May 1 until September 2026.", "The rink is closed until
+  December 1 for ice installation.", "Regular season ends August 23."
+  These are often posted weeks ahead of the start date, so an undated
+  parse would apply the closure from the posting date.
 
 Times:
 

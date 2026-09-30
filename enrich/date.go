@@ -339,8 +339,8 @@ func parseLeadingDate(s string, anchor time.Time) (dateSpec, string, bool) {
 		}
 		if isDateJoiner(w) && !isRange && len(parts) == 1 {
 			second, k, ok := p.parseSingle(j+1, true)
-			if !ok {
-				break
+			if !ok || (second.month == 0 && p.clockAhead(k)) {
+				break // "July 3 - 10 am" is a date and a clock, not a range
 			}
 			parts = append(parts, second)
 			isRange = true
@@ -640,4 +640,153 @@ func absDur(d time.Duration) time.Duration {
 		return -d
 	}
 	return d
+}
+
+// Words that introduce a prose-embedded date and say which side of a span
+// it is ("closed from March 23 to April 12", "closed until November 30",
+// "closed between November 3 and February 1", "closed starting May 1").
+var (
+	embeddedFromWords    = map[string]bool{"from": true, "starting": true, "beginning": true, "effective": true, "starts": true}
+	embeddedToWords      = map[string]bool{"until": true, "till": true, "through": true, "ends": true, "ending": true}
+	embeddedBetweenWords = map[string]bool{"between": true}
+	// prepositions dropped from the remainder along with the date; verbs
+	// ("ends", "starts") stay so the sentence still reads
+	embeddedDropWords = map[string]bool{"from": true, "starting": true, "beginning": true, "effective": true, "until": true, "till": true, "through": true, "between": true, "on": true}
+)
+
+// embeddedSecondRe matches the joiner to a second date after the first
+// mention of a two-sided span, tolerating a clock on the first date
+// ("between Thursday, May 21 at 5 pm and Friday, May 22 at 5:30 pm").
+var embeddedSecondRe = regexp.MustCompile(`^[ ,]*(?:at\s+\d{1,2}(?::\d{2})?\s*(?:am|pm|a\.m\.|p\.m\.|noon)?[ ,]*)?(?:and|to|until|through)\s+`)
+
+// embeddedMonthYearRe matches a month-only end ("until September 2026").
+var embeddedMonthYearRe = regexp.MustCompile(`(?i)^([a-z]+)\s+(20\d\d)\b`)
+
+const ambDateMonthOnly = "date-month-only" // an end given as a month, taken as its last day
+
+// findEmbeddedDate finds a date expression inside a sentence, as opposed to
+// leading it, and returns the resolved span, the sentence with the date (and
+// its introducing preposition) removed, and whether one was found. Only
+// expressions led by a weekday or month name (optionally introduced by a
+// from/until/between word) are considered, so "may be cancelled" and clock
+// ranges are not dates.
+func findEmbeddedDate(s string, anchor time.Time) (dateSpec, string, bool) {
+	locs := wordRe.FindAllStringIndex(s, -1)
+	word := func(i int) string {
+		return strings.Trim(strings.ToLower(s[locs[i][0]:locs[i][1]]), ",.;:!()")
+	}
+	dateish := func(i int) bool {
+		if i >= len(locs) {
+			return false
+		}
+		w := word(i)
+		_, isWd := weekdayNames[strings.TrimSuffix(w, "s")]
+		_, isMon := monthNames[w]
+		return isWd || isMon
+	}
+	reopening := func(i int) bool {
+		// "return to regular hours Friday, June 12", "will reopen beginning
+		// Sunday, May 10": the date is when the notice stops applying
+		for k := max(0, i-4); k < i; k++ {
+			switch word(k) {
+			case "reopen", "reopens", "reopening", "return", "returns", "returning", "resume", "resumes", "resuming":
+				return true
+			}
+		}
+		return false
+	}
+	skipTo := 0 // byte offset; words inside a skipped reopening date
+	for i := range locs {
+		if locs[i][0] < skipTo {
+			continue
+		}
+		w := word(i)
+		intro, dateAt := "", -1
+		switch {
+		case (embeddedFromWords[w] || embeddedToWords[w] || embeddedBetweenWords[w] || w == "on") && dateish(i+1):
+			intro, dateAt = w, i+1
+		case dateish(i):
+			dateAt = i
+		default:
+			continue
+		}
+		if reopening(i) {
+			if r, _, ok := parseLeadingDate(s[locs[dateAt][0]:], anchor); ok {
+				skipTo = locs[dateAt][0] + len(r.Raw)
+			}
+			continue
+		}
+		cut := locs[i][0]
+		if !embeddedDropWords[intro] {
+			cut = locs[dateAt][0]
+		}
+		sub := s[locs[dateAt][0]:]
+
+		var spec dateSpec
+		end := 0
+		if embeddedToWords[intro] {
+			// "until September 2026": a month-only end is its last day
+			if m := embeddedMonthYearRe.FindStringSubmatch(sub); m != nil {
+				if mon, ok := monthNames[strings.ToLower(m[1])]; ok {
+					y, _ := strconv.Atoi(m[2])
+					spec.To = time.Date(y, mon+1, 0, 0, 0, 0, 0, ottrecidx.TZ)
+					spec.Raw = m[0]
+					spec.Ambig = []string{ambDateMonthOnly}
+					end = locs[dateAt][0] + len(m[0])
+				}
+			}
+		}
+		if end == 0 {
+			var ok bool
+			spec, _, ok = parseLeadingDate(sub, anchor)
+			if !ok {
+				continue
+			}
+			end = locs[dateAt][0] + len(spec.Raw)
+		}
+
+		// the second side of a two-sided span, possibly a month-only end
+		// ("starting May 1 until September 2026")
+		if (embeddedBetweenWords[intro] || embeddedFromWords[intro]) && len(spec.Dates) == 1 && spec.From.IsZero() {
+			if m := embeddedSecondRe.FindString(s[end:]); m != "" {
+				tail := s[end+len(m):]
+				if second, _, ok := parseLeadingDate(tail, anchor); ok && len(second.Dates) == 1 {
+					spec.From, spec.To = spec.Dates[0], second.Dates[0]
+					spec.Dates = nil
+					spec.Ambig = append(spec.Ambig, second.Ambig...)
+					end += len(m) + len(second.Raw)
+				} else if my := embeddedMonthYearRe.FindStringSubmatch(tail); my != nil {
+					if mon, ok := monthNames[strings.ToLower(my[1])]; ok {
+						y, _ := strconv.Atoi(my[2])
+						spec.From, spec.To = spec.Dates[0], time.Date(y, mon+1, 0, 0, 0, 0, 0, ottrecidx.TZ)
+						spec.Dates = nil
+						spec.Ambig = append(spec.Ambig, ambDateMonthOnly)
+						end += len(m) + len(my[0])
+					}
+				}
+			}
+		}
+		switch {
+		case embeddedBetweenWords[intro] && len(spec.Dates) == 2:
+			spec.From, spec.To = spec.Dates[0], spec.Dates[1]
+			spec.Dates = nil
+		case embeddedToWords[intro] && len(spec.Dates) == 1:
+			spec.To = spec.Dates[0]
+			spec.Dates = nil
+		case embeddedFromWords[intro] && len(spec.Dates) == 1:
+			spec.From = spec.Dates[0]
+			spec.Dates = nil
+			spec.OpenEnded = true
+		}
+		if spec.empty() {
+			continue
+		}
+		spec.Raw = strings.TrimSpace(s[cut:end])
+
+		rem := strings.TrimSpace(s[:cut]) + " " + strings.TrimLeft(s[end:], " ,")
+		rem = strings.TrimSpace(strings.ReplaceAll(rem, "  ", " "))
+		rem = strings.ReplaceAll(rem, " .", ".")
+		return spec, rem, true
+	}
+	return dateSpec{}, s, false
 }

@@ -96,9 +96,16 @@ func findClockRanges(s string) ([]clockMention, string) {
 			continue
 		}
 		out = append(out, clockMention{Text: strings.TrimSpace(rest[loc[0]:loc[1]]), Cands: cands, Inferred: inferred})
-		kept.WriteString(strings.TrimRight(rest[:loc[0]], " ,"))
+		before := strings.TrimRight(rest[:loc[0]], " ")
+		after := strings.TrimLeft(rest[loc[1]:], " ")
+		kept.WriteString(strings.TrimRight(before, " ,"))
+		if strings.HasSuffix(before, ",") && strings.HasPrefix(after, ",") {
+			// a range that was a clause of its own leaves the clauses around
+			// it separated ("Public swim, 1 to 3 pm, 25m pool only")
+			kept.WriteByte(',')
+		}
 		kept.WriteByte(' ')
-		rest = strings.TrimLeft(rest[loc[1]:], " ,")
+		rest = strings.TrimLeft(after, " ,")
 	}
 	return out, strings.TrimSpace(kept.String())
 }

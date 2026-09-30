@@ -47,14 +47,24 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   <date>" heads set only To (From zero; enrichidx `applies` and `dated`
   handle To-only spans). `parseWeekdaySet` takes "-" as well as "to" for a
   range, backing off a dangling dash ("Saturday and Sunday - 10 am to 5
-  pm") so the set still parses.
+  pm") so the set still parses. `findEmbeddedDate` finds a date written
+  into a sentence ("The pool is closed from Monday, March 23 to Sunday,
+  April 12.", "closed between November 3, 2025 and February 1, 2026",
+  "closed until December 1", "starting May 1 until September 2026", which
+  takes the month's last day with `date-month-only`): only expressions led
+  by a weekday/month name, optionally introduced by a from/until/between
+  word (which decides the side of the span), never one after a reopening
+  cue (reopen/return/resume), and "July 3 - 10 am" is a date and a clock.
+  It returns the sentence with the date and its preposition removed.
 - `clock.go` — `findClockRanges(s) ([]clockMention, remainder)`. A match
   needs a meridiem/noon/midnight/colon on at least one side ("December 13
   and 14" is not a clock). Missing meridiems produce candidates: >12h
   readings dropped when a shorter exists, sorted shortest-first, `Inferred`
-  set. Note the remainder loses commas adjacent to removed ranges
-  ("Aquafit, 8:05 to 9 am, cancelled" → "Aquafit cancelled"); the clause
-  code downstream tolerates that.
+  set. A range that was a clause of its own leaves one comma behind
+  ("Aquafit, 8:05 to 9 am, cancelled" → "Aquafit, cancelled"), so the
+  clauses around it stay separate; that is what lets "Public swim, 1 to 3
+  pm, 25m pool only" reach the restriction clause. The clause loop drops a
+  bare conjunction left over ("Lane swim, 12:30 to 1 pm, and 8 to 9 pm").
 - `match.go` — `groupMatcher` (one per schedule group; actEntry per
   normalized activity name with folded spellings + token sets from label and
   name). `match`: exact folded string → equal token sets → subset either
@@ -81,7 +91,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   season" → "Regular/Pre/Post season, <range>". Before all of that, a bare
   cross-reference with a link ("See Outdoor Pools for more information.",
   "Details: Outdoor pools") is ignored/supplementary; "See X schedule" is
-  still a SeeSchedule notice
+  still a SeeSchedule notice. Then the embedded date: a headless sentence
+  (or one led by a weekday set, which merges) takes it as its own date; a
+  head date context is never overridden ("...and return to regular hours
+  Friday, June 12" under "Thursday, June 11" is about the 11th)
   → findClockRanges → subjectClosedRe ("X is closed", skipped for "all "
   prefixes; subject resolved facility-name → all-programs → part-of-a-row →
   activity → amenity → none; a generic facility word that names only some of
@@ -89,7 +102,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   facility when the item cancels) →
   comma-clause loop (keyword / schedule change / `hoursClauseRe` ("Modified
   hours", "facility hours" ⇒ ModifiedHours) /
-  trailing "only" restriction / phrase parts) → trailing keyword glued
+  trailing "only" restriction, or a `noteClauseRe` note ("moved to 25m
+  warm pool", "reduced capacity", "no instructor") which is a Restriction
+  too / phrase parts) → trailing keyword glued
   without comma → allDropinsRe → allClassRe → empty-phrase branch (bare
   effects, date+clock hours items, date-only items) → activity match →
   amenity → freeform. Bare date+clock items: closureContext ⇒ Closure; in a

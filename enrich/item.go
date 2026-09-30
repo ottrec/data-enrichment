@@ -31,10 +31,14 @@ var (
 	// ice sports"), resolved by resolveClass
 	allClassRe = regexp.MustCompile(`^(?:all|both) (?:drop ?in )?(.+?)(?: drop ?ins?| programs| sessions| activities)?$`)
 	// "Regular season, <date range>" seasonal operating statements
-	seasonRe     = regexp.MustCompile(`(?i)^(regular season|pre-? ?season|post-? ?season)\b[ ,]*`)
+	seasonRe = regexp.MustCompile(`(?i)^(regular season|(?:pre-? ?)+season|post-? ?season)\b[ ,]*`)
 	// an hours label riding with a clock range ("Modified hours, 6 am to 8
 	// pm", "Monday, August 3, 8 am to 4 pm, facility hours")
 	hoursClauseRe = regexp.MustCompile(`^(?:modified |facility |regular |holiday )?(?:facility )?hours$`)
+	// a condition on a session that keeps it running ("moved to 25m warm
+	// pool", "reduced capacity", "no instructor"): a Restriction, like the
+	// "X only" clauses
+	noteClauseRe = regexp.MustCompile(`^(?:(?:moved|relocated)(?: inside| outside)? to .+|reduced capacity|half capacity|no instructor)$`)
 	closedSeason = regexp.MustCompile(`^closed for the season`)
 	// a reason the city sometimes appends after the effect word ("cancelled
 	// due to annual maintenance"), which otherwise hides the keyword from the
@@ -56,7 +60,7 @@ var (
 	// never a row in any published table
 	dogSwimRe = regexp.MustCompile(`(?i)\bdogs?\s+swim`)
 	// "X is closed ...", "X closed until further notice", "X will be closed"
-	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|not available|unavailable)\b`)
+	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be)?(?: temporarily| now| also)? (?:closed|closes|closing|will close|not available|unavailable)\b`)
 	// "... and all programs cancelled" riding on a subject closure, which
 	// upgrades it to a cancellation (capture: the class it names, if any,
 	// "group fitness " in "all group fitness drop ins are cancelled")
@@ -241,6 +245,28 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		return
 	}
 
+	// a date written into the sentence ("The pool is closed from Monday,
+	// March 23 to Sunday, April 12.") is the sentence's own, like a leading
+	// one, and beats the head context
+	// A head date context is left alone: "The facility will close at 4:30 pm
+	// and return to regular hours Friday, June 12" under "Thursday, June 11"
+	// is about the 11th. A leading weekday set merges with it ("Sundays,
+	// beginning May 24 - 10 am to 5 pm").
+	ownLeading := spec != nil && spec != st.head
+	if spec == nil || (ownLeading && len(spec.Weekdays) > 0 && len(spec.Dates) == 0 && spec.From.IsZero() && spec.To.IsZero()) {
+		if em, rem, ok := findEmbeddedDate(working, b.anchor); ok && len(em.Weekdays) == 0 {
+			b.out.Stats["date/embedded"]++
+			if spec != nil {
+				em.Weekdays = spec.Weekdays
+				em.Raw = spec.Raw + ", " + em.Raw
+			}
+			spec = &em
+			n.DateText = em.Raw
+			n.Ambiguities = append(n.Ambiguities, em.Ambig...)
+			working = rem
+		}
+	}
+
 	// time extraction first, so closure sentences keep their times
 	clocks, remainder := findClockRanges(working)
 	singles, remainder := findSingleEnded(remainder)
@@ -374,6 +400,9 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			continue
 		}
 		fc := foldText(clause)
+		if fc == "" || fc == "and" || fc == "or" {
+			continue // a conjunction left behind by a lifted clock range
+		}
 		if m := keywordRe.FindStringSubmatch(fc); m != nil {
 			setKeyword(&n.Effects, m[1])
 			continue
@@ -386,7 +415,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			n.Effects.ModifiedHours = true
 			continue
 		}
-		if strings.HasSuffix(fc, " only") && len(phraseParts) > 0 {
+		if (strings.HasSuffix(fc, " only") || noteClauseRe.MatchString(fc)) && len(phraseParts) > 0 {
 			n.Effects.Restriction = strings.Trim(normText(clause), " .")
 			continue
 		}

@@ -15,14 +15,14 @@ func TestFindClockRanges(t *testing.T) {
 		inferred bool
 		rest     string
 	}{
-		{in: "Aquafit, 8:05 to 9 am, cancelled", first: schema.ClockRange{Start: 8*60 + 5, End: 9 * 60}, n: 1, cands: 1, inferred: true, rest: "Aquafit cancelled"},
+		{in: "Aquafit, 8:05 to 9 am, cancelled", first: schema.ClockRange{Start: 8*60 + 5, End: 9 * 60}, n: 1, cands: 1, inferred: true, rest: "Aquafit, cancelled"},
 		{in: "Noon to 5 pm", first: schema.ClockRange{Start: 12 * 60, End: 17 * 60}, n: 1, cands: 1},
 		{in: "4:15 to 5:15 pm", first: schema.ClockRange{Start: 16*60 + 15, End: 17*60 + 15}, n: 1, cands: 1, inferred: true},
 		{in: "1 to 5 pm", first: schema.ClockRange{Start: 13 * 60, End: 17 * 60}, n: 1, cands: 1, inferred: true},
 		{in: "8:30 to 10:30", first: schema.ClockRange{Start: 8*60 + 30, End: 10*60 + 30}, n: 1, cands: 2, inferred: true},
 		{in: "10 pm to midnight", first: schema.ClockRange{Start: 22 * 60, End: 24 * 60}, n: 1, cands: 1},
 		{in: "December 13 and 14", n: 0, rest: "December 13 and 14"},
-		{in: "Lane swim, 12:30 to 1 pm, and 8 to 9 pm.", first: schema.ClockRange{Start: 12*60 + 30, End: 13 * 60}, n: 2, cands: 1, inferred: true, rest: "Lane swim and ."},
+		{in: "Lane swim, 12:30 to 1 pm, and 8 to 9 pm.", first: schema.ClockRange{Start: 12*60 + 30, End: 13 * 60}, n: 2, cands: 1, inferred: true, rest: "Lane swim, and ."},
 	} {
 		t.Run(tc.in, func(t *testing.T) {
 			ms, rest := findClockRanges(tc.in)
