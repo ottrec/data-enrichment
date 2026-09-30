@@ -106,24 +106,21 @@ func foldText(s string) string {
 	return strings.Join(strings.Fields(b.String()), " ")
 }
 
-// stopTokens are dropped when tokenizing phrases for matching: articles,
-// glue, and the drop-in boilerplate that varies freely between the schedule
-// and the handwritten changes.
+// stopTokens are dropped when tokenizing phrases for matching: glue, and
+// the drop-in boilerplate that varies freely between the schedule and the
+// handwritten changes. Each entry has a row in vocabRows (vocab_test.go), as
+// does each of stemMap's.
 var stopTokens = map[string]bool{
-	"the": true, "a": true, "an": true, "and": true, "or": true, "of": true,
-	"in": true, "on": true, "at": true, "to": true, "for": true, "with": true,
-	"drop": true, "ins": true, "all": true, "s": true,
-	"session": true, "sessions": true, "program": true, "programs": true,
-	"programming": true,
-	"activity":    true, "activities": true, "times": true,
-	"schedule": true, "schedules": true,
+	"the": true, "and": true, "of": true, "in": true, "at": true, "to": true,
+	"drop": true, "ins": true, "all": true, "sessions": true,
+	"programs": true, "programming": true, "activities": true, "times": true,
+	"schedule": true,
 }
 
 // stemMap folds trivial variants the city alternates between.
 var stemMap = map[string]string{
 	"skating": "skate", "skates": "skate", "skatings": "skate",
-	"swimming": "swim", "swims": "swim",
-	"canceled": "cancelled",
+	"swimming": "swim",
 	"aqua":     "aquafit", "aquafitness": "aquafit",
 }
 

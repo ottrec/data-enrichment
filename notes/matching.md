@@ -298,6 +298,102 @@ facility check would close Splash Wave Pool from "Public Swim - wave tank
 and warm pool, cancelled". The structural review's d.md measured both
 unifications (20 and 3 objects, all wrong).
 
+## The word lists
+
+Seven lists decide how a phrase reads:
+
+| list | file | rule |
+| --- | --- | --- |
+| `stopTokens` | text.go | dropped from every token set (phrases, labels, titles): glue and drop-in boilerplate |
+| `stemMap` | text.go | a variant the city alternates with, folded before matching |
+| `genericFacility` | item.go | words facility names share: a subject of only these is the facility, and none is a distinctive token of a name (`subjectIsFacility`, `otherFacilities`) |
+| `amenityCore` | item.go | a core noun: a phrase ending with one, or reaching one through qualifiers, is an amenity (`isAmenity`) |
+| `amenityQualifier` | item.go | a word that may lead to a core noun, for a phrase that does not end with one ("lap pool heater broken") |
+| `partGenericTokens` | item.go | words a closed part's name carries and no group title does, skipped by `groupsForPart` |
+| `iceClassVocab` | match.go | the ice class taxonomy above |
+
+An entry is there because a phrase needs it, and `vocabRows` in
+`enrich/vocab_test.go` is the record: per entry, the fixture, the phrase,
+and `want`, what the phrase resolves to with the entry in (the closure
+subject's reason where the closure path decides, then each notice's scope
+level, match quality, amenity, and activities or groups).
+`TestVocabularyMotivation` requires `want`, removes the entry, and
+requires the phrase's objects in the fixture or its resolution to change.
+`TestVocabularyCovered` fails on an entry with no row, so a new word lands
+with its phrase, and an entry whose phrase stops depending on it fails
+too. The table has 75 rows: 61 corpus phrases, and 14 entries no fixture
+needs, each with its reason and a probe that resolves the case it exists
+for:
+
+- `genericFacility`: `arena`, `building`, `dome`, `hall`, `park`,
+  `recreation` keep a word facility names share out of the name-token
+  match, so "the skate park" at Fisher Park Community Centre is not the
+  facility; `facility` is the facility wherever it is posted, and the
+  facility sentences (`facilityRe`) read it before the subject resolver
+  does.
+- `partGenericTokens`: all four. `court` and `courts` are the part rule of
+  84c17cd ("squash court" names the squash group, whose title does not say
+  court); `room` keeps a bare "room" from naming the weight and cardio
+  room group; `rooms` is St. Laurent's "weight and cardio rooms".
+- `iceClassVocab`: both, the documented guard above.
+- `stopTokens:to`: "10 to 14" in a label and "10-14" in a notice read as
+  one spelling (`TestTokens`).
+
+Two corpus rows decide only the reason: `genericFacility:complex` (Tony
+Graham's "The complex and Client Services remain closed." is
+`facility-list-with-desk` with it, `facility-name-token` without) and
+`genericFacility:rink` ("The rink is closed" at Jim Tubman Chevrolet Rink
+is `facility-generic` rather than `facility-name-token`). Removing either
+leaves the objects as they are and moves the `subject/closure/<reason>`
+counters.
+
+`want` is what the phrase resolves to today, and three rows pin a reading
+that is not what the city meant. `genericFacility:centre` and `:community`
+have one phrase, CARDELREC's "the community centre is closed for annual
+maintenance. The arenas are open.", which is the facility: a changes
+warning on every group, no strike. `amenityCore:entrance` has Bob
+MacQuarrie's "The Main Entrance will be closed due to construction. Please
+use the West Entrance.", whose second sentence is an amenity notice
+("please use west entrance") with no effect. Reading the candidate phrases
+turned up one more that no row uses: the `skating` stem makes Bob
+MacQuarrie's "Elizabeth Manley Figure Skating Arena is closed for annual
+maintenance." a closure of the Figure skating activity (its tokens hold
+"figure skate"), where without the stem it is an amenity. No Figure
+skating session in the consumer golden falls in the closure's dates, so
+nothing is struck there.
+
+68 entries were deleted in the structural review (d.md's D3) because no
+phrase in the cache's history resolves differently without them: without
+each alone and without all 68 together, the golden output and the stats
+summed over the fixtures are unchanged, and so are the full-corpus
+rendering and stats. By reason:
+
+- plural or spelling never written: `amenityCore` `tubs`, `whirlpools`,
+  `slides`, `elevators`, `gyms`, `rinks`, `tracks`, `fields`, `entrances`,
+  `studios`, `ramps`, `center`; `genericFacility` `center` (no facility
+  name has it); `stemMap` `swims`, `canceled`; `stopTokens` `session`,
+  `program`, `activity`, `schedules` (the city writes the other number)
+- a core noun later in the phrase decides: `amenityCore` `steam` ("steam
+  room"), `lawn` ("the Great Lawn and the sledding hill"), `heater` ("lap
+  pool heater")
+- no subject the parser resolves reaches them: `amenityCore` `washroom`,
+  `washrooms` (the washroom notices carry no effect word), `ice`
+- a qualifier before a phrase that ends with its core noun, so the
+  qualifier never decides (36): `amenityQualifier` `main`, `baby`,
+  `training`, `therapeutic`, `whale`, `wave`, `leisure`, `outdoor`,
+  `indoor`, `hot`, `rock`, `sledding`, `great`, `men's`, `women's`,
+  `mens`, `womens`, `25m`, `50m`, `1m`, `3m`, `m`, `metre`, `meter`, `1`,
+  `3`, `25`, `50`, `customer`, `service`, `cross`, `country`, `ski`,
+  `pool` (a core noun, so the qualifier entry could not decide), `dance`
+  and `wheelchair` (647596b: "dance studio" and "pool's wheelchair ramp"
+  end with their core noun)
+- glue no label and phrase differ by where it decides: `stopTokens` `a`,
+  `an`, `or`, `on`, `for`, `with`, `s` (`foldText` keeps the apostrophe,
+  so "'s" never splits off)
+
+A phrase one of them would have helped now degrades to what an unmatched
+subject gives (a warning), and the entry comes back with its row.
+
 ## Time slot matching
 
 For items with an exact activity match, a parseable single-date head, and a

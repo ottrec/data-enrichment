@@ -71,37 +71,31 @@ var (
 	// "All changerooms closed for maintenance": an amenity closure phrased
 	// through the "all X" form (capture: the amenity phrase)
 	allAmenityClosedRe = regexp.MustCompile(`^(.+?),? (?:are |is )?closed(?: for .+)?$`)
-	genericFacility    = map[string]bool{"facility": true, "centre": true, "center": true, "complex": true, "building": true, "hall": true, "community": true, "recreation": true, "park": true, "pool": true, "arena": true, "rink": true, "dome": true}
+	// genericFacility are words facility names share: a subject of only
+	// these is the facility, and none of them is a distinctive token of a
+	// facility's name (subject.go). Each entry has a row in vocabRows
+	// (vocab_test.go).
+	genericFacility = map[string]bool{"facility": true, "centre": true, "complex": true, "building": true, "hall": true, "community": true, "recreation": true, "park": true, "pool": true, "arena": true, "rink": true, "dome": true}
 )
 
 // amenityCore are nouns that identify a facility amenity subject; a phrase is
-// an amenity if its leading tokens are qualifiers up to a core noun.
+// an amenity if its leading tokens are qualifiers up to a core noun. Each
+// entry of both lists has a row in vocabRows (vocab_test.go).
 var amenityCore = map[string]bool{
-	"pool": true, "pools": true, "tub": true, "tubs": true, "sauna": true,
-	"saunas": true, "steam": true, "whirlpool": true, "whirlpools": true,
-	"board": true, "boards": true, "slide": true, "slides": true, "wall": true,
-	"elevator": true, "elevators": true,
-	"changeroom": true, "changerooms": true,
-	"court": true, "courts": true, "gym": true, "gyms": true, "gymnasium": true,
-	"arena": true, "arenas": true, "rink": true, "rinks": true,
-	"washroom": true, "washrooms": true,
-	"lawn": true, "hill": true, "room": true, "rooms": true, "ice": true,
-	"heater": true, "centre": true, "center": true,
-	"track": true, "tracks": true, "field": true, "fields": true,
-	"entrance": true, "entrances": true, "studio": true, "studios": true,
-	"ramp": true, "ramps": true,
+	"pool": true, "pools": true, "tub": true, "sauna": true, "saunas": true,
+	"whirlpool": true, "board": true, "boards": true, "slide": true,
+	"wall": true, "elevator": true, "changeroom": true, "changerooms": true,
+	"court": true, "courts": true, "gym": true, "gymnasium": true,
+	"arena": true, "arenas": true, "rink": true, "hill": true, "room": true,
+	"rooms": true, "centre": true, "track": true, "field": true,
+	"entrance": true, "studio": true, "ramp": true,
 }
 
+// amenityQualifier are the words that lead to a core noun in a phrase that
+// does not end with one ("lap pool heater broken").
 var amenityQualifier = map[string]bool{
-	"main": true, "baby": true, "training": true, "therapeutic": true,
-	"lap": true, "whale": true, "wave": true, "leisure": true, "outdoor": true,
-	"indoor": true, "hot": true, "diving": true, "rock": true, "weight": true,
-	"cardio": true, "squash": true, "change": true, "sledding": true,
-	"great": true, "men's": true, "women's": true, "mens": true, "womens": true,
-	"25m": true, "50m": true, "1m": true, "3m": true, "m": true, "metre": true,
-	"meter": true, "1": true, "3": true, "25": true, "50": true, "pool": true,
-	"customer": true, "service": true, "athletics": true, "cross": true,
-	"country": true, "ski": true, "dance": true, "wheelchair": true,
+	"lap": true, "diving": true, "weight": true, "cardio": true,
+	"squash": true, "change": true, "athletics": true,
 }
 
 // processItem parses one extracted line/item and emits objects for it.
@@ -853,6 +847,7 @@ func (b *blockCtx) resolveClass(n *notice, classPhrase string) []*actEntry {
 
 // partGenericTokens are words a closed part's name carries that no group
 // title does ("squash and racquetball courts", "weight and cardio room").
+// Each entry has a row in vocabRows (vocab_test.go).
 var partGenericTokens = map[string]bool{"court": true, "courts": true, "room": true, "rooms": true}
 
 // groupsForPart returns the groups whose title names every other word of a

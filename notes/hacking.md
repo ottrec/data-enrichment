@@ -23,7 +23,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   folded), `tokens`/`tokenSet` (stemmed + stopworded). The `stemMap`
   (skating→skate, aqua→aquafit, ...) and `stopTokens` (drop/ins/all/
   programming/...) feed activity matching, class segments, and
-  `subjectIsFacility` alike; edit with care. `skatings` is in the stemMap
+  `subjectIsFacility` alike; edit with care. An entry needs a row in
+  `vocabRows` (vocab_test.go): the phrase that needs it and what the phrase
+  resolves to (matching.md "The word lists"). `skatings` is in the stemMap
   because Tom Brown Arena writes it (see matching.md).
 - `html.go` — `splitBlock` → `blockPart` (heading/para/list) and nested
   `liNode`s. `nodeText` concatenates text nodes with no separator (the city
@@ -221,6 +223,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   `emit` takes the spec the notice is dated by, and a range with a clock on
   an end is emitted in its `pieces()`, each end day with its own clock and
   the days between with the sentence's clocks).
+  The word lists here (`genericFacility`, `amenityCore`,
+  `amenityQualifier`, `partGenericTokens`) follow text.go's rule: an entry
+  needs a row in `vocabRows`.
 - `enrich.go` — version loop, per-fragment `rec` collection (`blockCtx.add`
   assigns block seq + id and every heading/date-context/boilerplate fragment
   becomes an ignored object), walkState lifetimes (head reset by headings;
@@ -267,6 +272,12 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   other facilities beside it by name alone (a subject can name one of
   them); `-blocks-only` drops the schedule structure from the key. See
   Workflow.
+- `enrich/vocab_test.go`: `vocabRows`, one row per entry of the seven word
+  lists: the fixture and phrase the entry decides and `want`, what the
+  phrase resolves to (the closure reason, the scope, the match quality),
+  or, for an entry no fixture needs, the reading it exists for and a probe.
+  `TestVocabularyMotivation` requires `want` with the entry and a change
+  without it; `TestVocabularyCovered` fails on an entry with no row.
 - `enrichidx/golden_test.go` — `TestConsumerGolden`, the consumer golden:
   `golden.Consumer` per fixture against `enrichidx/testdata/consumer`, a
   file only for fixtures with an answer (2,294 of 2,511). The one golden a
@@ -603,8 +614,11 @@ the parser saw; `cmd/report` renders one version as HTML.
   for the next year: `subjectClosedRe` left "is currently" on the subject,
   so its last token was `currently` and `isAmenity` never reached the ramp.
   Nothing checked that the phrase behind the entry resolved once the entry
-  was in. The verb and the adverb now come off in the regex, and D3's
-  motivation table (next steps) is the check.
+  was in. The verb and the adverb now come off in the regex, the ramp
+  resolves on `ramp`, and `wheelchair` is gone, with `dance` (the studio
+  resolves on `studio`). `TestVocabularyMotivation` is the check: a row
+  whose entry changes nothing fails, so an entry that never fired fails
+  the day it is added.
 - The `<li>` walk was a ladder of eight shapes, each an all-or-nothing
   predicate over a head's children, tried in a fixed order. A layout the
   city had not posted before fell to the last rung, `head-unparsed`, and its
