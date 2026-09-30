@@ -8,7 +8,6 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All group fitness, gymnasium sports, and skating drop-ins"
-    sources: schedule_changes special_hours
     at: group "Drop-in schedule - group fitness"
 - IGNORED date-context "Wednesday, July 1"
     at: group "Drop-in schedule - gymnasium sports"
@@ -19,7 +18,6 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All group fitness, gymnasium sports, and skating drop-ins"
-    sources: schedule_changes special_hours
     at: group "Drop-in schedule - gymnasium sports"
 - IGNORED date-context "Wednesday, July 1"
     at: group "Drop-in schedule - skating"
@@ -29,7 +27,6 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All group fitness, gymnasium sports, and skating drop-ins"
-    sources: schedule_changes special_hours
     at: group "Drop-in schedule - skating"
 
 == CARDELREC Recreation Complex Goulbourn special_hours
@@ -42,16 +39,19 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     at: facility
-- IGNORED duplicate "The pool is closed until further notice. All swim and aquafitness drop-ins are cancelled."
+- NOTICE "The pool is closed until further notice. All swim and aquafitness drop-ins are cancelled."
     date text: "Wednesday, July 1"
     dates: 2026-07-01 Wed
     time: "" covers [Wednesday 11:30am - 12:30pm; Wednesday 2:00 - 4:00pm; Wednesday 7:15 - 8:15am; Wednesday 8:00 - 9:00pm; Wednesday 8:15 - 9:15am; Wednesday 9:15 - 10:15am]
+    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All swim and aquafitness drop-ins"
-    duplicate of: schedule_changes "Drop-in schedule - group fitness" "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
-    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
-    duplicate of: schedule_changes "Drop-in schedule - skating" "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness" activity "50+ swim *Reservations required." sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Shallow/deep combo *Reservations required." sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim *Reservations required." sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool swim" sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool swim (shared pool)" sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim with slide" sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
 - IGNORED heading "Modified hours"
     section: "Modified hours"
     at: facility

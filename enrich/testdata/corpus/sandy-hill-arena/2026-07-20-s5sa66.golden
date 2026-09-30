@@ -8,7 +8,6 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All drop-in skating"
-    sources: schedule_changes special_hours
     at: group "Drop-in schedule - skating"
 - IGNORED date-context "Friday, August 14"
     at: group "Drop-in schedule - skating"
@@ -25,14 +24,15 @@
 == Sandy Hill Arena special_hours
 - IGNORED date-context "Civic Holiday, Monday, August 3"
     at: facility
-- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+- NOTICE "All drop-in skating and ice sports, cancelled"
     date text: "Civic Holiday, Monday, August 3"
     dates: 2026-08-03 Mon
     time: "" covers [Monday 4:00 - 4:50pm; Monday 5:00 - 5:50pm]
+    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All drop-in skating and ice sports"
-    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
-    at: facility
+    at: group "Drop-in schedule - skating"
+    at: group "Drop-in schedule - ice sports"
 - IGNORED date-context "Friday, August 14"
     at: facility
 - IGNORED duplicate "All drop-in skating, cancelled"

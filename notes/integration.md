@@ -60,7 +60,10 @@ All join keys are the raw dataset identifiers, never normalized forms:
 5. **Duplicates are pre-collapsed**: render the surviving notice once
    (`sources` says it appeared in both the group changes and the facility
    special hours); `ignored/duplicate` stubs link to survivors via
-   `duplicate_of`.
+   `duplicate_of`. A special-hours notice naming more groups than its
+   group copies ("All drop-in skating and ice sports, cancelled" against a
+   skating-only copy) is not collapsed, so the same cancellation can be
+   listed twice.
 
 ## Suggested /today mapping
 

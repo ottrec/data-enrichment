@@ -27,6 +27,7 @@
     match: NORMALIZED
     phrase: "Aquafit general"
     ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
     at: group "Drop-in schedule - swim and aquafit" activity "Aqua general" sessions 2025-12-10 Wed 08:30-09:30
 - IGNORED date-context "Saturday, December 13"
     at: group "Drop-in schedule - swim and aquafit"
@@ -119,15 +120,15 @@
     duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
     duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
     at: facility
-- NOTICE "Aquafit general, 8:30 to 9:30 am, moved to 25 m warm pool"
+- IGNORED duplicate "Aquafit general, 8:30 to 9:30 am, moved to 25 m warm pool"
     date text: "Wednesday, December 10"
     dates: 2025-12-10 Wed
     time: "8:30 to 9:30 am" 08:30-09:30 exact [Wednesday 8:30 - 9:30am]
-    effects: restriction "moved to 25 m warm pool"
     match: NORMALIZED
     phrase: "Aquafit general"
     ambiguities: meridiem-inferred
-    at: group "Drop-in schedule - swim and aquafit" activity "Aqua general" sessions 2025-12-10 Wed 08:30-09:30
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Aquafit general, 8:30 to 9:30 am, moved to 25m warm pool"
+    at: facility
 - IGNORED date-context "Saturday, December 13"
     at: facility
 - IGNORED duplicate "Lane swim, 11 am to 3 pm, cancelled"

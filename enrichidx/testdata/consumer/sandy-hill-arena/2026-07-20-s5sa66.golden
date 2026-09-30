@@ -4,3 +4,6 @@ group "Drop-in schedule - skating"
   2026-08-03 Mon 16:00-16:50 "Adult skating (18+)": group scope stated
   2026-08-14 Fri 17:00-17:50 "Family skating": group scope stated
   2026-08-14 Fri 18:00-18:50 "Public skating": group scope stated
+group "Drop-in schedule - ice sports"
+  warning: changes 2026-08-03 Mon
+  2026-08-03 Mon 17:00-17:50 "Figure skating": group scope stated

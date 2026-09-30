@@ -8,15 +8,15 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All drop-in skating and ice sports"
-    sources: schedule_changes special_hours
     at: group "Drop-in schedule - skating"
 - IGNORED date-context "Thursday, March 12 and Saturday, March 14"
     at: facility
-- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+- NOTICE "All drop-in skating and ice sports, cancelled"
     date text: "Thursday, March 12 and Saturday, March 14"
     dates: 2026-03-12 Thu 2026-03-14 Sat
     time: "" covers [Saturday 6:00 - 6:50pm; Saturday 7:00 - 7:50pm; Thursday 7:00 - 7:50pm; Thursday 8:00 - 8:50pm]
+    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All drop-in skating and ice sports"
-    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating and ice sports, cancelled"
-    at: facility
+    at: group "Drop-in schedule - ice sports"
+    at: group "Drop-in schedule - skating"

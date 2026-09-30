@@ -1,4 +1,7 @@
 == John G. Mlacak Centre, 2026-03-05 Thu to 2026-04-23 Thu
+group "Drop-in schedule - ice sports"
+  warning: changes 2026-03-12 Thu, changes 2026-03-14 Sat
+  2026-03-12 Thu 20:00-20:50 "Figure skating - 18+": group scope stated
 group "Drop-in schedule - skating"
   warning: changes 2026-03-12 Thu, changes 2026-03-14 Sat
   2026-03-12 Thu 19:00-19:50 "Public skating": group scope stated

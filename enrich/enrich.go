@@ -466,6 +466,10 @@ func (fc *facCtx) collapse() {
 			if !ok {
 				continue
 			}
+			if !coveredBy(&r.n, survivors) {
+				fc.out.Stats["dedupe/special-uncovered"]++
+				continue
+			}
 			r.kind = "ignored"
 			r.reason = "duplicate"
 			r.sessions = nil
@@ -484,18 +488,53 @@ func (fc *facCtx) collapse() {
 	}
 }
 
-// dedupeKeys builds comparison keys for a notice: dates + effects + scope.
-// Broad scopes (group/class/facility) share a key so the city's merged
+// coveredBy reports whether the schedule_changes notices sharing a special
+// hours notice's key claim every group it names. The broad key ignores
+// groups, so without this "All drop-in skating and ice sports, cancelled"
+// collapsed into a skating group copy alone and the ice sports cancellation
+// was lost. Only a notice that names its groups (a class resolved to groups)
+// is checked; one claiming the whole facility collapses as before.
+func coveredBy(n *notice, survivors []*rec) bool {
+	switch n.Scope.Level {
+	case "group", "class", "facility":
+	default:
+		return true
+	}
+	have := map[string]bool{}
+	for _, s := range survivors {
+		gs := s.n.Scope.Groups
+		if len(gs) == 0 && s.n.Group != "" {
+			gs = []string{s.n.Group}
+		}
+		if len(gs) == 0 {
+			return true // claims the whole facility
+		}
+		for _, g := range gs {
+			have[g] = true
+		}
+	}
+	for _, g := range n.Scope.Groups {
+		if !have[g] {
+			return false
+		}
+	}
+	return true
+}
+
+// dedupeKeys builds comparison keys for a notice: dates + effect kinds +
+// scope. Broad scopes (group/class/facility) share a key so the city's merged
 // facility-level phrasing ("skating and ice sports") matches the per-group
-// copies ("skating").
+// copies ("skating"); collapse then checks the copies cover its groups
+// (coveredBy). Effects are compared by kind, not payload: the two copies of
+// one restriction are written differently ("25 m warm pool", "25m warm
+// pool").
 func dedupeKeys(n *notice) []string {
 	var d string
 	if n.Dates != nil {
 		d = fmt.Sprint(n.Dates.Dates, "|", n.Dates.From, "|", n.Dates.To, "|", n.Dates.OpenEnded, "|", n.Dates.Weekdays)
 	}
 	e := n.Effects
-	e.SeeURL = ""
-	eff := fmt.Sprintf("%+v", e)
+	eff := fmt.Sprint(e.Cancelled, e.Added, e.TimeChange, e.Closure, e.SeasonalHours, e.ModifiedHours, e.Restriction != "", e.SeeSchedule != "")
 	var sc string
 	switch n.Scope.Level {
 	case "group", "class", "facility":

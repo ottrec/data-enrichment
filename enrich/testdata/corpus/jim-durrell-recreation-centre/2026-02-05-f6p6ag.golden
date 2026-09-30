@@ -19,7 +19,6 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All drop-in skating"
-    sources: schedule_changes special_hours
     at: group "Drop-in schedule - skating"
 
 == Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - ice sports"
@@ -49,11 +48,12 @@
     at: facility
 - IGNORED date-context "Sunday, February 15"
     at: facility
-- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+- NOTICE "All drop-in skating and ice sports, cancelled"
     date text: "Sunday, February 15"
     dates: 2026-02-15 Sun
     time: "" covers [Sunday 3:15 - 4:05pm; Sunday 4:15 - 5:05pm]
+    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All drop-in skating and ice sports"
-    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
-    at: facility
+    at: group "Drop-in schedule - skating"
+    at: group "Drop-in schedule - ice sports"

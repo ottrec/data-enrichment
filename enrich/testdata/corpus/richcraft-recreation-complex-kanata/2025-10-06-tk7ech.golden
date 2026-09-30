@@ -159,26 +159,26 @@
     duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All badminton drop-ins, cancelled"
     duplicate of: schedule_changes "Drop-in schedule - sports" "All basketball drop-ins, cancelled"
     at: facility
-- IGNORED duplicate "All basketball drop-ins, cancelled"
+- NOTICE "All basketball drop-ins, cancelled"
     date text: "Friday, October 10"
     dates: 2025-10-10 Fri
     time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All basketball drop-ins"
-    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All pickleball drop-ins, cancelled"
-    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All badminton drop-ins, cancelled"
-    duplicate of: schedule_changes "Drop-in schedule - sports" "All basketball drop-ins, cancelled"
-    at: facility
-- IGNORED duplicate "All badminton drop-ins, cancelled"
+    at: group "Drop-in schedule - Thanksgiving weekend" activity "Basketball - adult" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+    at: group "Drop-in schedule - sports" activity "Basketball - adult" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+- NOTICE "All badminton drop-ins, cancelled"
     date text: "Friday, October 10"
     dates: 2025-10-10 Fri
     time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All badminton drop-ins"
-    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All pickleball drop-ins, cancelled"
-    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All badminton drop-ins, cancelled"
-    duplicate of: schedule_changes "Drop-in schedule - sports" "All basketball drop-ins, cancelled"
-    at: facility
+    at: group "Drop-in schedule - Thanksgiving weekend" activity "Badminton doubles - adult" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+    at: group "Drop-in schedule - racquet sports" activity "Badminton - family" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - adult" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - all ages" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
 - IGNORED date-context "Monday, October 13"
     at: facility
 - NOTICE "7 am to 4 pm"

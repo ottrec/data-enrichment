@@ -139,8 +139,12 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   with `head-unparsed` and children processed, unless `allSupplementary` says
   the children are only cross-references and the head is therefore complete),
   `collapse` (special_hours
-  notices matching a schedule_changes notice on dates+effects+scope key
-  become ignored/duplicate stubs; survivors get Sources), and `place`
+  notices matching a schedule_changes notice on dates, effect kinds and
+  scope become ignored/duplicate stubs, provided the matching copies claim
+  every group the notice names (`coveredBy`); survivors get Sources. The
+  broad scope bucket ignores groups so the facility's merged phrasing
+  matches the per-group copies; effects compare by kind so "25 m" and "25m"
+  restrictions match), and `place`
   (converts recs to Objects and builds the reference tree; sessions filled
   from rec.sessions, `added` vs `objects` split by Effects.Added).
 - `cmd/enrich` — `-versions n` (0=all), `-o` stdout/dir/stats-only,
@@ -334,6 +338,19 @@ the parser saw; `cmd/report` renders one version as HTML.
 - The same block HTML can resolve differently under a different anchor year
   or schedule; don't cache on block hash alone (see matching.md).
 - Stats keys are ad-hoc, not API.
+- The `broad` collapse bucket compared dates, effects and "some broad
+  scope", never groups, so a facility cancellation naming two groups
+  collapsed into a copy posted in one of them and the other group's
+  cancellation vanished: Sandy Hill and Jim Durrell's "All drop-in skating
+  and ice sports, cancelled" against the skating group's "All drop-in
+  skating, cancelled", CARDELREC's July 1 swim cancellation against the
+  other groups' copies. 133 objects over the corpus, silent for as long as
+  the bucket existed; `coveredBy` fixed it. A notice whose `Scope.Groups`
+  includes a holiday group that does not run on its date (Winter Break on
+  December 5, Thanksgiving weekend on October 10) also stops collapsing,
+  46 of the 133, because the class resolved to that group too; it only adds
+  a warning on a day the group has no sessions and a second listing on the
+  activity pages.
 
 ## Next steps
 

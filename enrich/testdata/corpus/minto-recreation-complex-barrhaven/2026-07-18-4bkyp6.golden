@@ -107,16 +107,22 @@
     duplicate of: schedule_changes "Drop-in schedule - group fitness" "All group fitness drop-ins are cancelled."
     duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium sports drop-ins are cancelled."
     at: facility
-- IGNORED duplicate "All swim and aquafitness drop-ins are cancelled."
+- NOTICE "All swim and aquafitness drop-ins are cancelled."
     date text: "Saturday, July 18"
     dates: 2026-07-18 Sat
     time: "" covers [Saturday 12:00 - 2:30pm; Saturday 2:30 - 6:00pm]
+    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All swim and aquafitness drop-ins"
-    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "All swim and aquafitness drop-ins are cancelled."
-    duplicate of: schedule_changes "Drop-in schedule - group fitness" "All group fitness drop-ins are cancelled."
-    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium sports drop-ins are cancelled."
-    at: facility
+    at: group "Drop-in schedule - Civic Holiday weekend" activity "Aquafit General -Deep/shallow combo" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - Civic Holiday weekend" activity "Lane swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - Civic Holiday weekend" activity "Preschool swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - Civic Holiday weekend" activity "Public swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General -Deep/shallow combo*Reservations are required" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - reduced capacity(shared pool)" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool Swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
 - IGNORED duplicate "Public swim, 11 am to 6 pm, added"
     date text: "Saturday, July 18"
     dates: 2026-07-18 Sat

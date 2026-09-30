@@ -39,7 +39,8 @@ vocabulary; unrecognized markers must read as reduced confidence and can be
 shown verbatim).
 Special-hours notices that duplicate a group's schedule-changes copy
 collapse into an ignored/duplicate stub pointing at the survivor, which gets
-`sources: [schedule_changes, special_hours]`. Marked-but-validated matches
+`sources: [schedule_changes, special_hours]`, but only when the copies claim
+every group the special-hours notice names; otherwise both survive. Marked-but-validated matches
 (matched-other-group, activity-typo-match, time-disambiguated) descend,
 since they are deterministic; anything ambiguous stays higher up.
 

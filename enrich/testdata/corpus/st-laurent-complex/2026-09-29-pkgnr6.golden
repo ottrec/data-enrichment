@@ -45,7 +45,6 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All open gym drop-ins"
-    sources: schedule_changes special_hours
     at: group "Drop-in schedule - gymnasium sports" activity "Open gym *Reservations not required." sessions 2026-10-02 Fri 09:00-10:00, 2026-10-02 Fri 10:00-11:00, 2026-10-02 Fri 11:00-12:00, 2026-10-02 Fri 12:00-13:00, 2026-10-02 Fri 13:00-14:00
 - IGNORED date-context "Sunday, October 4"
     at: group "Drop-in schedule - gymnasium sports"
@@ -90,14 +89,15 @@
     at: facility
 - IGNORED date-context "Friday, October 2"
     at: facility
-- IGNORED duplicate "All open gym drop-ins, cancelled"
+- NOTICE "All open gym drop-ins, cancelled"
     date text: "Friday, October 2"
     dates: 2026-10-02 Fri
     time: "" covers [Friday 10:00 - 11:00am; Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm; Friday 1:00 - 2:00pm; Friday 9:00 - 10:00am]
+    effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All open gym drop-ins"
-    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All open gym drop-ins, cancelled"
-    at: facility
+    at: group "Drop-in schedule - Thanksgiving Day" activity "Open gym *Reservations not required." sessions 2026-10-02 Fri 09:00-10:00, 2026-10-02 Fri 10:00-11:00, 2026-10-02 Fri 11:00-12:00, 2026-10-02 Fri 12:00-13:00, 2026-10-02 Fri 13:00-14:00
+    at: group "Drop-in schedule - gymnasium sports" activity "Open gym *Reservations not required." sessions 2026-10-02 Fri 09:00-10:00, 2026-10-02 Fri 10:00-11:00, 2026-10-02 Fri 11:00-12:00, 2026-10-02 Fri 12:00-13:00, 2026-10-02 Fri 13:00-14:00
 - IGNORED date-context "Sunday, October 4"
     at: facility
 - IGNORED duplicate "All gymnasium sports drop-ins, cancelled"
