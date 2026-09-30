@@ -101,7 +101,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   closureContext reset by headings and after each list), the `<li>` shapes
   (leaf with `<br>` lines; date head + children; garbled head — children
   processed with the marked spec; inverted form: statement head whose
-  children are all dates, ranges emitted separately; time analogue
+  children are all dates, ranges emitted separately, and a date+clock child
+  ("PD Day Public Swim" over "Friday, October 2, 8:30 to 10 am") emitted on
+  its own as "<head>, <clock>" under that date; time analogue
   (`allClocks`): statement head whose children are all bare clock ranges
   ("Pickleball cancelled:" over "11:45 am to 12:45 pm", ...) is re-read as
   "<head sans colon>, <child>" per child, so the usual clause code applies; otherwise head emitted

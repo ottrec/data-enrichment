@@ -52,7 +52,8 @@ since they are deterministic; anything ambiguous stays higher up.
 2. **Walk** (`enrich.go`): headings set the section and can set the date
    context; date-only paragraphs/list-heads set the date context; leaf items
    (list items, `<br>` lines, paragraphs) become candidate notices. Handles
-   the inverted form (statement head, date children), its time analogue
+   the inverted form (statement head, date children, or date+clock children
+   read as "<head>, <clock>" under each date), its time analogue
    (statement head, bare clock children: each child becomes "<head>, <time>"),
    and garbled date heads (children emitted with a `date-garbled` marker, no
    dates). An intro line

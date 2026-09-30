@@ -267,9 +267,18 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 	}
 
 	// inverted form: a statement whose children are all dates. Single dates
-	// merge into one notice; each range child gets its own.
+	// merge into one notice; each range child gets its own. A child that is
+	// a date plus a bare clock ("PD Day Public Swim" over "Friday, October 2,
+	// 8:30 to 10 am") gets its own too, read as "<head>, <clock>" under that
+	// date.
+	type timedChild struct {
+		spec  dateSpec
+		clock string
+		sub   liNode
+	}
 	var singles dateSpec
 	var ranges []dateSpec
+	var timed []timedChild
 	var childIgnored []liNode
 	allDates := len(li.Items) > 0
 	for _, sub := range li.Items {
@@ -278,9 +287,17 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 			break
 		}
 		spec, rest, ok := parseLeadingDate(sub.Head, b.anchor)
-		if !ok || !restIsTrivial(rest) {
+		if !ok {
 			allDates = false
 			break
+		}
+		if !restIsTrivial(rest) {
+			if clocks, rem := findClockRanges(rest); len(clocks) == 0 || strings.Trim(rem, " .,") != "" {
+				allDates = false
+				break
+			}
+			timed = append(timed, timedChild{spec: spec, clock: strings.Trim(rest, " .,"), sub: sub})
+			continue
 		}
 		childIgnored = append(childIgnored, sub)
 		if !spec.From.IsZero() || spec.OpenEnded {
@@ -291,7 +308,7 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 		singles.Ambig = append(singles.Ambig, spec.Ambig...)
 		singles.Raw = strings.TrimSpace(singles.Raw + " " + spec.Raw)
 	}
-	if allDates && (!singles.empty() || len(ranges) > 0) {
+	if allDates && (!singles.empty() || len(ranges) > 0 || len(timed) > 0) {
 		for _, sub := range childIgnored {
 			b.addIgnored("date-context", sub.Head, sub.HeadHTML, sub.Off, st, nil)
 		}
@@ -303,6 +320,15 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 			local := *st
 			local.head, local.headRaw = &specs[i], specs[i].Raw
 			b.processItem(&local, head, li.HeadHTML, li.Off, li.Links, nil)
+		}
+		if len(timed) > 0 {
+			b.out.Stats["li/head-dated-times"]++
+		}
+		for i := range timed {
+			local := *st
+			local.head, local.headRaw = &timed[i].spec, timed[i].spec.Raw
+			text := strings.TrimRight(strings.TrimSpace(head), ":") + ", " + timed[i].clock
+			b.processItem(&local, text, li.HeadHTML+timed[i].sub.HeadHTML, li.Off, append(slices.Clone(li.Links), timed[i].sub.Links...), nil)
 		}
 		return
 	}
