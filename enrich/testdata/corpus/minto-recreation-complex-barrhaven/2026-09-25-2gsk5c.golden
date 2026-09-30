@@ -1,7 +1,8 @@
 == Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
 - IGNORED date-context "Wednesday, September 30"
     at: group "Drop-in schedule - gymnasium sports"
-- NOTICE "Pickleball drop-ins, 8:45 to 9:45 am"
+- NOTICE "Pickleball drop-ins:\n8:45 to 9:45 am"
+    reading: "Pickleball drop-ins, 8:45 to 9:45 am"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
     time: "8:45 to 9:45 am" 08:45-09:45 none
@@ -9,7 +10,8 @@
     phrase: "Pickleball drop-ins"
     ambiguities: meridiem-inferred
     at: group "Drop-in schedule - gymnasium sports" activity "Pickleball"
-- NOTICE "Pickleball drop-ins, 9:50 to 10:50 am"
+- NOTICE "Pickleball drop-ins:\n9:50 to 10:50 am"
+    reading: "Pickleball drop-ins, 9:50 to 10:50 am"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
     time: "9:50 to 10:50 am" 09:50-10:50 none
@@ -17,7 +19,8 @@
     phrase: "Pickleball drop-ins"
     ambiguities: meridiem-inferred
     at: group "Drop-in schedule - gymnasium sports" activity "Pickleball"
-- NOTICE "Pickleball drop-ins, 10:55 to 11:55 am"
+- NOTICE "Pickleball drop-ins:\n10:55 to 11:55 am"
+    reading: "Pickleball drop-ins, 10:55 to 11:55 am"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
     time: "10:55 to 11:55 am" 10:55-11:55 overlaps [Wednesday 11:45am - 12:45pm]
@@ -25,7 +28,8 @@
     phrase: "Pickleball drop-ins"
     ambiguities: meridiem-inferred
     at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-09-30 Wed 11:45-12:45
-- NOTICE "Pickleball drop-ins, Noon to 1 pm"
+- NOTICE "Pickleball drop-ins:\nNoon to 1 pm"
+    reading: "Pickleball drop-ins, Noon to 1 pm"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
     time: "Noon to 1 pm" 12:00-13:00 overlaps [Wednesday 11:45am - 12:45pm; Wednesday 12:50 - 1:50pm]

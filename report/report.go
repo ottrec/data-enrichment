@@ -287,6 +287,7 @@ func writeCard(b *strings.Builder, o *epb.Object, color string, placements map[s
 	esc := html.EscapeString
 
 	row("text", esc(o.GetRawText()))
+	row("reading", esc(o.GetReading()))
 	if dt := o.GetDateText(); dt != "" && dt != o.GetRawText() {
 		row("date text", esc(dt))
 	}

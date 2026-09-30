@@ -103,8 +103,15 @@ var amenityQualifier = map[string]bool{
 }
 
 // processItem parses one extracted line/item and emits objects for it.
-func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int, links []anchor, extraAmbig []string) {
-	t := strings.TrimSpace(text)
+// text is the source text as posted and becomes RawText; readAs, when not
+// empty, is the sentence the walk composed for it, which the parser reads
+// instead and which becomes Reading.
+func (b *blockCtx) processItem(st *walkState, text, readAs, itemHTML string, off [2]int, links []anchor, extraAmbig []string) {
+	raw := strings.TrimSpace(text)
+	t, reading := raw, ""
+	if s := strings.TrimSpace(readAs); s != "" && s != raw {
+		t, reading = s, s
+	}
 	if t == "" {
 		return
 	}
@@ -113,7 +120,7 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int,
 	if boilerplateRe.MatchString(folded) {
 		b.out.Stats["boilerplate"]++
 		b.add("ignored", "boilerplate", notice{
-			Section: st.section, DateText: st.headRaw, RawHTML: itemHTML, RawText: t,
+			Section: st.section, DateText: st.headRaw, RawHTML: itemHTML, RawText: raw, Reading: reading,
 		}, off, nil, false)
 		return
 	}
@@ -122,7 +129,8 @@ func (b *blockCtx) processItem(st *walkState, text, itemHTML string, off [2]int,
 		Section:     st.section,
 		DateText:    st.headRaw,
 		RawHTML:     itemHTML,
-		RawText:     t,
+		RawText:     raw,
+		Reading:     reading,
 		Ambiguities: slices.Clone(extraAmbig),
 	}
 

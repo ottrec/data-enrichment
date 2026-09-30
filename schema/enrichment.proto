@@ -114,6 +114,9 @@ message Object {
     string section = 13;   // nearest heading text
     string date_text = 14; // raw date-context text
     string raw_html = 15;
+    // raw_text is the source text as posted. For a list head completed by a
+    // clock child it is the two lines joined by a newline ("<head>\n<child>");
+    // for a head completed by date children, the head's line.
     string raw_text = 16;
 
     DateSpan dates = 17 [features.field_presence = EXPLICIT];
@@ -155,6 +158,12 @@ message Object {
     // verbatim), never as certainty.
     repeated string ambiguities = 24;
     string produced_by = 25; // parser (llm reserved for a residue pass)
+    // reading is the sentence the parser read when it differs from
+    // raw_text, else unset: a head completed by a clock child reads as the
+    // head without its trailing colon, a comma, and the clock ("Pickleball
+    // cancelled, 11:45 am to 12:45 pm"); a head completed by dates reads as
+    // its line without the colon.
+    string reading = 26;
 }
 
 // DateSpan is a resolved date association.

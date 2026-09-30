@@ -165,6 +165,16 @@ with a go.mod bump:
   The activity pages' date chip falls back to `DateText`, so "until
   September 2026" and "from August 22 to spring 2028" show as posted rather
   than as "to Wed, Sep 30" and "from Sat, Aug 22".
+- `Item.Text` is the source text as posted, as its doc always said, and
+  `Item.Reading` the sentence the parser read when it differs (from the new
+  `Object.reading`; the website does not use it). A list head completed by
+  a clock child was the composed sentence and is now the two lines joined
+  by a newline, so the activity pages' copy changes for those postings:
+  Walter Baker's "PD Day Public Swim - training and whale pools only" over
+  each of its three dates, and Minto's Pickleball drop-ins, cancelled and
+  added times. `.activity-change-text` has `white-space: pre-line` so the
+  two lines show as posted. Arrives with the bump after this change; the
+  CSS rule does not depend on it.
 
 ## Open decisions
 

@@ -230,7 +230,7 @@ func (fc *facCtx) processBlock(blockHTML, source string, grp *groupMatcher) {
 					b.addIgnored("date-context", line, part.HTML, part.Off, st, nil)
 					continue
 				}
-				b.processItem(st, line, part.HTML, part.Off, part.Links, nil)
+				b.processItem(st, line, "", part.HTML, part.Off, part.Links, nil)
 			}
 		case "list":
 			b.resolve(st, b.flatten(part.Items))
@@ -505,7 +505,7 @@ func (b *blockCtx) resolve(st *walkState, units []unit) {
 			s.headRaw = u.r.text
 			b.addIgnored("date-context", u.r.text, u.html, u.off, s, u.r.garbled)
 		case uItem:
-			b.processItem(s, u.r.text, u.html, u.off, u.links, nil)
+			b.processItem(s, u.r.text, "", u.html, u.off, u.links, nil)
 			s.head, s.headRaw = u.r.spec, u.r.spec.Raw
 		case uHead:
 			if u.completed {
@@ -519,7 +519,7 @@ func (b *blockCtx) resolve(st *walkState, units []unit) {
 			if u.supp {
 				amb = nil
 			}
-			b.processItem(s, u.r.text, u.html, u.off, u.links, amb)
+			b.processItem(s, u.r.text, "", u.html, u.off, u.links, amb)
 		case uLeaf:
 			switch {
 			case u.withHead:
@@ -527,7 +527,7 @@ func (b *blockCtx) resolve(st *walkState, units []unit) {
 			case u.completes:
 				b.complete(s, &units[u.stmt], u)
 			default:
-				b.processItem(s, u.r.text, u.html, u.off, u.links, nil)
+				b.processItem(s, u.r.text, "", u.html, u.off, u.links, nil)
 			}
 		}
 	}
@@ -538,8 +538,11 @@ func (b *blockCtx) resolve(st *walkState, units []unit) {
 // cancelled:" over dates): each bare date child as a date context, then
 // the statement once per range child and once for all the single date
 // children together. A To-only child ("Until August 21"), a weekday set
-// and an open end are ranges here, one notice each. Clock children, and
-// dates nested deeper, are emitted when the walk reaches them (complete).
+// and an open end are ranges here, one notice each. Each notice keeps the
+// head's line as its text and reads it as withStmt gives it, so
+// "Pickleball cancelled:" over a bare date is a cancellation. Clock
+// children, and dates nested deeper, are emitted when the walk reaches them
+// (complete).
 func (b *blockCtx) completeHead(s *walkState, units []unit, h int) {
 	var singles dateSpec
 	var specs []dateSpec
@@ -565,34 +568,41 @@ func (b *blockCtx) completeHead(s *walkState, units []unit, h int) {
 	for i := range specs {
 		local := *s
 		local.head, local.headRaw = &specs[i], specs[i].Raw
-		b.processItem(&local, head.r.text, head.html, head.off, head.links, nil)
+		b.processItem(&local, head.r.text, withStmt(head.statement(), ""), head.html, head.off, head.links, nil)
 	}
 }
 
 // complete emits a leaf that completes the statement above it. A clock
 // times the statement: "Pickleball cancelled:" over "11:45 am to 12:45 pm"
-// reads "Pickleball cancelled, 11:45 am to 12:45 pm", under the leaf's own
-// date when it carries one ("PD Day Public Swim" over "Friday, October 2,
-// 8:30 to 10 am") and the inherited one otherwise. A bare date below the
-// head's own children dates the statement as completeHead does.
+// is posted as the two lines and reads "Pickleball cancelled, 11:45 am to
+// 12:45 pm", under the leaf's own date when it carries one ("PD Day Public
+// Swim" over "Friday, October 2, 8:30 to 10 am") and the inherited one
+// otherwise. Its HTML is the statement's <li>, which contains the leaf. A
+// bare date below the head's own children dates the statement as
+// completeHead does.
 func (b *blockCtx) complete(s *walkState, stmt, u *unit) {
 	if u.r.dateOnly() {
 		b.addIgnored("date-context", u.r.text, u.html, u.off, s, nil)
 		s.head, s.headRaw = u.r.spec, u.r.spec.Raw
-		b.processItem(s, stmt.statement(), stmt.html, stmt.off, stmt.links, nil)
+		b.processItem(s, stmt.r.text, withStmt(stmt.statement(), ""), stmt.html, stmt.off, stmt.links, nil)
 		return
 	}
 	if u.r.spec != nil {
 		s.head, s.headRaw = u.r.spec, u.r.spec.Raw
 	}
-	b.processItem(s, withStmt(stmt.statement(), u.r.clock), stmt.html+u.html, stmt.off, append(slices.Clone(stmt.links), u.links...), nil)
+	b.processItem(s, stmt.r.text+"\n"+u.r.text, withStmt(stmt.statement(), u.r.clock), stmt.html, stmt.off, append(slices.Clone(stmt.links), u.links...), nil)
 }
 
-// withStmt is the text a clock leaf reads as under the statement it
-// completes: the statement without its trailing colon, a comma, the clock.
-// The one place the parser reads a sentence the city did not write.
+// withStmt is the sentence a completion reads as: the statement without
+// its trailing colon, which the keyword rules do not read past, then a
+// comma and the leaf's clock when it has one. The one place the parser
+// reads a sentence the city did not write.
 func withStmt(stmt, clock string) string {
-	return strings.TrimRight(strings.TrimSpace(stmt), ":") + ", " + clock
+	s := strings.TrimRight(strings.TrimSpace(stmt), ":")
+	if clock == "" {
+		return s
+	}
+	return s + ", " + clock
 }
 
 // supplementaryRe matches a child that only points somewhere else.
@@ -777,7 +787,13 @@ func dedupeKeys(n *notice) []string {
 	case "amenity":
 		sc = "amenity:" + foldText(n.Scope.Phrase)
 	default:
-		sc = "none:" + foldText(n.RawText)
+		// the text the parser read, so a completion's key is its
+		// sentence, not the two lines it was posted as
+		t := n.RawText
+		if n.Reading != "" {
+			t = n.Reading
+		}
+		sc = "none:" + foldText(t)
 	}
 	return []string{d + "||" + eff + "||" + sc}
 }
@@ -1017,6 +1033,7 @@ func (fc *facCtx) buildObject(r *rec) *epb.Object {
 		DateText:     r.n.DateText,
 		RawHtml:      r.n.RawHTML,
 		RawText:      r.n.RawText,
+		Reading:      r.n.Reading,
 		Dates:        dateSpanToProto(r.n.Dates),
 		Time:         timeAssocToProto(r.n.Time),
 		MatchQuality: matchQualityToProto(r.n.Scope.MatchQuality),

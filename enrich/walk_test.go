@@ -386,8 +386,8 @@ func TestCompleteHead(t *testing.T) {
 			"single dates merge, a range is its own",
 			`<ul><li>The facility is closed, and all programs cancelled:<ul><li>Friday, August 7</li><li>Saturday, August 8</li><li>August 10 to 12</li></ul></li></ul>`,
 			[]string{
-				`"The facility is closed, and all programs cancelled:" 20260810-20260812 [August 10 to 12]`,
-				`"The facility is closed, and all programs cancelled:" 20260807 20260808 [Friday, August 7 Saturday, August 8]`,
+				`"The facility is closed, and all programs cancelled:" reads "The facility is closed, and all programs cancelled" 20260810-20260812 [August 10 to 12]`,
+				`"The facility is closed, and all programs cancelled:" reads "The facility is closed, and all programs cancelled" 20260807 20260808 [Friday, August 7 Saturday, August 8]`,
 			},
 		},
 		{
@@ -414,7 +414,7 @@ func TestCompleteHead(t *testing.T) {
 		{
 			"a clock child times the statement under the inherited date",
 			`<ul><li>Wednesday, August 5<ul><li>The arena is closed:<ul><li>11:45 am to 12:45 pm</li></ul></li></ul></li></ul>`,
-			[]string{`"The arena is closed, 11:45 am to 12:45 pm" 20260805 [Wednesday, August 5]`},
+			[]string{`"The arena is closed:\n11:45 am to 12:45 pm" reads "The arena is closed, 11:45 am to 12:45 pm" 20260805 [Wednesday, August 5]`},
 		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
@@ -427,6 +427,9 @@ func TestCompleteHead(t *testing.T) {
 					continue
 				}
 				s := fmt.Sprintf("%q", r.n.RawText)
+				if r.n.Reading != "" {
+					s += fmt.Sprintf(" reads %q", r.n.Reading)
+				}
 				if d := r.n.Dates; d != nil {
 					for _, x := range d.Dates {
 						s += fmt.Sprintf(" %d", x/10)
@@ -451,6 +454,68 @@ func TestCompleteHead(t *testing.T) {
 			}
 			if !slices.Equal(got, tc.want) {
 				t.Errorf("notices:\n  %s\nwant:\n  %s", strings.Join(got, "\n  "), strings.Join(tc.want, "\n  "))
+			}
+		})
+	}
+}
+
+// TestCompletionText pins what a completion keeps and what it reads: the
+// lines as posted in RawText, the composed sentence in Reading, the head's
+// <li> once in RawHTML, and the colon off the head on both paths, so a
+// colon head over a bare date carries its cancellation.
+func TestCompletionText(t *testing.T) {
+	for _, tc := range []struct {
+		name, html       string
+		raw, reading     string
+		cancelled        bool
+		htmlHasChildOnce string
+	}{
+		{
+			"a clock completion keeps both lines",
+			`<ul><li>Pickleball cancelled:<ul><li>Friday, August 7, 11:45 am to 12:45 pm</li></ul></li></ul>`,
+			"Pickleball cancelled:\nFriday, August 7, 11:45 am to 12:45 pm",
+			"Pickleball cancelled, 11:45 am to 12:45 pm",
+			true, "11:45 am",
+		},
+		{
+			"a date completion reads the head without its colon",
+			`<ul><li>Pickleball cancelled:<ul><li>Friday, August 7</li></ul></li></ul>`,
+			"Pickleball cancelled:",
+			"Pickleball cancelled",
+			true, "",
+		},
+		{
+			"an item of its own has no reading",
+			`<ul><li>Friday, August 7<ul><li>Pickleball, 11:45 am to 12:45 pm, cancelled</li></ul></li></ul>`,
+			"Pickleball, 11:45 am to 12:45 pm, cancelled",
+			"",
+			true, "",
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			fac := testFacility(t, tc.html)
+			fc := &facCtx{out: &builder{Stats: map[string]int{}}, fac: fac, anchor: fac.GetSourceDate()}
+			fc.processBlock(tc.html, "special_hours", nil)
+			var n []notice
+			for _, r := range fc.recs {
+				if r.kind == "notice" {
+					n = append(n, r.n)
+				}
+			}
+			if len(n) != 1 {
+				t.Fatalf("got %d notices, want 1", len(n))
+			}
+			if n[0].RawText != tc.raw || n[0].Reading != tc.reading {
+				t.Errorf("text %q reading %q, want %q and %q", n[0].RawText, n[0].Reading, tc.raw, tc.reading)
+			}
+			if n[0].Effects.Cancelled != tc.cancelled {
+				t.Errorf("cancelled %v, want %v", n[0].Effects.Cancelled, tc.cancelled)
+			}
+			if d := n[0].Dates; d == nil || len(d.Dates) != 1 || d.Dates[0]/10 != 20260807 {
+				t.Errorf("dates %+v, want August 7", d)
+			}
+			if s := tc.htmlHasChildOnce; s != "" && strings.Count(n[0].RawHTML, s) != 1 {
+				t.Errorf("html %q has %q %d times, want once", n[0].RawHTML, s, strings.Count(n[0].RawHTML, s))
 			}
 		})
 	}

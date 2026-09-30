@@ -813,6 +813,7 @@ type Object struct {
 	xxx_hidden_Candidates   []string               `protobuf:"bytes,23,rep,name=candidates"`
 	xxx_hidden_Ambiguities  []string               `protobuf:"bytes,24,rep,name=ambiguities"`
 	xxx_hidden_ProducedBy   string                 `protobuf:"bytes,25,opt,name=produced_by,json=producedBy"`
+	xxx_hidden_Reading      string                 `protobuf:"bytes,26,opt,name=reading"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
@@ -1021,6 +1022,13 @@ func (x *Object) GetProducedBy() string {
 	return ""
 }
 
+func (x *Object) GetReading() string {
+	if x != nil {
+		return x.xxx_hidden_Reading
+	}
+	return ""
+}
+
 func (x *Object) SetId(v string) {
 	x.xxx_hidden_Id = v
 }
@@ -1063,12 +1071,12 @@ func (x *Object) SetSeq(v int32) {
 
 func (x *Object) SetHtmlStart(v int32) {
 	x.xxx_hidden_HtmlStart = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 25)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 26)
 }
 
 func (x *Object) SetHtmlEnd(v int32) {
 	x.xxx_hidden_HtmlEnd = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 25)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 26)
 }
 
 func (x *Object) SetSection(v string) {
@@ -1121,6 +1129,10 @@ func (x *Object) SetAmbiguities(v []string) {
 
 func (x *Object) SetProducedBy(v string) {
 	x.xxx_hidden_ProducedBy = v
+}
+
+func (x *Object) SetReading(v string) {
+	x.xxx_hidden_Reading = v
 }
 
 func (x *Object) HasHtmlStart() bool {
@@ -1198,9 +1210,12 @@ type Object_builder struct {
 	Section   string
 	DateText  string
 	RawHtml   string
-	RawText   string
-	Dates     *DateSpan
-	Time      *TimeAssoc
+	// raw_text is the source text as posted. For a list head completed by a
+	// clock child it is the two lines joined by a newline ("<head>\n<child>");
+	// for a head completed by date children, the head's line.
+	RawText string
+	Dates   *DateSpan
+	Time    *TimeAssoc
 	// The notice's effects. Empty for non-notice objects and for notices
 	// stating no recognized effect. A consumer on an older schema sees a new
 	// effect kind as an Effect element whose oneof is unset: treat those as
@@ -1221,6 +1236,12 @@ type Object_builder struct {
 	// verbatim), never as certainty.
 	Ambiguities []string
 	ProducedBy  string
+	// reading is the sentence the parser read when it differs from
+	// raw_text, else unset: a head completed by a clock child reads as the
+	// head without its trailing colon, a comma, and the clock ("Pickleball
+	// cancelled, 11:45 am to 12:45 pm"); a head completed by dates reads as
+	// its line without the colon.
+	Reading string
 }
 
 func (b0 Object_builder) Build() *Object {
@@ -1238,11 +1259,11 @@ func (b0 Object_builder) Build() *Object {
 	x.xxx_hidden_BlockHash = b.BlockHash
 	x.xxx_hidden_Seq = b.Seq
 	if b.HtmlStart != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 25)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 26)
 		x.xxx_hidden_HtmlStart = *b.HtmlStart
 	}
 	if b.HtmlEnd != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 25)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 26)
 		x.xxx_hidden_HtmlEnd = *b.HtmlEnd
 	}
 	x.xxx_hidden_Section = b.Section
@@ -1258,6 +1279,7 @@ func (b0 Object_builder) Build() *Object {
 	x.xxx_hidden_Candidates = b.Candidates
 	x.xxx_hidden_Ambiguities = b.Ambiguities
 	x.xxx_hidden_ProducedBy = b.ProducedBy
+	x.xxx_hidden_Reading = b.Reading
 	return m0
 }
 
@@ -2477,7 +2499,8 @@ const file_enrichment_proto_rawDesc = "" +
 	"\x05start\x18\x02 \x01(\x05R\x05start\x12\x10\n" +
 	"\x03end\x18\x03 \x01(\x05R\x03end\x12\x18\n" +
 	"\aobjects\x18\x04 \x03(\tR\aobjects\x12\x14\n" +
-	"\x05added\x18\x05 \x03(\tR\x05added\"\xef\t\n" +
+	"\x05added\x18\x05 \x03(\tR\x05added\"\x89\n" +
+	"\n" +
 	"\x06Object\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x125\n" +
 	"\x04kind\x18\x02 \x01(\x0e2!.ottrec.enrichment.v1.Object.KindR\x04kind\x12\x16\n" +
@@ -2509,7 +2532,8 @@ const file_enrichment_proto_rawDesc = "" +
 	"candidates\x12 \n" +
 	"\vambiguities\x18\x18 \x03(\tR\vambiguities\x12\x1f\n" +
 	"\vproduced_by\x18\x19 \x01(\tR\n" +
-	"producedBy\"C\n" +
+	"producedBy\x12\x18\n" +
+	"\areading\x18\x1a \x01(\tR\areading\"C\n" +
 	"\x04Kind\x12\x14\n" +
 	"\x10KIND_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +

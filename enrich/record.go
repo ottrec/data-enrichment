@@ -67,7 +67,8 @@ type notice struct {
 	Section  string // nearest heading text
 	DateText string // raw date-context text
 	RawHTML  string
-	RawText  string
+	RawText  string // the source text as posted
+	Reading  string // the sentence the parser read, when it is not RawText
 
 	Dates   *DateSpan
 	Scope   scope

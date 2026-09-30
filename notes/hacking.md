@@ -14,7 +14,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   internal DateSpan/TimeAssoc/Effects) the item parser produces before
   placement converts it to protobuf. Effects booleans are only ever set from
   literal trigger words; scope.Activities carries raw activity labels (the
-  canonical dataset join key).
+  canonical dataset join key). `notice.RawText` is the source text as
+  posted and `notice.Reading` the sentence the parser read when the walk
+  composed one (a completion), else empty.
 - `text.go` — `normText` (display text; keeps `\n` from `<br>`, strips
   zero-width/nbsp), `foldText` (lowercase, punctuation folded; kills colons,
   so clock/date parsing must run on normText and only keyword/token work on
@@ -169,7 +171,8 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   Sources. The
   broad scope bucket ignores groups so the facility's merged phrasing
   matches the per-group copies; effects compare by kind so "25 m" and "25m"
-  restrictions match), and `place`
+  restrictions match; a notice with no scope keys on its text, the reading
+  when it has one), and `place`
   (converts recs to Objects and builds the reference tree; sessions filled
   from rec.sessions, each only under the group and label whose slot
   produced it (added times, which no slot produced, under every matched
@@ -182,6 +185,8 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   the fields that are set, one `at:` line per placement, sessions per
   activity; ids, seq, offsets, raw HTML and block hashes left out) and
   `Diff` (the changed region with the block and object headers above it).
+  A `reading:` line under the header shows what the parser read when it
+  differs from the raw text.
   Shared by the golden test, the corpus properties and `-format golden`.
   `Fixtures` and `Load` read and enrich the corpus for both test binaries.
   `Consumer` renders enrichidx's answers for one fixture: its published
@@ -245,12 +250,18 @@ single date children together ("The facility is closed, and all programs
 cancelled:" over dates); a To-only child ("Until August 21"), a weekday set
 and an open end are ranges here, one notice each (the ladder dropped the
 first two). A clock child is emitted when the walk reaches it (`complete`),
-as `withStmt`'s "<statement sans colon>, <clock>" ("Pickleball cancelled:"
-over "11:45 am to 12:45 pm"), under its own date when it carries one ("PD
-Day Public Swim" over "Friday, October 2, 8:30 to 10 am") and the inherited
-one otherwise. `withStmt` is the one place the parser reads a sentence the
-city did not write. A head's `<br>` lines are leaves under it in every
-case.
+under its own date when it carries one ("PD Day Public Swim" over "Friday,
+October 2, 8:30 to 10 am") and the inherited one otherwise. `withStmt` is
+the one place the parser reads a sentence the city did not write: the
+statement without its trailing colon, which `trailingKwRe` does not read
+past, then ", <clock>" for a clock child ("Pickleball cancelled, 11:45 am to
+12:45 pm"), so "Pickleball cancelled:" over a bare date is a cancellation
+too. `RawText` stays as posted: the head's line for a date completion, the
+two lines for a clock completion ("Pickleball cancelled:\n11:45 am to
+12:45 pm", "PD Day Public Swim - training and whale pools only\nFriday,
+October 2, 8:30 to 10 am"); the composed sentence is the notice's
+`Reading`, and `RawHTML` is the head's `<li>`, which contains the child. A
+head's `<br>` lines are leaves under it in every case.
 
 The census of top-level `<li>` shapes over the golden corpus's 2,042
 unique blocks (head class from the walk-level parsers, children as a set;
@@ -295,9 +306,7 @@ clocks (completed through the date contexts, four exact cancellations), a
 statement over date heads over items of their own (the head stays
 `head-unparsed`, the items resolve on their own), a date over a statement
 over clocks, and a statement over mixed children (a bare date, a date and
-clock, an item of its own). A head completed by a bare date keeps its colon
-in the text the sentence parser reads, so "Pickleball cancelled:" over
-"Wednesday, September 30" carries no effect until entry 11 strips it.
+clock, an item of its own).
 
 The `li/*` stats count what `flatten` found: `li/leaf` (a leaf `<li>` that
 is an item of its own), `li/leaf-date-line`, `li/date-head`,

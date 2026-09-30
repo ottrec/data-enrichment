@@ -506,8 +506,12 @@ type Item struct {
 	// ID is the object id, unique within the output, for deduplicating an
 	// object reachable through more than one scope.
 	ID string
-	// Text is the source text as posted.
+	// Text is the source text as posted. A list head completed by a child
+	// line is the two lines joined by a newline.
 	Text string
+	// Reading is the sentence the parser read when it differs from Text,
+	// else "".
+	Reading string
 	// Unparsed marks freeform text nothing could be extracted from (or an
 	// object kind this consumer doesn't recognize); it can never be ruled out
 	// and carries no further classification.
@@ -572,6 +576,7 @@ func items(objs []*epb.Object, from schema.Date) []Item {
 		it := Item{
 			ID:       o.GetId(),
 			Text:     strings.TrimSpace(o.GetRawText()),
+			Reading:  strings.TrimSpace(o.GetReading()),
 			DateText: strings.TrimSpace(o.GetDateText()),
 		}
 		if it.Text == "" {

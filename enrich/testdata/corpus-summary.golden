@@ -18,7 +18,7 @@
 ## effect
 
     250 added
-   3160 cancelled
+   3161 cancelled
    3101 closure
    1222 modified-hours
     185 restriction
@@ -28,8 +28,8 @@
 
 ## match
 
-   2329 exact
-    698 fuzzy
+   2330 exact
+    697 fuzzy
     133 multiple
     628 none
     116 normalized
@@ -38,7 +38,7 @@
 
 ## relation
 
-   1322 covers
+   1323 covers
    2008 exact
     136 none
     327 novel
@@ -162,7 +162,7 @@ A notice that cancels, closes or adds with no date, which applies on every day i
 - Walter Baker Sports Centre: "The whirlpool is temporarily closed." (closure)
     walter-baker-sports-centre/2026-01-11-w5zhys
 
-## no-effect: 21
+## no-effect: 22
 
 A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect word list) and has none, nor does any other sentence of the item.
 
@@ -174,8 +174,6 @@ A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect 
     fairfields-heritage-house/2025-10-06-tk7ech
 - Genest Pool: "Closed until the 2027 Summer season." (closed)
     genest-pool/2026-08-31-imjgcl
-- Minto Recreation Complex - Barrhaven: "Pickleball cancelled:" (cancelled)
-    invented/stmt-over-mixed
 - Nepean Sportsplex: "The Athletics change rooms are now open." (open)
     nepean-sportsplex/2026-08-07-sytkfb and 3 more
 - Nepean Sportsplex: "The diving boards are open during Public Swim." (open)
@@ -206,8 +204,12 @@ A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect 
     tom-brown-arena/2026-06-30-mqukqb
 - Tony Graham Recreation Complex - Kanata: "The arenas will open*" (open)
     tony-graham-recreation-complex-kanata/2026-09-25-2gsk5c
-- Walter Baker Sports Centre: "PD Day Public Swim - training and whale pools only, 8:30 to 10 am" (only)
-    walter-baker-sports-centre/2026-09-17-nz6mft and 11 more
+- Walter Baker Sports Centre: "PD Day Public Swim - training and whale pools only\nFriday, November 20, 8:30 to 10 am" (only)
+    walter-baker-sports-centre/2026-09-17-nz6mft and 3 more
+- Walter Baker Sports Centre: "PD Day Public Swim - training and whale pools only\nFriday, November 27, 8:30 to 10 am" (only)
+    walter-baker-sports-centre/2026-09-17-nz6mft and 3 more
+- Walter Baker Sports Centre: "PD Day Public Swim - training and whale pools only\nFriday, October 2, 8:30 to 10 am" (only)
+    walter-baker-sports-centre/2026-09-17-nz6mft and 3 more
 
 ## stray-date: 7
 

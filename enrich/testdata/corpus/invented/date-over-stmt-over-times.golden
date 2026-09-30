@@ -1,7 +1,8 @@
 == Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
 - IGNORED date-context "Wednesday, September 30"
     at: group "Drop-in schedule - gymnasium sports"
-- NOTICE "Pickleball cancelled, 11:45 am to 12:45 pm"
+- NOTICE "Pickleball cancelled:\n11:45 am to 12:45 pm"
+    reading: "Pickleball cancelled, 11:45 am to 12:45 pm"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
     time: "11:45 am to 12:45 pm" 11:45-12:45 exact [Wednesday 11:45am - 12:45pm]
@@ -9,7 +10,8 @@
     match: EXACT
     phrase: "Pickleball"
     at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-09-30 Wed 11:45-12:45
-- NOTICE "Pickleball cancelled, 12:50 to 1:50 pm"
+- NOTICE "Pickleball cancelled:\n12:50 to 1:50 pm"
+    reading: "Pickleball cancelled, 12:50 to 1:50 pm"
     date text: "Wednesday, September 30"
     dates: 2026-09-30 Wed
     time: "12:50 to 1:50 pm" 12:50-13:50 exact [Wednesday 12:50 - 1:50pm]

@@ -47,6 +47,9 @@ func Render(out *epb.Output) string {
 		field := func(k, format string, args ...any) {
 			fmt.Fprintf(&b, "    %s: %s\n", k, fmt.Sprintf(format, args...))
 		}
+		if s := o.GetReading(); s != "" {
+			field("reading", "%q", s)
+		}
 		if s := o.GetSection(); s != "" {
 			field("section", "%q", s)
 		}

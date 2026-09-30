@@ -23,6 +23,13 @@ some object's raw text). Objects carry blockHash + seq (block reading order)
 and, when the markup allows tracking, the [start,end) byte offset into the
 source block HTML.
 
+`raw_text` is always the fragment as posted. A list head completed by its
+children keeps its own line when dates complete it, and its line and the
+child's joined by a newline when a clock does ("Pickleball
+cancelled:\n11:45 am to 12:45 pm"). The sentence the parser read for it,
+"Pickleball cancelled, 11:45 am to 12:45 pm", is `reading`, set only when
+it differs from `raw_text`.
+
 The tree joins to the dataset by raw identifiers (facility name, group
 label, raw activity label; the normalized _name is lossy) and references
 objects by id at the most specific level the association is guaranteed for:
