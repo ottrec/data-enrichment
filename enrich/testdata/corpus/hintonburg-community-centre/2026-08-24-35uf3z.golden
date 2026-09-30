@@ -1,0 +1,43 @@
+== Hintonburg Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Friday, August 28 to Friday, September 4"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-in programs are cancelled"
+    date text: "Friday, August 28 to Friday, September 4"
+    dates: 2026-08-28 Fri to 2026-09-04 Fri
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in programs"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Hintonburg Community Centre special_hours
+- IGNORED date-context "Friday, August 28 to Friday, September 4"
+    at: facility
+- IGNORED duplicate "All drop-in programs are cancelled."
+    date text: "Friday, August 28 to Friday, September 4"
+    dates: 2026-08-28 Fri to 2026-09-04 Fri
+    match: SCOPE_PHRASE
+    phrase: "All drop-in programs"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-in programs are cancelled"
+    at: facility
+- IGNORED heading "Labour Day weekend hours"
+    section: "Labour Day weekend hours"
+    at: facility
+- NOTICE "Saturday, September 5 to Monday, September 7, closed"
+    section: "Labour Day weekend hours"
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: closure
+    at: facility
+
+== Hintonburg Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

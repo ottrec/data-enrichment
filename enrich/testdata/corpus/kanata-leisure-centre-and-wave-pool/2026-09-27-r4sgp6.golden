@@ -1,0 +1,7 @@
+== Kanata Leisure Centre and Wave Pool special_hours
+- NOTICE "Monday, October 12, 8 am to 4 pm"
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

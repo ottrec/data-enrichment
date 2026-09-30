@@ -1,0 +1,6 @@
+== Pat Clark Community Centre special_hours
+- NOTICE "Saturday, September 5 to Monday, September 7, closed"
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: closure
+    at: facility

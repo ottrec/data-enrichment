@@ -1,0 +1,50 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, April 24"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Friday, April 24"
+    dates: 2026-04-24 Fri
+    time: "" covers [Friday 7:15 - 8:05pm; Friday 8:15 - 9:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "Friday, April 24"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Friday, April 24"
+    dates: 2026-04-24 Fri
+    time: "" covers [Friday 7:15 - 8:05pm; Friday 8:15 - 9:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility
+- IGNORED heading "Closures"
+    section: "Closures"
+    at: facility
+- IGNORED date-context "Monday, March 30 to Tuesday, September 1"
+    section: "Closures"
+    at: facility
+- NOTICE "Roger Sénécal Arena is closed for annual maintenance."
+    section: "Closures"
+    date text: "Monday, March 30 to Tuesday, September 1"
+    dates: 2026-03-30 Mon to 2026-09-01 Tue
+    effects: closure
+    match: NONE
+    phrase: "roger sénécal arena"
+    amenity: "roger sénécal arena"
+    at: facility
+- IGNORED date-context "Saturday, May 2 to Sunday, May 10"
+    section: "Closures"
+    at: facility
+- NOTICE "Elizabeth Manley Figure Skating Arena is closed for annual maintenance."
+    section: "Closures"
+    date text: "Saturday, May 2 to Sunday, May 10"
+    dates: 2026-05-02 Sat to 2026-05-10 Sun
+    effects: closure
+    match: FUZZY
+    phrase: "elizabeth manley figure skating arena"
+    at: group "Drop-in schedule - skating" activity "Figure skating"

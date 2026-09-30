@@ -1,0 +1,28 @@
+== Genest Pool schedule_changes "Drop-in schedule - Swim and aquafitness"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - Swim and aquafitness"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Swim and aquafitness"
+
+== Genest Pool special_hours
+- NOTICE "Regular season, June 29 to August 30"
+    date text: "June 29 to August 30"
+    dates: 2026-06-29 Mon to 2026-08-30 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday, August 3, 10 am to 5:30 pm"
+    section: "Civic Holiday"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "10 am to 5:30 pm" 10:00-17:30 unchecked
+    effects: modified-hours
+    at: facility

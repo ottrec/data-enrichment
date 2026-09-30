@@ -1,0 +1,66 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Friday, April 3 to Monday, April 6"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Easter schedule."
+    date text: "Friday, April 3 to Monday, April 6"
+    dates: 2026-04-03 Fri to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Friday, April 3 to Monday, April 6"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Easter schedule."
+    date text: "Friday, April 3 to Monday, April 6"
+    dates: 2026-04-03 Fri to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Friday, April 3 to Monday, April 6"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Easter schedule."
+    date text: "Friday, April 3 to Monday, April 6"
+    dates: 2026-04-03 Fri to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== St. Laurent Complex special_hours
+- IGNORED heading "Easter weekend hours"
+    section: "Easter weekend hours"
+    at: facility
+- NOTICE "Friday, April 3, 8 am to 6 pm"
+    section: "Easter weekend hours"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    time: "8 am to 6 pm" 08:00-18:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "April 4 and 5, 8 am to 8 pm"
+    section: "Easter weekend hours"
+    date text: "April 4 and 5"
+    dates: 2026-04-04 Sat 2026-04-05 Sun
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, April 6, 8 am to 6 pm"
+    section: "Easter weekend hours"
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    time: "8 am to 6 pm" 08:00-18:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "June 2, 2025 to April 7, 2026"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool and change rooms are closed."
+    section: "Closure"
+    date text: "June 2, 2025 to April 7, 2026"
+    dates: 2025-06-02 Mon to 2026-04-07 Tue
+    effects: closure
+    match: NONE
+    phrase: "pool and change rooms"
+    amenity: "pool change rooms"
+    at: facility

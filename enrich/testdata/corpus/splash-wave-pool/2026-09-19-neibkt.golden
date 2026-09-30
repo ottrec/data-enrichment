@@ -1,0 +1,6 @@
+== Splash Wave Pool special_hours
+- NOTICE "August 29 to September 27, closed"
+    date text: "August 29 to September 27"
+    dates: 2026-08-29 Sat to 2026-09-27 Sun
+    effects: closure
+    at: facility

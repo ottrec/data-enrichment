@@ -1,0 +1,67 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, July 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 10:30 - 11:30am; Saturday 8:00 - 9:00am; Saturday 9:15 - 10:15am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness drop-ins"
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- NOTICE "Monday August 3, 7 am to 4 pm"
+    date text: "Monday August 3"
+    dates: 2026-08-03 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,30 @@
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "August 17 to September 7: the pool is closed for annual maintenance."
+    date text: "August 17 to September 7"
+    dates: 2026-08-17 Mon to 2026-09-07 Mon
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- NOTICE "August 24 to October 4: the gymnasium is closed for maintenance."
+    date text: "August 24 to October 4"
+    dates: 2026-08-24 Mon to 2026-10-04 Sun
+    effects: closure
+    match: NONE
+    phrase: "gymnasium"
+    amenity: "gymnasium"
+    at: facility
+- NOTICE "August 31 to September 7: the community centre is closed for annual maintenance. The arenas are open."
+    date text: "August 31 to September 7"
+    dates: 2026-08-31 Mon to 2026-09-07 Mon
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "community centre"
+    at: facility
+- NOTICE "August 31 to September 7: the community centre is closed for annual maintenance. The arenas are open."
+    date text: "August 31 to September 7"
+    dates: 2026-08-31 Mon to 2026-09-07 Mon
+    match: NONE
+    phrase: "The arenas are open"
+    amenity: "arenas"
+    at: facility

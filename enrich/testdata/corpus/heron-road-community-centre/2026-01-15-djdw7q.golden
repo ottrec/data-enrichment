@@ -1,0 +1,15 @@
+== Heron Road Community Centre special_hours
+- IGNORED date-context "Tuesday, January 20 to Thursday, January 22."
+    at: facility
+- NOTICE "All gymnasium programming is cancelled."
+    date text: "Tuesday, January 20 to Thursday, January 22."
+    dates: 2026-01-20 Tue to 2026-01-22 Thu
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium programming"
+    ambiguities: class-title-partial
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Heron Road Community Centre notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

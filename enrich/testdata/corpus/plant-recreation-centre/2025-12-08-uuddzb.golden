@@ -1,0 +1,19 @@
+== Plant Recreation Centre special_hours
+- IGNORED date-context "December 1 to 21"
+    at: facility
+- NOTICE "The pool is closed."
+    date text: "December 1 to 21"
+    dates: 2025-12-01 Mon to 2025-12-21 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED date-context "December 15 to 21"
+    at: facility
+- NOTICE "The weight room is closed."
+    date text: "December 15 to 21"
+    dates: 2025-12-15 Mon to 2025-12-21 Sun
+    effects: closure
+    match: FUZZY
+    phrase: "weight room"
+    at: group "Drop-in schedule - weight and cardio room" activity "Weight and cardio room"

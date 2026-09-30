@@ -1,0 +1,93 @@
+== Tom Brown Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Wednesday, December 31"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Figure skating, 8 to 8:50 pm, cancelled"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "8 to 8:50 pm" 20:00-20:50 exact [Wednesday 8:00 - 8:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Figure skating" sessions 2025-12-31 Wed 20:00-20:50
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Hockey 18+, 11 to 11:50 am, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "11 to 11:50 am" 11:00-11:50 exact [Thursday 11:00 - 11:50am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Hockey 18+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Hockey 18+" sessions 2026-01-01 Thu 11:00-11:50
+
+== Tom Brown Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Wednesday, December 31"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Adult 18+ skating, 9 to 9:50 pm, cancelled"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "9 to 9:50 pm" 21:00-21:50 exact [Wednesday 9:00 - 9:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Adult 18+ skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Adult 18+ skating" sessions 2025-12-31 Wed 21:00-21:50
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 10 to 10:50 am, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "10 to 10:50 am" 10:00-10:50 exact [Thursday 10:00 - 10:50am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-01 Thu 10:00-10:50
+
+== Tom Brown Arena special_hours
+- IGNORED date-context "Wednesday, December 31"
+    at: facility
+- IGNORED duplicate "Figure skating, 8 to 8:50 pm, cancelled"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "8 to 8:50 pm" 20:00-20:50 exact [Wednesday 8:00 - 8:50pm]
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Figure skating, 8 to 8:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Adult 18+, 9 to 9:50 pm, cancelled"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "9 to 9:50 pm" 21:00-21:50 exact [Wednesday 9:00 - 9:50pm]
+    match: FUZZY
+    phrase: "Adult 18+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Adult 18+ skating, 9 to 9:50 pm, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, January 1"
+    at: facility
+- IGNORED duplicate "Public skating, 10 to 10:50 am, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "10 to 10:50 am" 10:00-10:50 exact [Thursday 10:00 - 10:50am]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 10 to 10:50 am, cancelled"
+    at: facility
+- IGNORED duplicate "Hockey 18+, 11 to 11:50 am, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "11 to 11:50 am" 11:00-11:50 exact [Thursday 11:00 - 11:50am]
+    match: EXACT
+    phrase: "Hockey 18+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Hockey 18+, 11 to 11:50 am, cancelled"
+    at: facility

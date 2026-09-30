@@ -1,0 +1,44 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, July 25"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Table tennis, Noon to 3 pm, cancelled"
+    date text: "Saturday, July 25"
+    dates: 2026-07-25 Sat
+    time: "Noon to 3 pm" 12:00-15:00 exact [Saturday 12:00 - 3:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Table tennis"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Table tennis" sessions 2026-07-25 Sat 12:00-15:00
+
+== Canterbury Recreation Complex special_hours
+- IGNORED date-context "Saturday, July 25"
+    at: facility
+- IGNORED duplicate "Table tennis, Noon to 3 pm, cancelled"
+    date text: "Saturday, July 25"
+    dates: 2026-07-25 Sat
+    time: "Noon to 3 pm" 12:00-15:00 exact [Saturday 12:00 - 3:00pm]
+    match: EXACT
+    phrase: "Table tennis"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Table tennis, Noon to 3 pm, cancelled"
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday, August 3, 10 am to 4 pm"
+    section: "Civic Holiday"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool is closed for maintenance until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

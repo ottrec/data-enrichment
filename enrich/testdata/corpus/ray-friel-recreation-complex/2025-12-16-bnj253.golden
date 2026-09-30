@@ -1,0 +1,83 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/ray-friel-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/ray-friel-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/ray-friel-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/ray-friel-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Ray Friel Recreation Complex special_hours
+- IGNORED date-context "Thursday, December 18"
+    at: facility
+- NOTICE "The sauna is closed for maintenance."
+    date text: "Thursday, December 18"
+    dates: 2025-12-18 Thu
+    effects: closure
+    match: NONE
+    phrase: "sauna"
+    amenity: "sauna"
+    at: facility
+- IGNORED heading "Winter Break hours"
+    section: "Winter Break hours"
+    at: facility
+- NOTICE "Wednesday, December 24, 6 am to noon"
+    section: "Winter Break hours"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "6 am to noon" 06:00-12:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, December 25, closed"
+    section: "Winter Break hours"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    effects: closure
+    at: facility
+- NOTICE "Friday, December 26, 8 am to 4 pm"
+    section: "Winter Break hours"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Wednesday, December 31, 6 am to noon"
+    section: "Winter Break hours"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "6 am to noon" 06:00-12:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    section: "Winter Break hours"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility

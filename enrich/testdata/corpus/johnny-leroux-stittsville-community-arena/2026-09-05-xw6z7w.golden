@@ -1,0 +1,85 @@
+== Johnny Leroux Stittsville Community Arena schedule_changes "Drop-in calendar - ice sports"
+- IGNORED date-context "Tuesday, October 20"
+    at: group "Drop-in calendar - ice sports"
+- NOTICE "Hockey 60+, cancelled"
+    date text: "Tuesday, October 20"
+    dates: 2026-10-20 Tue
+    time: "" covers [Tuesday 2:00 - 2:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Hockey 60+"
+    sources: schedule_changes special_hours
+    at: group "Drop-in calendar - ice sports" activity "Hockey 60+" sessions 2026-10-20 Tue 14:00-14:50
+- IGNORED date-context "Tuesday, October 27"
+    at: group "Drop-in calendar - ice sports"
+- NOTICE "Hockey 60+, cancelled"
+    date text: "Tuesday, October 27"
+    dates: 2026-10-27 Tue
+    time: "" covers [Tuesday 2:00 - 2:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Hockey 60+"
+    sources: schedule_changes special_hours
+    at: group "Drop-in calendar - ice sports" activity "Hockey 60+" sessions 2026-10-27 Tue 14:00-14:50
+- IGNORED date-context "Tuesday, December 22"
+    at: group "Drop-in calendar - ice sports"
+- NOTICE "Hockey 60+, cancelled"
+    date text: "Tuesday, December 22"
+    dates: 2026-12-22 Tue
+    time: "" covers [Tuesday 2:00 - 2:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Hockey 60+"
+    sources: schedule_changes special_hours
+    at: group "Drop-in calendar - ice sports" activity "Hockey 60+" sessions 2026-12-22 Tue 14:00-14:50
+- IGNORED date-context "Tuesday, December 29"
+    at: group "Drop-in calendar - ice sports"
+- NOTICE "Hockey 60+, cancelled"
+    date text: "Tuesday, December 29"
+    dates: 2026-12-29 Tue
+    time: "" covers [Tuesday 2:00 - 2:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Hockey 60+"
+    sources: schedule_changes special_hours
+    at: group "Drop-in calendar - ice sports" activity "Hockey 60+" sessions 2026-12-29 Tue 14:00-14:50
+- IGNORED date-context "Tuesday, October 20"
+    at: facility
+- IGNORED duplicate "Hockey 60+, cancelled"
+    date text: "Tuesday, October 20"
+    dates: 2026-10-20 Tue
+    time: "" covers [Tuesday 2:00 - 2:50pm]
+    match: EXACT
+    phrase: "Hockey 60+"
+    duplicate of: schedule_changes "Drop-in calendar - ice sports" "Hockey 60+, cancelled"
+    at: facility
+- IGNORED date-context "Tuesday, October 27"
+    at: facility
+- IGNORED duplicate "Hockey 60+, cancelled"
+    date text: "Tuesday, October 27"
+    dates: 2026-10-27 Tue
+    time: "" covers [Tuesday 2:00 - 2:50pm]
+    match: EXACT
+    phrase: "Hockey 60+"
+    duplicate of: schedule_changes "Drop-in calendar - ice sports" "Hockey 60+, cancelled"
+    at: facility
+- IGNORED date-context "Tuesday, December 22"
+    at: facility
+- IGNORED duplicate "Hockey 60+, cancelled"
+    date text: "Tuesday, December 22"
+    dates: 2026-12-22 Tue
+    time: "" covers [Tuesday 2:00 - 2:50pm]
+    match: EXACT
+    phrase: "Hockey 60+"
+    duplicate of: schedule_changes "Drop-in calendar - ice sports" "Hockey 60+, cancelled"
+    at: facility
+- IGNORED date-context "Tuesday, December 29"
+    at: facility
+- IGNORED duplicate "Hockey 60+, cancelled"
+    date text: "Tuesday, December 29"
+    dates: 2026-12-29 Tue
+    time: "" covers [Tuesday 2:00 - 2:50pm]
+    match: EXACT
+    phrase: "Hockey 60+"
+    duplicate of: schedule_changes "Drop-in calendar - ice sports" "Hockey 60+, cancelled"
+    at: facility

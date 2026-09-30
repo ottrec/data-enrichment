@@ -1,0 +1,26 @@
+== Splash Wave Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Tuesday, November 18"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Public swim, 4:30 to 9 pm, cancelled"
+    date text: "Tuesday, November 18"
+    dates: 2025-11-18 Tue
+    time: "4:30 to 9 pm" 16:30-21:00 exact [Tuesday 4:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Public swim" sessions 2025-11-18 Tue 16:30-21:00
+
+== Splash Wave Pool special_hours
+- IGNORED date-context "Tuesday, November 18"
+    at: facility
+- IGNORED duplicate "Public swim, 4:30 to 9 pm, cancelled"
+    date text: "Tuesday, November 18"
+    dates: 2025-11-18 Tue
+    time: "4:30 to 9 pm" 16:30-21:00 exact [Tuesday 4:30 - 9:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Public swim, 4:30 to 9 pm, cancelled"
+    at: facility

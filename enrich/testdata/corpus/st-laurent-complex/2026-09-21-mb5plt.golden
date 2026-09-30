@@ -1,0 +1,24 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, September 21"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Yoga, 7:30 to 8:30 pm, cancelled"
+    date text: "Monday, September 21"
+    dates: 2026-09-21 Mon
+    time: "7:30 to 8:30 pm" 19:30-20:30 exact [Monday 7:30 - 8:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Yoga"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Yoga" sessions 2026-09-21 Mon 19:30-20:30
+- IGNORED date-context "Monday, September 21"
+    at: facility
+- IGNORED duplicate "Yoga, 7:30 to 8:30 pm, cancelled"
+    date text: "Monday, September 21"
+    dates: 2026-09-21 Mon
+    time: "7:30 to 8:30 pm" 19:30-20:30 exact [Monday 7:30 - 8:30pm]
+    match: EXACT
+    phrase: "Yoga"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Yoga, 7:30 to 8:30 pm, cancelled"
+    at: facility

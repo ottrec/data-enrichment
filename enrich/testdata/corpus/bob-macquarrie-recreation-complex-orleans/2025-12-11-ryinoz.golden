@@ -1,0 +1,154 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, December 20"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Women's only public swim, 8:15 to 9:15 pm, added"
+    date text: "Saturday, December 20"
+    dates: 2025-12-20 Sat
+    time: "8:15 to 9:15 pm" 20:15-21:15 novel
+    effects: added
+    match: NORMALIZED
+    phrase: "Women's only public swim"
+    ambiguities: date-outside-schedule matched-other-group meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Winter Break" activity "Public swim - women's only" sessions 2025-12-20 Sat 20:15-21:15 added
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/bob-macquarrie-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/bob-macquarrie-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/bob-macquarrie-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - squash and racquetball"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/bob-macquarrie-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash and racquetball"
+
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, December 12"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, December 12"
+    dates: 2025-12-12 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-12 Fri 19:15-20:05
+- NOTICE "Figure skating, 8:15 to 9:05 pm, cancelled"
+    date text: "Friday, December 12"
+    dates: 2025-12-12 Fri
+    time: "8:15 to 9:05 pm" 20:15-21:05 exact [Friday 8:15 - 9:05pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Figure skating" sessions 2025-12-12 Fri 20:15-21:05
+- IGNORED date-context "Sunday, December 14"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 1 to 1:50 pm, cancelled"
+    date text: "Sunday, December 14"
+    dates: 2025-12-14 Sun
+    time: "1 to 1:50 pm" 13:00-13:50 exact [Sunday 1:00 - 1:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-14 Sun 13:00-13:50
+- NOTICE "Public skating, 2 to 2:50 pm, cancelled"
+    date text: "Sunday, December 14"
+    dates: 2025-12-14 Sun
+    time: "2 to 2:50 pm" 14:00-14:50 exact [Sunday 2:00 - 2:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-14 Sun 14:00-14:50
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/bob-macquarrie-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "Friday, December 12"
+    at: facility
+- IGNORED duplicate "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, December 12"
+    dates: 2025-12-12 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 7:15 to 8:05 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Figure skating, 8:15 to 9:05 pm, cancelled"
+    date text: "Friday, December 12"
+    dates: 2025-12-12 Fri
+    time: "8:15 to 9:05 pm" 20:15-21:05 exact [Friday 8:15 - 9:05pm]
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Figure skating, 8:15 to 9:05 pm, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, December 14"
+    at: facility
+- IGNORED duplicate "Public skating, 1 to 1:50 pm, cancelled"
+    date text: "Sunday, December 14"
+    dates: 2025-12-14 Sun
+    time: "1 to 1:50 pm" 13:00-13:50 exact [Sunday 1:00 - 1:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 1 to 1:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 2 to 2:50 pm, cancelled"
+    date text: "Sunday, December 14"
+    dates: 2025-12-14 Sun
+    time: "2 to 2:50 pm" 14:00-14:50 exact [Sunday 2:00 - 2:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 2 to 2:50 pm, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, December 20"
+    at: facility
+- IGNORED duplicate "Women's only public swim, 8:15 to 9:15 pm, added"
+    date text: "Saturday, December 20"
+    dates: 2025-12-20 Sat
+    time: "8:15 to 9:15 pm" 20:15-21:15 novel
+    match: NORMALIZED
+    phrase: "Women's only public swim"
+    ambiguities: date-outside-schedule meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Women's only public swim, 8:15 to 9:15 pm, added"
+    at: facility

@@ -1,0 +1,85 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== St. Laurent Complex special_hours
+- IGNORED date-context "June 22 and 23"
+    at: facility
+- NOTICE "The gymnasium is closed"
+    date text: "June 22 and 23"
+    dates: 2026-06-22 Mon 2026-06-23 Tue
+    effects: closure
+    match: NONE
+    phrase: "gymnasium"
+    amenity: "gymnasium"
+    at: facility
+- IGNORED date-context "June 23"
+    at: facility
+- NOTICE "The weight room is closed from 8:30 to 10 pm."
+    date text: "June 23"
+    dates: 2026-06-23 Tue
+    time: "8:30 to 10 pm" 20:30-22:00 within [Tuesday 7:00am - 10:00pm]
+    effects: closure
+    match: FUZZY
+    phrase: "weight room"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - weight and cardio room" activity "Weight and cardio room" sessions 2026-06-23 Tue 07:00-22:00
+- IGNORED date-context "June 24 and 25"
+    at: facility
+- NOTICE "The weight room is closed"
+    date text: "June 24 and 25"
+    dates: 2026-06-24 Wed 2026-06-25 Thu
+    time: "" covers [Thursday 7:00am - 10:00pm; Wednesday 7:00am - 10:00pm]
+    effects: closure
+    match: FUZZY
+    phrase: "weight room"
+    at: group "Drop-in schedule - weight and cardio room" activity "Weight and cardio room" sessions 2026-06-24 Wed 07:00-22:00, 2026-06-25 Thu 07:00-22:00
+- IGNORED date-context "June 26"
+    at: facility
+- NOTICE "The visual arts room is closed"
+    date text: "June 26"
+    dates: 2026-06-26 Fri
+    effects: closure
+    match: NONE
+    phrase: "visual arts room"
+    amenity: "visual arts room"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Wednesday, July 1, closed"
+    section: "Modified hours"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility

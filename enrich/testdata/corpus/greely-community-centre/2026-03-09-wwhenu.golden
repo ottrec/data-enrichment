@@ -1,0 +1,10 @@
+== Greely Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, March 14"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-ins cancelled."
+    date text: "Saturday, March 14"
+    dates: 2026-03-14 Sat
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-ins"
+    at: group "Drop-in schedule - gymnasium sports"

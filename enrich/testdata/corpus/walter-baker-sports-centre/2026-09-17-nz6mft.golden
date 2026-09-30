@@ -1,0 +1,25 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- NOTICE "PD Day Public Swim - training and whale pools only, 8:30 to 10 am"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "8:30 to 10 am" 08:30-10:00 none
+    match: FUZZY
+    phrase: "PD Day Public Swim - training and whale pools only"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim"
+- NOTICE "PD Day Public Swim - training and whale pools only, 8:30 to 10 am"
+    date text: "Friday, November 20"
+    dates: 2026-11-20 Fri
+    time: "8:30 to 10 am" 08:30-10:00 none
+    match: FUZZY
+    phrase: "PD Day Public Swim - training and whale pools only"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim"
+- NOTICE "PD Day Public Swim - training and whale pools only, 8:30 to 10 am"
+    date text: "Friday, November 27"
+    dates: 2026-11-27 Fri
+    time: "8:30 to 10 am" 08:30-10:00 none
+    match: FUZZY
+    phrase: "PD Day Public Swim - training and whale pools only"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim"

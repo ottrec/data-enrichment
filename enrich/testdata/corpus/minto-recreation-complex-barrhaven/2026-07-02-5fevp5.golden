@@ -1,0 +1,28 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, July 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Kinderplay, 9 to 11 am, cancelled"
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "9 to 11 am" 09:00-11:00 exact [Saturday 9:00 - 11:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Kinderplay" sessions 2026-07-18 Sat 09:00-11:00
+- IGNORED date-context "Saturday, July 18"
+    at: facility
+- IGNORED duplicate "Kinderplay, 9 to 11 am, cancelled"
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "9 to 11 am" 09:00-11:00 exact [Saturday 9:00 - 11:00am]
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Kinderplay, 9 to 11 am, cancelled"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

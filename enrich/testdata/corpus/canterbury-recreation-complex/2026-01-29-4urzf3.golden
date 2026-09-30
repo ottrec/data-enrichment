@@ -1,0 +1,114 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, January 31"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Table Tennis, all times, cancelled"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "" covers [Saturday 12:00 - 1:00pm; Saturday 1:00 - 2:00pm; Saturday 2:00 - 3:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Table Tennis, all times"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Table tennis" sessions 2026-01-31 Sat 12:00-13:00, 2026-01-31 Sat 13:00-14:00, 2026-01-31 Sat 14:00-15:00
+
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, January 30"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Adult skating, 11 am to noon, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "11 am to noon" 11:00-12:00 exact [Friday 11:00am - 12:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Adult skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Adult skating" sessions 2026-01-30 Fri 11:00-12:00
+- NOTICE "Public skating, Noon to 1 pm, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "Noon to 1 pm" 12:00-13:00 exact [Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-30 Fri 12:00-13:00
+- IGNORED date-context "Saturday, January 31"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family hockey, 12:15 to 2 pm, added"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "12:15 to 2 pm" 12:15-14:00 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Family hockey"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family hockey" novel sessions 2026-01-31 Sat 12:15-14:00 added
+- NOTICE "Child hockey, 2:15 to 4 pm, added"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "2:15 to 4 pm" 14:15-16:00 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Child hockey"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Child hockey" novel sessions 2026-01-31 Sat 14:15-16:00 added
+
+== Canterbury Recreation Complex special_hours
+- IGNORED date-context "Friday, January 30"
+    at: facility
+- IGNORED duplicate "Adult skating, 11 am to noon, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "11 am to noon" 11:00-12:00 exact [Friday 11:00am - 12:00pm]
+    match: EXACT
+    phrase: "Adult skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Adult skating, 11 am to noon, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, Noon to 1 pm, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "Noon to 1 pm" 12:00-13:00 exact [Friday 12:00 - 1:00pm]
+    match: EXACT
+    phrase: "Public skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, Noon to 1 pm, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, January 31"
+    at: facility
+- IGNORED duplicate "Family hockey, 12:15 to 2 pm, added"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "12:15 to 2 pm" 12:15-14:00 unchecked
+    match: NOVEL
+    phrase: "Family hockey"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family hockey, 12:15 to 2 pm, added"
+    at: facility
+- IGNORED duplicate "Child hockey, 2:15 to 4 pm, added"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "2:15 to 4 pm" 14:15-16:00 unchecked
+    match: NOVEL
+    phrase: "Child hockey"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Child hockey, 2:15 to 4 pm, added"
+    at: facility
+- IGNORED duplicate "Table Tennis, all times, cancelled"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "" covers [Saturday 12:00 - 1:00pm; Saturday 1:00 - 2:00pm; Saturday 2:00 - 3:00pm]
+    match: NORMALIZED
+    phrase: "Table Tennis, all times"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Table Tennis, all times, cancelled"
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool is closed for maintenance until further notice."
+    section: "Pool closure"
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

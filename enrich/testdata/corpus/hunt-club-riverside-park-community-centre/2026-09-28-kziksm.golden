@@ -1,0 +1,78 @@
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, October 12"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, October 12"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Friday, October 2"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Badminton, 1 to 2 pm and 2 to 3 pm, cancelled"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "1 to 2 pm" 13:00-14:00 exact [Friday 1:00 - 2:00pm]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Badminton"
+    candidates: "Badminton - adult" "Badminton - family"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Badminton, 1 to 2 pm and 2 to 3 pm, cancelled"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "2 to 3 pm" 14:00-15:00 exact [Friday 2:00 - 3:00pm]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Badminton"
+    candidates: "Badminton - adult" "Badminton - family"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, October 12"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Hunt Club-Riverside Park Community Centre special_hours
+- IGNORED date-context "Friday, October 2"
+    at: facility
+- IGNORED duplicate "Badminton, 1 to 2 pm and 2 to 3 pm, cancelled"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "1 to 2 pm" 13:00-14:00 exact [Friday 1:00 - 2:00pm]
+    match: MULTIPLE
+    phrase: "Badminton"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Badminton, 1 to 2 pm and 2 to 3 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Badminton, 1 to 2 pm and 2 to 3 pm, cancelled"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "2 to 3 pm" 14:00-15:00 exact [Friday 2:00 - 3:00pm]
+    match: MULTIPLE
+    phrase: "Badminton"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Badminton, 1 to 2 pm and 2 to 3 pm, cancelled"
+    at: facility
+- NOTICE "Monday, October 12, closed"
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: closure
+    at: facility

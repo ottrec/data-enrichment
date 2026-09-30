@@ -1,0 +1,10 @@
+== Routhier Community Centre special_hours
+- IGNORED date-context "Wednesday, September 30"
+    at: facility
+- NOTICE "The facility will open at 10:45 am."
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    time: "will open at 10:45 am." 00:00-10:45 open-start unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

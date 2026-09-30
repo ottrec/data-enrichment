@@ -1,0 +1,54 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Thursday, January 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 11 am to noon, cancelled"
+    date text: "Thursday, January 22"
+    dates: 2026-01-22 Thu
+    time: "11 am to noon" 11:00-12:00 overlaps [Thursday 11:05am - 1:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-01-22 Thu 11:05-13:30
+- IGNORED date-context "Saturday, January 24"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The pool is closed for maintenance until further notice."
+    date text: "Saturday, January 24"
+    dates: 2026-01-24 Sat; open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    sources: schedule_changes special_hours
+    at: facility
+
+== Canterbury Recreation Complex special_hours
+- IGNORED date-context "Thursday, January 22"
+    at: facility
+- IGNORED duplicate "Lane swim, 11 am to noon, cancelled"
+    date text: "Thursday, January 22"
+    dates: 2026-01-22 Thu
+    time: "11 am to noon" 11:00-12:00 overlaps [Thursday 11:05am - 1:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 11 am to noon, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, January 24"
+    at: facility
+- IGNORED duplicate "The pool is closed for maintenance until further notice."
+    date text: "Saturday, January 24"
+    dates: 2026-01-24 Sat; open-ended
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The pool is closed for maintenance until further notice."
+    at: facility
+- IGNORED heading "Note"
+    section: "Note"
+    at: facility
+- UNPARSED freeform "Construction is taking place along the east and north access to the parking lot until further notice."
+    section: "Note"
+    phrase: "Construction is taking place along the east and north access to the parking lot until further notice"
+    at: facility
+- UNPARSED freeform "Pedestrian access between buildings is limited until further notice due to ongoing construction."
+    section: "Note"
+    phrase: "Pedestrian access between buildings is limited until further notice due to ongoing construction"
+    at: facility

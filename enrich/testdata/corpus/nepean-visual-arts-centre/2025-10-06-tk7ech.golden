@@ -1,0 +1,8 @@
+== Nepean Visual Arts Centre special_hours
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: facility
+- NOTICE "Closed"
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: closure
+    at: facility

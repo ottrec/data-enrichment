@@ -1,0 +1,89 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Tuesday, April 14"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 3 to 4 pm, cancelled"
+    date text: "Tuesday, April 14"
+    dates: 2026-04-14 Tue
+    time: "3 to 4 pm" 15:00-16:00 exact [Tuesday 3:00 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim*Reservations not required." sessions 2026-04-14 Tue 15:00-16:00
+- NOTICE "Reduced lane swim, 3 to 4 pm, added"
+    date text: "Tuesday, April 14"
+    dates: 2026-04-14 Tue
+    time: "3 to 4 pm" 15:00-16:00 novel
+    effects: added
+    match: FUZZY
+    phrase: "Reduced lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Reduced lane swim *Reservations not required." sessions 2026-04-14 Tue 15:00-16:00 added
+- IGNORED date-context "Thursday, April 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 2 to 3 pm, cancelled"
+    date text: "Thursday, April 16"
+    dates: 2026-04-16 Thu
+    time: "2 to 3 pm" 14:00-15:00 within [Thursday 2:00 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim*Reservations not required." sessions 2026-04-16 Thu 14:00-16:00
+- NOTICE "Reduced lane swim, 2 to 3 pm, added"
+    date text: "Thursday, April 16"
+    dates: 2026-04-16 Thu
+    time: "2 to 3 pm" 14:00-15:00 novel
+    effects: added
+    match: FUZZY
+    phrase: "Reduced lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Reduced lane swim *Reservations not required." sessions 2026-04-16 Thu 14:00-15:00 added
+- IGNORED date-context "Tuesday, April 14"
+    at: facility
+- IGNORED duplicate "Lane swim, 3 to 4 pm, cancelled"
+    date text: "Tuesday, April 14"
+    dates: 2026-04-14 Tue
+    time: "3 to 4 pm" 15:00-16:00 exact [Tuesday 3:00 - 4:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 3 to 4 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Reduced lane swim, 3 to 4 pm, added"
+    date text: "Tuesday, April 14"
+    dates: 2026-04-14 Tue
+    time: "3 to 4 pm" 15:00-16:00 novel
+    match: FUZZY
+    phrase: "Reduced lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Reduced lane swim, 3 to 4 pm, added"
+    at: facility
+- IGNORED date-context "Thursday, April 16"
+    at: facility
+- IGNORED duplicate "Lane swim, 2 to 3 pm, cancelled"
+    date text: "Thursday, April 16"
+    dates: 2026-04-16 Thu
+    time: "2 to 3 pm" 14:00-15:00 within [Thursday 2:00 - 4:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 2 to 3 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Reduced lane swim, 2 to 3 pm, added"
+    date text: "Thursday, April 16"
+    dates: 2026-04-16 Thu
+    time: "2 to 3 pm" 14:00-15:00 novel
+    match: FUZZY
+    phrase: "Reduced lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Reduced lane swim, 2 to 3 pm, added"
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

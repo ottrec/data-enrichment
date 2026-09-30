@@ -1,0 +1,9 @@
+== Pat Clark Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"

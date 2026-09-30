@@ -1,0 +1,17 @@
+== Jim Tubman Chevrolet Rink schedule_changes "Drop-in schedule - Summer"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - Summer"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Summer"
+
+== Jim Tubman Chevrolet Rink special_hours
+- NOTICE "Monday, August 3, 10 am to 4 pm"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

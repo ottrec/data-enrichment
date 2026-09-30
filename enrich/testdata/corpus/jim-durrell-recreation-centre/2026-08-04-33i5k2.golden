@@ -1,0 +1,73 @@
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, August 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Sunday, August 16"
+    dates: 2026-08-16 Sun
+    time: "" covers [Sunday 3:15 - 4:05pm; Sunday 4:15 - 5:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, August 13"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "" covers [Thursday 3:00 - 3:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, August 27"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Thursday, August 27"
+    dates: 2026-08-27 Thu
+    time: "" covers [Thursday 3:00 - 3:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+
+== Jim Durrell Recreation Centre special_hours
+- IGNORED date-context "Thursday, August 13"
+    at: facility
+- IGNORED duplicate "All drop-in ice sports, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "" covers [Thursday 3:00 - 3:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, August 16"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Sunday, August 16"
+    dates: 2026-08-16 Sun
+    time: "" covers [Sunday 3:15 - 4:05pm; Sunday 4:15 - 5:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, August 27"
+    at: facility
+- IGNORED duplicate "All drop-in ice sports, cancelled"
+    date text: "Thursday, August 27"
+    dates: 2026-08-27 Thu
+    time: "" covers [Thursday 3:00 - 3:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility
+
+== Jim Durrell Recreation Centre notifications
+- UNPARSED freeform "Please be advised that our parking lot will be under construction. Expect delays, limited parking availability, and changes to traffic flow while work is underway."
+    phrase: "Please be advised that our parking lot will be under construction"
+    at: facility

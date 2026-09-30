@@ -1,0 +1,59 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, January 24"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Women's only swim, 8:15 to 9:15 pm, added"
+    date text: "Saturday, January 24"
+    dates: 2026-01-24 Sat
+    time: "8:15 to 9:15 pm" 20:15-21:15 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Women's only swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Women's only swim" novel sessions 2026-01-24 Sat 20:15-21:15 added
+
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, January 30"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating and figure skating, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 7:15 - 8:05pm; Friday 8:15 - 9:05pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating and figure skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Figure skating" sessions 2026-01-30 Fri 19:15-20:05, 2026-01-30 Fri 20:15-21:05
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-30 Fri 19:15-20:05, 2026-01-30 Fri 20:15-21:05
+- IGNORED date-context "Sunday, February 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating drop-ins, cancelled"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "" covers [Sunday 1:00 - 1:50pm; Sunday 2:00 - 2:50pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Public skating drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-02-01 Sun 13:00-13:50, 2026-02-01 Sun 14:00-14:50
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "Friday, January 30"
+    at: facility
+- IGNORED duplicate "Public skating and figure skating, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 7:15 - 8:05pm; Friday 8:15 - 9:05pm]
+    match: EXACT
+    phrase: "Public skating and figure skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating and figure skating, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, February 1"
+    at: facility
+- IGNORED duplicate "Public skating drop-ins, cancelled"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "" covers [Sunday 1:00 - 1:50pm; Sunday 2:00 - 2:50pm]
+    match: NORMALIZED
+    phrase: "Public skating drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating drop-ins, cancelled"
+    at: facility

@@ -1,0 +1,61 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving Day schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - racquet sports"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - sports"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - curling"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - curling"

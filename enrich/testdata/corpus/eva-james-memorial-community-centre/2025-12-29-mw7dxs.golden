@@ -1,0 +1,30 @@
+== Eva James Memorial Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- NOTICE "Saturday, December 20 to Sunday, January 4 see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Eva James Memorial Community Centre special_hours
+- NOTICE "December 29 and 30, 9 am to 4:30 pm"
+    date text: "December 29 and 30"
+    dates: 2025-12-29 Mon 2025-12-30 Tue
+    time: "9 am to 4:30 pm" 09:00-16:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 2 to 4, 9 am to 4:30 pm"
+    date text: "January 2 to 4"
+    dates: 2026-01-02 Fri to 2026-01-04 Sun
+    time: "9 am to 4:30 pm" 09:00-16:30 unchecked
+    effects: modified-hours
+    at: facility
+
+== Eva James Memorial Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

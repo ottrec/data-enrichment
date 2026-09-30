@@ -1,0 +1,8 @@
+== Churchill Seniors Centre special_hours
+- IGNORED date-context "August 31 to September 7"
+    at: facility
+- NOTICE "Closed for annual maintenance"
+    date text: "August 31 to September 7"
+    dates: 2026-08-31 Mon to 2026-09-07 Mon
+    effects: closure
+    at: facility

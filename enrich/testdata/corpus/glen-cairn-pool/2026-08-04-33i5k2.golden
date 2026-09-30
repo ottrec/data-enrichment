@@ -1,0 +1,8 @@
+== Glen Cairn Pool special_hours
+- NOTICE "Regular season, June 27 to August 23"
+    date text: "June 27 to August 23"
+    dates: 2026-06-27 Sat to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

@@ -1,0 +1,47 @@
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - Racquet sports"
+- IGNORED date-context "Wednesday, November 12"
+    at: group "Drop-in schedule - Racquet sports"
+- NOTICE "All badminton drop-ins, cancelled"
+    date text: "Wednesday, November 12"
+    dates: 2025-11-12 Wed
+    time: "" covers [Wednesday 12:00 - 1:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All badminton drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Racquet sports" activity "Badminton - adult" sessions 2025-11-12 Wed 12:00-13:00
+    at: group "Drop-in schedule - Racquet sports" activity "Badminton - family" sessions 2025-11-12 Wed 12:00-13:00
+- IGNORED date-context "Thursday, November 13"
+    at: group "Drop-in schedule - Racquet sports"
+- NOTICE "All pickleball drop-ins are cancelled"
+    date text: "Thursday, November 13"
+    dates: 2025-11-13 Thu
+    time: "" covers [Thursday 12:00 - 1:00pm; Thursday 1:00 - 2:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All pickleball drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Racquet sports" activity "Pickleball - adult" sessions 2025-11-13 Thu 12:00-13:00, 2025-11-13 Thu 13:00-14:00
+    at: group "Drop-in schedule - Racquet sports" activity "Pickleball - adult - intermediate" sessions 2025-11-13 Thu 12:00-13:00, 2025-11-13 Thu 13:00-14:00
+
+== Hunt Club-Riverside Park Community Centre special_hours
+- IGNORED date-context "Wednesday, November 12"
+    at: facility
+- IGNORED duplicate "All badminton drop-ins, cancelled"
+    date text: "Wednesday, November 12"
+    dates: 2025-11-12 Wed
+    time: "" covers [Wednesday 12:00 - 1:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All badminton drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - Racquet sports" "All badminton drop-ins, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, November 13"
+    at: facility
+- IGNORED duplicate "All pickleball drop-ins, cancelled"
+    date text: "Thursday, November 13"
+    dates: 2025-11-13 Thu
+    time: "" covers [Thursday 12:00 - 1:00pm; Thursday 1:00 - 2:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All pickleball drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - Racquet sports" "All pickleball drop-ins are cancelled"
+    at: facility

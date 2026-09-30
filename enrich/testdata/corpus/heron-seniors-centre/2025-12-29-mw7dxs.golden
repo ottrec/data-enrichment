@@ -1,0 +1,25 @@
+== Heron Seniors Centre schedule_changes "Drop-in schedule - older adult activities"
+- NOTICE "Monday, December 22 to Friday, January 2, see Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - older adult activities"
+
+== Heron Seniors Centre special_hours
+- NOTICE "December 29 to 30, 8 am to 4 pm"
+    date text: "December 29 to 30"
+    dates: 2025-12-29 Mon to 2025-12-30 Tue
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 31, closed"
+    date text: "December 31"
+    dates: 2025-12-31 Wed
+    effects: closure
+    at: facility
+- NOTICE "January 1 to 4, closed"
+    date text: "January 1 to 4"
+    dates: 2026-01-01 Thu to 2026-01-04 Sun
+    effects: closure
+    at: facility

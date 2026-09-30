@@ -1,0 +1,27 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Labour Day schedule."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: see-schedule "Labour Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== St. Laurent Complex special_hours
+- NOTICE "Monday, September 7, 8 am to 6 pm"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    time: "8 am to 6 pm" 08:00-18:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool's wheelchair ramp is currently unavailable. We apologize for the inconvenience."
+    section: "Closure"
+    effects: closure
+    match: NONE
+    phrase: "pool's wheelchair ramp is currently"
+    ambiguities: activity-unmatched
+    at: facility

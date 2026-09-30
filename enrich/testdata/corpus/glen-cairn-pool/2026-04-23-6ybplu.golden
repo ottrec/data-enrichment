@@ -1,0 +1,15 @@
+== Glen Cairn Pool special_hours
+- NOTICE "Pre-season, June 13 to 26"
+    date text: "June 13 to 26"
+    dates: 2026-06-13 Sat to 2026-06-26 Fri
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Pre-season"
+    at: facility
+- NOTICE "Regular season, June 27 to August 23"
+    date text: "June 27 to August 23"
+    dates: 2026-06-27 Sat to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

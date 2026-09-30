@@ -1,0 +1,28 @@
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - ice sports"
+
+== Tony Graham Recreation Complex - Kanata special_hours
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- NOTICE "Closed"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: closure
+    at: facility

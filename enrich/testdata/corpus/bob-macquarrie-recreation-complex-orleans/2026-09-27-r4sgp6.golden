@@ -1,0 +1,87 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, October 12"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, October 12"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, October 12"
+    at: group "Drop-in schedule - squash and racquetball"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash and racquetball"
+- IGNORED date-context "Monday, October 12"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "September 27 to November 6"
+    at: facility
+- NOTICE "The Main Entrance will be closed due to construction. Please use the West Entrance."
+    date text: "September 27 to November 6"
+    dates: 2026-09-27 Sun to 2026-11-06 Fri
+    effects: closure
+    match: NONE
+    phrase: "main entrance"
+    amenity: "main entrance"
+    at: facility
+- NOTICE "The Main Entrance will be closed due to construction. Please use the West Entrance."
+    date text: "September 27 to November 6"
+    dates: 2026-09-27 Sun to 2026-11-06 Fri
+    match: NONE
+    phrase: "Please use the West Entrance"
+    amenity: "please use west entrance"
+    at: facility
+- NOTICE "The West Entrance parking lot will be undergoing repairs. The parking lot will remain open and accessible to the public."
+    date text: "September 27 to November 6"
+    dates: 2026-09-27 Sun to 2026-11-06 Fri
+    match: NONE
+    phrase: "The West Entrance parking lot will be undergoing repairs"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "The West Entrance parking lot will be undergoing repairs. The parking lot will remain open and accessible to the public."
+    date text: "September 27 to November 6"
+    dates: 2026-09-27 Sun to 2026-11-06 Fri
+    match: NONE
+    phrase: "The parking lot will remain open and accessible to the public"
+    ambiguities: freeform-item
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "September 14 to 27, squash and racquetball courts are closed."
+    section: "Closure"
+    date text: "September 14 to 27"
+    dates: 2026-09-14 Mon to 2026-09-27 Sun
+    effects: closure
+    match: NONE
+    phrase: "squash and racquetball courts"
+    amenity: "squash racquetball courts"
+    at: facility
+- NOTICE "Squash court 3 is closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "squash court 3"
+    amenity: "squash court"
+    ambiguities: activity-narrowed-to-amenity activity-typo-match
+    at: facility

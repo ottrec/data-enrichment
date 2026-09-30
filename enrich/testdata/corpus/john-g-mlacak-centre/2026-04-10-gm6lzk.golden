@@ -1,0 +1,24 @@
+== John G. Mlacak Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, April 11"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, 6 to 8 pm, cancelled"
+    date text: "Saturday, April 11"
+    dates: 2026-04-11 Sat
+    time: "6 to 8 pm" 18:00-20:00 covers [Saturday 6:00 - 6:50pm; Saturday 7:00 - 7:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, April 11"
+    at: facility
+- IGNORED duplicate "All drop-in skating, 6 to 8 pm, cancelled"
+    date text: "Saturday, April 11"
+    dates: 2026-04-11 Sat
+    time: "6 to 8 pm" 18:00-20:00 covers [Saturday 6:00 - 6:50pm; Saturday 7:00 - 7:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, 6 to 8 pm, cancelled"
+    at: facility

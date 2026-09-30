@@ -1,0 +1,32 @@
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - ice sports"
+
+== Jim Durrell Recreation Centre special_hours
+- NOTICE "Wednesday, December 31, 8 am to 2 pm"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "8 am to 2 pm" 08:00-14:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility

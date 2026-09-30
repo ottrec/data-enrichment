@@ -1,0 +1,7 @@
+== Terry Fox Athletic Facility special_hours
+- NOTICE "Track and field is now closed for the season and the facility will reopen in January for cross-country skiing."
+    effects: closure
+    match: NONE
+    phrase: "track and field"
+    amenity: "track field"
+    at: facility

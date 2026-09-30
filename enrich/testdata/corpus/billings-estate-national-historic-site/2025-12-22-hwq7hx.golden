@@ -1,0 +1,9 @@
+== Billings Estate National Historic Site special_hours
+- NOTICE "The museum will be closed from December 22, 2025 through January 4, 2026. Winter hours of operation will begin on Monday, January 5."
+    date text: "from December 22, 2025 through January 4, 2026"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: closure
+    match: NONE
+    phrase: "museum"
+    ambiguities: activity-unmatched
+    at: facility

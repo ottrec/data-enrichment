@@ -1,0 +1,60 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== François Dupuis Recreation Centre special_hours
+- IGNORED date-context "Monday, January 5"
+    at: facility
+- NOTICE "The facility will be closed until 4 pm due to scheduled maintenance."
+    date text: "Monday, January 5"
+    dates: 2026-01-05 Mon
+    time: "will be closed until 4 pm" 00:00-16:00 open-start unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Closures"
+    section: "Closures"
+    at: facility
+- IGNORED date-context "January 2 to 25"
+    section: "Closures"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Closures"
+    date text: "January 2 to 25"
+    dates: 2026-01-02 Fri to 2026-01-25 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED date-context "January 5 to 11"
+    section: "Closures"
+    at: facility
+- NOTICE "Men's pool changeroom, closed for maintenance."
+    section: "Closures"
+    date text: "January 5 to 11"
+    dates: 2026-01-05 Mon to 2026-01-11 Sun
+    effects: closure
+    match: NONE
+    phrase: "men's pool changeroom"
+    amenity: "men's pool changeroom"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

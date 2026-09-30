@@ -1,0 +1,17 @@
+== General Burns Pool special_hours
+- NOTICE "Monday, August 31, 4 to 5 pm"
+    date text: "Monday, August 31"
+    dates: 2026-08-31 Mon
+    time: "4 to 5 pm" 16:00-17:00 unchecked
+    ambiguities: hours-context-unknown meridiem-inferred
+    at: facility
+- IGNORED supplementary "See Outdoor Pools for more information."
+    date text: "Monday, August 31"
+    at: facility
+- NOTICE "Regular season ends August 31"
+    date text: "August 31"
+    dates: to 2026-08-31 Mon
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

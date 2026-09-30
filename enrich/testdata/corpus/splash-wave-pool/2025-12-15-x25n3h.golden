@@ -1,0 +1,45 @@
+== Splash Wave Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Tuesday, December 16"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Public swim, 4:30 to 9 pm, cancelled"
+    date text: "Tuesday, December 16"
+    dates: 2025-12-16 Tue
+    time: "4:30 to 9 pm" 16:30-21:00 exact [Tuesday 4:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Public swim" sessions 2025-12-16 Tue 16:30-21:00
+- IGNORED date-context "Monday, December 22 to Friday, January 2"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/splash-wave-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Splash Wave Pool special_hours
+- IGNORED date-context "Tuesday, December 16"
+    at: facility
+- IGNORED duplicate "Public swim, 4:30 to 9 pm, cancelled"
+    date text: "Tuesday, December 16"
+    dates: 2025-12-16 Tue
+    time: "4:30 to 9 pm" 16:30-21:00 exact [Tuesday 4:30 - 9:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Public swim, 4:30 to 9 pm, cancelled"
+    at: facility
+- IGNORED heading "Notice: December 5"
+    section: "Notice: December 5"
+    at: facility
+- NOTICE "The lap pool heater is out of order, the water will feel colder."
+    section: "Notice: December 5"
+    date text: "Notice: December 5"
+    dates: 2025-12-05 Fri
+    match: NONE
+    phrase: "The lap pool heater is out of order, the water will feel colder"
+    amenity: "lap pool"
+    at: facility

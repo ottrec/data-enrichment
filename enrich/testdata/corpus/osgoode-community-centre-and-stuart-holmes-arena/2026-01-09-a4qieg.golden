@@ -1,0 +1,24 @@
+== Osgoode Community Centre and Stuart Holmes Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, January 25"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All skating drop-ins, cancelled"
+    date text: "Sunday, January 25"
+    dates: 2026-01-25 Sun
+    time: "" covers [Sunday 1:00 - 1:50pm; Sunday 2:00 - 2:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skating drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Osgoode Community Centre and Stuart Holmes Arena special_hours
+- IGNORED date-context "Sunday, January 25"
+    at: facility
+- IGNORED duplicate "All skating drop-ins, cancelled"
+    date text: "Sunday, January 25"
+    dates: 2026-01-25 Sun
+    time: "" covers [Sunday 1:00 - 1:50pm; Sunday 2:00 - 2:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All skating drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All skating drop-ins, cancelled"
+    at: facility

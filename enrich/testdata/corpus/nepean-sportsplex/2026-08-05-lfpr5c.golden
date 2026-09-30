@@ -1,0 +1,26 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "June 29 to August 14"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The diving boards are open during Public Swim."
+    date text: "June 29 to August 14"
+    dates: 2026-06-29 Mon to 2026-08-14 Fri
+    match: NONE
+    phrase: "The diving boards are open during Public Swim"
+    amenity: "diving boards"
+    at: facility
+
+== Nepean Sportsplex special_hours
+- IGNORED date-context "August 15 to September 13"
+    at: facility
+- NOTICE "The pools are closed for annual maintenance."
+    date text: "August 15 to September 13"
+    dates: 2026-08-15 Sat to 2026-09-13 Sun
+    effects: closure
+    match: NONE
+    phrase: "pools"
+    amenity: "pools"
+    at: facility
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

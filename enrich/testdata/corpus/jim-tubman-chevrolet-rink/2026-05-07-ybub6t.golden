@@ -1,0 +1,11 @@
+== Jim Tubman Chevrolet Rink special_hours
+- IGNORED date-context "Saturday, May 9"
+    at: facility
+- NOTICE "The Jim Tubman Chevrolet Rink will be closed until 6 pm due to an event."
+    date text: "Saturday, May 9"
+    dates: 2026-05-09 Sat
+    time: "will be closed until 6 pm" 00:00-18:00 open-start unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "jim tubman chevrolet rink"
+    at: facility

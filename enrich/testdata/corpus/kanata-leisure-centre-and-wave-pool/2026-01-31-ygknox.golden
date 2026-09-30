@@ -1,0 +1,65 @@
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedules - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedules - weight and cardio room"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedules - group fitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - group fitness"
+
+== Kanata Leisure Centre and Wave Pool special_hours
+- IGNORED date-context "Thursday, February 5"
+    at: facility
+- NOTICE "The facility is closed for scheduled maintenance."
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Family Day weekend hours"
+    section: "Family Day weekend hours"
+    at: facility
+- NOTICE "Saturday, February 14, 8 am to 8 pm"
+    section: "Family Day weekend hours"
+    date text: "Saturday, February 14"
+    dates: 2026-02-14 Sat
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, February 15, 8 am to 6 pm"
+    section: "Family Day weekend hours"
+    date text: "Sunday, February 15"
+    dates: 2026-02-15 Sun
+    time: "8 am to 6 pm" 08:00-18:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, February 16, 8 am to 4 pm"
+    section: "Family Day weekend hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- IGNORED date-context "November 4, 2025 to March 13, 2026"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool is closed for maintenance."
+    section: "Pool closure"
+    date text: "November 4, 2025 to March 13, 2026"
+    dates: 2025-11-04 Tue to 2026-03-13 Fri
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

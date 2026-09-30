@@ -1,0 +1,132 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, April 4 to Monday, April 6"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Easter schedule."
+    date text: "Saturday, April 4 to Monday, April 6"
+    dates: 2026-04-04 Sat to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Friday, April 10"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7:30 pm to 9 pm, cancelled"
+    date text: "Friday, April 10"
+    dates: 2026-04-10 Fri
+    time: "7:30 pm to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-04-10 Fri 19:30-21:00
+- NOTICE "Hot tub/steam room, 7:30 pm to 9 pm, cancelled"
+    date text: "Friday, April 10"
+    dates: 2026-04-10 Fri
+    time: "7:30 pm to 9 pm" 19:30-21:00 within [Friday 6:00 - 9:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Hot tub/steam room"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Hot tub and steam room" sessions 2026-04-10 Fri 18:00-21:00
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, April 4 to Monday, April 6"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Easter schedule."
+    date text: "Saturday, April 4 to Monday, April 6"
+    dates: 2026-04-04 Sat to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - squash"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+- IGNORED date-context "Saturday, April 4 to Monday, April 6"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Easter schedule."
+    date text: "Saturday, April 4 to Monday, April 6"
+    dates: 2026-04-04 Sat to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - skating"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, April 4 to Monday, April 6"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Easter schedule."
+    date text: "Saturday, April 4 to Monday, April 6"
+    dates: 2026-04-04 Sat to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "Friday, April 3, closed"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: closure
+    at: facility
+- NOTICE "April 5 and 6, 8 am to 5 pm"
+    date text: "April 5 and 6"
+    dates: 2026-04-05 Sun 2026-04-06 Mon
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED date-context "Friday, April 10"
+    at: facility
+- IGNORED duplicate "Lane swim, 7:30 pm to 9 pm, cancelled"
+    date text: "Friday, April 10"
+    dates: 2026-04-10 Fri
+    time: "7:30 pm to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 7:30 pm to 9 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Hot tub/steam room, 7:30 pm to 9 pm, cancelled"
+    date text: "Friday, April 10"
+    dates: 2026-04-10 Fri
+    time: "7:30 pm to 9 pm" 19:30-21:00 within [Friday 6:00 - 9:00pm]
+    match: NORMALIZED
+    phrase: "Hot tub/steam room"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Hot tub/steam room, 7:30 pm to 9 pm, cancelled"
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- IGNORED date-context "Monday, May 11 to Sunday, June 28"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Pool closure"
+    date text: "Monday, May 11 to Sunday, June 28"
+    dates: 2026-05-11 Mon to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

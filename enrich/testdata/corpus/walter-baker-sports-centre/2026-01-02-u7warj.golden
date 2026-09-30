@@ -1,0 +1,78 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Friday, January 9"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, January 9"
+    dates: 2026-01-09 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim" sessions 2026-01-09 Fri 19:30-21:00
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - skating"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "Whale pool closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "whale pool"
+    amenity: "whale pool"
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Friday, January 9"
+    section: "Schedule change"
+    at: facility
+- NOTICE "Lane swim, 7:30 to 9 pm, cancelled"
+    section: "Schedule change"
+    date text: "Friday, January 9"
+    dates: 2026-01-09 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - Winter Break - December 20 to January 4" activity "Lane swim *Reservations not required." sessions 2026-01-09 Fri 19:30-21:00
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim" sessions 2026-01-09 Fri 19:30-21:00

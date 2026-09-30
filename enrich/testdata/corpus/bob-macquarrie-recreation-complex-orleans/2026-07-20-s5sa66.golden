@@ -1,0 +1,37 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - squash and racquetball"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash and racquetball"
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "Monday, March 30 to Tuesday, September 1"
+    at: facility
+- NOTICE "Roger Sénécal Arena is closed for annual maintenance."
+    date text: "Monday, March 30 to Tuesday, September 1"
+    dates: 2026-03-30 Mon to 2026-09-01 Tue
+    effects: closure
+    match: NONE
+    phrase: "roger sénécal arena"
+    amenity: "roger sénécal arena"
+    at: facility

@@ -1,0 +1,24 @@
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, July 13"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7 to 9 pm, cancelled"
+    date text: "Monday, July 13"
+    dates: 2026-07-13 Mon
+    time: "7 to 9 pm" 19:00-21:00 exact [Monday 7:00 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-13 Mon 19:00-21:00
+- IGNORED date-context "Monday, July 13"
+    at: facility
+- IGNORED duplicate "Lane swim, 7 to 9 pm, cancelled"
+    date text: "Monday, July 13"
+    dates: 2026-07-13 Mon
+    time: "7 to 9 pm" 19:00-21:00 exact [Monday 7:00 - 9:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 7 to 9 pm, cancelled"
+    at: facility

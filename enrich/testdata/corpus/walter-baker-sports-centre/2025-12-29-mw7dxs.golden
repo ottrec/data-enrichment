@@ -1,0 +1,75 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - skating"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "Whale pool closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "whale pool"
+    amenity: "whale pool"
+    at: facility
+- NOTICE "The 1m and 3m diving boards are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "1m and 3m diving boards"
+    amenity: "1m 3m diving boards"
+    at: facility
+- IGNORED heading "Winter Break hours"
+    section: "Winter Break hours"
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    section: "Winter Break hours"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility
+
+== Walter Baker Sports Centre notifications
+- IGNORED date-context "Wednesday, December 31"
+    at: facility
+- NOTICE "Barrhaven New Year's Eve Family Party"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    match: NONE
+    phrase: "Barrhaven New Year's Eve Family Party"
+    ambiguities: freeform-item
+    at: facility

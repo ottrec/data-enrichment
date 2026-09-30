@@ -1,0 +1,103 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Wednesday, November 19"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Aquafit general, 8:20 to 9:15 am, cancelled"
+    date text: "Wednesday, November 19"
+    dates: 2025-11-19 Wed
+    time: "8:20 to 9:15 am" 08:20-09:15 exact [Wednesday 8:20 - 9:15am]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Aquafit general"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Aqua general - shallow/deep combo" sessions 2025-11-19 Wed 08:20-09:15
+- NOTICE "Aquafit general, 9:20 to 10:15am, cancelled"
+    date text: "Wednesday, November 19"
+    dates: 2025-11-19 Wed
+    time: "9:20 to 10:15am" 09:20-10:15 exact [Wednesday 9:20 - 10:15am]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Aquafit general"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Aqua general - shallow/deep combo" sessions 2025-11-19 Wed 09:20-10:15
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "November 13 to 21"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Bootcamp, 7:30 to 8:30 am, cancelled"
+    date text: "November 13 to 21"
+    dates: 2025-11-13 Thu to 2025-11-21 Fri
+    time: "7:30 to 8:30 am" 07:30-08:30 exact [Friday 7:30 - 8:30am; Thursday 7:30 - 8:30am; Tuesday 7:30 - 8:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Bootcamp"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Bootcamp" sessions 2025-11-13 Thu 07:30-08:30, 2025-11-14 Fri 07:30-08:30, 2025-11-18 Tue 07:30-08:30, 2025-11-20 Thu 07:30-08:30, 2025-11-21 Fri 07:30-08:30
+- IGNORED date-context "Monday, November 17"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, November 17"
+    dates: 2025-11-17 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Requires reservations" sessions 2025-11-17 Mon 07:00-08:00
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "November 13 to 21"
+    at: facility
+- IGNORED duplicate "Bootcamp, 7:30 to 8:30 am, cancelled"
+    date text: "November 13 to 21"
+    dates: 2025-11-13 Thu to 2025-11-21 Fri
+    time: "7:30 to 8:30 am" 07:30-08:30 exact [Friday 7:30 - 8:30am; Thursday 7:30 - 8:30am; Tuesday 7:30 - 8:30am]
+    match: EXACT
+    phrase: "Bootcamp"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Bootcamp, 7:30 to 8:30 am, cancelled"
+    at: facility
+- IGNORED date-context "Wednesday, November 19"
+    at: facility
+- IGNORED duplicate "Aquafit general, 8:20 to 9:15 am, cancelled"
+    date text: "Wednesday, November 19"
+    dates: 2025-11-19 Wed
+    time: "8:20 to 9:15 am" 08:20-09:15 exact [Wednesday 8:20 - 9:15am]
+    match: FUZZY
+    phrase: "Aquafit general"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Aquafit general, 8:20 to 9:15 am, cancelled"
+    at: facility
+- IGNORED duplicate "Aquafit general, 9:20 to 10:15 am, cancelled"
+    date text: "Wednesday, November 19"
+    dates: 2025-11-19 Wed
+    time: "9:20 to 10:15 am" 09:20-10:15 exact [Wednesday 9:20 - 10:15am]
+    match: FUZZY
+    phrase: "Aquafit general"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Aquafit general, 9:20 to 10:15am, cancelled"
+    at: facility
+- IGNORED date-context "Monday, November 24"
+    at: facility
+- NOTICE "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, November 24"
+    dates: 2025-11-24 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Requires reservations" sessions 2025-11-24 Mon 07:00-08:00
+- IGNORED date-context "Monday, December 1"
+    at: facility
+- NOTICE "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, December 1"
+    dates: 2025-12-01 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Requires reservations" sessions 2025-12-01 Mon 07:00-08:00

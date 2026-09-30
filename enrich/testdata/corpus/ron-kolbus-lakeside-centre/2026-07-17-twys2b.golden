@@ -1,0 +1,16 @@
+== Ron Kolbus Lakeside Centre special_hours
+- NOTICE "Monday, August 3, closed"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Facility hours"
+    section: "Facility hours"
+    at: facility
+- IGNORED boilerplate "Please contact the facility by phone or email for information on opening hours and washroom availability."
+    section: "Facility hours"
+    at: facility
+- UNPARSED freeform "Main patio washrooms are open 9 am to 7 pm."
+    section: "Facility hours"
+    phrase: "Main patio washrooms are open"
+    at: facility

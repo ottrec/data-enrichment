@@ -1,0 +1,28 @@
+== Jack Purcell Community Centre special_hours
+- NOTICE "Wednesday, December 24, 7:30 am to 2 pm"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "7:30 am to 2 pm" 07:30-14:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, December 25, closed"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    effects: closure
+    at: facility
+- NOTICE "Friday, December 26, closed"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "Wednesday, December 31, 7:30 am to 2 pm"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "7:30 am to 2 pm" 07:30-14:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility

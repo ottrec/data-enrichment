@@ -1,0 +1,20 @@
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "Monday, March 30 to Tuesday, September 1"
+    at: facility
+- NOTICE "Roger Sénécal Arena is closed for annual maintenance."
+    date text: "Monday, March 30 to Tuesday, September 1"
+    dates: 2026-03-30 Mon to 2026-09-01 Tue
+    effects: closure
+    match: NONE
+    phrase: "roger sénécal arena"
+    amenity: "roger sénécal arena"
+    at: facility
+- IGNORED date-context "Saturday, May 2 to Sunday, May 10"
+    at: facility
+- NOTICE "Elizabeth Manley Figure Skating Arena is closed for annual maintenance."
+    date text: "Saturday, May 2 to Sunday, May 10"
+    dates: 2026-05-02 Sat to 2026-05-10 Sun
+    effects: closure
+    match: FUZZY
+    phrase: "elizabeth manley figure skating arena"
+    at: group "Drop-in schedule - skating" activity "Figure skating"

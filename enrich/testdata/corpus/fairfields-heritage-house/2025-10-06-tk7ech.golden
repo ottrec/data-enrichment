@@ -1,0 +1,17 @@
+== Fairfields Heritage House special_hours
+- UNPARSED freeform "Fairfields Heritage House is open to visitors seasonally during the summer and offers special programs and events year-round."
+    phrase: "Fairfields Heritage House is open to visitors seasonally during the summer and offers special programs and events year-round"
+    at: facility
+- UNPARSED freeform "Summer season"
+    phrase: "Summer season"
+    at: facility
+- IGNORED date-context "July 5 - August 31, 2025"
+    at: facility
+- NOTICE "Saturdays and Sundays from 10 am to 5 pm"
+    date text: "Saturdays and Sundays"
+    dates: weekdays Sat Sun
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    match: NONE
+    phrase: "from"
+    ambiguities: freeform-item
+    at: facility

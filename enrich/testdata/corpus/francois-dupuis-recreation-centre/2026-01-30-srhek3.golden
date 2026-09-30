@@ -1,0 +1,45 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Sunday, February 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 10:30 am to noon, cancelled"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "10:30 am to noon" 10:30-12:00 within [Sunday 10:30am - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-02-01 Sun 10:30-13:00
+- NOTICE "Lane swim - shared pool, 10:30 am to noon, added"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "10:30 am to noon" 10:30-12:00 novel
+    effects: added
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - shared pool" sessions 2026-02-01 Sun 10:30-12:00 added
+
+== François Dupuis Recreation Centre special_hours
+- IGNORED date-context "Sunday, February 1"
+    at: facility
+- IGNORED duplicate "Lane swim, 10:30 am to noon, cancelled"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "10:30 am to noon" 10:30-12:00 within [Sunday 10:30am - 1:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 10:30 am to noon, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim - shared pool, 10:30 am to noon, added"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "10:30 am to noon" 10:30-12:00 novel
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim - shared pool, 10:30 am to noon, added"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

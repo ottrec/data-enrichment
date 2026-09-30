@@ -1,0 +1,55 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- NOTICE "Monday, February 16, 7 am to 4 pm"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

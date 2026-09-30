@@ -1,0 +1,45 @@
+== J.A. Dulude Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, December 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skate, 3 to 3:50 pm, cancelled"
+    date text: "Sunday, December 7"
+    dates: 2025-12-07 Sun
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Sunday 3:00 - 3:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-07 Sun 15:00-15:50
+- NOTICE "Public skate, 4 to 4:50 pm, cancelled"
+    date text: "Sunday, December 7"
+    dates: 2025-12-07 Sun
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Sunday 4:00 - 4:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-07 Sun 16:00-16:50
+
+== J.A. Dulude Arena special_hours
+- IGNORED date-context "Sunday, December 7"
+    at: facility
+- IGNORED duplicate "Family skate, 3 to 3:50 pm, cancelled"
+    date text: "Sunday, December 7"
+    dates: 2025-12-07 Sun
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Sunday 3:00 - 3:50pm]
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skate, 3 to 3:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skate, 4 to 4:50 pm, cancelled"
+    date text: "Sunday, December 7"
+    dates: 2025-12-07 Sun
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Sunday 4:00 - 4:50pm]
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skate, 4 to 4:50 pm, cancelled"
+    at: facility

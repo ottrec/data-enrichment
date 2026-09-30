@@ -1,0 +1,12 @@
+== Nepean Sportsplex special_hours
+- NOTICE "The whirlpool is closed until further notice."
+    dates: open-ended
+    time: "" covers [Friday 7:00 - 8:00am; Friday 8:30am - 1:00pm; Monday 7:00 - 8:00am; Monday 7:30 - 9:30pm; Monday 8:30am - 1:00pm; Saturday 11:00am - 3:00pm; Sunday 11:00am - 3:00pm; Thursday 7:30 - 9:30pm; Thursday 8:30am - 1:00pm; Tuesday 7:30 - 9:30pm; Tuesday 8:30am - 1:00pm; Wednesday 7:00 - 8:00am; Wednesday 7:30 - 9:30pm; Wednesday 8:30am - 1:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "whirlpool"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Whirlpool"
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

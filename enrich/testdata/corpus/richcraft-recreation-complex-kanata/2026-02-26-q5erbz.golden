@@ -1,0 +1,26 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Tuesday, February 24"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Volleyball - adult, all drop-ins cancelled"
+    date text: "Tuesday, February 24"
+    dates: 2026-02-24 Tue
+    time: "" covers [Tuesday 11:00am - 12:00pm; Tuesday 12:00 - 1:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Volleyball - adult, all drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Volleyball - adult" sessions 2026-02-24 Tue 11:00-12:00, 2026-02-24 Tue 12:00-13:00
+- IGNORED date-context "Tuesday, February 24"
+    at: facility
+- IGNORED duplicate "Volleyball - adult, all drop-ins cancelled"
+    date text: "Tuesday, February 24"
+    dates: 2026-02-24 Tue
+    time: "" covers [Tuesday 11:00am - 12:00pm; Tuesday 12:00 - 1:00pm]
+    match: NORMALIZED
+    phrase: "Volleyball - adult, all drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Volleyball - adult, all drop-ins cancelled"
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

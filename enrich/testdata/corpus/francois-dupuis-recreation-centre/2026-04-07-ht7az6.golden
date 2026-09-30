@@ -1,0 +1,12 @@
+== François Dupuis Recreation Centre special_hours
+- NOTICE "The sauna is closed until further notice."
+    dates: open-ended
+    time: "" covers [Friday 7:00 - 9:00pm; Friday 7:30am - 3:30pm; Monday 7:30am - 3:30pm; Monday 8:00 - 9:00pm; Saturday 10:30am - 4:00pm; Sunday 9:30am - 4:00pm; Thursday 7:30am - 2:30pm; Thursday 8:00 - 9:00pm; Tuesday 7:30am - 3:30pm; Tuesday 8:00 - 9:00pm; Wednesday 7:30am - 3:00pm; Wednesday 8:00 - 9:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna"
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

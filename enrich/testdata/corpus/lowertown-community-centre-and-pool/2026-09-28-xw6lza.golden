@@ -1,0 +1,17 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swimming"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"

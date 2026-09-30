@@ -1,0 +1,119 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - racquet sports"
+- IGNORED date-context "Friday, October 10"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "The facility is closed from 6:15 to 10 am."
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "6:15 to 10 am" 06:15-10:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "The gymnasium is closed from 10 am to 5 pm."
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    effects: closure
+    match: NONE
+    phrase: "gymnasium"
+    amenity: "gymnasium"
+    at: facility
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - racquet sports"
+- IGNORED date-context "Friday, October 10"
+    at: group "Drop-in schedule - sports"
+- NOTICE "The facility is closed from 6:15 to 10 am."
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "6:15 to 10 am" 06:15-10:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - sports"
+- NOTICE "The gymnasium is closed from 10 am to 5 pm."
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    effects: closure
+    match: NONE
+    phrase: "gymnasium"
+    amenity: "gymnasium"
+    at: facility
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - sports"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- NOTICE "The facility is closed, 6:15 to 10 am. All programs are cancelled."
+    time: "6:15 to 10 am" 06:15-10:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "The facility is closed, 6:15 to 10 am. All programs are cancelled."
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All programs"
+    at: facility
+- IGNORED heading "Thanksgiving hours"
+    section: "Thanksgiving hours"
+    at: facility
+- IGNORED date-context "Monday, October 13"
+    section: "Thanksgiving hours"
+    at: facility
+- NOTICE "7 am to 4 pm"
+    section: "Thanksgiving hours"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

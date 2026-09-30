@@ -1,0 +1,17 @@
+== Ray Friel Recreation Complex special_hours
+- NOTICE "The diving board is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility
+- IGNORED date-context "June 8 to 21"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    date text: "June 8 to 21"
+    dates: 2026-06-08 Mon to 2026-06-21 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

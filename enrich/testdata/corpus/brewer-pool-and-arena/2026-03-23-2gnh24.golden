@@ -1,0 +1,22 @@
+== Brewer Pool and Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, March 28"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Saturday, March 28"
+    dates: 2026-03-28 Sat
+    time: "" covers [Saturday 7:00 - 8:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, March 28"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Saturday, March 28"
+    dates: 2026-03-28 Sat
+    time: "" covers [Saturday 7:00 - 8:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility

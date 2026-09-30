@@ -1,0 +1,81 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness drop-ins are cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    time: "" covers [Monday 10:20 - 11:20am; Monday 10:35 - 11:35am; Monday 9:15 - 10:15am; Monday 9:30 - 10:30am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness drop-ins"
+    at: group "Drop-in schedule - group fitness"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "Saturday, May 16, 8 am to 8 pm"
+    date text: "Saturday, May 16"
+    dates: 2026-05-16 Sat
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, May 17, 8 am to 8 pm"
+    date text: "Sunday, May 17"
+    dates: 2026-05-17 Sun
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, May 18, 8 am to 5 pm"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Closures"
+    section: "Closures"
+    at: facility
+- NOTICE "The hot tub and steam room are closed until further notice."
+    section: "Closures"
+    dates: open-ended
+    time: "" covers [Friday 6:00 - 7:30pm; Saturday 1:00 - 4:00pm; Sunday 1:00 - 4:00pm; Wednesday 6:00 - 7:30pm]
+    effects: closure
+    match: EXACT
+    phrase: "hot tub and steam room"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Hot tub and steam room"
+- IGNORED date-context "Monday, May 11 to Sunday, June 28"
+    section: "Closures"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Closures"
+    date text: "Monday, May 11 to Sunday, June 28"
+    dates: 2026-05-11 Mon to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

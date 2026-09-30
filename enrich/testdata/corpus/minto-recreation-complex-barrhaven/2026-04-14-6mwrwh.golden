@@ -1,0 +1,68 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Tuesday, April 14"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Public swim, 6:45 to 8:45 pm, cancelled"
+    date text: "Tuesday, April 14"
+    dates: 2026-04-14 Tue
+    time: "6:45 to 8:45 pm" 18:45-20:45 exact [Tuesday 6:45 - 8:45pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim" sessions 2026-04-14 Tue 18:45-20:45
+- NOTICE "Lane swim, 8:45 to 10 pm, cancelled"
+    date text: "Tuesday, April 14"
+    dates: 2026-04-14 Tue
+    time: "8:45 to 10 pm" 20:45-22:00 exact [Tuesday 8:45 - 10:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-04-14 Tue 20:45-22:00
+- IGNORED date-context "Wednesday, April 15"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The pool will be closed until noon."
+    date text: "Wednesday, April 15"
+    dates: 2026-04-15 Wed
+    time: "will be closed until noon" 00:00-12:00 open-start unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    sources: schedule_changes special_hours
+    at: facility
+- IGNORED date-context "Tuesday, April 14"
+    at: facility
+- IGNORED duplicate "Public swim, 6:45 to 8:45 pm, cancelled"
+    date text: "Tuesday, April 14"
+    dates: 2026-04-14 Tue
+    time: "6:45 to 8:45 pm" 18:45-20:45 exact [Tuesday 6:45 - 8:45pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim, 6:45 to 8:45 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim, 8:45 to 10 pm, cancelled"
+    date text: "Tuesday, April 14"
+    dates: 2026-04-14 Tue
+    time: "8:45 to 10 pm" 20:45-22:00 exact [Tuesday 8:45 - 10:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 8:45 to 10 pm, cancelled"
+    at: facility
+- IGNORED date-context "Wednesday, April 15"
+    at: facility
+- IGNORED duplicate "The pool will be closed until noon."
+    date text: "Wednesday, April 15"
+    dates: 2026-04-15 Wed
+    time: "will be closed until noon" 00:00-12:00 open-start unchecked
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The pool will be closed until noon."
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

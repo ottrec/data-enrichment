@@ -1,0 +1,8 @@
+== Nepean Sportsplex special_hours
+- UNPARSED freeform "November pool changes"
+    phrase: "November pool changes"
+    at: facility
+- NOTICE "See Drop-in schedule."
+    effects: see-schedule "Drop-in schedule" "https://ottawa.ca/en/recreation-and-parks/facilities/place-listing/nepean-sportsplex/nepean-sportsplex-drop-schedule-swim-and-aquafit"
+    match: SCOPE_PHRASE
+    at: facility

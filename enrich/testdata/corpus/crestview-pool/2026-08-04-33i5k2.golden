@@ -1,0 +1,8 @@
+== Crestview Pool special_hours
+- NOTICE "Regular season, June 26 to August 31"
+    date text: "June 26 to August 31"
+    dates: 2026-06-26 Fri to 2026-08-31 Mon
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

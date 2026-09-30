@@ -1,0 +1,91 @@
+== Metcalfe Community Centre and Larry Robinson Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, December 25"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 4 to 4:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Thursday 4:00 - 4:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-25 Thu 16:00-16:50
+- NOTICE "Public skating, 5 to 5:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "5 to 5:50 pm" 17:00-17:50 exact [Thursday 5:00 - 5:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-25 Thu 17:00-17:50
+- IGNORED date-context "Friday, December 26"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 3 to 3:50 pm, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Friday 3:00 - 3:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-26 Fri 15:00-15:50
+
+== Metcalfe Community Centre and Larry Robinson Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Friday, December 26"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Child Hockey (6 to 12 years), 4 to 4:50 pm, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Friday 4:00 - 4:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Child Hockey (6 to 12 years)"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Child Hockey (6 to 12 years)" sessions 2025-12-26 Fri 16:00-16:50
+
+== Metcalfe Community Centre and Larry Robinson Arena special_hours
+- IGNORED date-context "Thursday, December 25"
+    at: facility
+- IGNORED duplicate "Family skating, 4 to 4:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Thursday 4:00 - 4:50pm]
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 4 to 4:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 5 to 5:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "5 to 5:50 pm" 17:00-17:50 exact [Thursday 5:00 - 5:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 5 to 5:50 pm, cancelled"
+    at: facility
+- IGNORED date-context "Friday, December 26"
+    at: facility
+- IGNORED duplicate "Family skating, 3 to 3:50 pm, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Friday 3:00 - 3:50pm]
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 3 to 3:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Child Hockey (6 to 12 years), 4 to 4:50 pm, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Friday 4:00 - 4:50pm]
+    match: EXACT
+    phrase: "Child Hockey (6 to 12 years)"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Child Hockey (6 to 12 years), 4 to 4:50 pm, cancelled"
+    at: facility

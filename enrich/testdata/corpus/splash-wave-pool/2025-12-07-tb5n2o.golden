@@ -1,0 +1,19 @@
+== Splash Wave Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, December 22 to Friday, January 2"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/splash-wave-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Splash Wave Pool special_hours
+- UNPARSED freeform "The air heater at our facility is not working. The building may feel colder than usual."
+    phrase: "The air heater at our facility is not working"
+    at: facility
+- NOTICE "The lap pool heater is out of order, the water will feel colder."
+    match: NONE
+    phrase: "The lap pool heater is out of order, the water will feel colder"
+    amenity: "lap pool"
+    at: facility

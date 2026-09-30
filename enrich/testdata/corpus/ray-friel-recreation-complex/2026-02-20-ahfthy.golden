@@ -1,0 +1,8 @@
+== Ray Friel Recreation Complex special_hours
+- NOTICE "The diving board is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility

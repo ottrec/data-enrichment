@@ -1,0 +1,6 @@
+== Ben Franklin Place special_hours
+- NOTICE "Facility is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

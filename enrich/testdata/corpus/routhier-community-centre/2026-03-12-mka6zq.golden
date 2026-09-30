@@ -1,0 +1,21 @@
+== Routhier Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, March 16 to Friday, March 20"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Friday, March 20"
+    dates: 2026-03-16 Mon to 2026-03-20 Fri
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Routhier Community Centre special_hours
+- NOTICE "Monday, March 16, 9 am to 4 pm"
+    date text: "Monday, March 16"
+    dates: 2026-03-16 Mon
+    time: "9 am to 4 pm" 09:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Routhier Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

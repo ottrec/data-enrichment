@@ -1,0 +1,60 @@
+== Lansdowne Park schedule_changes "Drop-in schedule - roller sports"
+- IGNORED date-context "Tuesday, October 20"
+    at: group "Drop-in schedule - roller sports"
+- NOTICE "Roller skating, all programs cancelled."
+    date text: "Tuesday, October 20"
+    dates: 2026-10-20 Tue
+    time: "" covers [Tuesday 6:15 - 7:15pm; Tuesday 7:20 - 8:20pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Roller skating, all programs"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - roller sports" activity "Roller skating" sessions 2026-10-20 Tue 18:15-19:15, 2026-10-20 Tue 19:20-20:20
+
+== Lansdowne Park special_hours
+- NOTICE "Thursdays: The basketball court closes at 9 pm."
+    date text: "Thursdays"
+    dates: weekdays Thu
+    time: "closes at 9 pm" 21:00-24:00 open-end unchecked
+    effects: closure
+    match: NONE
+    phrase: "basketball court"
+    amenity: "basketball court"
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Sunday, October 5"
+    section: "Schedule change"
+    at: facility
+- NOTICE "The basketball court is closed."
+    section: "Schedule change"
+    date text: "Sunday, October 5"
+    dates: 2026-10-05 Mon
+    effects: closure
+    match: NONE
+    phrase: "basketball court"
+    amenity: "basketball court"
+    ambiguities: weekday-mismatch
+    at: facility
+- IGNORED date-context "Tuesday, October 20"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Roller skating, all programs cancelled."
+    section: "Schedule change"
+    date text: "Tuesday, October 20"
+    dates: 2026-10-20 Tue
+    time: "" covers [Tuesday 6:15 - 7:15pm; Tuesday 7:20 - 8:20pm]
+    match: NORMALIZED
+    phrase: "Roller skating, all programs"
+    duplicate of: schedule_changes "Drop-in schedule - roller sports" "Roller skating, all programs cancelled."
+    at: facility
+
+== Lansdowne Park notifications
+- NOTICE "The Great Lawn and the sledding hill are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "great lawn and the sledding hill"
+    amenity: "great lawn sledding hill"
+    at: facility

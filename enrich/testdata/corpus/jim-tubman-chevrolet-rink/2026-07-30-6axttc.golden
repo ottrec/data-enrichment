@@ -1,0 +1,22 @@
+== Jim Tubman Chevrolet Rink schedule_changes "Drop-in schedule - Summer"
+- IGNORED date-context "Thursday, July 30"
+    at: group "Drop-in schedule - Summer"
+- NOTICE "Facility closing at 2 pm and all programs cancelled."
+    date text: "Thursday, July 30"
+    dates: 2026-07-30 Thu
+    time: "closing at 2 pm" 14:00-24:00 open-end unchecked
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Summer"
+
+== Jim Tubman Chevrolet Rink special_hours
+- IGNORED date-context "Thursday, July 30"
+    at: facility
+- IGNORED duplicate "Closing at 2 pm - all programs cancelled"
+    date text: "Thursday, July 30"
+    dates: 2026-07-30 Thu
+    time: "Closing at 2 pm" 14:00-24:00 open-end unchecked
+    match: SCOPE_PHRASE
+    duplicate of: schedule_changes "Drop-in schedule - Summer" "Facility closing at 2 pm and all programs cancelled."
+    at: facility

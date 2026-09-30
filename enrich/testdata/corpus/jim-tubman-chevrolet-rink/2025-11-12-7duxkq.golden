@@ -1,0 +1,8 @@
+== Jim Tubman Chevrolet Rink special_hours
+- NOTICE "The rink is closed until December 1 for ice installation."
+    date text: "until December 1"
+    dates: to 2025-12-01 Mon
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "rink"
+    at: facility

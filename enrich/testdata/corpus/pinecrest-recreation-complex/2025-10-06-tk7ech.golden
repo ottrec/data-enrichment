@@ -1,0 +1,68 @@
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - ice sports"
+
+== Pinecrest Recreation Complex special_hours
+- IGNORED date-context "Saturday, October 11"
+    at: facility
+- NOTICE "9:30 am to 2:30 pm"
+    date text: "Saturday, October 11"
+    dates: 2025-10-11 Sat
+    time: "9:30 am to 2:30 pm" 09:30-14:30 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- IGNORED date-context "Sunday, October 12"
+    at: facility
+- NOTICE "11:30 am to 4 pm"
+    date text: "Sunday, October 12"
+    dates: 2025-10-12 Sun
+    time: "11:30 am to 4 pm" 11:30-16:00 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- NOTICE "Closed"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: closure
+    at: facility

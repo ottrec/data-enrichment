@@ -1,0 +1,54 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, October 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba, 10 to 10:55 am, cancelled"
+    date text: "Saturday, October 18"
+    dates: 2025-10-18 Sat
+    time: "10 to 10:55 am" 10:00-10:55 exact [Saturday 10:00 - 10:55am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2025-10-18 Sat 10:00-10:55
+
+== St. Laurent Complex special_hours
+- IGNORED date-context "June 2 to December 31"
+    at: facility
+- NOTICE "The pool and change rooms are closed."
+    date text: "June 2 to December 31"
+    dates: 2025-06-02 Mon to 2025-12-31 Wed
+    effects: closure
+    match: NONE
+    phrase: "pool and change rooms"
+    amenity: "pool change rooms"
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Friday, October 17"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "Zumba, 6 to 7 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Friday, October 17"
+    dates: 2025-10-17 Fri
+    time: "6 to 7 pm" 18:00-19:00 exact [Friday 6:00 - 7:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2025-10-17 Fri 18:00-19:00
+- IGNORED date-context "Saturday, October 18"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Zumba, 10 to 10:55 am, cancelled"
+    section: "Schedule changes"
+    date text: "Saturday, October 18"
+    dates: 2025-10-18 Sat
+    time: "10 to 10:55 am" 10:00-10:55 exact [Saturday 10:00 - 10:55am]
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba, 10 to 10:55 am, cancelled"
+    at: facility

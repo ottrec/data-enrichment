@@ -1,0 +1,28 @@
+== General Burns Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== General Burns Pool special_hours
+- NOTICE "Regular season, June 25 to August 31"
+    date text: "June 25 to August 31"
+    dates: 2026-06-25 Thu to 2026-08-31 Mon
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday, August 3, 10:30 am to 12:30 pm"
+    section: "Civic Holiday"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "10:30 am to 12:30 pm" 10:30-12:30 unchecked
+    ambiguities: possible-activity-time
+    at: facility

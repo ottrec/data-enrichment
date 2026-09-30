@@ -1,0 +1,7 @@
+== Richelieu Vanier Community Centre special_hours
+- NOTICE "Monday, August 3, 11 am to 2 pm"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "11 am to 2 pm" 11:00-14:00 unchecked
+    ambiguities: hours-context-unknown
+    at: facility

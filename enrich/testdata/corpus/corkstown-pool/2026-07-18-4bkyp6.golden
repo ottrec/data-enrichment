@@ -1,0 +1,27 @@
+== Corkstown Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swimming"
+
+== Corkstown Pool special_hours
+- NOTICE "The facility is closed until July 19."
+    date text: "until July 19"
+    dates: to 2026-07-19 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday, August 3, noon to 5 pm"
+    section: "Civic Holiday"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "noon to 5 pm" 12:00-17:00 unchecked
+    ambiguities: possible-activity-time
+    at: facility

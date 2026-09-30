@@ -1,0 +1,17 @@
+== Carleton Heights Community Centre special_hours
+- NOTICE "Saturday, February 14, 9 am to noon"
+    date text: "Saturday, February 14"
+    dates: 2026-02-14 Sat
+    time: "9 am to noon" 09:00-12:00 unchecked
+    ambiguities: hours-context-unknown
+    at: facility
+- NOTICE "Sunday, February 15, closed"
+    date text: "Sunday, February 15"
+    dates: 2026-02-15 Sun
+    effects: closure
+    at: facility
+- NOTICE "Monday, February 16, closed"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: closure
+    at: facility

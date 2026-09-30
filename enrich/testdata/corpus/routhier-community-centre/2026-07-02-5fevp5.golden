@@ -1,0 +1,25 @@
+== Routhier Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Thursday, July 2"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop in activities are cancelled."
+    date text: "Thursday, July 2"
+    dates: 2026-07-02 Thu
+    time: "" covers [Thursday 10:30 - 11:30am; Thursday 3:00 - 4:00pm; Thursday 4:00 - 5:00pm; Thursday 5:00 - 6:00pm; Thursday 6:00 - 7:00pm; Thursday 7:00 - 8:00pm; Thursday 8:00 - 9:00pm; Thursday 9:00 - 10:00pm; Thursday 9:30 - 10:30am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop in activities"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Thursday, July 2"
+    at: facility
+- IGNORED duplicate "All drop in activities are cancelled."
+    date text: "Thursday, July 2"
+    dates: 2026-07-02 Thu
+    match: SCOPE_PHRASE
+    phrase: "All drop in activities"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop in activities are cancelled."
+    at: facility
+
+== Routhier Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

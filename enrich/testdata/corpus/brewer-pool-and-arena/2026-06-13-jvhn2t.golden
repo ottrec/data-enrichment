@@ -1,0 +1,71 @@
+== Brewer Pool and Arena schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The pool is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    amenity: "pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, June 13"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane Swim, noon to 1 pm, cancelled"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "noon to 1 pm" 12:00-13:00 exact [Saturday 12:00 - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane Swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-06-13 Sat 12:00-13:00
+- NOTICE "Public Swim, 1 to 2 pm, cancelled"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "1 to 2 pm" 13:00-14:00 exact [Saturday 1:00 - 2:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-06-13 Sat 13:00-14:00
+
+== Brewer Pool and Arena special_hours
+- IGNORED date-context "Wednesday, July 1"
+    at: facility
+- IGNORED duplicate "The pool is closed, and all swim and aquafit drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 11:30am - 1:00pm; Wednesday 1:00 - 3:00pm; Wednesday 3:00 - 4:00pm; Wednesday 7:30 - 8:30am; Wednesday 8:00 - 9:00pm; Wednesday 8:35 - 9:30am; Wednesday 9:35 - 10:30am]
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    amenity: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The pool is closed and all programs cancelled."
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Saturday, June 13"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Lane Swim, noon to 1 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "noon to 1 pm" 12:00-13:00 exact [Saturday 12:00 - 1:00pm]
+    match: EXACT
+    phrase: "Lane Swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane Swim, noon to 1 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public Swim, 1 to 2 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "1 to 2 pm" 13:00-14:00 exact [Saturday 1:00 - 2:00pm]
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public Swim, 1 to 2 pm, cancelled"
+    at: facility

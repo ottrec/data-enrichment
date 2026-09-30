@@ -1,0 +1,116 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, May 6"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 11:30 am - 12:30 pm, cancelled"
+    date text: "Wednesday, May 6"
+    dates: 2026-05-06 Wed
+    time: "11:30 am - 12:30 pm" 11:30-12:30 exact [Wednesday 11:30am - 12:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-05-06 Wed 11:30-12:30
+- NOTICE "Lane swim, shared pool, 11:30 am - 12:30 pm, added"
+    date text: "Wednesday, May 6"
+    dates: 2026-05-06 Wed
+    time: "11:30 am - 12:30 pm" 11:30-12:30 novel
+    effects: added
+    match: EXACT
+    phrase: "Lane swim, shared pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim -shared pool" sessions 2026-05-06 Wed 11:30-12:30 added
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== François Dupuis Recreation Centre special_hours
+- IGNORED date-context "Wednesday, May 6"
+    at: facility
+- IGNORED duplicate "Lane swim, 11:30 am - 12:30 pm, cancelled"
+    date text: "Wednesday, May 6"
+    dates: 2026-05-06 Wed
+    time: "11:30 am - 12:30 pm" 11:30-12:30 exact [Wednesday 11:30am - 12:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 11:30 am - 12:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim, shared pool, 11:30 am - 12:30 pm, added"
+    date text: "Wednesday, May 6"
+    dates: 2026-05-06 Wed
+    time: "11:30 am - 12:30 pm" 11:30-12:30 novel
+    match: EXACT
+    phrase: "Lane swim, shared pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, shared pool, 11:30 am - 12:30 pm, added"
+    at: facility
+- NOTICE "Monday, May 18, closed"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: closure
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

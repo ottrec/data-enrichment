@@ -1,0 +1,81 @@
+== J.A. Dulude Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Skating 50+, 11 to 11:50 am, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "11 to 11:50 am" 11:00-11:50 exact [Thursday 11:00 - 11:50am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Skating 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Skating 50+" sessions 2026-01-01 Thu 11:00-11:50
+- NOTICE "Public skating, Noon to 12:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "Noon to 12:50 pm" 12:00-12:50 exact [Thursday 12:00 - 12:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-01 Thu 12:00-12:50
+- NOTICE "Public skating, 6 to 6:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "6 to 6:50 pm" 18:00-18:50 exact [Thursday 6:00 - 6:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-01 Thu 18:00-18:50
+- NOTICE "Figure skating, 7 to 7:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Thursday 7:00 - 7:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Figure skating" sessions 2026-01-01 Thu 19:00-19:50
+
+== J.A. Dulude Arena special_hours
+- IGNORED date-context "Thursday, January 1"
+    at: facility
+- IGNORED duplicate "Skating 50+, 11 to 11:50 am, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "11 to 11:50 am" 11:00-11:50 exact [Thursday 11:00 - 11:50am]
+    match: EXACT
+    phrase: "Skating 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Skating 50+, 11 to 11:50 am, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, Noon to 12:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "Noon to 12:50 pm" 12:00-12:50 exact [Thursday 12:00 - 12:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, Noon to 12:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 6 to 6:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "6 to 6:50 pm" 18:00-18:50 exact [Thursday 6:00 - 6:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 6 to 6:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Figure skating, 7 to 7:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Thursday 7:00 - 7:50pm]
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Figure skating, 7 to 7:50 pm, cancelled"
+    at: facility

@@ -1,0 +1,6 @@
+== Cumberland Heritage Village Museum special_hours
+- NOTICE "The museum is closed to daily visitors for the winter season, except for programs and special events. The museum will reopen to visitors in May 2026."
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "museum"
+    at: facility

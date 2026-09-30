@@ -1,0 +1,63 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - racquet sports"
+- IGNORED date-context "Friday, November 7"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "All pickleball drop-ins are cancelled."
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 3:00 - 4:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All pickleball drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports" activity "Pickleball" sessions 2025-11-07 Fri 11:45-12:45, 2025-11-07 Fri 12:50-13:50, 2025-11-07 Fri 13:55-14:55, 2025-11-07 Fri 15:00-16:00
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - sports"
+- IGNORED date-context "Friday, November 7"
+    at: group "Drop-in schedule - sports"
+- NOTICE "Kindergym, 9 to 11 am, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "9 to 11 am" 09:00-11:00 exact [Friday 9:00 - 11:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kindergym"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - sports" activity "Kindergym" sessions 2025-11-07 Fri 09:00-11:00
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Friday, November 7"
+    at: facility
+- IGNORED duplicate "All pickleball drop-ins are cancelled."
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 3:00 - 4:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All pickleball drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All pickleball drop-ins are cancelled."
+    at: facility
+- IGNORED duplicate "Kindergym, 9 to 11 am, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "9 to 11 am" 09:00-11:00 exact [Friday 9:00 - 11:00am]
+    match: EXACT
+    phrase: "Kindergym"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - sports" "Kindergym, 9 to 11 am, cancelled"
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- IGNORED date-context "Thursday, November 20"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool will be closed from 1 to 3 pm."
+    section: "Pool closure"
+    date text: "Thursday, November 20"
+    dates: 2025-11-20 Thu
+    time: "1 to 3 pm" 13:00-15:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    ambiguities: meridiem-inferred
+    at: facility

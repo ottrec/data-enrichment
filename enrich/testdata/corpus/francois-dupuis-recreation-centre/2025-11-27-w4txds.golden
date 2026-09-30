@@ -1,0 +1,26 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Thursday, November 27"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim - shared pool, 8 to 9 pm, cancelled"
+    date text: "Thursday, November 27"
+    dates: 2025-11-27 Thu
+    time: "8 to 9 pm" 20:00-21:00 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim - shared pool"
+
+== François Dupuis Recreation Centre special_hours
+- IGNORED date-context "Thursday, November 27"
+    at: facility
+- IGNORED duplicate "Lane swim - shared pool, 8 to 9 pm, cancelled"
+    date text: "Thursday, November 27"
+    dates: 2025-11-27 Thu
+    time: "8 to 9 pm" 20:00-21:00 none
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim - shared pool, 8 to 9 pm, cancelled"
+    at: facility

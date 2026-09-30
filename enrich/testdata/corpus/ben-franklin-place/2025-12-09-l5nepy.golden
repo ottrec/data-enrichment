@@ -1,0 +1,11 @@
+== Ben Franklin Place special_hours
+- NOTICE "December 25 and 26, closed"
+    date text: "December 25 and 26"
+    dates: 2025-12-25 Thu 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "January 1, closed"
+    date text: "January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility

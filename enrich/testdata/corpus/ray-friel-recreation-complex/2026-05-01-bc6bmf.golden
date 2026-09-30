@@ -1,0 +1,49 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Ray Friel Recreation Complex special_hours
+- NOTICE "The diving board is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility
+- NOTICE "The hot tub is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "hot tub"
+    amenity: "hot tub"
+    at: facility

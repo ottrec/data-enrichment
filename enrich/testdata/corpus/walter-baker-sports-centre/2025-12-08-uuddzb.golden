@@ -1,0 +1,80 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - racquet sports"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - sports"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "December 24 and 25, closed"
+    date text: "December 24 and 25"
+    dates: 2025-12-24 Wed 2025-12-25 Thu
+    effects: closure
+    at: facility
+- NOTICE "Friday, December 26, 8 am to 5 pm"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Rock wall closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "rock wall"
+    amenity: "rock wall"
+    at: facility

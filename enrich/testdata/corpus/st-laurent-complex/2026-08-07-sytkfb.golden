@@ -1,0 +1,9 @@
+== St. Laurent Complex special_hours
+- NOTICE "The pool is closed until 9 am, Friday, August 7."
+    date text: "Friday, August 7"
+    dates: 2026-08-07 Fri
+    time: "closed until 9 am" 00:00-09:00 open-start unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

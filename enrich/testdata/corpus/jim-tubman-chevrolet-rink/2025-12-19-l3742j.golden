@@ -1,0 +1,9 @@
+== Jim Tubman Chevrolet Rink schedule_changes "Drop-in schedule - Winter"
+- IGNORED date-context "Sunday, December 21 to Sunday, January 4"
+    at: group "Drop-in schedule - Winter"
+- NOTICE "See Winter Break schedule."
+    date text: "Sunday, December 21 to Sunday, January 4"
+    dates: 2025-12-21 Sun to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/jim-tubman-chevrolet-rink-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Winter"

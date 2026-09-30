@@ -1,0 +1,3 @@
+
+X
+Bearbrook Poolæ…’‘:<<p><strong>Closed until the Summer 2027 season.</strong></p>

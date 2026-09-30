@@ -1,0 +1,51 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Ray Friel Recreation Complex special_hours
+- NOTICE "The diving board is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility
+- IGNORED date-context "June 8 to 22"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    date text: "June 8 to 22"
+    dates: 2026-06-08 Mon to 2026-06-22 Mon
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

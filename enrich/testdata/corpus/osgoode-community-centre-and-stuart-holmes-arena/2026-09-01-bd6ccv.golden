@@ -1,0 +1,11 @@
+== Osgoode Community Centre and Stuart Holmes Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating and ice sports, cancelled."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    time: "" covers [Monday 3:00 - 3:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    at: group "Drop-in schedule - skating"

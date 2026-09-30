@@ -1,0 +1,50 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The pool is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    amenity: "pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "Monday, March 30 to Tuesday, September 1"
+    at: facility
+- NOTICE "Roger Sénécal Arena is closed for annual maintenance."
+    date text: "Monday, March 30 to Tuesday, September 1"
+    dates: 2026-03-30 Mon to 2026-09-01 Tue
+    effects: closure
+    match: NONE
+    phrase: "roger sénécal arena"
+    amenity: "roger sénécal arena"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Wednesday, July 1, 8 am to 4 pm"
+    section: "Modified hours"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- IGNORED date-context "Wednesday, July 1"
+    section: "Pool closure"
+    at: facility
+- IGNORED duplicate "The pool is closed, and all swim and aquafit drop-ins are cancelled."
+    section: "Pool closure"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 12:00 - 1:00pm; Wednesday 12:00 - 2:00pm; Wednesday 3:00 - 5:00pm; Wednesday 6:00 - 8:00am; Wednesday 7:00 - 8:00am; Wednesday 8:00 - 9:00am]
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    amenity: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The pool is closed and all programs cancelled."
+    at: facility

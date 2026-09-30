@@ -1,0 +1,34 @@
+== Pinhey's Point Historic Site special_hours
+- UNPARSED freeform "The museum at Pinhey's Point Historic Site is open to visitors seasonally from May to October. The park is open year-round."
+    phrase: "The museum at Pinhey's Point Historic Site is open to visitors seasonally from May to October"
+    at: facility
+- UNPARSED freeform "Summer season"
+    phrase: "Summer season"
+    at: facility
+- IGNORED date-context "May 11 - August 31, 2025"
+    at: facility
+- NOTICE "Wednesday to Sunday from 10 am to 5 pm"
+    date text: "Wednesday to Sunday"
+    dates: weekdays Wed Thu Fri Sat Sun
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    match: NONE
+    phrase: "from"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "Fall season"
+    date text: "May 11 - August 31, 2025"
+    dates: 2025-05-11 Sun to 2025-08-31 Sun
+    match: NONE
+    phrase: "Fall season"
+    ambiguities: freeform-item
+    at: facility
+- IGNORED date-context "September 6 - October 12, 2025"
+    at: facility
+- NOTICE "Saturday and Sunday from 10 am to 5 pm"
+    date text: "Saturday and Sunday"
+    dates: weekdays Sat Sun
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    match: NONE
+    phrase: "from"
+    ambiguities: freeform-item
+    at: facility

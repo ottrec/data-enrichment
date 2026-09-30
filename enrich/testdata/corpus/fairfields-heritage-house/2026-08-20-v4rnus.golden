@@ -1,0 +1,24 @@
+== Fairfields Heritage House special_hours
+- NOTICE "The summer operating season ends Sunday, August 30, 2026. Programs and special events are offered year-round."
+    date text: "Sunday, August 30, 2026"
+    dates: to 2026-08-30 Sun
+    match: NONE
+    phrase: "The summer operating season ends. Programs and special events are offered year-round"
+    ambiguities: freeform-item
+    at: facility
+- IGNORED heading "July and August"
+    section: "July and August"
+    at: facility
+- NOTICE "Monday - Thursday: Closed"
+    section: "July and August"
+    date text: "Monday - Thursday"
+    dates: weekdays Mon Tue Wed Thu
+    effects: closure
+    at: facility
+- NOTICE "Fridays, Saturdays and Sundays: 10 am to 5 pm"
+    section: "July and August"
+    date text: "Fridays, Saturdays and Sundays"
+    dates: weekdays Fri Sat Sun
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    effects: modified-hours
+    at: facility

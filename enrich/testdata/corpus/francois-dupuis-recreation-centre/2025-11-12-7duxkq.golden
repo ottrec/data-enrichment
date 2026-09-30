@@ -1,0 +1,60 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, November 17"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 11:30 am to 2:30 pm, cancelled"
+    date text: "Monday, November 17"
+    dates: 2025-11-17 Mon
+    time: "11:30 am to 2:30 pm" 11:30-14:30 covers [Monday 11:30am - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim" sessions 2025-11-17 Mon 11:30-13:00
+- NOTICE "Public swim - therapeutic pool, 11:30 am to 2:30 pm, cancelled"
+    date text: "Monday, November 17"
+    dates: 2025-11-17 Mon
+    time: "11:30 am to 2:30 pm" 11:30-14:30 within [Monday 11:30am - 3:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim - therapeutic pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Public swim - therapeutic pool" sessions 2025-11-17 Mon 11:30-15:30
+- NOTICE "Public swim - 25m pool, 1 to 2:30 pm, cancelled"
+    date text: "Monday, November 17"
+    dates: 2025-11-17 Mon
+    time: "1 to 2:30 pm" 13:00-14:30 exact [Monday 1:00 - 2:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim - 25m pool"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Public swim - 25m pool" sessions 2025-11-17 Mon 13:00-14:30
+
+== François Dupuis Recreation Centre special_hours
+- IGNORED date-context "Monday, November 17"
+    at: facility
+- IGNORED duplicate "Lane swim, 11:30 am to 2:30 pm, cancelled"
+    date text: "Monday, November 17"
+    dates: 2025-11-17 Mon
+    time: "11:30 am to 2:30 pm" 11:30-14:30 covers [Monday 11:30am - 1:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 11:30 am to 2:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public swim - therapeutic pool, 11:30 am to 2:30 pm, cancelled"
+    date text: "Monday, November 17"
+    dates: 2025-11-17 Mon
+    time: "11:30 am to 2:30 pm" 11:30-14:30 within [Monday 11:30am - 3:30pm]
+    match: EXACT
+    phrase: "Public swim - therapeutic pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Public swim - therapeutic pool, 11:30 am to 2:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public swim - 25m pool, 1 to 2:30 pm, cancelled"
+    date text: "Monday, November 17"
+    dates: 2025-11-17 Mon
+    time: "1 to 2:30 pm" 13:00-14:30 exact [Monday 1:00 - 2:30pm]
+    match: EXACT
+    phrase: "Public swim - 25m pool"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Public swim - 25m pool, 1 to 2:30 pm, cancelled"
+    at: facility

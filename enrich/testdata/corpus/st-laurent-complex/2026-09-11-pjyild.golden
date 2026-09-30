@@ -1,0 +1,19 @@
+== St. Laurent Complex special_hours
+- IGNORED date-context "Tuesday, September 8 to Friday, September 11"
+    at: facility
+- NOTICE "The dance studio is closed. All group fitness drop-ins are cancelled."
+    date text: "Tuesday, September 8 to Friday, September 11"
+    dates: 2026-09-08 Tue to 2026-09-11 Fri
+    effects: closure
+    match: NONE
+    phrase: "dance studio"
+    amenity: "dance studio"
+    at: facility
+- NOTICE "The dance studio is closed. All group fitness drop-ins are cancelled."
+    date text: "Tuesday, September 8 to Friday, September 11"
+    dates: 2026-09-08 Tue to 2026-09-11 Fri
+    time: "" covers [Friday 6:00 - 7:00pm; Friday 9:00 - 9:55am; Thursday 5:00 - 5:55pm; Thursday 9:00 - 9:55am; Tuesday 5:00 - 5:55pm; Tuesday 6:00 - 7:00pm; Tuesday 9:00 - 9:55am; Wednesday 6:00 - 7:00pm; Wednesday 7:15 - 8:15pm; Wednesday 8:30 - 9:25am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness drop-ins"
+    at: group "Drop-in schedule - group fitness"

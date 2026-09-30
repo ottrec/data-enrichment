@@ -1,0 +1,31 @@
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Friday, November 21"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Aqua - general, 8:30 to 10:30, cancelled"
+    date text: "Friday, November 21"
+    dates: 2025-11-21 Fri
+    time: "8:30 to 10:30" 08:30-10:30 covers [Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Aqua - general"
+    candidates: "Aqua General - Deep" "Aqua General - Shallow"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Public swim, 8:30 to 10:30, added"
+    date text: "Friday, November 21"
+    dates: 2025-11-21 Fri
+    time: "8:30 to 10:30" 08:30-10:30 novel
+    effects: added
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-ambiguous
+    at: group "Drop-in schedule - swim and aquafit" activity "Public Swim *Reservations not required." sessions 2025-11-21 Fri 08:30-10:30 added
+
+== Pinecrest Recreation Complex special_hours
+- NOTICE "The sauna is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "sauna"
+    amenity: "sauna"
+    at: facility

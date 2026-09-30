@@ -1,0 +1,17 @@
+== Canterbury Recreation Complex special_hours
+- IGNORED date-context "Monday, October 20"
+    at: facility
+- NOTICE "The Canterbury Community Center will be closed until further notice due to a water outage."
+    date text: "Monday, October 20"
+    dates: 2025-10-20 Mon; open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "canterbury community center"
+    at: facility
+- IGNORED heading "Note"
+    section: "Note"
+    at: facility
+- UNPARSED freeform "Construction will be taking place along the east and north access to the parking lot."
+    section: "Note"
+    phrase: "Construction will be taking place along the east and north access to the parking lot"
+    at: facility

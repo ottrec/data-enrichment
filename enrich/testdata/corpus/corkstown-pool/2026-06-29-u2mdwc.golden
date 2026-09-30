@@ -1,0 +1,7 @@
+== Corkstown Pool special_hours
+- IGNORED heading "Regular season"
+    section: "Regular season"
+    at: facility
+- IGNORED date-context "June 29 to August 23"
+    section: "Regular season"
+    at: facility

@@ -1,0 +1,127 @@
+== W. Erskine Johnston Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Tuesday, December 30"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 11:30 am to 12:20 pm, cancelled"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "11:30 am to 12:20 pm" 11:30-12:20 exact [Tuesday 11:30am - 12:20pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-30 Tue 11:30-12:20
+- IGNORED date-context "Friday, December 26"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 11:30 am to 6 pm, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "11:30 am to 6 pm" 11:30-18:00 covers [Friday 11:30am - 12:20pm; Friday 4:00 - 5:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-26 Fri 11:30-12:20, 2025-12-26 Fri 16:00-17:50
+
+== W. Erskine Johnston Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Tuesday, December 30"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Pick-up hockey 35+, 9:30 to 10:20 am, cancelled"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "9:30 to 10:20 am" 09:30-10:20 exact [Tuesday 9:30 - 10:20am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pick-up hockey 35+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Pick-up hockey 35+" sessions 2025-12-30 Tue 09:30-10:20
+- NOTICE "Pick-up hockey 50+, 10:30 to 11:20 am, cancelled"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "10:30 to 11:20 am" 10:30-11:20 exact [Tuesday 10:30 - 11:20am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pick-up hockey 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Pick-up hockey 50+" sessions 2025-12-30 Tue 10:30-11:20
+- IGNORED date-context "Friday, December 26"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Pick-up hockey 50+, 9:30 to 11:20 am, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "9:30 to 11:20 am" 09:30-11:20 exact [Friday 9:30 - 11:20am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pick-up hockey 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Pick-up hockey 50+" sessions 2025-12-26 Fri 09:30-11:20
+- NOTICE "Stick and puck - youth and adult, 12:30 to 1:20 pm, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "12:30 to 1:20 pm" 12:30-13:20 exact [Friday 12:30 - 1:20pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Stick and puck - youth and adult"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Stick and puck - youth and adult" sessions 2025-12-26 Fri 12:30-13:20
+
+== W. Erskine Johnston Arena special_hours
+- IGNORED date-context "Tuesday, December 30"
+    at: facility
+- IGNORED duplicate "Pick-up hockey 35+, 9:30 to 10:20 am, cancelled"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "9:30 to 10:20 am" 09:30-10:20 exact [Tuesday 9:30 - 10:20am]
+    match: EXACT
+    phrase: "Pick-up hockey 35+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Pick-up hockey 35+, 9:30 to 10:20 am, cancelled"
+    at: facility
+- IGNORED duplicate "Pick-up hockey 50+, 10:30 to 11:20 am, cancelled"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "10:30 to 11:20 am" 10:30-11:20 exact [Tuesday 10:30 - 11:20am]
+    match: EXACT
+    phrase: "Pick-up hockey 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Pick-up hockey 50+, 10:30 to 11:20 am, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 11:30 am to 12:20 pm, cancelled"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "11:30 am to 12:20 pm" 11:30-12:20 exact [Tuesday 11:30am - 12:20pm]
+    match: EXACT
+    phrase: "Public skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 11:30 am to 12:20 pm, cancelled"
+    at: facility
+- IGNORED date-context "Friday, December 26"
+    at: facility
+- IGNORED duplicate "Pick-up hockey 50+, 9:30 to 11:20 am, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "9:30 to 11:20 am" 09:30-11:20 exact [Friday 9:30 - 11:20am]
+    match: EXACT
+    phrase: "Pick-up hockey 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Pick-up hockey 50+, 9:30 to 11:20 am, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 11:30 am to 6 pm, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "11:30 am to 6 pm" 11:30-18:00 covers [Friday 11:30am - 12:20pm; Friday 4:00 - 5:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 11:30 am to 6 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Stick and puck - youth and adult, 12:30 to 1:20 pm, cancelled"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "12:30 to 1:20 pm" 12:30-13:20 exact [Friday 12:30 - 1:20pm]
+    match: EXACT
+    phrase: "Stick and puck - youth and adult"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Stick and puck - youth and adult, 12:30 to 1:20 pm, cancelled"
+    at: facility

@@ -1,0 +1,22 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== South Fallingbrook Community Centre special_hours
+- NOTICE "Saturday, October 10, 8:30 am to 4 pm"
+    date text: "Saturday, October 10"
+    dates: 2026-10-10 Sat
+    time: "8:30 am to 4 pm" 08:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, October 11 and Monday, October 12, closed"
+    date text: "Sunday, October 11 and Monday, October 12"
+    dates: 2026-10-11 Sun 2026-10-12 Mon
+    effects: closure
+    at: facility

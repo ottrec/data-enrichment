@@ -1,0 +1,21 @@
+== Fred Barrett Arena special_hours
+- IGNORED date-context "Saturday, December 27"
+    at: facility
+- NOTICE "Family skate, 1 to 1:50 pm, added"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "1 to 1:50 pm" 13:00-13:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-27 Sat 13:00-13:50 added
+- NOTICE "Public skate, 2 to 2:50 pm, added"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "2 to 2:50 pm" 14:00-14:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-27 Sat 14:00-14:50 added

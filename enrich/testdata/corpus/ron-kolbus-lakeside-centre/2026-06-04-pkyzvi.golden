@@ -1,0 +1,6 @@
+== Ron Kolbus Lakeside Centre special_hours
+- IGNORED boilerplate "Please contact the facility by phone or email for information on opening hours and washroom availability."
+    at: facility
+- UNPARSED freeform "Main patio washrooms are open 9 am to 7 pm."
+    phrase: "Main patio washrooms are open"
+    at: facility

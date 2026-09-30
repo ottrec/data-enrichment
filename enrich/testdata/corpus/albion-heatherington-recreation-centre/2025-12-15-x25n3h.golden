@@ -1,0 +1,58 @@
+== Albion-Heatherington Recreation Centre special_hours
+- NOTICE "December 20, 3:30 pm to 11 pm"
+    date text: "December 20"
+    dates: 2025-12-20 Sat
+    time: "3:30 pm to 11 pm" 15:30-23:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 21, 9 am to 3 pm"
+    date text: "December 21"
+    dates: 2025-12-21 Sun
+    time: "9 am to 3 pm" 09:00-15:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 22 to 24, 9 am to 8 pm"
+    date text: "December 22 to 24"
+    dates: 2025-12-22 Mon to 2025-12-24 Wed
+    time: "9 am to 8 pm" 09:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 25 to 27, closed"
+    date text: "December 25 to 27"
+    dates: 2025-12-25 Thu to 2025-12-27 Sat
+    effects: closure
+    at: facility
+- NOTICE "December 28, 9 am to 3 pm"
+    date text: "December 28"
+    dates: 2025-12-28 Sun
+    time: "9 am to 3 pm" 09:00-15:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 29 to 31, 9 am to 8 pm"
+    date text: "December 29 to 31"
+    dates: 2025-12-29 Mon to 2025-12-31 Wed
+    time: "9 am to 8 pm" 09:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "January 1, closed"
+    date text: "January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 2, 9 am to 10 pm"
+    date text: "January 2"
+    dates: 2026-01-02 Fri
+    time: "9 am to 10 pm" 09:00-22:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "January 3, Closed"
+    date text: "January 3"
+    dates: 2026-01-03 Sat
+    effects: closure
+    at: facility
+- NOTICE "January 4, 9 am to 3 pm"
+    date text: "January 4"
+    dates: 2026-01-04 Sun
+    time: "9 am to 3 pm" 09:00-15:00 unchecked
+    effects: modified-hours
+    at: facility

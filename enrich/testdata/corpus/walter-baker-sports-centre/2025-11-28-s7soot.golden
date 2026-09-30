@@ -1,0 +1,37 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Friday, December 5"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, December 5"
+    dates: 2025-12-05 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim" sessions 2025-12-05 Fri 19:30-21:00
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Friday, December 5"
+    at: facility
+- IGNORED duplicate "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, December 5"
+    dates: 2025-12-05 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 7:30 to 9 pm, cancelled"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Rock wall closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "rock wall"
+    amenity: "rock wall"
+    at: facility

@@ -1,0 +1,38 @@
+== Walter Baker Sports Centre special_hours
+- NOTICE "The main pool is closed today until 12:30 pm"
+    effects: closure
+    match: NONE
+    phrase: "main pool"
+    amenity: "main pool"
+    at: facility
+- NOTICE "Lane swim, 12:30 to 1 pm, and 8 to 9 pm."
+    time: "12:30 to 1 pm" 12:30-13:00 within [Friday 11:45am - 1:00pm; Monday 11:45am - 1:00pm; Saturday 12:00 - 1:00pm; Sunday 12:00 - 1:00pm; Thursday 11:30am - 1:00pm; Tuesday 11:30am - 1:00pm; Wednesday 11:45am - 1:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim"
+- NOTICE "Lane swim, 12:30 to 1 pm, and 8 to 9 pm."
+    time: "8 to 9 pm" 20:00-21:00 exact [Friday 7:30 - 9:00pm; Monday 8:00 - 9:00pm; Thursday 8:00 - 9:00pm; Tuesday 8:00 - 9:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim"
+- NOTICE "All Aquafit Lite and Aquafit - shallow, cancelled."
+    time: "" covers [Friday 10:45 - 11:45am; Friday 1:00 - 2:00pm; Friday 7:30 - 8:30am; Friday 8:30 - 9:30am; Monday 10:45 - 11:45am; Monday 1:00 - 2:00pm; Monday 7:30 - 8:30am; Monday 8:30 - 9:30am; Thursday 1:00 - 2:00pm; Thursday 9:30 - 10:30am; Tuesday 1:00 - 2:00pm; Tuesday 9:30 - 10:30am; Wednesday 10:45 - 11:45am; Wednesday 1:00 - 2:00pm; Wednesday 7:30 - 8:30am; Wednesday 8:30 - 9:30am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All Aquafit Lite and Aquafit - shallow"
+    at: group "Drop-in schedule - swim and aquafit" activity "Aquafit general - shallow"
+    at: group "Drop-in schedule - swim and aquafit" activity "Aquafit lite"
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Squash courts 3 and 4 are closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "squash courts 3 and 4"
+    amenity: "squash courts"
+    ambiguities: activity-narrowed-to-amenity
+    at: facility

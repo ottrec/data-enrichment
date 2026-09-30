@@ -1,0 +1,10 @@
+== Deborah Anne Kirwan Pool special_hours
+- IGNORED date-context "Monday, August 24 to Sunday, September 13"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    date text: "Monday, August 24 to Sunday, September 13"
+    dates: 2026-08-24 Mon to 2026-09-13 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

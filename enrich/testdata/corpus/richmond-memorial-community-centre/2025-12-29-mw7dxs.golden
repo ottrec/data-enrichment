@@ -1,0 +1,43 @@
+== Richmond Memorial Community Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Tuesday, December 30"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 11 to 11:50 am, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "11 to 11:50 am" 11:00-11:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-30 Tue 11:00-11:50 added
+- NOTICE "Public skating, noon to 12:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "noon to 12:50 pm" 12:00-12:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-30 Tue 12:00-12:50 added
+
+== Richmond Memorial Community Centre special_hours
+- IGNORED date-context "Tuesday, December 30"
+    at: facility
+- IGNORED duplicate "Family skate, 11 to 11:50 am, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "11 to 11:50 am" 11:00-11:50 novel
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 11 to 11:50 am, added"
+    at: facility
+- IGNORED duplicate "Public skate, Noon to 12:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "Noon to 12:50 pm" 12:00-12:50 novel
+    match: EXACT
+    phrase: "Public skate"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, noon to 12:50 pm, added"
+    at: facility

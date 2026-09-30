@@ -1,0 +1,38 @@
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, March 19"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating programs are cancelled."
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 1:00 - 1:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating programs"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, March 19"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in 18+ Pick-up hockey programs are cancelled."
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 12:00 - 12:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in 18+ Pick-up hockey programs"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "18+ Pick-up hockey" sessions 2026-03-19 Thu 12:00-12:50
+
+== Tony Graham Recreation Complex - Kanata special_hours
+- IGNORED date-context "Thursday, March 19"
+    at: facility
+- IGNORED duplicate "All drop-in skating programs are cancelled."
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 1:00 - 1:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating programs"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating programs are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in 18+ Pick-up hockey programs are cancelled."
+    at: facility

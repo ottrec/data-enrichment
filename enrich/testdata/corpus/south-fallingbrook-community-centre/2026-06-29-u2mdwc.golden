@@ -1,0 +1,16 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== South Fallingbrook Community Centre special_hours
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility

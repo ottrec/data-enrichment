@@ -1,0 +1,22 @@
+== Fred Barrett Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, March 8"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Sunday, March 8"
+    dates: 2026-03-08 Sun
+    time: "" covers [Sunday 1:00 - 1:50pm; Sunday 2:00 - 2:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, March 8"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Sunday, March 8"
+    dates: 2026-03-08 Sun
+    time: "" covers [Sunday 1:00 - 1:50pm; Sunday 2:00 - 2:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility

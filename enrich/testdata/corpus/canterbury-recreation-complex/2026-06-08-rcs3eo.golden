@@ -1,0 +1,7 @@
+== Canterbury Recreation Complex special_hours
+- NOTICE "The pool is closed for maintenance until further notice."
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

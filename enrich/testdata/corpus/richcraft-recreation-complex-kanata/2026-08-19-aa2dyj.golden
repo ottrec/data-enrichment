@@ -1,0 +1,26 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, August 29"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aqua Zumba, cancelled"
+    date text: "Saturday, August 29"
+    dates: 2026-08-29 Sat
+    time: "" covers [Saturday 4:00 - 5:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Aqua Zumba"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit Zumba®" sessions 2026-08-29 Sat 16:00-17:00
+- IGNORED date-context "Saturday, August 29"
+    at: facility
+- IGNORED duplicate "Aqua Zumba, cancelled"
+    date text: "Saturday, August 29"
+    dates: 2026-08-29 Sat
+    time: "" covers [Saturday 4:00 - 5:00pm]
+    match: NORMALIZED
+    phrase: "Aqua Zumba"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aqua Zumba, cancelled"
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

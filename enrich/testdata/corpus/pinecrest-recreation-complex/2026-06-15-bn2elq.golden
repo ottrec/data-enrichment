@@ -1,0 +1,39 @@
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Pinecrest Recreation Complex special_hours
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "Monday, June 7 to Sunday, June 28"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Closure"
+    date text: "Monday, June 7 to Sunday, June 28"
+    dates: 2026-06-07 Sun to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    ambiguities: weekday-mismatch
+    at: facility

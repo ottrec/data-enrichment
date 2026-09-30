@@ -1,0 +1,92 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - weight and cardio room"
+- NOTICE "Friday, April 3, the facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, April 4, 7:15 am to 9 pm"
+    date text: "Saturday, April 4"
+    dates: 2026-04-04 Sat
+    time: "7:15 am to 9 pm" 07:15-21:00 unchecked
+    ambiguities: possible-activity-time
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Sunday, April 5, the facility is closed and all programs cancelled."
+    date text: "Sunday, April 5"
+    dates: 2026-04-05 Sun
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Monday, April 6, 7 am to 4 pm"
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    ambiguities: possible-activity-time
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- NOTICE "Friday, April 3 to Monday, April 6, see Easter schedule."
+    date text: "Friday, April 3 to Monday, April 6"
+    dates: 2026-04-03 Fri to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- NOTICE "Friday, April 3 to Monday, April 6, see Easter schedule."
+    date text: "Friday, April 3 to Monday, April 6"
+    dates: 2026-04-03 Fri to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - skating"
+- NOTICE "Friday, April 3 to Monday, April 6, all programs cancelled."
+    date text: "Friday, April 3 to Monday, April 6"
+    dates: 2026-04-03 Fri to 2026-04-06 Mon
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "all programs"
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- NOTICE "March 23 to April 12, the pool is closed for maintenance."
+    date text: "March 23 to April 12"
+    dates: 2026-03-23 Mon to 2026-04-12 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED heading "Easter weekend hours"
+    section: "Easter weekend hours"
+    at: facility
+- NOTICE "Friday, April 3, closed"
+    section: "Easter weekend hours"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: closure
+    at: facility
+- NOTICE "Saturday, April 4, 7:15 am to 9 pm"
+    section: "Easter weekend hours"
+    date text: "Saturday, April 4"
+    dates: 2026-04-04 Sat
+    time: "7:15 am to 9 pm" 07:15-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, April 5, closed"
+    section: "Easter weekend hours"
+    date text: "Sunday, April 5"
+    dates: 2026-04-05 Sun
+    effects: closure
+    at: facility
+- NOTICE "Monday, April 6, 7 am to 4 pm"
+    section: "Easter weekend hours"
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,17 @@
+== General Burns Pool special_hours
+- NOTICE "Regular season, June 25 to August 31"
+    date text: "June 25 to August 31"
+    dates: 2026-06-25 Thu to 2026-08-31 Mon
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Facility is closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

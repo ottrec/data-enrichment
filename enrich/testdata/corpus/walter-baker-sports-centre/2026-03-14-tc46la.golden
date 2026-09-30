@@ -1,0 +1,84 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "The pool, hot tub and steam room are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "pool hot tub and steam room"
+    amenity: "pool hot tub steam room"
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Friday, March 20"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "All drop-in public skating, cancelled"
+    section: "Schedule changes"
+    date text: "Friday, March 20"
+    dates: 2026-03-20 Fri
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in public skating"
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, March 22"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "All drop-in public skating, cancelled"
+    section: "Schedule changes"
+    date text: "Sunday, March 22"
+    dates: 2026-03-22 Sun
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in public skating"
+    at: group "Drop-in schedule - skating"
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- NOTICE "May 11 to June 28"
+    section: "Pool closure"
+    date text: "May 11 to June 28"
+    dates: 2026-05-11 Mon to 2026-06-28 Sun
+    effects: closure
+    at: facility

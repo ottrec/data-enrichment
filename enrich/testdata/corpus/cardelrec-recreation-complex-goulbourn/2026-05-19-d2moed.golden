@@ -1,0 +1,28 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Tuesday, May 19"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The Groove Method®, 10:15 to 11:15 am, cancelled"
+    date text: "Tuesday, May 19"
+    dates: 2026-05-19 Tue
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Tuesday 10:15 - 11:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "The Groove Method®"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "The Groove Method®" sessions 2026-05-19 Tue 10:15-11:15
+- IGNORED date-context "Tuesday, May 19"
+    at: facility
+- IGNORED duplicate "The Groove Method®, 10:15 to 11:15 am, cancelled"
+    date text: "Tuesday, May 19"
+    dates: 2026-05-19 Tue
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Tuesday 10:15 - 11:15am]
+    match: EXACT
+    phrase: "The Groove Method®"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "The Groove Method®, 10:15 to 11:15 am, cancelled"
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

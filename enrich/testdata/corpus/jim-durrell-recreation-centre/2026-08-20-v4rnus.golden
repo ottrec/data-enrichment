@@ -1,0 +1,135 @@
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Tuesday, September 15"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating and ice sports, cancelled"
+    date text: "Tuesday, September 15"
+    dates: 2026-09-15 Tue
+    time: "" covers [Tuesday 11:00 - 11:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, December 10"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating and ice sports, cancelled"
+    date text: "Thursday, December 10"
+    dates: 2026-12-10 Thu
+    time: "" covers [Thursday 11:00 - 11:50pm; Thursday 12:00 - 12:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, August 27"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Thursday, August 27"
+    dates: 2026-08-27 Thu
+    time: "" covers [Thursday 3:00 - 3:50pm; Thursday 3:15 - 4:05pm; Thursday 4:15 - 5:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Tuesday, September 15"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in skating and ice sports, cancelled"
+    date text: "Tuesday, September 15"
+    dates: 2026-09-15 Tue
+    time: "" covers [Tuesday 12:00 - 12:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, December 10"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in skating and ice sports, cancelled"
+    date text: "Thursday, December 10"
+    dates: 2026-12-10 Thu
+    time: "" covers [Thursday 3:15 - 4:05pm; Thursday 4:15 - 5:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Sunday, December 13"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Sunday, December 13"
+    dates: 2026-12-13 Sun
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, December 24"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Thursday, December 24"
+    dates: 2026-12-24 Thu
+    time: "" covers [Thursday 3:15 - 4:05pm; Thursday 4:15 - 5:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, August 27"
+    at: facility
+- IGNORED duplicate "All drop-in ice sports, cancelled"
+    date text: "Thursday, August 27"
+    dates: 2026-08-27 Thu
+    time: "" covers [Thursday 3:00 - 3:50pm; Thursday 3:15 - 4:05pm; Thursday 4:15 - 5:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility
+- IGNORED date-context "Tuesday, September 15"
+    at: facility
+- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+    date text: "Tuesday, September 15"
+    dates: 2026-09-15 Tue
+    time: "" covers [Tuesday 11:00 - 11:50pm; Tuesday 12:00 - 12:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating and ice sports, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in skating and ice sports, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, December 10"
+    at: facility
+- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+    date text: "Thursday, December 10"
+    dates: 2026-12-10 Thu
+    time: "" covers [Thursday 11:00 - 11:50pm; Thursday 12:00 - 12:50pm; Thursday 3:15 - 4:05pm; Thursday 4:15 - 5:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating and ice sports, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in skating and ice sports, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, December 13"
+    at: facility
+- IGNORED duplicate "All drop-in ice sports, cancelled"
+    date text: "Sunday, December 13"
+    dates: 2026-12-13 Sun
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, December 24"
+    at: facility
+- IGNORED duplicate "All drop-in ice sports, cancelled"
+    date text: "Thursday, December 24"
+    dates: 2026-12-24 Thu
+    time: "" covers [Thursday 3:15 - 4:05pm; Thursday 4:15 - 5:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility
+
+== Jim Durrell Recreation Centre notifications
+- UNPARSED freeform "Please be advised that our parking lot will be under construction. Expect delays, limited parking availability, and changes to traffic flow while work is underway."
+    phrase: "Please be advised that our parking lot will be under construction"
+    at: facility

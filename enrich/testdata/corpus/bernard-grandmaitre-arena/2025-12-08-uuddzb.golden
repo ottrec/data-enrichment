@@ -1,0 +1,41 @@
+== Bernard Grandmaître Arena special_hours
+- IGNORED date-context "Tuesday, December 30"
+    at: facility
+- NOTICE "Family Skate, 3 to 3:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "3 to 3:50 pm" 15:00-15:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family Skate"
+    ambiguities: date-outside-schedule meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-30 Tue 15:00-15:50 added
+- NOTICE "Public Skate, 4 to 4:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "4 to 4:50 pm" 16:00-16:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: date-outside-schedule meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-30 Tue 16:00-16:50 added
+- IGNORED date-context "Friday, January 2"
+    at: facility
+- NOTICE "Family Skate, 10 to 10:50 am, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "10 to 10:50 am" 10:00-10:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family Skate"
+    ambiguities: date-outside-schedule meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-01-02 Fri 10:00-10:50 added
+- NOTICE "Public Skate, 11 to 11:50 am, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "11 to 11:50 am" 11:00-11:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: date-outside-schedule meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-02 Fri 11:00-11:50 added

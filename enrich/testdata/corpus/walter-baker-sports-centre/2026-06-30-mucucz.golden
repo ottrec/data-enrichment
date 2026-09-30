@@ -1,0 +1,54 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - squash"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Tuesday, June 30"
+    at: facility
+- NOTICE "The whale pool is closed."
+    date text: "Tuesday, June 30"
+    dates: 2026-06-30 Tue
+    effects: closure
+    match: NONE
+    phrase: "whale pool"
+    amenity: "whale pool"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Wednesday, July 1, closed"
+    section: "Modified hours"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility

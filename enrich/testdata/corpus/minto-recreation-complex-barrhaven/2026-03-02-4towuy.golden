@@ -1,0 +1,12 @@
+== Minto Recreation Complex - Barrhaven special_hours
+- NOTICE "The pool is closed from Monday, March 23 to Sunday, April 12."
+    date text: "from Monday, March 23 to Sunday, April 12"
+    dates: 2026-03-23 Mon to 2026-04-12 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

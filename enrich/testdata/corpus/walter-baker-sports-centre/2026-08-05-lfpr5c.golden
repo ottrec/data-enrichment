@@ -1,0 +1,7 @@
+== Walter Baker Sports Centre special_hours
+- NOTICE "The pool lift is out of order until further notice."
+    dates: open-ended
+    match: NONE
+    phrase: "The pool lift is out of order until further notice"
+    amenity: "pool"
+    at: facility

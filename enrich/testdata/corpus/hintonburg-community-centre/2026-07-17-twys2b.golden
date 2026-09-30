@@ -1,0 +1,10 @@
+== Hintonburg Community Centre special_hours
+- NOTICE "Monday, August 3, closed"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: closure
+    at: facility
+
+== Hintonburg Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

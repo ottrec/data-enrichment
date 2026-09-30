@@ -1,0 +1,8 @@
+== Terry Fox Athletic Facility special_hours
+- NOTICE "Mooney's Bay Cross Country Ski Centre is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "mooney's bay cross country ski centre"
+    amenity: "mooney's bay cross country ski centre"
+    at: facility

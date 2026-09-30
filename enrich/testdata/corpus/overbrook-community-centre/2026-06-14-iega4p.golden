@@ -1,0 +1,9 @@
+== Overbrook Community Centre special_hours
+- IGNORED date-context "Saturday, June 20 to Saturday, August 29"
+    at: facility
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Saturday, June 20 to Saturday, August 29"
+    dates: 2026-06-20 Sat to 2026-08-29 Sat
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: facility

@@ -1,0 +1,56 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Thursday, December 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Aquafit general - deep, 8:30 to 9:30 am, cancelled"
+    date text: "Thursday, December 4"
+    dates: 2025-12-04 Thu
+    time: "8:30 to 9:30 am" 08:30-09:30 exact [Thursday 8:30 - 9:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit general - deep"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Aquafit general - deep" sessions 2025-12-04 Thu 08:30-09:30
+- NOTICE "Aquafit lite, 9:30 to 10:30 am, cancelled"
+    date text: "Thursday, December 4"
+    dates: 2025-12-04 Thu
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Thursday 9:30 - 10:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit lite"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Aquafit lite" sessions 2025-12-04 Thu 09:30-10:30
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Thursday, December 4"
+    at: facility
+- IGNORED duplicate "Aquafit general - deep, 8:30 to 9:30 am, cancelled"
+    date text: "Thursday, December 4"
+    dates: 2025-12-04 Thu
+    time: "8:30 to 9:30 am" 08:30-09:30 exact [Thursday 8:30 - 9:30am]
+    match: EXACT
+    phrase: "Aquafit general - deep"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Aquafit general - deep, 8:30 to 9:30 am, cancelled"
+    at: facility
+- IGNORED duplicate "Aquafit lite, 9:30 to 10:30 am, cancelled"
+    date text: "Thursday, December 4"
+    dates: 2025-12-04 Thu
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Thursday 9:30 - 10:30am]
+    match: EXACT
+    phrase: "Aquafit lite"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Aquafit lite, 9:30 to 10:30 am, cancelled"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Rock wall closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "rock wall"
+    amenity: "rock wall"
+    at: facility

@@ -1,0 +1,28 @@
+== Entrance Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swimming"
+
+== Entrance Pool special_hours
+- NOTICE "Regular season, June 29 to August 16"
+    date text: "June 29 to August 16"
+    dates: 2026-06-29 Mon to 2026-08-16 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday, August 3, 11 am to 4 pm"
+    section: "Civic Holiday"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "11 am to 4 pm" 11:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

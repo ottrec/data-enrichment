@@ -1,0 +1,7 @@
+== St. Laurent Complex special_hours
+- NOTICE "The pool's wheelchair ramp is currently unavailable. We apologize for the inconvenience."
+    effects: closure
+    match: NONE
+    phrase: "pool's wheelchair ramp is currently"
+    ambiguities: activity-unmatched
+    at: facility

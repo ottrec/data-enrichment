@@ -1,0 +1,10 @@
+== Diane Deans Greenboro Community Centre special_hours
+- IGNORED date-context "Thursday, November 20"
+    at: facility
+- NOTICE "The facility is closed until noon for maintenance."
+    date text: "Thursday, November 20"
+    dates: 2025-11-20 Thu
+    time: "closed until noon" 00:00-12:00 open-start unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

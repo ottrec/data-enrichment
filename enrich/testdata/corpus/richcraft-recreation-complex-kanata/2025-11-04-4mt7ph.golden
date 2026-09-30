@@ -1,0 +1,22 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, November 15"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "The pool is closed."
+    date text: "Saturday, November 15"
+    dates: 2025-11-15 Sat
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    sources: schedule_changes special_hours
+    at: facility
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Saturday, November 15"
+    at: facility
+- IGNORED duplicate "The pool is closed."
+    date text: "Saturday, November 15"
+    dates: 2025-11-15 Sat
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "The pool is closed."
+    at: facility

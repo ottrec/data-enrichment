@@ -1,0 +1,17 @@
+== Tom Brown Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Monday, March 16 to Friday, March 20"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Friday, March 20"
+    dates: 2026-03-16 Mon to 2026-03-20 Fri
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Monday, March 16 to Friday, March 20"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Friday, March 20"
+    dates: 2026-03-16 Mon to 2026-03-20 Fri
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"

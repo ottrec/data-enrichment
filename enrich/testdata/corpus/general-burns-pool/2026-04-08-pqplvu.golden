@@ -1,0 +1,15 @@
+== General Burns Pool special_hours
+- NOTICE "Pre-season, June 8 to 24"
+    date text: "June 8 to 24"
+    dates: 2026-06-08 Mon to 2026-06-24 Wed
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Pre-season"
+    at: facility
+- NOTICE "Regular season, June 25 to August 31"
+    date text: "June 25 to August 31"
+    dates: 2026-06-25 Thu to 2026-08-31 Mon
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

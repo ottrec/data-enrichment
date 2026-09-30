@@ -1,0 +1,7 @@
+== Glebe Community Centre special_hours
+- NOTICE "The elevator is out of service until further notice."
+    dates: open-ended
+    match: NONE
+    phrase: "The elevator is out of service until further notice"
+    amenity: "elevator"
+    at: facility

@@ -1,0 +1,94 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 30"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aqua Zumba®, 7 to 8 pm, cancelled"
+    date text: "Saturday, May 30"
+    dates: 2026-05-30 Sat
+    time: "7 to 8 pm" 19:00-20:00 exact [Saturday 7:00 - 8:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Aqua Zumba®"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit Zumba®" sessions 2026-05-30 Sat 19:00-20:00
+- NOTICE "Aquafit, 7 to 8 pm, added"
+    date text: "Saturday, May 30"
+    dates: 2026-05-30 Sat
+    time: "7 to 8 pm" 19:00-20:00 exact [Saturday 7:00 - 8:00pm]
+    effects: added
+    match: MULTIPLE
+    phrase: "Aquafit"
+    candidates: "Aquafit - Deep" "Aquafit - Shallow" "Aquafit Zumba®"
+    ambiguities: activity-multiple-candidates added-time-already-scheduled meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Friday, May 29"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba® Gold, 9:30 to 10:30 am, cancelled"
+    date text: "Friday, May 29"
+    dates: 2026-05-29 Fri
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Friday 9:30 - 10:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba® Gold"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba® Gold" sessions 2026-05-29 Fri 09:30-10:30
+- NOTICE "Zumba® Gold, 10:30 to 11:30 am, added"
+    date text: "Friday, May 29"
+    dates: 2026-05-29 Fri
+    time: "10:30 to 11:30 am" 10:30-11:30 novel
+    effects: added
+    match: EXACT
+    phrase: "Zumba® Gold"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba® Gold" sessions 2026-05-29 Fri 10:30-11:30 added
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Friday, May 29"
+    at: facility
+- IGNORED duplicate "Zumba® Gold, 9:30 to 10:30 am, cancelled"
+    date text: "Friday, May 29"
+    dates: 2026-05-29 Fri
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Friday 9:30 - 10:30am]
+    match: EXACT
+    phrase: "Zumba® Gold"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba® Gold, 9:30 to 10:30 am, cancelled"
+    at: facility
+- IGNORED duplicate "Zumba® Gold, 10:30 to 11:30 am, added"
+    date text: "Friday, May 29"
+    dates: 2026-05-29 Fri
+    time: "10:30 to 11:30 am" 10:30-11:30 novel
+    match: EXACT
+    phrase: "Zumba® Gold"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba® Gold, 10:30 to 11:30 am, added"
+    at: facility
+- IGNORED date-context "Saturday, May 30"
+    at: facility
+- IGNORED duplicate "Aqua Zumba®, 7 to 8 pm, cancelled"
+    date text: "Saturday, May 30"
+    dates: 2026-05-30 Sat
+    time: "7 to 8 pm" 19:00-20:00 exact [Saturday 7:00 - 8:00pm]
+    match: NORMALIZED
+    phrase: "Aqua Zumba®"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aqua Zumba®, 7 to 8 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Aquafit, 7 to 8 pm, added"
+    date text: "Saturday, May 30"
+    dates: 2026-05-30 Sat
+    time: "7 to 8 pm" 19:00-20:00 exact [Saturday 7:00 - 8:00pm]
+    match: MULTIPLE
+    phrase: "Aquafit"
+    ambiguities: activity-multiple-candidates added-time-already-scheduled meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit, 7 to 8 pm, added"
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

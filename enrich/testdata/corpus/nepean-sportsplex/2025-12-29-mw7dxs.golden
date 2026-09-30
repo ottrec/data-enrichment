@@ -1,0 +1,56 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Monday, December 22 to Sunday, January 4, see the Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - weight and cardio room"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All skating programs cancelled."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skating programs"
+    at: group "Drop-in schedule - skating"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - curling"
+- NOTICE "Monday, December 22 to Sunday, January 4. see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - curling"
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

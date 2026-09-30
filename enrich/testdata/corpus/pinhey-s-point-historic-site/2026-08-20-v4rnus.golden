@@ -1,0 +1,41 @@
+== Pinhey's Point Historic Site special_hours
+- IGNORED heading "July 25 to August 30"
+    section: "July 25 to August 30"
+    at: facility
+- NOTICE "Monday and Tuesday: Closed"
+    section: "July 25 to August 30"
+    date text: "Monday and Tuesday"
+    dates: weekdays Mon Tue
+    effects: closure
+    at: facility
+- NOTICE "Wednesday - Sunday: 10 am to 5 pm"
+    section: "July 25 to August 30"
+    date text: "Wednesday - Sunday"
+    dates: weekdays Wed Thu Fri Sat Sun
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "September 5 to October 11"
+    section: "September 5 to October 11"
+    at: facility
+- NOTICE "Monday - Friday: Closed"
+    section: "September 5 to October 11"
+    date text: "Monday - Friday"
+    dates: weekdays Mon Tue Wed Thu Fri
+    effects: closure
+    at: facility
+- NOTICE "Saturday and Sunday - 10 am to 5 pm"
+    section: "September 5 to October 11"
+    date text: "Saturday and Sunday"
+    dates: weekdays Sat Sun
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "The park grounds remain open to visitors year-round."
+    section: "September 5 to October 11"
+    date text: "September 5 to October 11"
+    dates: 2026-09-05 Sat to 2026-10-11 Sun
+    match: NONE
+    phrase: "The park grounds remain open to visitors year-round"
+    ambiguities: freeform-item
+    at: facility

@@ -1,0 +1,72 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Thursday, April 9"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Public swim, 1 to 2 pm, cancelled"
+    date text: "Thursday, April 9"
+    dates: 2026-04-09 Thu
+    time: "1 to 2 pm" 13:00-14:00 exact [Thursday 1:00 - 2:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Public swim" sessions 2026-04-09 Thu 13:00-14:00
+
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, April 11"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Open gym - family, 10:30 am to 12:30 pm, cancelled"
+    date text: "Saturday, April 11"
+    dates: 2026-04-11 Sat
+    time: "10:30 am to 12:30 pm" 10:30-12:30 exact [Saturday 10:30am - 12:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Open gym - family"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Open gym - family" sessions 2026-04-11 Sat 10:30-12:30
+- NOTICE "Basketball, 12:30 to 2:30 pm, cancelled"
+    date text: "Saturday, April 11"
+    dates: 2026-04-11 Sat
+    time: "12:30 to 2:30 pm" 12:30-14:30 exact [Saturday 12:30 - 2:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Basketball"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Basketball" sessions 2026-04-11 Sat 12:30-14:30
+
+== Lowertown Community Centre and Pool special_hours
+- IGNORED date-context "Thursday, April 9"
+    at: facility
+- IGNORED duplicate "Public swim, 1 to 2 pm, cancelled"
+    date text: "Thursday, April 9"
+    dates: 2026-04-09 Thu
+    time: "1 to 2 pm" 13:00-14:00 exact [Thursday 1:00 - 2:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Public swim, 1 to 2 pm, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, April 11"
+    at: facility
+- IGNORED duplicate "Open gym - family, 10:30 am to 12:30 pm, cancelled"
+    date text: "Saturday, April 11"
+    dates: 2026-04-11 Sat
+    time: "10:30 am to 12:30 pm" 10:30-12:30 exact [Saturday 10:30am - 12:30pm]
+    match: EXACT
+    phrase: "Open gym - family"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Open gym - family, 10:30 am to 12:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Basketball, 12:30 to 2:30 pm, cancelled"
+    date text: "Saturday, April 11"
+    dates: 2026-04-11 Sat
+    time: "12:30 to 2:30 pm" 12:30-14:30 exact [Saturday 12:30 - 2:30pm]
+    match: EXACT
+    phrase: "Basketball"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Basketball, 12:30 to 2:30 pm, cancelled"
+    at: facility
+
+== Lowertown Community Centre and Pool notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

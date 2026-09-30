@@ -1,0 +1,21 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Wednesday , November 26"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 8:30 am to 1 pm, moved to short course shallow end"
+    date text: "Wednesday , November 26"
+    dates: 2025-11-26 Wed
+    time: "8:30 am to 1 pm" 08:30-13:00 exact [Wednesday 8:30am - 1:00pm]
+    effects: restriction "moved to short course shallow end"
+    match: FUZZY
+    phrase: "Lane swim"
+    ambiguities: activity-time-disambiguated
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim - 50m long course" sessions 2025-11-26 Wed 08:30-13:00
+
+== Nepean Sportsplex special_hours
+- UNPARSED freeform "November pool changes"
+    phrase: "November pool changes"
+    at: facility
+- NOTICE "See Drop-in schedule."
+    effects: see-schedule "Drop-in schedule" "https://ottawa.ca/en/recreation-and-parks/facilities/place-listing/nepean-sportsplex/nepean-sportsplex-drop-schedule-swim-and-aquafit"
+    match: SCOPE_PHRASE
+    at: facility

@@ -1,0 +1,25 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"

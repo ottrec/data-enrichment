@@ -1,0 +1,74 @@
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Thursday, August 13"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility will close at 7 pm."
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "will close at 7 pm." 19:00-24:00 open-end unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7 to 9 pm, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "7 to 9 pm" 19:00-21:00 exact [Thursday 7:00 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-08-13 Thu 19:00-21:00
+- IGNORED date-context "Until August 21"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane Swim, daily 11:30 am to 1:30 pm, will have shared space"
+    date text: "Until August 21"
+    dates: to 2026-08-21 Fri
+    time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 11:30am - 1:30pm; Monday 11:30am - 1:30pm; Saturday 11:30am - 1:30pm; Sunday 11:30am - 1:30pm; Thursday 11:30am - 1:30pm; Tuesday 11:30am - 1:30pm; Wednesday 11:30am - 1:30pm]
+    match: FUZZY
+    phrase: "Lane Swim, daily will have shared space"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim"
+
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Thursday, August 13"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility will close at 7 pm."
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "will close at 7 pm." 19:00-24:00 open-end unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness"
+
+== Sawmill Creek Community Centre and Pool special_hours
+- IGNORED date-context "Thursday, August 13"
+    at: facility
+- IGNORED duplicate "The facility will close at 7 pm."
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "will close at 7 pm." 19:00-24:00 open-end unchecked
+    match: SCOPE_PHRASE
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The facility will close at 7 pm."
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "The facility will close at 7 pm."
+    at: facility
+- IGNORED duplicate "Lane swim, 7 to 9 pm, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "7 to 9 pm" 19:00-21:00 exact [Thursday 7:00 - 9:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 7 to 9 pm, cancelled"
+    at: facility
+- IGNORED date-context "Until August 21"
+    at: facility
+- IGNORED duplicate "Lane Swim, daily 11:30 am to 1:30 pm, will have shared space"
+    date text: "Until August 21"
+    dates: to 2026-08-21 Fri
+    time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 11:30am - 1:30pm; Monday 11:30am - 1:30pm; Saturday 11:30am - 1:30pm; Sunday 11:30am - 1:30pm; Thursday 11:30am - 1:30pm; Tuesday 11:30am - 1:30pm; Wednesday 11:30am - 1:30pm]
+    match: FUZZY
+    phrase: "Lane Swim, daily will have shared space"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane Swim, daily 11:30 am to 1:30 pm, will have shared space"
+    at: facility

@@ -1,0 +1,101 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Civic Holiday schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness drop-ins are cancelled."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    time: "" covers [Monday 3:00 - 4:00pm; Monday 4:15 - 5:15pm; Monday 5:30 - 6:30pm; Monday 6:15 - 7:15pm; Monday 6:45 - 7:45pm; Monday 7:30 - 8:30pm; Monday 8:00 - 9:00pm; Monday 9:30 - 10:30am; Saturday 10:45 - 11:45am; Saturday 9:30 - 10:30am; Sunday 10:15 - 11:15am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness drop-ins"
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Thursday, August 6"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "TRX, 1 to 2 pm, cancelled"
+    date text: "Thursday, August 6"
+    dates: 2026-08-06 Thu
+    time: "1 to 2 pm" 13:00-14:00 exact [Thursday 1:00 - 2:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "TRX"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "TRX" sessions 2026-08-06 Thu 13:00-14:00
+- NOTICE "Strength, 1 to 2 pm, added"
+    date text: "Thursday, August 6"
+    dates: 2026-08-06 Thu
+    time: "1 to 2 pm" 13:00-14:00 novel
+    effects: added
+    match: EXACT
+    phrase: "Strength"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Strength" sessions 2026-08-06 Thu 13:00-14:00 added
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Richcraft Recreation Complex-Kanata special_hours
+- NOTICE "Saturday, August 1 to Monday, August 3, 10 am to 4 pm"
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Thursday, August 6"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "TRX, 1 to 2 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Thursday, August 6"
+    dates: 2026-08-06 Thu
+    time: "1 to 2 pm" 13:00-14:00 exact [Thursday 1:00 - 2:00pm]
+    match: EXACT
+    phrase: "TRX"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "TRX, 1 to 2 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Strength, 1 to 2 pm, added"
+    section: "Schedule changes"
+    date text: "Thursday, August 6"
+    dates: 2026-08-06 Thu
+    time: "1 to 2 pm" 13:00-14:00 novel
+    match: EXACT
+    phrase: "Strength"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Strength, 1 to 2 pm, added"
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,6 @@
+== Beaverbrook Pool - Kanata special_hours
+- NOTICE "Closed for the season."
+    dates: open-ended
+    effects: closure, seasonal-hours
+    match: SCOPE_PHRASE
+    at: facility

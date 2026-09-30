@@ -1,0 +1,9 @@
+== Splash Wave Pool special_hours
+- UNPARSED freeform "The air heater at our facility is not working. The building may feel colder than usual."
+    phrase: "The air heater at our facility is not working"
+    at: facility
+- NOTICE "The lap pool heater is out of order, the water will feel colder."
+    match: NONE
+    phrase: "The lap pool heater is out of order, the water will feel colder"
+    amenity: "lap pool"
+    at: facility

@@ -1,0 +1,118 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - group fitness"
+- NOTICE "September 14 to October 5, all indoor cycling cancelled."
+    date text: "September 14 to October 5"
+    dates: 2026-09-14 Mon to 2026-10-05 Mon
+    time: "" covers [Friday 8:30 - 9:25am; Monday 8:30 - 9:25am; Thursday 6:30 - 7:25am; Tuesday 6:30 - 7:25am; Wednesday 8:30 - 9:25am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "all indoor cycling"
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Reservations required" sessions 2026-09-14 Mon 08:30-09:25, 2026-09-15 Tue 06:30-07:25, 2026-09-16 Wed 08:30-09:25, 2026-09-17 Thu 06:30-07:25, 2026-09-18 Fri 08:30-09:25, 2026-09-21 Mon 08:30-09:25, 2026-09-22 Tue 06:30-07:25, 2026-09-23 Wed 08:30-09:25, 2026-09-24 Thu 06:30-07:25, 2026-09-25 Fri 08:30-09:25, 2026-09-28 Mon 08:30-09:25, 2026-09-29 Tue 06:30-07:25, 2026-09-30 Wed 08:30-09:25, 2026-10-01 Thu 06:30-07:25, 2026-10-02 Fri 08:30-09:25, 2026-10-05 Mon 08:30-09:25
+
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, September 18"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, September 18"
+    dates: 2026-09-18 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-09-18 Fri 19:15-20:05
+- IGNORED date-context "Sunday, September 20"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 1 to 1:50 pm, cancelled"
+    date text: "Sunday, September 20"
+    dates: 2026-09-20 Sun
+    time: "1 to 1:50 pm" 13:00-13:50 exact [Sunday 1:00 - 1:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-09-20 Sun 13:00-13:50
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- NOTICE "Squash court 3 is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "squash court 3"
+    amenity: "squash court"
+    ambiguities: activity-narrowed-to-amenity activity-typo-match
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Monday, August 24 to Monday, September 14"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Schedule changes"
+    date text: "Monday, August 24 to Monday, September 14"
+    dates: 2026-08-24 Mon to 2026-09-14 Mon
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED date-context "Until September 15"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "Roger Sénécal Arena is closed for annual maintenance."
+    section: "Schedule changes"
+    date text: "Until September 15"
+    dates: to 2026-09-15 Tue
+    effects: closure
+    match: NONE
+    phrase: "roger sénécal arena"
+    amenity: "roger sénécal arena"
+    at: facility
+- IGNORED date-context "September 14 to October 5"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "Squash and racquetball courts are closed and all drop-ins cancelled."
+    section: "Schedule changes"
+    date text: "September 14 to October 5"
+    dates: 2026-09-14 Mon to 2026-10-05 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    phrase: "squash and racquetball courts"
+    amenity: "squash and racquetball courts"
+    at: group "Drop-in schedule - squash and racquetball"
+- NOTICE "Indoor cycling, all drop-ins cancelled."
+    section: "Schedule changes"
+    date text: "September 14 to October 5"
+    dates: 2026-09-14 Mon to 2026-10-05 Mon
+    time: "" covers [Friday 8:30 - 9:25am; Monday 8:30 - 9:25am; Thursday 6:30 - 7:25am; Tuesday 6:30 - 7:25am; Wednesday 8:30 - 9:25am]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Indoor cycling, all drop-ins"
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Reservations required" sessions 2026-09-14 Mon 08:30-09:25, 2026-09-15 Tue 06:30-07:25, 2026-09-16 Wed 08:30-09:25, 2026-09-17 Thu 06:30-07:25, 2026-09-18 Fri 08:30-09:25, 2026-09-21 Mon 08:30-09:25, 2026-09-22 Tue 06:30-07:25, 2026-09-23 Wed 08:30-09:25, 2026-09-24 Thu 06:30-07:25, 2026-09-25 Fri 08:30-09:25, 2026-09-28 Mon 08:30-09:25, 2026-09-29 Tue 06:30-07:25, 2026-09-30 Wed 08:30-09:25, 2026-10-01 Thu 06:30-07:25, 2026-10-02 Fri 08:30-09:25, 2026-10-05 Mon 08:30-09:25
+- IGNORED date-context "Friday, September 18"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Public skating, 7:15 to 8:05 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Friday, September 18"
+    dates: 2026-09-18 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 7:15 to 8:05 pm, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, September 20"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Public skating, 1 to 1:50 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Sunday, September 20"
+    dates: 2026-09-20 Sun
+    time: "1 to 1:50 pm" 13:00-13:50 exact [Sunday 1:00 - 1:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 1 to 1:50 pm, cancelled"
+    at: facility

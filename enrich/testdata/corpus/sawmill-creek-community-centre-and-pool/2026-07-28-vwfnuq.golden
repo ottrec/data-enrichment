@@ -1,0 +1,42 @@
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- NOTICE "Monday, July 27 to Friday, July 31, between 9 am and 4 pm"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "9 am and 4 pm" 09:00-16:00 unchecked
+    match: NONE
+    phrase: "between"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "Lane swim, 11:30 am to 1:30 pm, cancelled"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 11:30am - 1:30pm; Monday 11:30am - 1:30pm; Thursday 11:30am - 1:30pm; Tuesday 11:30am - 1:30pm; Wednesday 11:30am - 1:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-27 Mon 11:30-13:30, 2026-07-28 Tue 11:30-13:30, 2026-07-29 Wed 11:30-13:30, 2026-07-30 Thu 11:30-13:30, 2026-07-31 Fri 11:30-13:30
+- NOTICE "Lane swim, 11:30 am to noon, added"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "11:30 am to noon" 11:30-12:00 within [Friday 11:30am - 1:30pm; Monday 11:30am - 1:30pm; Thursday 11:30am - 1:30pm; Tuesday 11:30am - 1:30pm; Wednesday 11:30am - 1:30pm]
+    effects: added
+    match: EXACT
+    phrase: "Lane swim"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-27 Mon 11:30-12:00 added, 2026-07-28 Tue 11:30-12:00 added, 2026-07-29 Wed 11:30-12:00 added, 2026-07-30 Thu 11:30-12:00 added, 2026-07-31 Fri 11:30-12:00 added
+
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Sawmill Creek Community Centre and Pool special_hours
+- NOTICE "Monday, August 3, closed"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: closure
+    at: facility

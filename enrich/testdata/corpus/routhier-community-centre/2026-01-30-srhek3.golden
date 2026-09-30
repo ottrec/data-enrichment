@@ -1,0 +1,24 @@
+== Routhier Community Centre schedule_changes "Drop-in schedule - racquet sports"
+- IGNORED date-context "Monday, February 16 (Family Day)"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, February 16 (Family Day)"
+    dates: 2026-02-16 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - racquet sports"
+- IGNORED date-context "Monday, February 16 (Family Day)"
+    at: group "Drop-in schedule - sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, February 16 (Family Day)"
+    dates: 2026-02-16 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - sports"
+
+== Routhier Community Centre special_hours
+- NOTICE "Monday, February 16, closed"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: closure
+    at: facility

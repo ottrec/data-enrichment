@@ -1,0 +1,110 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, August 8"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    date text: "Saturday, August 8"
+    dates: 2026-08-08 Sat
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Saturday 9:15 - 10:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling" sessions 2026-08-08 Sat 09:15-10:15
+- IGNORED date-context "Saturday, August 15"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Saturday 9:15 - 10:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling" sessions 2026-08-15 Sat 09:15-10:15
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- NOTICE "Monday August 3, 7 am to 4 pm"
+    date text: "Monday August 3"
+    dates: 2026-08-03 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Saturday, August 8"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    section: "Schedule changes"
+    date text: "Saturday, August 8"
+    dates: 2026-08-08 Sat
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Saturday 9:15 - 10:15am]
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, August 15"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    section: "Schedule changes"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Saturday 9:15 - 10:15am]
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

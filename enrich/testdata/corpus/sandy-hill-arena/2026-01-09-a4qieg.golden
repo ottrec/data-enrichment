@@ -1,0 +1,10 @@
+== Sandy Hill Arena special_hours
+- NOTICE "Saturday, January 10 - All skating and ice sports are cancelled."
+    date text: "Saturday, January 10"
+    dates: 2026-01-10 Sat
+    time: "" covers [Saturday 10:00 - 10:50pm; Saturday 8:00 - 8:50pm; Saturday 9:00 - 9:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "- All skating and ice sports"
+    at: group "Drop-in schedule - skating"
+    at: group "Drop-in schedule - ice sports"

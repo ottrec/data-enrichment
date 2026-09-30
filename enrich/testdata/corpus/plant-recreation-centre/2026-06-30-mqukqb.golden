@@ -1,0 +1,68 @@
+== Plant Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The pool is closed and all drop-ins cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    amenity: "pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Plant Recreation Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The weight and cardio room is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    phrase: "weight and cardio room"
+    amenity: "weight and cardio room"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Plant Recreation Centre schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All drop-ins cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-ins"
+    at: group "Drop-in schedule - group fitness"
+
+== Plant Recreation Centre special_hours
+- IGNORED heading "Wednesday, July 1"
+    section: "Wednesday, July 1"
+    at: facility
+- NOTICE "Emergency cooling centre will be open from 10 am to 5 pm."
+    section: "Wednesday, July 1"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    match: NONE
+    phrase: "Emergency cooling centre will be open from"
+    ambiguities: freeform-item
+    at: facility
+- IGNORED duplicate "The pool and gymnasium are closed and all programs cancelled."
+    section: "Wednesday, July 1"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    match: SCOPE_PHRASE
+    phrase: "pool and gymnasium"
+    amenity: "pool and gymnasium"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The pool is closed and all drop-ins cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - weight and cardio room" "The weight and cardio room is closed and all programs cancelled."
+    at: facility
+- NOTICE "Residents are encouraged to stay cool at home using the Beat the Heat tips from Ottawa Public Health."
+    section: "Wednesday, July 1"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    match: NONE
+    phrase: "Residents are encouraged to stay cool at home using the Beat the Heat tips from Ottawa Public Health"
+    ambiguities: freeform-item
+    at: facility

@@ -1,0 +1,93 @@
+== Richmond Memorial Community Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, December 25"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 5 to 5:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "5 to 5:50 pm" 17:00-17:50 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating"
+
+== Richmond Memorial Community Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, December 25"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Stick and puck (youth and adult), 3 to 3:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Thursday 3:00 - 3:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Stick and puck (youth and adult)"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Stick and puck (youth and adult)" sessions 2025-12-25 Thu 15:00-15:50
+- NOTICE "Child hockey (6 to 12 years), 4 to 4:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "4 to 4:50 pm" 16:00-16:50 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Child hockey (6 to 12 years)"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Child hockey (6 to 12 years)"
+
+== Richmond Memorial Community Centre special_hours
+- IGNORED date-context "Thursday, December 25"
+    at: facility
+- IGNORED duplicate "Stick and puck (youth and adult), 3 to 3:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Thursday 3:00 - 3:50pm]
+    match: EXACT
+    phrase: "Stick and puck (youth and adult)"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Stick and puck (youth and adult), 3 to 3:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Child hockey (6 to 12 years), 4 to 4:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "4 to 4:50 pm" 16:00-16:50 none
+    match: EXACT
+    phrase: "Child hockey (6 to 12 years)"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Child hockey (6 to 12 years), 4 to 4:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 5 to 5:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "5 to 5:50 pm" 17:00-17:50 none
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 5 to 5:50 pm, cancelled"
+    at: facility
+- IGNORED heading "Holiday skates"
+    section: "Holiday skates"
+    at: facility
+- IGNORED date-context "Tuesday, December 30"
+    section: "Holiday skates"
+    at: facility
+- NOTICE "Family Skate, 11 to 11:50 am, added"
+    section: "Holiday skates"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "11 to 11:50 am" 11:00-11:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-30 Tue 11:00-11:50 added
+- NOTICE "Public Skate, Noon to 12:50 pm, added"
+    section: "Holiday skates"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "Noon to 12:50 pm" 12:00-12:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-30 Tue 12:00-12:50 added

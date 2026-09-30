@@ -1,0 +1,23 @@
+== Ray Friel Recreation Complex special_hours
+- IGNORED date-context "Sunday, April 12"
+    at: facility
+- NOTICE "Public skating, 5 to 6:50 pm, cancelled"
+    date text: "Sunday, April 12"
+    dates: 2026-04-12 Sun
+    time: "5 to 6:50 pm" 17:00-18:50 exact [Sunday 5:00 - 6:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public Skating" sessions 2026-04-12 Sun 17:00-18:50
+- IGNORED heading "Notice"
+    section: "Notice"
+    at: facility
+- NOTICE "The diving board is closed until further notice."
+    section: "Notice"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility

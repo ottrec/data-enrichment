@@ -1,0 +1,41 @@
+== Manotick Community Centre and Mike O'Neil Arena special_hours
+- IGNORED date-context "Sunday, December 28"
+    at: facility
+- NOTICE "Family Skate, 4 to 4:50 pm, added"
+    date text: "Sunday, December 28"
+    dates: 2025-12-28 Sun
+    time: "4 to 4:50 pm" 16:00-16:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-28 Sun 16:00-16:50 added
+- NOTICE "Public Skate, 5 to 5:50 pm, added"
+    date text: "Sunday, December 28"
+    dates: 2025-12-28 Sun
+    time: "5 to 5:50 pm" 17:00-17:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-28 Sun 17:00-17:50 added
+- IGNORED date-context "Friday, January 2"
+    at: facility
+- NOTICE "Family Skate, 1 to 1:50 pm, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "1 to 1:50 pm" 13:00-13:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-01-02 Fri 13:00-13:50 added
+- NOTICE "Public Skate, 2 to 2:50 pm, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "2 to 2:50 pm" 14:00-14:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-02 Fri 14:00-14:50 added

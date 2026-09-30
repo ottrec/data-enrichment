@@ -1,0 +1,36 @@
+== Tony Graham Recreation Complex - Kanata special_hours
+- IGNORED date-context "Monday, March 30 to Monday, April 6"
+    at: facility
+- NOTICE "All drop-in skating and ice sport programs are cancelled."
+    date text: "Monday, March 30 to Monday, April 6"
+    dates: 2026-03-30 Mon to 2026-04-06 Mon
+    time: "" covers [Friday 7:15 - 8:05pm; Sunday 12:15 - 1:05pm; Sunday 1:15 - 2:05pm; Thursday 1:00 - 1:50pm; Tuesday 1:15 - 2:05pm; Wednesday 1:00 - 1:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sport programs"
+    at: group "Drop-in schedule - skating"
+- IGNORED service-desk "Customer Service is closed."
+    date text: "Monday, March 30 to Monday, April 6"
+    at: facility
+- IGNORED heading "Easter weekend hours"
+    section: "Easter weekend hours"
+    at: facility
+- NOTICE "Friday, April 3, closed"
+    section: "Easter weekend hours"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: closure
+    at: facility
+- NOTICE "Saturday, April 4, 9 am to 8 pm"
+    section: "Easter weekend hours"
+    date text: "Saturday, April 4"
+    dates: 2026-04-04 Sat
+    time: "9 am to 8 pm" 09:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, April 5 and Monday, April 6, closed"
+    section: "Easter weekend hours"
+    date text: "Sunday, April 5 and Monday, April 6"
+    dates: 2026-04-05 Sun 2026-04-06 Mon
+    effects: closure
+    at: facility

@@ -1,0 +1,49 @@
+== Howard Darwin Centennial Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Friday, January 30"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Figure skating, 8 to 8:50 pm, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "8 to 8:50 pm" 20:00-20:50 exact [Friday 8:00 - 8:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Figure skating" sessions 2026-01-30 Fri 20:00-20:50
+
+== Howard Darwin Centennial Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, January 30"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 7 to 7:50 pm, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Friday 7:00 - 7:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-01-30 Fri 19:00-19:50
+
+== Howard Darwin Centennial Arena special_hours
+- IGNORED date-context "Friday, January 30"
+    at: facility
+- IGNORED duplicate "Figure skating, 8 to 8:50 pm, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "8 to 8:50 pm" 20:00-20:50 exact [Friday 8:00 - 8:50pm]
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Figure skating, 8 to 8:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Family skating, 7 to 7:50 pm, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Friday 7:00 - 7:50pm]
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 7 to 7:50 pm, cancelled"
+    at: facility

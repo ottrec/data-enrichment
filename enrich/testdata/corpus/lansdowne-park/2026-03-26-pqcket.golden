@@ -1,0 +1,6 @@
+== Lansdowne Park special_hours
+- NOTICE "The Great Lawn and the sledding hill at Lansdowne Park are closed due to construction."
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "great lawn and the sledding hill at lansdowne park"
+    at: facility

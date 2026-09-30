@@ -1,0 +1,25 @@
+== Genest Pool schedule_changes "Drop-in schedule - Swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - Swim and aquafitness"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Swim and aquafitness"
+
+== Genest Pool special_hours
+- NOTICE "Pre-season, June 8 to 28"
+    date text: "June 8 to 28"
+    dates: 2026-06-08 Mon to 2026-06-28 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Pre-season"
+    at: facility
+- NOTICE "Regular season, June 29 to August 30"
+    date text: "June 29 to August 30"
+    dates: 2026-06-29 Mon to 2026-08-30 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

@@ -1,0 +1,18 @@
+== Splash Wave Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Splash Wave Pool special_hours
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- NOTICE "Closed"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: closure
+    at: facility

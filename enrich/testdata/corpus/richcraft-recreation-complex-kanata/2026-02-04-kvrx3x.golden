@@ -1,0 +1,151 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, February 7"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane Swim, 12:30 to 1:30 pm, cancelled"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    time: "12:30 to 1:30 pm" 12:30-13:30 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane Swim"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim*Reservations not required."
+- NOTICE "Public Swim, 1:30 to 4 pm, cancelled"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    time: "1:30 to 4 pm" 13:30-16:00 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim *Reservations not required."
+- NOTICE "Sauna, 12:30 to 4 pm, closed"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    time: "12:30 to 4 pm" 12:30-16:00 within [Saturday 8:30am - 7:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna *Reservations not required." sessions 2026-02-07 Sat 08:30-19:00
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Thursday, February 5"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Yoga, all drop-ins cancelled"
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    time: "" covers [Thursday 10:45 - 11:45am; Thursday 9:30 - 10:30am]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Yoga, all drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Yoga" sessions 2026-02-05 Thu 09:30-10:30, 2026-02-05 Thu 10:45-11:45
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Thursday, February 5"
+    at: facility
+- IGNORED duplicate "Yoga, all drop-ins cancelled"
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    time: "" covers [Thursday 10:45 - 11:45am; Thursday 9:30 - 10:30am]
+    match: NORMALIZED
+    phrase: "Yoga, all drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Yoga, all drop-ins cancelled"
+    at: facility
+- IGNORED date-context "Saturday, February 7"
+    at: facility
+- IGNORED duplicate "Lane Swim, 12:30 to 1:30 pm, cancelled"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    time: "12:30 to 1:30 pm" 12:30-13:30 none
+    match: EXACT
+    phrase: "Lane Swim"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane Swim, 12:30 to 1:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public Swim, 1:30 to 4 pm, cancelled"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    time: "1:30 to 4 pm" 13:30-16:00 none
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public Swim, 1:30 to 4 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Sauna, 12:30 to 4 pm, closed"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    time: "12:30 to 4 pm" 12:30-16:00 within [Saturday 8:30am - 7:00pm]
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Sauna, 12:30 to 4 pm, closed"
+    at: facility
+- IGNORED heading "Family Day weekend hours"
+    section: "Family Day weekend hours"
+    at: facility
+- NOTICE "Saturday, February 14, 8 am to 8 pm"
+    section: "Family Day weekend hours"
+    date text: "Saturday, February 14"
+    dates: 2026-02-14 Sat
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, February 15, 8 am to 8 pm"
+    section: "Family Day weekend hours"
+    date text: "Sunday, February 15"
+    dates: 2026-02-15 Sun
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, February 16, 10 am to 4 pm"
+    section: "Family Day weekend hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,11 @@
+== St. Laurent Complex special_hours
+- IGNORED date-context "June 2 to December 31"
+    at: facility
+- NOTICE "The pool and change rooms are closed."
+    date text: "June 2 to December 31"
+    dates: 2025-06-02 Mon to 2025-12-31 Wed
+    effects: closure
+    match: NONE
+    phrase: "pool and change rooms"
+    amenity: "pool change rooms"
+    at: facility

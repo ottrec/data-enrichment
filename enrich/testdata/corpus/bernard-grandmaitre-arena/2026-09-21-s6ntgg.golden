@@ -1,0 +1,115 @@
+== Bernard Grandmaître Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Saturday, November 21"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Saturday, November 21"
+    dates: 2026-11-21 Sat
+    time: "" covers [Saturday 3:00 - 3:50pm; Saturday 4:00 - 4:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, December 24"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Figure skating and hockey 35+, cancelled"
+    date text: "Thursday, December 24"
+    dates: 2026-12-24 Thu
+    time: "" covers [Thursday 4:00 - 4:50pm; Thursday 5:00 - 5:50pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Figure skating and hockey 35+"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Figure Skating (6+)" sessions 2026-12-24 Thu 16:00-16:50, 2026-12-24 Thu 17:00-17:50
+    at: group "Drop-in schedule - ice sports" activity "Hockey 35+" sessions 2026-12-24 Thu 16:00-16:50, 2026-12-24 Thu 17:00-17:50
+- IGNORED date-context "Saturday, December 26"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Saturday, December 26"
+    dates: 2026-12-26 Sat
+    time: "" covers [Saturday 3:00 - 3:50pm; Saturday 4:00 - 4:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, December 31"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Figure skating and hockey 35+, cancelled"
+    date text: "Thursday, December 31"
+    dates: 2026-12-31 Thu
+    time: "" covers [Thursday 4:00 - 4:50pm; Thursday 5:00 - 5:50pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Figure skating and hockey 35+"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Figure Skating (6+)" sessions 2026-12-31 Thu 16:00-16:50, 2026-12-31 Thu 17:00-17:50
+    at: group "Drop-in schedule - ice sports" activity "Hockey 35+" sessions 2026-12-31 Thu 16:00-16:50, 2026-12-31 Thu 17:00-17:50
+
+== Bernard Grandmaître Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, November 21"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Saturday, November 21"
+    dates: 2026-11-21 Sat
+    time: "" covers [Saturday 2:00 - 2:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, December 26"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Saturday, December 26"
+    dates: 2026-12-26 Sat
+    time: "" covers [Saturday 2:00 - 2:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Bernard Grandmaître Arena special_hours
+- IGNORED date-context "Saturday, November 21"
+    at: facility
+- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+    date text: "Saturday, November 21"
+    dates: 2026-11-21 Sat
+    time: "" covers [Saturday 2:00 - 2:50pm; Saturday 3:00 - 3:50pm; Saturday 4:00 - 4:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, December 24"
+    at: facility
+- IGNORED duplicate "Figure skating and hockey 35+, cancelled"
+    date text: "Thursday, December 24"
+    dates: 2026-12-24 Thu
+    time: "" covers [Thursday 4:00 - 4:50pm; Thursday 5:00 - 5:50pm]
+    match: FUZZY
+    phrase: "Figure skating and hockey 35+"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Figure skating and hockey 35+, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, December 26"
+    at: facility
+- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+    date text: "Saturday, December 26"
+    dates: 2026-12-26 Sat
+    time: "" covers [Saturday 2:00 - 2:50pm; Saturday 3:00 - 3:50pm; Saturday 4:00 - 4:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, December 31"
+    at: facility
+- IGNORED duplicate "Figure skating and hockey 35+, cancelled"
+    date text: "Thursday, December 31"
+    dates: 2026-12-31 Thu
+    time: "" covers [Thursday 4:00 - 4:50pm; Thursday 5:00 - 5:50pm]
+    match: FUZZY
+    phrase: "Figure skating and hockey 35+"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Figure skating and hockey 35+, cancelled"
+    at: facility

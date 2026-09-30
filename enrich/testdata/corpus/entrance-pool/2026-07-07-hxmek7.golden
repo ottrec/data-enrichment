@@ -1,0 +1,37 @@
+== Entrance Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Thursday, July 9"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Public swim, 6 to 7 pm, cancelled"
+    date text: "Thursday, July 9"
+    dates: 2026-07-09 Thu
+    time: "6 to 7 pm" 18:00-19:00 within [Thursday 1:30 - 7:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Public swim" sessions 2026-07-09 Thu 13:30-19:00
+
+== Entrance Pool special_hours
+- IGNORED date-context "Thursday, July 9"
+    at: facility
+- IGNORED duplicate "Public swim, 6 to 7 pm, cancelled"
+    date text: "Thursday, July 9"
+    dates: 2026-07-09 Thu
+    time: "6 to 7 pm" 18:00-19:00 within [Thursday 1:30 - 7:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Public swim, 6 to 7 pm, cancelled"
+    at: facility
+- IGNORED heading "Summer 2026"
+    section: "Summer 2026"
+    at: facility
+- NOTICE "Regular season, June 29 to August 16"
+    section: "Summer 2026"
+    date text: "June 29 to August 16"
+    dates: 2026-06-29 Mon to 2026-08-16 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

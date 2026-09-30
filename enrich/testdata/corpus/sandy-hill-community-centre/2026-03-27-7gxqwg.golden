@@ -1,0 +1,6 @@
+== Sandy Hill Community Centre special_hours
+- NOTICE "Friday, April 3 and Monday, April 6, closed"
+    date text: "Friday, April 3 and Monday, April 6"
+    dates: 2026-04-03 Fri 2026-04-06 Mon
+    effects: closure
+    at: facility

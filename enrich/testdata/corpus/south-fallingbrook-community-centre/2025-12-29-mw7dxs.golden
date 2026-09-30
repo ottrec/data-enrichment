@@ -1,0 +1,50 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== South Fallingbrook Community Centre special_hours
+- NOTICE "December 29, 8:30 am to 8 pm"
+    date text: "December 29"
+    dates: 2025-12-29 Mon
+    time: "8:30 am to 8 pm" 08:30-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 30, 8:30 am to 9 pm"
+    date text: "December 30"
+    dates: 2025-12-30 Tue
+    time: "8:30 am to 9 pm" 08:30-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Wednesday, December 31, 8:30 am to 5 pm"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "8:30 am to 5 pm" 08:30-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "Friday, January 2, 8:30 am to 9 pm"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "8:30 am to 9 pm" 08:30-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Saturday, January 3, 8:45 am to 4 pm"
+    date text: "Saturday, January 3"
+    dates: 2026-01-03 Sat
+    time: "8:45 am to 4 pm" 08:45-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, January 4, 8:45 am to 3 pm"
+    date text: "Sunday, January 4"
+    dates: 2026-01-04 Sun
+    time: "8:45 am to 3 pm" 08:45-15:00 unchecked
+    effects: modified-hours
+    at: facility

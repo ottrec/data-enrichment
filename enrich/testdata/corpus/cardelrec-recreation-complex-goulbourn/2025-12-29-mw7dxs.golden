@@ -1,0 +1,54 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Saturday, December 20 to Sunday, January 4 see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4 see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4 see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - gymnasium sports"
+- NOTICE "Saturday, December 20 to Sunday, January 4 see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - skating"
+- NOTICE "Saturday, December 20 to Sunday, January 4 see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "Wednesday, December 31, 7 am to 4 pm"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,24 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, August 8"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba, 10 to 10:55 am, cancelled"
+    date text: "Saturday, August 8"
+    dates: 2026-08-08 Sat
+    time: "10 to 10:55 am" 10:00-10:55 exact [Saturday 10:00 - 10:55am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2026-08-08 Sat 10:00-10:55
+- IGNORED date-context "Saturday, August 8"
+    at: facility
+- IGNORED duplicate "Zumba, 10 to 10:55 am, cancelled"
+    date text: "Saturday, August 8"
+    dates: 2026-08-08 Sat
+    time: "10 to 10:55 am" 10:00-10:55 exact [Saturday 10:00 - 10:55am]
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba, 10 to 10:55 am, cancelled"
+    at: facility

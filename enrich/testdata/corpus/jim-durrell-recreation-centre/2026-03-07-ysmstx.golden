@@ -1,0 +1,80 @@
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, March 15"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Sunday, March 15"
+    dates: 2026-03-15 Sun
+    time: "" covers [Sunday 3:15 - 4:05pm; Sunday 4:15 - 5:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, March 19"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 11:00 - 11:50am; Thursday 12:00 - 12:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Sunday, March 22"
+    dates: 2026-03-22 Sun
+    time: "" covers [Sunday 3:15 - 4:05pm; Sunday 4:15 - 5:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, March 19"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 3:15 - 4:05pm; Thursday 4:15 - 5:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+
+== Jim Durrell Recreation Centre special_hours
+- IGNORED date-context "Sunday, March 15"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Sunday, March 15"
+    dates: 2026-03-15 Sun
+    time: "" covers [Sunday 3:15 - 4:05pm; Sunday 4:15 - 5:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, March 19"
+    at: facility
+- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 11:00 - 11:50am; Thursday 12:00 - 12:50pm; Thursday 3:15 - 4:05pm; Thursday 4:15 - 5:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, March 22"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Sunday, March 22"
+    dates: 2026-03-22 Sun
+    time: "" covers [Sunday 3:15 - 4:05pm; Sunday 4:15 - 5:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility

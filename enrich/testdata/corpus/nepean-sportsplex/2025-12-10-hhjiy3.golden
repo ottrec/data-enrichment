@@ -1,0 +1,141 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Wednesday, December 10"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
+    date text: "Wednesday, December 10"
+    dates: 2025-12-10 Wed
+    time: "8:30 am to 1 pm" 08:30-13:00 unchecked
+    match: NONE
+    phrase: "Lane swim, changed to short course"
+    ambiguities: freeform-item
+    sources: schedule_changes special_hours
+    at: facility
+- NOTICE "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
+    date text: "Wednesday, December 10"
+    dates: 2025-12-10 Wed
+    time: "9 am to 1 pm" 09:00-13:00 unchecked
+    match: NONE
+    phrase: "Lane swim, changed to short course"
+    ambiguities: freeform-item
+    sources: schedule_changes special_hours
+    at: facility
+- NOTICE "Aquafit general, 8:30 to 9:30 am, moved to 25m warm pool"
+    date text: "Wednesday, December 10"
+    dates: 2025-12-10 Wed
+    time: "8:30 to 9:30 am" 08:30-09:30 exact [Wednesday 8:30 - 9:30am]
+    effects: restriction "moved to 25m warm pool"
+    match: NORMALIZED
+    phrase: "Aquafit general"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafit" activity "Aqua general" sessions 2025-12-10 Wed 08:30-09:30
+- IGNORED date-context "Saturday, December 13"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 11 am to 3 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "11 am to 3 pm" 11:00-15:00 exact [Saturday 11:00am - 3:00pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Lane swim"
+    ambiguities: activity-time-disambiguated
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim - 50m short course" sessions 2025-12-13 Sat 11:00-15:00
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - racquet sports"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - sports"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All programs cancelled."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All programs"
+    at: group "Drop-in schedule - skating"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - curling"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - curling"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - curling"
+
+== Nepean Sportsplex special_hours
+- IGNORED date-context "Wednesday, December 10"
+    at: facility
+- IGNORED duplicate "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
+    date text: "Wednesday, December 10"
+    dates: 2025-12-10 Wed
+    time: "8:30 am to 1 pm" 08:30-13:00 unchecked
+    match: NONE
+    phrase: "Lane swim, changed to short course"
+    ambiguities: freeform-item
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
+    at: facility
+- IGNORED duplicate "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
+    date text: "Wednesday, December 10"
+    dates: 2025-12-10 Wed
+    time: "9 am to 1 pm" 09:00-13:00 unchecked
+    match: NONE
+    phrase: "Lane swim, changed to short course"
+    ambiguities: freeform-item
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 8:30 am to 1 pm, changed to 9 am to 1 pm short course"
+    at: facility
+- NOTICE "Aquafit general, 8:30 to 9:30 am, moved to 25 m warm pool"
+    date text: "Wednesday, December 10"
+    dates: 2025-12-10 Wed
+    time: "8:30 to 9:30 am" 08:30-09:30 exact [Wednesday 8:30 - 9:30am]
+    effects: restriction "moved to 25 m warm pool"
+    match: NORMALIZED
+    phrase: "Aquafit general"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafit" activity "Aqua general" sessions 2025-12-10 Wed 08:30-09:30
+- IGNORED date-context "Saturday, December 13"
+    at: facility
+- IGNORED duplicate "Lane swim, 11 am to 3 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "11 am to 3 pm" 11:00-15:00 exact [Saturday 11:00am - 3:00pm]
+    match: FUZZY
+    phrase: "Lane swim"
+    ambiguities: activity-time-disambiguated
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 11 am to 3 pm, cancelled"
+    at: facility

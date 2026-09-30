@@ -1,0 +1,96 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Friday May 15"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Lane swim, 6:30 - 7:30 am, cancelled"
+    date text: "Friday May 15"
+    dates: 2026-05-15 Fri
+    time: "6:30 - 7:30 am" 06:30-07:30 within [Friday 6:30 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Lane swim" sessions 2026-05-15 Fri 06:30-10:00
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swimming"
+- IGNORED date-context "Friday May 22"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Lane swim, 6:30 - 7:30 am, cancelled"
+    date text: "Friday May 22"
+    dates: 2026-05-22 Fri
+    time: "6:30 - 7:30 am" 06:30-07:30 within [Friday 6:30 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Lane swim" sessions 2026-05-22 Fri 06:30-10:00
+
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Lowertown Community Centre and Pool special_hours
+- NOTICE "Saturday, May 16, 9 am to 8:30 pm"
+    date text: "Saturday, May 16"
+    dates: 2026-05-16 Sat
+    time: "9 am to 8:30 pm" 09:00-20:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, May 17, 9 am to 8:30 pm"
+    date text: "Sunday, May 17"
+    dates: 2026-05-17 Sun
+    time: "9 am to 8:30 pm" 09:00-20:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, May 18, 9 am to 4 pm"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    time: "9 am to 4 pm" 09:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Friday May 15"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Lane swim, 6:30 - 7:30 am, cancelled"
+    section: "Schedule changes"
+    date text: "Friday May 15"
+    dates: 2026-05-15 Fri
+    time: "6:30 - 7:30 am" 06:30-07:30 within [Friday 6:30 - 10:00am]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Lane swim, 6:30 - 7:30 am, cancelled"
+    at: facility
+- IGNORED date-context "Friday May 22"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Lane swim, 6:30 - 7:30 am, cancelled"
+    section: "Schedule changes"
+    date text: "Friday May 22"
+    dates: 2026-05-22 Fri
+    time: "6:30 - 7:30 am" 06:30-07:30 within [Friday 6:30 - 10:00am]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Lane swim, 6:30 - 7:30 am, cancelled"
+    at: facility
+
+== Lowertown Community Centre and Pool notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

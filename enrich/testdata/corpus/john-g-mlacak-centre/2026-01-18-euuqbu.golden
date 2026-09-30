@@ -1,0 +1,11 @@
+== John G. Mlacak Centre special_hours
+- IGNORED date-context "Saturday, January 17"
+    at: facility
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Saturday, January 17"
+    dates: 2026-01-17 Sat
+    time: "" covers [Saturday 6:00 - 6:50pm; Saturday 7:00 - 7:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    at: group "Drop-in schedule - skating"

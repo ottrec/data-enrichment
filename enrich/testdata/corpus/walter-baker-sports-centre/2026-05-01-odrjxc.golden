@@ -1,0 +1,72 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Friday, May 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "• Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, May 1"
+    dates: 2026-05-01 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "• Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-05-01 Fri 19:30-21:00
+- IGNORED heading "Closures"
+    section: "Closures"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Hot tub and steam room are closed until further notice."
+    section: "Closures"
+    dates: open-ended
+    time: "" covers [Friday 6:00 - 7:30pm; Saturday 1:00 - 4:00pm; Sunday 1:00 - 4:00pm; Wednesday 6:00 - 7:30pm]
+    effects: closure
+    match: EXACT
+    phrase: "hot tub and steam room"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Hot tub and steam room"
+- IGNORED date-context "Monday, May 11 to Sunday, June 28"
+    section: "Closures"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Closures"
+    date text: "Monday, May 11 to Sunday, June 28"
+    dates: 2026-05-11 Mon to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    sources: schedule_changes special_hours
+    at: facility
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Friday, May 1"
+    at: facility
+- IGNORED duplicate "• Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, May 1"
+    dates: 2026-05-01 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    match: EXACT
+    phrase: "• Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "• Lane swim, 7:30 to 9 pm, cancelled"
+    at: facility
+- IGNORED heading "Closures"
+    section: "Closures"
+    at: facility
+- IGNORED duplicate "The hot tub and steam room are closed until further notice."
+    section: "Closures"
+    dates: open-ended
+    time: "" covers [Friday 6:00 - 7:30pm; Saturday 1:00 - 4:00pm; Sunday 1:00 - 4:00pm; Wednesday 6:00 - 7:30pm]
+    match: EXACT
+    phrase: "hot tub and steam room"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Hot tub and steam room are closed until further notice."
+    at: facility
+- IGNORED date-context "Monday, May 11 to Sunday, June 28"
+    section: "Closures"
+    at: facility
+- IGNORED duplicate "The pool is closed for annual maintenance."
+    section: "Closures"
+    date text: "Monday, May 11 to Sunday, June 28"
+    dates: 2026-05-11 Mon to 2026-06-28 Sun
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The pool is closed for annual maintenance."
+    at: facility

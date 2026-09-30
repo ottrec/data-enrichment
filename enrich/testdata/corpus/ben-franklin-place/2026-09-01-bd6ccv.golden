@@ -1,0 +1,7 @@
+== Ben Franklin Place special_hours
+- NOTICE "The building, library and all services are open. Meridian Theatres @ Centrepointe remains closed for flood restoration."
+    effects: closure
+    match: NONE
+    phrase: "meridian theatres centrepointe remains"
+    ambiguities: activity-unmatched
+    at: facility

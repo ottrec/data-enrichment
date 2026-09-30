@@ -1,0 +1,17 @@
+== Katimavik Pool special_hours
+- NOTICE "Sunday, August 23, 5 to 6 pm"
+    date text: "Sunday, August 23"
+    dates: 2026-08-23 Sun
+    time: "5 to 6 pm" 17:00-18:00 unchecked
+    ambiguities: hours-context-unknown meridiem-inferred
+    at: facility
+- IGNORED supplementary "See Outdoor Pools for more information."
+    date text: "Sunday, August 23"
+    at: facility
+- NOTICE "Regular season ends August 23."
+    date text: "August 23"
+    dates: to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

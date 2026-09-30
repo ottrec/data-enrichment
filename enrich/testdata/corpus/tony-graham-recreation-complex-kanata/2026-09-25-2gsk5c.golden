@@ -1,0 +1,22 @@
+== Tony Graham Recreation Complex - Kanata special_hours
+- IGNORED date-context "Tuesday, October 13:"
+    at: facility
+- NOTICE "The arenas will open*"
+    date text: "Tuesday, October 13:"
+    dates: 2026-10-13 Tue
+    match: NONE
+    phrase: "The arenas will open*"
+    amenity: "arenas"
+    at: facility
+- NOTICE "The complex and Client Services remain closed."
+    date text: "Tuesday, October 13:"
+    dates: 2026-10-13 Tue
+    effects: closure
+    match: NONE
+    phrase: "complex and client services remain"
+    ambiguities: activity-unmatched
+    at: facility
+- NOTICE "*See the drop-in schedules for times and payment methods."
+    effects: see-schedule "drop-in schedule"
+    match: SCOPE_PHRASE
+    at: facility

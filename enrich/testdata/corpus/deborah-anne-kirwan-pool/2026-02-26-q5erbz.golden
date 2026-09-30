@@ -1,0 +1,8 @@
+== Deborah Anne Kirwan Pool special_hours
+- NOTICE "Slide pool closed for maintenance until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "slide pool"
+    amenity: "slide pool"
+    at: facility

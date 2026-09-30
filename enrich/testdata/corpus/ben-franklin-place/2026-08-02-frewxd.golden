@@ -1,0 +1,16 @@
+== Ben Franklin Place special_hours
+- NOTICE "Monday, August 3, closed"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Meridian Theatres @ Centrepointe will remain closed for continued recovery and restoration efforts"
+    section: "Closure"
+    effects: closure
+    match: NONE
+    phrase: "meridian theatres centrepointe will remain"
+    ambiguities: activity-unmatched
+    at: facility

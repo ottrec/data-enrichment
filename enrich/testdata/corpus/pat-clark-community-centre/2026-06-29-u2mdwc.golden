@@ -1,0 +1,6 @@
+== Pat Clark Community Centre special_hours
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility

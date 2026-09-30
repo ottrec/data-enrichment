@@ -1,0 +1,8 @@
+== Lansdowne Park special_hours
+- NOTICE "The Great Lawn and the sledding hill are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "great lawn and the sledding hill"
+    amenity: "great lawn sledding hill"
+    at: facility

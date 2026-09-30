@@ -1,0 +1,70 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 17"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane Swim, 11 am to 3 pm, cancelled"
+    date text: "Saturday, October 17"
+    dates: 2026-10-17 Sat
+    time: "11 am to 3 pm" 11:00-15:00 exact [Saturday 11:00am - 3:00pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Lane Swim"
+    ambiguities: activity-time-disambiguated
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - 50m short course" sessions 2026-10-17 Sat 11:00-15:00
+- NOTICE "Public Swim, 11 am to 12:30 pm, 25m pool only"
+    date text: "Saturday, October 17"
+    dates: 2026-10-17 Sat
+    time: "11 am to 12:30 pm" 11:00-12:30 exact [Saturday 11:00am - 12:30pm]
+    effects: restriction "25m pool only"
+    match: EXACT
+    phrase: "Public Swim"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-10-17 Sat 11:00-12:30
+- IGNORED date-context "Sunday, October 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 11 am to 3 pm, cancelled"
+    date text: "Sunday, October 18"
+    dates: 2026-10-18 Sun
+    time: "11 am to 3 pm" 11:00-15:00 exact [Sunday 11:00am - 3:00pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Lane swim"
+    ambiguities: activity-time-disambiguated
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - 50m short course" sessions 2026-10-18 Sun 11:00-15:00
+- NOTICE "Public Swim, 1 to 3 pm, 25m pool only"
+    date text: "Sunday, October 18"
+    dates: 2026-10-18 Sun
+    time: "1 to 3 pm" 13:00-15:00 exact [Sunday 1:00 - 3:00pm]
+    effects: restriction "25m pool only"
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-10-18 Sun 13:00-15:00
+- IGNORED date-context "Saturday, October 24"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Public Swim, 11 am to 12:30 pm, 25m pool only"
+    date text: "Saturday, October 24"
+    dates: 2026-10-24 Sat
+    time: "11 am to 12:30 pm" 11:00-12:30 exact [Saturday 11:00am - 12:30pm]
+    effects: restriction "25m pool only"
+    match: EXACT
+    phrase: "Public Swim"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-10-24 Sat 11:00-12:30
+- IGNORED date-context "Sunday, October 25"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Public Swim, 1 to 3 pm, 25m pool only"
+    date text: "Sunday, October 25"
+    dates: 2026-10-25 Sun
+    time: "1 to 3 pm" 13:00-15:00 exact [Sunday 1:00 - 3:00pm]
+    effects: restriction "25m pool only"
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-10-25 Sun 13:00-15:00
+
+== Nepean Sportsplex special_hours
+- NOTICE "The saunas are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "saunas"
+    amenity: "saunas"
+    at: facility

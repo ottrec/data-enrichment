@@ -1,0 +1,20 @@
+== Splash Wave Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Tuesday, December 16"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Public swim, 4:30 to 9 pm, cancelled"
+    date text: "Tuesday, December 16"
+    dates: 2025-12-16 Tue
+    time: "4:30 to 9 pm" 16:30-21:00 exact [Tuesday 4:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafit" activity "Public swim" sessions 2025-12-16 Tue 16:30-21:00
+- IGNORED date-context "Monday, December 22 to Friday, January 2"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/splash-wave-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"

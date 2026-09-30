@@ -1,0 +1,23 @@
+== Kanata Seniors Centre schedule_changes "Drop-in activities"
+- NOTICE "Friday, April 3, closed"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: closure
+    sources: schedule_changes special_hours
+    at: group "Drop-in activities"
+- NOTICE "Monday, April 6, closed"
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    effects: closure
+    sources: schedule_changes special_hours
+    at: group "Drop-in activities"
+- IGNORED duplicate "Friday, April 3, closed"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    duplicate of: schedule_changes "Drop-in activities" "Friday, April 3, closed"
+    at: facility
+- IGNORED duplicate "Monday, April 6, closed"
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    duplicate of: schedule_changes "Drop-in activities" "Monday, April 6, closed"
+    at: facility

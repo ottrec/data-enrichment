@@ -1,0 +1,106 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Thursday, February 5"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Pilates, 7:45 to 8:45 am, cancelled"
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    time: "7:45 to 8:45 am" 07:45-08:45 exact [Thursday 7:45 - 8:45am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pilates"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Pilates" sessions 2026-02-05 Thu 07:45-08:45
+- NOTICE "Indoor Cycling, 6:30 to 7:30 pm, cancelled"
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    time: "6:30 to 7:30 pm" 18:30-19:30 overlaps [Thursday 6:15 - 7:15pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor Cycling"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Requires reservations" sessions 2026-02-05 Thu 18:15-19:15
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, February 6 and Saturday, February 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All public skating drop-ins, cancelled"
+    date text: "Friday, February 6 and Saturday, February 7"
+    dates: 2026-02-06 Fri 2026-02-07 Sat
+    time: "" covers [Friday 6:15 - 7:05pm; Friday 7:15 - 8:05pm; Saturday 2:15 - 3:05pm; Saturday 3:15 - 4:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All public skating drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Thursday, February 5"
+    at: facility
+- IGNORED duplicate "Pilates, 7:45 to 8:45 am, cancelled"
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    time: "7:45 to 8:45 am" 07:45-08:45 exact [Thursday 7:45 - 8:45am]
+    match: EXACT
+    phrase: "Pilates"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Pilates, 7:45 to 8:45 am, cancelled"
+    at: facility
+- IGNORED duplicate "Indoor Cycling, 6:30 to 7:30 pm, cancelled"
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    time: "6:30 to 7:30 pm" 18:30-19:30 overlaps [Thursday 6:15 - 7:15pm]
+    match: EXACT
+    phrase: "Indoor Cycling"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Indoor Cycling, 6:30 to 7:30 pm, cancelled"
+    at: facility
+- IGNORED date-context "Friday, February 6 and Saturday, February 7"
+    at: facility
+- IGNORED duplicate "All public skating drop-ins, cancelled"
+    date text: "Friday, February 6 and Saturday, February 7"
+    dates: 2026-02-06 Fri 2026-02-07 Sat
+    time: "" covers [Friday 6:15 - 7:05pm; Friday 7:15 - 8:05pm; Saturday 2:15 - 3:05pm; Saturday 3:15 - 4:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All public skating drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All public skating drop-ins, cancelled"
+    at: facility
+- IGNORED heading "Family Day weekend hours"
+    section: "Family Day weekend hours"
+    at: facility
+- NOTICE "Saturday, February 14, 7:30 am to 4 pm"
+    section: "Family Day weekend hours"
+    date text: "Saturday, February 14"
+    dates: 2026-02-14 Sat
+    time: "7:30 am to 4 pm" 07:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, February 15, 7:30 am to 4 pm"
+    section: "Family Day weekend hours"
+    date text: "Sunday, February 15"
+    dates: 2026-02-15 Sun
+    time: "7:30 am to 4 pm" 07:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, February 16, 7 am to 4 pm"
+    section: "Family Day weekend hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

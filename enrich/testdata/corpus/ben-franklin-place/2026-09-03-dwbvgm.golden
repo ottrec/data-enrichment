@@ -1,0 +1,19 @@
+== Ben Franklin Place special_hours
+- NOTICE "The building, library and all services are open. Meridian Theatres @ Centrepointe remains closed for flood restoration."
+    effects: closure
+    match: NONE
+    phrase: "meridian theatres centrepointe remains"
+    ambiguities: activity-unmatched
+    at: facility
+- IGNORED heading "Labour Day"
+    section: "Labour Day"
+    at: facility
+- IGNORED date-context "Monday, September 7"
+    section: "Labour Day"
+    at: facility
+- NOTICE "Closed"
+    section: "Labour Day"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: closure
+    at: facility

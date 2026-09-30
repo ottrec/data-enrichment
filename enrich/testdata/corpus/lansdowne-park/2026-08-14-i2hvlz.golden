@@ -1,0 +1,32 @@
+== Lansdowne Park special_hours
+- IGNORED date-context "Thursday, August 20 to Monday, August 24"
+    at: facility
+- NOTICE "The basketball court is closed."
+    date text: "Thursday, August 20 to Monday, August 24"
+    dates: 2026-08-20 Thu to 2026-08-24 Mon
+    effects: closure
+    match: NONE
+    phrase: "basketball court"
+    amenity: "basketball court"
+    at: facility
+- IGNORED heading "Closures"
+    section: "Closures"
+    at: facility
+- NOTICE "Thursdays: The basketball court is closed at 9 pm."
+    section: "Closures"
+    date text: "Thursdays"
+    dates: weekdays Thu
+    time: "closed at 9 pm" 21:00-24:00 open-end unchecked
+    effects: closure
+    match: NONE
+    phrase: "basketball court"
+    amenity: "basketball court"
+    at: facility
+- NOTICE "The Great Lawn and the sledding hill are closed until further notice."
+    section: "Closures"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "great lawn and the sledding hill"
+    amenity: "great lawn sledding hill"
+    at: facility

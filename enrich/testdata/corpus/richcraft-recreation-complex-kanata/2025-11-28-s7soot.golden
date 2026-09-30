@@ -1,0 +1,95 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - racquet sports"
+- IGNORED date-context "Friday, November 28"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "Badminton doubles - adult, 11 am to noon, cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "11 am to noon" 11:00-12:00 exact [Friday 11:00am - 12:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Badminton doubles - adult"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - adult" sessions 2025-11-28 Fri 11:00-12:00
+- NOTICE "Badminton doubles - adult, noon to 1 pm, cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "noon to 1 pm" 12:00-13:00 exact [Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Badminton doubles - adult"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - adult" sessions 2025-11-28 Fri 12:00-13:00
+- NOTICE "Pickleball - rotations, 1:30 to 2:30 pm, cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "1:30 to 2:30 pm" 13:30-14:30 exact [Friday 1:30 - 2:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball - rotations"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports" activity "Pickleball - rotations" sessions 2025-11-28 Fri 13:30-14:30
+- NOTICE "Pickleball - rotations, 2:30-3:30 pm - cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "2:30-3:30 pm" 14:30-15:30 exact [Friday 2:30 - 3:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball - rotations -"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports" activity "Pickleball - rotations" sessions 2025-11-28 Fri 14:30-15:30
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Friday, November 28"
+    at: facility
+- NOTICE "Basketball, 11 am to noon, cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "11 am to noon" 11:00-12:00 exact [Friday 11:00am - 12:00pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Basketball"
+    at: group "Drop-in schedule - sports" activity "Basketball - adult" sessions 2025-11-28 Fri 11:00-12:00
+- NOTICE "Basketball, noon to 1 pm, cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "noon to 1 pm" 12:00-13:00 exact [Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Basketball"
+    at: group "Drop-in schedule - sports" activity "Basketball - adult" sessions 2025-11-28 Fri 12:00-13:00
+- IGNORED duplicate "Badminton doubles - adult, 11 am to noon, cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "11 am to noon" 11:00-12:00 exact [Friday 11:00am - 12:00pm]
+    match: EXACT
+    phrase: "Badminton doubles - adult"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "Badminton doubles - adult, 11 am to noon, cancelled"
+    at: facility
+- IGNORED duplicate "Badminton doubles - adult, noon to 1 pm, cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "noon to 1 pm" 12:00-13:00 exact [Friday 12:00 - 1:00pm]
+    match: EXACT
+    phrase: "Badminton doubles - adult"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "Badminton doubles - adult, noon to 1 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Pickleball - rotations, 1:30 to 2:30 pm, cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "1:30 to 2:30 pm" 13:30-14:30 exact [Friday 1:30 - 2:30pm]
+    match: EXACT
+    phrase: "Pickleball - rotations"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "Pickleball - rotations, 1:30 to 2:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Pickleball - rotations, 2:30-3:30 pm - cancelled"
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "2:30-3:30 pm" 14:30-15:30 exact [Friday 2:30 - 3:30pm]
+    match: EXACT
+    phrase: "Pickleball - rotations -"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "Pickleball - rotations, 2:30-3:30 pm - cancelled"
+    at: facility

@@ -1,0 +1,24 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Thursday, October 30"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "The pool is closed from 8 am to 4 pm."
+    date text: "Thursday, October 30"
+    dates: 2025-10-30 Thu
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    sources: schedule_changes special_hours
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Thursday, October 30"
+    at: facility
+- IGNORED duplicate "The pool is closed from 8 am to 4 pm."
+    date text: "Thursday, October 30"
+    dates: 2025-10-30 Thu
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "The pool is closed from 8 am to 4 pm."
+    at: facility

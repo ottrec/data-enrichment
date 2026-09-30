@@ -1,0 +1,6 @@
+== Pat Clark Community Centre special_hours
+- NOTICE "Saturday, February 14 to Monday, February 16, closed"
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: closure
+    at: facility

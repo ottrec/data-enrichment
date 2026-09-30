@@ -1,0 +1,42 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Ray Friel Recreation Complex special_hours
+- NOTICE "The diving board is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility

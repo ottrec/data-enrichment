@@ -1,0 +1,6 @@
+== Cumberland Heritage Village Museum special_hours
+- NOTICE "The museum is closed to daily visitors from mid-October through mid-May except for programs and special events, which are offered year-round."
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "museum"
+    at: facility

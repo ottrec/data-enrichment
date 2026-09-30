@@ -1,0 +1,148 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, December 22 to Friday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, December 22 to Friday, January 4"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Friday, January 4"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - group fitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - racquet sports"
+- IGNORED date-context "Friday, December 5"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "All pickleball drop-ins, cancelled"
+    date text: "Friday, December 5"
+    dates: 2025-12-05 Fri
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 3:00 - 4:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All pickleball drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports" activity "Pickleball" sessions 2025-12-05 Fri 11:45-12:45, 2025-12-05 Fri 12:50-13:50, 2025-12-05 Fri 13:55-14:55, 2025-12-05 Fri 15:00-16:00
+- IGNORED date-context "Monday, December 22 to Friday, January 4"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - racquet sports"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - sports"
+- IGNORED date-context "Friday, December 5"
+    at: group "Drop-in schedule - sports"
+- NOTICE "Kinderplay, 9 to 11 am, cancelled"
+    date text: "Friday, December 5"
+    dates: 2025-12-05 Fri
+    time: "9 to 11 am" 09:00-11:00 exact [Friday 9:00 - 11:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - sports" activity "Kinderplay" sessions 2025-12-05 Fri 09:00-11:00
+- IGNORED date-context "Monday, December 22 to Friday, January 4"
+    at: group "Drop-in schedule - sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - sports"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, December 22 to Friday, January 4"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/minto-recreation-complex-barrhaven-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Friday, December 5"
+    at: facility
+- IGNORED duplicate "All pickleball drop-ins, cancelled"
+    date text: "Friday, December 5"
+    dates: 2025-12-05 Fri
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 3:00 - 4:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All pickleball drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All pickleball drop-ins, cancelled"
+    at: facility
+- IGNORED duplicate "Kinderplay, 9 to 11 am, cancelled"
+    date text: "Friday, December 5"
+    dates: 2025-12-05 Fri
+    time: "9 to 11 am" 09:00-11:00 exact [Friday 9:00 - 11:00am]
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - sports" "Kinderplay, 9 to 11 am, cancelled"
+    at: facility
+- IGNORED heading "Winter Break hours"
+    section: "Winter Break hours"
+    at: facility
+- NOTICE "Wednesday, December 24, 7 am to 4 pm"
+    section: "Winter Break hours"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 25 and 26, closed"
+    section: "Winter Break hours"
+    date text: "December 25 and 26"
+    dates: 2025-12-25 Thu 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "Sunday, December 28, 7:15 am to 8 pm"
+    section: "Winter Break hours"
+    date text: "Sunday, December 28"
+    dates: 2025-12-28 Sun
+    time: "7:15 am to 8 pm" 07:15-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Wednesday, December 31, 7 am to 4 pm"
+    section: "Winter Break hours"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    section: "Winter Break hours"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "Sunday, January 4, 7:15 am to 8 pm"
+    section: "Winter Break hours"
+    date text: "Sunday, January 4"
+    dates: 2026-01-04 Sun
+    time: "7:15 am to 8 pm" 07:15-20:00 unchecked
+    effects: modified-hours
+    at: facility

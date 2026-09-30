@@ -1,0 +1,30 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Friday January 9"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Yoga, 9 to 10 am, cancelled"
+    date text: "Friday January 9"
+    dates: 2026-01-09 Fri
+    time: "9 to 10 am" 09:00-10:00 exact [Friday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Yoga"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Yoga" sessions 2026-01-09 Fri 09:00-10:00
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Friday January 9"
+    at: facility
+- IGNORED duplicate "Yoga, 9 to 10 am, cancelled"
+    date text: "Friday January 9"
+    dates: 2026-01-09 Fri
+    time: "9 to 10 am" 09:00-10:00 exact [Friday 9:00 - 10:00am]
+    match: EXACT
+    phrase: "Yoga"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Yoga, 9 to 10 am, cancelled"
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

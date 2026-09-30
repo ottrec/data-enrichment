@@ -1,0 +1,26 @@
+== Lois Kemp Arena (Blackburn) schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 2 to 2:50 pm, added"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "2 to 2:50 pm" 14:00-14:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-02-16 Mon 14:00-14:50 added
+
+== Lois Kemp Arena (Blackburn) special_hours
+- IGNORED date-context "Monday, February 16"
+    at: facility
+- IGNORED duplicate "Family skating, 2 to 2:50 pm, added"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "2 to 2:50 pm" 14:00-14:50 novel
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 2 to 2:50 pm, added"
+    at: facility

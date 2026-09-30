@@ -1,0 +1,21 @@
+== Champagne Fitness Centre schedule_changes "Drop-in schedule - swim"
+- NOTICE "Monday, December 22 to Friday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - swim"
+
+== Champagne Fitness Centre special_hours
+- NOTICE "Wednesday, December 31, 9:30 am to 4 pm"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "9:30 am to 4 pm" 09:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility

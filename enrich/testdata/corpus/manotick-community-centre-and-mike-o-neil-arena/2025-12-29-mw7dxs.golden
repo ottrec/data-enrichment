@@ -1,0 +1,45 @@
+== Manotick Community Centre and Mike O'Neil Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, January 2"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skate, 1 to 1:50 pm, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "1 to 1:50 pm" 13:00-13:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-01-02 Fri 13:00-13:50 added
+- NOTICE "Public skate, 2 to 2:50 pm, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "2 to 2:50 pm" 14:00-14:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-02 Fri 14:00-14:50 added
+
+== Manotick Community Centre and Mike O'Neil Arena special_hours
+- IGNORED date-context "Friday, January 2"
+    at: facility
+- IGNORED duplicate "Family skate, 1 to 1:50 pm, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "1 to 1:50 pm" 13:00-13:50 novel
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skate, 1 to 1:50 pm, added"
+    at: facility
+- IGNORED duplicate "Public skate, 2 to 2:50 pm, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "2 to 2:50 pm" 14:00-14:50 novel
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skate, 2 to 2:50 pm, added"
+    at: facility

@@ -1,0 +1,12 @@
+== Walter Baker Sports Centre special_hours
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "The rock wall is closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "rock wall"
+    amenity: "rock wall"
+    at: facility

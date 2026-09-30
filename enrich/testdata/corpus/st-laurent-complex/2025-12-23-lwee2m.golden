@@ -1,0 +1,52 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Monday, December 22 to Sunday, January 4, see Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== St. Laurent Complex special_hours
+- NOTICE "December 25 and 26, closed"
+    date text: "December 25 and 26"
+    dates: 2025-12-25 Thu 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "June 2, 2025 to March 16, 2026"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool and change rooms are closed."
+    section: "Closure"
+    date text: "June 2, 2025 to March 16, 2026"
+    dates: 2025-06-02 Mon to 2026-03-16 Mon
+    effects: closure
+    match: NONE
+    phrase: "pool and change rooms"
+    amenity: "pool change rooms"
+    at: facility

@@ -1,0 +1,45 @@
+== John G. Mlacak Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, October 25"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skate, 6 to 6:50 pm, cancelled"
+    date text: "Saturday, October 25"
+    dates: 2025-10-25 Sat
+    time: "6 to 6:50 pm" 18:00-18:50 exact [Saturday 6:00 - 6:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-10-25 Sat 18:00-18:50
+- NOTICE "Public skate, 7 to 7:50 pm, cancelled"
+    date text: "Saturday, October 25"
+    dates: 2025-10-25 Sat
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Saturday 7:00 - 7:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-10-25 Sat 19:00-19:50
+
+== John G. Mlacak Centre special_hours
+- IGNORED date-context "Saturday, October 25"
+    at: facility
+- IGNORED duplicate "Family skate, 6 to 6:50 pm, cancelled"
+    date text: "Saturday, October 25"
+    dates: 2025-10-25 Sat
+    time: "6 to 6:50 pm" 18:00-18:50 exact [Saturday 6:00 - 6:50pm]
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skate, 6 to 6:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skate, 7 to 7:50 pm, cancelled"
+    date text: "Saturday, October 25"
+    dates: 2025-10-25 Sat
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Saturday 7:00 - 7:50pm]
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skate, 7 to 7:50 pm, cancelled"
+    at: facility

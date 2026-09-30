@@ -1,0 +1,24 @@
+== François Dupuis Recreation Centre special_hours
+- IGNORED date-context "January 2 to 25"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    date text: "January 2 to 25"
+    dates: 2026-01-02 Fri to 2026-01-25 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED date-context "January 5 to 11"
+    at: facility
+- NOTICE "Men's pool changeroom, closed for maintenance."
+    date text: "January 5 to 11"
+    dates: 2026-01-05 Mon to 2026-01-11 Sun
+    effects: closure
+    match: NONE
+    phrase: "men's pool changeroom"
+    amenity: "men's pool changeroom"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

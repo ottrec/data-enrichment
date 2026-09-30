@@ -1,0 +1,21 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swimming"
+- IGNORED date-context "Saturday, August 1 to Monday, August 3"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Civic Holiday weekend schedule."
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: see-schedule "Civic Holiday weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Lowertown Community Centre and Pool notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

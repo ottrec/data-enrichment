@@ -1,0 +1,6 @@
+== Carlington Recreation Centre special_hours
+- NOTICE "January 4, closed"
+    date text: "January 4"
+    dates: 2026-01-04 Sun
+    effects: closure
+    at: facility

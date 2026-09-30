@@ -1,0 +1,26 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, December 20"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Women's only public swim, 8:15 to 9:15 pm, added"
+    date text: "Saturday, December 20"
+    dates: 2025-12-20 Sat
+    time: "8:15 to 9:15 pm" 20:15-21:15 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Women's only public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Women's only public swim" novel sessions 2025-12-20 Sat 20:15-21:15 added
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "Saturday, December 20"
+    at: facility
+- IGNORED duplicate "Women's only public swim, 8:15 to 9:15 pm, added"
+    date text: "Saturday, December 20"
+    dates: 2025-12-20 Sat
+    time: "8:15 to 9:15 pm" 20:15-21:15 unchecked
+    match: NOVEL
+    phrase: "Women's only public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Women's only public swim, 8:15 to 9:15 pm, added"
+    at: facility

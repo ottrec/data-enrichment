@@ -1,0 +1,22 @@
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, September 12"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-in gymnasium sports, cancelled"
+    date text: "Saturday, September 12"
+    dates: 2026-09-12 Sat
+    time: "" covers [Saturday 10:00 - 11:00am; Saturday 1:00 - 2:00pm; Saturday 2:15 - 3:15pm; Saturday 9:00 - 10:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in gymnasium sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, September 12"
+    at: facility
+- IGNORED duplicate "All drop-in gymnasium sports, cancelled"
+    date text: "Saturday, September 12"
+    dates: 2026-09-12 Sat
+    time: "" covers [Saturday 10:00 - 11:00am; Saturday 1:00 - 2:00pm; Saturday 2:15 - 3:15pm; Saturday 9:00 - 10:00am]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in gymnasium sports"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-in gymnasium sports, cancelled"
+    at: facility

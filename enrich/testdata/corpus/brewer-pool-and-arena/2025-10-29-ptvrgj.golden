@@ -1,0 +1,37 @@
+== Brewer Pool and Arena schedule_changes "Drop-in schedule - Swim and aquafit"
+- IGNORED date-context "Wednesday, October 29"
+    at: group "Drop-in schedule - Swim and aquafit"
+- NOTICE "Lane swim, 8 - 9:30 pm, cancelled"
+    date text: "Wednesday, October 29"
+    dates: 2025-10-29 Wed
+    time: "8 - 9:30 pm" 20:00-21:30 exact [Wednesday 8:00 - 9:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Swim and aquafit" activity "Lane swim" sessions 2025-10-29 Wed 20:00-21:30
+
+== Brewer Pool and Arena special_hours
+- IGNORED date-context "Wednesday, October 29"
+    at: facility
+- IGNORED duplicate "Lane swim, 8 - 9:30 pm, cancelled"
+    date text: "Wednesday, October 29"
+    dates: 2025-10-29 Wed
+    time: "8 - 9:30 pm" 20:00-21:30 exact [Wednesday 8:00 - 9:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - Swim and aquafit" "Lane swim, 8 - 9:30 pm, cancelled"
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool is closed between November 3, 2025 and February 1, 2026."
+    section: "Pool closure"
+    date text: "between November 3, 2025 and February 1, 2026"
+    dates: 2025-11-03 Mon to 2026-02-01 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

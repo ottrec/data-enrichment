@@ -1,0 +1,5 @@
+== Walter Baker Sports Centre special_hours
+- NOTICE "Public skating from12:15 to 1:05 pm and 1:15 t0 2:05 pm"
+    match: FUZZY
+    phrase: "Public skating from12:15 to 1:05 pm and 1:15 t0 2:05 pm"
+    at: group "Drop-in schedule - skating" activity "Public skating"

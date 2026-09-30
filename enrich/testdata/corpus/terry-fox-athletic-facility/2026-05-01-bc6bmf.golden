@@ -1,0 +1,70 @@
+== Terry Fox Athletic Facility special_hours
+- NOTICE "Monday, May 18, closed"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "The facility is not available on the following dates due to special events:"
+    section: "Schedule changes"
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- NOTICE "April 23 to June 15, Monday to Friday, 8 am to 4 pm"
+    section: "Schedule changes"
+    date text: "April 23 to June 15, Monday to Friday"
+    dates: 2026-04-23 Thu to 2026-06-15 Mon; weekdays Mon Tue Wed Thu Fri
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "May 3, 9 am to 2 pm"
+    section: "Schedule changes"
+    date text: "May 3"
+    dates: 2026-05-03 Sun
+    time: "9 am to 2 pm" 09:00-14:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "May 9 and 10, 9 am to 8 pm"
+    section: "Schedule changes"
+    date text: "May 9 and 10"
+    dates: 2026-05-09 Sat 2026-05-10 Sun
+    time: "9 am to 8 pm" 09:00-20:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "May 31, 9 am to 3 pm"
+    section: "Schedule changes"
+    date text: "May 31"
+    dates: 2026-05-31 Sun
+    time: "9 am to 3 pm" 09:00-15:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "June 16 to 21, 7 am to 11 pm"
+    section: "Schedule changes"
+    date text: "June 16 to 21"
+    dates: 2026-06-16 Tue to 2026-06-21 Sun
+    time: "7 am to 11 pm" 07:00-23:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "June 26, 2 pm to 9 pm"
+    section: "Schedule changes"
+    date text: "June 26"
+    dates: 2026-06-26 Fri
+    time: "2 pm to 9 pm" 14:00-21:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "June 27, 9 am to 5 pm"
+    section: "Schedule changes"
+    date text: "June 27"
+    dates: 2026-06-27 Sat
+    time: "9 am to 5 pm" 09:00-17:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "September 5, 7 am to 4 pm"
+    section: "Schedule changes"
+    date text: "September 5"
+    dates: 2026-09-05 Sat
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: closure
+    at: facility

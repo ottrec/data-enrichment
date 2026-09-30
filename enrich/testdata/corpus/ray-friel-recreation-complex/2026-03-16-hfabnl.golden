@@ -1,0 +1,71 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Thursday, March 26"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Public swim, 5 to 7:30 pm, cancelled"
+    date text: "Thursday, March 26"
+    dates: 2026-03-26 Thu
+    time: "5 to 7:30 pm" 17:00-19:30 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim"
+
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Ray Friel Recreation Complex special_hours
+- IGNORED date-context "Thursday, March 26"
+    at: facility
+- IGNORED duplicate "Public swim, 5 to 7:30 pm, cancelled"
+    date text: "Thursday, March 26"
+    dates: 2026-03-26 Thu
+    time: "5 to 7:30 pm" 17:00-19:30 none
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim, 5 to 7:30 pm, cancelled"
+    at: facility
+- IGNORED heading "Notice"
+    section: "Notice"
+    at: facility
+- NOTICE "The diving board is closed until further notice."
+    section: "Notice"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility

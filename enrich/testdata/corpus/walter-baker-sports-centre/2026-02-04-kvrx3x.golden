@@ -1,0 +1,67 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "The pool is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED heading "Family Day hours"
+    section: "Family Day hours"
+    at: facility
+- NOTICE "Monday, February 16, 8 am to 5 pm"
+    section: "Family Day hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility

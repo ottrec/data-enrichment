@@ -1,0 +1,6 @@
+== Fairfields Heritage House special_hours
+- NOTICE "Fairfields Heritage House is closed for the winter season, with the exception of special programs and events. The museum will reopen to visitors in summer 2026."
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "fairfields heritage house"
+    at: facility

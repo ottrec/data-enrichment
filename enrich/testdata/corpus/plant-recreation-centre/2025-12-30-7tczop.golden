@@ -1,0 +1,47 @@
+== Plant Recreation Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Monday, December 22 to Friday, January 2, see Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Plant Recreation Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- NOTICE "Monday, December 22 to Friday, January 2, see Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Monday, December 22 to Friday, January 2, see Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Plant Recreation Centre special_hours
+- NOTICE "December 29 and 30, 6:45 am to 9:30 pm"
+    date text: "December 29 and 30"
+    dates: 2025-12-29 Mon 2025-12-30 Tue
+    time: "6:45 am to 9:30 pm" 06:45-21:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 31, 6:45 to 4 pm"
+    date text: "December 31"
+    dates: 2025-12-31 Wed
+    time: "6:45 to 4 pm" 06:45-16:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "January 1, closed"
+    date text: "January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 2, 6:45 am to 9:30 pm"
+    date text: "January 2"
+    dates: 2026-01-02 Fri
+    time: "6:45 am to 9:30 pm" 06:45-21:30 unchecked
+    effects: modified-hours
+    at: facility

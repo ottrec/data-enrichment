@@ -1,0 +1,28 @@
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedules - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - group fitness"
+
+== Kanata Leisure Centre and Wave Pool special_hours
+- IGNORED date-context "November 4, 2025 to March 13, 2026"
+    at: facility
+- NOTICE "The pool is closed for maintenance."
+    date text: "November 4, 2025 to March 13, 2026"
+    dates: 2025-11-04 Tue to 2026-03-13 Fri
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

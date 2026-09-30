@@ -1,0 +1,136 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, September 30"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball drop-ins, 8:45 to 9:45 am"
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    time: "8:45 to 9:45 am" 08:45-09:45 none
+    match: NORMALIZED
+    phrase: "Pickleball drop-ins"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball"
+- NOTICE "Pickleball drop-ins, 9:50 to 10:50 am"
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    time: "9:50 to 10:50 am" 09:50-10:50 none
+    match: NORMALIZED
+    phrase: "Pickleball drop-ins"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball"
+- NOTICE "Pickleball drop-ins, 10:55 to 11:55 am"
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    time: "10:55 to 11:55 am" 10:55-11:55 overlaps [Wednesday 11:45am - 12:45pm]
+    match: NORMALIZED
+    phrase: "Pickleball drop-ins"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-09-30 Wed 11:45-12:45
+- NOTICE "Pickleball drop-ins, Noon to 1 pm"
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    time: "Noon to 1 pm" 12:00-13:00 overlaps [Wednesday 11:45am - 12:45pm; Wednesday 12:50 - 1:50pm]
+    match: NORMALIZED
+    phrase: "Pickleball drop-ins"
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-09-30 Wed 11:45-12:45, 2026-09-30 Wed 12:50-13:50
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "October 1, 2, 3, 4, 16, and 26"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All gymnasium activities are cancelled."
+    date text: "October 1, 2, 3, 4, 16, and 26"
+    dates: 2026-10-01 Thu 2026-10-02 Fri 2026-10-03 Sat 2026-10-04 Sun 2026-10-16 Fri 2026-10-26 Mon
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 6:35 - 7:35pm; Friday 7:40 - 8:40pm; Friday 8:45 - 9:45pm; Friday 9:00 - 11:00am; Monday 11:45am - 12:45pm; Monday 12:50 - 1:50pm; Monday 1:55 - 2:55pm; Monday 3:00 - 4:00pm; Monday 8:35 - 9:35pm; Monday 9:00 - 11:00am; Saturday 4:45 - 6:15pm; Saturday 6:45 - 7:45pm; Saturday 7:50 - 8:50pm; Sunday 5:00 - 6:00pm; Sunday 6:30 - 7:30pm; Thursday 11:45am - 12:45pm; Thursday 12:50 - 1:50pm; Thursday 1:55 - 2:55pm; Thursday 3:00 - 4:00pm; Thursday 8:15 - 9:15pm; Thursday 9:00 - 11:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium activities"
+    ambiguities: class-title-partial
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The walking track is closed from 10 am to 8 pm."
+    date text: "October 1, 2, 3, 4, 16, and 26"
+    dates: 2026-10-01 Thu 2026-10-02 Fri 2026-10-03 Sat 2026-10-04 Sun 2026-10-16 Fri 2026-10-26 Mon
+    time: "10 am to 8 pm" 10:00-20:00 unchecked
+    effects: closure
+    match: NONE
+    phrase: "walking track"
+    amenity: "walking track"
+    sources: schedule_changes special_hours
+    at: facility
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Wednesday, September 30"
+    at: facility
+- NOTICE "See the gymnasium drop-in chart for pickleball schedule changes."
+    date text: "Wednesday, September 30"
+    dates: 2026-09-30 Wed
+    effects: see-schedule "gymnasium drop-in chart for pickleball schedule"
+    match: SCOPE_PHRASE
+    at: facility
+- NOTICE "Monday, October 12, 7 am to 4 pm"
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED date-context "October 1, 2, 3, 4, 16, and 26"
+    at: facility
+- IGNORED duplicate "All gymnasium activities are cancelled."
+    date text: "October 1, 2, 3, 4, 16, and 26"
+    dates: 2026-10-01 Thu 2026-10-02 Fri 2026-10-03 Sat 2026-10-04 Sun 2026-10-16 Fri 2026-10-26 Mon
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 6:35 - 7:35pm; Friday 7:40 - 8:40pm; Friday 8:45 - 9:45pm; Friday 9:00 - 11:00am; Monday 11:45am - 12:45pm; Monday 12:50 - 1:50pm; Monday 1:55 - 2:55pm; Monday 3:00 - 4:00pm; Monday 8:35 - 9:35pm; Monday 9:00 - 11:00am; Saturday 4:45 - 6:15pm; Saturday 6:45 - 7:45pm; Saturday 7:50 - 8:50pm; Sunday 5:00 - 6:00pm; Sunday 6:30 - 7:30pm; Thursday 11:45am - 12:45pm; Thursday 12:50 - 1:50pm; Thursday 1:55 - 2:55pm; Thursday 3:00 - 4:00pm; Thursday 8:15 - 9:15pm; Thursday 9:00 - 11:00am]
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium activities"
+    ambiguities: class-title-partial
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium activities are cancelled."
+    at: facility
+- IGNORED duplicate "The walking track is closed from 10 am to 8 pm."
+    date text: "October 1, 2, 3, 4, 16, and 26"
+    dates: 2026-10-01 Thu 2026-10-02 Fri 2026-10-03 Sat 2026-10-04 Sun 2026-10-16 Fri 2026-10-26 Mon
+    time: "10 am to 8 pm" 10:00-20:00 unchecked
+    match: NONE
+    phrase: "walking track"
+    amenity: "walking track"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "The walking track is closed from 10 am to 8 pm."
+    at: facility

@@ -1,0 +1,12 @@
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "August 17 to September 7, pool closed for annual maintenance."
+    date text: "August 17 to September 7"
+    dates: 2026-08-17 Mon to 2026-09-07 Mon
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

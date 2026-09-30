@@ -1,0 +1,19 @@
+== Diane Deans Greenboro Community Centre schedule_changes "Drop-in schedule - group fitness"
+- NOTICE "December 20 to January 2 see Winter Break schedule."
+    date text: "December 20 to January 2"
+    dates: 2025-12-20 Sat to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Diane Deans Greenboro Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- NOTICE "Saturday, December 20 to Sunday, January 4 see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Diane Deans Greenboro Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

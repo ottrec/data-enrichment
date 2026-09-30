@@ -1,0 +1,53 @@
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Tuesday, December 30"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Adult skating, 11 am to noon, cancelled"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "11 am to noon" 11:00-12:00 covers [Tuesday 11:00 - 11:50am]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Adult skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Adult 18+ skating" sessions 2025-12-30 Tue 11:00-11:50
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - ice sports"
+
+== Jim Durrell Recreation Centre special_hours
+- IGNORED date-context "Tuesday, December 30"
+    at: facility
+- IGNORED duplicate "Adult skating, 11 am to noon, cancelled"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "11 am to noon" 11:00-12:00 covers [Tuesday 11:00 - 11:50am]
+    match: FUZZY
+    phrase: "Adult skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Adult skating, 11 am to noon, cancelled"
+    at: facility
+- NOTICE "Wednesday, December 31, 8 am to 2 pm"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "8 am to 2 pm" 08:00-14:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility

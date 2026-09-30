@@ -1,0 +1,38 @@
+== Glen Cairn Pool schedule_changes "Drop-in schedule - Swimming"
+- IGNORED date-context "Wednesday, August 19"
+    at: group "Drop-in schedule - Swimming"
+- NOTICE "Public swim, 6 to 8 pm, cancelled"
+    date text: "Wednesday, August 19"
+    dates: 2026-08-19 Wed
+    time: "6 to 8 pm" 18:00-20:00 exact [Wednesday 6:00 - 8:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Swimming" activity "Public Swim" sessions 2026-08-19 Wed 18:00-20:00
+
+== Glen Cairn Pool special_hours
+- NOTICE "Regular season, June 27 to August 23"
+    date text: "June 27 to August 23"
+    dates: 2026-06-27 Sat to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Wednesday, August 19"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Public swim, 6 to 8 pm, cancelled"
+    section: "Schedule change"
+    date text: "Wednesday, August 19"
+    dates: 2026-08-19 Wed
+    time: "6 to 8 pm" 18:00-20:00 exact [Wednesday 6:00 - 8:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - Swimming" "Public swim, 6 to 8 pm, cancelled"
+    at: facility

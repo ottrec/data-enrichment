@@ -1,0 +1,39 @@
+== Heron Road Community Centre special_hours
+- NOTICE "December 20 and 21, closed"
+    date text: "December 20 and 21"
+    dates: 2025-12-20 Sat 2025-12-21 Sun
+    effects: closure
+    at: facility
+- NOTICE "December 22 to 24, 8 am to 4 pm"
+    date text: "December 22 to 24"
+    dates: 2025-12-22 Mon to 2025-12-24 Wed
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 25 to 28, closed"
+    date text: "December 25 to 28"
+    dates: 2025-12-25 Thu to 2025-12-28 Sun
+    effects: closure
+    at: facility
+- NOTICE "December 29 to 31, 8 am to 4 pm"
+    date text: "December 29 to 31"
+    dates: 2025-12-29 Mon to 2025-12-31 Wed
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "January 1, closed"
+    date text: "January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 2, 8 am to 4 pm"
+    date text: "January 2"
+    dates: 2026-01-02 Fri
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "January 3 and 4, closed"
+    date text: "January 3 and 4"
+    dates: 2026-01-03 Sat 2026-01-04 Sun
+    effects: closure
+    at: facility

@@ -1,0 +1,18 @@
+== Heron Road Community Centre special_hours
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- NOTICE "Closed"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "The cardio and weight room is closed."
+    section: "Closure"
+    effects: closure
+    match: NONE
+    phrase: "cardio and weight room"
+    amenity: "cardio weight room"
+    at: facility

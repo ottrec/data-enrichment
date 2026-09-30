@@ -1,0 +1,61 @@
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, July 27 to Friday, July 31"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 11:30 am to 1:30 pm, reduced capacity"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 11:30am - 1:30pm; Monday 11:30am - 1:30pm; Thursday 11:30am - 1:30pm; Tuesday 11:30am - 1:30pm; Wednesday 11:30am - 1:30pm]
+    effects: restriction "reduced capacity"
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-27 Mon 11:30-13:30, 2026-07-28 Tue 11:30-13:30, 2026-07-29 Wed 11:30-13:30, 2026-07-30 Thu 11:30-13:30, 2026-07-31 Fri 11:30-13:30
+- NOTICE "Public swim, 1:30 to 3 pm only"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "1:30 to 3 pm" 13:30-15:00 within [Friday 1:30 - 3:30pm; Monday 1:30 - 3:30pm; Thursday 1:30 - 3:30pm; Tuesday 1:30 - 3:30pm; Wednesday 1:30 - 3:30pm]
+    match: FUZZY
+    phrase: "Public swim only"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-07-27 Mon 13:30-15:30, 2026-07-28 Tue 13:30-15:30, 2026-07-29 Wed 13:30-15:30, 2026-07-30 Thu 13:30-15:30, 2026-07-31 Fri 13:30-15:30
+
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Sawmill Creek Community Centre and Pool special_hours
+- IGNORED date-context "Monday, July 27 to Friday, July 31"
+    at: facility
+- IGNORED duplicate "Lane swim, 11:30 am to 1:30 pm, reduced capacity"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 11:30am - 1:30pm; Monday 11:30am - 1:30pm; Thursday 11:30am - 1:30pm; Tuesday 11:30am - 1:30pm; Wednesday 11:30am - 1:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 11:30 am to 1:30 pm, reduced capacity"
+    at: facility
+- IGNORED duplicate "Public swim, 1:30 to 3 pm only"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "1:30 to 3 pm" 13:30-15:00 within [Friday 1:30 - 3:30pm; Monday 1:30 - 3:30pm; Thursday 1:30 - 3:30pm; Tuesday 1:30 - 3:30pm; Wednesday 1:30 - 3:30pm]
+    match: FUZZY
+    phrase: "Public swim only"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim, 1:30 to 3 pm only"
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday, August 3, closed"
+    section: "Civic Holiday"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: closure
+    at: facility

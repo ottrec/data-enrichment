@@ -1,0 +1,49 @@
+== Navan Memorial Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Child hockey (6 to 12 years), 5 to 5:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "5 to 5:50 pm" 17:00-17:50 exact [Thursday 5:00 - 5:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Child hockey (6 to 12 years)"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Child hockey (6 to 12 years)" sessions 2026-01-01 Thu 17:00-17:50
+
+== Navan Memorial Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 4 to 4:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Thursday 4:00 - 4:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-01 Thu 16:00-16:50
+
+== Navan Memorial Centre special_hours
+- IGNORED date-context "Thursday, January 1"
+    at: facility
+- IGNORED duplicate "Public skating, 4 to 4:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Thursday 4:00 - 4:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 4 to 4:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Child hockey (6 to 12 years), 5 to 5:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "5 to 5:50 pm" 17:00-17:50 exact [Thursday 5:00 - 5:50pm]
+    match: EXACT
+    phrase: "Child hockey (6 to 12 years)"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Child hockey (6 to 12 years), 5 to 5:50 pm, cancelled"
+    at: facility

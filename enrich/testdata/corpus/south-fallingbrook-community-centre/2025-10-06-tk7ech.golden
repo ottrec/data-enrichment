@@ -1,0 +1,26 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - sports"
+- IGNORED date-context "Saturday, October 11"
+    at: group "Drop-in schedule - sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11"
+    dates: 2025-10-11 Sat
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/south-fallingbrook-community-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - sports"
+- IGNORED date-context "Sunday, October 12 and Monday, October 13"
+    at: group "Drop-in schedule - sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Sunday, October 12 and Monday, October 13"
+    dates: 2025-10-12 Sun 2025-10-13 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - sports"
+
+== South Fallingbrook Community Centre special_hours
+- IGNORED date-context "Sunday, October 12 and Monday, October 13"
+    at: facility
+- NOTICE "Closed"
+    date text: "Sunday, October 12 and Monday, October 13"
+    dates: 2025-10-12 Sun 2025-10-13 Mon
+    effects: closure
+    at: facility

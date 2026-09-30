@@ -1,0 +1,12 @@
+== Cumberland Heritage Village Museum special_hours
+- NOTICE "Sunday, May 10 to Friday, October 9 from 9 am to 4 pm."
+    date text: "Sunday, May 10 to Friday, October 9"
+    dates: 2026-05-10 Sun to 2026-10-09 Fri
+    time: "9 am to 4 pm" 09:00-16:00 unchecked
+    match: NONE
+    phrase: "from"
+    ambiguities: freeform-item
+    at: facility
+- UNPARSED freeform "The museum will reopen to daily visitors beginning Sunday, May 10, 2026. Workshops and special events are offered year-round."
+    phrase: "The museum will reopen to daily visitors beginning Sunday, May 10, 2026. Workshops and special events are offered year-round"
+    at: facility

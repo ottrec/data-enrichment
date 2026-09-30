@@ -1,0 +1,15 @@
+== Walter Baker Sports Centre special_hours
+- NOTICE "The hot tub and steam room are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "hot tub and steam room"
+    amenity: "hot tub steam room"
+    at: facility
+- NOTICE "Monday, May 11 to Sunday, June 28, the pool is closed for annual maintenance."
+    date text: "Monday, May 11 to Sunday, June 28"
+    dates: 2026-05-11 Mon to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

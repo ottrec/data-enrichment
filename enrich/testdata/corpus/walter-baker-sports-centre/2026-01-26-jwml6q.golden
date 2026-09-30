@@ -1,0 +1,86 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, January 28"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Wednesday, January 28"
+    dates: 2026-01-28 Wed
+    time: "7:30 to 9 pm" 19:30-21:00 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim"
+- NOTICE "Preschool swim, 8:30 to 10 am, cancelled"
+    date text: "Wednesday, January 28"
+    dates: 2026-01-28 Wed
+    time: "8:30 to 10 am" 08:30-10:00 exact [Wednesday 8:30 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Preschool swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool swim" sessions 2026-01-28 Wed 08:30-10:00
+- IGNORED date-context "Thursday, January 29"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aquafit General - Shallow, 1 to 2 pm , cancelled"
+    date text: "Thursday, January 29"
+    dates: 2026-01-29 Thu
+    time: "1 to 2 pm" 13:00-14:00 exact [Thursday 1:00 - 2:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit General - Shallow"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Shallow" sessions 2026-01-29 Thu 13:00-14:00
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Wednesday, January 28 and Thursday, January 29"
+    at: facility
+- NOTICE "The training pool is closed."
+    date text: "Wednesday, January 28 and Thursday, January 29"
+    dates: 2026-01-28 Wed 2026-01-29 Thu
+    effects: closure
+    match: NONE
+    phrase: "training pool"
+    amenity: "training pool"
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Wednesday, January 28"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Lane swim, 7:30 to 9 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Wednesday, January 28"
+    dates: 2026-01-28 Wed
+    time: "7:30 to 9 pm" 19:30-21:00 none
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 7:30 to 9 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Preschool swim, 8:30 to 10 am, cancelled"
+    section: "Schedule changes"
+    date text: "Wednesday, January 28"
+    dates: 2026-01-28 Wed
+    time: "8:30 to 10 am" 08:30-10:00 exact [Wednesday 8:30 - 10:00am]
+    match: EXACT
+    phrase: "Preschool swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Preschool swim, 8:30 to 10 am, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, January 29"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Aquafit General - Shallow, 1 to 2 pm , cancelled"
+    section: "Schedule changes"
+    date text: "Thursday, January 29"
+    dates: 2026-01-29 Thu
+    time: "1 to 2 pm" 13:00-14:00 exact [Thursday 1:00 - 2:00pm]
+    match: EXACT
+    phrase: "Aquafit General - Shallow"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit General - Shallow, 1 to 2 pm , cancelled"
+    at: facility

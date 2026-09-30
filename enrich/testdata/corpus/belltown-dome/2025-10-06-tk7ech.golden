@@ -1,0 +1,5 @@
+== Belltown Dome special_hours
+- NOTICE "The facility is closed for the season."
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

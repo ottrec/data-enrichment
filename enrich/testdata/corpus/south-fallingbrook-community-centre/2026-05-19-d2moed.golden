@@ -1,0 +1,47 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Thursday, May 21"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball - adult, 6 to 9:15 pm, cancelled"
+    date text: "Thursday, May 21"
+    dates: 2026-05-21 Thu
+    time: "6 to 9:15 pm" 18:00-21:15 covers [Thursday 6:00 - 7:00pm; Thursday 7:00 - 8:00pm; Thursday 8:15 - 9:15pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball - adult"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult" sessions 2026-05-21 Thu 18:00-19:00, 2026-05-21 Thu 19:00-20:00, 2026-05-21 Thu 20:15-21:15
+- IGNORED date-context "Thursday, May 28"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball - adult, 6 to 9:15 pm, cancelled"
+    date text: "Thursday, May 28"
+    dates: 2026-05-28 Thu
+    time: "6 to 9:15 pm" 18:00-21:15 covers [Thursday 6:00 - 7:00pm; Thursday 7:00 - 8:00pm; Thursday 8:15 - 9:15pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball - adult"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult" sessions 2026-05-28 Thu 18:00-19:00, 2026-05-28 Thu 19:00-20:00, 2026-05-28 Thu 20:15-21:15
+- IGNORED date-context "Thursday, May 21"
+    at: facility
+- IGNORED duplicate "Pickleball - adult, 6 to 9:15 pm, cancelled"
+    date text: "Thursday, May 21"
+    dates: 2026-05-21 Thu
+    time: "6 to 9:15 pm" 18:00-21:15 covers [Thursday 6:00 - 7:00pm; Thursday 7:00 - 8:00pm; Thursday 8:15 - 9:15pm]
+    match: EXACT
+    phrase: "Pickleball - adult"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball - adult, 6 to 9:15 pm, cancelled"
+    at: facility
+- IGNORED date-context "Thursday, May 28"
+    at: facility
+- IGNORED duplicate "Pickleball - adult, 6 to 9:15 pm, cancelled"
+    date text: "Thursday, May 28"
+    dates: 2026-05-28 Thu
+    time: "6 to 9:15 pm" 18:00-21:15 covers [Thursday 6:00 - 7:00pm; Thursday 7:00 - 8:00pm; Thursday 8:15 - 9:15pm]
+    match: EXACT
+    phrase: "Pickleball - adult"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball - adult, 6 to 9:15 pm, cancelled"
+    at: facility

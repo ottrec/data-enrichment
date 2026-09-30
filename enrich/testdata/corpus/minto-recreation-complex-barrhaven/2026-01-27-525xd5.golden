@@ -1,0 +1,97 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, February 2"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aquafit General - Deep/shallow combo, 9:30 to 10:30 am, cancelled"
+    date text: "Monday, February 2"
+    dates: 2026-02-02 Mon
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Monday 9:30 - 10:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit General - Deep/shallow combo"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Deep/shallow combo *Reservations are required" sessions 2026-02-02 Mon 09:30-10:30
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, January 28"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba, 9:15 to 10:15 am, cancelled"
+    date text: "Wednesday, January 28"
+    dates: 2026-01-28 Wed
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Wednesday 9:15 - 10:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba®" sessions 2026-01-28 Wed 09:15-10:15
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Friday, January 30"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Kinderplay, 9 to 10 am, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "9 to 10 am" 09:00-10:00 within [Friday 9:00 - 11:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Kinderplay" sessions 2026-01-30 Fri 09:00-11:00
+- NOTICE "Pickleball, all drop-ins, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 3:00 - 4:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Pickleball, all drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-01-30 Fri 11:45-12:45, 2026-01-30 Fri 12:50-13:50, 2026-01-30 Fri 13:55-14:55, 2026-01-30 Fri 15:00-16:00
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Wednesday, January 28"
+    at: facility
+- IGNORED duplicate "Zumba, 9:15 to 10:15 am, cancelled"
+    date text: "Wednesday, January 28"
+    dates: 2026-01-28 Wed
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Wednesday 9:15 - 10:15am]
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba, 9:15 to 10:15 am, cancelled"
+    at: facility
+- IGNORED date-context "Friday, January 30"
+    at: facility
+- IGNORED duplicate "Kinderplay, 9 to 10 am, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "9 to 10 am" 09:00-10:00 within [Friday 9:00 - 11:00am]
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Kinderplay, 9 to 10 am, cancelled"
+    at: facility
+- IGNORED duplicate "Pickleball, all drop-ins, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 3:00 - 4:00pm]
+    match: NORMALIZED
+    phrase: "Pickleball, all drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball, all drop-ins, cancelled"
+    at: facility
+- IGNORED date-context "Monday, February 2"
+    at: facility
+- IGNORED duplicate "Aquafit General, Deep/shallow combo, 9:30 to 10:30 am, cancelled"
+    date text: "Monday, February 2"
+    dates: 2026-02-02 Mon
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Monday 9:30 - 10:30am]
+    match: EXACT
+    phrase: "Aquafit General, Deep/shallow combo"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit General - Deep/shallow combo, 9:30 to 10:30 am, cancelled"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

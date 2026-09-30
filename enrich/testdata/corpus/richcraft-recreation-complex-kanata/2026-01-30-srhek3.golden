@@ -1,0 +1,123 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Friday, January 30"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 1:30 - 2:30pm; Friday 2:30 - 3:30pm; Friday 7:30 - 8:30am; Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Pickleball"
+    candidates: "Pickleball - rotations" "Pickleball - rotations (intermediate)"
+    ambiguities: activity-multiple-candidates
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Basketball - adult, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Basketball - adult"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Basketball - adult" sessions 2026-01-30 Fri 11:00-12:00, 2026-01-30 Fri 12:00-13:00
+- NOTICE "Badminton, doubles - adult, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Badminton, doubles - adult"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton doubles - adult" sessions 2026-01-30 Fri 11:00-12:00, 2026-01-30 Fri 12:00-13:00
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Friday, January 30"
+    at: facility
+- IGNORED duplicate "Pickleball, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 1:30 - 2:30pm; Friday 2:30 - 3:30pm; Friday 7:30 - 8:30am; Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    match: MULTIPLE
+    phrase: "Pickleball"
+    ambiguities: activity-multiple-candidates
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball, cancelled"
+    at: facility
+- IGNORED duplicate "Basketball - adult, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    match: EXACT
+    phrase: "Basketball - adult"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Basketball - adult, cancelled"
+    at: facility
+- IGNORED duplicate "Badminton, doubles - adult, cancelled"
+    date text: "Friday, January 30"
+    dates: 2026-01-30 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    match: EXACT
+    phrase: "Badminton, doubles - adult"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Badminton, doubles - adult, cancelled"
+    at: facility
+- IGNORED heading "Family Day weekend hours"
+    section: "Family Day weekend hours"
+    at: facility
+- NOTICE "Saturday, February 14, 8 am to 8 pm"
+    section: "Family Day weekend hours"
+    date text: "Saturday, February 14"
+    dates: 2026-02-14 Sat
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, February 15, 8 am to 8 pm"
+    section: "Family Day weekend hours"
+    date text: "Sunday, February 15"
+    dates: 2026-02-15 Sun
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, February 16, 10 am to 4 pm"
+    section: "Family Day weekend hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

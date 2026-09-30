@@ -1,0 +1,39 @@
+== Brewer Pool and Arena special_hours
+- IGNORED date-context "Wednesday, July 1"
+    at: facility
+- NOTICE "The pool is closed, and all swim and aquafit drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 11:30am - 1:00pm; Wednesday 1:00 - 3:00pm; Wednesday 3:00 - 4:00pm; Wednesday 7:30 - 8:30am; Wednesday 8:00 - 9:00pm; Wednesday 8:35 - 9:30am; Wednesday 9:35 - 10:30am]
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    amenity: "pool"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit general" sessions 2026-07-01 Wed 07:30-08:30, 2026-07-01 Wed 08:35-09:30, 2026-07-01 Wed 09:35-10:30, 2026-07-01 Wed 11:30-13:00, 2026-07-01 Wed 13:00-15:00, 2026-07-01 Wed 15:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-01 Wed 07:30-08:30, 2026-07-01 Wed 08:35-09:30, 2026-07-01 Wed 09:35-10:30, 2026-07-01 Wed 11:30-13:00, 2026-07-01 Wed 13:00-15:00, 2026-07-01 Wed 15:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-07-01 Wed 07:30-08:30, 2026-07-01 Wed 08:35-09:30, 2026-07-01 Wed 09:35-10:30, 2026-07-01 Wed 11:30-13:00, 2026-07-01 Wed 13:00-15:00, 2026-07-01 Wed 15:00-16:00, 2026-07-01 Wed 20:00-21:00
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Saturday, June 13"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "Lane Swim, noon to 1 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "noon to 1 pm" 12:00-13:00 exact [Saturday 12:00 - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane Swim"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-06-13 Sat 12:00-13:00
+- NOTICE "Public Swim, 1 to 2 pm, cancelled"
+    section: "Schedule changes"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "1 to 2 pm" 13:00-14:00 exact [Saturday 1:00 - 2:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-06-13 Sat 13:00-14:00

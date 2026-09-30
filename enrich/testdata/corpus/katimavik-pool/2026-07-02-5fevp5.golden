@@ -1,0 +1,8 @@
+== Katimavik Pool special_hours
+- NOTICE "Regular season, June 29 to August 23"
+    date text: "June 29 to August 23"
+    dates: 2026-06-29 Mon to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

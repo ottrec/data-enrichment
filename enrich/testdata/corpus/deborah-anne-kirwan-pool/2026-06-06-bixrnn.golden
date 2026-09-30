@@ -1,0 +1,24 @@
+== Deborah Anne Kirwan Pool schedule_changes "Drop-in schedule - swim"
+- IGNORED date-context "Saturday, June 20"
+    at: group "Drop-in schedule - swim"
+- NOTICE "Public swim, 1 to 2:30 pm, cancelled"
+    date text: "Saturday, June 20"
+    dates: 2026-06-20 Sat
+    time: "1 to 2:30 pm" 13:00-14:30 within [Saturday 1:00 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim" activity "Public swim" sessions 2026-06-20 Sat 13:00-16:00
+- IGNORED date-context "Saturday, June 20"
+    at: facility
+- IGNORED duplicate "Public swim, 1 to 2:30 pm, cancelled"
+    date text: "Saturday, June 20"
+    dates: 2026-06-20 Sat
+    time: "1 to 2:30 pm" 13:00-14:30 within [Saturday 1:00 - 4:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim" "Public swim, 1 to 2:30 pm, cancelled"
+    at: facility

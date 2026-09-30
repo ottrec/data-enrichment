@@ -1,0 +1,23 @@
+== Kanata Leisure Centre and Wave Pool special_hours
+- IGNORED date-context "Thursday, February 5"
+    at: facility
+- NOTICE "The facility is closed for scheduled maintenance."
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- IGNORED date-context "November 4, 2025 to March 13, 2026"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool is closed for maintenance."
+    section: "Pool closure"
+    date text: "November 4, 2025 to March 13, 2026"
+    dates: 2025-11-04 Tue to 2026-03-13 Fri
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

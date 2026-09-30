@@ -1,0 +1,7 @@
+== Splash Wave Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Monday, December 22 to Friday, January 2, see Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"

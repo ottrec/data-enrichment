@@ -1,0 +1,20 @@
+== Hintonburg Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, December 24 to Sunday, January 4"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, December 24 to Sunday, January 4"
+    dates: 2025-12-24 Wed to 2026-01-04 Sun
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Hintonburg Community Centre special_hours
+- NOTICE "December 24 to January 4, closed"
+    date text: "December 24 to January 4"
+    dates: 2025-12-24 Wed to 2026-01-04 Sun
+    effects: closure
+    at: facility
+
+== Hintonburg Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

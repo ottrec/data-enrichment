@@ -1,0 +1,11 @@
+== Pinecrest Recreation Complex special_hours
+- IGNORED date-context "Thursday, October 23"
+    at: facility
+- NOTICE "The facility is closed from 6 to 9 am for maintenance."
+    date text: "Thursday, October 23"
+    dates: 2025-10-23 Thu
+    time: "6 to 9 am" 06:00-09:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    ambiguities: meridiem-inferred
+    at: facility

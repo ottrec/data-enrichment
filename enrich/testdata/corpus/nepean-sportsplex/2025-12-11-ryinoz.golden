@@ -1,0 +1,85 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, December 13"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 11 am to 3 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "11 am to 3 pm" 11:00-15:00 exact [Saturday 11:00am - 3:00pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Lane swim"
+    ambiguities: activity-time-disambiguated
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim - 50m short course" sessions 2025-12-13 Sat 11:00-15:00
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - gym sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gym sports"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All programs cancelled."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All programs"
+    at: group "Drop-in schedule - skating"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - curling"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - curling"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/nepean-sportsplex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - curling"
+
+== Nepean Sportsplex special_hours
+- IGNORED date-context "Saturday, December 13"
+    at: facility
+- IGNORED duplicate "Lane swim, 11 am to 3 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "11 am to 3 pm" 11:00-15:00 exact [Saturday 11:00am - 3:00pm]
+    match: FUZZY
+    phrase: "Lane swim"
+    ambiguities: activity-time-disambiguated
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 11 am to 3 pm, cancelled"
+    at: facility
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

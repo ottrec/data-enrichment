@@ -1,0 +1,8 @@
+== Navan Memorial Centre special_hours
+- NOTICE "The elevator is not available until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "elevator"
+    amenity: "elevator"
+    at: facility

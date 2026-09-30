@@ -1,0 +1,24 @@
+== Cumberland Heritage Village Museum special_hours
+- NOTICE "The museum is closed to daily visitors from mid-October through mid-May except for programs and special events, which are offered year-round."
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "museum"
+    at: facility
+- IGNORED heading "Vintage Village of Lights"
+    section: "Vintage Village of Lights"
+    at: facility
+- IGNORED date-context "November 28 - December 21, 2025"
+    section: "Vintage Village of Lights"
+    at: facility
+- IGNORED date-context "Fridays, Saturdays, and Sundays"
+    section: "Vintage Village of Lights"
+    at: facility
+- NOTICE "4 pm to 9 pm (final entry by 8 pm)"
+    section: "Vintage Village of Lights"
+    date text: "Fridays, Saturdays, and Sundays"
+    dates: weekdays Fri Sat Sun
+    time: "4 pm to 9 pm" 16:00-21:00 unchecked
+    match: NONE
+    phrase: "(final entry by 8 pm)"
+    ambiguities: freeform-item
+    at: facility

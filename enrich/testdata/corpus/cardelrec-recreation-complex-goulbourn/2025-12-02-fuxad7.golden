@@ -1,0 +1,34 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, December 1"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "All aqua general drop-ins, cancelled"
+    date text: "Monday, December 1"
+    dates: 2025-12-01 Mon
+    time: "" covers [Monday 8:20 - 9:15am; Monday 9:20 - 10:15am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All aqua general drop-ins"
+    at: group "Drop-in schedule - swim and aquafit" activity "Aqua general - shallow/deep combo" sessions 2025-12-01 Mon 08:20-09:15, 2025-12-01 Mon 09:20-10:15
+- IGNORED date-context "Wednesday, December 3"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "All aqua general drop-ins, cancelled"
+    date text: "Wednesday, December 3"
+    dates: 2025-12-03 Wed
+    time: "" covers [Wednesday 8:20 - 9:15am; Wednesday 9:20 - 10:15am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All aqua general drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Aqua general - shallow/deep combo" sessions 2025-12-03 Wed 08:20-09:15, 2025-12-03 Wed 09:20-10:15
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Wednesday, December 3"
+    at: facility
+- IGNORED duplicate "All aqua general drop-ins, cancelled"
+    date text: "Wednesday, December 3"
+    dates: 2025-12-03 Wed
+    time: "" covers [Wednesday 8:20 - 9:15am; Wednesday 9:20 - 10:15am]
+    match: SCOPE_PHRASE
+    phrase: "All aqua general drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "All aqua general drop-ins, cancelled"
+    at: facility

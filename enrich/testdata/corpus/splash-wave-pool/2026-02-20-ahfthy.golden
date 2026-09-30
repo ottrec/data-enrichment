@@ -1,0 +1,7 @@
+== Splash Wave Pool special_hours
+- NOTICE "The pool deck may feel cooler than usual until further notice."
+    dates: open-ended
+    match: NONE
+    phrase: "The pool deck may feel cooler than usual until further notice"
+    amenity: "pool"
+    at: facility

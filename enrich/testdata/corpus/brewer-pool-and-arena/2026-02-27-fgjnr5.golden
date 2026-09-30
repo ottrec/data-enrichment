@@ -1,0 +1,8 @@
+== Brewer Pool and Arena special_hours
+- NOTICE "The pool is closed between November 3, 2025 and March 1, 2026."
+    date text: "between November 3, 2025 and March 1, 2026"
+    dates: 2025-11-03 Mon to 2026-03-01 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

@@ -1,0 +1,12 @@
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "Therapeutic pool closed for maintenance until further notice."
+    dates: open-ended
+    time: "" covers [Friday 12:15 - 2:15pm; Friday 7:00 - 9:30pm; Friday 7:15 - 11:15am; Monday 7:15am - 2:15pm; Monday 8:45 - 9:45pm; Saturday 12:30 - 4:00pm; Sunday 12:30 - 4:00pm; Sunday 7:00 - 8:00pm; Thursday 2:15 - 3:30pm; Thursday 7:45 - 9:45pm; Thursday 8:30am - 12:30pm; Tuesday 11:30am - 2:30pm; Tuesday 7:45 - 9:45pm; Tuesday 8:30 - 10:30am; Wednesday 7:15am - 2:15pm; Wednesday 8:45 - 9:45pm]
+    effects: closure
+    match: EXACT
+    phrase: "therapeutic pool"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Therapeutic pool"
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

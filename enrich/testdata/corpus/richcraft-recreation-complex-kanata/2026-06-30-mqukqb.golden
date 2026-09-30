@@ -1,0 +1,47 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Canada Day schedule"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Richcraft Recreation Complex-Kanata special_hours
+- NOTICE "Wednesday, July 1, 10 am to 4 pm"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

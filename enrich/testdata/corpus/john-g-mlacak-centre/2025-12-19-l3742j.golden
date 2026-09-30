@@ -1,0 +1,91 @@
+== John G. Mlacak Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, December 25"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Figure skating - 18+, 8 to 8:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "8 to 8:50 pm" 20:00-20:50 exact [Thursday 8:00 - 8:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Figure skating - 18+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Figure skating - 18+" sessions 2025-12-25 Thu 20:00-20:50
+
+== John G. Mlacak Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, December 25"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 7 to 7:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Thursday 7:00 - 7:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-25 Thu 19:00-19:50
+- IGNORED date-context "Saturday, December 27"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 6 to 6:50 pm, cancelled"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "6 to 6:50 pm" 18:00-18:50 exact [Saturday 6:00 - 6:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-27 Sat 18:00-18:50
+- NOTICE "Public skating, 7 to 7:50 pm, cancelled"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Saturday 7:00 - 7:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-27 Sat 19:00-19:50
+
+== John G. Mlacak Centre special_hours
+- IGNORED date-context "Thursday, December 25"
+    at: facility
+- IGNORED duplicate "Public skating, 7 to 7:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Thursday 7:00 - 7:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 7 to 7:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Figure skating - 18+, 8 to 8:50 pm, cancelled"
+    date text: "Thursday, December 25"
+    dates: 2025-12-25 Thu
+    time: "8 to 8:50 pm" 20:00-20:50 exact [Thursday 8:00 - 8:50pm]
+    match: EXACT
+    phrase: "Figure skating - 18+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Figure skating - 18+, 8 to 8:50 pm, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, December 27"
+    at: facility
+- IGNORED duplicate "Family skating, 6 to 6:50 pm, cancelled"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "6 to 6:50 pm" 18:00-18:50 exact [Saturday 6:00 - 6:50pm]
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 6 to 6:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 7 to 7:50 pm, cancelled"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Saturday 7:00 - 7:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 7 to 7:50 pm, cancelled"
+    at: facility

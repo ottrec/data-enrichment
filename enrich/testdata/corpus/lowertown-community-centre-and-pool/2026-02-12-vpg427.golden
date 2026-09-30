@@ -1,0 +1,16 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Thursday, February 5"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Open gym, 5:45 to 7:45 pm, cancelled"
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    time: "5:45 to 7:45 pm" 17:45-19:45 covers [Thursday 5:45 - 6:45pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Open gym"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - gymnasium sports" activity "Open gym" sessions 2026-02-05 Thu 17:45-18:45
+
+== Lowertown Community Centre and Pool notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

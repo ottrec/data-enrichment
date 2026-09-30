@@ -1,0 +1,28 @@
+== Terry Fox Athletic Facility special_hours
+- NOTICE "The facility is not available 9 am to 3 pm on the following dates:"
+    time: "9 am to 3 pm" 09:00-15:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- NOTICE "October 6 to 10"
+    date text: "October 6 to 10"
+    dates: 2025-10-06 Mon to 2025-10-10 Fri
+    effects: closure
+    at: facility
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- NOTICE "Closed"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: closure
+    at: facility
+- NOTICE "October 15 and 16"
+    date text: "October 15 and 16"
+    dates: 2025-10-15 Wed 2025-10-16 Thu
+    effects: closure
+    at: facility
+- NOTICE "October 21 to 23"
+    date text: "October 21 to 23"
+    dates: 2025-10-21 Tue to 2025-10-23 Thu
+    effects: closure
+    at: facility

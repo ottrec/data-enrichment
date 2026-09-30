@@ -1,0 +1,20 @@
+== Rideauview Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled"
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Rideauview Community Centre special_hours
+- NOTICE "Saturday, February 14 to Monday, February 16, closed"
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: closure
+    at: facility
+
+== Rideauview Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

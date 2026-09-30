@@ -1,0 +1,19 @@
+== Jim Tubman Chevrolet Rink schedule_changes "Drop-in schedule - Fall"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedule - Fall"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving Day schedule" "https://ottawa.ca/en/jim-tubman-chevrolet-rink-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Fall"
+
+== Jim Tubman Chevrolet Rink special_hours
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- NOTICE "10 am to 7 pm"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "10 am to 7 pm" 10:00-19:00 unchecked
+    effects: modified-hours
+    at: facility

@@ -1,0 +1,16 @@
+== Carlington Recreation Centre special_hours
+- NOTICE "December 24 to 28, closed"
+    date text: "December 24 to 28"
+    dates: 2025-12-24 Wed to 2025-12-28 Sun
+    effects: closure
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 4, closed"
+    date text: "January 4"
+    dates: 2026-01-04 Sun
+    effects: closure
+    at: facility

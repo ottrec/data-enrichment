@@ -1,0 +1,45 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== St. Laurent Complex special_hours
+- IGNORED date-context "June 2, 2025 to March 16, 2026"
+    at: facility
+- NOTICE "The pool and change rooms are closed."
+    date text: "June 2, 2025 to March 16, 2026"
+    dates: 2025-06-02 Mon to 2026-03-16 Mon
+    effects: closure
+    match: NONE
+    phrase: "pool and change rooms"
+    amenity: "pool change rooms"
+    at: facility

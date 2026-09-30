@@ -1,0 +1,9 @@
+== Nepean Sportsplex special_hours
+- NOTICE "Drop-in swim and aquafit - January pool changes, see drop-in schedule."
+    effects: see-schedule "drop-in schedule"
+    match: SCOPE_PHRASE
+    at: facility
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

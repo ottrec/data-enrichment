@@ -1,0 +1,67 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Labour Day schedule."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: see-schedule "Labour Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Labour Day schedule."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: see-schedule "Labour Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Labour Day schedule."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: see-schedule "Labour Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Labour Day schedule."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: see-schedule "Labour Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Nepean Sportsplex special_hours
+- NOTICE "Monday, September 7, 7 am to 4 pm"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "August 15 to September 13"
+    section: "Closure"
+    at: facility
+- NOTICE "The pools are closed for annual maintenance."
+    section: "Closure"
+    date text: "August 15 to September 13"
+    dates: 2026-08-15 Sat to 2026-09-13 Sun
+    effects: closure
+    match: NONE
+    phrase: "pools"
+    amenity: "pools"
+    at: facility
+- IGNORED heading "Notice"
+    section: "Notice"
+    at: facility
+- NOTICE "The saunas are closed until further notice."
+    section: "Notice"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "saunas"
+    amenity: "saunas"
+    at: facility

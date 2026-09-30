@@ -1,0 +1,20 @@
+== Jim Tubman Chevrolet Rink schedule_changes "Drop-in schedule - Winter"
+- IGNORED date-context "Wednesday, January 7"
+    at: group "Drop-in schedule - Winter"
+- NOTICE "The facility is closed."
+    date text: "Wednesday, January 7"
+    dates: 2026-01-07 Wed
+    effects: closure
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Winter"
+
+== Jim Tubman Chevrolet Rink special_hours
+- IGNORED date-context "Wednesday, January 7"
+    at: facility
+- IGNORED duplicate "The facility is closed."
+    date text: "Wednesday, January 7"
+    dates: 2026-01-07 Wed
+    match: SCOPE_PHRASE
+    duplicate of: schedule_changes "Drop-in schedule - Winter" "The facility is closed."
+    at: facility

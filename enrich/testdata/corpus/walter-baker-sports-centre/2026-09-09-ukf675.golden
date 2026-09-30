@@ -1,0 +1,18 @@
+== Walter Baker Sports Centre special_hours
+- NOTICE "All pools are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "All pools are closed until further notice"
+    amenity: "pools"
+    at: facility
+- IGNORED heading "Notice"
+    section: "Notice"
+    at: facility
+- NOTICE "The pool lift is out of order until further notice."
+    section: "Notice"
+    dates: open-ended
+    match: NONE
+    phrase: "The pool lift is out of order until further notice"
+    amenity: "pool"
+    at: facility

@@ -1,0 +1,46 @@
+== Crestview Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, August 31"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "End of season dog swim, 4:30 to 5:30 pm, added"
+    date text: "Monday, August 31"
+    dates: 2026-08-31 Mon
+    time: "4:30 to 5:30 pm" 16:30-17:30 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "End of season dog swim"
+    ambiguities: dog-swim-session meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "End of season dog swim" novel sessions 2026-08-31 Mon 16:30-17:30 added
+- IGNORED supplementary "Details: Outdoor pools"
+    date text: "Monday, August 31"
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Crestview Pool special_hours
+- IGNORED date-context "Monday, August 31"
+    at: facility
+- NOTICE "Aquafit, 9 to 10 am, cancelled"
+    date text: "Monday, August 31"
+    dates: 2026-08-31 Mon
+    time: "9 to 10 am" 09:00-10:00 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit"
+    ambiguities: date-outside-schedule meridiem-inferred no-slot-overlap
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit"
+- NOTICE "Dogs swim free, 4:30 to 5:30 pm"
+    date text: "Monday, August 31"
+    dates: 2026-08-31 Mon
+    time: "4:30 to 5:30 pm" 16:30-17:30 unchecked
+    match: NOVEL
+    phrase: "Dogs swim free"
+    ambiguities: dog-swim-session meridiem-inferred
+    at: facility
+- IGNORED supplementary "See Outdoor Pools for more information."
+    date text: "Monday, August 31"
+    at: facility
+- NOTICE "Regular season ends"
+    date text: "Monday, August 31"
+    dates: 2026-08-31 Mon
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

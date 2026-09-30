@@ -1,0 +1,15 @@
+== Entrance Pool special_hours
+- NOTICE "Pre-season, June 13 to 28"
+    date text: "June 13 to 28"
+    dates: 2026-06-13 Sat to 2026-06-28 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Pre-season"
+    at: facility
+- NOTICE "Regular season, June 29 to August 16"
+    date text: "June 29 to August 16"
+    dates: 2026-06-29 Mon to 2026-08-16 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

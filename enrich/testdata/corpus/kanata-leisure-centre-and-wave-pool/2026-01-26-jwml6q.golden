@@ -1,0 +1,53 @@
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedules - group fitness"
+- IGNORED date-context "Monday, January 26"
+    at: group "Drop-in schedules - group fitness"
+- NOTICE "Strength, 9 to 10 am, cancelled"
+    date text: "Monday, January 26"
+    dates: 2026-01-26 Mon
+    time: "9 to 10 am" 09:00-10:00 exact [Monday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Strength"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedules - group fitness" activity "Strength" sessions 2026-01-26 Mon 09:00-10:00
+
+== Kanata Leisure Centre and Wave Pool special_hours
+- IGNORED date-context "Monday, January 26"
+    at: facility
+- IGNORED duplicate "Strength, 9 to 10 am, cancelled"
+    date text: "Monday, January 26"
+    dates: 2026-01-26 Mon
+    time: "9 to 10 am" 09:00-10:00 exact [Monday 9:00 - 10:00am]
+    match: EXACT
+    phrase: "Strength"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedules - group fitness" "Strength, 9 to 10 am, cancelled"
+    at: facility
+- IGNORED heading "Facility closure"
+    section: "Facility closure"
+    at: facility
+- IGNORED date-context "Thursday, February 5"
+    section: "Facility closure"
+    at: facility
+- NOTICE "The facility is closed for scheduled maintenance."
+    section: "Facility closure"
+    date text: "Thursday, February 5"
+    dates: 2026-02-05 Thu
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- IGNORED date-context "November 4, 2025 to March 13, 2026"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool is closed for maintenance."
+    section: "Pool closure"
+    date text: "November 4, 2025 to March 13, 2026"
+    dates: 2025-11-04 Tue to 2026-03-13 Fri
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

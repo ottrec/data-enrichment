@@ -1,0 +1,9 @@
+== Billings Estate National Historic Site special_hours
+- NOTICE "The museum will be closed from October 27 to November 27 for regular maintenance and to prepare for the holiday programming season. Regular operating hours will resume on Friday, November 28."
+    date text: "from October 27 to November 27"
+    dates: 2025-10-27 Mon to 2025-11-27 Thu
+    effects: closure
+    match: NONE
+    phrase: "museum"
+    ambiguities: activity-unmatched
+    at: facility

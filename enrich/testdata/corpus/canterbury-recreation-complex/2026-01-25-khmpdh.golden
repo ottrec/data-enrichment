@@ -1,0 +1,56 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, January 31"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family hockey, 12:15 to 2 pm, added"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "12:15 to 2 pm" 12:15-14:00 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Family hockey"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family hockey" novel sessions 2026-01-31 Sat 12:15-14:00 added
+- NOTICE "Child hockey, 2:15 to 4 pm, added"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "2:15 to 4 pm" 14:15-16:00 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Child hockey"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Child hockey" novel sessions 2026-01-31 Sat 14:15-16:00 added
+
+== Canterbury Recreation Complex special_hours
+- IGNORED date-context "Saturday, January 31"
+    at: facility
+- IGNORED duplicate "Family hockey, 12:15 to 2 pm, added"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "12:15 to 2 pm" 12:15-14:00 unchecked
+    match: NOVEL
+    phrase: "Family hockey"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family hockey, 12:15 to 2 pm, added"
+    at: facility
+- IGNORED duplicate "Child hockey, 2:15 to 4 pm, added"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "2:15 to 4 pm" 14:15-16:00 unchecked
+    match: NOVEL
+    phrase: "Child hockey"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Child hockey, 2:15 to 4 pm, added"
+    at: facility
+- IGNORED heading "Note"
+    section: "Note"
+    at: facility
+- UNPARSED freeform "Construction is taking place along the east and north access to the parking lot until further notice."
+    section: "Note"
+    phrase: "Construction is taking place along the east and north access to the parking lot until further notice"
+    at: facility
+- UNPARSED freeform "Pedestrian access between buildings is limited until further notice due to ongoing construction."
+    section: "Note"
+    phrase: "Pedestrian access between buildings is limited until further notice due to ongoing construction"
+    at: facility

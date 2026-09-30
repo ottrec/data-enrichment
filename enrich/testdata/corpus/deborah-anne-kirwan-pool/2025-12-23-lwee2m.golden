@@ -1,0 +1,46 @@
+== Deborah Anne Kirwan Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Monday, December 22 to Friday, January 4 see Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Deborah Anne Kirwan Pool special_hours
+- NOTICE "December 22 and 23, 4 to 8 pm"
+    date text: "December 22 and 23"
+    dates: 2025-12-22 Mon 2025-12-23 Tue
+    time: "4 to 8 pm" 16:00-20:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "December 24 to 26, closed"
+    date text: "December 24 to 26"
+    dates: 2025-12-24 Wed to 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "December 27 and 28, noon to 4 pm"
+    date text: "December 27 and 28"
+    dates: 2025-12-27 Sat 2025-12-28 Sun
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 29 and 30, 4 to 8 pm"
+    date text: "December 29 and 30"
+    dates: 2025-12-29 Mon 2025-12-30 Tue
+    time: "4 to 8 pm" 16:00-20:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 3 and 4, noon to 4 pm"
+    date text: "January 3 and 4"
+    dates: 2026-01-03 Sat 2026-01-04 Sun
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

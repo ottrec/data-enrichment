@@ -1,0 +1,54 @@
+== Routhier Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Thursday, June 25"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Badminton, 3 to 10 pm, cancelled."
+    date text: "Thursday, June 25"
+    dates: 2026-06-25 Thu
+    time: "3 to 10 pm" 15:00-22:00 covers [Thursday 3:00 - 4:00pm; Thursday 4:00 - 5:00pm; Thursday 5:00 - 6:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Badminton"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton" sessions 2026-06-25 Thu 15:00-16:00, 2026-06-25 Thu 16:00-17:00, 2026-06-25 Thu 17:00-18:00
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Routhier Community Centre special_hours
+- NOTICE "Thursday, June 25, 9 am to 8 pm"
+    date text: "Thursday, June 25"
+    dates: 2026-06-25 Thu
+    time: "9 am to 8 pm" 09:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Thursday, June 25"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Badminton, 3 to 10 pm, cancelled"
+    section: "Schedule change"
+    date text: "Thursday, June 25"
+    dates: 2026-06-25 Thu
+    time: "3 to 10 pm" 15:00-22:00 covers [Thursday 3:00 - 4:00pm; Thursday 4:00 - 5:00pm; Thursday 5:00 - 6:00pm]
+    match: EXACT
+    phrase: "Badminton"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Badminton, 3 to 10 pm, cancelled."
+    at: facility
+
+== Routhier Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

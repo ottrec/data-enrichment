@@ -1,0 +1,68 @@
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Pinecrest Recreation Complex special_hours
+- NOTICE "Saturday, May 16, 9:30 am to 2:30 pm"
+    date text: "Saturday, May 16"
+    dates: 2026-05-16 Sat
+    time: "9:30 am to 2:30 pm" 09:30-14:30 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- NOTICE "Sunday, May 17, 9:30 am to 2:30 pm"
+    date text: "Sunday, May 17"
+    dates: 2026-05-17 Sun
+    time: "9:30 am to 2:30 pm" 09:30-14:30 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- NOTICE "Monday, May 18, closed"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: closure
+    at: facility

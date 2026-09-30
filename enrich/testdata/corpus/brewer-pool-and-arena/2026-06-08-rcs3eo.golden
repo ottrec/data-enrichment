@@ -1,0 +1,41 @@
+== Brewer Pool and Arena schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, June 13"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane Swim, noon to 1 pm, cancelled"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "noon to 1 pm" 12:00-13:00 exact [Saturday 12:00 - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane Swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-06-13 Sat 12:00-13:00
+- NOTICE "Public Swim, 1 to 2 pm, cancelled"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "1 to 2 pm" 13:00-14:00 exact [Saturday 1:00 - 2:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-06-13 Sat 13:00-14:00
+- IGNORED date-context "Saturday, June 13"
+    at: facility
+- IGNORED duplicate "Lane Swim, noon to 1 pm, cancelled"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "noon to 1 pm" 12:00-13:00 exact [Saturday 12:00 - 1:00pm]
+    match: EXACT
+    phrase: "Lane Swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane Swim, noon to 1 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public Swim, 1 to 2 pm, cancelled"
+    date text: "Saturday, June 13"
+    dates: 2026-06-13 Sat
+    time: "1 to 2 pm" 13:00-14:00 exact [Saturday 1:00 - 2:00pm]
+    match: EXACT
+    phrase: "Public Swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public Swim, 1 to 2 pm, cancelled"
+    at: facility

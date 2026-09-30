@@ -1,0 +1,15 @@
+== Nepean Sportsplex special_hours
+- IGNORED date-context "Monday, April 27 to Friday, June 12"
+    at: facility
+- NOTICE "The athletics changerooms will be closed."
+    date text: "Monday, April 27 to Friday, June 12"
+    dates: 2026-04-27 Mon to 2026-06-12 Fri
+    effects: closure
+    match: NONE
+    phrase: "athletics changerooms"
+    amenity: "athletics changerooms"
+    at: facility
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

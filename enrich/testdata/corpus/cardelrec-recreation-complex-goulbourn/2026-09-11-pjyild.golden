@@ -1,0 +1,9 @@
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "August 24 to October 4: the gymnasium is closed for maintenance."
+    date text: "August 24 to October 4"
+    dates: 2026-08-24 Mon to 2026-10-04 Sun
+    effects: closure
+    match: NONE
+    phrase: "gymnasium"
+    amenity: "gymnasium"
+    at: facility

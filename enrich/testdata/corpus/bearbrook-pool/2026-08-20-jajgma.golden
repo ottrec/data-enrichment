@@ -1,0 +1,29 @@
+== Bearbrook Pool special_hours
+- NOTICE "Sunday, August 30, 5 to 6 pm"
+    date text: "Sunday, August 30"
+    dates: 2026-08-30 Sun
+    time: "5 to 6 pm" 17:00-18:00 unchecked
+    ambiguities: hours-context-unknown meridiem-inferred
+    at: facility
+- IGNORED supplementary "See Outdoor Pools for more information."
+    date text: "Sunday, August 30"
+    at: facility
+- IGNORED heading "Summer 2026"
+    section: "Summer 2026"
+    at: facility
+- NOTICE "Regular season, June 29 to August 23"
+    section: "Summer 2026"
+    date text: "June 29 to August 23"
+    dates: 2026-06-29 Mon to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- NOTICE "Post season, August 24 to 30"
+    section: "Summer 2026"
+    date text: "August 24 to 30"
+    dates: 2026-08-24 Mon to 2026-08-30 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Post season"
+    at: facility

@@ -1,0 +1,25 @@
+== Pinecrest Recreation Complex special_hours
+- IGNORED date-context "Thursday, June 11"
+    at: facility
+- NOTICE "The facility will close at 4:30 pm and return to regular hours Friday, June 12."
+    date text: "Thursday, June 11"
+    dates: 2026-06-11 Thu
+    time: "will close at 4:30 pm" 16:30-24:00 open-end unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "Monday, June 7 to Sunday, June 28"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Closure"
+    date text: "Monday, June 7 to Sunday, June 28"
+    dates: 2026-06-07 Sun to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    ambiguities: weekday-mismatch
+    at: facility

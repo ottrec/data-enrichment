@@ -1,0 +1,276 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, June 22 and Tuesday, June 23"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Sauna, 4 to 7:30 pm, closed"
+    date text: "Monday, June 22 and Tuesday, June 23"
+    dates: 2026-06-22 Mon 2026-06-23 Tue
+    time: "4 to 7:30 pm" 16:00-19:30 within [Monday 2:00 - 9:00pm; Tuesday 4:30 - 9:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna *Reservations not required." sessions 2026-06-22 Mon 14:00-21:00, 2026-06-23 Tue 16:30-21:00
+- IGNORED date-context "Wednesday, June 24"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Sauna, 4:30 to 9 pm, closed"
+    date text: "Wednesday, June 24"
+    dates: 2026-06-24 Wed
+    time: "4:30 to 9 pm" 16:30-21:00 overlaps [Wednesday 11:30am - 8:30pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna *Reservations not required." sessions 2026-06-24 Wed 11:30-20:30
+- IGNORED date-context "Thursday, June 25"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Sauna, 4 to 7:30 pm, closed"
+    date text: "Thursday, June 25"
+    dates: 2026-06-25 Thu
+    time: "4 to 7:30 pm" 16:00-19:30 overlaps [Thursday 4:30 - 9:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna *Reservations not required." sessions 2026-06-25 Thu 16:30-21:00
+- IGNORED date-context "Friday, June 26"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Sauna, 4:30 to 7:30 pm, closed"
+    date text: "Friday, June 26"
+    dates: 2026-06-26 Fri
+    time: "4:30 to 7:30 pm" 16:30-19:30 within [Friday 7:30am - 7:30pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna *Reservations not required." sessions 2026-06-26 Fri 07:30-19:30
+- IGNORED date-context "Saturday, June 27"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 9:30 am to 12:30 pm, added"
+    date text: "Saturday, June 27"
+    dates: 2026-06-27 Sat
+    time: "9:30 am to 12:30 pm" 09:30-12:30 novel
+    effects: added
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim*Reservations not required." sessions 2026-06-27 Sat 09:30-12:30 added
+- NOTICE "Public swim - leisure pool only, 9:30 am to 12:30 pm, added"
+    date text: "Saturday, June 27"
+    dates: 2026-06-27 Sat
+    time: "9:30 am to 12:30 pm" 09:30-12:30 novel
+    effects: added
+    match: EXACT
+    phrase: "Public swim - leisure pool only"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim - leisure pool only*Reservations not required." sessions 2026-06-27 Sat 09:30-12:30 added
+- NOTICE "Sauna, 4 to 7 pm, closed"
+    date text: "Saturday, June 27"
+    dates: 2026-06-27 Sat
+    time: "4 to 7 pm" 16:00-19:00 within [Saturday 8:30am - 7:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna *Reservations not required." sessions 2026-06-27 Sat 08:30-19:00
+- NOTICE "Aqua Zumba®, 7 to 8 pm, cancelled"
+    date text: "Saturday, June 27"
+    dates: 2026-06-27 Sat
+    time: "7 to 8 pm" 19:00-20:00 exact [Saturday 7:00 - 8:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Aqua Zumba®"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit Zumba®" sessions 2026-06-27 Sat 19:00-20:00
+- IGNORED date-context "Sunday, June 28"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 10:30 am to 1:30 pm, added"
+    date text: "Sunday, June 28"
+    dates: 2026-06-28 Sun
+    time: "10:30 am to 1:30 pm" 10:30-13:30 novel
+    effects: added
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim*Reservations not required." sessions 2026-06-28 Sun 10:30-13:30 added
+- NOTICE "Public swim - leisure pool only, 10:30 am to 1:30 pm, added"
+    date text: "Sunday, June 28"
+    dates: 2026-06-28 Sun
+    time: "10:30 am to 1:30 pm" 10:30-13:30 novel
+    effects: added
+    match: EXACT
+    phrase: "Public swim - leisure pool only"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim - leisure pool only*Reservations not required." sessions 2026-06-28 Sun 10:30-13:30 added
+- NOTICE "Sauna, 4 to 7 pm, closed"
+    date text: "Sunday, June 28"
+    dates: 2026-06-28 Sun
+    time: "4 to 7 pm" 16:00-19:00 within [Sunday 8:30am - 7:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna *Reservations not required." sessions 2026-06-28 Sun 08:30-19:00
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Monday, June 22 and Tuesday, June 23"
+    at: facility
+- IGNORED duplicate "Sauna, 4 to 7:30 pm, closed"
+    date text: "Monday, June 22 and Tuesday, June 23"
+    dates: 2026-06-22 Mon 2026-06-23 Tue
+    time: "4 to 7:30 pm" 16:00-19:30 within [Monday 2:00 - 9:00pm; Tuesday 4:30 - 9:00pm]
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Sauna, 4 to 7:30 pm, closed"
+    at: facility
+- IGNORED date-context "Wednesday, June 24"
+    at: facility
+- IGNORED duplicate "Sauna, 4:30 to 9 pm, closed"
+    date text: "Wednesday, June 24"
+    dates: 2026-06-24 Wed
+    time: "4:30 to 9 pm" 16:30-21:00 overlaps [Wednesday 11:30am - 8:30pm]
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Sauna, 4:30 to 9 pm, closed"
+    at: facility
+- IGNORED date-context "Thursday, June 25"
+    at: facility
+- IGNORED duplicate "Sauna, 4 to 7:30 pm, closed"
+    date text: "Thursday, June 25"
+    dates: 2026-06-25 Thu
+    time: "4 to 7:30 pm" 16:00-19:30 overlaps [Thursday 4:30 - 9:00pm]
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Sauna, 4 to 7:30 pm, closed"
+    at: facility
+- IGNORED date-context "Friday, June 26"
+    at: facility
+- IGNORED duplicate "Sauna, 4:30 to 7:30 pm, closed"
+    date text: "Friday, June 26"
+    dates: 2026-06-26 Fri
+    time: "4:30 to 7:30 pm" 16:30-19:30 within [Friday 7:30am - 7:30pm]
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Sauna, 4:30 to 7:30 pm, closed"
+    at: facility
+- IGNORED date-context "Saturday, June 27"
+    at: facility
+- IGNORED duplicate "Lane swim, 9:30 am to 12:30 pm, added"
+    date text: "Saturday, June 27"
+    dates: 2026-06-27 Sat
+    time: "9:30 am to 12:30 pm" 09:30-12:30 novel
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 9:30 am to 12:30 pm, added"
+    at: facility
+- IGNORED duplicate "Public swim - leisure pool only, 9:30 am to 12:30 pm, added"
+    date text: "Saturday, June 27"
+    dates: 2026-06-27 Sat
+    time: "9:30 am to 12:30 pm" 09:30-12:30 novel
+    match: EXACT
+    phrase: "Public swim - leisure pool only"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim - leisure pool only, 9:30 am to 12:30 pm, added"
+    at: facility
+- IGNORED duplicate "Sauna, 4 to 7 pm, closed"
+    date text: "Saturday, June 27"
+    dates: 2026-06-27 Sat
+    time: "4 to 7 pm" 16:00-19:00 within [Saturday 8:30am - 7:00pm]
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Sauna, 4 to 7 pm, closed"
+    at: facility
+- IGNORED duplicate "Aqua Zumba®, 7 to 8 pm, cancelled"
+    date text: "Saturday, June 27"
+    dates: 2026-06-27 Sat
+    time: "7 to 8 pm" 19:00-20:00 exact [Saturday 7:00 - 8:00pm]
+    match: NORMALIZED
+    phrase: "Aqua Zumba®"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aqua Zumba®, 7 to 8 pm, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, June 28"
+    at: facility
+- IGNORED duplicate "Lane swim, 10:30 am to 1:30 pm, added"
+    date text: "Sunday, June 28"
+    dates: 2026-06-28 Sun
+    time: "10:30 am to 1:30 pm" 10:30-13:30 novel
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 10:30 am to 1:30 pm, added"
+    at: facility
+- IGNORED duplicate "Public swim - leisure pool only, 10:30 am to 1:30 pm, added"
+    date text: "Sunday, June 28"
+    dates: 2026-06-28 Sun
+    time: "10:30 am to 1:30 pm" 10:30-13:30 novel
+    match: EXACT
+    phrase: "Public swim - leisure pool only"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim - leisure pool only, 10:30 am to 1:30 pm, added"
+    at: facility
+- IGNORED duplicate "Sauna, 4 to 7 pm, closed"
+    date text: "Sunday, June 28"
+    dates: 2026-06-28 Sun
+    time: "4 to 7 pm" 16:00-19:00 within [Sunday 8:30am - 7:00pm]
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Sauna, 4 to 7 pm, closed"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Wednesday, July 1, 10 am to 4 pm"
+    section: "Modified hours"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

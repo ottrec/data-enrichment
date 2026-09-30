@@ -1,0 +1,44 @@
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, October 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 7:30 to 8:30 pm, cancelled"
+    date text: "Saturday, October 4"
+    dates: 2025-10-04 Sat
+    time: "7:30 to 8:30 pm" 19:30-20:30 exact [Saturday 7:30 - 8:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim" sessions 2025-10-04 Sat 19:30-20:30
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/sawmill-creek-community-centre-and-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, October 11 to Monday, October 13"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 to Monday, October 13"
+    dates: 2025-10-11 Sat to 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/sawmill-creek-community-centre-and-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Sawmill Creek Community Centre and Pool special_hours
+- IGNORED date-context "Saturday, October 4"
+    at: facility
+- IGNORED duplicate "Lane swim, 7:30 to 8:30 pm, cancelled"
+    date text: "Saturday, October 4"
+    dates: 2025-10-04 Sat
+    time: "7:30 to 8:30 pm" 19:30-20:30 exact [Saturday 7:30 - 8:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 7:30 to 8:30 pm, cancelled"
+    at: facility

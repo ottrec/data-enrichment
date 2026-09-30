@@ -1,0 +1,8 @@
+== Cumberland Heritage Village Museum special_hours
+- NOTICE "The final day of the 2025 regular operating season will be Friday, October 10. Stay tuned for programs and special events year-round."
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    match: NONE
+    phrase: "The final day of the 2025 regular operating season will be. Stay tuned for programs and special events year-round"
+    ambiguities: freeform-item
+    at: facility

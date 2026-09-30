@@ -1,0 +1,8 @@
+== Nepean Museum special_hours
+- NOTICE "The museum will be closed from November 19 to November 21 for regular maintenance and to prepare for the holiday programming season. Regular operating hours will resume on Saturday, November 22."
+    date text: "from November 19 to November 21"
+    dates: 2025-11-19 Wed to 2025-11-21 Fri
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "museum"
+    at: facility

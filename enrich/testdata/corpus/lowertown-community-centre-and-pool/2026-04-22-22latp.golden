@@ -1,0 +1,28 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Friday, April 24"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Lane swim, 2 to 3:30 pm, cancelled"
+    date text: "Friday, April 24"
+    dates: 2026-04-24 Fri
+    time: "2 to 3:30 pm" 14:00-15:30 exact [Friday 2:00 - 3:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Lane swim" sessions 2026-04-24 Fri 14:00-15:30
+- IGNORED date-context "Friday, April 24"
+    at: facility
+- IGNORED duplicate "Lane swim, 2 to 3:30 pm, cancelled"
+    date text: "Friday, April 24"
+    dates: 2026-04-24 Fri
+    time: "2 to 3:30 pm" 14:00-15:30 exact [Friday 2:00 - 3:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Lane swim, 2 to 3:30 pm, cancelled"
+    at: facility
+
+== Lowertown Community Centre and Pool notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,21 @@
+== John G. Mlacak Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, January 22"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All skating and ice sports drop-ins, cancelled"
+    date text: "Thursday, January 22"
+    dates: 2026-01-22 Thu
+    time: "" covers [Thursday 8:00 - 8:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skating and ice sports drop-ins"
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, January 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All skating and ice sports drop-ins, cancelled"
+    date text: "Thursday, January 22"
+    dates: 2026-01-22 Thu
+    time: "" covers [Thursday 7:00 - 7:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skating and ice sports drop-ins"
+    at: group "Drop-in schedule - skating"

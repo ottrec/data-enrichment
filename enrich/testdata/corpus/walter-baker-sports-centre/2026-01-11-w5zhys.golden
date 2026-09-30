@@ -1,0 +1,14 @@
+== Walter Baker Sports Centre special_hours
+- NOTICE "The whirlpool is temporarily closed."
+    effects: closure
+    match: NONE
+    phrase: "whirlpool"
+    amenity: "whirlpool"
+    at: facility
+- NOTICE "Whale pool closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "whale pool"
+    amenity: "whale pool"
+    at: facility

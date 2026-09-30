@@ -1,0 +1,386 @@
+# golden corpus summary
+
+2511 fixtures, 20409 objects
+
+## kind
+
+  10154 ignored
+    784 ignored/boilerplate
+   6913 ignored/date-context
+   1698 ignored/duplicate
+    723 ignored/heading
+     12 ignored/service-desk
+     24 ignored/supplementary
+  10139 notice
+    116 unparsed
+    116 unparsed/freeform
+
+## effect
+
+    250 added
+   3134 cancelled
+   3097 closure
+   1222 modified-hours
+    187 restriction
+    204 seasonal-hours
+   2677 see-schedule
+     31 time-change
+
+## match
+
+   2320 exact
+    697 fuzzy
+    133 multiple
+    623 none
+    114 normalized
+     61 novel
+   5422 scope_phrase
+
+## relation
+
+   1317 covers
+   1999 exact
+    134 none
+    327 novel
+     83 overlaps
+   1646 unchecked
+    323 within
+
+## marker
+
+    133 activity-multiple-candidates
+     20 activity-narrowed-to-amenity
+    215 activity-time-disambiguated
+     19 activity-typo-match
+     18 activity-unmatched
+      9 added-time-already-scheduled
+     15 class-title-partial
+      3 class-unmatched
+     12 date-garbled
+      2 date-month-only
+     12 date-only-item
+     91 date-outside-schedule
+     11 dog-swim-session
+     56 freeform-item
+     13 head-unparsed
+     35 hours-context-unknown
+     41 matched-other-group
+      3 meridiem-ambiguous
+   2332 meridiem-inferred
+     92 no-slot-overlap
+    107 possible-activity-time
+      8 skating-widened-to-window
+    178 weekday-mismatch
+
+## undated-effect: 36
+
+A notice that cancels, closes or adds with no date, which applies on every day it is posted.
+
+- Belltown Dome: "The facility is closed for the season." (closure)
+    belltown-dome/2025-10-06-tk7ech and 1 more
+- Ben Franklin Place: "Meridian Theatres @ Centrepointe and the Nepean Centrepointe branch of the Ottawa Public Library will remain closed for continued recovery and restoration efforts, and all sections of the lower level of the building remain restricted." (closure)
+    ben-franklin-place/2026-07-15-ozg3fl and 1 more
+- Ben Franklin Place: "Meridian Theatres @ Centrepointe will remain closed for continued recovery and restoration efforts" (closure)
+    ben-franklin-place/2026-08-02-frewxd and 1 more
+- Ben Franklin Place: "The building, library and all services are open. Meridian Theatres @ Centrepointe remains closed for flood restoration." (closure)
+    ben-franklin-place/2026-09-01-bd6ccv and 2 more
+- Brewer Pool and Arena: "The sauna is temporarily closed." (closure)
+    brewer-pool-and-arena/2026-05-20-bg7cbg
+- CARDELREC Recreation Complex Goulbourn: "The therapuetic pool is closed." (closure)
+    cardelrec-recreation-complex-goulbourn/2026-03-17-fk3yd6
+- Cumberland Heritage Village Museum: "The museum is closed to daily visitors for the winter season, except for programs and special events. The museum will reopen to visitors in May 2026." (closure)
+    cumberland-heritage-village-museum/2025-12-22-hwq7hx and 1 more
+- Cumberland Heritage Village Museum: "The museum is closed to daily visitors from mid-October through mid-May except for programs and special events, which are offered year-round." (closure)
+    cumberland-heritage-village-museum/2025-10-16-5qxega and 1 more
+- Deborah Anne Kirwan Pool: "The pool is closed and all programs cancelled." (cancelled closure)
+    deborah-anne-kirwan-pool/2025-10-22-wgrx46
+- Fairfields Heritage House: "Fairfields Heritage House is closed for the winter season, with the exception of special programs and events. The museum will reopen to visitors in summer 2026." (closure)
+    fairfields-heritage-house/2025-12-11-ryinoz and 2 more
+- Fairfields Heritage House: "The summer operating season has now ended at Fairfields Heritage House. The museum is closed to daily visitors, but programs and special events are offered year-round." (closure)
+    fairfields-heritage-house/2026-09-24-yjyy75
+- François Dupuis Recreation Centre: "The facility is closed and all programs cancelled." (cancelled closure)
+    francois-dupuis-recreation-centre/2026-04-01-f5oxp4
+- François Dupuis Recreation Centre: "The pool is closed until noon." (closure)
+    francois-dupuis-recreation-centre/2026-07-02-5fevp5
+- Heron Road Community Centre: "The cardio and weight room is closed." (closure)
+    heron-road-community-centre/2025-10-06-tk7ech and 1 more
+- Heron Seniors Centre: "The cardio and weight room is closed." (closure)
+    heron-seniors-centre/2025-10-06-tk7ech and 1 more
+- Jim Tubman Chevrolet Rink: "The rink is closed for the season." (closure)
+    jim-tubman-chevrolet-rink/2026-03-31-byn5do and 1 more
+- Lansdowne Park: "The Great Lawn and the sledding hill and at Lansdowne Park are closed due to construction." (closure)
+    lansdowne-park/2025-12-23-lwee2m
+- Lansdowne Park: "The Great Lawn and the sledding hill at Lansdowne Park are closed due to construction." (closure)
+    lansdowne-park/2025-12-24-nfqsp7 and 5 more
+- Lansdowne Park: "The sledding hill at Lansdowne Park is closed due to construction." (closure)
+    lansdowne-park/2025-12-11-ryinoz and 1 more
+- Minto Recreation Complex - Barrhaven: "The facility is closed, 6:15 to 10 am. All programs are cancelled." (cancelled)
+    minto-recreation-complex-barrhaven/2025-10-09-aqli6r
+- Minto Recreation Complex - Barrhaven: "The facility is closed, 6:15 to 10 am. All programs are cancelled." (closure)
+    minto-recreation-complex-barrhaven/2025-10-09-aqli6r
+- Nepean Museum: "The museum will be closed on the following public holidays:" (closure)
+    nepean-museum/2025-12-22-hwq7hx
+- Pinhey's Point Historic Site: "The museum at Pinhey's Point Historic Site is closed for the winter season. It will reopen to visitors in May 2026." (closure)
+    pinhey-s-point-historic-site/2025-10-16-5qxega and 1 more
+- Pinhey's Point Historic Site: "The museum at Pinhey's Point Historic Site is closed for the winter season. It will reopen to visitors in summer 2026." (closure)
+    pinhey-s-point-historic-site/2026-05-08-4gmfub
+- Pinhey's Point Historic Site: "The museum at Pinhey's Point Historic Site is closed. It will reopen to visitors in late July 2026." (closure)
+    pinhey-s-point-historic-site/2026-06-04-pkyzvi
+- Plant Recreation Centre: "The facility is closed and all programs cancelled." (cancelled closure)
+    plant-recreation-centre/2026-06-25-4qwuaj
+- St. Laurent Complex: "The pool's wheelchair ramp is currently unavailable. We apologize for the inconvenience." (closure)
+    st-laurent-complex/2026-08-14-uycqmu and 4 more
+- Terry Fox Athletic Facility: "The facility is not available 9 am to 3 pm on the following dates:" (closure)
+    terry-fox-athletic-facility/2025-10-06-tk7ech and 1 more
+- Terry Fox Athletic Facility: "The facility is not available due to special events:" (closure)
+    terry-fox-athletic-facility/2026-07-22-b7nt23 and 8 more
+- Terry Fox Athletic Facility: "The facility is not available on the following dates due to special events:" (closure)
+    terry-fox-athletic-facility/2026-03-17-fk3yd6 and 6 more
+- Terry Fox Athletic Facility: "Track and field is now closed for the season and the facility will reopen in January for cross-country skiing." (closure)
+    terry-fox-athletic-facility/2025-11-10-zersph
+- Tony Graham Recreation Complex - Kanata: "The facility is closed until October." (closure)
+    tony-graham-recreation-complex-kanata/2026-08-07-sytkfb
+- Walter Baker Sports Centre: "3m diving board closed." (closure)
+    walter-baker-sports-centre/2025-11-21-iaknce
+- Walter Baker Sports Centre: "All Aquafit Lite and Aquafit - shallow, cancelled." (cancelled)
+    walter-baker-sports-centre/2025-10-28-lqlr2u
+- Walter Baker Sports Centre: "The main pool is closed today until 12:30 pm" (closure)
+    walter-baker-sports-centre/2025-10-28-lqlr2u
+- Walter Baker Sports Centre: "The whirlpool is temporarily closed." (closure)
+    walter-baker-sports-centre/2026-01-11-w5zhys
+
+## no-effect: 20
+
+A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect word list) and has none, nor does any other sentence of the item.
+
+- Bearbrook Pool: "Closed until the Summer 2027 season." (closed)
+    bearbrook-pool/2026-08-31-imjgcl
+- Bob MacQuarrie Recreation Complex - Orléans: "The West Entrance parking lot will be undergoing repairs. The parking lot will remain open and accessible to the public." (open)
+    bob-macquarrie-recreation-complex-orleans/2026-09-26-cxz4x7 and 3 more
+- Fairfields Heritage House: "Fairfields Heritage House is open to visitors seasonally during the summer and offers special programs and events year-round." (open)
+    fairfields-heritage-house/2025-10-06-tk7ech
+- Genest Pool: "Closed until the 2027 Summer season." (closed)
+    genest-pool/2026-08-31-imjgcl
+- Nepean Sportsplex: "The Athletics change rooms are now open." (open)
+    nepean-sportsplex/2026-08-07-sytkfb and 3 more
+- Nepean Sportsplex: "The diving boards are open during Public Swim." (open)
+    nepean-sportsplex/2026-08-05-lfpr5c and 1 more
+- Overbrook Community Centre: "Emergency cooling centre will be open from 10 am to 8 pm." (open)
+    overbrook-community-centre/2026-07-01-dqbvfo
+- Pinhey's Point Historic Site: "The museum at Pinhey's Point Historic Site is open to visitors seasonally from May to October. The park is open year-round." (open)
+    pinhey-s-point-historic-site/2025-10-06-tk7ech
+- Pinhey's Point Historic Site: "The park grounds remain open to visitors year-round." (open)
+    pinhey-s-point-historic-site/2026-08-20-v4rnus
+- Plant Recreation Centre: "Emergency cooling centre will be open from 10 am to 5 pm." (open)
+    plant-recreation-centre/2026-06-30-mqukqb
+- Ray Friel Recreation Complex: "Pick-up hockey 18+, noon to 12:50 pm only" (only)
+    ray-friel-recreation-complex/2026-02-13-4raexg and 1 more
+- Richcraft Recreation Complex-Kanata: "All other areas of the facility and drop-in programs will be closed during the event." (closed)
+    richcraft-recreation-complex-kanata/2026-08-12-6hnosn
+- Richcraft Recreation Complex-Kanata: "All other areas of the facility will be closed during the event." (closed)
+    richcraft-recreation-complex-kanata/2026-08-10-bph7yw
+- Richcraft Recreation Complex-Kanata: "The weight and cardio room will remain open." (open)
+    richcraft-recreation-complex-kanata/2026-08-10-bph7yw and 1 more
+- Ron Kolbus Lakeside Centre: "Main patio washrooms are open 9 am to 7 pm." (open)
+    ron-kolbus-lakeside-centre/2026-06-04-pkyzvi and 2 more
+- Sawmill Creek Community Centre and Pool: "All swims at reduced capacity" (reduced)
+    sawmill-creek-community-centre-and-pool/2026-07-25-adamty
+- Sawmill Creek Community Centre and Pool: "Public swim, 1:30 to 3 pm only" (only)
+    sawmill-creek-community-centre-and-pool/2026-07-30-6axttc and 2 more
+- Tom Brown Arena: "Emergency cooling centre will be open from 9 am to 8 pm" (open)
+    tom-brown-arena/2026-06-30-mqukqb
+- Tony Graham Recreation Complex - Kanata: "The arenas will open*" (open)
+    tony-graham-recreation-complex-kanata/2026-09-25-2gsk5c
+- Walter Baker Sports Centre: "PD Day Public Swim - training and whale pools only, 8:30 to 10 am" (only)
+    walter-baker-sports-centre/2026-09-17-nz6mft and 11 more
+
+## stray-date: 7
+
+A notice or unparsed item that names a month and day its resolved dates do not include (claude-qc's enrich-stray-date).
+
+- Billings Estate National Historic Site: "The museum will be closed from December 22, 2025 through January 4, 2026. Winter hours of operation will begin on Monday, January 5." (Jan 5)
+    billings-estate-national-historic-site/2025-12-22-hwq7hx
+- Billings Estate National Historic Site: "The museum will be closed from October 27 to November 27 for regular maintenance and to prepare for the holiday programming season. Regular operating hours will resume on Friday, November 28." (Nov 28)
+    billings-estate-national-historic-site/2025-10-27-dell3j
+- Billings Estate National Historic Site: "The museum will be closed through April 14, 2026. Summer hours of operation will begin on Wednesday, April 15 (Wednesday to Sunday from 10 am to 5 pm)." (Apr 15)
+    billings-estate-national-historic-site/2026-04-09-5dannm
+- Cumberland Heritage Village Museum: "The museum will reopen to daily visitors beginning Sunday, May 10, 2026. Workshops and special events are offered year-round." (May 10, no dates)
+    cumberland-heritage-village-museum/2026-04-15-i6z7tn and 1 more
+- Nepean Museum: "The museum will be closed from November 19 to November 21 for regular maintenance and to prepare for the holiday programming season. Regular operating hours will resume on Saturday, November 22." (Nov 22)
+    nepean-museum/2025-11-17-scv7br
+- Pinecrest Recreation Complex: "The facility will close at 4:30 pm and return to regular hours Friday, June 12." (Jun 12)
+    pinecrest-recreation-complex/2026-06-09-wgzj4i
+- Pinecrest Recreation Complex: "The facility will close at 4:30 pm, Thursday, June 11, and reopen at noon, Friday, June 12." (Jun 12)
+    pinecrest-recreation-complex/2026-06-11-ns7p56
+
+## far-date: 4
+
+A resolved date more than 300 days from the fixture's anchor (its source date).
+
+- St. Laurent Complex: "The pool and change rooms are closed." (2025-06-02 Mon is -301 days)
+    st-laurent-complex/2026-03-30-vqs2q6
+- St. Laurent Complex: "The pool and change rooms are closed." (2025-06-02 Mon is -303 days)
+    st-laurent-complex/2026-04-01-f5oxp4
+- St. Laurent Complex: "The pool and change rooms are closed." (2025-06-02 Mon is -304 days)
+    st-laurent-complex/2026-04-02-aidrvf
+- St. Laurent Complex: "The pool and change rooms are closed." (2025-06-02 Mon is -309 days)
+    st-laurent-complex/2026-04-07-ht7az6
+
+## head-unparsed-trigger: 3
+
+A list head left unparsed although it carries an effect word, so its children lost what it says.
+
+- Crestview Pool: "End of season dog swim, 4:30 to 5:30 pm, added" (added)
+    crestview-pool/2026-08-13-x4iihf and 2 more
+- François Dupuis Recreation Centre: "The 25 m pool is closed between 7:30 and 10:30 am." (closed)
+    francois-dupuis-recreation-centre/2026-06-11-ns7p56 and 2 more
+- Jim Tubman Chevrolet Rink: "The rink is closed from noon to 4 pm" (closed)
+    jim-tubman-chevrolet-rink/2026-01-23-t5lrwi
+
+## unparsed: 32
+
+Objects of kind UNPARSED: the residue.
+
+- Bearbrook Pool: "...until summer 2027" (freeform)
+    bearbrook-pool/2026-09-02-wnazvw
+- Bearbrook Pool: "Closed until the Summer 2027 season." (freeform)
+    bearbrook-pool/2026-08-31-imjgcl
+- Beaverbrook Pool - Kanata: "...until Summer 2027" (freeform)
+    beaverbrook-pool-kanata/2026-08-26-a2trbv
+- Canterbury Recreation Complex: "Construction is taking place along the east and north access to the parking lot until further notice." (freeform)
+    canterbury-recreation-complex/2025-11-05-zvld2d and 25 more
+- Canterbury Recreation Complex: "Construction will be taking place along the east and north access to the parking lot." (freeform)
+    canterbury-recreation-complex/2025-10-06-tk7ech and 6 more
+- Canterbury Recreation Complex: "Pedestrian access between buildings is limited until further notice due to ongoing construction." (freeform)
+    canterbury-recreation-complex/2025-11-05-zvld2d and 25 more
+- Corkstown Pool: "...until Summer 2027" (freeform)
+    corkstown-pool/2026-08-24-q4hh2e
+- Crestview Pool: "...until Summer 2027" (freeform)
+    crestview-pool/2026-09-01-bd6ccv
+- Cumberland Heritage Village Museum: "The museum will reopen to daily visitors beginning Sunday, May 10, 2026. Workshops and special events are offered year-round." (freeform)
+    cumberland-heritage-village-museum/2026-04-15-i6z7tn and 1 more
+- Entrance Pool: "...until summer 2027" (freeform)
+    entrance-pool/2026-08-24-q4hh2e
+- Fairfields Heritage House: "*Hours may vary for programs and special events." (freeform)
+    fairfields-heritage-house/2026-05-12-bluqcm
+- Fairfields Heritage House: "Fairfields Heritage House is open to visitors seasonally during the summer and offers special programs and events year-round." (freeform)
+    fairfields-heritage-house/2025-10-06-tk7ech
+- Fairfields Heritage House: "July and August:" (freeform)
+    fairfields-heritage-house/2026-05-12-bluqcm
+- Fairfields Heritage House: "May and June:" (freeform)
+    fairfields-heritage-house/2026-05-12-bluqcm
+- Fairfields Heritage House: "Summer season" (freeform)
+    fairfields-heritage-house/2025-10-06-tk7ech
+- François Dupuis Recreation Centre: "Civic Holiday" (freeform)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt and 4 more
+- General Burns Pool: "...until Summer 2027" (freeform)
+    general-burns-pool/2026-09-01-bd6ccv
+- Genest Pool: "...until summer 2027" (freeform)
+    genest-pool/2026-09-02-wnazvw
+- Genest Pool: "Closed until the 2027 Summer season." (freeform)
+    genest-pool/2026-08-31-imjgcl
+- Glen Cairn Pool: "...until Summer 2027" (freeform)
+    glen-cairn-pool/2026-08-24-q4hh2e
+- Jim Durrell Recreation Centre: "Please be advised that our parking lot will be under construction. Expect delays, limited parking availability, and changes to traffic flow while work is underway." (freeform)
+    jim-durrell-recreation-centre/2026-07-09-ezziwb and 10 more
+- Katimavik Pool: "...until Summer 2027" (freeform)
+    katimavik-pool/2026-08-24-q4hh2e
+- Nepean Sportsplex: "November pool changes" (freeform)
+    nepean-sportsplex/2025-10-30-k6yy5e and 6 more
+- Nepean Sportsplex: "Skating and Ice Sports will resume in the Fall." (freeform)
+    nepean-sportsplex/2026-05-08-4gmfub and 2 more
+- Nepean Sportsplex: "Skating and Ice Sports will resume in the fall." (freeform)
+    nepean-sportsplex/2026-05-07-ybub6t
+- Pinhey's Point Historic Site: "Summer season" (freeform)
+    pinhey-s-point-historic-site/2025-10-06-tk7ech
+- Pinhey's Point Historic Site: "The museum at Pinhey's Point Historic Site is open to visitors seasonally from May to October. The park is open year-round." (freeform)
+    pinhey-s-point-historic-site/2025-10-06-tk7ech
+- Plant Recreation Centre: "Residents are encouraged to stay cool at home using the Beat the Heat tips from Ottawa Public Health." (freeform)
+    plant-recreation-centre/2026-07-02-vjnexu
+- Ron Kolbus Lakeside Centre: "Main patio washrooms are open 9 am to 7 pm." (freeform)
+    ron-kolbus-lakeside-centre/2026-06-04-pkyzvi and 2 more
+- Splash Wave Pool: "Aquafit will take place in the wave pool until further notice." (freeform)
+    splash-wave-pool/2025-11-10-zersph
+- Splash Wave Pool: "The air heater at our facility is not working. The building may feel colder than usual." (freeform)
+    splash-wave-pool/2025-12-05-2nsxpg and 3 more
+- Terry Fox Athletic Facility: "The facility will reopen in January for cross-country skiing." (freeform)
+    terry-fox-athletic-facility/2025-12-29-mw7dxs
+
+## session-outside-schedule: 37
+
+A published session an object refers to on a date outside every effective range of the schedules that list its activity (ranges are negative-only evidence, so this should not happen).
+
+- Bob MacQuarrie Recreation Complex - Orléans: "Indoor cycling, all drop-ins cancelled." ("Indoor cycling *Reservations required" 2026-10-05 Mon)
+    bob-macquarrie-recreation-complex-orleans/2026-09-08-qf5txy and 8 more
+- Bob MacQuarrie Recreation Complex - Orléans: "September 14 to October 5, all indoor cycling cancelled." ("Indoor cycling *Reservations required" 2026-10-05 Mon)
+    bob-macquarrie-recreation-complex-orleans/2026-09-08-qf5txy and 8 more
+- CARDELREC Recreation Complex Goulbourn: "All group fitness, gymnasium sports, and skating drop-ins are cancelled." ("Family skate" 2026-07-01 Wed)
+    cardelrec-recreation-complex-goulbourn/2026-06-23-iawabs and 17 more
+- CARDELREC Recreation Complex Goulbourn: "All group fitness, gymnasium sports, and skating drop-ins are cancelled." ("Pick-up hockey 35+ *Reservations required." 2026-07-01 Wed)
+    cardelrec-recreation-complex-goulbourn/2026-06-23-iawabs and 11 more
+- CARDELREC Recreation Complex Goulbourn: "All group fitness, gymnasium sports, and skating drop-ins are cancelled." ("Pick-up hockey 50+ *Reservations required." 2026-07-01 Wed)
+    cardelrec-recreation-complex-goulbourn/2026-06-23-iawabs and 17 more
+- CARDELREC Recreation Complex Goulbourn: "All group fitness, gymnasium sports, and skating drop-ins are cancelled." ("Public skate" 2026-07-01 Wed)
+    cardelrec-recreation-complex-goulbourn/2026-06-23-iawabs and 17 more
+- Crestview Pool: "Aquafit General, 9 to 10 am, cancelled" ("Aquafit general" 2026-08-31 Mon)
+    crestview-pool/2026-08-13-x4iihf
+- Entrance Pool: "Public swim will end at 6 pm." ("Public Swim *Reservations not required." 2026-07-13 Mon)
+    entrance-pool/2026-06-30-mqukqb and 1 more
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, and noon to 1:30 pm, cancelled" ("Lane swim - shared pool" 2026-07-29 Wed)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, and noon to 1:30 pm, cancelled" ("Lane swim - shared pool" 2026-07-30 Thu)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, and noon to 1:30 pm, cancelled" ("Lane swim - shared pool" 2026-07-31 Fri)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, cancelled" ("Lane swim - shared pool" 2026-07-27 Mon)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, cancelled" ("Lane swim - shared pool" 2026-07-28 Tue)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, cancelled" ("Lane swim - shared pool" 2026-08-04 Tue)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, cancelled" ("Lane swim - shared pool" 2026-08-05 Wed)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, cancelled" ("Lane swim - shared pool" 2026-08-06 Thu)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- François Dupuis Recreation Centre: "Lane swim - shared pool, 8:30 to 9 am, cancelled" ("Lane swim - shared pool" 2026-08-07 Fri)
+    francois-dupuis-recreation-centre/2026-07-24-y2ofyt
+- Lowertown Community Centre and Pool: "Pickleball, 8:30 am to 12:30 pm, cancelled" ("Pickleball *Reservations required." 2026-03-25 Wed)
+    lowertown-community-centre-and-pool/2026-03-26-pqcket and 1 more
+- Ray Friel Recreation Complex: "Pick-up hockey 18+, Noon to 1:20 pm, cancelled" ("Pick-up hockey 18+" 2026-02-18 Wed)
+    ray-friel-recreation-complex/2026-02-13-4raexg
+- Ray Friel Recreation Complex: "Pick-up hockey 18+, noon to 1:30 pm, cancelled" ("Pick-up hockey 18+" 2025-12-12 Fri)
+    ray-friel-recreation-complex/2025-12-10-hhjiy3 and 1 more
+- Ray Friel Recreation Complex: "Public skating, 10 to 11:50 am, cancelled" ("Public skating" 2025-12-12 Fri)
+    ray-friel-recreation-complex/2025-12-10-hhjiy3 and 1 more
+- Ray Friel Recreation Complex: "Public swim, 5 to 7:30 pm, cancelled" ("Public swim" 2026-03-26 Thu)
+    ray-friel-recreation-complex/2026-03-20-tobsxb
+- Richcraft Recreation Complex-Kanata: "Sauna, 4 to 7:30 pm, closed" ("Sauna *Reservations not required." 2026-06-22 Mon)
+    richcraft-recreation-complex-kanata/2026-06-23-xym2vq
+- Richcraft Recreation Complex-Kanata: "Sauna, 4 to 7:30 pm, closed" ("Sauna *Reservations not required." 2026-06-23 Tue)
+    richcraft-recreation-complex-kanata/2026-06-23-xym2vq
+- Richcraft Recreation Complex-Kanata: "The pool is closed, and all swim and aquafitness drop-ins are cancelled." ("Lane swim*Reservations not required." 2026-02-14 Sat)
+    richcraft-recreation-complex-kanata/2026-02-06-trnefp and 11 more
+- Richcraft Recreation Complex-Kanata: "The pool is closed, and all swim and aquafitness drop-ins are cancelled." ("Lane swim*Reservations not required." 2026-02-15 Sun)
+    richcraft-recreation-complex-kanata/2026-02-06-trnefp and 5 more
+- Richcraft Recreation Complex-Kanata: "The pool is closed, and all swim and aquafitness drop-ins are cancelled." ("Public swim *Reservations not required." 2026-02-14 Sat)
+    richcraft-recreation-complex-kanata/2026-02-06-trnefp and 11 more
+- Richcraft Recreation Complex-Kanata: "The pool is closed, and all swim and aquafitness drop-ins are cancelled." ("Public swim *Reservations not required." 2026-02-15 Sun)
+    richcraft-recreation-complex-kanata/2026-02-06-trnefp and 5 more
+- Sandy Hill Arena: "Youth hockey and speed skating, cancelled" ("Speed skating" 2026-09-05 Sat)
+    sandy-hill-arena/2026-08-20-v4rnus and 3 more
+- Sandy Hill Arena: "Youth hockey and speed skating, cancelled" ("Speed skating" 2026-09-26 Sat)
+    sandy-hill-arena/2026-08-20-v4rnus and 3 more
+- Sandy Hill Arena: "Youth hockey and speed skating, cancelled" ("Speed skating" 2026-12-19 Sat)
+    sandy-hill-arena/2026-08-20-v4rnus and 3 more
+- Sawmill Creek Community Centre and Pool: "Lane swim, 7:30 to 8:30 pm, cancelled" ("Lane swim" 2025-12-06 Sat)
+    sawmill-creek-community-centre-and-pool/2025-12-07-tb5n2o
+- Sawmill Creek Community Centre and Pool: "Public swim, 6:30 to 7:30 pm, cancelled" ("Public swim" 2025-12-06 Sat)
+    sawmill-creek-community-centre-and-pool/2025-12-07-tb5n2o
+- Splash Wave Pool: "Public swim, wave tank and warm pool, 4:30 to 9 pm, cancelled" ("Public Swim - wave tank and warm pool" 2026-03-10 Tue)
+    splash-wave-pool/2026-03-09-wwhenu and 1 more
+- Walter Baker Sports Centre: "Lane swim, 7:30 to 9 pm, cancelled" ("Lane swim *Reservations not required." 2026-01-09 Fri)
+    walter-baker-sports-centre/2026-01-02-u7warj
+- Walter Baker Sports Centre: "Lane swim, 7:30 to 9 pm, cancelled" ("Lane swim *Reservations not required." 2026-02-06 Fri)
+    walter-baker-sports-centre/2026-02-05-jxelrt
+- Walter Baker Sports Centre: "The hot tub and steam room is closed at 7:30 pm." ("Hot tub and steam room" 2026-03-06 Fri)
+    walter-baker-sports-centre/2026-03-06-uu6ink

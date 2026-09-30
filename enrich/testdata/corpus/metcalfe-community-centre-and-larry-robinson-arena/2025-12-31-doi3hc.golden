@@ -1,0 +1,46 @@
+== Metcalfe Community Centre and Larry Robinson Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, January 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 3 to 3:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "3 to 3:50 pm" 15:00-15:50 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating"
+- NOTICE "Public skating, 4 to 4:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Thursday 4:00 - 4:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred skating-widened-to-window
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-01-01 Thu 16:00-16:50
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-01 Thu 16:00-16:50
+
+== Metcalfe Community Centre and Larry Robinson Arena special_hours
+- IGNORED date-context "Thursday, January 1"
+    at: facility
+- IGNORED duplicate "Family skating, 3 to 3:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "3 to 3:50 pm" 15:00-15:50 none
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 3 to 3:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 4 to 4:50 pm, cancelled"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Thursday 4:00 - 4:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred skating-widened-to-window
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 4 to 4:50 pm, cancelled"
+    at: facility

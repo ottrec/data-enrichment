@@ -1,0 +1,32 @@
+== John G. Mlacak Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, February 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    time: "" covers [Saturday 6:00 - 6:50pm; Saturday 7:00 - 7:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== John G. Mlacak Centre special_hours
+- IGNORED date-context "Saturday, February 7"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    time: "" covers [Saturday 6:00 - 6:50pm; Saturday 7:00 - 7:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility

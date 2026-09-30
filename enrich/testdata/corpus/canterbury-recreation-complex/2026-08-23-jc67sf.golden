@@ -1,0 +1,26 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Canterbury Recreation Complex special_hours
+- NOTICE "Monday, September 7, closed"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool is closed for maintenance until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

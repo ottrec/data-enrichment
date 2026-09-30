@@ -1,0 +1,46 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - gymnasium sports"
+- NOTICE "Saturday, April 11, Basketball, cancelled"
+    date text: "Saturday, April 11"
+    dates: 2026-04-11 Sat
+    time: "" covers [Saturday 6:30 - 7:30pm; Saturday 7:30 - 8:30pm; Saturday 8:30 - 9:30pm]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Basketball"
+    candidates: "Basketball - adult" "Basketball - child" "Basketball - youth"
+    ambiguities: activity-multiple-candidates
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Sunday, April 12, Table Tennis, cancelled"
+    date text: "Sunday, April 12"
+    dates: 2026-04-12 Sun
+    time: "" covers [Sunday 12:00 - 1:00pm; Sunday 1:00 - 2:00pm; Sunday 2:00 - 3:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Table Tennis"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Table tennis" sessions 2026-04-12 Sun 12:00-13:00, 2026-04-12 Sun 13:00-14:00, 2026-04-12 Sun 14:00-15:00
+
+== Canterbury Recreation Complex special_hours
+- IGNORED duplicate "Saturday, April 11, Basketball, cancelled"
+    date text: "Saturday, April 11"
+    dates: 2026-04-11 Sat
+    time: "" covers [Saturday 6:30 - 7:30pm; Saturday 7:30 - 8:30pm; Saturday 8:30 - 9:30pm]
+    match: MULTIPLE
+    phrase: "Basketball"
+    ambiguities: activity-multiple-candidates
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Saturday, April 11, Basketball, cancelled"
+    at: facility
+- IGNORED duplicate "Sunday, April 12, Table Tennis, cancelled"
+    date text: "Sunday, April 12"
+    dates: 2026-04-12 Sun
+    time: "" covers [Sunday 12:00 - 1:00pm; Sunday 1:00 - 2:00pm; Sunday 2:00 - 3:00pm]
+    match: EXACT
+    phrase: "Table Tennis"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Sunday, April 12, Table Tennis, cancelled"
+    at: facility
+- NOTICE "The pool is closed for maintenance until further notice."
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

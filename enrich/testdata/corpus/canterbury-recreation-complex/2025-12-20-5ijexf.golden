@@ -1,0 +1,157 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/recreation-and-parks/facilities/place-listing/canterbury-recreation-complex/canterbury-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, January 24"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "The pool is closed for maintenance until further notice."
+    date text: "Saturday, January 24"
+    dates: 2026-01-24 Sat; open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    sources: schedule_changes special_hours
+    at: facility
+
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/recreation-and-parks/facilities/place-listing/canterbury-recreation-complex/canterbury-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Canterbury Recreation Complex special_hours
+- IGNORED heading "Community Centre"
+    section: "Community Centre"
+    at: facility
+- NOTICE "December 20 to 23, 8:30 am to 10 pm"
+    section: "Community Centre"
+    date text: "December 20 to 23"
+    dates: 2025-12-20 Sat to 2025-12-23 Tue
+    time: "8:30 am to 10 pm" 08:30-22:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 24 to January 1, closed"
+    section: "Community Centre"
+    date text: "December 24 to January 1"
+    dates: 2025-12-24 Wed to 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 2 to 4, 8:30 am to 10 pm"
+    section: "Community Centre"
+    date text: "January 2 to 4"
+    dates: 2026-01-02 Fri to 2026-01-04 Sun
+    time: "8:30 am to 10 pm" 08:30-22:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Pool"
+    section: "Pool"
+    at: facility
+- NOTICE "Saturday, December 20, 7 am to 5:30 pm"
+    section: "Pool"
+    date text: "Saturday, December 20"
+    dates: 2025-12-20 Sat
+    time: "7 am to 5:30 pm" 07:00-17:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, December 21, 9 am to 4 pm"
+    section: "Pool"
+    date text: "Sunday, December 21"
+    dates: 2025-12-21 Sun
+    time: "9 am to 4 pm" 09:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, December 22, 7:30 am to 9:30 pm"
+    section: "Pool"
+    date text: "Monday, December 22"
+    dates: 2025-12-22 Mon
+    time: "7:30 am to 9:30 pm" 07:30-21:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 23 and 24, 7:30 am to 1:30 pm"
+    section: "Pool"
+    date text: "December 23 and 24"
+    dates: 2025-12-23 Tue 2025-12-24 Wed
+    time: "7:30 am to 1:30 pm" 07:30-13:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 25 and 26, closed"
+    section: "Pool"
+    date text: "December 25 and 26"
+    dates: 2025-12-25 Thu 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "December 27 and 28, 9 am to 5:30 pm"
+    section: "Pool"
+    date text: "December 27 and 28"
+    dates: 2025-12-27 Sat 2025-12-28 Sun
+    time: "9 am to 5:30 pm" 09:00-17:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 29 and 30, 7:30 am to 9:30 pm"
+    section: "Pool"
+    date text: "December 29 and 30"
+    dates: 2025-12-29 Mon 2025-12-30 Tue
+    time: "7:30 am to 9:30 pm" 07:30-21:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Wednesday, December 31, 7:30 am to 1:30 pm"
+    section: "Pool"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "7:30 am to 1:30 pm" 07:30-13:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, January 1, closed"
+    section: "Pool"
+    date text: "Thursday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "Friday, January 2, 7:30 am to 9:30 pm"
+    section: "Pool"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "7:30 am to 9:30 pm" 07:30-21:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "January 3 and 4, 9 am to 5:30 pm"
+    section: "Pool"
+    date text: "January 3 and 4"
+    dates: 2026-01-03 Sat 2026-01-04 Sun
+    time: "9 am to 5:30 pm" 09:00-17:30 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Saturday, January 24"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "The pool is closed for maintenance until further notice."
+    section: "Schedule changes"
+    date text: "Saturday, January 24"
+    dates: 2026-01-24 Sat; open-ended
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "The pool is closed for maintenance until further notice."
+    at: facility
+- IGNORED heading "Note"
+    section: "Note"
+    at: facility
+- UNPARSED freeform "Construction is taking place along the east and north access to the parking lot until further notice."
+    section: "Note"
+    phrase: "Construction is taking place along the east and north access to the parking lot until further notice"
+    at: facility
+- UNPARSED freeform "Pedestrian access between buildings is limited until further notice due to ongoing construction."
+    section: "Note"
+    phrase: "Pedestrian access between buildings is limited until further notice due to ongoing construction"
+    at: facility

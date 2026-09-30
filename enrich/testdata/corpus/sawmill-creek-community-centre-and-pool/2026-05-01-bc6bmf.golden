@@ -1,0 +1,76 @@
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 8"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7:30 to 8:30 pm, cancelled"
+    date text: "Saturday, May 8"
+    dates: 2026-05-08 Fri
+    time: "7:30 to 8:30 pm" 19:30-20:30 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred no-slot-overlap weekday-mismatch
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim"
+- NOTICE "Public swim, 6:30 to 7:30 pm, cancelled"
+    date text: "Saturday, May 8"
+    dates: 2026-05-08 Fri
+    time: "6:30 to 7:30 pm" 18:30-19:30 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred no-slot-overlap weekday-mismatch
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Sawmill Creek Community Centre and Pool special_hours
+- IGNORED date-context "Saturday, May 8"
+    at: facility
+- IGNORED duplicate "Lane swim, 7:30 to 8:30 pm, cancelled"
+    date text: "Saturday, May 8"
+    dates: 2026-05-08 Fri
+    time: "7:30 to 8:30 pm" 19:30-20:30 none
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred no-slot-overlap weekday-mismatch
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 7:30 to 8:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public swim, 6:30 to 7:30 pm, cancelled"
+    date text: "Saturday, May 8"
+    dates: 2026-05-08 Fri
+    time: "6:30 to 7:30 pm" 18:30-19:30 none
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred no-slot-overlap weekday-mismatch
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim, 6:30 to 7:30 pm, cancelled"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Saturday, May 16, 11:30 am to 3 pm"
+    section: "Modified hours"
+    date text: "Saturday, May 16"
+    dates: 2026-05-16 Sat
+    time: "11:30 am to 3 pm" 11:30-15:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, May 17, 11:30 am to 3 pm"
+    section: "Modified hours"
+    date text: "Sunday, May 17"
+    dates: 2026-05-17 Sun
+    time: "11:30 am to 3 pm" 11:30-15:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, May 18, closed"
+    section: "Modified hours"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: closure
+    at: facility

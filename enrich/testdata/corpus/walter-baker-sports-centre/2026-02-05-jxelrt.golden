@@ -1,0 +1,86 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Friday, February 6"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, February 6"
+    dates: 2026-02-06 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-02-06 Fri 19:30-21:00
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Friday, February 6"
+    at: facility
+- NOTICE "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, February 6"
+    dates: 2026-02-06 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - Family Day weekend" activity "Lane swim *Reservations not required." sessions 2026-02-06 Fri 19:30-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-02-06 Fri 19:30-21:00
+- IGNORED heading "Family Day hours"
+    section: "Family Day hours"
+    at: facility
+- NOTICE "Monday, February 16, 8 am to 5 pm"
+    section: "Family Day hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility

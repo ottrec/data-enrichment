@@ -1,0 +1,33 @@
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedules - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - weight and cardio room"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedules - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - group fitness"
+
+== Kanata Leisure Centre and Wave Pool special_hours
+- NOTICE "March 16 to 22, 8 am to 6 pm"
+    date text: "March 16 to 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    time: "8 am to 6 pm" 08:00-18:00 unchecked
+    effects: modified-hours
+    at: facility

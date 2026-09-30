@@ -1,0 +1,16 @@
+== Kanata Seniors Centre schedule_changes "Drop-in activities"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in activities"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in activities"
+
+== Kanata Seniors Centre special_hours
+- NOTICE "Monday, February 16, closed"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: closure
+    at: facility

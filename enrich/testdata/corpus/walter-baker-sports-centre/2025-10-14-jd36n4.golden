@@ -1,0 +1,9 @@
+== Walter Baker Sports Centre special_hours
+- NOTICE "Squash courts 3 and 4 are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "squash courts 3 and 4"
+    amenity: "squash courts"
+    ambiguities: activity-narrowed-to-amenity
+    at: facility

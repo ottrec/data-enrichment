@@ -1,0 +1,20 @@
+== Richelieu Vanier Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "March 22 to 30"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-ins cancelled"
+    date text: "March 22 to 30"
+    dates: 2026-03-22 Sun to 2026-03-30 Mon
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "March 22 to 30"
+    at: facility
+- IGNORED duplicate "All drop-ins cancelled"
+    date text: "March 22 to 30"
+    dates: 2026-03-22 Sun to 2026-03-30 Mon
+    match: SCOPE_PHRASE
+    phrase: "All drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-ins cancelled"
+    at: facility

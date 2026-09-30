@@ -1,0 +1,8 @@
+== François Dupuis Recreation Centre special_hours
+- NOTICE "The rock wall is closed for annual maintenance until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "rock wall"
+    amenity: "rock wall"
+    at: facility

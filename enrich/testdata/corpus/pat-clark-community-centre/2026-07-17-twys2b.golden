@@ -1,0 +1,6 @@
+== Pat Clark Community Centre special_hours
+- NOTICE "Saturday, August 1 to Monday, August 3, closed"
+    date text: "Saturday, August 1 to Monday, August 3"
+    dates: 2026-08-01 Sat to 2026-08-03 Mon
+    effects: closure
+    at: facility

@@ -1,0 +1,30 @@
+== Jim Tubman Chevrolet Rink special_hours
+- IGNORED date-context "Saturday, January 31"
+    at: facility
+- NOTICE "The rink is closed from noon to 4 pm"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "rink"
+    ambiguities: head-unparsed
+    at: facility
+- NOTICE "Family hockey, 12:15 to 2 pm, moved inside to Brian Kilrea Arena"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "12:15 to 2 pm" 12:15-14:00 exact [Saturday 12:15 - 2:00pm]
+    effects: restriction "moved inside to Brian Kilrea Arena"
+    match: EXACT
+    phrase: "Family hockey"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - Winter" activity "Family hockey" sessions 2026-01-31 Sat 12:15-14:00
+- NOTICE "Child hockey, 2:15 to 4 pm, moved inside to Brian Kilrea Arena"
+    date text: "Saturday, January 31"
+    dates: 2026-01-31 Sat
+    time: "2:15 to 4 pm" 14:15-16:00 exact [Saturday 2:15 - 4:00pm]
+    effects: restriction "moved inside to Brian Kilrea Arena"
+    match: EXACT
+    phrase: "Child hockey"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - Winter" activity "Child hockey" sessions 2026-01-31 Sat 14:15-16:00

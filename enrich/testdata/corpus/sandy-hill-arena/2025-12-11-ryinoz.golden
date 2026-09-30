@@ -1,0 +1,68 @@
+== Sandy Hill Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, December 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skate, 8 - 8:50 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "8 - 8:50 pm" 20:00-20:50 exact [Saturday 8:00 - 8:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-13 Sat 20:00-20:50
+- NOTICE "Public skate, 9 - 9:50 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "9 - 9:50 pm" 21:00-21:50 exact [Saturday 9:00 - 9:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-13 Sat 21:00-21:50
+
+== Sandy Hill Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Saturday, December 13"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Figure skate, 10 - 10:50 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "10 - 10:50 pm" 22:00-22:50 exact [Saturday 10:00 - 10:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Figure skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Figure skating" sessions 2025-12-13 Sat 22:00-22:50
+
+== Sandy Hill Arena special_hours
+- IGNORED date-context "Saturday, December 13"
+    at: facility
+- IGNORED duplicate "Family skate, 8 to 8:50 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "8 to 8:50 pm" 20:00-20:50 exact [Saturday 8:00 - 8:50pm]
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skate, 8 - 8:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skate, 9 to 9:50 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "9 to 9:50 pm" 21:00-21:50 exact [Saturday 9:00 - 9:50pm]
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skate, 9 - 9:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Figure skate, 10 to 10:50 pm, cancelled"
+    date text: "Saturday, December 13"
+    dates: 2025-12-13 Sat
+    time: "10 to 10:50 pm" 22:00-22:50 exact [Saturday 10:00 - 10:50pm]
+    match: EXACT
+    phrase: "Figure skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Figure skate, 10 - 10:50 pm, cancelled"
+    at: facility

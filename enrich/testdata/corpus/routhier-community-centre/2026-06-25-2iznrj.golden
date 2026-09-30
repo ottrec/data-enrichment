@@ -1,0 +1,48 @@
+== Routhier Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Thursday, July 25"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball, 9:30 to 11:30 am, cancelled."
+    date text: "Thursday, July 25"
+    dates: 2026-07-25 Sat
+    time: "9:30 to 11:30 am" 09:30-11:30 none
+    effects: cancelled
+    match: FUZZY
+    phrase: "Pickleball"
+    ambiguities: meridiem-inferred no-slot-overlap weekday-mismatch
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Routhier Community Centre special_hours
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Thursday, July 25"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Pickleball, 9:30 to 11:30 am, cancelled"
+    section: "Schedule change"
+    date text: "Thursday, July 25"
+    dates: 2026-07-25 Sat
+    time: "9:30 to 11:30 am" 09:30-11:30 none
+    match: FUZZY
+    phrase: "Pickleball"
+    ambiguities: meridiem-inferred no-slot-overlap weekday-mismatch
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball, 9:30 to 11:30 am, cancelled."
+    at: facility
+
+== Routhier Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

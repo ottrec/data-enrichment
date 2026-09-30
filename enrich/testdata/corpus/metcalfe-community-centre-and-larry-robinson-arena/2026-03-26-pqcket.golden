@@ -1,0 +1,41 @@
+== Metcalfe Community Centre and Larry Robinson Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, April 2 to Saturday, April 3"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Thursday, April 2 to Saturday, April 3"
+    dates: 2026-04-02 Thu to 2026-04-03 Fri
+    time: "" covers [Friday 3:00 - 3:50pm; Thursday 4:00 - 4:50pm; Thursday 5:00 - 5:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    ambiguities: weekday-mismatch
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Metcalfe Community Centre and Larry Robinson Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Thursday, April 2 to Saturday, April 3"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Thursday, April 2 to Saturday, April 3"
+    dates: 2026-04-02 Thu to 2026-04-03 Fri
+    time: "" covers [Friday 4:00 - 4:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    ambiguities: weekday-mismatch
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+
+== Metcalfe Community Centre and Larry Robinson Arena special_hours
+- IGNORED date-context "Thursday, April 2 to Saturday, April 3"
+    at: facility
+- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+    date text: "Thursday, April 2 to Saturday, April 3"
+    dates: 2026-04-02 Thu to 2026-04-03 Fri
+    time: "" covers [Friday 3:00 - 3:50pm; Friday 4:00 - 4:50pm; Thursday 4:00 - 4:50pm; Thursday 5:00 - 5:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    ambiguities: weekday-mismatch
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility

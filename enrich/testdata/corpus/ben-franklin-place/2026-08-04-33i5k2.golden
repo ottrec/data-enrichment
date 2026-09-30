@@ -1,0 +1,7 @@
+== Ben Franklin Place special_hours
+- NOTICE "Meridian Theatres @ Centrepointe will remain closed for continued recovery and restoration efforts"
+    effects: closure
+    match: NONE
+    phrase: "meridian theatres centrepointe will remain"
+    ambiguities: activity-unmatched
+    at: facility

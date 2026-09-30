@@ -1,0 +1,11 @@
+== Foster Farm Community Centre special_hours
+- NOTICE "December 22 to 26, closed"
+    date text: "December 22 to 26"
+    dates: 2025-12-22 Mon to 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "January 1, closed"
+    date text: "January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility

@@ -1,0 +1,45 @@
+== Richmond Memorial Community Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skate, 1 to 1:50 pm, cancelled"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "1 to 1:50 pm" 13:00-13:50 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating"
+- NOTICE "Public skate, 2 to 2:50 pm, cancelled"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "2 to 2:50 pm" 14:00-14:50 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating"
+
+== Richmond Memorial Community Centre special_hours
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- IGNORED duplicate "Family skate, 1 to 1:50 pm, cancelled"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "1 to 1:50 pm" 13:00-13:50 none
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skate, 1 to 1:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skate, 2 to 2:50 pm, cancelled"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "2 to 2:50 pm" 14:00-14:50 none
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skate, 2 to 2:50 pm, cancelled"
+    at: facility

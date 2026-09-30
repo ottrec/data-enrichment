@@ -1,0 +1,6 @@
+== Nepean Visual Arts Centre special_hours
+- NOTICE "Saturday, May 16 to Monday, May 18, closed"
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: closure
+    at: facility

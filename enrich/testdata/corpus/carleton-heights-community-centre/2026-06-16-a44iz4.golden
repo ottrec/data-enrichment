@@ -1,0 +1,9 @@
+== Carleton Heights Community Centre special_hours
+- IGNORED service-desk "Wednesday, June 24, 4 to 9 pm, Client Services Desk closed"
+    date text: "Wednesday, June 24"
+    at: facility
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility

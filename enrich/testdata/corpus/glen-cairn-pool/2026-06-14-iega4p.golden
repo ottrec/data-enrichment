@@ -1,0 +1,26 @@
+== Glen Cairn Pool special_hours
+- NOTICE "Wednesday, July 1, 11:30 am to 4 pm"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "11:30 am to 4 pm" 11:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Summer 2026"
+    section: "Summer 2026"
+    at: facility
+- NOTICE "Pre-season, June 13 to 26"
+    section: "Summer 2026"
+    date text: "June 13 to 26"
+    dates: 2026-06-13 Sat to 2026-06-26 Fri
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Pre-season"
+    at: facility
+- NOTICE "Regular season, June 27 to August 23"
+    section: "Summer 2026"
+    date text: "June 27 to August 23"
+    dates: 2026-06-27 Sat to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

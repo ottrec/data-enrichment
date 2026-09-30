@@ -1,0 +1,6 @@
+== Carleton Heights Community Centre special_hours
+- NOTICE "Monday, December 22 to Sunday, January 4, closed"
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: closure
+    at: facility

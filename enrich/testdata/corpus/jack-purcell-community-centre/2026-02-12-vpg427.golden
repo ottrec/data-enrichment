@@ -1,0 +1,34 @@
+== Jack Purcell Community Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Jack Purcell Community Centre special_hours
+- NOTICE "The pool is colder than usual until further notice."
+    dates: open-ended
+    match: NONE
+    phrase: "The pool is colder than usual until further notice"
+    amenity: "pool"
+    at: facility
+- IGNORED heading "Family Day hours"
+    section: "Family Day hours"
+    at: facility
+- NOTICE "Monday, February 16, closed"
+    section: "Family Day hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: closure
+    at: facility

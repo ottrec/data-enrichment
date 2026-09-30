@@ -1,0 +1,11 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, February 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Kinderplay, 10 am to 2 pm, cancelled."
+    date text: "Wednesday, February 18"
+    dates: 2026-02-18 Wed
+    time: "10 am to 2 pm" 10:00-14:00 covers [Wednesday 10:00 - 11:00am; Wednesday 11:00am - 12:00pm; Wednesday 12:00 - 1:00pm; Wednesday 1:00 - 2:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kinderplay"
+    at: group "Drop-in schedule - gymnasium sports" activity "Kinderplay" sessions 2026-02-18 Wed 10:00-11:00, 2026-02-18 Wed 11:00-12:00, 2026-02-18 Wed 12:00-13:00, 2026-02-18 Wed 13:00-14:00

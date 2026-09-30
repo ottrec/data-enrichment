@@ -1,0 +1,10 @@
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Monday, May 11 to Sunday, June 28"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    date text: "Monday, May 11 to Sunday, June 28"
+    dates: 2026-05-11 Mon to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

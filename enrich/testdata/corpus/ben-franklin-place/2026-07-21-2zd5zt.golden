@@ -1,0 +1,16 @@
+== Ben Franklin Place special_hours
+- NOTICE "Monday, August 3, closed"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Meridian Theatres @ Centrepointe and the Nepean Centrepointe branch of the Ottawa Public Library will remain closed for continued recovery and restoration efforts, and all sections of the lower level of the building remain restricted."
+    section: "Closure"
+    effects: closure
+    match: NONE
+    phrase: "meridian theatres centrepointe and the nepean centrepointe branch of the ottawa public library will remain"
+    ambiguities: activity-unmatched
+    at: facility

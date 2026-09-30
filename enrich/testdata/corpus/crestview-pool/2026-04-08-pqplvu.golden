@@ -1,0 +1,22 @@
+== Crestview Pool special_hours
+- NOTICE "Pre-pre season, May 11 to June 7"
+    date text: "May 11 to June 7"
+    dates: 2026-05-11 Mon to 2026-06-07 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Pre-pre season"
+    at: facility
+- NOTICE "Pre-season, June 8 to 25"
+    date text: "June 8 to 25"
+    dates: 2026-06-08 Mon to 2026-06-25 Thu
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Pre-season"
+    at: facility
+- NOTICE "Regular season, June 26 to August 31"
+    date text: "June 26 to August 31"
+    dates: 2026-06-26 Fri to 2026-08-31 Mon
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

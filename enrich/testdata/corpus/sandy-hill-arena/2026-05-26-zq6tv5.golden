@@ -1,0 +1,38 @@
+== Sandy Hill Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "May 31 to June 28"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "May 31 to June 28"
+    dates: 2026-05-31 Sun to 2026-06-28 Sun
+    time: "" covers [Friday 5:00 - 5:50pm; Friday 6:00 - 6:50pm; Monday 4:00 - 4:50pm; Sunday 3:00 - 3:50pm; Tuesday 9:00 - 9:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Sandy Hill Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "May 31 to June 28"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "May 31 to June 28"
+    dates: 2026-05-31 Sun to 2026-06-28 Sun
+    time: "" covers [Monday 5:00 - 5:50pm; Sunday 4:00 - 4:50pm; Tuesday 8:00 - 8:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+
+== Sandy Hill Arena special_hours
+- IGNORED date-context "May 31 to June 28"
+    at: facility
+- IGNORED duplicate "All drop-in skating and ice sports, cancelled"
+    date text: "May 31 to June 28"
+    dates: 2026-05-31 Sun to 2026-06-28 Sun
+    time: "" covers [Friday 5:00 - 5:50pm; Friday 6:00 - 6:50pm; Monday 4:00 - 4:50pm; Monday 5:00 - 5:50pm; Sunday 3:00 - 3:50pm; Sunday 4:00 - 4:50pm; Tuesday 8:00 - 8:50pm; Tuesday 9:00 - 9:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility

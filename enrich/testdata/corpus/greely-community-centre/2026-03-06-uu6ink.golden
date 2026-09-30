@@ -1,0 +1,39 @@
+== Greely Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, March 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-ins cancelled."
+    date text: "Saturday, March 7"
+    dates: 2026-03-07 Sat
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, March 14"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-ins cancelled."
+    date text: "Saturday, March 14"
+    dates: 2026-03-14 Sat
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, March 7"
+    at: facility
+- IGNORED duplicate "All drop-ins cancelled."
+    date text: "Saturday, March 7"
+    dates: 2026-03-07 Sat
+    match: SCOPE_PHRASE
+    phrase: "All drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-ins cancelled."
+    at: facility
+- IGNORED date-context "Saturday, March 14"
+    at: facility
+- IGNORED duplicate "All drop-ins cancelled."
+    date text: "Saturday, March 14"
+    dates: 2026-03-14 Sat
+    match: SCOPE_PHRASE
+    phrase: "All drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-ins cancelled."
+    at: facility

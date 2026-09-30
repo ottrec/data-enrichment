@@ -1,0 +1,16 @@
+== Carleton Heights Community Centre schedule_changes "Drop-in activities"
+- IGNORED date-context "Sunday, October 11 to Monday, October 12"
+    at: group "Drop-in activities"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Sunday, October 11 to Monday, October 12"
+    dates: 2026-10-11 Sun to 2026-10-12 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in activities"
+
+== Carleton Heights Community Centre special_hours
+- NOTICE "Sunday, October 11 and Monday, October 12, closed"
+    date text: "Sunday, October 11 and Monday, October 12"
+    dates: 2026-10-11 Sun 2026-10-12 Mon
+    effects: closure
+    at: facility

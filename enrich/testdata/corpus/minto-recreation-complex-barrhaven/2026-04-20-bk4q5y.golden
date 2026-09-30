@@ -1,0 +1,68 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, April 20"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Volleyball - adult, 8:35 to 9:45 pm, cancelled"
+    date text: "Monday, April 20"
+    dates: 2026-04-20 Mon
+    time: "8:35 to 9:45 pm" 20:35-21:45 covers [Monday 8:35 - 9:35pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Volleyball - adult"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Volleyball adult" sessions 2026-04-20 Mon 20:35-21:35
+- IGNORED date-context "Friday, April 24 to Monday, April 27"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball, 11:45 am to 4 pm, cancelled"
+    date text: "Friday, April 24 to Monday, April 27"
+    dates: 2026-04-24 Fri to 2026-04-27 Mon
+    time: "11:45 am to 4 pm" 11:45-16:00 covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 3:00 - 4:00pm; Monday 11:45am - 12:45pm; Monday 12:50 - 1:50pm; Monday 1:55 - 2:55pm; Monday 3:00 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball" sessions 2026-04-24 Fri 11:45-12:45, 2026-04-24 Fri 12:50-13:50, 2026-04-24 Fri 13:55-14:55, 2026-04-24 Fri 15:00-16:00, 2026-04-27 Mon 11:45-12:45, 2026-04-27 Mon 12:50-13:50, 2026-04-27 Mon 13:55-14:55, 2026-04-27 Mon 15:00-16:00
+- NOTICE "Kinderplay, 9 to 11 am, cancelled"
+    date text: "Friday, April 24 to Monday, April 27"
+    dates: 2026-04-24 Fri to 2026-04-27 Mon
+    time: "9 to 11 am" 09:00-11:00 exact [Friday 9:00 - 11:00am; Monday 9:00 - 11:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Kinderplay" sessions 2026-04-24 Fri 09:00-11:00, 2026-04-27 Mon 09:00-11:00
+- IGNORED date-context "Monday, April 20"
+    at: facility
+- IGNORED duplicate "Volleyball - adult, 8:35 to 9:45 pm, cancelled"
+    date text: "Monday, April 20"
+    dates: 2026-04-20 Mon
+    time: "8:35 to 9:45 pm" 20:35-21:45 covers [Monday 8:35 - 9:35pm]
+    match: EXACT
+    phrase: "Volleyball - adult"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Volleyball - adult, 8:35 to 9:45 pm, cancelled"
+    at: facility
+- IGNORED date-context "Friday, April 24 to Monday, April 27"
+    at: facility
+- IGNORED duplicate "Pickleball, 11:45 am to 4 pm, cancelled"
+    date text: "Friday, April 24 to Monday, April 27"
+    dates: 2026-04-24 Fri to 2026-04-27 Mon
+    time: "11:45 am to 4 pm" 11:45-16:00 covers [Friday 11:45am - 12:45pm; Friday 12:50 - 1:50pm; Friday 1:55 - 2:55pm; Friday 3:00 - 4:00pm; Monday 11:45am - 12:45pm; Monday 12:50 - 1:50pm; Monday 1:55 - 2:55pm; Monday 3:00 - 4:00pm]
+    match: EXACT
+    phrase: "Pickleball"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball, 11:45 am to 4 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Kinderplay, 9 to 11 am, cancelled"
+    date text: "Friday, April 24 to Monday, April 27"
+    dates: 2026-04-24 Fri to 2026-04-27 Mon
+    time: "9 to 11 am" 09:00-11:00 exact [Friday 9:00 - 11:00am; Monday 9:00 - 11:00am]
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Kinderplay, 9 to 11 am, cancelled"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

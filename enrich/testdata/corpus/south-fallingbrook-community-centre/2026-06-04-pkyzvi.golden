@@ -1,0 +1,43 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Sunday, June 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All pickleball - adult drop-ins, cancelled"
+    date text: "Sunday, June 7"
+    dates: 2026-06-07 Sun
+    time: "" covers [Sunday 2:00 - 3:00pm; Sunday 3:00 - 4:00pm; Sunday 4:00 - 5:00pm; Sunday 5:00 - 6:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All pickleball - adult drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult" sessions 2026-06-07 Sun 14:00-15:00, 2026-06-07 Sun 15:00-16:00, 2026-06-07 Sun 16:00-17:00, 2026-06-07 Sun 17:00-18:00
+- IGNORED date-context "Sunday, June 14"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All pickleball - adult drop-ins, cancelled"
+    date text: "Sunday, June 14"
+    dates: 2026-06-14 Sun
+    time: "" covers [Sunday 2:00 - 3:00pm; Sunday 3:00 - 4:00pm; Sunday 4:00 - 5:00pm; Sunday 5:00 - 6:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All pickleball - adult drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult" sessions 2026-06-14 Sun 14:00-15:00, 2026-06-14 Sun 15:00-16:00, 2026-06-14 Sun 16:00-17:00, 2026-06-14 Sun 17:00-18:00
+- IGNORED date-context "Sunday, June 7"
+    at: facility
+- IGNORED duplicate "All pickleball - adult drop-ins, cancelled"
+    date text: "Sunday, June 7"
+    dates: 2026-06-07 Sun
+    time: "" covers [Sunday 2:00 - 3:00pm; Sunday 3:00 - 4:00pm; Sunday 4:00 - 5:00pm; Sunday 5:00 - 6:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All pickleball - adult drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All pickleball - adult drop-ins, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, June 14"
+    at: facility
+- IGNORED duplicate "All pickleball - adult drop-ins, cancelled"
+    date text: "Sunday, June 14"
+    dates: 2026-06-14 Sun
+    time: "" covers [Sunday 2:00 - 3:00pm; Sunday 3:00 - 4:00pm; Sunday 4:00 - 5:00pm; Sunday 5:00 - 6:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All pickleball - adult drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All pickleball - adult drop-ins, cancelled"
+    at: facility

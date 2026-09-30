@@ -1,0 +1,102 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, November 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Cardio 50+, 8:30 to 9:25 am, cancelled"
+    date text: "Saturday, November 22"
+    dates: 2025-11-22 Sat
+    time: "8:30 to 9:25 am" 08:30-09:25 exact [Saturday 8:30 - 9:25am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Cardio 50+" sessions 2025-11-22 Sat 08:30-09:25
+- NOTICE "Stretch and strength 50+, 9:30 to 10 am, cancelled"
+    date text: "Saturday, November 22"
+    dates: 2025-11-22 Sat
+    time: "9:30 to 10 am" 09:30-10:00 exact [Saturday 9:30 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Stretch and strength 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Stretch and strength 50+" sessions 2025-11-22 Sat 09:30-10:00
+- IGNORED date-context "Sunday, November 23"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Cardio 50+, 9 to 9:55 am, cancelled"
+    date text: "Sunday, November 23"
+    dates: 2025-11-23 Sun
+    time: "9 to 9:55 am" 09:00-09:55 exact [Sunday 9:00 - 9:55am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Cardio 50+" sessions 2025-11-23 Sun 09:00-09:55
+- NOTICE "Stretch and strength 50+, 10 to 10:30 am, cancelled"
+    date text: "Sunday, November 23"
+    dates: 2025-11-23 Sun
+    time: "10 to 10:30 am" 10:00-10:30 exact [Sunday 10:00 - 10:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Stretch and strength 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Stretch and strength 50+" sessions 2025-11-23 Sun 10:00-10:30
+
+== St. Laurent Complex special_hours
+- IGNORED date-context "Saturday, November 22"
+    at: facility
+- IGNORED duplicate "Cardio 50+, 8:30 to 9:25 am, cancelled"
+    date text: "Saturday, November 22"
+    dates: 2025-11-22 Sat
+    time: "8:30 to 9:25 am" 08:30-09:25 exact [Saturday 8:30 - 9:25am]
+    match: EXACT
+    phrase: "Cardio 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Cardio 50+, 8:30 to 9:25 am, cancelled"
+    at: facility
+- IGNORED duplicate "Stretch and strength 50+, 9:30 to 10 am, cancelled"
+    date text: "Saturday, November 22"
+    dates: 2025-11-22 Sat
+    time: "9:30 to 10 am" 09:30-10:00 exact [Saturday 9:30 - 10:00am]
+    match: EXACT
+    phrase: "Stretch and strength 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Stretch and strength 50+, 9:30 to 10 am, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, November 23"
+    at: facility
+- IGNORED duplicate "Cardio 50+, 9 to 9:55 am, cancelled"
+    date text: "Sunday, November 23"
+    dates: 2025-11-23 Sun
+    time: "9 to 9:55 am" 09:00-09:55 exact [Sunday 9:00 - 9:55am]
+    match: EXACT
+    phrase: "Cardio 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Cardio 50+, 9 to 9:55 am, cancelled"
+    at: facility
+- IGNORED duplicate "Stretch and strength 50+, 10 to 10:30 am, cancelled"
+    date text: "Sunday, November 23"
+    dates: 2025-11-23 Sun
+    time: "10 to 10:30 am" 10:00-10:30 exact [Sunday 10:00 - 10:30am]
+    match: EXACT
+    phrase: "Stretch and strength 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Stretch and strength 50+, 10 to 10:30 am, cancelled"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "June 2, 2025 to March 16, 2026"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool and change rooms are closed."
+    section: "Closure"
+    date text: "June 2, 2025 to March 16, 2026"
+    dates: 2025-06-02 Mon to 2026-03-16 Mon
+    effects: closure
+    match: NONE
+    phrase: "pool and change rooms"
+    amenity: "pool change rooms"
+    at: facility

@@ -1,0 +1,189 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - Thanksgiving weekend"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedule - Thanksgiving weekend"
+- NOTICE "All group fitness programs cancelled."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "" covers [Monday 6:15 - 7:15pm; Monday 7:30 - 8:30am; Monday 7:30 - 8:30pm; Monday 9:30 - 10:30am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness programs"
+    ambiguities: matched-other-group
+    at: group "Drop-in schedule - group fitness" activity "Bootcamp" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Cardio 50+" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "HIIT" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Pilates" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "TRX" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Yoga" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Zumba Gold" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Zumba Toning" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Wednesday, October 8"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim will end at 4 pm."
+    date text: "Wednesday, October 8"
+    dates: 2025-10-08 Wed
+    time: "will end at 4 pm." 16:00-24:00 open-end overlaps [Wednesday 2:00 - 4:30pm]
+    effects: time-change
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim *Reservations not required." sessions 2025-10-08 Wed 14:00-16:30
+- NOTICE "Sauna, 4 to 9 pm, closed"
+    date text: "Wednesday, October 8"
+    dates: 2025-10-08 Wed
+    time: "4 to 9 pm" 16:00-21:00 within [Wednesday 11:30am - 9:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Sauna *Reservations not required." sessions 2025-10-08 Wed 11:30-21:00
+- IGNORED date-context "Saturday, October 11 and Monday, October 13"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 and Monday, October 13"
+    dates: 2025-10-11 Sat 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/richcraft-recreation-complex-kanata-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 11 and Monday, October 13"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 and Monday, October 13"
+    dates: 2025-10-11 Sat 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/richcraft-recreation-complex-kanata-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness programs cancelled."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "" covers [Monday 6:15 - 7:15pm; Monday 7:30 - 8:30am; Monday 7:30 - 8:30pm; Monday 9:30 - 10:30am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness programs"
+    at: group "Drop-in schedule - group fitness"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - racquet sports"
+- IGNORED date-context "Friday, October 10"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "All pickleball drop-ins, cancelled"
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "" covers [Friday 1:30 - 2:30pm; Friday 2:30 - 3:30pm; Friday 7:30 - 8:30am; Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All pickleball drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports" activity "Pickleball - rotations" sessions 2025-10-10 Fri 07:30-08:30, 2025-10-10 Fri 08:30-09:30, 2025-10-10 Fri 09:30-10:30, 2025-10-10 Fri 13:30-14:30, 2025-10-10 Fri 14:30-15:30
+- NOTICE "All badminton drop-ins, cancelled"
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All badminton drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports" activity "Badminton - family" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - adult" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - all ages" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+- IGNORED date-context "Saturday, October 11 and Monday, October 13"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 and Monday, October 13"
+    dates: 2025-10-11 Sat 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/richcraft-recreation-complex-kanata-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - racquet sports"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - sports"
+- IGNORED date-context "Friday, October 10"
+    at: group "Drop-in schedule - sports"
+- NOTICE "All basketball drop-ins, cancelled"
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All basketball drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - sports" activity "Basketball - adult" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
+- IGNORED date-context "Saturday, October 11 and Monday, October 13"
+    at: group "Drop-in schedule - sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 11 and Monday, October 13"
+    dates: 2025-10-11 Sat 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving weekend schedule" "https://ottawa.ca/en/richcraft-recreation-complex-kanata-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - sports"
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Wednesday, October 8"
+    at: facility
+- IGNORED duplicate "Lane swim will end at 4 pm."
+    date text: "Wednesday, October 8"
+    dates: 2025-10-08 Wed
+    time: "will end at 4 pm." 16:00-24:00 open-end overlaps [Wednesday 2:00 - 4:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim will end at 4 pm."
+    at: facility
+- IGNORED duplicate "Sauna, 4 to 9 pm, closed"
+    date text: "Wednesday, October 8"
+    dates: 2025-10-08 Wed
+    time: "4 to 9 pm" 16:00-21:00 within [Wednesday 11:30am - 9:00pm]
+    match: EXACT
+    phrase: "sauna"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Sauna, 4 to 9 pm, closed"
+    at: facility
+- IGNORED date-context "Friday, October 10"
+    at: facility
+- IGNORED duplicate "All pickleball drop-ins, cancelled"
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "" covers [Friday 1:30 - 2:30pm; Friday 2:30 - 3:30pm; Friday 7:30 - 8:30am; Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    match: SCOPE_PHRASE
+    phrase: "All pickleball drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All pickleball drop-ins, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All badminton drop-ins, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - sports" "All basketball drop-ins, cancelled"
+    at: facility
+- IGNORED duplicate "All basketball drop-ins, cancelled"
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All basketball drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All pickleball drop-ins, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All badminton drop-ins, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - sports" "All basketball drop-ins, cancelled"
+    at: facility
+- IGNORED duplicate "All badminton drop-ins, cancelled"
+    date text: "Friday, October 10"
+    dates: 2025-10-10 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All badminton drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All pickleball drop-ins, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "All badminton drop-ins, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - sports" "All basketball drop-ins, cancelled"
+    at: facility
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- NOTICE "7 am to 4 pm"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

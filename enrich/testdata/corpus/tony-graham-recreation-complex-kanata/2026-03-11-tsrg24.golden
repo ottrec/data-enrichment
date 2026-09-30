@@ -1,0 +1,134 @@
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, March 13 to Tuesday, March 17"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating programs are cancelled."
+    date text: "Friday, March 13 to Tuesday, March 17"
+    dates: 2026-03-13 Fri to 2026-03-17 Tue
+    time: "" covers [Friday 7:15 - 8:05pm; Sunday 12:15 - 1:05pm; Sunday 1:15 - 2:05pm; Tuesday 1:15 - 2:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating programs"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Wednesday, March 18"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 1 to 1:50 pm, cancelled"
+    date text: "Wednesday, March 18"
+    dates: 2026-03-18 Wed
+    time: "1 to 1:50 pm" 13:00-13:50 exact [Wednesday 1:00 - 1:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-03-18 Wed 13:00-13:50
+- NOTICE "Public skating, 10 to 10:50 am, added"
+    date text: "Wednesday, March 18"
+    dates: 2026-03-18 Wed
+    time: "10 to 10:50 am" 10:00-10:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-03-18 Wed 10:00-10:50 added
+- IGNORED date-context "Thursday, March 19"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating programs are cancelled."
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 1:00 - 1:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating programs"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Friday, March 13 to Tuesday, March 17"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in 18+ Pick-up hockey programs are cancelled."
+    date text: "Friday, March 13 to Tuesday, March 17"
+    dates: 2026-03-13 Fri to 2026-03-17 Tue
+    time: "" covers [Tuesday 12:15 - 1:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in 18+ Pick-up hockey programs"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "18+ Pick-up hockey" sessions 2026-03-17 Tue 12:15-13:05
+- IGNORED date-context "Wednesday, March 18"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Stick and Puck - preschool and child (3 to 12 years), 11 to 11:50 am, added"
+    date text: "Wednesday, March 18"
+    dates: 2026-03-18 Wed
+    time: "11 to 11:50 am" 11:00-11:50 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Stick and Puck - preschool and child (3 to 12 years)"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Stick and Puck - preschool and child (3 to 12 years)" novel sessions 2026-03-18 Wed 11:00-11:50 added
+- IGNORED date-context "Thursday, March 19"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in 18+ Pick-up hockey programs are cancelled."
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 12:00 - 12:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in 18+ Pick-up hockey programs"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "18+ Pick-up hockey" sessions 2026-03-19 Thu 12:00-12:50
+
+== Tony Graham Recreation Complex - Kanata special_hours
+- IGNORED date-context "Friday, March 13 to Tuesday, March 17"
+    at: facility
+- IGNORED duplicate "All drop-in skating programs are cancelled."
+    date text: "Friday, March 13 to Tuesday, March 17"
+    dates: 2026-03-13 Fri to 2026-03-17 Tue
+    time: "" covers [Friday 7:15 - 8:05pm; Sunday 12:15 - 1:05pm; Sunday 1:15 - 2:05pm; Tuesday 1:15 - 2:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating programs"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating programs are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in 18+ Pick-up hockey programs are cancelled."
+    at: facility
+- IGNORED date-context "Wednesday, March 18"
+    at: facility
+- IGNORED duplicate "Public skating, 1 to 1:50 pm, cancelled"
+    date text: "Wednesday, March 18"
+    dates: 2026-03-18 Wed
+    time: "1 to 1:50 pm" 13:00-13:50 exact [Wednesday 1:00 - 1:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 1 to 1:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 10 to 10:50 am, added"
+    date text: "Wednesday, March 18"
+    dates: 2026-03-18 Wed
+    time: "10 to 10:50 am" 10:00-10:50 novel
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 10 to 10:50 am, added"
+    at: facility
+- IGNORED duplicate "Stick and Puck - preschool and child (3 to 12 years), 11 to 11:50 am, added"
+    date text: "Wednesday, March 18"
+    dates: 2026-03-18 Wed
+    time: "11 to 11:50 am" 11:00-11:50 unchecked
+    match: NOVEL
+    phrase: "Stick and Puck - preschool and child (3 to 12 years)"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Stick and Puck - preschool and child (3 to 12 years), 11 to 11:50 am, added"
+    at: facility
+- IGNORED date-context "Thursday, March 19"
+    at: facility
+- IGNORED duplicate "All drop-in skating programs are cancelled."
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "" covers [Thursday 1:00 - 1:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating programs"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating programs are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in 18+ Pick-up hockey programs are cancelled."
+    at: facility

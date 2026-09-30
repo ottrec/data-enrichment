@@ -1,0 +1,79 @@
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, December 20 to Friday, January 2"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Friday, January 2"
+    dates: 2025-12-20 Sat to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, December 20 to Friday, January 2"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Friday, January 2"
+    dates: 2025-12-20 Sat to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, December 20 to Friday, January 2"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Friday, January 2"
+    dates: 2025-12-20 Sat to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, December 20 to Friday, January 2"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Friday, January 2"
+    dates: 2025-12-20 Sat to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, December 20 to Friday, January 2"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Friday, January 2"
+    dates: 2025-12-20 Sat to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/pinecrest-recreation-complex-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - ice sports"
+
+== Pinecrest Recreation Complex special_hours
+- NOTICE "Saturday, December 20, 9:30 am to 2:30 pm"
+    date text: "Saturday, December 20"
+    dates: 2025-12-20 Sat
+    time: "9:30 am to 2:30 pm" 09:30-14:30 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- NOTICE "Sunday, December 21, 11:30 am to 4 pm"
+    date text: "Sunday, December 21"
+    dates: 2025-12-21 Sun
+    time: "11:30 am to 4 pm" 11:30-16:00 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- NOTICE "December 24 to 26, closed"
+    date text: "December 24 to 26"
+    dates: 2025-12-24 Wed to 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "Saturday, December 27, 9:30 am to 2:30 pm"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "9:30 am to 2:30 pm" 09:30-14:30 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- NOTICE "Sunday, December 28, 11:30 am to 4 pm"
+    date text: "Sunday, December 28"
+    dates: 2025-12-28 Sun
+    time: "11:30 am to 4 pm" 11:30-16:00 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility

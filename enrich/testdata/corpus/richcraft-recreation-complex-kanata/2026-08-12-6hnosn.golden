@@ -1,0 +1,93 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, August 15"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "" covers [Saturday 9:30 - 10:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    at: group "Drop-in schedule - group fitness" activity "Zumba®" sessions 2026-08-15 Sat 09:30-10:30
+- NOTICE "Zumba Toning, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "" covers [Saturday 10:45 - 11:45am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba Toning"
+    at: group "Drop-in schedule - group fitness" activity "Zumba® Toning" sessions 2026-08-15 Sat 10:45-11:45
+- NOTICE "Aqua Zumba, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "" covers [Saturday 9:30 - 10:30am]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Aqua Zumba"
+    at: group "Drop-in schedule - group fitness" activity "Zumba®" sessions 2026-08-15 Sat 09:30-10:30
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, August 15"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Open gym - family, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "" covers [Saturday 8:00 - 9:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Open gym - family"
+    at: group "Drop-in schedule - gymnasium sports" activity "Open Gym - family" sessions 2026-08-15 Sat 08:00-09:00
+- NOTICE "Open gym - youth, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "" covers [Saturday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Open gym - youth"
+    at: group "Drop-in schedule - gymnasium sports" activity "Open Gym - youth" sessions 2026-08-15 Sat 09:00-10:00
+- NOTICE "Volleyball - youth, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "" covers [Saturday 6:00 - 7:00pm; Saturday 7:00 - 8:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Volleyball - youth"
+    at: group "Drop-in schedule - gymnasium sports" activity "Volleyball - youth" sessions 2026-08-15 Sat 18:00-19:00, 2026-08-15 Sat 19:00-20:00
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Saturday, August 15"
+    at: facility
+- NOTICE "Facility Hours, 8 am to 4 pm"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Event Hours, 11 am to 3 pm"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "11 am to 3 pm" 11:00-15:00 unchecked
+    match: NONE
+    phrase: "Event Hours"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "The weight and cardio room will remain open."
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    match: FUZZY
+    phrase: "The weight and cardio room will remain open"
+    at: group "Drop-in schedule - weight and cardio room" activity "Weight and cardio room"
+- NOTICE "All other areas of the facility and drop-in programs will be closed during the event."
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    match: NONE
+    phrase: "All other areas of the facility and drop-in programs will be closed during the event"
+    ambiguities: class-unmatched
+    at: facility
+- IGNORED supplementary "Details about the event"
+    date text: "Saturday, August 15"
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

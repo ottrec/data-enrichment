@@ -1,0 +1,31 @@
+== Billings Estate National Historic Site special_hours
+- IGNORED date-context "Monday, August 31 to Friday, September 4"
+    at: facility
+- NOTICE "Parking will not be available in the museum parking lot due to repaving."
+    date text: "Monday, August 31 to Friday, September 4"
+    dates: 2026-08-31 Mon to 2026-09-04 Fri
+    match: NONE
+    phrase: "Parking will not be available in the museum parking lot due to repaving"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "On-street parking is available on Cabot Street, Parkhill Circle and Chalmers Road."
+    date text: "Monday, August 31 to Friday, September 4"
+    dates: 2026-08-31 Mon to 2026-09-04 Fri
+    match: NONE
+    phrase: "On-street parking is available on Cabot Street, Parkhill Circle and Chalmers Road"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "Please be respectful of our neighbours and avoid blocking driveways."
+    date text: "Monday, August 31 to Friday, September 4"
+    dates: 2026-08-31 Mon to 2026-09-04 Fri
+    match: NONE
+    phrase: "Please be respectful of our neighbours and avoid blocking driveways"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "Visitors with accessibility questions or requiring mobility support can contact the museum for assistance."
+    date text: "Monday, August 31 to Friday, September 4"
+    dates: 2026-08-31 Mon to 2026-09-04 Fri
+    match: NONE
+    phrase: "Visitors with accessibility questions or requiring mobility support can contact the museum for assistance"
+    ambiguities: freeform-item
+    at: facility

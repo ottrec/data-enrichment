@@ -1,0 +1,6 @@
+== Sandy Hill Community Centre special_hours
+- NOTICE "Monday, August 3, closed"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: closure
+    at: facility

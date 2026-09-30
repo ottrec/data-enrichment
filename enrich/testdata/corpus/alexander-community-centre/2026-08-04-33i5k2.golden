@@ -1,0 +1,7 @@
+== Alexander Community Centre special_hours
+- NOTICE "The facility is closed from August 22 to spring 2028 for renovations."
+    date text: "from August 22"
+    dates: 2026-08-22 Sat to; open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

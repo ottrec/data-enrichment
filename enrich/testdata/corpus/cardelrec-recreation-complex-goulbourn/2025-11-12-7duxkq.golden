@@ -1,0 +1,26 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "November 13 to 21"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Bootcamp, 7:30 to 8:30 am, cancelled"
+    date text: "November 13 to 21"
+    dates: 2025-11-13 Thu to 2025-11-21 Fri
+    time: "7:30 to 8:30 am" 07:30-08:30 exact [Friday 7:30 - 8:30am; Thursday 7:30 - 8:30am; Tuesday 7:30 - 8:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Bootcamp"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Bootcamp" sessions 2025-11-13 Thu 07:30-08:30, 2025-11-14 Fri 07:30-08:30, 2025-11-18 Tue 07:30-08:30, 2025-11-20 Thu 07:30-08:30, 2025-11-21 Fri 07:30-08:30
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "November 13 to 21"
+    at: facility
+- IGNORED duplicate "Bootcamp, 7:30 to 8:30 am, cancelled"
+    date text: "November 13 to 21"
+    dates: 2025-11-13 Thu to 2025-11-21 Fri
+    time: "7:30 to 8:30 am" 07:30-08:30 exact [Friday 7:30 - 8:30am; Thursday 7:30 - 8:30am; Tuesday 7:30 - 8:30am]
+    match: EXACT
+    phrase: "Bootcamp"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Bootcamp, 7:30 to 8:30 am, cancelled"
+    at: facility

@@ -1,0 +1,28 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, June 17"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aquafit General - Deep, 9:30 to 10:25, cancelled"
+    date text: "Wednesday, June 17"
+    dates: 2026-06-17 Wed
+    time: "9:30 to 10:25" 09:30-10:25 exact [Wednesday 9:30 - 10:25am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit General - Deep"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Deep" sessions 2026-06-17 Wed 09:30-10:25
+- IGNORED date-context "Wednesday, June 17"
+    at: facility
+- IGNORED duplicate "Aquafit General - Deep, 9:30 to 10:25, cancelled"
+    date text: "Wednesday, June 17"
+    dates: 2026-06-17 Wed
+    time: "9:30 to 10:25" 09:30-10:25 exact [Wednesday 9:30 - 10:25am]
+    match: EXACT
+    phrase: "Aquafit General - Deep"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit General - Deep, 9:30 to 10:25, cancelled"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,45 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Thursday, March 5"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All Pickleball - adult drop-ins, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "" covers [Thursday 6:00 - 7:00pm; Thursday 7:00 - 8:00pm; Thursday 8:15 - 9:15pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All Pickleball - adult drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult" sessions 2026-03-05 Thu 18:00-19:00, 2026-03-05 Thu 19:00-20:00, 2026-03-05 Thu 20:15-21:15
+- IGNORED date-context "Saturday, March 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Kinderplay, 12:30 to 1:30 pm cancelled"
+    date text: "Saturday, March 7"
+    dates: 2026-03-07 Sat
+    time: "12:30 to 1:30 pm" 12:30-13:30 exact [Saturday 12:30 - 1:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Kinderplay" sessions 2026-03-07 Sat 12:30-13:30
+- IGNORED date-context "Thursday, March 5"
+    at: facility
+- IGNORED duplicate "All Pickleball - adult drop-ins, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "" covers [Thursday 6:00 - 7:00pm; Thursday 7:00 - 8:00pm; Thursday 8:15 - 9:15pm]
+    match: SCOPE_PHRASE
+    phrase: "All Pickleball - adult drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All Pickleball - adult drop-ins, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, March 7"
+    at: facility
+- IGNORED duplicate "Kinderplay, 12:30 to 1:30 pm cancelled"
+    date text: "Saturday, March 7"
+    dates: 2026-03-07 Sat
+    time: "12:30 to 1:30 pm" 12:30-13:30 exact [Saturday 12:30 - 1:30pm]
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Kinderplay, 12:30 to 1:30 pm cancelled"
+    at: facility

@@ -1,0 +1,56 @@
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Tuesday, March 17"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Yoga, 9 to 10 am, cancelled"
+    date text: "Tuesday, March 17"
+    dates: 2026-03-17 Tue
+    time: "9 to 10 am" 09:00-10:00 exact [Tuesday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Yoga"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Yoga" sessions 2026-03-17 Tue 09:00-10:00
+
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, March 16 to Friday, March 20"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-in pickleball and badminton, cancelled"
+    date text: "Monday, March 16 to Friday, March 20"
+    dates: 2026-03-16 Mon to 2026-03-20 Fri
+    time: "" covers [Friday 1:00 - 2:00pm; Friday 2:00 - 3:00pm; Monday 12:00 - 1:00pm; Monday 1:00 - 2:00pm; Thursday 12:00 - 1:00pm; Thursday 1:00 - 2:00pm; Tuesday 11:30am - 12:30pm; Tuesday 12:30 - 1:30pm; Wednesday 12:00 - 1:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in pickleball and badminton"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton - adult" sessions 2026-03-16 Mon 12:00-13:00, 2026-03-16 Mon 13:00-14:00, 2026-03-17 Tue 11:30-12:30, 2026-03-17 Tue 12:30-13:30, 2026-03-18 Wed 12:00-13:00, 2026-03-19 Thu 12:00-13:00, 2026-03-19 Thu 13:00-14:00, 2026-03-20 Fri 13:00-14:00, 2026-03-20 Fri 14:00-15:00
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton - family" sessions 2026-03-16 Mon 12:00-13:00, 2026-03-16 Mon 13:00-14:00, 2026-03-17 Tue 11:30-12:30, 2026-03-17 Tue 12:30-13:30, 2026-03-18 Wed 12:00-13:00, 2026-03-19 Thu 12:00-13:00, 2026-03-19 Thu 13:00-14:00, 2026-03-20 Fri 13:00-14:00, 2026-03-20 Fri 14:00-15:00
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult" sessions 2026-03-16 Mon 12:00-13:00, 2026-03-16 Mon 13:00-14:00, 2026-03-17 Tue 11:30-12:30, 2026-03-17 Tue 12:30-13:30, 2026-03-18 Wed 12:00-13:00, 2026-03-19 Thu 12:00-13:00, 2026-03-19 Thu 13:00-14:00, 2026-03-20 Fri 13:00-14:00, 2026-03-20 Fri 14:00-15:00
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult - intermediate" sessions 2026-03-16 Mon 12:00-13:00, 2026-03-16 Mon 13:00-14:00, 2026-03-17 Tue 11:30-12:30, 2026-03-17 Tue 12:30-13:30, 2026-03-18 Wed 12:00-13:00, 2026-03-19 Thu 12:00-13:00, 2026-03-19 Thu 13:00-14:00, 2026-03-20 Fri 13:00-14:00, 2026-03-20 Fri 14:00-15:00
+
+== Hunt Club-Riverside Park Community Centre special_hours
+- IGNORED date-context "Tuesday, March 17"
+    at: facility
+- IGNORED duplicate "Yoga, 9 to 10 am, cancelled"
+    date text: "Tuesday, March 17"
+    dates: 2026-03-17 Tue
+    time: "9 to 10 am" 09:00-10:00 exact [Tuesday 9:00 - 10:00am]
+    match: EXACT
+    phrase: "Yoga"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Yoga, 9 to 10 am, cancelled"
+    at: facility
+- IGNORED date-context "Monday, March 16 to Friday, March 20"
+    at: facility
+- IGNORED duplicate "All drop-in pickleball and badminton, cancelled"
+    date text: "Monday, March 16 to Friday, March 20"
+    dates: 2026-03-16 Mon to 2026-03-20 Fri
+    time: "" covers [Friday 1:00 - 2:00pm; Friday 2:00 - 3:00pm; Monday 12:00 - 1:00pm; Monday 1:00 - 2:00pm; Thursday 12:00 - 1:00pm; Thursday 1:00 - 2:00pm; Tuesday 11:30am - 12:30pm; Tuesday 12:30 - 1:30pm; Wednesday 12:00 - 1:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in pickleball and badminton"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-in pickleball and badminton, cancelled"
+    at: facility
+
+== Hunt Club-Riverside Park Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

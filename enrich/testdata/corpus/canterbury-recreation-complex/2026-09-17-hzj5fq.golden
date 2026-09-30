@@ -1,0 +1,19 @@
+== Canterbury Recreation Complex special_hours
+- NOTICE "The pool is closed for maintenance until Monday, September 21 at 4 pm."
+    date text: "until Monday, September 21"
+    dates: to 2026-09-21 Mon
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "The sauna is closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "sauna"
+    amenity: "sauna"
+    at: facility

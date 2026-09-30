@@ -1,0 +1,32 @@
+== Canterbury Recreation Complex special_hours
+- IGNORED date-context "Monday, October 20"
+    at: facility
+- NOTICE "The facility is closed from 6 am to 2 pm for maintenance."
+    date text: "Monday, October 20"
+    dates: 2025-10-20 Mon
+    time: "6 am to 2 pm" 06:00-14:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Note"
+    section: "Note"
+    at: facility
+- UNPARSED freeform "Construction will be taking place along the east and north access to the parking lot."
+    section: "Note"
+    phrase: "Construction will be taking place along the east and north access to the parking lot"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "Monday, October 20"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool is closed from 6 am to 3 pm"
+    section: "Closure"
+    date text: "Monday, October 20"
+    dates: 2025-10-20 Mon
+    time: "6 am to 3 pm" 06:00-15:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

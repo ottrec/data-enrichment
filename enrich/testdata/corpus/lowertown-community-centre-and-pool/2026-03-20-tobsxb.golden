@@ -1,0 +1,69 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swimming"
+
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, March 25"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball, 8:30 am to 12:30 pm, cancelled"
+    date text: "Wednesday, March 25"
+    dates: 2026-03-25 Wed
+    time: "8:30 am to 12:30 pm" 08:30-12:30 exact [Wednesday 8:30am - 12:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball *Reservations required." sessions 2026-03-25 Wed 08:30-12:30
+- IGNORED date-context "Thursday March 26"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball, 9 to 10 am, cancelled"
+    date text: "Thursday March 26"
+    dates: 2026-03-26 Thu
+    time: "9 to 10 am" 09:00-10:00 exact [Thursday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball *Reservations required." sessions 2026-03-26 Thu 09:00-10:00
+
+== Lowertown Community Centre and Pool special_hours
+- IGNORED date-context "Wednesday, March 25"
+    at: facility
+- IGNORED duplicate "Pickleball, 8:30 am to 12:30 pm, cancelled"
+    date text: "Wednesday, March 25"
+    dates: 2026-03-25 Wed
+    time: "8:30 am to 12:30 pm" 08:30-12:30 exact [Wednesday 8:30am - 12:30pm]
+    match: EXACT
+    phrase: "Pickleball"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball, 8:30 am to 12:30 pm, cancelled"
+    at: facility
+- IGNORED date-context "Thursday March 26"
+    at: facility
+- IGNORED duplicate "Pickleball, 9 to 10 am, cancelled"
+    date text: "Thursday March 26"
+    dates: 2026-03-26 Thu
+    time: "9 to 10 am" 09:00-10:00 exact [Thursday 9:00 - 10:00am]
+    match: EXACT
+    phrase: "Pickleball"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball, 9 to 10 am, cancelled"
+    at: facility
+
+== Lowertown Community Centre and Pool notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,42 @@
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - skating"
+- NOTICE "Sunday, December 21 to Saturday, January 3, see Winter Break schedule."
+    date text: "Sunday, December 21 to Saturday, January 3"
+    dates: 2025-12-21 Sun to 2026-01-03 Sat
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - ice sports"
+- NOTICE "Sunday, December 21 to Saturday, January 3, see Winter Break schedule."
+    date text: "Sunday, December 21 to Saturday, January 3"
+    dates: 2025-12-21 Sun to 2026-01-03 Sat
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - ice sports"
+
+== Tony Graham Recreation Complex - Kanata special_hours
+- NOTICE "Tuesday, December 31, 9 am to noon"
+    date text: "Tuesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "9 am to noon" 09:00-12:00 unchecked
+    ambiguities: hours-context-unknown weekday-mismatch
+    at: facility
+- NOTICE "Wednesday, January 1, closed"
+    date text: "Wednesday, January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    ambiguities: weekday-mismatch
+    at: facility
+- IGNORED heading "Customer service hours - Winter Break"
+    section: "Customer service hours - Winter Break"
+    at: facility
+- NOTICE "December 24 to January 1, closed"
+    section: "Customer service hours - Winter Break"
+    date text: "December 24 to January 1"
+    dates: 2025-12-24 Wed to 2026-01-01 Thu
+    effects: closure
+    at: facility
+- IGNORED service-desk "Friday, January 2, noon to 8 pm"
+    section: "Customer service hours - Winter Break"
+    date text: "Friday, January 2"
+    at: facility

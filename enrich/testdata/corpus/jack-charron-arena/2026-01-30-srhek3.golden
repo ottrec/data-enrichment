@@ -1,0 +1,24 @@
+== Jack Charron Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, February 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Friday, February 13"
+    dates: 2026-02-13 Fri
+    time: "" covers [Friday 10:00 - 10:50am; Friday 9:00 - 9:50am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Jack Charron Arena special_hours
+- IGNORED date-context "Friday, February 13"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Friday, February 13"
+    dates: 2026-02-13 Fri
+    time: "" covers [Friday 10:00 - 10:50am; Friday 9:00 - 9:50am]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility

@@ -1,0 +1,81 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - squash and racquetball"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash and racquetball"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- NOTICE "Squash court 3 is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "squash court 3"
+    amenity: "squash court"
+    ambiguities: activity-narrowed-to-amenity activity-typo-match
+    at: facility
+- IGNORED heading "Closures"
+    section: "Closures"
+    at: facility
+- IGNORED date-context "Monday, August 24 to Sunday, September 20"
+    section: "Closures"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Closures"
+    date text: "Monday, August 24 to Sunday, September 20"
+    dates: 2026-08-24 Mon to 2026-09-20 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED date-context "Until September 14"
+    section: "Closures"
+    at: facility
+- NOTICE "Roger Sénécal Arena is closed for annual maintenance."
+    section: "Closures"
+    date text: "Until September 14"
+    dates: to 2026-09-14 Mon
+    effects: closure
+    match: NONE
+    phrase: "roger sénécal arena"
+    amenity: "roger sénécal arena"
+    at: facility
+- IGNORED heading "Labour Day"
+    section: "Labour Day"
+    at: facility
+- IGNORED date-context "Monday, September 7"
+    section: "Labour Day"
+    at: facility
+- NOTICE "Closed"
+    section: "Labour Day"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: closure
+    at: facility

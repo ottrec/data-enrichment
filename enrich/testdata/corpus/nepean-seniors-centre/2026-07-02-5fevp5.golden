@@ -1,0 +1,9 @@
+== Nepean Seniors Centre schedule_changes "Drop-in activities"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in activities"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in activities"

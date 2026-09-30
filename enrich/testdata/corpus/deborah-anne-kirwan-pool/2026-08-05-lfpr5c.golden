@@ -1,0 +1,43 @@
+== Deborah Anne Kirwan Pool schedule_changes "Drop-in schedule - swim"
+- IGNORED date-context "Thursday, August 13"
+    at: group "Drop-in schedule - swim"
+- NOTICE "Public swim, 6:30 to 8:30 pm, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "6:30 to 8:30 pm" 18:30-20:30 exact [Thursday 6:30 - 8:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim" activity "Public swim" sessions 2026-08-13 Thu 18:30-20:30
+- NOTICE "Lane swim, 8:30 to 9:30 pm, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "8:30 to 9:30 pm" 20:30-21:30 exact [Thursday 8:30 - 9:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim" activity "Lane swim" sessions 2026-08-13 Thu 20:30-21:30
+- IGNORED date-context "Thursday, August 13"
+    at: facility
+- IGNORED duplicate "Public swim, 6:30 to 8:30 pm, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "6:30 to 8:30 pm" 18:30-20:30 exact [Thursday 6:30 - 8:30pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim" "Public swim, 6:30 to 8:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim, 8:30 to 9:30 pm, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "8:30 to 9:30 pm" 20:30-21:30 exact [Thursday 8:30 - 9:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim" "Lane swim, 8:30 to 9:30 pm, cancelled"
+    at: facility

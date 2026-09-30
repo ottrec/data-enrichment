@@ -1,0 +1,25 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Labour Day schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Labour Day schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Labour Day schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"

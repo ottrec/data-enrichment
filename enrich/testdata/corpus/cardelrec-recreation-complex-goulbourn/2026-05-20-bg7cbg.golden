@@ -1,0 +1,15 @@
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Tuesday, May 26"
+    at: facility
+- NOTICE "The therapeutic pool is closed."
+    date text: "Tuesday, May 26"
+    dates: 2026-05-26 Tue
+    time: "" covers [Tuesday 11:30am - 2:30pm; Tuesday 7:45 - 9:45pm; Tuesday 8:30 - 10:30am]
+    effects: closure
+    match: EXACT
+    phrase: "therapeutic pool"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Therapeutic pool" sessions 2026-05-26 Tue 08:30-10:30, 2026-05-26 Tue 11:30-14:30, 2026-05-26 Tue 19:45-21:45
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

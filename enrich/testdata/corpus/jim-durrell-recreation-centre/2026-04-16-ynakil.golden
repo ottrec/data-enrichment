@@ -1,0 +1,41 @@
+== Jim Durrell Recreation Centre schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Monday, April 20"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Monday, April 20"
+    dates: 2026-04-20 Mon
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Monday, April 27"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in ice sports, cancelled"
+    date text: "Monday, April 27"
+    dates: 2026-04-27 Mon
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+
+== Jim Durrell Recreation Centre special_hours
+- IGNORED date-context "Monday, April 20"
+    at: facility
+- IGNORED duplicate "All drop-in ice sports, cancelled"
+    date text: "Monday, April 20"
+    dates: 2026-04-20 Mon
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility
+- IGNORED date-context "Monday, April 27"
+    at: facility
+- IGNORED duplicate "All drop-in ice sports, cancelled"
+    date text: "Monday, April 27"
+    dates: 2026-04-27 Mon
+    match: SCOPE_PHRASE
+    phrase: "All drop-in ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in ice sports, cancelled"
+    at: facility

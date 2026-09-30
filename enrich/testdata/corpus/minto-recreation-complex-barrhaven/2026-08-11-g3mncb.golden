@@ -1,0 +1,55 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Sunday, August 30"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 6:45 to 8 pm, cancelled"
+    date text: "Sunday, August 30"
+    dates: 2026-08-30 Sun
+    time: "6:45 to 8 pm" 18:45-20:00 exact [Sunday 6:45 - 8:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-08-30 Sun 18:45-20:00
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, August 15"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Saturday 9:15 - 10:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling" sessions 2026-08-15 Sat 09:15-10:15
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Saturday, August 15"
+    at: facility
+- IGNORED duplicate "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    date text: "Saturday, August 15"
+    dates: 2026-08-15 Sat
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Saturday 9:15 - 10:15am]
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Indoor cycling, 9:15 to 10:15 am, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, August 30"
+    at: facility
+- IGNORED duplicate "Lane swim, 6:45 to 8 pm, cancelled"
+    date text: "Sunday, August 30"
+    dates: 2026-08-30 Sun
+    time: "6:45 to 8 pm" 18:45-20:00 exact [Sunday 6:45 - 8:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 6:45 to 8 pm, cancelled"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

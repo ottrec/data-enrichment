@@ -1,0 +1,53 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Thursday, February 26"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Cardio and strength, 10:15 to 11:15 am, cancelled"
+    date text: "Thursday, February 26"
+    dates: 2026-02-26 Thu
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Thursday 10:15 - 11:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength" sessions 2026-02-26 Thu 10:15-11:15
+- IGNORED date-context "Friday, February 27"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Strength, 10:15 to 11:15 am, cancelled"
+    date text: "Friday, February 27"
+    dates: 2026-02-27 Fri
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Friday 10:15 - 11:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Strength"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Strength" sessions 2026-02-27 Fri 10:15-11:15
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Thursday, February 26"
+    at: facility
+- IGNORED duplicate "Cardio and strength, 10:15 to 11:15 am, cancelled"
+    date text: "Thursday, February 26"
+    dates: 2026-02-26 Thu
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Thursday 10:15 - 11:15am]
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Cardio and strength, 10:15 to 11:15 am, cancelled"
+    at: facility
+- IGNORED date-context "Friday, February 27"
+    at: facility
+- IGNORED duplicate "Strength, 10:15 to 11:15 am, cancelled"
+    date text: "Friday, February 27"
+    dates: 2026-02-27 Fri
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Friday 10:15 - 11:15am]
+    match: EXACT
+    phrase: "Strength"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Strength, 10:15 to 11:15 am, cancelled"
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

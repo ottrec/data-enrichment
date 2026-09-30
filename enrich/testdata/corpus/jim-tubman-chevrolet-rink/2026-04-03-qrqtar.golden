@@ -1,0 +1,6 @@
+== Jim Tubman Chevrolet Rink special_hours
+- NOTICE "The rink is closed for the season."
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "rink"
+    at: facility

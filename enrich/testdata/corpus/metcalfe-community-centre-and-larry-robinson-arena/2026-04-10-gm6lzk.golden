@@ -1,0 +1,12 @@
+== Metcalfe Community Centre and Larry Robinson Arena special_hours
+- IGNORED date-context "Thursday, April 2 to Saturday, April 3"
+    at: facility
+- NOTICE "All drop-in skating and ice sports, cancelled"
+    date text: "Thursday, April 2 to Saturday, April 3"
+    dates: 2026-04-02 Thu to 2026-04-03 Fri
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - skating"
+    at: group "Drop-in schedule - ice sports"

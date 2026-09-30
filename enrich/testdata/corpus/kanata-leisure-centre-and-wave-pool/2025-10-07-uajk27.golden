@@ -1,0 +1,101 @@
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedule - Thanksgiving Day"
+- IGNORED date-context "Saturday, October 11 and Sunday, October 12"
+    at: group "Drop-in schedule - Thanksgiving Day"
+- NOTICE "Hot tub and sauna, 8:30 am to noon, cancelled"
+    date text: "Saturday, October 11 and Sunday, October 12"
+    dates: 2025-10-11 Sat 2025-10-12 Sun
+    time: "8:30 am to noon" 08:30-12:00 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    ambiguities: date-outside-schedule no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Thanksgiving Day" activity "Hot tub and sauna"
+- NOTICE "Hot tub and sauna, Noon to 5 pm, added"
+    date text: "Saturday, October 11 and Sunday, October 12"
+    dates: 2025-10-11 Sat 2025-10-12 Sun
+    time: "Noon to 5 pm" 12:00-17:00 novel
+    effects: added
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    ambiguities: date-outside-schedule
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Thanksgiving Day" activity "Hot tub and sauna" sessions 2025-10-11 Sat 12:00-17:00 added, 2025-10-12 Sun 12:00-17:00 added
+
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedules - swim and aquafit"
+- IGNORED date-context "Saturday, October 11 and Sunday, October 12"
+    at: group "Drop-in schedules - swim and aquafit"
+- NOTICE "Hot tub and sauna, 8:30 am to noon, cancelled"
+    date text: "Saturday, October 11 and Sunday, October 12"
+    dates: 2025-10-11 Sat 2025-10-12 Sun
+    time: "8:30 am to noon" 08:30-12:00 within [Saturday 8:30am - 5:00pm; Sunday 8:30am - 5:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedules - swim and aquafit" activity "Hot tub and sauna" sessions 2025-10-11 Sat 08:30-17:00, 2025-10-12 Sun 08:30-17:00
+- NOTICE "Hot tub and sauna, Noon to 5 pm, added"
+    date text: "Saturday, October 11 and Sunday, October 12"
+    dates: 2025-10-11 Sat 2025-10-12 Sun
+    time: "Noon to 5 pm" 12:00-17:00 within [Saturday 8:30am - 5:00pm; Sunday 8:30am - 5:00pm]
+    effects: added
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedules - swim and aquafit" activity "Hot tub and sauna" sessions 2025-10-11 Sat 12:00-17:00 added, 2025-10-12 Sun 12:00-17:00 added
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedules - swim and aquafit"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving Day schedule" "https://ottawa.ca/en/kanata-leisure-centre-and-wave-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - swim and aquafit"
+
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedules - weight and cardio room"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedules - weight and cardio room"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving Day schedule" "https://ottawa.ca/en/kanata-leisure-centre-and-wave-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - weight and cardio room"
+- IGNORED date-context "Monday, October 13"
+    at: group "Drop-in schedules - group fitness"
+- NOTICE "See Thanksgiving Day schedule."
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    effects: see-schedule "Thanksgiving Day schedule" "https://ottawa.ca/en/kanata-leisure-centre-and-wave-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - group fitness"
+
+== Kanata Leisure Centre and Wave Pool special_hours
+- IGNORED date-context "Saturday, October 11 and Sunday, October 12"
+    at: facility
+- IGNORED duplicate "Hot tub and sauna, 8:30 am to noon, cancelled"
+    date text: "Saturday, October 11 and Sunday, October 12"
+    dates: 2025-10-11 Sat 2025-10-12 Sun
+    time: "8:30 am to noon" 08:30-12:00 within [Saturday 8:30am - 5:00pm; Sunday 8:30am - 5:00pm]
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    duplicate of: schedule_changes "Drop-in schedule - Thanksgiving Day" "Hot tub and sauna, 8:30 am to noon, cancelled"
+    duplicate of: schedule_changes "Drop-in schedules - swim and aquafit" "Hot tub and sauna, 8:30 am to noon, cancelled"
+    at: facility
+- IGNORED duplicate "Hot tub and sauna, Noon to 5 pm, added"
+    date text: "Saturday, October 11 and Sunday, October 12"
+    dates: 2025-10-11 Sat 2025-10-12 Sun
+    time: "Noon to 5 pm" 12:00-17:00 within [Saturday 8:30am - 5:00pm; Sunday 8:30am - 5:00pm]
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    duplicate of: schedule_changes "Drop-in schedule - Thanksgiving Day" "Hot tub and sauna, Noon to 5 pm, added"
+    duplicate of: schedule_changes "Drop-in schedules - swim and aquafit" "Hot tub and sauna, Noon to 5 pm, added"
+    at: facility
+- IGNORED date-context "Monday, October 13"
+    at: facility
+- NOTICE "8 am to 4 pm"
+    date text: "Monday, October 13"
+    dates: 2025-10-13 Mon
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

@@ -1,0 +1,69 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Thursday, April 9"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aquafit, 8:05 to 9 am, cancelled"
+    date text: "Thursday, April 9"
+    dates: 2026-04-09 Thu
+    time: "8:05 to 9 am" 08:05-09:00 exact [Thursday 8:05 - 9:00am]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Aquafit"
+    candidates: "Aquafit - Deep" "Aquafit - Shallow"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aquafit, 9:05 to 10 am, cancelled"
+    date text: "Thursday, April 9"
+    dates: 2026-04-09 Thu
+    time: "9:05 to 10 am" 09:05-10:00 exact [Thursday 9:05 - 10:00am]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Aquafit"
+    candidates: "Aquafit - Deep" "Aquafit - Shallow"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Ray Friel Recreation Complex special_hours
+- IGNORED date-context "Thursday, April 9"
+    at: facility
+- IGNORED duplicate "Aquafit, 8:05 to 9 am, cancelled"
+    date text: "Thursday, April 9"
+    dates: 2026-04-09 Thu
+    time: "8:05 to 9 am" 08:05-09:00 exact [Thursday 8:05 - 9:00am]
+    match: MULTIPLE
+    phrase: "Aquafit"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit, 8:05 to 9 am, cancelled"
+    at: facility
+- IGNORED duplicate "Aquafit, 9:05 to 10 am, cancelled"
+    date text: "Thursday, April 9"
+    dates: 2026-04-09 Thu
+    time: "9:05 to 10 am" 09:05-10:00 exact [Thursday 9:05 - 10:00am]
+    match: MULTIPLE
+    phrase: "Aquafit"
+    ambiguities: activity-multiple-candidates meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit, 9:05 to 10 am, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, April 12"
+    at: facility
+- NOTICE "Public skating, 5 to 6:50 pm, cancelled"
+    date text: "Sunday, April 12"
+    dates: 2026-04-12 Sun
+    time: "5 to 6:50 pm" 17:00-18:50 exact [Sunday 5:00 - 6:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public Skating" sessions 2026-04-12 Sun 17:00-18:50
+- IGNORED heading "Notice"
+    section: "Notice"
+    at: facility
+- NOTICE "The diving board is closed until further notice."
+    section: "Notice"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility

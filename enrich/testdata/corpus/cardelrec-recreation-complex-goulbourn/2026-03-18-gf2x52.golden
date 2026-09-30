@@ -1,0 +1,63 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - Kinderplay"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Kinderplay"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "The therapeutic pool is closed until further notice."
+    dates: open-ended
+    time: "" covers [Friday 12:15 - 2:15pm; Friday 7:00 - 9:30pm; Friday 7:15 - 11:15am; Friday, March 20, 2026 7:00 - 9:30pm; Friday, March 20, 2026 7:15am - 3:00pm; Monday 7:15am - 2:15pm; Monday 8:45 - 9:45pm; Monday, March 16, 2026 6:00 - 9:00pm; Monday, March 16, 2026 7:15am - 3:00pm; Saturday 12:30 - 4:00pm; Saturday, March 21, 2026 11:30am - 4:00pm; Sunday 12:30 - 4:00pm; Sunday 7:00 - 8:00pm; Sunday, March 22, 2026 11:30am - 4:00pm; Thursday 2:15 - 3:30pm; Thursday 7:45 - 9:45pm; Thursday 8:30am - 12:30pm; Thursday, March 19, 2026 6:00 - 9:00pm; Thursday, March 19, 2026 8:30am - 3:30pm; Tuesday 11:30am - 2:30pm; Tuesday 7:45 - 9:45pm; Tuesday 8:30 - 10:30am; Tuesday, March 17, 2026 6:00 - 9:00pm; Tuesday, March 17, 2026 8:30am - 3:30pm; Wednesday 7:15am - 2:15pm; Wednesday 8:45 - 9:45pm; Wednesday, March 18, 2026 6:00 - 9:00pm; Wednesday, March 18, 2026 7:15am - 3:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "therapeutic pool"
+    at: group "Drop-in schedule - March Break" activity "Therapeutic pool *Reservations not required."
+    at: group "Drop-in schedule - swim and aquafitness" activity "Therapeutic pool"
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

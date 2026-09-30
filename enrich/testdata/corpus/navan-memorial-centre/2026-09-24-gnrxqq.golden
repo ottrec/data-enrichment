@@ -1,0 +1,6 @@
+== Navan Memorial Centre special_hours
+- NOTICE "The facility is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

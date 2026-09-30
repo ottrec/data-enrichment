@@ -1,0 +1,36 @@
+== General Burns Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== General Burns Pool special_hours
+- NOTICE "Wednesday, July 1, 10:30 am to 4 pm"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "10:30 am to 4 pm" 10:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Summer 2026"
+    section: "Summer 2026"
+    at: facility
+- NOTICE "Pre-season, June 8 to 24"
+    section: "Summer 2026"
+    date text: "June 8 to 24"
+    dates: 2026-06-08 Mon to 2026-06-24 Wed
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Pre-season"
+    at: facility
+- NOTICE "Regular season, June 25 to August 31"
+    section: "Summer 2026"
+    date text: "June 25 to August 31"
+    dates: 2026-06-25 Thu to 2026-08-31 Mon
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

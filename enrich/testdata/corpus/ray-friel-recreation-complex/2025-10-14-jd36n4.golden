@@ -1,0 +1,24 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "September 22 to November 3"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "The pool, sauna and hot tub are closed."
+    date text: "September 22 to November 3"
+    dates: 2025-09-22 Mon to 2025-11-03 Mon
+    effects: closure
+    match: NONE
+    phrase: "pool sauna and hot tub"
+    amenity: "pool sauna hot tub"
+    sources: schedule_changes special_hours
+    at: facility
+
+== Ray Friel Recreation Complex special_hours
+- IGNORED date-context "September 22 to November 3"
+    at: facility
+- IGNORED duplicate "The pool, sauna and hot tub are closed."
+    date text: "September 22 to November 3"
+    dates: 2025-09-22 Mon to 2025-11-03 Mon
+    match: NONE
+    phrase: "pool sauna and hot tub"
+    amenity: "pool sauna hot tub"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "The pool, sauna and hot tub are closed."
+    at: facility

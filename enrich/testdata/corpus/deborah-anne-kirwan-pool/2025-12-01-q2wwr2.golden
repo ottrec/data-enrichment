@@ -1,0 +1,80 @@
+== Deborah Anne Kirwan Pool schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Friday, December 12"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Public swim, 5 to 7 pm, cancelled"
+    date text: "Friday, December 12"
+    dates: 2025-12-12 Fri
+    time: "5 to 7 pm" 17:00-19:00 exact [Friday 5:00 - 7:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Public swim" sessions 2025-12-12 Fri 17:00-19:00
+- IGNORED date-context "Monday, December 22 to Friday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/deborah-anne-kirwan-pool-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Deborah Anne Kirwan Pool special_hours
+- IGNORED date-context "Friday, December 12"
+    at: facility
+- IGNORED duplicate "Public swim, 5 to 7 pm, cancelled"
+    date text: "Friday, December 12"
+    dates: 2025-12-12 Fri
+    time: "5 to 7 pm" 17:00-19:00 exact [Friday 5:00 - 7:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Public swim, 5 to 7 pm, cancelled"
+    at: facility
+- IGNORED heading "Winter Break hours"
+    section: "Winter Break hours"
+    at: facility
+- NOTICE "December 22 and 23, 4 to 8 pm"
+    section: "Winter Break hours"
+    date text: "December 22 and 23"
+    dates: 2025-12-22 Mon 2025-12-23 Tue
+    time: "4 to 8 pm" 16:00-20:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "December 24 to 26, closed"
+    section: "Winter Break hours"
+    date text: "December 24 to 26"
+    dates: 2025-12-24 Wed to 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "December 27 and 28, noon to 4 pm"
+    section: "Winter Break hours"
+    date text: "December 27 and 28"
+    dates: 2025-12-27 Sat 2025-12-28 Sun
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 29 and 30, 4 to 8 pm"
+    section: "Winter Break hours"
+    date text: "December 29 and 30"
+    dates: 2025-12-29 Mon 2025-12-30 Tue
+    time: "4 to 8 pm" 16:00-20:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    section: "Winter Break hours"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 3 and 4, noon to 4 pm"
+    section: "Winter Break hours"
+    date text: "January 3 and 4"
+    dates: 2026-01-03 Sat 2026-01-04 Sun
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

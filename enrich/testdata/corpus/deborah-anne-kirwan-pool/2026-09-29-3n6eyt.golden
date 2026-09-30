@@ -1,0 +1,28 @@
+== Deborah Anne Kirwan Pool schedule_changes "Drop-in schedule - swim"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - swim"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim"
+
+== Deborah Anne Kirwan Pool special_hours
+- NOTICE "Saturday, October 10, 11 am to 3 pm"
+    date text: "Saturday, October 10"
+    dates: 2026-10-10 Sat
+    time: "11 am to 3 pm" 11:00-15:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, October 11, 11 am to 4 pm"
+    date text: "Sunday, October 11"
+    dates: 2026-10-11 Sun
+    time: "11 am to 4 pm" 11:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, October 12, closed"
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: closure
+    at: facility

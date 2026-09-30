@@ -1,0 +1,110 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, February 21"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Women's only swim, 8:15 to 9:15 pm, added"
+    date text: "Saturday, February 21"
+    dates: 2026-02-21 Sat
+    time: "8:15 to 9:15 pm" 20:15-21:15 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Women's only swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Women's only swim" novel sessions 2026-02-21 Sat 20:15-21:15 added
+
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - squash and racquetball"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash and racquetball"
+
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, February 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All public skating drop-ins, cancelled"
+    date text: "Friday, February 13"
+    dates: 2026-02-13 Fri
+    time: "" covers [Friday 7:15 - 8:05pm; Friday 8:15 - 9:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All public skating drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- NOTICE "All figure skating drop-ins, cancelled"
+    date text: "Friday, February 13"
+    dates: 2026-02-13 Fri
+    time: "" covers [Friday 7:15 - 8:05pm; Friday 8:15 - 9:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All figure skating drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- IGNORED date-context "Friday, February 13"
+    at: facility
+- IGNORED duplicate "All public skating drop-ins, cancelled"
+    date text: "Friday, February 13"
+    dates: 2026-02-13 Fri
+    time: "" covers [Friday 7:15 - 8:05pm; Friday 8:15 - 9:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All public skating drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All public skating drop-ins, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All figure skating drop-ins, cancelled"
+    at: facility
+- IGNORED duplicate "All figure skating drop-ins, cancelled"
+    date text: "Friday, February 13"
+    dates: 2026-02-13 Fri
+    time: "" covers [Friday 7:15 - 8:05pm; Friday 8:15 - 9:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All figure skating drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All public skating drop-ins, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All figure skating drop-ins, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, February 21"
+    at: facility
+- IGNORED duplicate "Women's only swim, 8:15 to 9:15 pm, added"
+    date text: "Saturday, February 21"
+    dates: 2026-02-21 Sat
+    time: "8:15 to 9:15 pm" 20:15-21:15 unchecked
+    match: NOVEL
+    phrase: "Women's only swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Women's only swim, 8:15 to 9:15 pm, added"
+    at: facility

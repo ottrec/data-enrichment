@@ -1,0 +1,24 @@
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Tuesday, September 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aquafit - Combo, 12:45 to 1:45 pm, cancelled"
+    date text: "Tuesday, September 22"
+    dates: 2026-09-22 Tue
+    time: "12:45 to 1:45 pm" 12:45-13:45 exact [Tuesday 12:45 - 1:45pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit - Combo"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - Combo" sessions 2026-09-22 Tue 12:45-13:45
+- IGNORED date-context "Tuesday, September 22"
+    at: facility
+- IGNORED duplicate "Aquafit - Combo, 12:45 to 1:45 pm, cancelled"
+    date text: "Tuesday, September 22"
+    dates: 2026-09-22 Tue
+    time: "12:45 to 1:45 pm" 12:45-13:45 exact [Tuesday 12:45 - 1:45pm]
+    match: EXACT
+    phrase: "Aquafit - Combo"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit - Combo, 12:45 to 1:45 pm, cancelled"
+    at: facility

@@ -1,0 +1,43 @@
+== Greely Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, March 21"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-in badminton, cancelled"
+    date text: "Saturday, March 21"
+    dates: 2026-03-21 Sat
+    time: "" covers [Saturday 10:30 - 11:50am; Saturday 9:00 - 10:20am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in badminton"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton - family" sessions 2026-03-21 Sat 09:00-10:20, 2026-03-21 Sat 10:30-11:50
+- IGNORED date-context "Saturday, March 28"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-in badminton, cancelled"
+    date text: "Saturday, March 28"
+    dates: 2026-03-28 Sat
+    time: "" covers [Saturday 10:30 - 11:50am; Saturday 9:00 - 10:20am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in badminton"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton - family" sessions 2026-03-28 Sat 09:00-10:20, 2026-03-28 Sat 10:30-11:50
+- IGNORED date-context "Saturday, March 21"
+    at: facility
+- IGNORED duplicate "All drop-in badminton, cancelled"
+    date text: "Saturday, March 21"
+    dates: 2026-03-21 Sat
+    time: "" covers [Saturday 10:30 - 11:50am; Saturday 9:00 - 10:20am]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in badminton"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-in badminton, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, March 28"
+    at: facility
+- IGNORED duplicate "All drop-in badminton, cancelled"
+    date text: "Saturday, March 28"
+    dates: 2026-03-28 Sat
+    time: "" covers [Saturday 10:30 - 11:50am; Saturday 9:00 - 10:20am]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in badminton"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-in badminton, cancelled"
+    at: facility

@@ -1,0 +1,85 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - Canada Day"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - Canada Day"
+- NOTICE "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 10:15 - 11:15am; Wednesday 11:20am - 12:20pm; Wednesday 6:55 - 7:55am; Wednesday 7:45 - 8:45am; Wednesday 8:30 - 9:30pm; Wednesday 9:10 - 10:10am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness, gymnasium sports, and skating drop-ins"
+    ambiguities: matched-other-group
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength 50+ *Reservations not required" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Core conditioning" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Drums Alive®" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Pilates *Reservations not required" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Step and strength" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Strength" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "TMC" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "The Groove Method®" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Yoga *Reservations not required" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Yoga - Yin *Reservations not required" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - group fitness" activity "Zumba®" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton - adult (18+)" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton - family" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - gymnasium sports" activity "Basketball - adult (18+)" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - gymnasium sports" activity "Volleyball - adult (18+)" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - skating" activity "Family skate" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - skating" activity "Pick-up hockey 35+ *Reservations required." sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - skating" activity "Pick-up hockey 50+ *Reservations required." sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+    at: group "Drop-in schedule - skating" activity "Public skate" sessions 2026-07-01 Wed 06:55-07:55, 2026-07-01 Wed 07:45-08:45, 2026-07-01 Wed 09:10-10:10, 2026-07-01 Wed 10:15-11:15, 2026-07-01 Wed 11:20-12:20, 2026-07-01 Wed 20:30-21:30
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 10:15 - 11:15am; Wednesday 11:20am - 12:20pm; Wednesday 6:55 - 7:55am; Wednesday 7:45 - 8:45am; Wednesday 9:10 - 10:10am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness, gymnasium sports, and skating drop-ins"
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 8:30 - 9:30pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness, gymnasium sports, and skating drop-ins"
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness, gymnasium sports, and skating drop-ins"
+    at: group "Drop-in schedule - skating"
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "Wednesday, July 1, 7 am to 4 pm"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

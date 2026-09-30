@@ -1,0 +1,93 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Wednesday, January 7"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "The facility is closed."
+    date text: "Wednesday, January 7"
+    dates: 2026-01-07 Wed
+    effects: closure
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Friday, January 16"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane Swim, noon to 1:30 pm, cancelled"
+    date text: "Friday, January 16"
+    dates: 2026-01-16 Fri
+    time: "noon to 1:30 pm" 12:00-13:30 within [Friday 11:05am - 1:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane Swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim" sessions 2026-01-16 Fri 11:05-13:30
+- IGNORED date-context "Saturday, January 24"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "The pool is closed for maintenance until further notice."
+    date text: "Saturday, January 24"
+    dates: 2026-01-24 Sat; open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    sources: schedule_changes special_hours
+    at: facility
+
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, January 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed."
+    date text: "Wednesday, January 7"
+    dates: 2026-01-07 Wed
+    effects: closure
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, January 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "The facility is closed."
+    date text: "Wednesday, January 7"
+    dates: 2026-01-07 Wed
+    effects: closure
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Canterbury Recreation Complex special_hours
+- IGNORED date-context "Wednesday, January 7"
+    at: facility
+- IGNORED duplicate "The facility is closed."
+    date text: "Wednesday, January 7"
+    dates: 2026-01-07 Wed
+    match: SCOPE_PHRASE
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "The facility is closed."
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "The facility is closed."
+    duplicate of: schedule_changes "Drop-in schedule - skating" "The facility is closed."
+    at: facility
+- IGNORED date-context "Friday, January 16"
+    at: facility
+- IGNORED duplicate "Lane Swim, noon to 1:30 pm, cancelled"
+    date text: "Friday, January 16"
+    dates: 2026-01-16 Fri
+    time: "noon to 1:30 pm" 12:00-13:30 within [Friday 11:05am - 1:30pm]
+    match: EXACT
+    phrase: "Lane Swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane Swim, noon to 1:30 pm, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, January 24"
+    at: facility
+- IGNORED duplicate "The pool is closed for maintenance until further notice."
+    date text: "Saturday, January 24"
+    dates: 2026-01-24 Sat; open-ended
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "The pool is closed for maintenance until further notice."
+    at: facility
+- IGNORED heading "Note"
+    section: "Note"
+    at: facility
+- UNPARSED freeform "Construction is taking place along the east and north access to the parking lot until further notice."
+    section: "Note"
+    phrase: "Construction is taking place along the east and north access to the parking lot until further notice"
+    at: facility
+- UNPARSED freeform "Pedestrian access between buildings is limited until further notice due to ongoing construction."
+    section: "Note"
+    phrase: "Pedestrian access between buildings is limited until further notice due to ongoing construction"
+    at: facility

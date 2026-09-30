@@ -1,0 +1,104 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Thursday, April 4 to Monday, April 6"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Easter schedule."
+    date text: "Thursday, April 4 to Monday, April 6"
+    dates: 2026-04-04 Sat to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Thursday, April 4 to Monday, April 6"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Easter schedule."
+    date text: "Thursday, April 4 to Monday, April 6"
+    dates: 2026-04-04 Sat to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Thursday, April 4 to Monday, April 6"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Easter schedule."
+    date text: "Thursday, April 4 to Monday, April 6"
+    dates: 2026-04-04 Sat to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Thursday, April 4 to Monday, April 6"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Easter schedule."
+    date text: "Thursday, April 4 to Monday, April 6"
+    dates: 2026-04-04 Sat to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - gymnasium sports"
+
+== François Dupuis Recreation Centre special_hours
+- NOTICE "Friday, April 3, closed"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: closure
+    at: facility
+- NOTICE "April 4 and 5, 8 am to 5:30 pm"
+    date text: "April 4 and 5"
+    dates: 2026-04-04 Sat 2026-04-05 Sun
+    time: "8 am to 5:30 pm" 08:00-17:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, April 6, 8 am to 4 pm"
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Sauna is closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    time: "" covers [Friday 7:00 - 9:00pm; Friday 7:30am - 3:30pm; Monday 7:30am - 3:30pm; Monday 8:00 - 9:00pm; Monday, April 6, 2026 7:30am - 12:00pm; Saturday 10:30am - 4:00pm; Saturday, April 4, 2026 9:00am - 4:00pm; Sunday 9:30am - 4:00pm; Sunday, April 5, 2026 9:00am - 4:00pm; Thursday 7:30am - 2:30pm; Thursday 8:00 - 9:00pm; Tuesday 7:30am - 3:30pm; Tuesday 8:00 - 9:00pm; Wednesday 7:30am - 3:00pm; Wednesday 8:00 - 9:00pm]
+    effects: closure
+    match: EXACT
+    phrase: "sauna"
+    at: group "Drop-in schedule - Easter weekend" activity "Sauna"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Sauna"
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

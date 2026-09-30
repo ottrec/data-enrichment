@@ -1,0 +1,59 @@
+== Osgoode Community Centre and Stuart Holmes Arena special_hours
+- IGNORED date-context "Monday, December 22"
+    at: facility
+- NOTICE "Family skate, noon to 12:50 pm, added"
+    date text: "Monday, December 22"
+    dates: 2025-12-22 Mon
+    time: "noon to 12:50 pm" 12:00-12:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family skate"
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-22 Mon 12:00-12:50 added
+- NOTICE "Public skate, 1 to 1:50 pm, added"
+    date text: "Monday, December 22"
+    dates: 2025-12-22 Mon
+    time: "1 to 1:50 pm" 13:00-13:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-22 Mon 13:00-13:50 added
+- IGNORED date-context "Saturday, December 27"
+    at: facility
+- NOTICE "Family skate, 2 to 2:50 pm, added"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "2 to 2:50 pm" 14:00-14:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-27 Sat 14:00-14:50 added
+- NOTICE "Public skate, 3 to 3:50 pm, added"
+    date text: "Saturday, December 27"
+    dates: 2025-12-27 Sat
+    time: "3 to 3:50 pm" 15:00-15:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-27 Sat 15:00-15:50 added
+- IGNORED date-context "Friday, January 2"
+    at: facility
+- NOTICE "Family skate, noon to 12:50 pm, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "noon to 12:50 pm" 12:00-12:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family skate"
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-01-02 Fri 12:00-12:50 added
+- NOTICE "Public skate, 1 to 1:50 pm, added"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "1 to 1:50 pm" 13:00-13:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-02 Fri 13:00-13:50 added

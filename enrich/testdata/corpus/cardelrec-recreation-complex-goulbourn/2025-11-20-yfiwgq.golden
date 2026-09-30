@@ -1,0 +1,72 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Friday, November 21"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Bootcamp, 7:30 to 8:30 am, cancelled"
+    date text: "Friday, November 21"
+    dates: 2025-11-21 Fri
+    time: "7:30 to 8:30 am" 07:30-08:30 exact [Friday 7:30 - 8:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Bootcamp"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Bootcamp" sessions 2025-11-21 Fri 07:30-08:30
+- IGNORED date-context "Monday, November 24"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, November 24"
+    dates: 2025-11-24 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Requires reservations" sessions 2025-11-24 Mon 07:00-08:00
+- IGNORED date-context "Monday, December 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, December 1"
+    dates: 2025-12-01 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Requires reservations" sessions 2025-12-01 Mon 07:00-08:00
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Friday, November 21"
+    at: facility
+- IGNORED duplicate "Bootcamp, 7:30 to 8:30 am, cancelled"
+    date text: "Friday, November 21"
+    dates: 2025-11-21 Fri
+    time: "7:30 to 8:30 am" 07:30-08:30 exact [Friday 7:30 - 8:30am]
+    match: EXACT
+    phrase: "Bootcamp"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Bootcamp, 7:30 to 8:30 am, cancelled"
+    at: facility
+- IGNORED date-context "Monday, November 24"
+    at: facility
+- IGNORED duplicate "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, November 24"
+    dates: 2025-11-24 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Indoor cycling, 7 to 8 am, cancelled"
+    at: facility
+- IGNORED date-context "Monday, December 1"
+    at: facility
+- IGNORED duplicate "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, December 1"
+    dates: 2025-12-01 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Indoor cycling, 7 to 8 am, cancelled"
+    at: facility

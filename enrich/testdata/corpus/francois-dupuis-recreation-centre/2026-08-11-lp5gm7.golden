@@ -1,0 +1,66 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, August 19"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 1:15 to 1:30 pm, cancelled"
+    date text: "Wednesday, August 19"
+    dates: 2026-08-19 Wed
+    time: "1:15 to 1:30 pm" 13:15-13:30 within [Wednesday 12:00 - 1:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-08-19 Wed 12:00-13:30
+- NOTICE "Public swim - therapeutic pool, 1 to 4 pm, cancelled"
+    date text: "Wednesday, August 19"
+    dates: 2026-08-19 Wed
+    time: "1 to 4 pm" 13:00-16:00 exact [Wednesday 1:00 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim - therapeutic pool"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim -therapeutic pool" sessions 2026-08-19 Wed 13:00-16:00
+- NOTICE "Public swim - 25m pool, 1:30 to 4 pm, cancelled"
+    date text: "Wednesday, August 19"
+    dates: 2026-08-19 Wed
+    time: "1:30 to 4 pm" 13:30-16:00 exact [Wednesday 1:30 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim - 25m pool"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim - 25m pool" sessions 2026-08-19 Wed 13:30-16:00
+- IGNORED date-context "Wednesday, August 19"
+    at: facility
+- IGNORED duplicate "Lane swim, 1:15 to 1:30 pm, cancelled"
+    date text: "Wednesday, August 19"
+    dates: 2026-08-19 Wed
+    time: "1:15 to 1:30 pm" 13:15-13:30 within [Wednesday 12:00 - 1:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 1:15 to 1:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public swim - therapeutic pool, 1 to 4 pm, cancelled"
+    date text: "Wednesday, August 19"
+    dates: 2026-08-19 Wed
+    time: "1 to 4 pm" 13:00-16:00 exact [Wednesday 1:00 - 4:00pm]
+    match: EXACT
+    phrase: "Public swim - therapeutic pool"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim - therapeutic pool, 1 to 4 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public swim - 25m pool, 1:30 to 4 pm, cancelled"
+    date text: "Wednesday, August 19"
+    dates: 2026-08-19 Wed
+    time: "1:30 to 4 pm" 13:30-16:00 exact [Wednesday 1:30 - 4:00pm]
+    match: EXACT
+    phrase: "Public swim - 25m pool"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim - 25m pool, 1:30 to 4 pm, cancelled"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

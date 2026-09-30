@@ -1,0 +1,38 @@
+== Lois Kemp Arena (Blackburn) schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Friday, December 25"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in skating and ice sports, cancelled."
+    date text: "Friday, December 25"
+    dates: 2026-12-25 Fri
+    time: "" covers [Friday 7:00 - 7:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+
+== Lois Kemp Arena (Blackburn) schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, December 25"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating and ice sports, cancelled"
+    date text: "Friday, December 25"
+    dates: 2026-12-25 Fri
+    time: "" covers [Friday 5:00 - 5:50pm; Friday 6:00 - 6:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Lois Kemp Arena (Blackburn) special_hours
+- IGNORED date-context "Friday, December 25"
+    at: facility
+- IGNORED duplicate "All drop-in skating and ice sports, cancelled."
+    date text: "Friday, December 25"
+    dates: 2026-12-25 Fri
+    time: "" covers [Friday 5:00 - 5:50pm; Friday 6:00 - 6:50pm; Friday 7:00 - 7:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All drop-in skating and ice sports, cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating and ice sports, cancelled"
+    at: facility

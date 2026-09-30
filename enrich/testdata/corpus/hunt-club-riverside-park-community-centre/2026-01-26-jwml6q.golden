@@ -1,0 +1,30 @@
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Tuesday, January 27"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Cardio and strength, 6 to 7 pm, cancelled"
+    date text: "Tuesday, January 27"
+    dates: 2026-01-27 Tue
+    time: "6 to 7 pm" 18:00-19:00 exact [Tuesday 6:00 - 7:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength" sessions 2026-01-27 Tue 18:00-19:00
+
+== Hunt Club-Riverside Park Community Centre special_hours
+- IGNORED date-context "Tuesday, January 27"
+    at: facility
+- IGNORED duplicate "Cardio and strength, 6 to 7 pm, cancelled"
+    date text: "Tuesday, January 27"
+    dates: 2026-01-27 Tue
+    time: "6 to 7 pm" 18:00-19:00 exact [Tuesday 6:00 - 7:00pm]
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Cardio and strength, 6 to 7 pm, cancelled"
+    at: facility
+
+== Hunt Club-Riverside Park Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

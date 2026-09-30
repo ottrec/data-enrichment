@@ -1,0 +1,19 @@
+== Richelieu Vanier Community Centre special_hours
+- IGNORED date-context "Monday, August 31 to Tuesday, September 1"
+    at: facility
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, August 31 to Tuesday, September 1"
+    dates: 2026-08-31 Mon to 2026-09-01 Tue
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Labour Day hours"
+    section: "Labour Day hours"
+    at: facility
+- NOTICE "Monday, September 7, 11 am to 2 pm"
+    section: "Labour Day hours"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    time: "11 am to 2 pm" 11:00-14:00 unchecked
+    effects: modified-hours
+    at: facility

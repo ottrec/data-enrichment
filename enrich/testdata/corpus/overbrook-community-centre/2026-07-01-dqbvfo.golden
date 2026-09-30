@@ -1,0 +1,21 @@
+== Overbrook Community Centre special_hours
+- IGNORED heading "Wednesday, July 1"
+    section: "Wednesday, July 1"
+    at: facility
+- NOTICE "Emergency cooling centre will be open from 10 am to 8 pm."
+    section: "Wednesday, July 1"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "10 am to 8 pm" 10:00-20:00 unchecked
+    match: NONE
+    phrase: "Emergency cooling centre will be open from"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "Residents are encouraged to stay cool at home using the Beat the Heat tips from Ottawa Public Health."
+    section: "Wednesday, July 1"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    match: NONE
+    phrase: "Residents are encouraged to stay cool at home using the Beat the Heat tips from Ottawa Public Health"
+    ambiguities: freeform-item
+    at: facility

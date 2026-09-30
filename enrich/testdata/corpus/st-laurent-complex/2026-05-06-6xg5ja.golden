@@ -1,0 +1,41 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Victoria Day schedule."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: see-schedule "Victoria Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Victoria Day schedule."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: see-schedule "Victoria Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Victoria Day schedule."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: see-schedule "Victoria Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Victoria Day schedule."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: see-schedule "Victoria Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== St. Laurent Complex special_hours
+- NOTICE "Monday, May 18, 8 am to 6 pm"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    time: "8 am to 6 pm" 08:00-18:00 unchecked
+    effects: modified-hours
+    at: facility

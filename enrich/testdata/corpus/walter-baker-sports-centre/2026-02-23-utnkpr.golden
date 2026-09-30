@@ -1,0 +1,38 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Friday, March 6"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, March 6"
+    dates: 2026-03-06 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-03-06 Fri 19:30-21:00
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "The hot tub is closed until further notice."
+    dates: open-ended
+    time: "" covers [Friday 6:00 - 9:00pm; Friday 7:30am - 2:00pm; Monday 7:30am - 2:00pm; Monday 8:00 - 9:00pm; Saturday 12:00 - 4:00pm; Sunday 12:00 - 4:00pm; Thursday 7:30am - 2:00pm; Thursday 8:00 - 9:00pm; Tuesday 7:30am - 2:00pm; Tuesday 8:00 - 9:00pm; Wednesday 6:00 - 9:00pm; Wednesday 7:30am - 2:00pm]
+    effects: closure
+    match: FUZZY
+    phrase: "hot tub"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Hot tub and steam room"
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Friday, March 6"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Lane swim, 7:30 to 9 pm, cancelled"
+    section: "Schedule change"
+    date text: "Friday, March 6"
+    dates: 2026-03-06 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 7:30 to 9 pm, cancelled"
+    at: facility

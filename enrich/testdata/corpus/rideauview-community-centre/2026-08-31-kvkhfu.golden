@@ -1,0 +1,59 @@
+== Rideauview Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Rideauview Community Centre special_hours
+- NOTICE "Saturday, September 5 to Monday, September 7, closed"
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Modified facility hours"
+    section: "Modified facility hours"
+    at: facility
+- NOTICE "Monday, August 31, 2 to 6 pm"
+    section: "Modified facility hours"
+    date text: "Monday, August 31"
+    dates: 2026-08-31 Mon
+    time: "2 to 6 pm" 14:00-18:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "Tuesday, September 1, 2 to 8:30 pm"
+    section: "Modified facility hours"
+    date text: "Tuesday, September 1"
+    dates: 2026-09-01 Tue
+    time: "2 to 8:30 pm" 14:00-20:30 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "Wednesday, September 2, 2 to 6 pm"
+    section: "Modified facility hours"
+    date text: "Wednesday, September 2"
+    dates: 2026-09-02 Wed
+    time: "2 to 6 pm" 14:00-18:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "Thursday, September 3, 2 to 8:30 pm"
+    section: "Modified facility hours"
+    date text: "Thursday, September 3"
+    dates: 2026-09-03 Thu
+    time: "2 to 8:30 pm" 14:00-20:30 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "Friday, September 4, 2 to 6 pm"
+    section: "Modified facility hours"
+    date text: "Friday, September 4"
+    dates: 2026-09-04 Fri
+    time: "2 to 6 pm" 14:00-18:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility

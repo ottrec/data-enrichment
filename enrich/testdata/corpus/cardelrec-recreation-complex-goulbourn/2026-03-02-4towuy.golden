@@ -1,0 +1,156 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Thursday, March 5"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Drums Alive, 9 to 10 am, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "9 to 10 am" 09:00-10:00 exact [Thursday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Drums Alive"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Drums Alive" sessions 2026-03-05 Thu 09:00-10:00
+- NOTICE "Cardio and strength, 10:15 to 11:15 am, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Thursday 10:15 - 11:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength" sessions 2026-03-05 Thu 10:15-11:15
+- NOTICE "Cardio and strength 50+, 11:30 am to 12:30 pm, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "11:30 am to 12:30 pm" 11:30-12:30 exact [Thursday 11:30am - 12:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio and strength 50+"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength 50+" sessions 2026-03-05 Thu 11:30-12:30
+- NOTICE "Pickleball, 12:45 to 1:45 pm, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "12:45 to 1:45 pm" 12:45-13:45 exact [Thursday 12:45 - 1:45pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Pickleball"
+    ambiguities: matched-other-group meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult (18+)" sessions 2026-03-05 Thu 12:45-13:45
+- NOTICE "Pickleball, 1:45 to 2:45 pm, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "1:45 to 2:45 pm" 13:45-14:45 exact [Thursday 1:45 - 2:45pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Pickleball"
+    ambiguities: matched-other-group meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult (18+)" sessions 2026-03-05 Thu 13:45-14:45
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - Kinderplay"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Kinderplay"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Thursday, March 5"
+    at: facility
+- IGNORED duplicate "Drums Alive, 9 to 10 am, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "9 to 10 am" 09:00-10:00 exact [Thursday 9:00 - 10:00am]
+    match: EXACT
+    phrase: "Drums Alive"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Drums Alive, 9 to 10 am, cancelled"
+    at: facility
+- IGNORED duplicate "Cardio and strength, 10:15 to 11:15 am, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Thursday 10:15 - 11:15am]
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Cardio and strength, 10:15 to 11:15 am, cancelled"
+    at: facility
+- IGNORED duplicate "Cardio and strength 50+, 11:30 am to 12:30 pm, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "11:30 am to 12:30 pm" 11:30-12:30 exact [Thursday 11:30am - 12:30pm]
+    match: EXACT
+    phrase: "Cardio and strength 50+"
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Cardio and strength 50+, 11:30 am to 12:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Pickleball, 12:45 to 1:45 pm, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "12:45 to 1:45 pm" 12:45-13:45 exact [Thursday 12:45 - 1:45pm]
+    match: FUZZY
+    phrase: "Pickleball"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Pickleball, 12:45 to 1:45 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Pickleball, 1:45 to 2:45 pm, cancelled"
+    date text: "Thursday, March 5"
+    dates: 2026-03-05 Thu
+    time: "1:45 to 2:45 pm" 13:45-14:45 exact [Thursday 1:45 - 2:45pm]
+    match: FUZZY
+    phrase: "Pickleball"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Pickleball, 1:45 to 2:45 pm, cancelled"
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

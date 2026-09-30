@@ -1,0 +1,40 @@
+== Terry Fox Athletic Facility special_hours
+- NOTICE "The facility is not available on the following dates due to special events:"
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- NOTICE "June 16 to 21, 7 am to 11 pm"
+    date text: "June 16 to 21"
+    dates: 2026-06-16 Tue to 2026-06-21 Sun
+    time: "7 am to 11 pm" 07:00-23:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "June 26, 2 pm to 9 pm"
+    date text: "June 26"
+    dates: 2026-06-26 Fri
+    time: "2 pm to 9 pm" 14:00-21:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "June 27, 9 am to 5 pm"
+    date text: "June 27"
+    dates: 2026-06-27 Sat
+    time: "9 am to 5 pm" 09:00-17:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "September 5, 7 am to 4 pm"
+    date text: "September 5"
+    dates: 2026-09-05 Sat
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: closure
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Wednesday, July 1, 3:30 to 9 pm"
+    section: "Modified hours"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "3:30 to 9 pm" 15:30-21:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility

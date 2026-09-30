@@ -1,0 +1,6 @@
+== Nepean Visual Arts Centre special_hours
+- NOTICE "Saturday, October 10 to Monday, October 12, closed"
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: closure
+    at: facility

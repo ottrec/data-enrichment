@@ -1,0 +1,23 @@
+== Ray Friel Recreation Complex special_hours
+- NOTICE "The diving board is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "March 2 to 4"
+    section: "Closure"
+    at: facility
+- NOTICE "The elevator is closed for maintenance."
+    section: "Closure"
+    date text: "March 2 to 4"
+    dates: 2026-03-02 Mon to 2026-03-04 Wed
+    effects: closure
+    match: NONE
+    phrase: "elevator"
+    amenity: "elevator"
+    at: facility

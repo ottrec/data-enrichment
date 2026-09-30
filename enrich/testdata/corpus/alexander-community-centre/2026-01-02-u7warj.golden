@@ -1,0 +1,6 @@
+== Alexander Community Centre special_hours
+- NOTICE "January 3 and 4, closed"
+    date text: "January 3 and 4"
+    dates: 2026-01-03 Sat 2026-01-04 Sun
+    effects: closure
+    at: facility

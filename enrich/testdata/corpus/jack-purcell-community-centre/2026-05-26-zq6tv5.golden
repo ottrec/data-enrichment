@@ -1,0 +1,10 @@
+== Jack Purcell Community Centre special_hours
+- IGNORED date-context "Tuesday, May 26"
+    at: facility
+- NOTICE "The pool is closed for maintenance."
+    date text: "Tuesday, May 26"
+    dates: 2026-05-26 Tue
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

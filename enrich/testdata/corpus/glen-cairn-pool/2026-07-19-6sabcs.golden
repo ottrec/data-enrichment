@@ -1,0 +1,46 @@
+== Glen Cairn Pool schedule_changes "Drop-in schedule - Swimming"
+- IGNORED date-context "Monday, July 27 to Friday, July 31"
+    at: group "Drop-in schedule - Swimming"
+- NOTICE "Lane Swim - shared pool, 9 am to noon, cancelled"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "9 am to noon" 09:00-12:00 exact [Friday 9:00am - 12:00pm; Monday 9:00am - 12:00pm; Thursday 9:00am - 12:00pm; Tuesday 9:00am - 12:00pm; Wednesday 9:00am - 12:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane Swim - shared pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Swimming" activity "Lane Swim - shared pool" sessions 2026-07-27 Mon 09:00-12:00, 2026-07-28 Tue 09:00-12:00, 2026-07-29 Wed 09:00-12:00, 2026-07-30 Thu 09:00-12:00, 2026-07-31 Fri 09:00-12:00
+
+== Glen Cairn Pool special_hours
+- NOTICE "Regular season, June 27 to August 23"
+    date text: "June 27 to August 23"
+    dates: 2026-06-27 Sat to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Monday, July 27 to Friday, July 31"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "Lane Swim - shared pool, 9 am to noon, cancelled"
+    section: "Schedule changes"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "9 am to noon" 09:00-12:00 exact [Friday 9:00am - 12:00pm; Monday 9:00am - 12:00pm; Thursday 9:00am - 12:00pm; Tuesday 9:00am - 12:00pm; Wednesday 9:00am - 12:00pm]
+    match: EXACT
+    phrase: "Lane Swim - shared pool"
+    duplicate of: schedule_changes "Drop-in schedule - Swimming" "Lane Swim - shared pool, 9 am to noon, cancelled"
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday, August 3, 11:30 am to 4 pm"
+    section: "Civic Holiday"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "11:30 am to 4 pm" 11:30-16:00 unchecked
+    effects: modified-hours
+    at: facility

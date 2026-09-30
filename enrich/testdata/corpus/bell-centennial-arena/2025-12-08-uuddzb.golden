@@ -1,0 +1,21 @@
+== Bell Centennial Arena special_hours
+- IGNORED date-context "Tuesday, December 30"
+    at: facility
+- NOTICE "Family Skate, 2 to 2:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "2 to 2:50 pm" 14:00-14:50 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Family Skate"
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "Public Skate, 3 to 3:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "3 to 3:50 pm" 15:00-15:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-30 Tue 15:00-15:50 added

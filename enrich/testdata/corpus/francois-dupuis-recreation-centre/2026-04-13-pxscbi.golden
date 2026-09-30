@@ -1,0 +1,12 @@
+== François Dupuis Recreation Centre special_hours
+- NOTICE "The sauna is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "sauna"
+    amenity: "sauna"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

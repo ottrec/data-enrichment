@@ -1,0 +1,26 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Friday, November 7"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Lane swim, 2 to 3 pm, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "2 to 3 pm" 14:00-15:00 within [Friday 2:00 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Lane swim" sessions 2025-11-07 Fri 14:00-16:00
+
+== Lowertown Community Centre and Pool special_hours
+- IGNORED date-context "Friday, November 7"
+    at: facility
+- IGNORED duplicate "Lane swim, 2 to 3 pm, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "2 to 3 pm" 14:00-15:00 within [Friday 2:00 - 4:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Lane swim, 2 to 3 pm, cancelled"
+    at: facility

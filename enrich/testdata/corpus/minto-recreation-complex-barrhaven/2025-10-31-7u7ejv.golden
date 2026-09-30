@@ -1,0 +1,12 @@
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Thursday, November 20"
+    at: facility
+- NOTICE "The pool will be closed from 1 to 3 pm."
+    date text: "Thursday, November 20"
+    dates: 2025-11-20 Thu
+    time: "1 to 3 pm" 13:00-15:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    ambiguities: meridiem-inferred
+    at: facility

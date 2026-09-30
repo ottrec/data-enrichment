@@ -1,0 +1,37 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, February 14"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Skating, all sessions, cancelled"
+    date text: "Saturday, February 14"
+    dates: 2026-02-14 Sat
+    time: "" covers [Saturday 4:00 - 5:00pm; Saturday 5:00 - 6:00pm]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Skating, all sessions"
+    candidates: "Adult skating" "Family skating" "Public skating"
+    ambiguities: activity-multiple-candidates
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Canterbury Recreation Complex special_hours
+- IGNORED date-context "Saturday, February 14"
+    at: facility
+- IGNORED duplicate "Skating, all sessions, cancelled"
+    date text: "Saturday, February 14"
+    dates: 2026-02-14 Sat
+    time: "" covers [Saturday 4:00 - 5:00pm; Saturday 5:00 - 6:00pm]
+    match: MULTIPLE
+    phrase: "Skating, all sessions"
+    ambiguities: activity-multiple-candidates
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Skating, all sessions, cancelled"
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool is closed for maintenance until further notice."
+    section: "Pool closure"
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

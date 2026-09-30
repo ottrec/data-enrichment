@@ -1,0 +1,11 @@
+== François Dupuis Recreation Centre special_hours
+- NOTICE "The pool is closed until noon."
+    time: "closed until noon" 00:00-12:00 open-start unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,81 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Sunday, February 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 10:30 am to noon, cancelled"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "10:30 am to noon" 10:30-12:00 within [Sunday 10:30am - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-02-01 Sun 10:30-13:00
+- NOTICE "Lane swim - shared pool, 10:30 am to noon, added"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "10:30 am to noon" 10:30-12:00 novel
+    effects: added
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - shared pool" sessions 2026-02-01 Sun 10:30-12:00 added
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== François Dupuis Recreation Centre special_hours
+- IGNORED date-context "Sunday, February 1"
+    at: facility
+- IGNORED duplicate "Lane swim, 10:30 am to noon, cancelled"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "10:30 am to noon" 10:30-12:00 within [Sunday 10:30am - 1:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 10:30 am to noon, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim - shared pool, 10:30 am to noon, added"
+    date text: "Sunday, February 1"
+    dates: 2026-02-01 Sun
+    time: "10:30 am to noon" 10:30-12:00 novel
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim - shared pool, 10:30 am to noon, added"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

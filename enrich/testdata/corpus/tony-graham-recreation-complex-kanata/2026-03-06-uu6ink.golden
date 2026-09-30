@@ -1,0 +1,23 @@
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, March 13 to Thursday, March 19"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating programs are cancelled."
+    date text: "Friday, March 13 to Thursday, March 19"
+    dates: 2026-03-13 Fri to 2026-03-19 Thu
+    time: "" covers [Friday 7:15 - 8:05pm; Sunday 12:15 - 1:05pm; Sunday 1:15 - 2:05pm; Thursday 1:00 - 1:50pm; Tuesday 1:15 - 2:05pm; Wednesday 1:00 - 1:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating programs"
+    at: group "Drop-in schedule - skating"
+
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Tuesday, March 17 to Thursday, March 19"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All drop-in 18+ Pick-up hockey programs are cancelled."
+    date text: "Tuesday, March 17 to Thursday, March 19"
+    dates: 2026-03-17 Tue to 2026-03-19 Thu
+    time: "" covers [Thursday 12:00 - 12:50pm; Tuesday 12:15 - 1:05pm; Wednesday 12:00 - 12:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in 18+ Pick-up hockey programs"
+    at: group "Drop-in schedule - ice sports" activity "18+ Pick-up hockey" sessions 2026-03-17 Tue 12:15-13:05, 2026-03-18 Wed 12:00-12:50, 2026-03-19 Thu 12:00-12:50

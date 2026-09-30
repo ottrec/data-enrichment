@@ -1,0 +1,60 @@
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, July 4"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The baby pool will be closed from 1 to 5 pm."
+    date text: "Saturday, July 4"
+    dates: 2026-07-04 Sat
+    time: "1 to 5 pm" 13:00-17:00 unchecked
+    effects: closure
+    match: NONE
+    phrase: "baby pool"
+    amenity: "baby pool"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: facility
+- NOTICE "Hot tub and sauna, Noon to 5 pm, cancelled"
+    date text: "Saturday, July 4"
+    dates: 2026-07-04 Sat
+    time: "Noon to 5 pm" 12:00-17:00 exact [Saturday 12:00 - 5:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Hot tub and sauna" sessions 2026-07-04 Sat 12:00-17:00
+- NOTICE "Hot tub and sauna, Noon to 1 pm, added"
+    date text: "Saturday, July 4"
+    dates: 2026-07-04 Sat
+    time: "Noon to 1 pm" 12:00-13:00 within [Saturday 12:00 - 5:00pm]
+    effects: added
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Hot tub and sauna" sessions 2026-07-04 Sat 12:00-13:00 added
+- IGNORED date-context "Saturday, July 4"
+    at: facility
+- IGNORED duplicate "The baby pool will be closed from 1 to 5 pm."
+    date text: "Saturday, July 4"
+    dates: 2026-07-04 Sat
+    time: "1 to 5 pm" 13:00-17:00 unchecked
+    match: NONE
+    phrase: "baby pool"
+    amenity: "baby pool"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The baby pool will be closed from 1 to 5 pm."
+    at: facility
+- IGNORED duplicate "Hot tub and sauna, Noon to 5 pm, cancelled"
+    date text: "Saturday, July 4"
+    dates: 2026-07-04 Sat
+    time: "Noon to 5 pm" 12:00-17:00 exact [Saturday 12:00 - 5:00pm]
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Hot tub and sauna, Noon to 5 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Hot tub and sauna, Noon to 1 pm, added"
+    date text: "Saturday, July 4"
+    dates: 2026-07-04 Sat
+    time: "Noon to 1 pm" 12:00-13:00 within [Saturday 12:00 - 5:00pm]
+    match: EXACT
+    phrase: "Hot tub and sauna"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Hot tub and sauna, Noon to 1 pm, added"
+    at: facility

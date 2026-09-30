@@ -1,0 +1,13 @@
+== Dempsey Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Dempsey Community Centre notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,6 @@
+== Champagne Fitness Centre special_hours
+- NOTICE "May 1 to August 31, closed."
+    date text: "May 1 to August 31"
+    dates: 2026-05-01 Fri to 2026-08-31 Mon
+    effects: closure
+    at: facility

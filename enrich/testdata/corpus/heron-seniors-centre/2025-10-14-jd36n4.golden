@@ -1,0 +1,7 @@
+== Heron Seniors Centre special_hours
+- NOTICE "The cardio and weight room is closed."
+    effects: closure
+    match: NONE
+    phrase: "cardio and weight room"
+    amenity: "cardio weight room"
+    at: facility

@@ -1,0 +1,68 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 10:15 - 11:15am; Wednesday 11:20am - 12:20pm; Wednesday 6:55 - 7:55am; Wednesday 7:45 - 8:45am; Wednesday 9:10 - 10:10am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness, gymnasium sports, and skating drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 8:30 - 9:30pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness, gymnasium sports, and skating drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness, gymnasium sports, and skating drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Wednesday, July 1"
+    at: facility
+- NOTICE "The pool is closed until further notice. All swim and aquafitness drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed; open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED duplicate "The pool is closed until further notice. All swim and aquafitness drop-ins are cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "" covers [Wednesday 11:30am - 12:30pm; Wednesday 2:00 - 4:00pm; Wednesday 7:15 - 8:15am; Wednesday 8:00 - 9:00pm; Wednesday 8:15 - 9:15am; Wednesday 9:15 - 10:15am]
+    match: SCOPE_PHRASE
+    phrase: "All swim and aquafitness drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All group fitness, gymnasium sports, and skating drop-ins are cancelled."
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Wednesday, July 1, 7 am to 4 pm"
+    section: "Modified hours"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

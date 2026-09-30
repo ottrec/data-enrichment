@@ -1,0 +1,83 @@
+== Plant Recreation Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, December 22 to Friday, January 2"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/plant-recreation-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Plant Recreation Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Friday, January 2"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/plant-recreation-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, December 22 to Friday, January 2"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Friday, January 2"
+    dates: 2025-12-22 Mon to 2026-01-02 Fri
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/plant-recreation-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Plant Recreation Centre special_hours
+- NOTICE "December 22 and 23, 6:45 am to 9:30 pm"
+    date text: "December 22 and 23"
+    dates: 2025-12-22 Mon 2025-12-23 Tue
+    time: "6:45 am to 9:30 pm" 06:45-21:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 24, 6:45 am to 4 pm"
+    date text: "December 24"
+    dates: 2025-12-24 Wed
+    time: "6:45 am to 4 pm" 06:45-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 25 and 26, closed"
+    date text: "December 25 and 26"
+    dates: 2025-12-25 Thu 2025-12-26 Fri
+    effects: closure
+    at: facility
+- NOTICE "December 27, 8:30 am to 7 pm"
+    date text: "December 27"
+    dates: 2025-12-27 Sat
+    time: "8:30 am to 7 pm" 08:30-19:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 28, 8:30 to 5:30 pm"
+    date text: "December 28"
+    dates: 2025-12-28 Sun
+    time: "8:30 to 5:30 pm" 08:30-17:30 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "December 29 and 30, 6:45 am to 9:30 pm"
+    date text: "December 29 and 30"
+    dates: 2025-12-29 Mon 2025-12-30 Tue
+    time: "6:45 am to 9:30 pm" 06:45-21:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 31, 6:45 to 4 pm"
+    date text: "December 31"
+    dates: 2025-12-31 Wed
+    time: "6:45 to 4 pm" 06:45-16:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "January 1, closed"
+    date text: "January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- NOTICE "January 2, 6:45 am to 9:30 pm"
+    date text: "January 2"
+    dates: 2026-01-02 Fri
+    time: "6:45 am to 9:30 pm" 06:45-21:30 unchecked
+    effects: modified-hours
+    at: facility

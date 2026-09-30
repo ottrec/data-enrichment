@@ -1,0 +1,111 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Tuesday, December 16"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Aquafit - general deep, 8:30 to 9:30 am, cancelled"
+    date text: "Tuesday, December 16"
+    dates: 2025-12-16 Tue
+    time: "8:30 to 9:30 am" 08:30-09:30 exact [Tuesday 8:30 - 9:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit - general deep"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Aquafit general - deep" sessions 2025-12-16 Tue 08:30-09:30
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/walter-baker-sports-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Tuesday, December 16"
+    at: facility
+- IGNORED duplicate "Aquafit - general deep, 8:30 to 9:30 am, cancelled"
+    date text: "Tuesday, December 16"
+    dates: 2025-12-16 Tue
+    time: "8:30 to 9:30 am" 08:30-09:30 exact [Tuesday 8:30 - 9:30am]
+    match: EXACT
+    phrase: "Aquafit - general deep"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Aquafit - general deep, 8:30 to 9:30 am, cancelled"
+    at: facility
+- IGNORED heading "Winter Break hours"
+    section: "Winter Break hours"
+    at: facility
+- NOTICE "December 24 and 25, closed"
+    section: "Winter Break hours"
+    date text: "December 24 and 25"
+    dates: 2025-12-24 Wed 2025-12-25 Thu
+    effects: closure
+    at: facility
+- NOTICE "Friday, December 26, 8 am to 5 pm"
+    section: "Winter Break hours"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    section: "Winter Break hours"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- NOTICE "Rock wall closed until further notice."
+    section: "Closure"
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "rock wall"
+    amenity: "rock wall"
+    at: facility

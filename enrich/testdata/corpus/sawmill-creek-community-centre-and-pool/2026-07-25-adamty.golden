@@ -1,0 +1,41 @@
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- NOTICE "Monday, July 27 to Friday, July 31, between 9 am and 4 pm"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    time: "9 am and 4 pm" 09:00-16:00 unchecked
+    match: NONE
+    phrase: "between"
+    ambiguities: freeform-item
+    at: facility
+- NOTICE "All swims at reduced capacity"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    match: SCOPE_PHRASE
+    phrase: "All swims at reduced capacity"
+    ambiguities: class-unmatched
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Diving board and slide, closed"
+    date text: "Monday, July 27 to Friday, July 31"
+    dates: 2026-07-27 Mon to 2026-07-31 Fri
+    effects: closure
+    match: NONE
+    phrase: "diving board and slide"
+    amenity: "diving board slide"
+    at: facility
+
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, August 3"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Sawmill Creek Community Centre and Pool special_hours
+- NOTICE "Monday, August 3, closed"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    effects: closure
+    at: facility

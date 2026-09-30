@@ -1,0 +1,77 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Friday, June 5"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Badminton doubles - adult, all times, cancelled"
+    date text: "Friday, June 5"
+    dates: 2026-06-05 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Badminton doubles - adult, all times"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Badminton doubles - adult" sessions 2026-06-05 Fri 11:00-12:00, 2026-06-05 Fri 12:00-13:00
+- NOTICE "Basketball - adult, all times, cancelled"
+    date text: "Friday, June 5"
+    dates: 2026-06-05 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Basketball - adult, all times"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Basketball - adult" sessions 2026-06-05 Fri 11:00-12:00, 2026-06-05 Fri 12:00-13:00
+- NOTICE "Pickleball - rotations, all times, cancelled"
+    date text: "Friday, June 5"
+    dates: 2026-06-05 Fri
+    time: "" covers [Friday 1:30 - 2:30pm; Friday 2:30 - 3:30pm; Friday 7:30 - 8:30am; Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    effects: cancelled
+    match: NORMALIZED
+    phrase: "Pickleball - rotations, all times"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - rotations" sessions 2026-06-05 Fri 07:30-08:30, 2026-06-05 Fri 08:30-09:30, 2026-06-05 Fri 09:30-10:30, 2026-06-05 Fri 13:30-14:30, 2026-06-05 Fri 14:30-15:30
+- NOTICE "Pickleball - rotations (intermediate), cancelled"
+    date text: "Friday, June 5"
+    dates: 2026-06-05 Fri
+    time: "" covers [Friday 1:30 - 2:30pm; Friday 2:30 - 3:30pm; Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball - rotations (intermediate)"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - rotations (intermediate)" sessions 2026-06-05 Fri 08:30-09:30, 2026-06-05 Fri 09:30-10:30, 2026-06-05 Fri 13:30-14:30, 2026-06-05 Fri 14:30-15:30
+- IGNORED date-context "Friday, June 5"
+    at: facility
+- IGNORED duplicate "Badminton doubles - adult, all times, cancelled"
+    date text: "Friday, June 5"
+    dates: 2026-06-05 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    match: NORMALIZED
+    phrase: "Badminton doubles - adult, all times"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Badminton doubles - adult, all times, cancelled"
+    at: facility
+- IGNORED duplicate "Basketball - adult, all times, cancelled"
+    date text: "Friday, June 5"
+    dates: 2026-06-05 Fri
+    time: "" covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    match: NORMALIZED
+    phrase: "Basketball - adult, all times"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Basketball - adult, all times, cancelled"
+    at: facility
+- IGNORED duplicate "Pickleball - rotations, all times, cancelled"
+    date text: "Friday, June 5"
+    dates: 2026-06-05 Fri
+    time: "" covers [Friday 1:30 - 2:30pm; Friday 2:30 - 3:30pm; Friday 7:30 - 8:30am; Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    match: NORMALIZED
+    phrase: "Pickleball - rotations, all times"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball - rotations, all times, cancelled"
+    at: facility
+- IGNORED duplicate "Pickleball - rotations (intermediate), cancelled"
+    date text: "Friday, June 5"
+    dates: 2026-06-05 Fri
+    time: "" covers [Friday 1:30 - 2:30pm; Friday 2:30 - 3:30pm; Friday 8:30 - 9:30am; Friday 9:30 - 10:30am]
+    match: EXACT
+    phrase: "Pickleball - rotations (intermediate)"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball - rotations (intermediate), cancelled"
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

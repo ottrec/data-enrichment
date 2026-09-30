@@ -1,0 +1,6 @@
+== Deborah Anne Kirwan Pool special_hours
+- NOTICE "The pool is closed and all programs cancelled."
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

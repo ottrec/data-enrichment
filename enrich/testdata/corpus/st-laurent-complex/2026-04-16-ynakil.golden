@@ -1,0 +1,39 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, April 20"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aquafit - general deep, 11 am to noon, cancelled"
+    date text: "Monday, April 20"
+    dates: 2026-04-20 Mon
+    time: "11 am to noon" 11:00-12:00 exact [Monday 11:00am - 12:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit - general deep"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - general deep" sessions 2026-04-20 Mon 11:00-12:00
+- NOTICE "Aquafit - general shallow, 11 am to noon, cancelled"
+    date text: "Monday, April 20"
+    dates: 2026-04-20 Mon
+    time: "11 am to noon" 11:00-12:00 exact [Monday 11:00am - 12:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit - general shallow"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - general shallow" sessions 2026-04-20 Mon 11:00-12:00
+- IGNORED date-context "Monday, April 20"
+    at: facility
+- IGNORED duplicate "Aquafit - general deep, 11 am to noon, cancelled"
+    date text: "Monday, April 20"
+    dates: 2026-04-20 Mon
+    time: "11 am to noon" 11:00-12:00 exact [Monday 11:00am - 12:00pm]
+    match: EXACT
+    phrase: "Aquafit - general deep"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit - general deep, 11 am to noon, cancelled"
+    at: facility
+- IGNORED duplicate "Aquafit - general shallow, 11 am to noon, cancelled"
+    date text: "Monday, April 20"
+    dates: 2026-04-20 Mon
+    time: "11 am to noon" 11:00-12:00 exact [Monday 11:00am - 12:00pm]
+    match: EXACT
+    phrase: "Aquafit - general shallow"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit - general shallow, 11 am to noon, cancelled"
+    at: facility

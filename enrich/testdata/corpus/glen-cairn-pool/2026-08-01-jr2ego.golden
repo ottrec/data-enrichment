@@ -1,0 +1,18 @@
+== Glen Cairn Pool special_hours
+- NOTICE "Regular season, June 27 to August 23"
+    date text: "June 27 to August 23"
+    dates: 2026-06-27 Sat to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday, August 3, 11:30 am to 4 pm"
+    section: "Civic Holiday"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "11:30 am to 4 pm" 11:30-16:00 unchecked
+    effects: modified-hours
+    at: facility

@@ -1,0 +1,82 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - Winter Break - December 20 to January 4"
+- IGNORED date-context "Monday, December 29"
+    at: group "Drop-in schedule - Winter Break - December 20 to January 4"
+- NOTICE "All group fitness drop-in activities, cancelled"
+    date text: "Monday, December 29"
+    dates: 2025-12-29 Mon
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness drop-in activities"
+    ambiguities: matched-other-group
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength 50+"
+    at: group "Drop-in schedule - group fitness" activity "Core conditioning"
+    at: group "Drop-in schedule - group fitness" activity "HIIT"
+    at: group "Drop-in schedule - group fitness" activity "Pilates"
+    at: group "Drop-in schedule - group fitness" activity "Pilates 50+"
+    at: group "Drop-in schedule - group fitness" activity "TMC"
+    at: group "Drop-in schedule - group fitness" activity "TMC 50+"
+    at: group "Drop-in schedule - group fitness" activity "Yoga"
+    at: group "Drop-in schedule - group fitness" activity "Yoga 50 +"
+    at: group "Drop-in schedule - group fitness" activity "Zumba®"
+    at: group "Drop-in schedule - group fitness" activity "Zumba® Gold 50 +"
+
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Saturday, December 20 to Sunday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/francois-dupuis-recreation-centre-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== François Dupuis Recreation Centre special_hours
+- NOTICE "December 31, 7:15 am to noon"
+    date text: "December 31"
+    dates: 2025-12-31 Wed
+    time: "7:15 am to noon" 07:15-12:00 unchecked
+    ambiguities: possible-activity-time
+    at: facility
+- NOTICE "January 1, closed"
+    date text: "January 1"
+    dates: 2026-01-01 Thu
+    effects: closure
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- IGNORED date-context "January 2 to 25"
+    section: "Pool closure"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    section: "Pool closure"
+    date text: "January 2 to 25"
+    dates: 2026-01-02 Fri to 2026-01-25 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

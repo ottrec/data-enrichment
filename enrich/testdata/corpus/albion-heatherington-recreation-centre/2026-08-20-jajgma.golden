@@ -1,0 +1,8 @@
+== Albion-Heatherington Recreation Centre special_hours
+- IGNORED date-context "Monday, September 7"
+    at: facility
+- NOTICE "Closed"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: closure
+    at: facility

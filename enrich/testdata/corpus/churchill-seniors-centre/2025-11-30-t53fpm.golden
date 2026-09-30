@@ -1,0 +1,20 @@
+== Churchill Seniors Centre schedule_changes "Drop-in activities"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in activities"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in activities"
+
+== Churchill Seniors Centre special_hours
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: facility
+- IGNORED duplicate "The facility is closed and all programs cancelled."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    match: SCOPE_PHRASE
+    duplicate of: schedule_changes "Drop-in activities" "The facility is closed and all programs cancelled."
+    at: facility

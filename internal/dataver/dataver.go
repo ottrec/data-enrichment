@@ -16,6 +16,29 @@ import (
 func Each(ctx context.Context, cachePath string) func(*error) iter.Seq2[ottrecdata.DataVersion, ottrecidx.DataRef] {
 	return func(err *error) iter.Seq2[ottrecdata.DataVersion, ottrecidx.DataRef] {
 		return func(yield func(ottrecdata.DataVersion, ottrecidx.DataRef) bool) {
+			var lerr error
+			for ver, pb := range EachPB(ctx, cachePath)(err) {
+				idx, e := new(ottrecidx.Indexer).Load(pb)
+				if e != nil {
+					lerr = fmt.Errorf("load %s: %w", ver.ID, e)
+					break
+				}
+				if !yield(ver, idx.Data()) {
+					break
+				}
+			}
+			if lerr != nil {
+				*err = lerr
+			}
+		}
+	}
+}
+
+// EachPB is Each without the indexing: it yields the raw binary protobuf of
+// each version.
+func EachPB(ctx context.Context, cachePath string) func(*error) iter.Seq2[ottrecdata.DataVersion, []byte] {
+	return func(err *error) iter.Seq2[ottrecdata.DataVersion, []byte] {
+		return func(yield func(ottrecdata.DataVersion, []byte) bool) {
 			*err = func() error {
 				cache, err := ottrecdata.OpenCacheReadOnly(cachePath)
 				if err != nil {
@@ -47,12 +70,7 @@ func Each(ctx context.Context, cachePath string) func(*error) iter.Seq2[ottrecda
 						return fmt.Errorf("read %s: %w", ver.ID, err)
 					}
 
-					idx, err := new(ottrecidx.Indexer).Load(pb)
-					if err != nil {
-						return fmt.Errorf("load %s: %w", ver.ID, err)
-					}
-
-					if !yield(ver, idx.Data()) {
+					if !yield(ver, pb) {
 						break
 					}
 				}

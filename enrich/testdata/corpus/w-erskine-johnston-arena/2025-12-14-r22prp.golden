@@ -1,0 +1,23 @@
+== W. Erskine Johnston Arena special_hours
+- IGNORED date-context "Friday, November 28"
+    at: facility
+- NOTICE "All skating and ice sports drop-ins are cancelled."
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "" covers [Friday 11:30am - 12:20pm; Friday 12:30 - 1:20pm; Friday 4:00 - 5:50pm; Friday 9:30 - 11:20am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skating and ice sports drop-ins"
+    at: group "Drop-in schedule - skating"
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Sunday, November 30"
+    at: facility
+- NOTICE "Public skating, 2 to 3:50 pm, cancelled"
+    date text: "Sunday, November 30"
+    dates: 2025-11-30 Sun
+    time: "2 to 3:50 pm" 14:00-15:50 exact [Sunday 2:00 - 3:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-11-30 Sun 14:00-15:50

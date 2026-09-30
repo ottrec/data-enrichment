@@ -1,0 +1,23 @@
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "Saturday, August 1, 7:30 am to 4pm"
+    date text: "Saturday, August 1"
+    dates: 2026-08-01 Sat
+    time: "7:30 am to 4pm" 07:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, August 2, 7:30 am to 4pm"
+    date text: "Sunday, August 2"
+    dates: 2026-08-02 Sun
+    time: "7:30 am to 4pm" 07:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, August 3, 7 am to 4 pm"
+    date text: "Monday, August 3"
+    dates: 2026-08-03 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

@@ -1,0 +1,64 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Friday, March 27"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba, 6 to 7 pm and 7 to 8 pm, cancelled"
+    date text: "Friday, March 27"
+    dates: 2026-03-27 Fri
+    time: "6 to 7 pm" 18:00-19:00 exact [Friday 6:00 - 7:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2026-03-27 Fri 18:00-19:00
+- NOTICE "Zumba, 6 to 7 pm and 7 to 8 pm, cancelled"
+    date text: "Friday, March 27"
+    dates: 2026-03-27 Fri
+    time: "7 to 8 pm" 19:00-20:00 exact [Friday 7:00 - 8:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2026-03-27 Fri 19:00-20:00
+- NOTICE "Zumba, 7:15-9:15 pm, added"
+    date text: "Friday, March 27"
+    dates: 2026-03-27 Fri
+    time: "7:15-9:15 pm" 19:15-21:15 overlaps [Friday 7:00 - 8:00pm]
+    effects: added
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2026-03-27 Fri 19:15-21:15 added
+- IGNORED date-context "Saturday, March 28"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba, 9:30 to 10:30 am, cancelled"
+    date text: "Saturday, March 28"
+    dates: 2026-03-28 Sat
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Saturday 9:30 - 10:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2026-03-28 Sat 09:30-10:30
+- NOTICE "Aqua Zumba, 7 to 8 pm, cancelled"
+    date text: "Saturday, March 28"
+    dates: 2026-03-28 Sat
+    time: "7 to 8 pm" 19:00-20:00 none
+    effects: cancelled
+    match: FUZZY
+    phrase: "Aqua Zumba"
+    ambiguities: meridiem-inferred no-slot-overlap
+    at: group "Drop-in schedule - group fitness" activity "Zumba"
+- NOTICE "Aquafit, 7 to 8 pm, added"
+    date text: "Saturday, March 28"
+    dates: 2026-03-28 Sat
+    time: "7 to 8 pm" 19:00-20:00 exact [Saturday 7:00 - 8:00pm]
+    effects: added
+    match: MULTIPLE
+    phrase: "Aquafit"
+    candidates: "Aquafit - Deep" "Aquafit - Shallow" "Aquafit Zumba®"
+    ambiguities: activity-multiple-candidates added-time-already-scheduled matched-other-group meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

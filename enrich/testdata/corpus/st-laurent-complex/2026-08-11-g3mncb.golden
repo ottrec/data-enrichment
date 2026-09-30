@@ -1,0 +1,24 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Thursday, August 13"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7 to 9:30 pm, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "7 to 9:30 pm" 19:00-21:30 exact [Thursday 7:00 - 9:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane Swim" sessions 2026-08-13 Thu 19:00-21:30
+- IGNORED date-context "Thursday, August 13"
+    at: facility
+- IGNORED duplicate "Lane swim, 7 to 9:30 pm, cancelled"
+    date text: "Thursday, August 13"
+    dates: 2026-08-13 Thu
+    time: "7 to 9:30 pm" 19:00-21:30 exact [Thursday 7:00 - 9:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 7 to 9:30 pm, cancelled"
+    at: facility

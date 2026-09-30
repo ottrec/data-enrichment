@@ -1,0 +1,11 @@
+== Pinecrest Recreation Complex special_hours
+- IGNORED date-context "August 31 to September 3"
+    at: facility
+- NOTICE "The halls and weight room will be closed for annual maintenance."
+    date text: "August 31 to September 3"
+    dates: 2026-08-31 Mon to 2026-09-03 Thu
+    effects: closure
+    match: NONE
+    phrase: "halls and weight room"
+    amenity: "halls weight room"
+    at: facility

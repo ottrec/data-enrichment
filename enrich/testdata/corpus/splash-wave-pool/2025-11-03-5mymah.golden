@@ -1,0 +1,11 @@
+== Splash Wave Pool special_hours
+- IGNORED date-context "Friday, November 7"
+    at: facility
+- NOTICE "The pool will be closed from 8 am to 3 pm."
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "8 am to 3 pm" 08:00-15:00 unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

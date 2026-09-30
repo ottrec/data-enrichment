@@ -1,0 +1,49 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, September 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Wednesday, September 9"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public Skating, 11 am to 1 pm, cancelled"
+    date text: "Wednesday, September 9"
+    dates: 2026-09-09 Wed
+    time: "11 am to 1 pm" 11:00-13:00 covers [Wednesday 11:00am - 12:00pm; Wednesday 12:00 - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public Skating"
+    ambiguities: skating-widened-to-window
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Adult skating" sessions 2026-09-09 Wed 11:00-12:00, 2026-09-09 Wed 12:00-13:00
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-09-09 Wed 11:00-12:00, 2026-09-09 Wed 12:00-13:00
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-09-09 Wed 11:00-12:00, 2026-09-09 Wed 12:00-13:00
+
+== Canterbury Recreation Complex special_hours
+- NOTICE "The pool is closed for maintenance until further notice."
+    dates: open-ended
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- NOTICE "Labour Day, Monday, September 7, closed"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: closure
+    at: facility
+- IGNORED date-context "Wednesday, September 9"
+    at: facility
+- IGNORED duplicate "Public Skating, 11 am to 1 pm, cancelled"
+    date text: "Wednesday, September 9"
+    dates: 2026-09-09 Wed
+    time: "11 am to 1 pm" 11:00-13:00 covers [Wednesday 11:00am - 12:00pm; Wednesday 12:00 - 1:00pm]
+    match: EXACT
+    phrase: "Public Skating"
+    ambiguities: skating-widened-to-window
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public Skating, 11 am to 1 pm, cancelled"
+    at: facility

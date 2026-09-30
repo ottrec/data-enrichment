@@ -1,0 +1,95 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "December 26 to 28"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in public skating, cancelled"
+    date text: "December 26 to 28"
+    dates: 2025-12-26 Fri to 2025-12-28 Sun
+    time: "" covers [Friday 7:15 - 8:05pm; Saturday 11:15am - 12:05pm; Saturday 12:15 - 1:05pm; Sunday 11:15am - 12:05pm; Sunday 12:15 - 1:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in public skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- NOTICE "Saturday, December 20 to Sunday, January 4, see Winter Break schedule."
+    date text: "Saturday, December 20 to Sunday, January 4"
+    dates: 2025-12-20 Sat to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "December 26 to 28"
+    at: facility
+- IGNORED duplicate "All drop-in public skating, cancelled"
+    date text: "December 26 to 28"
+    dates: 2025-12-26 Fri to 2025-12-28 Sun
+    time: "" covers [Friday 7:15 - 8:05pm; Saturday 11:15am - 12:05pm; Saturday 12:15 - 1:05pm; Sunday 11:15am - 12:05pm; Sunday 12:15 - 1:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in public skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in public skating, cancelled"
+    at: facility
+- IGNORED heading "Winter Break hours"
+    section: "Winter Break hours"
+    at: facility
+- NOTICE "December 24 and 25, closed"
+    section: "Winter Break hours"
+    date text: "December 24 and 25"
+    dates: 2025-12-24 Wed 2025-12-25 Thu
+    effects: closure
+    at: facility
+- NOTICE "Friday, December 26, 8 am to 5 pm"
+    section: "Winter Break hours"
+    date text: "Friday, December 26"
+    dates: 2025-12-26 Fri
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "December 31 and January 1, closed"
+    section: "Winter Break hours"
+    date text: "December 31 and January 1"
+    dates: 2025-12-31 Wed 2026-01-01 Thu
+    effects: closure
+    at: facility
+
+== Walter Baker Sports Centre notifications
+- IGNORED date-context "Wednesday, December 31"
+    at: facility
+- NOTICE "Barrhaven New Year's Eve Family Party"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    match: NONE
+    phrase: "Barrhaven New Year's Eve Family Party"
+    ambiguities: freeform-item
+    at: facility

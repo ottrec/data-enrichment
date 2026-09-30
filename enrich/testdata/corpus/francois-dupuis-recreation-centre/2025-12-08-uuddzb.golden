@@ -1,0 +1,10 @@
+== François Dupuis Recreation Centre special_hours
+- IGNORED date-context "January 2 to 25"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance."
+    date text: "January 2 to 25"
+    dates: 2026-01-02 Fri to 2026-01-25 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

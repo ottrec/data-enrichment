@@ -1,0 +1,72 @@
+== W. Erskine Johnston Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, November 28"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All skating and ice sports drop-ins are cancelled."
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "" covers [Friday 11:30am - 12:20pm; Friday 4:00 - 5:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skating and ice sports drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, November 30"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 2 to 3:50 pm, cancelled"
+    date text: "Sunday, November 30"
+    dates: 2025-11-30 Sun
+    time: "2 to 3:50 pm" 14:00-15:50 exact [Sunday 2:00 - 3:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-11-30 Sun 14:00-15:50
+- IGNORED date-context "Friday, November 28"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All skating and ice sports drop-ins are cancelled."
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "" covers [Friday 12:30 - 1:20pm; Friday 9:30 - 11:20am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skating and ice sports drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports"
+- IGNORED date-context "Sunday, November 30"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Public skating, 2 to 3:50 pm, cancelled"
+    date text: "Sunday, November 30"
+    dates: 2025-11-30 Sun
+    time: "2 to 3:50 pm" 14:00-15:50 exact [Sunday 2:00 - 3:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: matched-other-group meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-11-30 Sun 14:00-15:50
+
+== W. Erskine Johnston Arena special_hours
+- IGNORED date-context "Friday, November 28"
+    at: facility
+- IGNORED duplicate "All skating and ice sports drop-ins are cancelled."
+    date text: "Friday, November 28"
+    dates: 2025-11-28 Fri
+    time: "" covers [Friday 11:30am - 12:20pm; Friday 12:30 - 1:20pm; Friday 4:00 - 5:50pm; Friday 9:30 - 11:20am]
+    match: SCOPE_PHRASE
+    phrase: "All skating and ice sports drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All skating and ice sports drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All skating and ice sports drop-ins are cancelled."
+    at: facility
+- IGNORED date-context "Sunday, November 30"
+    at: facility
+- IGNORED duplicate "Public skating, 2 to 3:50 pm, cancelled"
+    date text: "Sunday, November 30"
+    dates: 2025-11-30 Sun
+    time: "2 to 3:50 pm" 14:00-15:50 exact [Sunday 2:00 - 3:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 2 to 3:50 pm, cancelled"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Public skating, 2 to 3:50 pm, cancelled"
+    at: facility

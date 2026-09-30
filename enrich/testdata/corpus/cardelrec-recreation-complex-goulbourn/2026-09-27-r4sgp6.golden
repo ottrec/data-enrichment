@@ -1,0 +1,67 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Thanksigving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksigving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksigving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksigving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Thanksigving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksigving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - Kinderplay"
+- NOTICE "See Thanksigving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksigving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Kinderplay"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Thanksigving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksigving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- NOTICE "Saturday, October 10 and Sunday, October 11, 7:30 am to 4 pm"
+    date text: "Saturday, October 10 and Sunday, October 11"
+    dates: 2026-10-10 Sat 2026-10-11 Sun
+    time: "7:30 am to 4 pm" 07:30-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, October 12, 7 am to 4 pm"
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Closures"
+    section: "Closures"
+    at: facility
+- NOTICE "August 24 to October 4: the gymnasium is closed for maintenance."
+    section: "Closures"
+    date text: "August 24 to October 4"
+    dates: 2026-08-24 Mon to 2026-10-04 Sun
+    effects: closure
+    match: NONE
+    phrase: "gymnasium"
+    amenity: "gymnasium"
+    at: facility

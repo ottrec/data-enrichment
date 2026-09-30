@@ -1,0 +1,43 @@
+== Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - group fitness"
+- NOTICE "September 14 to October 5, all indoor cycling cancelled."
+    date text: "September 14 to October 5"
+    dates: 2026-09-14 Mon to 2026-10-05 Mon
+    time: "" covers [Friday 8:30 - 9:25am; Monday 8:30 - 9:25am; Thursday 6:30 - 7:25am; Tuesday 6:30 - 7:25am; Wednesday 8:30 - 9:25am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "all indoor cycling"
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Reservations required" sessions 2026-09-14 Mon 08:30-09:25, 2026-09-15 Tue 06:30-07:25, 2026-09-16 Wed 08:30-09:25, 2026-09-17 Thu 06:30-07:25, 2026-09-18 Fri 08:30-09:25, 2026-09-21 Mon 08:30-09:25, 2026-09-22 Tue 06:30-07:25, 2026-09-23 Wed 08:30-09:25, 2026-09-24 Thu 06:30-07:25, 2026-09-25 Fri 08:30-09:25, 2026-09-28 Mon 08:30-09:25, 2026-09-29 Tue 06:30-07:25, 2026-09-30 Wed 08:30-09:25, 2026-10-01 Thu 06:30-07:25, 2026-10-02 Fri 08:30-09:25, 2026-10-05 Mon 08:30-09:25
+
+== Bob MacQuarrie Recreation Complex - Orléans special_hours
+- NOTICE "Squash court 3 is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "squash court 3"
+    amenity: "squash court"
+    ambiguities: activity-narrowed-to-amenity activity-typo-match
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "September 14 to October 5"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "Squash and racquetball courts are closed and all drop-ins cancelled."
+    section: "Schedule changes"
+    date text: "September 14 to October 5"
+    dates: 2026-09-14 Mon to 2026-10-05 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    phrase: "squash and racquetball courts"
+    amenity: "squash and racquetball courts"
+    at: group "Drop-in schedule - squash and racquetball"
+- NOTICE "Indoor cycling, all drop-ins cancelled."
+    section: "Schedule changes"
+    date text: "September 14 to October 5"
+    dates: 2026-09-14 Mon to 2026-10-05 Mon
+    time: "" covers [Friday 8:30 - 9:25am; Monday 8:30 - 9:25am; Thursday 6:30 - 7:25am; Tuesday 6:30 - 7:25am; Wednesday 8:30 - 9:25am]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Indoor cycling, all drop-ins"
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Reservations required" sessions 2026-09-14 Mon 08:30-09:25, 2026-09-15 Tue 06:30-07:25, 2026-09-16 Wed 08:30-09:25, 2026-09-17 Thu 06:30-07:25, 2026-09-18 Fri 08:30-09:25, 2026-09-21 Mon 08:30-09:25, 2026-09-22 Tue 06:30-07:25, 2026-09-23 Wed 08:30-09:25, 2026-09-24 Thu 06:30-07:25, 2026-09-25 Fri 08:30-09:25, 2026-09-28 Mon 08:30-09:25, 2026-09-29 Tue 06:30-07:25, 2026-09-30 Wed 08:30-09:25, 2026-10-01 Thu 06:30-07:25, 2026-10-02 Fri 08:30-09:25, 2026-10-05 Mon 08:30-09:25

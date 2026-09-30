@@ -1,0 +1,9 @@
+== Kanata Seniors Centre special_hours
+- IGNORED date-context "Monday, June 29 to Sunday, July 5"
+    at: facility
+- NOTICE "The facility is closed."
+    date text: "Monday, June 29 to Sunday, July 5"
+    dates: 2026-06-29 Mon to 2026-07-05 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

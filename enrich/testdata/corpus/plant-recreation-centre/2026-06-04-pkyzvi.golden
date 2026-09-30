@@ -1,0 +1,9 @@
+== Plant Recreation Centre special_hours
+- IGNORED date-context "Thursday, June 4"
+    at: facility
+- NOTICE "Facility is closed due to a power outage."
+    date text: "Thursday, June 4"
+    dates: 2026-06-04 Thu
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

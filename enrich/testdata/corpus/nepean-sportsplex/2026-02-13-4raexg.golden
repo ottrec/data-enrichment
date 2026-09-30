@@ -1,0 +1,64 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness drop-ins cancelled."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "" covers [Monday 10:00 - 11:00am; Monday 12:00 - 1:00pm; Monday 5:00 - 6:00pm; Monday 6:00 - 7:00pm; Monday 8:00 - 9:00am; Monday 9:00 - 10:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness drop-ins"
+    at: group "Drop-in schedule - group fitness"
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, February 16"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Family Day schedule."
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    effects: see-schedule "Family Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+
+== Nepean Sportsplex special_hours
+- NOTICE "Drop-in swim and aquafitness - February pool changes, see drop-in schedule."
+    effects: see-schedule "drop-in schedule"
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "February 14 to 16"
+    section: "Closure"
+    at: facility
+- NOTICE "The curling rink is closed."
+    section: "Closure"
+    date text: "February 14 to 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: closure
+    match: NONE
+    phrase: "curling rink"
+    amenity: "curling rink"
+    at: facility
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

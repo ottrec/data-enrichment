@@ -1,0 +1,84 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, February 2"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Aquafit General - Deep/shallow combo, 9:30 to 10:30 am, cancelled"
+    date text: "Monday, February 2"
+    dates: 2026-02-02 Mon
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Monday 9:30 - 10:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Aquafit General - Deep/shallow combo"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Deep/shallow combo *Reservations are required" sessions 2026-02-02 Mon 09:30-10:30
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Monday, February 2"
+    at: facility
+- IGNORED duplicate "Aquafit General, Deep/shallow combo, 9:30 to 10:30 am, cancelled"
+    date text: "Monday, February 2"
+    dates: 2026-02-02 Mon
+    time: "9:30 to 10:30 am" 09:30-10:30 exact [Monday 9:30 - 10:30am]
+    match: EXACT
+    phrase: "Aquafit General, Deep/shallow combo"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Aquafit General - Deep/shallow combo, 9:30 to 10:30 am, cancelled"
+    at: facility
+- IGNORED heading "Family Day hours"
+    section: "Family Day hours"
+    at: facility
+- NOTICE "Monday, February 16, 7 am to 4 pm"
+    section: "Family Day hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

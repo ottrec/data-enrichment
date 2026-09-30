@@ -1,0 +1,130 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 11 am to 3 pm, cancelled"
+    date text: "Saturday, March 14"
+    dates: 2026-03-14 Sat
+    time: "11 am to 3 pm" 11:00-15:00 exact [Saturday 11:00am - 3:00pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Lane swim"
+    ambiguities: activity-time-disambiguated
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - 50m short course" sessions 2026-03-14 Sat 11:00-15:00
+- NOTICE "Public swim, 1 to 3 pm, 25m pool only"
+    date text: "Saturday, March 14"
+    dates: 2026-03-14 Sat
+    time: "1 to 3 pm" 13:00-15:00 exact [Saturday 1:00 - 3:00pm]
+    effects: restriction "25m pool only"
+    match: FUZZY
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim -25m pool" sessions 2026-03-14 Sat 13:00-15:00
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 11 am to 3 pm, shallow end only"
+    date text: "Sunday, March 22"
+    dates: 2026-03-22 Sun
+    time: "11 am to 3 pm" 11:00-15:00 none
+    effects: restriction "shallow end only"
+    match: MULTIPLE
+    phrase: "Lane swim"
+    candidates: "Lane swim - 25m pool" "Lane swim - 50m long course" "Lane swim - 50m short course"
+    ambiguities: activity-multiple-candidates date-outside-schedule
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Public swim, 1 to 3 pm, 25m pool only"
+    date text: "Sunday, March 22"
+    dates: 2026-03-22 Sun
+    time: "1 to 3 pm" 13:00-15:00 none
+    effects: restriction "25m pool only"
+    match: FUZZY
+    phrase: "Public swim"
+    ambiguities: date-outside-schedule meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim -25m pool"
+- IGNORED date-context "Sunday, March 29"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 11 am to 3 pm, cancelled"
+    date text: "Sunday, March 29"
+    dates: 2026-03-29 Sun
+    time: "11 am to 3 pm" 11:00-15:00 exact [Sunday 11:00am - 3:00pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Lane swim"
+    ambiguities: activity-time-disambiguated
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - 50m short course" sessions 2026-03-29 Sun 11:00-15:00
+- NOTICE "Public swim, 1 to 3 pm, 25m pool only"
+    date text: "Sunday, March 29"
+    dates: 2026-03-29 Sun
+    time: "1 to 3 pm" 13:00-15:00 exact [Sunday 1:00 - 3:00pm]
+    effects: restriction "25m pool only"
+    match: FUZZY
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim -25m pool" sessions 2026-03-29 Sun 13:00-15:00
+
+== Nepean Sportsplex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - curling"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - curling"
+
+== Nepean Sportsplex special_hours
+- NOTICE "Drop-in swim and aquafitness changes, see the drop-in schedule."
+    effects: see-schedule "drop-in schedule"
+    match: SCOPE_PHRASE
+    at: facility
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

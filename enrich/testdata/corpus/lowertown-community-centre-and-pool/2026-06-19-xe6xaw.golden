@@ -1,0 +1,116 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Monday, June 22 to Friday, June 26"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Lane swim, 11 am to noon and 2 to 3 pm, cancelled"
+    date text: "Monday, June 22 to Friday, June 26"
+    dates: 2026-06-22 Mon to 2026-06-26 Fri
+    time: "11 am to noon" 11:00-12:00 within [Friday 11:00am - 1:00pm; Monday 11:00am - 2:00pm; Thursday 11:00am - 1:00pm; Tuesday 11:00am - 2:00pm; Wednesday 11:00am - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Lane swim" sessions 2026-06-22 Mon 11:00-14:00, 2026-06-23 Tue 11:00-14:00, 2026-06-24 Wed 11:00-13:00, 2026-06-25 Thu 11:00-13:00, 2026-06-26 Fri 11:00-13:00
+- NOTICE "Lane swim, 11 am to noon and 2 to 3 pm, cancelled"
+    date text: "Monday, June 22 to Friday, June 26"
+    dates: 2026-06-22 Mon to 2026-06-26 Fri
+    time: "2 to 3 pm" 14:00-15:00 within [Friday 2:00 - 3:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Lane swim" sessions 2026-06-26 Fri 14:00-15:30
+- NOTICE "50+ swim, 11 am to noon and 2 to 3 pm, cancelled"
+    date text: "Monday, June 22 to Friday, June 26"
+    dates: 2026-06-22 Mon to 2026-06-26 Fri
+    time: "11 am to noon" 11:00-12:00 none
+    effects: cancelled
+    match: EXACT
+    phrase: "50+ swim"
+    ambiguities: no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "50+ Swim"
+- NOTICE "50+ swim, 11 am to noon and 2 to 3 pm, cancelled"
+    date text: "Monday, June 22 to Friday, June 26"
+    dates: 2026-06-22 Mon to 2026-06-26 Fri
+    time: "2 to 3 pm" 14:00-15:00 within [Monday 2:00 - 3:45pm; Thursday 2:00 - 4:00pm; Tuesday 2:00 - 4:00pm; Wednesday 2:00 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "50+ swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "50+ Swim" sessions 2026-06-22 Mon 14:00-15:45, 2026-06-23 Tue 14:00-16:00, 2026-06-24 Wed 14:00-16:00, 2026-06-25 Thu 14:00-16:00
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swimming"
+
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Lowertown Community Centre and Pool special_hours
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Monday, June 22 to Friday, June 26"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Lane swim, 11 am to noon and 2 to 3 pm, cancelled"
+    section: "Schedule change"
+    date text: "Monday, June 22 to Friday, June 26"
+    dates: 2026-06-22 Mon to 2026-06-26 Fri
+    time: "11 am to noon" 11:00-12:00 within [Friday 11:00am - 1:00pm; Monday 11:00am - 2:00pm; Thursday 11:00am - 1:00pm; Tuesday 11:00am - 2:00pm; Wednesday 11:00am - 1:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Lane swim, 11 am to noon and 2 to 3 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim, 11 am to noon and 2 to 3 pm, cancelled"
+    section: "Schedule change"
+    date text: "Monday, June 22 to Friday, June 26"
+    dates: 2026-06-22 Mon to 2026-06-26 Fri
+    time: "2 to 3 pm" 14:00-15:00 within [Friday 2:00 - 3:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Lane swim, 11 am to noon and 2 to 3 pm, cancelled"
+    at: facility
+- IGNORED duplicate "50+ swim, 11 am to noon and 2 to 3 pm, cancelled"
+    section: "Schedule change"
+    date text: "Monday, June 22 to Friday, June 26"
+    dates: 2026-06-22 Mon to 2026-06-26 Fri
+    time: "11 am to noon" 11:00-12:00 none
+    match: EXACT
+    phrase: "50+ swim"
+    ambiguities: no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "50+ swim, 11 am to noon and 2 to 3 pm, cancelled"
+    at: facility
+- IGNORED duplicate "50+ swim, 11 am to noon and 2 to 3 pm, cancelled"
+    section: "Schedule change"
+    date text: "Monday, June 22 to Friday, June 26"
+    dates: 2026-06-22 Mon to 2026-06-26 Fri
+    time: "2 to 3 pm" 14:00-15:00 within [Monday 2:00 - 3:45pm; Thursday 2:00 - 4:00pm; Tuesday 2:00 - 4:00pm; Wednesday 2:00 - 4:00pm]
+    match: EXACT
+    phrase: "50+ swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "50+ swim, 11 am to noon and 2 to 3 pm, cancelled"
+    at: facility
+
+== Lowertown Community Centre and Pool notifications
+- IGNORED boilerplate "Pickleball can now be found in the gymnasium sports schedule."
+    at: facility

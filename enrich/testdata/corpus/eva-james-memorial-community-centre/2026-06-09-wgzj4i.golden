@@ -1,0 +1,26 @@
+== Eva James Memorial Community Centre special_hours
+- IGNORED date-context "Sunday, June 21"
+    at: facility
+- IGNORED date-context "Friday, June 26 to Monday, June 28"
+    at: facility
+- IGNORED date-context "Wednesday, July 1"
+    at: facility
+- IGNORED date-context "Monday, August 3"
+    at: facility
+- NOTICE "The facility is closed, and all programs cancelled:"
+    date text: "Friday, June 26 to Monday, June 28"
+    dates: 2026-06-26 Fri to 2026-06-28 Sun
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    ambiguities: weekday-mismatch
+    at: facility
+- NOTICE "The facility is closed, and all programs cancelled:"
+    date text: "Sunday, June 21 Wednesday, July 1 Monday, August 3"
+    dates: 2026-06-21 Sun 2026-07-01 Wed 2026-08-03 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: facility
+
+== Eva James Memorial Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

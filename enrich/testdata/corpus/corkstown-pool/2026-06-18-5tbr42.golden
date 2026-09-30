@@ -1,0 +1,44 @@
+== Corkstown Pool special_hours
+- IGNORED heading "Pre-season"
+    section: "Pre-season"
+    at: facility
+- IGNORED date-context "June 20 to 28"
+    section: "Pre-season"
+    at: facility
+- NOTICE "Monday to Friday, 1:45 to 7 pm"
+    section: "Pre-season"
+    date text: "Monday to Friday"
+    dates: weekdays Mon Tue Wed Thu Fri
+    time: "1:45 to 7 pm" 13:45-19:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "Saturday and Sunday, 12:45 to 5 pm"
+    section: "Pre-season"
+    date text: "Saturday and Sunday"
+    dates: weekdays Sat Sun
+    time: "12:45 to 5 pm" 12:45-17:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- IGNORED heading "Regular season"
+    section: "Regular season"
+    at: facility
+- IGNORED date-context "June 29 to August 23"
+    section: "Regular season"
+    at: facility
+- NOTICE "Monday to Friday, 12:45 to 7 pm"
+    section: "Regular season"
+    date text: "Monday to Friday"
+    dates: weekdays Mon Tue Wed Thu Fri
+    time: "12:45 to 7 pm" 12:45-19:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "Saturday and Sunday, 10:45 am to 5 pm"
+    section: "Regular season"
+    date text: "Saturday and Sunday"
+    dates: weekdays Sat Sun
+    time: "10:45 am to 5 pm" 10:45-17:00 unchecked
+    effects: modified-hours
+    at: facility

@@ -1,0 +1,36 @@
+== Canterbury Recreation Complex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, October 2"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, 11 am to 1 pm, cancelled"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "11 am to 1 pm" 11:00-13:00 covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Canterbury Recreation Complex special_hours
+- NOTICE "The sauna is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "sauna"
+    amenity: "sauna"
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Friday, October 2"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "All drop-in skating, 11 am to 1 pm, cancelled"
+    section: "Schedule change"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "11 am to 1 pm" 11:00-13:00 covers [Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, 11 am to 1 pm, cancelled"
+    at: facility

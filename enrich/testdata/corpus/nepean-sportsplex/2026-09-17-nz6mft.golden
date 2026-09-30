@@ -1,0 +1,8 @@
+== Nepean Sportsplex special_hours
+- NOTICE "The saunas are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "saunas"
+    amenity: "saunas"
+    at: facility

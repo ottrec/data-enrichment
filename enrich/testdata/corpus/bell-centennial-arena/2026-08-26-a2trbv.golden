@@ -1,0 +1,10 @@
+== Bell Centennial Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, December 26"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating and ice sports, cancelled."
+    date text: "Saturday, December 26"
+    dates: 2026-12-26 Sat
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating and ice sports"
+    at: group "Drop-in schedule - skating"

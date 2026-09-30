@@ -1,0 +1,6 @@
+== Lansdowne Park special_hours
+- NOTICE "The sledding hill at Lansdowne Park is closed due to construction."
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "sledding hill at lansdowne park"
+    at: facility

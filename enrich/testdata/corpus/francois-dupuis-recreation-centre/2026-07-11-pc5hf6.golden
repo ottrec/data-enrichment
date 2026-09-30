@@ -1,0 +1,85 @@
+== François Dupuis Recreation Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Friday, July 10"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, noon to 1 pm, cancelled"
+    date text: "Friday, July 10"
+    dates: 2026-07-10 Fri
+    time: "noon to 1 pm" 12:00-13:00 within [Friday 12:00 - 1:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-10 Fri 12:00-13:30
+- NOTICE "Lane swim - shared pool, noon to 1 pm, added"
+    date text: "Friday, July 10"
+    dates: 2026-07-10 Fri
+    time: "noon to 1 pm" 12:00-13:00 novel
+    effects: added
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim -shared pool" sessions 2026-07-10 Fri 12:00-13:00 added
+- IGNORED date-context "Saturday, July 11"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 9:30 to 11:30 am, cancelled"
+    date text: "Saturday, July 11"
+    dates: 2026-07-11 Sat
+    time: "9:30 to 11:30 am" 09:30-11:30 exact [Saturday 9:30 - 11:30am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-11 Sat 09:30-11:30
+- NOTICE "Lane swim - shared pool, 9:30 to 11:30 am, added"
+    date text: "Saturday, July 11"
+    dates: 2026-07-11 Sat
+    time: "9:30 to 11:30 am" 09:30-11:30 novel
+    effects: added
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim -shared pool" sessions 2026-07-11 Sat 09:30-11:30 added
+- IGNORED date-context "Friday, July 10"
+    at: facility
+- IGNORED duplicate "Lane swim, noon to 1 pm, cancelled"
+    date text: "Friday, July 10"
+    dates: 2026-07-10 Fri
+    time: "noon to 1 pm" 12:00-13:00 within [Friday 12:00 - 1:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, noon to 1 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim - shared pool, noon to 1 pm, added"
+    date text: "Friday, July 10"
+    dates: 2026-07-10 Fri
+    time: "noon to 1 pm" 12:00-13:00 novel
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim - shared pool, noon to 1 pm, added"
+    at: facility
+- IGNORED date-context "Saturday, July 11"
+    at: facility
+- IGNORED duplicate "Lane swim, 9:30 to 11:30 am, cancelled"
+    date text: "Saturday, July 11"
+    dates: 2026-07-11 Sat
+    time: "9:30 to 11:30 am" 09:30-11:30 exact [Saturday 9:30 - 11:30am]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 9:30 to 11:30 am, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim - shared pool, 9:30 to 11:30 am, added"
+    date text: "Saturday, July 11"
+    dates: 2026-07-11 Sat
+    time: "9:30 to 11:30 am" 09:30-11:30 novel
+    match: EXACT
+    phrase: "Lane swim - shared pool"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim - shared pool, 9:30 to 11:30 am, added"
+    at: facility
+
+== François Dupuis Recreation Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

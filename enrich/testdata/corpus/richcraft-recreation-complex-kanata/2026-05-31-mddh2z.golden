@@ -1,0 +1,47 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Tuesday, June 2"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba Toning, 6:15 to 7:15 pm, cancelled"
+    date text: "Tuesday, June 2"
+    dates: 2026-06-02 Tue
+    time: "6:15 to 7:15 pm" 18:15-19:15 exact [Tuesday 6:15 - 7:15pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba Toning"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba® Toning" sessions 2026-06-02 Tue 18:15-19:15
+- NOTICE "Zumba, 6:15 to 7:15 pm, added"
+    date text: "Tuesday, June 2"
+    dates: 2026-06-02 Tue
+    time: "6:15 to 7:15 pm" 18:15-19:15 novel
+    effects: added
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba®" sessions 2026-06-02 Tue 18:15-19:15 added
+- IGNORED date-context "Tuesday, June 2"
+    at: facility
+- IGNORED duplicate "Zumba Toning, 6:15 to 7:15 pm, cancelled"
+    date text: "Tuesday, June 2"
+    dates: 2026-06-02 Tue
+    time: "6:15 to 7:15 pm" 18:15-19:15 exact [Tuesday 6:15 - 7:15pm]
+    match: EXACT
+    phrase: "Zumba Toning"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba Toning, 6:15 to 7:15 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Zumba, 6:15 to 7:15 pm, added"
+    date text: "Tuesday, June 2"
+    dates: 2026-06-02 Tue
+    time: "6:15 to 7:15 pm" 18:15-19:15 novel
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba, 6:15 to 7:15 pm, added"
+    at: facility
+
+== Richcraft Recreation Complex-Kanata notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

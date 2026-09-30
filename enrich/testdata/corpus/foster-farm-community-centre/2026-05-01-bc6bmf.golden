@@ -1,0 +1,6 @@
+== Foster Farm Community Centre special_hours
+- NOTICE "Monday, May 18, closed"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: closure
+    at: facility

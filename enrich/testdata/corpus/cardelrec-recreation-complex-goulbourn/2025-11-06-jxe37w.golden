@@ -1,0 +1,49 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, November 8"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Cardio and strength, 9 to 10 am, cancelled"
+    date text: "Saturday, November 8"
+    dates: 2025-11-08 Sat
+    time: "9 to 10 am" 09:00-10:00 exact [Saturday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength" sessions 2025-11-08 Sat 09:00-10:00
+- IGNORED date-context "Monday, November 10"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, November 10"
+    dates: 2025-11-10 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Requires reservations" sessions 2025-11-10 Mon 07:00-08:00
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Saturday, November 8"
+    at: facility
+- IGNORED duplicate "Cardio and strength, 9 to 10 am, cancelled"
+    date text: "Saturday, November 8"
+    dates: 2025-11-08 Sat
+    time: "9 to 10 am" 09:00-10:00 exact [Saturday 9:00 - 10:00am]
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Cardio and strength, 9 to 10 am, cancelled"
+    at: facility
+- IGNORED date-context "Monday, November 10"
+    at: facility
+- IGNORED duplicate "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, November 10"
+    dates: 2025-11-10 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Indoor cycling, 7 to 8 am, cancelled"
+    at: facility

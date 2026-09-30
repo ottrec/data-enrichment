@@ -1,0 +1,94 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, September 2"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The steam room is closed."
+    date text: "Wednesday, September 2"
+    dates: 2026-09-02 Wed
+    time: "" covers [Wednesday 6:00 - 9:00pm; Wednesday 7:30am - 2:00pm]
+    effects: closure
+    match: FUZZY
+    phrase: "steam room"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Hot tub and Steam Room" sessions 2026-09-02 Wed 07:30-14:00, 2026-09-02 Wed 18:00-21:00
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - squash"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - squash"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Walter Baker Sports Centre special_hours
+- NOTICE "The pool lift is out of order until further notice."
+    dates: open-ended
+    match: NONE
+    phrase: "The pool lift is out of order until further notice"
+    amenity: "pool"
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Wednesday, September 2"
+    section: "Schedule change"
+    at: facility
+- NOTICE "The steam room is closed."
+    section: "Schedule change"
+    date text: "Wednesday, September 2"
+    dates: 2026-09-02 Wed
+    effects: closure
+    match: NONE
+    phrase: "steam room"
+    amenity: "steam room"
+    at: facility
+- IGNORED heading "Labour Day hours"
+    section: "Labour Day hours"
+    at: facility
+- NOTICE "Monday, September 7, 8 am to 5 pm"
+    section: "Labour Day hours"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility

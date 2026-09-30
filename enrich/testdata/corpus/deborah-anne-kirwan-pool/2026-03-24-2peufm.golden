@@ -1,0 +1,37 @@
+== Deborah Anne Kirwan Pool schedule_changes "Drop-in schedule - swim"
+- NOTICE "Friday, April 3, the facility is closed and all programs cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim"
+- NOTICE "Saturday, April 4 and Sunday, April 5, see Easter schedule."
+    date text: "Saturday, April 4 and Sunday, April 5"
+    dates: 2026-04-04 Sat 2026-04-05 Sun
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim"
+- NOTICE "Monday, April 6, the facility is closed and all programs cancelled."
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim"
+
+== Deborah Anne Kirwan Pool special_hours
+- NOTICE "Friday, April 3, closed"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    effects: closure
+    at: facility
+- NOTICE "Saturday, April 4 and Sunday, April 5, noon to 4 pm"
+    date text: "Saturday, April 4 and Sunday, April 5"
+    dates: 2026-04-04 Sat 2026-04-05 Sun
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, April 6, closed"
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    effects: closure
+    at: facility

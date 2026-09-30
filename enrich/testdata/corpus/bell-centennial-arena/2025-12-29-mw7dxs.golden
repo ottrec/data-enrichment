@@ -1,0 +1,91 @@
+== Bell Centennial Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Wednesday, December 31"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Ringette, 5 to 5:50 pm, cancelled"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "5 to 5:50 pm" 17:00-17:50 exact [Wednesday 5:00 - 5:50pm]
+    effects: cancelled
+    match: FUZZY
+    phrase: "Ringette"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Ringette (10 to 14 years)" sessions 2025-12-31 Wed 17:00-17:50
+
+== Bell Centennial Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Tuesday, December 30"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family Skate, 2 to 2:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "2 to 2:50 pm" 14:00-14:50 unchecked
+    effects: added
+    match: NOVEL
+    phrase: "Family Skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family Skate" novel sessions 2025-12-30 Tue 14:00-14:50 added
+- NOTICE "Public Skate, 3 to 3:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "3 to 3:50 pm" 15:00-15:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-30 Tue 15:00-15:50 added
+- IGNORED date-context "Wednesday, December 31"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skate, 4 to 4:50 pm, cancelled"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Wednesday 4:00 - 4:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-31 Wed 16:00-16:50
+
+== Bell Centennial Arena special_hours
+- IGNORED date-context "Tuesday, December 30"
+    at: facility
+- IGNORED duplicate "Family Skate, 2 to 2:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "2 to 2:50 pm" 14:00-14:50 unchecked
+    match: NOVEL
+    phrase: "Family Skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family Skate, 2 to 2:50 pm, added"
+    at: facility
+- IGNORED duplicate "Public Skate, 3 to 3:50 pm, added"
+    date text: "Tuesday, December 30"
+    dates: 2025-12-30 Tue
+    time: "3 to 3:50 pm" 15:00-15:50 novel
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public Skate, 3 to 3:50 pm, added"
+    at: facility
+- IGNORED date-context "Wednesday, December 31"
+    at: facility
+- IGNORED duplicate "Public skate, 4 to 4:50 pm, cancelled"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "4 to 4:50 pm" 16:00-16:50 exact [Wednesday 4:00 - 4:50pm]
+    match: EXACT
+    phrase: "Public skate"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skate, 4 to 4:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Ringette, 5 to 5:50 pm, cancelled"
+    date text: "Wednesday, December 31"
+    dates: 2025-12-31 Wed
+    time: "5 to 5:50 pm" 17:00-17:50 exact [Wednesday 5:00 - 5:50pm]
+    match: FUZZY
+    phrase: "Ringette"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Ringette, 5 to 5:50 pm, cancelled"
+    at: facility

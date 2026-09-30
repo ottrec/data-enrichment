@@ -1,0 +1,32 @@
+== Splash Wave Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Splash Wave Pool special_hours
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility
+- IGNORED heading "Notice"
+    section: "Notice"
+    at: facility
+- NOTICE "Lap pool heater broken. Pool temperature is colder than normal until further notice."
+    section: "Notice"
+    match: NONE
+    phrase: "Lap pool heater broken"
+    amenity: "lap pool"
+    at: facility
+- NOTICE "Lap pool heater broken. Pool temperature is colder than normal until further notice."
+    section: "Notice"
+    dates: open-ended
+    match: NONE
+    phrase: "Pool temperature is colder than normal until further notice"
+    amenity: "pool"
+    at: facility

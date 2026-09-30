@@ -1,0 +1,72 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, September 5 to Monday, September 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Labour Day weekend schedule."
+    date text: "Saturday, September 5 to Monday, September 7"
+    dates: 2026-09-05 Sat to 2026-09-07 Mon
+    effects: see-schedule "Labour Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- NOTICE "Monday, September 7, 7 am to 4 pm"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Sunday, August 30"
+    section: "Schedule change"
+    at: facility
+- NOTICE "Lane swim, 6:45 to 8 pm, cancelled"
+    section: "Schedule change"
+    date text: "Sunday, August 30"
+    dates: 2026-08-30 Sun
+    time: "6:45 to 8 pm" 18:45-20:00 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: date-outside-schedule meridiem-inferred no-slot-overlap
+    at: group "Drop-in schedule - Labour Day weekend" activity "Lane swim"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim"
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

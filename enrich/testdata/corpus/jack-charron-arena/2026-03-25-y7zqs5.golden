@@ -1,0 +1,73 @@
+== Jack Charron Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All skates cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    time: "" covers [Friday 10:00 - 10:50am; Friday 9:00 - 9:50am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skates"
+    ambiguities: matched-other-group
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-04-03 Fri 09:00-09:50, 2026-04-03 Fri 10:00-10:50
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-04-03 Fri 09:00-09:50, 2026-04-03 Fri 10:00-10:50
+    at: group "Drop-in schedule - skating" activity "Skating 50+" sessions 2026-04-03 Fri 09:00-09:50, 2026-04-03 Fri 10:00-10:50
+- IGNORED date-context "Sunday, April 5"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "All skates cancelled."
+    date text: "Sunday, April 5"
+    dates: 2026-04-05 Sun
+    time: "" covers [Sunday 3:00 - 3:50pm; Sunday 4:00 - 4:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skates"
+    ambiguities: matched-other-group
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-04-05 Sun 15:00-15:50, 2026-04-05 Sun 16:00-16:50
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-04-05 Sun 15:00-15:50, 2026-04-05 Sun 16:00-16:50
+    at: group "Drop-in schedule - skating" activity "Skating 50+" sessions 2026-04-05 Sun 15:00-15:50, 2026-04-05 Sun 16:00-16:50
+- IGNORED date-context "Friday, April 3"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All skates cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    time: "" covers [Friday 10:00 - 10:50am; Friday 9:00 - 9:50am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skates"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Sunday, April 5"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All skates cancelled."
+    date text: "Sunday, April 5"
+    dates: 2026-04-05 Sun
+    time: "" covers [Sunday 3:00 - 3:50pm; Sunday 4:00 - 4:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All skates"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Friday, April 3"
+    at: facility
+- IGNORED duplicate "All skates cancelled."
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    time: "" covers [Friday 10:00 - 10:50am; Friday 9:00 - 9:50am]
+    match: SCOPE_PHRASE
+    phrase: "All skates"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All skates cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All skates cancelled."
+    at: facility
+- IGNORED date-context "Sunday, April 5"
+    at: facility
+- IGNORED duplicate "All skates cancelled."
+    date text: "Sunday, April 5"
+    dates: 2026-04-05 Sun
+    time: "" covers [Sunday 3:00 - 3:50pm; Sunday 4:00 - 4:50pm]
+    match: SCOPE_PHRASE
+    phrase: "All skates"
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "All skates cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All skates cancelled."
+    at: facility

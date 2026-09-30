@@ -1,0 +1,52 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/richcraft-recreation-complex-kanata-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit"
+
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/richcraft-recreation-complex-kanata-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - racquet sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/richcraft-recreation-complex-kanata-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - racquet sports"
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: group "Drop-in schedule - sports"
+- NOTICE "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    effects: see-schedule "Winter Break schedule" "https://ottawa.ca/en/richcraft-recreation-complex-kanata-holiday-drop-schedule"
+    match: SCOPE_PHRASE
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - sports"
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Monday, December 22 to Sunday, January 4"
+    at: facility
+- IGNORED duplicate "See Winter Break schedule."
+    date text: "Monday, December 22 to Sunday, January 4"
+    dates: 2025-12-22 Mon to 2026-01-04 Sun
+    match: SCOPE_PHRASE
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "See Winter Break schedule."
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "See Winter Break schedule."
+    duplicate of: schedule_changes "Drop-in schedule - racquet sports" "See Winter Break schedule."
+    duplicate of: schedule_changes "Drop-in schedule - sports" "See Winter Break schedule."
+    at: facility

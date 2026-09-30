@@ -1,0 +1,33 @@
+== Kanata Leisure Centre and Wave Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedules - weight and cardio room"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - weight and cardio room"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedules - group fitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedules - group fitness"
+
+== Kanata Leisure Centre and Wave Pool special_hours
+- NOTICE "Monday, October 12, 8 am to 4 pm"
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

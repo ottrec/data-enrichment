@@ -1,0 +1,26 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, April 16 to Saturday, April 18"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Thursday, April 16 to Saturday, April 18"
+    dates: 2026-04-16 Thu to 2026-04-18 Sat
+    time: "" covers [Friday 6:15 - 7:05pm; Friday 7:15 - 8:05pm; Saturday 2:15 - 3:05pm; Saturday 3:15 - 4:05pm; Thursday 10:15 - 11:05am; Thursday 11:15 - 12:05am; Thursday 12:15 - 1:05pm; Thursday 1:15 - 2:05pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Thursday, April 16 to Saturday, April 18"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Thursday, April 16 to Saturday, April 18"
+    dates: 2026-04-16 Thu to 2026-04-18 Sat
+    time: "" covers [Friday 6:15 - 7:05pm; Friday 7:15 - 8:05pm; Saturday 2:15 - 3:05pm; Saturday 3:15 - 4:05pm; Thursday 10:15 - 11:05am; Thursday 11:15 - 12:05am; Thursday 12:15 - 1:05pm; Thursday 1:15 - 2:05pm]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

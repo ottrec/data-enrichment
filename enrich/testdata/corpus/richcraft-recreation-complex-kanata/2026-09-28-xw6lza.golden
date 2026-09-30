@@ -1,0 +1,57 @@
+== Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Richcraft Recreation Complex-Kanata special_hours
+- IGNORED date-context "Tuesday, September 8 to Sunday, September 27"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance. All swim drop-ins are cancelled."
+    date text: "Tuesday, September 8 to Sunday, September 27"
+    dates: 2026-09-08 Tue to 2026-09-27 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- NOTICE "The pool is closed for annual maintenance. All swim drop-ins are cancelled."
+    date text: "Tuesday, September 8 to Sunday, September 27"
+    dates: 2026-09-08 Tue to 2026-09-27 Sun
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All swim drop-ins"
+    at: group "Drop-in schedule - Thanksgiving weekend" activity "Lane swim *Reservations not required."
+    at: group "Drop-in schedule - Thanksgiving weekend" activity "Public swim *Reservations not required."
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim *Reservations not required."
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - reduced *Reservations not required."
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool swim - leisure pool only"
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim *Reservations not required."
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim - leisure pool only *Reservations not required."

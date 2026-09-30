@@ -1,0 +1,12 @@
+== Nepean Museum special_hours
+- NOTICE "The museum will be closed on the following public holidays:"
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "museum"
+    at: facility
+- IGNORED date-context "Thursday, December 25"
+    at: facility
+- IGNORED date-context "Friday, December 26"
+    at: facility
+- IGNORED date-context "Thursday, January 1"
+    at: facility

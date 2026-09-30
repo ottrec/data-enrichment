@@ -1,0 +1,35 @@
+== Rideauview Community Centre special_hours
+- NOTICE "Monday, March 16, 8 am to 5 pm"
+    date text: "Monday, March 16"
+    dates: 2026-03-16 Mon
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Tuesday March 17, 8 am to 9 pm"
+    date text: "Tuesday March 17"
+    dates: 2026-03-17 Tue
+    time: "8 am to 9 pm" 08:00-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Wednesday, March 18, 8 am to 5 pm"
+    date text: "Wednesday, March 18"
+    dates: 2026-03-18 Wed
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, March 19, 8 am to 9 pm"
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "8 am to 9 pm" 08:00-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Friday, March 20, 8 am to 5 pm"
+    date text: "Friday, March 20"
+    dates: 2026-03-20 Fri
+    time: "8 am to 5 pm" 08:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Rideauview Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

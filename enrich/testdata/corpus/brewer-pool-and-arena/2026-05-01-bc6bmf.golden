@@ -1,0 +1,49 @@
+== Brewer Pool and Arena schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, May 4"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 9:30 am to 1 pm, cancelled"
+    date text: "Monday, May 4"
+    dates: 2026-05-04 Mon
+    time: "9:30 am to 1 pm" 09:30-13:00 within [Monday 7:30am - 1:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-05-04 Mon 07:30-13:00
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Brewer Pool and Arena special_hours
+- IGNORED date-context "Monday, May 4"
+    at: facility
+- IGNORED duplicate "Lane swim, 9:30 am to 1 pm, cancelled"
+    date text: "Monday, May 4"
+    dates: 2026-05-04 Mon
+    time: "9:30 am to 1 pm" 09:30-13:00 within [Monday 7:30am - 1:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 9:30 am to 1 pm, cancelled"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Monday, May 18, closed"
+    section: "Modified hours"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: closure
+    at: facility

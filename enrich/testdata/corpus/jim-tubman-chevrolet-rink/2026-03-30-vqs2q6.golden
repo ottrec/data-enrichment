@@ -1,0 +1,33 @@
+== Jim Tubman Chevrolet Rink schedule_changes "Drop-in schedule - Winter"
+- NOTICE "Friday, April 3 to Monday, April 6, see Easter schedule."
+    date text: "Friday, April 3 to Monday, April 6"
+    dates: 2026-04-03 Fri to 2026-04-06 Mon
+    effects: see-schedule "Easter schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Winter"
+
+== Jim Tubman Chevrolet Rink special_hours
+- NOTICE "Friday, April 3, 10 am to 4 pm"
+    date text: "Friday, April 3"
+    dates: 2026-04-03 Fri
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Saturday, April 4, 10 am to 10 pm"
+    date text: "Saturday, April 4"
+    dates: 2026-04-04 Sat
+    time: "10 am to 10 pm" 10:00-22:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, April 5, 10 am to 10 pm"
+    date text: "Sunday, April 5"
+    dates: 2026-04-05 Sun
+    time: "10 am to 10 pm" 10:00-22:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, April 6, 10 am to 4 pm"
+    date text: "Monday, April 6"
+    dates: 2026-04-06 Mon
+    time: "10 am to 4 pm" 10:00-16:00 unchecked
+    effects: modified-hours
+    at: facility

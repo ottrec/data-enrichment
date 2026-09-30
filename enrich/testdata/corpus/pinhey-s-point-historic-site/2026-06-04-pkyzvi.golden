@@ -1,0 +1,8 @@
+== Pinhey's Point Historic Site special_hours
+- NOTICE "The museum at Pinhey's Point Historic Site is closed. It will reopen to visitors in late July 2026."
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "museum at pinhey's point historic site"
+    at: facility
+- IGNORED boilerplate "The park is open year-round."
+    at: facility

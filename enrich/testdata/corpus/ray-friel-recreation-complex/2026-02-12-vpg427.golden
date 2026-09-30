@@ -1,0 +1,139 @@
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Thursday, February 12"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Public swim, 5 to 7:30 pm, cancelled"
+    date text: "Thursday, February 12"
+    dates: 2026-02-12 Thu
+    time: "5 to 7:30 pm" 17:00-19:30 exact [Thursday 5:00 - 7:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-02-12 Thu 17:00-19:30
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Ray Friel Recreation Complex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, February 14 to Monday, February 16"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Family Day weekend schedule."
+    date text: "Saturday, February 14 to Monday, February 16"
+    dates: 2026-02-14 Sat to 2026-02-16 Mon
+    effects: see-schedule "Family Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Wednesday, February 18"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Pick-up hockey 18+, Noon to 1:20 pm, cancelled"
+    date text: "Wednesday, February 18"
+    dates: 2026-02-18 Wed
+    time: "Noon to 1:20 pm" 12:00-13:20 exact [Wednesday 12:00 - 1:20pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Pick-up hockey 18+"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Pick-up hockey 18+" sessions 2026-02-18 Wed 12:00-13:20
+
+== Ray Friel Recreation Complex special_hours
+- NOTICE "The diving board is closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "diving board"
+    amenity: "diving board"
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Thursday, February 12"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Public swim, 5 to 7:30 pm, cancelled"
+    section: "Schedule change"
+    date text: "Thursday, February 12"
+    dates: 2026-02-12 Thu
+    time: "5 to 7:30 pm" 17:00-19:30 exact [Thursday 5:00 - 7:30pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim, 5 to 7:30 pm, cancelled"
+    at: facility
+- IGNORED heading "Family Day weekend hours"
+    section: "Family Day weekend hours"
+    at: facility
+- NOTICE "Saturday, February 14, 8 am to 8 pm"
+    section: "Family Day weekend hours"
+    date text: "Saturday, February 14"
+    dates: 2026-02-14 Sat
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, February 15, 8 am to 8 pm"
+    section: "Family Day weekend hours"
+    date text: "Sunday, February 15"
+    dates: 2026-02-15 Sun
+    time: "8 am to 8 pm" 08:00-20:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, February 16, 8 am to 4 pm"
+    section: "Family Day weekend hours"
+    date text: "Monday, February 16"
+    dates: 2026-02-16 Mon
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "February 17 to 19"
+    section: "Closure"
+    at: facility
+- NOTICE "The elevator is closed for maintenance."
+    section: "Closure"
+    date text: "February 17 to 19"
+    dates: 2026-02-17 Tue to 2026-02-19 Thu
+    effects: closure
+    match: NONE
+    phrase: "elevator"
+    amenity: "elevator"
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Wednesday, February 18"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Pick-up hockey 18+, Noon to 1:20 pm, cancelled"
+    section: "Schedule change"
+    date text: "Wednesday, February 18"
+    dates: 2026-02-18 Wed
+    time: "Noon to 1:20 pm" 12:00-13:20 exact [Wednesday 12:00 - 1:20pm]
+    match: EXACT
+    phrase: "Pick-up hockey 18+"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Pick-up hockey 18+, Noon to 1:20 pm, cancelled"
+    at: facility

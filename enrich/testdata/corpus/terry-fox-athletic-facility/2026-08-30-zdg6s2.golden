@@ -1,0 +1,64 @@
+== Terry Fox Athletic Facility special_hours
+- NOTICE "Monday, September 7, closed"
+    date text: "Monday, September 7"
+    dates: 2026-09-07 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- NOTICE "The facility is not available due to special events:"
+    section: "Schedule changes"
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- NOTICE "September 5, 7 am to 4 pm"
+    section: "Schedule changes"
+    date text: "September 5"
+    dates: 2026-09-05 Sat
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "September 13, 9 am to 4 pm"
+    section: "Schedule changes"
+    date text: "September 13"
+    dates: 2026-09-13 Sun
+    time: "9 am to 4 pm" 09:00-16:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "September 20, 9 am to 4 pm"
+    section: "Schedule changes"
+    date text: "September 20"
+    dates: 2026-09-20 Sun
+    time: "9 am to 4 pm" 09:00-16:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "September 25, 1 to 5 pm"
+    section: "Schedule changes"
+    date text: "September 25"
+    dates: 2026-09-25 Fri
+    time: "1 to 5 pm" 13:00-17:00 unchecked
+    effects: closure
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "September 26, 8 am to 4 pm"
+    section: "Schedule changes"
+    date text: "September 26"
+    dates: 2026-09-26 Sat
+    time: "8 am to 4 pm" 08:00-16:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "September 27, noon to 4 pm"
+    section: "Schedule changes"
+    date text: "September 27"
+    dates: 2026-09-27 Sun
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: closure
+    at: facility
+- NOTICE "September 30, 9 am to 2 pm"
+    section: "Schedule changes"
+    date text: "September 30"
+    dates: 2026-09-30 Wed
+    time: "9 am to 2 pm" 09:00-14:00 unchecked
+    effects: closure
+    at: facility

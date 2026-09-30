@@ -1,0 +1,97 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, May 13"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Drums Alive®, 6:45 to 7:45 pm, cancelled"
+    date text: "Wednesday, May 13"
+    dates: 2026-05-13 Wed
+    time: "6:45 to 7:45 pm" 18:45-19:45 exact [Wednesday 6:45 - 7:45pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Drums Alive®"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Drums Alive®" sessions 2026-05-13 Wed 18:45-19:45
+- NOTICE "Zumba, 6:45 to 7:45 pm, added"
+    date text: "Wednesday, May 13"
+    dates: 2026-05-13 Wed
+    time: "6:45 to 7:45 pm" 18:45-19:45 novel
+    effects: added
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba®" sessions 2026-05-13 Wed 18:45-19:45 added
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, May 16 to Monday, May 18"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 to Monday, May 18"
+    dates: 2026-05-16 Sat to 2026-05-18 Mon
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Wednesday, May 13"
+    at: facility
+- IGNORED duplicate "Drums Alive®, 6:45 to 7:45 pm, cancelled"
+    date text: "Wednesday, May 13"
+    dates: 2026-05-13 Wed
+    time: "6:45 to 7:45 pm" 18:45-19:45 exact [Wednesday 6:45 - 7:45pm]
+    match: EXACT
+    phrase: "Drums Alive®"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Drums Alive®, 6:45 to 7:45 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Zumba, 6:45 to 7:45 pm, added"
+    date text: "Wednesday, May 13"
+    dates: 2026-05-13 Wed
+    time: "6:45 to 7:45 pm" 18:45-19:45 novel
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba, 6:45 to 7:45 pm, added"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Monday, May 18, 7 am to 4 pm"
+    section: "Modified hours"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

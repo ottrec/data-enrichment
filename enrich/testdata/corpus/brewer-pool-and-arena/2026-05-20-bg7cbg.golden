@@ -1,0 +1,7 @@
+== Brewer Pool and Arena special_hours
+- NOTICE "The sauna is temporarily closed."
+    effects: closure
+    match: NONE
+    phrase: "sauna"
+    amenity: "sauna"
+    at: facility

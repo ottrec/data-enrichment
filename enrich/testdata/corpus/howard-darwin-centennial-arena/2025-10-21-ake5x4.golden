@@ -1,0 +1,91 @@
+== Howard Darwin Centennial Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Friday, November 7"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Figure skating, 8 to 8:50, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "8 to 8:50" 20:00-20:50 exact [Friday 8:00 - 8:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Figure skating" sessions 2025-11-07 Fri 20:00-20:50
+
+== Howard Darwin Centennial Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, November 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 7 to 7:50 pm, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Friday 7:00 - 7:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-11-07 Fri 19:00-19:50
+- IGNORED date-context "Saturday, November 15"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Family skating, 3 to 3:50 pm, cancelled"
+    date text: "Saturday, November 15"
+    dates: 2025-11-15 Sat
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Saturday 3:00 - 3:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-11-15 Sat 15:00-15:50
+- NOTICE "Public skating, 4 to 4:50, cancelled"
+    date text: "Saturday, November 15"
+    dates: 2025-11-15 Sat
+    time: "4 to 4:50" 16:00-16:50 exact [Saturday 4:00 - 4:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-11-15 Sat 16:00-16:50
+
+== Howard Darwin Centennial Arena special_hours
+- IGNORED date-context "Friday, November 7"
+    at: facility
+- IGNORED duplicate "Family skating, 7 to 7:50 pm, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "7 to 7:50 pm" 19:00-19:50 exact [Friday 7:00 - 7:50pm]
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 7 to 7:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Figure skating, 8 to 8:50, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "8 to 8:50" 20:00-20:50 exact [Friday 8:00 - 8:50pm]
+    match: EXACT
+    phrase: "Figure skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Figure skating, 8 to 8:50, cancelled"
+    at: facility
+- IGNORED date-context "Saturday, November 15"
+    at: facility
+- IGNORED duplicate "Family skating, 3 to 3:50 pm, cancelled"
+    date text: "Saturday, November 15"
+    dates: 2025-11-15 Sat
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Saturday 3:00 - 3:50pm]
+    match: EXACT
+    phrase: "Family skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Family skating, 3 to 3:50 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 4 to 4:50, cancelled"
+    date text: "Saturday, November 15"
+    dates: 2025-11-15 Sat
+    time: "4 to 4:50" 16:00-16:50 exact [Saturday 4:00 - 4:50pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 4 to 4:50, cancelled"
+    at: facility

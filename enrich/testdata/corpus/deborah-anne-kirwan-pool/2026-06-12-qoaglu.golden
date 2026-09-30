@@ -1,0 +1,44 @@
+== Deborah Anne Kirwan Pool schedule_changes "Drop-in schedule - swim"
+- IGNORED date-context "Saturday, June 20"
+    at: group "Drop-in schedule - swim"
+- NOTICE "Public swim, 2:30 to 4 pm, cancelled"
+    date text: "Saturday, June 20"
+    dates: 2026-06-20 Sat
+    time: "2:30 to 4 pm" 14:30-16:00 within [Saturday 1:00 - 4:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim" activity "Public swim" sessions 2026-06-20 Sat 13:00-16:00
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim"
+
+== Deborah Anne Kirwan Pool special_hours
+- NOTICE "Wednesday, July 1, closed"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: closure
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Saturday, June 20"
+    section: "Schedule change"
+    at: facility
+- IGNORED duplicate "Public swim, 2:30 to 4 pm, cancelled"
+    section: "Schedule change"
+    date text: "Saturday, June 20"
+    dates: 2026-06-20 Sat
+    time: "2:30 to 4 pm" 14:30-16:00 within [Saturday 1:00 - 4:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim" "Public swim, 2:30 to 4 pm, cancelled"
+    at: facility

@@ -1,0 +1,97 @@
+== Pinecrest Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, March 14 to Sunday, March 22"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "See March Break schedule."
+    date text: "Saturday, March 14 to Sunday, March 22"
+    dates: 2026-03-14 Sat to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - ice sports"
+
+== Pinecrest Recreation Complex special_hours
+- NOTICE "Saturday, March 14, 7:30 am to 3 pm"
+    date text: "Saturday, March 14"
+    dates: 2026-03-14 Sat
+    time: "7:30 am to 3 pm" 07:30-15:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, March 15, 9 am to 4:30 pm"
+    date text: "Sunday, March 15"
+    dates: 2026-03-15 Sun
+    time: "9 am to 4:30 pm" 09:00-16:30 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, March 16, 7:30 am to 9 pm"
+    date text: "Monday, March 16"
+    dates: 2026-03-16 Mon
+    time: "7:30 am to 9 pm" 07:30-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Tuesday, March 17, 6:30 am to 9 pm"
+    date text: "Tuesday, March 17"
+    dates: 2026-03-17 Tue
+    time: "6:30 am to 9 pm" 06:30-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Wednesday, March 18, 7:30 am to 9 pm"
+    date text: "Wednesday, March 18"
+    dates: 2026-03-18 Wed
+    time: "7:30 am to 9 pm" 07:30-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Thursday, March 19, 6:30 am to 9 pm"
+    date text: "Thursday, March 19"
+    dates: 2026-03-19 Thu
+    time: "6:30 am to 9 pm" 06:30-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Friday, March 20, 7:30 am to 9 pm"
+    date text: "Friday, March 20"
+    dates: 2026-03-20 Fri
+    time: "7:30 am to 9 pm" 07:30-21:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Saturday, March 21, 7:30 am to 3 pm"
+    date text: "Saturday, March 21"
+    dates: 2026-03-21 Sat
+    time: "7:30 am to 3 pm" 07:30-15:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, March 22, 9 am to 4:30 pm"
+    date text: "Sunday, March 22"
+    dates: 2026-03-22 Sun
+    time: "9 am to 4:30 pm" 09:00-16:30 unchecked
+    effects: modified-hours
+    at: facility

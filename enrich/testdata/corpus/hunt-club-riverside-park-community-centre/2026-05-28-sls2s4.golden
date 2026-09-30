@@ -1,0 +1,28 @@
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, June 6"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "Pickleball - adult - intermediate, noon to 2 pm, cancelled"
+    date text: "Saturday, June 6"
+    dates: 2026-06-06 Sat
+    time: "noon to 2 pm" 12:00-14:00 none
+    effects: cancelled
+    match: EXACT
+    phrase: "Pickleball - adult - intermediate"
+    ambiguities: no-slot-overlap
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Pickleball - adult - intermediate"
+- IGNORED date-context "Saturday, June 6"
+    at: facility
+- IGNORED duplicate "Pickleball - adult - intermediate, noon to 2 pm, cancelled"
+    date text: "Saturday, June 6"
+    dates: 2026-06-06 Sat
+    time: "noon to 2 pm" 12:00-14:00 none
+    match: EXACT
+    phrase: "Pickleball - adult - intermediate"
+    ambiguities: no-slot-overlap
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "Pickleball - adult - intermediate, noon to 2 pm, cancelled"
+    at: facility
+
+== Hunt Club-Riverside Park Community Centre notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

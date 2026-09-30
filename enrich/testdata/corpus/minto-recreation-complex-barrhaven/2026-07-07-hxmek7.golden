@@ -1,0 +1,171 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, July 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "All swim and aquafitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 12:00 - 2:30pm; Saturday 2:30 - 6:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All swim and aquafitness drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General -Deep/shallow combo*Reservations are required" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - reduced capacity(shared pool)" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool Swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+- NOTICE "Public swim, 11 am to 6 pm, added"
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "11 am to 6 pm" 11:00-18:00 covers [Saturday 2:30 - 6:00pm]
+    effects: added
+    match: EXACT
+    phrase: "Public swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim" sessions 2026-07-18 Sat 11:00-18:00 added
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, July 8"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Drums Fitness, 4:15 to 5:15 pm, cancelled"
+    date text: "Wednesday, July 8"
+    dates: 2026-07-08 Wed
+    time: "4:15 to 5:15 pm" 16:15-17:15 exact [Wednesday 4:15 - 5:15pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Drums Fitness"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Drums Fitness" sessions 2026-07-08 Wed 16:15-17:15
+- NOTICE "Strength circuit, 4:15 to 5:15 pm, added"
+    date text: "Wednesday, July 8"
+    dates: 2026-07-08 Wed
+    time: "4:15 to 5:15 pm" 16:15-17:15 novel
+    effects: added
+    match: EXACT
+    phrase: "Strength circuit"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Strength circuit" sessions 2026-07-08 Wed 16:15-17:15 added
+- IGNORED date-context "Wednesday, July 15"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Drums Fitness, 4:15 to 5:15 pm, cancelled"
+    date text: "Wednesday, July 15"
+    dates: 2026-07-15 Wed
+    time: "4:15 to 5:15 pm" 16:15-17:15 exact [Wednesday 4:15 - 5:15pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Drums Fitness"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Drums Fitness" sessions 2026-07-15 Wed 16:15-17:15
+- NOTICE "Strength circuit, 4:15 to 5:15 pm, added"
+    date text: "Wednesday, July 15"
+    dates: 2026-07-15 Wed
+    time: "4:15 to 5:15 pm" 16:15-17:15 novel
+    effects: added
+    match: EXACT
+    phrase: "Strength circuit"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Strength circuit" sessions 2026-07-15 Wed 16:15-17:15 added
+- IGNORED date-context "Saturday, July 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 10:30 - 11:30am; Saturday 8:00 - 9:00am; Saturday 9:15 - 10:15am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, July 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All gymnasium sports drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 11:45am - 12:45pm; Saturday 1:15 - 2:15pm; Saturday 2:20 - 3:20pm; Saturday 3:45 - 4:45pm; Saturday 4:40 - 5:40pm; Saturday 6:15 - 7:15pm; Saturday 7:20 - 8:20pm; Saturday 9:00 - 11:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium sports drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Wednesday, July 8"
+    at: facility
+- IGNORED duplicate "Drums Fitness, 4:15 to 5:15 pm, cancelled"
+    date text: "Wednesday, July 8"
+    dates: 2026-07-08 Wed
+    time: "4:15 to 5:15 pm" 16:15-17:15 exact [Wednesday 4:15 - 5:15pm]
+    match: EXACT
+    phrase: "Drums Fitness"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Drums Fitness, 4:15 to 5:15 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Strength circuit, 4:15 to 5:15 pm, added"
+    date text: "Wednesday, July 8"
+    dates: 2026-07-08 Wed
+    time: "4:15 to 5:15 pm" 16:15-17:15 novel
+    match: EXACT
+    phrase: "Strength circuit"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Strength circuit, 4:15 to 5:15 pm, added"
+    at: facility
+- IGNORED date-context "Wednesday, July 15"
+    at: facility
+- IGNORED duplicate "Drums Fitness, 4:15 to 5:15 pm, cancelled"
+    date text: "Wednesday, July 15"
+    dates: 2026-07-15 Wed
+    time: "4:15 to 5:15 pm" 16:15-17:15 exact [Wednesday 4:15 - 5:15pm]
+    match: EXACT
+    phrase: "Drums Fitness"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Drums Fitness, 4:15 to 5:15 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Strength circuit, 4:15 to 5:15 pm, added"
+    date text: "Wednesday, July 15"
+    dates: 2026-07-15 Wed
+    time: "4:15 to 5:15 pm" 16:15-17:15 novel
+    match: EXACT
+    phrase: "Strength circuit"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Strength circuit, 4:15 to 5:15 pm, added"
+    at: facility
+- IGNORED date-context "Saturday, July 18"
+    at: facility
+- IGNORED duplicate "All gymnasium sports and group fitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 10:30 - 11:30am; Saturday 11:45am - 12:45pm; Saturday 1:15 - 2:15pm; Saturday 2:20 - 3:20pm; Saturday 3:45 - 4:45pm; Saturday 4:40 - 5:40pm; Saturday 6:15 - 7:15pm; Saturday 7:20 - 8:20pm; Saturday 8:00 - 9:00am; Saturday 9:00 - 11:00am; Saturday 9:15 - 10:15am]
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium sports and group fitness drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "All swim and aquafitness drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "All group fitness drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium sports drop-ins are cancelled."
+    at: facility
+- IGNORED duplicate "All swim and aquafitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 12:00 - 2:30pm; Saturday 2:30 - 6:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All swim and aquafitness drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "All swim and aquafitness drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "All group fitness drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium sports drop-ins are cancelled."
+    at: facility
+- IGNORED duplicate "Public swim, 11 am to 6 pm, added"
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "11 am to 6 pm" 11:00-18:00 covers [Saturday 2:30 - 6:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim, 11 am to 6 pm, added"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

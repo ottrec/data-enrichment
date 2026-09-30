@@ -1,0 +1,97 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, July 18"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "All swim and aquafitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 12:00 - 2:30pm; Saturday 2:30 - 6:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All swim and aquafitness drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General -Deep/shallow combo*Reservations are required" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - reduced capacity(shared pool)" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool Swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+- NOTICE "Public swim, 11 am to 6 pm, added"
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "11 am to 6 pm" 11:00-18:00 covers [Saturday 2:30 - 6:00pm]
+    effects: added
+    match: EXACT
+    phrase: "Public swim"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim" sessions 2026-07-18 Sat 11:00-18:00 added
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, July 18"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "All group fitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 10:30 - 11:30am; Saturday 8:00 - 9:00am; Saturday 9:15 - 10:15am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All group fitness drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness"
+
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, July 18"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All gymnasium sports drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 11:45am - 12:45pm; Saturday 1:15 - 2:15pm; Saturday 2:20 - 3:20pm; Saturday 3:45 - 4:45pm; Saturday 4:50 - 5:50pm; Saturday 6:15 - 7:15pm; Saturday 7:20 - 8:20pm; Saturday 9:00 - 11:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium sports drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Saturday, July 18"
+    at: facility
+- IGNORED duplicate "All gymnasium sports and group fitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 10:30 - 11:30am; Saturday 11:45am - 12:45pm; Saturday 1:15 - 2:15pm; Saturday 2:20 - 3:20pm; Saturday 3:45 - 4:45pm; Saturday 4:50 - 5:50pm; Saturday 6:15 - 7:15pm; Saturday 7:20 - 8:20pm; Saturday 8:00 - 9:00am; Saturday 9:00 - 11:00am; Saturday 9:15 - 10:15am]
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium sports and group fitness drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "All swim and aquafitness drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "All group fitness drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium sports drop-ins are cancelled."
+    at: facility
+- IGNORED duplicate "All swim and aquafitness drop-ins are cancelled."
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "" covers [Saturday 12:00 - 2:30pm; Saturday 2:30 - 6:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All swim and aquafitness drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "All swim and aquafitness drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "All group fitness drop-ins are cancelled."
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium sports drop-ins are cancelled."
+    at: facility
+- IGNORED duplicate "Public swim, 11 am to 6 pm, added"
+    date text: "Saturday, July 18"
+    dates: 2026-07-18 Sat
+    time: "11 am to 6 pm" 11:00-18:00 covers [Saturday 2:30 - 6:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim, 11 am to 6 pm, added"
+    at: facility
+- IGNORED heading "Civic Holiday"
+    section: "Civic Holiday"
+    at: facility
+- NOTICE "Monday August 3, 7 am to 4 pm"
+    section: "Civic Holiday"
+    date text: "Monday August 3"
+    dates: 2026-08-03 Mon
+    time: "7 am to 4 pm" 07:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

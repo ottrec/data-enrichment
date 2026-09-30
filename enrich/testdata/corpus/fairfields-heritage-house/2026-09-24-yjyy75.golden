@@ -1,0 +1,7 @@
+== Fairfields Heritage House special_hours
+- NOTICE "The summer operating season has now ended at Fairfields Heritage House. The museum is closed to daily visitors, but programs and special events are offered year-round."
+    effects: closure
+    match: NONE
+    phrase: "museum"
+    ambiguities: activity-unmatched
+    at: facility

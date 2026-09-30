@@ -1,0 +1,12 @@
+== Minto Recreation Complex - Barrhaven special_hours
+- NOTICE "The arenas are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "arenas"
+    amenity: "arenas"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

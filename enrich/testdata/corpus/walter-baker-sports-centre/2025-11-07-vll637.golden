@@ -1,0 +1,51 @@
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - swim and aquafit"
+- IGNORED date-context "Friday, November 7"
+    at: group "Drop-in schedule - swim and aquafit"
+- NOTICE "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafit" activity "Lane swim" sessions 2025-11-07 Fri 19:30-21:00
+
+== Walter Baker Sports Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, November 14"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, November 14"
+    dates: 2025-11-14 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-11-14 Fri 19:15-20:05
+
+== Walter Baker Sports Centre special_hours
+- IGNORED date-context "Friday, November 7"
+    at: facility
+- IGNORED duplicate "Lane swim, 7:30 to 9 pm, cancelled"
+    date text: "Friday, November 7"
+    dates: 2025-11-07 Fri
+    time: "7:30 to 9 pm" 19:30-21:00 exact [Friday 7:30 - 9:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafit" "Lane swim, 7:30 to 9 pm, cancelled"
+    at: facility
+- IGNORED date-context "Friday, November 14"
+    at: facility
+- IGNORED duplicate "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, November 14"
+    dates: 2025-11-14 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 7:15 to 8:05 pm, cancelled"
+    at: facility

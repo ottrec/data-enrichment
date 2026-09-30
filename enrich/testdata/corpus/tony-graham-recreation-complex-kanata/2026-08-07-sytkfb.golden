@@ -1,0 +1,5 @@
+== Tony Graham Recreation Complex - Kanata special_hours
+- NOTICE "The facility is closed until October."
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

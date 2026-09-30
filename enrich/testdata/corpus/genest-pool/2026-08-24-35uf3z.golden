@@ -1,0 +1,17 @@
+== Genest Pool special_hours
+- NOTICE "Sunday, August 30, 3:15 to 4:15 pm"
+    date text: "Sunday, August 30"
+    dates: 2026-08-30 Sun
+    time: "3:15 to 4:15 pm" 15:15-16:15 unchecked
+    ambiguities: hours-context-unknown meridiem-inferred
+    at: facility
+- IGNORED supplementary "See Outdoor Pools for more information."
+    date text: "Sunday, August 30"
+    at: facility
+- NOTICE "Regular season ends August 30"
+    date text: "August 30"
+    dates: to 2026-08-30 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

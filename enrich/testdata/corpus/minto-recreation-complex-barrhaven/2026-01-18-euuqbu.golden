@@ -1,0 +1,30 @@
+== Minto Recreation Complex - Barrhaven schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Wednesday, January 28"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Zumba, 9:15 to 10:15 am, cancelled"
+    date text: "Wednesday, January 28"
+    dates: 2026-01-28 Wed
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Wednesday 9:15 - 10:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Zumba®" sessions 2026-01-28 Wed 09:15-10:15
+
+== Minto Recreation Complex - Barrhaven special_hours
+- IGNORED date-context "Wednesday, January 28"
+    at: facility
+- IGNORED duplicate "Zumba, 9:15 to 10:15 am, cancelled"
+    date text: "Wednesday, January 28"
+    dates: 2026-01-28 Wed
+    time: "9:15 to 10:15 am" 09:15-10:15 exact [Wednesday 9:15 - 10:15am]
+    match: EXACT
+    phrase: "Zumba"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Zumba, 9:15 to 10:15 am, cancelled"
+    at: facility
+
+== Minto Recreation Complex - Barrhaven notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

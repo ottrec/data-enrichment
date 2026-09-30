@@ -1,0 +1,35 @@
+== Nepean Sportsplex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule" "https://ottawa.ca/en/drop-schedule-canada-day-3"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+
+== Nepean Sportsplex special_hours
+- IGNORED date-context "Monday, April 27 to Friday, July 24"
+    at: facility
+- NOTICE "The athletics changerooms will be closed."
+    date text: "Monday, April 27 to Friday, July 24"
+    dates: 2026-04-27 Mon to 2026-07-24 Fri
+    effects: closure
+    match: NONE
+    phrase: "athletics changerooms"
+    amenity: "athletics changerooms"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Wednesday, July 1, 6:30 am to 3:30 pm"
+    section: "Modified hours"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "6:30 am to 3:30 pm" 06:30-15:30 unchecked
+    effects: modified-hours
+    at: facility
+
+== Nepean Sportsplex notifications
+- IGNORED boilerplate "Pickleball, badminton and table tennis can now be found in the gymnasium sports schedule."
+    at: facility

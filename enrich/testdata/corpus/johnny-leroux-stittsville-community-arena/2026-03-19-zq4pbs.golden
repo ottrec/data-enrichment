@@ -1,0 +1,18 @@
+== Johnny Leroux Stittsville Community Arena schedule_changes "Drop-in calendar - ice sports"
+- IGNORED date-context "Tuesday, March 17"
+    at: group "Drop-in calendar - ice sports"
+- NOTICE "Stick and puck - preschool and child, 3 to 3:50 pm, cancelled"
+    date text: "Tuesday, March 17"
+    dates: 2026-03-17 Tue
+    time: "3 to 3:50 pm" 15:00-15:50 exact [Tuesday 3:00 - 3:50pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Stick and puck - preschool and child"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in calendar - ice sports" activity "Stick and puck - preschool and child" sessions 2026-03-17 Tue 15:00-15:50
+
+== Johnny Leroux Stittsville Community Arena special_hours
+- IGNORED boilerplate "Please contact the facility by email for information on opening hours and washroom availability."
+    at: facility
+- IGNORED boilerplate "Public skating is not available at this location."
+    at: facility

@@ -1,0 +1,43 @@
+== Walter Baker Sports Centre special_hours
+- NOTICE "The hot tub and steam room are closed until further notice."
+    dates: open-ended
+    effects: closure
+    match: NONE
+    phrase: "hot tub and steam room"
+    amenity: "hot tub steam room"
+    at: facility
+- IGNORED date-context "Monday, May 11 to Sunday, June 28"
+    at: facility
+- NOTICE "the pool is closed for annual maintenance."
+    date text: "Monday, May 11 to Sunday, June 28"
+    dates: 2026-05-11 Mon to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility
+- IGNORED date-context "Tuesday, June 2 to Wednesday, June 24"
+    at: facility
+- NOTICE "Weight and cardio rooms, closed for maintenance."
+    date text: "Tuesday, June 2 to Wednesday, June 24"
+    dates: 2026-06-02 Tue to 2026-06-24 Wed
+    effects: closure
+    match: NONE
+    phrase: "weight and cardio rooms"
+    amenity: "weight cardio rooms"
+    at: facility
+- NOTICE "Squash courts closed for maintenance."
+    date text: "Tuesday, June 2 to Wednesday, June 24"
+    dates: 2026-06-02 Tue to 2026-06-24 Wed
+    time: "" covers [Friday 6:30am - 8:30pm; Monday 6:30am - 8:30pm; Saturday 8:30am - 7:30pm; Sunday 8:30am - 7:30pm; Thursday 6:30am - 8:30pm; Tuesday 6:30am - 8:30pm; Wednesday 6:30am - 8:30pm]
+    effects: closure
+    match: FUZZY
+    phrase: "squash courts"
+    at: group "Drop-in schedule - squash" activity "Squash Courts 2, 3, 4, and 5" sessions 2026-06-02 Tue 06:30-20:30, 2026-06-03 Wed 06:30-20:30, 2026-06-04 Thu 06:30-20:30, 2026-06-05 Fri 06:30-20:30, 2026-06-06 Sat 08:30-19:30, 2026-06-07 Sun 08:30-19:30, 2026-06-08 Mon 06:30-20:30, 2026-06-09 Tue 06:30-20:30, 2026-06-10 Wed 06:30-20:30, 2026-06-11 Thu 06:30-20:30, 2026-06-12 Fri 06:30-20:30, 2026-06-13 Sat 08:30-19:30, 2026-06-14 Sun 08:30-19:30, 2026-06-15 Mon 06:30-20:30, 2026-06-16 Tue 06:30-20:30, 2026-06-17 Wed 06:30-20:30, 2026-06-18 Thu 06:30-20:30, 2026-06-19 Fri 06:30-20:30, 2026-06-20 Sat 08:30-19:30, 2026-06-21 Sun 08:30-19:30, 2026-06-22 Mon 06:30-20:30, 2026-06-23 Tue 06:30-20:30, 2026-06-24 Wed 06:30-20:30
+- NOTICE "All changerooms closed for maintenance."
+    date text: "Tuesday, June 2 to Wednesday, June 24"
+    dates: 2026-06-02 Tue to 2026-06-24 Wed
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "All changerooms"
+    amenity: "changerooms"
+    at: facility

@@ -1,0 +1,116 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+
+== St. Laurent Complex schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Wednesday, September 30 and Thursday, October 1"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All gymnasium sports drop-ins, cancelled"
+    date text: "Wednesday, September 30 and Thursday, October 1"
+    dates: 2026-09-30 Wed 2026-10-01 Thu
+    time: "" covers [Thursday 10:00 - 11:00am; Thursday 11:00am - 12:00pm; Thursday 12:00 - 1:00pm; Thursday 1:00 - 2:00pm; Thursday 9:00 - 10:00am; Wednesday 10:00 - 11:00am; Wednesday 11:00am - 12:00pm; Wednesday 12:00 - 1:00pm; Wednesday 1:00 - 2:00pm; Wednesday 6:00 - 7:00pm; Wednesday 7:00 - 9:00pm; Wednesday 9:00 - 10:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium sports drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Friday, October 2"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All open gym drop-ins, cancelled"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "" covers [Friday 10:00 - 11:00am; Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm; Friday 1:00 - 2:00pm; Friday 9:00 - 10:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All open gym drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports" activity "Open gym *Reservations not required." sessions 2026-10-02 Fri 09:00-10:00, 2026-10-02 Fri 10:00-11:00, 2026-10-02 Fri 11:00-12:00, 2026-10-02 Fri 12:00-13:00, 2026-10-02 Fri 13:00-14:00
+- IGNORED date-context "Sunday, October 4"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All gymnasium sports drop-ins, cancelled"
+    date text: "Sunday, October 4"
+    dates: 2026-10-04 Sun
+    time: "" covers [Sunday 3:00 - 5:00pm; Sunday 4:00 - 5:00pm; Sunday 5:00 - 7:00pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium sports drop-ins"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== St. Laurent Complex schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, October 10 to Monday, October 12"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See Thanksgiving weekend schedule."
+    date text: "Saturday, October 10 to Monday, October 12"
+    dates: 2026-10-10 Sat to 2026-10-12 Mon
+    effects: see-schedule "Thanksgiving weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== St. Laurent Complex special_hours
+- IGNORED date-context "Wednesday, September 30 and Thursday, October 1"
+    at: facility
+- IGNORED duplicate "All gymnasium sports drop-ins, cancelled"
+    date text: "Wednesday, September 30 and Thursday, October 1"
+    dates: 2026-09-30 Wed 2026-10-01 Thu
+    time: "" covers [Thursday 10:00 - 11:00am; Thursday 11:00am - 12:00pm; Thursday 12:00 - 1:00pm; Thursday 1:00 - 2:00pm; Thursday 9:00 - 10:00am; Wednesday 10:00 - 11:00am; Wednesday 11:00am - 12:00pm; Wednesday 12:00 - 1:00pm; Wednesday 1:00 - 2:00pm; Wednesday 6:00 - 7:00pm; Wednesday 7:00 - 9:00pm; Wednesday 9:00 - 10:00am]
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium sports drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium sports drop-ins, cancelled"
+    at: facility
+- IGNORED date-context "Friday, October 2"
+    at: facility
+- IGNORED duplicate "All open gym drop-ins, cancelled"
+    date text: "Friday, October 2"
+    dates: 2026-10-02 Fri
+    time: "" covers [Friday 10:00 - 11:00am; Friday 11:00am - 12:00pm; Friday 12:00 - 1:00pm; Friday 1:00 - 2:00pm; Friday 9:00 - 10:00am]
+    match: SCOPE_PHRASE
+    phrase: "All open gym drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All open gym drop-ins, cancelled"
+    at: facility
+- IGNORED date-context "Sunday, October 4"
+    at: facility
+- IGNORED duplicate "All gymnasium sports drop-ins, cancelled"
+    date text: "Sunday, October 4"
+    dates: 2026-10-04 Sun
+    time: "" covers [Sunday 3:00 - 5:00pm; Sunday 4:00 - 5:00pm; Sunday 5:00 - 7:00pm]
+    match: SCOPE_PHRASE
+    phrase: "All gymnasium sports drop-ins"
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All gymnasium sports drop-ins, cancelled"
+    at: facility
+- NOTICE "Monday, October 12, 8 am to 6 pm"
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    time: "8 am to 6 pm" 08:00-18:00 unchecked
+    effects: modified-hours
+    at: facility

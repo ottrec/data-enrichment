@@ -1,0 +1,101 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - weight and cardio room"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - weight and cardio room"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - Kinderplay"
+- IGNORED date-context "Sunday, March 15"
+    at: group "Drop-in schedule - Kinderplay"
+- NOTICE "Kinderplay, 9 to 10 am, cancelled"
+    date text: "Sunday, March 15"
+    dates: 2026-03-15 Sun
+    time: "9 to 10 am" 09:00-10:00 exact [Sunday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Kinderplay" activity "Kinderplay" sessions 2026-03-15 Sun 09:00-10:00
+- NOTICE "Kinderplay, 10:15 to 11:15 am, cancelled"
+    date text: "Sunday, March 15"
+    dates: 2026-03-15 Sun
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Sunday 10:15 - 11:15am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Kinderplay" activity "Kinderplay" sessions 2026-03-15 Sun 10:15-11:15
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - Kinderplay"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Kinderplay"
+
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Monday, March 16 to Sunday, March 22"
+    at: group "Drop-in schedule - skating"
+- NOTICE "See March Break schedule."
+    date text: "Monday, March 16 to Sunday, March 22"
+    dates: 2026-03-16 Mon to 2026-03-22 Sun
+    effects: see-schedule "March Break schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - skating"
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Sunday, March 15"
+    at: facility
+- IGNORED duplicate "Kinderplay, 9 to 10 am, cancelled"
+    date text: "Sunday, March 15"
+    dates: 2026-03-15 Sun
+    time: "9 to 10 am" 09:00-10:00 exact [Sunday 9:00 - 10:00am]
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - Kinderplay" "Kinderplay, 9 to 10 am, cancelled"
+    at: facility
+- IGNORED duplicate "Kinderplay, 10:15 to 11:15 am, cancelled"
+    date text: "Sunday, March 15"
+    dates: 2026-03-15 Sun
+    time: "10:15 to 11:15 am" 10:15-11:15 exact [Sunday 10:15 - 11:15am]
+    match: EXACT
+    phrase: "Kinderplay"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - Kinderplay" "Kinderplay, 10:15 to 11:15 am, cancelled"
+    at: facility
+
+== CARDELREC Recreation Complex Goulbourn notifications
+- IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."
+    at: facility

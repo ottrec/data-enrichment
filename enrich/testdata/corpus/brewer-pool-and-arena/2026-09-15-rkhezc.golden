@@ -1,0 +1,38 @@
+== Brewer Pool and Arena schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Tuesday September 14 and Wednesday September 15"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane Swim, 8 to 8:30 pm, cancelled"
+    date text: "Tuesday September 14 and Wednesday September 15"
+    dates: 2026-09-14 Mon 2026-09-15 Tue
+    time: "8 to 8:30 pm" 20:00-20:30 within [Tuesday 8:00 - 9:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane Swim"
+    ambiguities: meridiem-inferred weekday-mismatch
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-09-15 Tue 20:00-21:30
+
+== Brewer Pool and Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, December 26"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Saturday, December 26"
+    dates: 2026-12-26 Sat
+    time: "" covers [Saturday 7:00 - 7:50pm; Saturday 8:00 - 8:50pm]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    at: group "Drop-in schedule - skating"
+
+== Brewer Pool and Arena special_hours
+- IGNORED date-context "Tuesday September 14 and Wednesday September 15"
+    at: facility
+- IGNORED duplicate "Lane Swim, 8 to 8:30 pm, cancelled"
+    date text: "Tuesday September 14 and Wednesday September 15"
+    dates: 2026-09-14 Mon 2026-09-15 Tue
+    time: "8 to 8:30 pm" 20:00-20:30 within [Tuesday 8:00 - 9:30pm]
+    match: EXACT
+    phrase: "Lane Swim"
+    ambiguities: meridiem-inferred weekday-mismatch
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane Swim, 8 to 8:30 pm, cancelled"
+    at: facility

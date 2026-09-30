@@ -1,0 +1,43 @@
+== Lowertown Community Centre and Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Wednesday, September 9"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Public swim, 6 to 8 pm, cancelled"
+    date text: "Wednesday, September 9"
+    dates: 2026-09-09 Wed
+    time: "6 to 8 pm" 18:00-20:00 exact [Wednesday 6:00 - 8:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Public Swim" sessions 2026-09-09 Wed 18:00-20:00
+- NOTICE "Lane swim, 8 to 10 pm, cancelled"
+    date text: "Wednesday, September 9"
+    dates: 2026-09-09 Wed
+    time: "8 to 10 pm" 20:00-22:00 exact [Wednesday 8:00 - 10:00pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swimming" activity "Lane Swim" sessions 2026-09-09 Wed 20:00-22:00
+- IGNORED date-context "Wednesday, September 9"
+    at: facility
+- IGNORED duplicate "Public swim, 6 to 8 pm, cancelled"
+    date text: "Wednesday, September 9"
+    dates: 2026-09-09 Wed
+    time: "6 to 8 pm" 18:00-20:00 exact [Wednesday 6:00 - 8:00pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Public swim, 6 to 8 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Lane swim, 8 to 10 pm, cancelled"
+    date text: "Wednesday, September 9"
+    dates: 2026-09-09 Wed
+    time: "8 to 10 pm" 20:00-22:00 exact [Wednesday 8:00 - 10:00pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swimming" "Lane swim, 8 to 10 pm, cancelled"
+    at: facility

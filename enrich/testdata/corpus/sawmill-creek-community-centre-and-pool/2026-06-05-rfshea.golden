@@ -1,0 +1,7 @@
+== Sawmill Creek Community Centre and Pool special_hours
+- NOTICE "Monday, June 8 to Sunday, June 28, the facility is closed."
+    date text: "Monday, June 8 to Sunday, June 28"
+    dates: 2026-06-08 Mon to 2026-06-28 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

@@ -1,0 +1,21 @@
+== Jack Purcell Community Centre special_hours
+- NOTICE "The pool is colder than usual until further notice."
+    dates: open-ended
+    match: NONE
+    phrase: "The pool is colder than usual until further notice"
+    amenity: "pool"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "April 6 to 26"
+    section: "Closure"
+    at: facility
+- NOTICE "The pool closed for annual maintenance."
+    section: "Closure"
+    date text: "April 6 to 26"
+    dates: 2026-04-06 Mon to 2026-04-26 Sun
+    effects: closure
+    match: SCOPE_PHRASE
+    phrase: "pool"
+    at: facility

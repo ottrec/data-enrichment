@@ -1,0 +1,28 @@
+== Jim Tubman Chevrolet Rink special_hours
+- IGNORED date-context "Saturday, August 8"
+    at: facility
+- NOTICE "The facility will close at 5 pm."
+    date text: "Saturday, August 8"
+    dates: 2026-08-08 Sat
+    time: "will close at 5 pm." 17:00-24:00 open-end unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED date-context "Saturday, August 22"
+    at: facility
+- NOTICE "The facility will close at 4 pm."
+    date text: "Saturday, August 22"
+    dates: 2026-08-22 Sat
+    time: "will close at 4 pm." 16:00-24:00 open-end unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility
+- IGNORED date-context "Saturday, August 29"
+    at: facility
+- NOTICE "The facility will close at 6 pm."
+    date text: "Saturday, August 29"
+    dates: 2026-08-29 Sat
+    time: "will close at 6 pm." 18:00-24:00 open-end unchecked
+    effects: closure
+    match: SCOPE_PHRASE
+    at: facility

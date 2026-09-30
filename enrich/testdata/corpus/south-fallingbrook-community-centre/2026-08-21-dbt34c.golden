@@ -1,0 +1,76 @@
+== South Fallingbrook Community Centre schedule_changes "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Sunday, September 6 and Monday, September 7"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Sunday, September 6 and Monday, September 7"
+    dates: 2026-09-06 Sun 2026-09-07 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, August 22"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-in sports are cancelled."
+    date text: "Saturday, August 22"
+    dates: 2026-08-22 Sat
+    time: "" covers [Saturday 11:00am - 12:00pm; Saturday 12:45 - 1:45pm; Saturday 1:45 - 2:45pm; Saturday 2:45 - 3:45pm; Saturday 8:30 - 9:30am; Saturday 9:30 - 10:30am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in sports"
+    ambiguities: class-title-partial
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+- IGNORED date-context "Saturday, August 29"
+    at: group "Drop-in schedule - gymnasium sports"
+- NOTICE "All drop-in sports are cancelled."
+    date text: "Saturday, August 29"
+    dates: 2026-08-29 Sat
+    time: "" covers [Saturday 11:00am - 12:00pm; Saturday 12:45 - 1:45pm; Saturday 1:45 - 2:45pm; Saturday 2:45 - 3:45pm; Saturday 8:30 - 9:30am; Saturday 9:30 - 10:30am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in sports"
+    ambiguities: class-title-partial
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - gymnasium sports"
+
+== South Fallingbrook Community Centre special_hours
+- NOTICE "Saturday, September 5, 1 to 5 pm"
+    date text: "Saturday, September 5"
+    dates: 2026-09-05 Sat
+    time: "1 to 5 pm" 13:00-17:00 unchecked
+    effects: modified-hours
+    ambiguities: meridiem-inferred
+    at: facility
+- NOTICE "Sunday, September 6 and Monday, September 7, closed"
+    date text: "Sunday, September 6 and Monday, September 7"
+    dates: 2026-09-06 Sun 2026-09-07 Mon
+    effects: closure
+    at: facility
+- IGNORED heading "Schedule changes"
+    section: "Schedule changes"
+    at: facility
+- IGNORED date-context "Saturday, August 22"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "All drop-in sports are cancelled."
+    section: "Schedule changes"
+    date text: "Saturday, August 22"
+    dates: 2026-08-22 Sat
+    time: "" covers [Saturday 11:00am - 12:00pm; Saturday 12:45 - 1:45pm; Saturday 1:45 - 2:45pm; Saturday 2:45 - 3:45pm; Saturday 8:30 - 9:30am; Saturday 9:30 - 10:30am]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in sports"
+    ambiguities: class-title-partial
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-in sports are cancelled."
+    at: facility
+- IGNORED date-context "Saturday, August 29"
+    section: "Schedule changes"
+    at: facility
+- IGNORED duplicate "All drop-in sports are cancelled."
+    section: "Schedule changes"
+    date text: "Saturday, August 29"
+    dates: 2026-08-29 Sat
+    time: "" covers [Saturday 11:00am - 12:00pm; Saturday 12:45 - 1:45pm; Saturday 1:45 - 2:45pm; Saturday 2:45 - 3:45pm; Saturday 8:30 - 9:30am; Saturday 9:30 - 10:30am]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in sports"
+    ambiguities: class-title-partial
+    duplicate of: schedule_changes "Drop-in schedule - gymnasium sports" "All drop-in sports are cancelled."
+    at: facility

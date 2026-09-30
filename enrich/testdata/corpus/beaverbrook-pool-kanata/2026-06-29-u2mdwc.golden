@@ -1,0 +1,28 @@
+== Beaverbrook Pool - Kanata schedule_changes "Drop-in schedule - Swimming"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - Swimming"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - Swimming"
+
+== Beaverbrook Pool - Kanata special_hours
+- NOTICE "Regular season, June 29 to August 23"
+    date text: "June 29 to August 23"
+    dates: 2026-06-29 Mon to 2026-08-23 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility
+- IGNORED heading "Modified hours"
+    section: "Modified hours"
+    at: facility
+- NOTICE "Wednesday, July 1, 11:30 am to 4 pm"
+    section: "Modified hours"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "11:30 am to 4 pm" 11:30-16:00 unchecked
+    effects: modified-hours
+    at: facility

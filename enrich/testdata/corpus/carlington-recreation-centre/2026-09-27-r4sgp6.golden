@@ -1,0 +1,6 @@
+== Carlington Recreation Centre special_hours
+- NOTICE "Monday, October 12, closed"
+    date text: "Monday, October 12"
+    dates: 2026-10-12 Mon
+    effects: closure
+    at: facility

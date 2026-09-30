@@ -1,0 +1,56 @@
+== Entrance Pool schedule_changes "Drop-in schedule - swimming"
+- IGNORED date-context "Wednesday, July 1"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "See Canada Day schedule."
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swimming"
+- IGNORED date-context "Thursday, July 13"
+    at: group "Drop-in schedule - swimming"
+- NOTICE "Public swim will end at 6 pm."
+    date text: "Thursday, July 13"
+    dates: 2026-07-13 Mon
+    time: "will end at 6 pm." 18:00-24:00 open-end overlaps [Monday 1:00 - 7:00pm]
+    effects: time-change
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - swimming" activity "Public swim" sessions 2026-07-13 Mon 13:00-19:00
+
+== Entrance Pool special_hours
+- NOTICE "Wednesday, July 1, 11 am to 4 pm"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    time: "11 am to 4 pm" 11:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Thursday, July 13"
+    section: "Schedule change"
+    at: facility
+- NOTICE "Public swim will end at 6 pm."
+    section: "Schedule change"
+    date text: "Thursday, July 13"
+    dates: 2026-07-13 Mon
+    time: "will end at 6 pm." 18:00-24:00 open-end overlaps [Monday 1:00 - 7:00pm]
+    effects: time-change
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: weekday-mismatch
+    at: group "Drop-in schedule - Canada Day" activity "Public Swim *Reservations not required." sessions 2026-07-13 Mon 13:00-19:00
+    at: group "Drop-in schedule - swimming" activity "Public swim" sessions 2026-07-13 Mon 13:00-19:00
+- IGNORED heading "Summer 2026"
+    section: "Summer 2026"
+    at: facility
+- NOTICE "Regular season, June 29 to August 16"
+    section: "Summer 2026"
+    date text: "June 29 to August 16"
+    dates: 2026-06-29 Mon to 2026-08-16 Sun
+    effects: seasonal-hours
+    match: SCOPE_PHRASE
+    phrase: "Regular season"
+    at: facility

@@ -1,0 +1,6 @@
+== Carleton Heights Community Centre special_hours
+- NOTICE "Sunday, September 6 and Monday, September 7, closed"
+    date text: "Sunday, September 6 and Monday, September 7"
+    dates: 2026-09-06 Sun 2026-09-07 Mon
+    effects: closure
+    at: facility

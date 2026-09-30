@@ -1,0 +1,22 @@
+== Fairfields Heritage House special_hours
+- UNPARSED freeform "May and June:"
+    phrase: "May and June:"
+    at: facility
+- NOTICE "Sundays, beginning May 24 - 10 am to 5 pm"
+    date text: "Sundays, beginning May 24"
+    dates: 2026-05-24 Sun to; open-ended; weekdays Sun
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- UNPARSED freeform "July and August:"
+    phrase: "July and August:"
+    at: facility
+- NOTICE "Fridays, Saturdays and Sundays beginning July 3 - 10 am to 5 pm"
+    date text: "Fridays, Saturdays and Sundays, beginning July 3"
+    dates: 2026-07-03 Fri to; open-ended; weekdays Fri Sat Sun
+    time: "10 am to 5 pm" 10:00-17:00 unchecked
+    effects: modified-hours
+    at: facility
+- UNPARSED freeform "*Hours may vary for programs and special events."
+    phrase: "*Hours may vary for programs and special events"
+    at: facility

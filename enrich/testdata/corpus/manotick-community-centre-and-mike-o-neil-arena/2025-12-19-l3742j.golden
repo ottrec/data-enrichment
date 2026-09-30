@@ -1,0 +1,117 @@
+== Manotick Community Centre and Mike O'Neil Arena schedule_changes "Drop-in schedule - ice sports"
+- IGNORED date-context "Wednesday, December 24"
+    at: group "Drop-in schedule - ice sports"
+- NOTICE "Hockey 18+, 11 to 11:50 am, cancelled"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "11 to 11:50 am" 11:00-11:50 exact [Wednesday 11:00 - 11:50am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Hockey 18+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - ice sports" activity "Hockey 18+" sessions 2025-12-24 Wed 11:00-11:50
+
+== Manotick Community Centre and Mike O'Neil Arena schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Wednesday, December 24"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Skating 50+, 9 to 9:50 am, cancelled"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "9 to 9:50 am" 09:00-09:50 exact [Wednesday 9:00 - 9:50am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Skating 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Skating 50+" sessions 2025-12-24 Wed 09:00-09:50
+- NOTICE "Public skating, 10 to 10:50 am, cancelled"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "10 to 10:50 am" 10:00-10:50 exact [Wednesday 10:00 - 10:50am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-24 Wed 10:00-10:50
+
+== Manotick Community Centre and Mike O'Neil Arena special_hours
+- IGNORED date-context "Wednesday, December 24"
+    at: facility
+- IGNORED duplicate "Skating 50+, 9 to 9:50 am, cancelled"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "9 to 9:50 am" 09:00-09:50 exact [Wednesday 9:00 - 9:50am]
+    match: EXACT
+    phrase: "Skating 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Skating 50+, 9 to 9:50 am, cancelled"
+    at: facility
+- IGNORED duplicate "Public skating, 10 to 10:50 am, cancelled"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "10 to 10:50 am" 10:00-10:50 exact [Wednesday 10:00 - 10:50am]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 10 to 10:50 am, cancelled"
+    at: facility
+- IGNORED duplicate "Hockey 18+, 11 to 11:50 am, cancelled"
+    date text: "Wednesday, December 24"
+    dates: 2025-12-24 Wed
+    time: "11 to 11:50 am" 11:00-11:50 exact [Wednesday 11:00 - 11:50am]
+    match: EXACT
+    phrase: "Hockey 18+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - ice sports" "Hockey 18+, 11 to 11:50 am, cancelled"
+    at: facility
+- IGNORED heading "Holiday skates"
+    section: "Holiday skates"
+    at: facility
+- IGNORED date-context "Sunday, December 28"
+    section: "Holiday skates"
+    at: facility
+- NOTICE "Family Skate, 4 to 4:50 pm, added"
+    section: "Holiday skates"
+    date text: "Sunday, December 28"
+    dates: 2025-12-28 Sun
+    time: "4 to 4:50 pm" 16:00-16:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2025-12-28 Sun 16:00-16:50 added
+- NOTICE "Public Skate, 5 to 5:50 pm, added"
+    section: "Holiday skates"
+    date text: "Sunday, December 28"
+    dates: 2025-12-28 Sun
+    time: "5 to 5:50 pm" 17:00-17:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2025-12-28 Sun 17:00-17:50 added
+- IGNORED date-context "Friday, January 2"
+    section: "Holiday skates"
+    at: facility
+- NOTICE "Family Skate, 1 to 1:50 pm, added"
+    section: "Holiday skates"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "1 to 1:50 pm" 13:00-13:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Family Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-01-02 Fri 13:00-13:50 added
+- NOTICE "Public Skate, 2 to 2:50 pm, added"
+    section: "Holiday skates"
+    date text: "Friday, January 2"
+    dates: 2026-01-02 Fri
+    time: "2 to 2:50 pm" 14:00-14:50 novel
+    effects: added
+    match: EXACT
+    phrase: "Public Skate"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-02 Fri 14:00-14:50 added

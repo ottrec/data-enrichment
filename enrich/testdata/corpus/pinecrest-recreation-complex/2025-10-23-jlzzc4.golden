@@ -1,0 +1,11 @@
+== Pinecrest Recreation Complex special_hours
+- IGNORED date-context "Thursday, October 23"
+    at: facility
+- NOTICE "The sauna is closed until further notice."
+    date text: "Thursday, October 23"
+    dates: 2025-10-23 Thu; open-ended
+    effects: closure
+    match: NONE
+    phrase: "sauna"
+    amenity: "sauna"
+    at: facility

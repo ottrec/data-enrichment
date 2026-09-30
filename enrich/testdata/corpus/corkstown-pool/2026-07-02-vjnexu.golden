@@ -1,0 +1,20 @@
+== Corkstown Pool special_hours
+- IGNORED heading "Regular season"
+    section: "Regular season"
+    at: facility
+- IGNORED date-context "June 29 to August 23"
+    section: "Regular season"
+    at: facility
+- IGNORED heading "Closure"
+    section: "Closure"
+    at: facility
+- IGNORED date-context "Wednesday, July 1"
+    section: "Closure"
+    at: facility
+- NOTICE "The facility is closed, and all programs cancelled."
+    section: "Closure"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: facility

@@ -1,0 +1,70 @@
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - Group fitness"
+- IGNORED date-context "Monday, October 20"
+    at: group "Drop-in schedule - Group fitness"
+- NOTICE "Stretch and Strength, 9 am, cancelled"
+    date text: "Monday, October 20"
+    dates: 2025-10-20 Mon
+    time: "" covers [Monday 9:00 - 10:00am]
+    effects: cancelled
+    match: MULTIPLE
+    phrase: "Stretch and Strength, 9 am"
+    candidates: "Strength" "Stretch and strength"
+    ambiguities: activity-multiple-candidates
+    at: group "Drop-in schedule - Group fitness"
+- IGNORED date-context "Saturday, October 25"
+    at: group "Drop-in schedule - Group fitness"
+- NOTICE "Cardio and strength, 9 to 10 am, cancelled"
+    date text: "Saturday, October 25"
+    dates: 2025-10-25 Sat
+    time: "9 to 10 am" 09:00-10:00 exact [Saturday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Group fitness" activity "Cardio and strength" sessions 2025-10-25 Sat 09:00-10:00
+
+== Hunt Club-Riverside Park Community Centre schedule_changes "Drop-in schedule - Sports"
+- IGNORED date-context "Saturday, October 25"
+    at: group "Drop-in schedule - Sports"
+- NOTICE "All drop-in sports, cancelled"
+    date text: "Saturday, October 25"
+    dates: 2025-10-25 Sat
+    time: "" covers [Saturday 10:00 - 11:00am; Saturday 1:00 - 2:00pm; Saturday 2:15 - 3:15pm; Saturday 9:00 - 10:00am]
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in sports"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - Sports"
+
+== Hunt Club-Riverside Park Community Centre special_hours
+- IGNORED date-context "Monday, October 20"
+    at: facility
+- NOTICE "Stretch and Strength, 9 to 10 am, cancelled"
+    date text: "Monday, October 20"
+    dates: 2025-10-20 Mon
+    time: "9 to 10 am" 09:00-10:00 exact [Monday 9:00 - 10:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Stretch and Strength"
+    ambiguities: meridiem-inferred
+    at: group "Drop-in schedule - Group fitness" activity "Stretch and strength" sessions 2025-10-20 Mon 09:00-10:00
+- IGNORED date-context "Saturday, October 25"
+    at: facility
+- IGNORED duplicate "All drop-in sports, cancelled"
+    date text: "Saturday, October 25"
+    dates: 2025-10-25 Sat
+    time: "" covers [Saturday 10:00 - 11:00am; Saturday 1:00 - 2:00pm; Saturday 2:15 - 3:15pm; Saturday 9:00 - 10:00am]
+    match: SCOPE_PHRASE
+    phrase: "All drop-in sports"
+    duplicate of: schedule_changes "Drop-in schedule - Sports" "All drop-in sports, cancelled"
+    at: facility
+- IGNORED duplicate "Cardio and strength, 9 to 10 am, cancelled"
+    date text: "Saturday, October 25"
+    dates: 2025-10-25 Sat
+    time: "9 to 10 am" 09:00-10:00 exact [Saturday 9:00 - 10:00am]
+    match: EXACT
+    phrase: "Cardio and strength"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - Group fitness" "Cardio and strength, 9 to 10 am, cancelled"
+    at: facility

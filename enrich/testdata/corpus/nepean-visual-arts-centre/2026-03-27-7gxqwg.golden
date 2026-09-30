@@ -1,0 +1,15 @@
+== Nepean Visual Arts Centre special_hours
+- NOTICE "Saturday March 28 and Sunday March 29, closed"
+    date text: "Saturday March 28 and Sunday March 29"
+    dates: 2026-03-28 Sat 2026-03-29 Sun
+    effects: closure
+    at: facility
+- IGNORED heading "Easter weekend hours"
+    section: "Easter weekend hours"
+    at: facility
+- NOTICE "Friday, April 3 to Monday, April 6, closed"
+    section: "Easter weekend hours"
+    date text: "Friday, April 3 to Monday, April 6"
+    dates: 2026-04-03 Fri to 2026-04-06 Mon
+    effects: closure
+    at: facility

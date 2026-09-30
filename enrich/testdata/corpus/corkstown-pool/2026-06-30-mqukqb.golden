@@ -1,0 +1,20 @@
+== Corkstown Pool special_hours
+- IGNORED heading "Regular season"
+    section: "Regular season"
+    at: facility
+- IGNORED date-context "June 29 to August 23"
+    section: "Regular season"
+    at: facility
+- IGNORED heading "Schedule change"
+    section: "Schedule change"
+    at: facility
+- IGNORED date-context "Wednesday, July 1"
+    section: "Schedule change"
+    at: facility
+- NOTICE "See Canada Day schedule."
+    section: "Schedule change"
+    date text: "Wednesday, July 1"
+    dates: 2026-07-01 Wed
+    effects: see-schedule "Canada Day schedule"
+    match: SCOPE_PHRASE
+    at: facility

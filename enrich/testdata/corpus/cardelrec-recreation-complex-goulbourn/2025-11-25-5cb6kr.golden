@@ -1,0 +1,35 @@
+== CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Monday, December 1"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, December 1"
+    dates: 2025-12-01 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Requires reservations" sessions 2025-12-01 Mon 07:00-08:00
+
+== CARDELREC Recreation Complex Goulbourn special_hours
+- IGNORED date-context "Monday, December 1"
+    at: facility
+- IGNORED duplicate "Indoor cycling, 7 to 8 am, cancelled"
+    date text: "Monday, December 1"
+    dates: 2025-12-01 Mon
+    time: "7 to 8 am" 07:00-08:00 exact [Monday 7:00 - 8:00am]
+    match: EXACT
+    phrase: "Indoor cycling"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Indoor cycling, 7 to 8 am, cancelled"
+    at: facility
+- IGNORED heading "Pool closure"
+    section: "Pool closure"
+    at: facility
+- NOTICE "November 25 until further notice"
+    section: "Pool closure"
+    date text: "November 25 until further notice"
+    dates: 2025-11-25 Tue to; open-ended
+    effects: closure
+    at: facility

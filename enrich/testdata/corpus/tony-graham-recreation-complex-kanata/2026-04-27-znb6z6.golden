@@ -1,0 +1,8 @@
+== Tony Graham Recreation Complex - Kanata special_hours
+- NOTICE "The facility will be closed starting May 1 until September 2026."
+    date text: "starting May 1 until September 2026"
+    dates: 2026-05-01 Fri to 2026-09-30 Wed
+    effects: closure
+    match: SCOPE_PHRASE
+    ambiguities: date-month-only
+    at: facility

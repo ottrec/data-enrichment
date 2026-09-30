@@ -1,0 +1,36 @@
+== Deborah Anne Kirwan Pool schedule_changes "Drop-in schedule - swim"
+- IGNORED date-context "Saturday, May 16 and Sunday, May 17"
+    at: group "Drop-in schedule - swim"
+- NOTICE "See Victoria Day weekend schedule."
+    date text: "Saturday, May 16 and Sunday, May 17"
+    dates: 2026-05-16 Sat 2026-05-17 Sun
+    effects: see-schedule "Victoria Day weekend schedule"
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim"
+- IGNORED date-context "Monday, May 18"
+    at: group "Drop-in schedule - swim"
+- NOTICE "The facility is closed and all programs cancelled."
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: cancelled, closure
+    match: SCOPE_PHRASE
+    at: group "Drop-in schedule - swim"
+
+== Deborah Anne Kirwan Pool special_hours
+- NOTICE "Saturday, May 16, noon to 4 pm"
+    date text: "Saturday, May 16"
+    dates: 2026-05-16 Sat
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Sunday, May 17, noon to 4 pm"
+    date text: "Sunday, May 17"
+    dates: 2026-05-17 Sun
+    time: "noon to 4 pm" 12:00-16:00 unchecked
+    effects: modified-hours
+    at: facility
+- NOTICE "Monday, May 18, closed"
+    date text: "Monday, May 18"
+    dates: 2026-05-18 Mon
+    effects: closure
+    at: facility

@@ -1,0 +1,43 @@
+== Sawmill Creek Community Centre and Pool schedule_changes "Drop-in schedule - swim and aquafitness"
+- IGNORED date-context "Saturday, March 7"
+    at: group "Drop-in schedule - swim and aquafitness"
+- NOTICE "Lane swim, 7:30 to 8:30 pm, cancelled"
+    date text: "Saturday, March 7"
+    dates: 2026-03-07 Sat
+    time: "7:30 to 8:30 pm" 19:30-20:30 exact [Saturday 7:30 - 8:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-03-07 Sat 19:30-20:30
+- NOTICE "Public swim, 6:30 to 7:30 pm, cancelled"
+    date text: "Saturday, March 7"
+    dates: 2026-03-07 Sat
+    time: "6:30 to 7:30 pm" 18:30-19:30 exact [Saturday 6:30 - 7:30pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-03-07 Sat 18:30-19:30
+- IGNORED date-context "Saturday, March 7"
+    at: facility
+- IGNORED duplicate "Lane swim, 7:30 to 8:30 pm, cancelled"
+    date text: "Saturday, March 7"
+    dates: 2026-03-07 Sat
+    time: "7:30 to 8:30 pm" 19:30-20:30 exact [Saturday 7:30 - 8:30pm]
+    match: EXACT
+    phrase: "Lane swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane swim, 7:30 to 8:30 pm, cancelled"
+    at: facility
+- IGNORED duplicate "Public swim, 6:30 to 7:30 pm, cancelled"
+    date text: "Saturday, March 7"
+    dates: 2026-03-07 Sat
+    time: "6:30 to 7:30 pm" 18:30-19:30 exact [Saturday 6:30 - 7:30pm]
+    match: EXACT
+    phrase: "Public swim"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Public swim, 6:30 to 7:30 pm, cancelled"
+    at: facility

@@ -1,0 +1,24 @@
+== St. Laurent Complex schedule_changes "Drop-in schedule - group fitness"
+- IGNORED date-context "Saturday, September 26"
+    at: group "Drop-in schedule - group fitness"
+- NOTICE "Cardio and Stretch 50+, 8:30 to 9:25 am, cancelled"
+    date text: "Saturday, September 26"
+    dates: 2026-09-26 Sat
+    time: "8:30 to 9:25 am" 08:30-09:25 exact [Saturday 8:30 - 9:25am]
+    effects: cancelled
+    match: EXACT
+    phrase: "Cardio and Stretch 50+"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - group fitness" activity "Cardio and stretch 50+" sessions 2026-09-26 Sat 08:30-09:25
+- IGNORED date-context "Saturday, September 26"
+    at: facility
+- IGNORED duplicate "Cardio and Stretch 50+, 8:30 to 9:25 am, cancelled"
+    date text: "Saturday, September 26"
+    dates: 2026-09-26 Sat
+    time: "8:30 to 9:25 am" 08:30-09:25 exact [Saturday 8:30 - 9:25am]
+    match: EXACT
+    phrase: "Cardio and Stretch 50+"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - group fitness" "Cardio and Stretch 50+, 8:30 to 9:25 am, cancelled"
+    at: facility

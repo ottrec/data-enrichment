@@ -1,0 +1,49 @@
+== Tony Graham Recreation Complex - Kanata schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Friday, February 6"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, February 6"
+    dates: 2026-02-06 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-02-06 Fri 19:15-20:05
+- IGNORED date-context "Friday, February 13"
+    at: group "Drop-in schedule - skating"
+- NOTICE "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, February 13"
+    dates: 2026-02-13 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    effects: cancelled
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-02-13 Fri 19:15-20:05
+
+== Tony Graham Recreation Complex - Kanata special_hours
+- IGNORED date-context "Friday, February 6"
+    at: facility
+- IGNORED duplicate "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, February 6"
+    dates: 2026-02-06 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 7:15 to 8:05 pm, cancelled"
+    at: facility
+- IGNORED date-context "Friday, February 13"
+    at: facility
+- IGNORED duplicate "Public skating, 7:15 to 8:05 pm, cancelled"
+    date text: "Friday, February 13"
+    dates: 2026-02-13 Fri
+    time: "7:15 to 8:05 pm" 19:15-20:05 exact [Friday 7:15 - 8:05pm]
+    match: EXACT
+    phrase: "Public skating"
+    ambiguities: meridiem-inferred
+    duplicate of: schedule_changes "Drop-in schedule - skating" "Public skating, 7:15 to 8:05 pm, cancelled"
+    at: facility

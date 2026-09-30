@@ -1,0 +1,22 @@
+== Richmond Memorial Community Centre schedule_changes "Drop-in schedule - skating"
+- IGNORED date-context "Saturday, February 7"
+    at: group "Drop-in schedule - skating"
+- NOTICE "All drop-in skating, cancelled"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    effects: cancelled
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    sources: schedule_changes special_hours
+    at: group "Drop-in schedule - skating"
+
+== Richmond Memorial Community Centre special_hours
+- IGNORED date-context "Saturday, February 7"
+    at: facility
+- IGNORED duplicate "All drop-in skating, cancelled"
+    date text: "Saturday, February 7"
+    dates: 2026-02-07 Sat
+    match: SCOPE_PHRASE
+    phrase: "All drop-in skating"
+    duplicate of: schedule_changes "Drop-in schedule - skating" "All drop-in skating, cancelled"
+    at: facility
