@@ -35,10 +35,13 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   right after a parse, e.g. "July 6 to 10 Friday, July 10") returns ok=false
   with `date-garbled` in Ambig — callers keep the raw head and mark items.
   Year resolution: `resolveDate` (single; written weekday must agree, a
-  weekday-matched candidate >300d out loses to a near one, marked) and
+  weekday-matched candidate >300d out loses to a near one, marked; one
+  kept more than 183 days out is marked `date-year-unconfirmed`) and
   `resolveRange` (joint: each candidate year places both endpoints, scored
-  by weekday agreements, ties to anchor proximity — one typo'd endpoint
-  can't drag the range a year off). Words are punctuation-trimmed and
+  by weekday agreements, ties to anchor proximity with a range containing
+  the anchor at distance zero, as ottrecidx's effective ranges read it, so
+  one typo'd endpoint can't drag the range a year off; a weekday-validated
+  range more than 183 days out is marked too). Words are punctuation-trimmed and
   empties skipped ("Wednesday , November 26"); `commaAfter` looks at the
   source token, so comma-enumerated days ("October 1, 2, 3, 4, 16, and 26")
   extend the list while `clockAhead`/`clockAfterAnd` stop it at an hour
@@ -216,7 +219,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
    `subjectNamesUnitOfActivity` narrows "Squash court 3" back off the six-court
    row it matched.
 6. Dates: no year is guessed against a written weekday without a marker;
-   garbled heads produce no dates at all.
+   garbled heads produce no dates at all. A weekday that agrees with a
+   year more than 183 days from the anchor does not confirm it:
+   `date-year-unconfirmed` (a typo'd weekday or a notice left up reads the
+   same). Undated years get the marker past 210 days.
 7. The consumer's side: a marker costs what its `markerPolicy` row says,
    and a marker with no row is warn, so a marker from a newer parser can
    never strike or add.
@@ -249,7 +255,7 @@ markers applies):
 | `date-outside-schedule` | no schedule listing the activity covers the date | stated (never reaches a strike; an add is expected there) |
 | `date-garbled` | a range repaired from its ends, both weekdays agreeing | likely |
 | `weekday-mismatch` | the written weekday fits no year: a typo'd weekday or a stale year | likely |
-| `date-year-unconfirmed` | no weekday to confirm a date far from the anchor | likely |
+| `date-year-unconfirmed` | more than 183 days from the anchor with only the weekday for the year (210 with no weekday) | likely |
 | `date-unparsed`, `date-year-ambiguous`, `date-range-invalid`, `date-only-item` | no usable date | warn |
 | `activity-time-disambiguated` | one of several candidates, the only one with the exact slot (invariant 2) | stated |
 | `class-title-partial` | the class names part of the title of the group it was posted under | stated |

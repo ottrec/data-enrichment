@@ -272,3 +272,41 @@ func TestUntilFurtherNoticeStarts(t *testing.T) {
 		}
 	}
 }
+
+// TestYearUnderAnchorShift pins year resolution for a notice left up past
+// its dates: a range containing the anchor keeps its year, and a
+// weekday-agreed date half a year or more away is marked.
+func TestYearUnderAnchorShift(t *testing.T) {
+	for _, tc := range []struct {
+		text   string
+		anchor time.Time
+		want   string
+		amb    []string
+	}{
+		// St. Laurent, posted in October; still up in December
+		{"June 2 to December 31", anchorAt(2026, time.October, 1), "20260602-20261231", nil},
+		{"June 2 to December 31", anchorAt(2026, time.December, 10), "20260602-20261231", nil},
+		// a typo for Friday, May 8, 2026: near the posting it is a mismatch
+		// on the near date; read in August it agrees only with 2027
+		{"Saturday, May 8", anchorAt(2026, time.May, 1), "20260508", []string{ambWeekdayMismatch}},
+		{"Saturday, May 8", anchorAt(2026, time.August, 1), "20270508", []string{ambYearUnconfirmed}},
+		{"Friday, May 8", anchorAt(2026, time.May, 1), "20260508", nil},
+		// a weekday-validated range far from the anchor
+		{"Saturday, May 8 to Sunday, May 9", anchorAt(2026, time.August, 1), "20270508-20270509", []string{ambYearUnconfirmed}},
+	} {
+		spec, _, ok := parseLeadingDate(tc.text, tc.anchor)
+		if !ok {
+			t.Fatalf("%q: no date", tc.text)
+		}
+		ymd := func(x time.Time) string { return x.Format("20060102") }
+		var got string
+		if len(spec.Dates) > 0 {
+			got = ymd(spec.Dates[0])
+		} else {
+			got = ymd(spec.From) + "-" + ymd(spec.To)
+		}
+		if got != tc.want || !slices.Equal(spec.Ambig, tc.amb) {
+			t.Errorf("%q at %s: got %s %v, want %s %v", tc.text, ymd(tc.anchor), got, spec.Ambig, tc.want, tc.amb)
+		}
+	}
+}

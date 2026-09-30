@@ -99,7 +99,7 @@ var markerPolicy = map[string]trust{
 	"date-unparsed":         trustWarn,   // no date resolved (cannot)
 	"date-garbled":          trustLikely, // a garbled range repaired from its ends, both weekdays agreeing
 	"weekday-mismatch":      trustLikely, // the written weekday fits no year: a typo'd weekday or a stale year
-	"date-year-unconfirmed": trustLikely, // no weekday to confirm a date far from the anchor
+	"date-year-unconfirmed": trustLikely, // half a year or more from the anchor, the year not confirmed by the weekday alone
 	"date-year-ambiguous":   trustWarn,   // two years fit the weekday (cannot)
 	"date-range-invalid":    trustWarn,   // the range did not resolve (cannot)
 	"date-month-only":       trustStated, // an end bounded by its month; see monthOnlyEnd

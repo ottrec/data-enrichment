@@ -506,6 +506,12 @@ func resolveDate(d partialDate, anchor time.Time) (time.Time, []string) {
 				absDur(near.Sub(anchor)) < 90*24*time.Hour {
 				return near, []string{ambWeekdayMismatch}
 			}
+			// the weekday agrees, but half a year or more from the anchor
+			// is as likely a typo'd weekday or a stale notice ("Saturday,
+			// May 8" read in August lands in the next year)
+			if absDur(match[0].Sub(anchor)) > unconfirmedDays*24*time.Hour {
+				return match[0], []string{ambYearUnconfirmed}
+			}
 			return match[0], nil
 		case 0:
 			return nearest(cands, anchor), []string{ambWeekdayMismatch}
@@ -619,7 +625,7 @@ func resolveRange(from, to partialDate, anchor time.Time) (time.Time, time.Time,
 	best := cands[0]
 	for _, c := range cands[1:] {
 		if c.score > best.score ||
-			(c.score == best.score && absDur(c.f.Sub(anchor)) < absDur(best.f.Sub(anchor))) {
+			(c.score == best.score && rangeDist(c.f, c.t, anchor) < rangeDist(best.f, best.t, anchor)) {
 			best = c
 		}
 	}
@@ -627,12 +633,29 @@ func resolveRange(from, to partialDate, anchor time.Time) (time.Time, time.Time,
 	if best.mismatch {
 		amb = append(amb, ambWeekdayMismatch)
 	}
-	if from.wd == nil && to.wd == nil {
-		if d := absDur(best.f.Sub(anchor)); d > 210*24*time.Hour {
-			amb = append(amb, ambYearUnconfirmed)
-		}
+	switch d := rangeDist(best.f, best.t, anchor); {
+	case from.wd == nil && to.wd == nil && d > 210*24*time.Hour:
+		amb = append(amb, ambYearUnconfirmed)
+	case (from.wd != nil || to.wd != nil) && d > unconfirmedDays*24*time.Hour:
+		amb = append(amb, ambYearUnconfirmed)
 	}
 	return best.f, best.t, amb
+}
+
+// unconfirmedDays is how far from the anchor a weekday-agreed resolution may
+// land before it is marked date-year-unconfirmed: half a year, past which
+// the agreement is as likely a typo'd weekday or a stale notice.
+const unconfirmedDays = 183
+
+// rangeDist is the distance from the anchor to the range [f, t]: zero when
+// the anchor falls inside it, as ottrecidx's effective ranges prefer the
+// year that covers the anchor ("June 2 to December 31" read on December 10
+// is this year's, not next year's), else the distance to its start.
+func rangeDist(f, t, anchor time.Time) time.Duration {
+	if !anchor.Before(f) && anchor.Before(t.AddDate(0, 0, 1)) {
+		return 0
+	}
+	return absDur(f.Sub(anchor))
 }
 
 // restIsTrivial reports whether the remainder after a date parse is empty or
