@@ -43,7 +43,11 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   source token, so comma-enumerated days ("October 1, 2, 3, 4, 16, and 26")
   extend the list while `clockAhead`/`clockAfterAnd` stop it at an hour
   ("October 12, 7 am to 4 pm", "October 12, 7 and 8 pm"); a comma before
-  the clock word keeps the day ("January 3 and 4, noon to 4 pm").
+  the clock word keeps the day ("January 3 and 4, noon to 4 pm"). "Until
+  <date>" heads set only To (From zero; enrichidx `applies` and `dated`
+  handle To-only spans). `parseWeekdaySet` takes "-" as well as "to" for a
+  range, backing off a dangling dash ("Saturday and Sunday - 10 am to 5
+  pm") so the set still parses.
 - `clock.go` — `findClockRanges(s) ([]clockMention, remainder)`. A match
   needs a meridiem/noon/midnight/colon on at least one side ("December 13
   and 14" is not a clock). Missing meridiems produce candidates: >12h
@@ -72,13 +76,19 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
 - `item.go` — `processItem` is the heart; **the order of checks is load-
   bearing**: boilerplate → item's own leading date (beats head context) →
   see-schedule → facilityRe (whole-facility sentences; sets
-  st.closureContext) → "closed for the season" → "Regular season, <range>"
+  st.closureContext; also "closing at X" and the late opening "will open
+  at X", which `findSingleEnded` reads as closed until X) → "closed for the
+  season" → "Regular/Pre/Post season, <range>". Before all of that, a bare
+  cross-reference with a link ("See Outdoor Pools for more information.",
+  "Details: Outdoor pools") is ignored/supplementary; "See X schedule" is
+  still a SeeSchedule notice
   → findClockRanges → subjectClosedRe ("X is closed", skipped for "all "
   prefixes; subject resolved facility-name → all-programs → part-of-a-row →
   activity → amenity → none; a generic facility word that names only some of
   the facility's groups, "the pool" at a complex, is a part and not the
   facility when the item cancels) →
-  comma-clause loop (keyword / schedule change /
+  comma-clause loop (keyword / schedule change / `hoursClauseRe` ("Modified
+  hours", "facility hours" ⇒ ModifiedHours) /
   trailing "only" restriction / phrase parts) → trailing keyword glued
   without comma → allDropinsRe → allClassRe → empty-phrase branch (bare
   effects, date+clock hours items, date-only items) → activity match →
@@ -99,7 +109,11 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   assigns block seq + id and every heading/date-context/boilerplate fragment
   becomes an ignored object), walkState lifetimes (head reset by headings;
   closureContext reset by headings and after each list), the `<li>` shapes
-  (leaf with `<br>` lines; date head + children; garbled head — children
+  (leaf with `<br>` lines; date head + children; date head carrying more
+  than the date ("Sunday, August 23, 5 to 6 pm", "Monday, July 27 to
+  Friday, July 31, between 9 am and 4 pm") + children: the head is an item
+  and the children still get its date, which is what keeps a child
+  cancellation from going undated; garbled head — children
   processed with the marked spec; inverted form: statement head whose
   children are all dates, ranges emitted separately, and a date+clock child
   ("PD Day Public Swim" over "Friday, October 2, 8:30 to 10 am") emitted on

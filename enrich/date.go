@@ -244,6 +244,7 @@ func (p *dateParser) parseWeekdaySet(i int) ([]time.Weekday, int, bool) {
 	var wds []time.Weekday
 	j := i
 	rangeTo := false
+	dash := false // the range token was a dash, which may instead separate what follows
 	for j < len(p.words) {
 		w := strings.TrimSuffix(p.words[j], "s")
 		if wd, ok := weekdayNames[w]; ok {
@@ -265,12 +266,17 @@ func (p *dateParser) parseWeekdaySet(i int) ([]time.Weekday, int, bool) {
 			j++
 			continue
 		}
-		if p.words[j] == "to" && len(wds) > 0 && !rangeTo {
-			rangeTo = true
+		if (p.words[j] == "to" || p.words[j] == "-") && len(wds) > 0 && !rangeTo {
+			rangeTo, dash = true, p.words[j] == "-"
 			j++
 			continue
 		}
 		break
+	}
+	if rangeTo && dash {
+		// "Saturday and Sunday - 10 am to 5 pm": the dash was a separator
+		rangeTo = false
+		j--
 	}
 	if len(wds) == 0 || rangeTo {
 		return nil, i, false
@@ -295,6 +301,19 @@ func parseLeadingDate(s string, anchor time.Time) (dateSpec, string, bool) {
 
 	p := newDateParser(s)
 	var spec dateSpec
+
+	// "Until <date>": an end with no stated start
+	if len(p.words) > 1 && (p.words[0] == "until" || p.words[0] == "through") {
+		if d, j, ok := p.parseSingle(1, false); ok {
+			t, amb := resolveDate(d, anchor)
+			if !t.IsZero() {
+				spec.To = t
+				spec.Ambig = amb
+				spec.Raw = strings.TrimRight(strings.TrimSpace(s[:p.starts[j-1]+len(p.words[j-1])]), ",.")
+				return spec, p.rest(j), true
+			}
+		}
+	}
 
 	// weekday-only pattern (no month/day follows the weekday)
 	if wds, j, ok := p.parseWeekdaySet(0); ok {

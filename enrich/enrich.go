@@ -255,6 +255,22 @@ func (b *blockCtx) processLi(st *walkState, li liNode) {
 			b.processLi(&local, sub)
 		}
 		return
+	} else if ok && len(li.Items) > 0 {
+		// date head carrying more than the date ("Monday, July 27 to Friday,
+		// July 31, between 9 am and 4 pm", "Sunday, August 23, 5 to 6 pm"):
+		// the head is an item of its own, and its date still contexts the
+		// children
+		b.out.Stats["li/dated-head-item"]++
+		b.processItem(st, head, li.HeadHTML, li.Off, li.Links, nil)
+		local := *st
+		local.head, local.headRaw = &spec, spec.Raw
+		for _, line := range lines[1:] {
+			b.processItem(&local, line, li.HeadHTML, li.Off, li.Links, nil)
+		}
+		for _, sub := range li.Items {
+			b.processLi(&local, sub)
+		}
+		return
 	} else if len(spec.Ambig) > 0 {
 		// garbled date head: children still get the head text, marked
 		local := *st

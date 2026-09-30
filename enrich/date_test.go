@@ -43,6 +43,11 @@ func TestParseLeadingDate(t *testing.T) {
 		{in: "October 12, 7 and 8 pm", anchor: anchorAt(2026, 9, 29), ok: true, dates: []string{"2026-10-12"}, rest: "7 and 8 pm"},
 		{in: "January 3 and 4, noon to 4 pm", anchor: anchorAt(2025, 12, 20), ok: true, dates: []string{"2026-01-03", "2026-01-04"}, rest: "noon to 4 pm"},
 		{in: "November 25 until further notice", anchor: anchorAt(2025, 11, 20), ok: true, from: "2025-11-25", open: true},
+		{in: "Until August 21", anchor: anchorAt(2026, 8, 1), ok: true, to: "2026-08-21"},
+		{in: "Until September 14", anchor: anchorAt(2026, 9, 1), ok: true, to: "2026-09-14"},
+		{in: "Until further notice", anchor: anchorAt(2026, 9, 1), ok: false},
+		{in: "Monday - Thursday: Closed", anchor: anchorAt(2026, 8, 1), ok: true, wds: 4, rest: "Closed"},
+		{in: "Saturday and Sunday - 10 am to 5 pm", anchor: anchorAt(2026, 8, 1), ok: true, wds: 2, rest: "- 10 am to 5 pm"},
 		{in: "Monday to Friday", anchor: anchorAt(2026, 1, 1), ok: true, wds: 5},
 		{in: "Fridays, Saturdays, and Sundays", anchor: anchorAt(2026, 1, 1), ok: true, wds: 3},
 		// From's weekday is a typo; anchor proximity must win over it

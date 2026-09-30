@@ -138,6 +138,10 @@ Dates (usually no year):
   unless it reads as a clock, "October 12, 7 am to 4 pm").
 - Explicit years occasionally: "October 31, 2025 to March 13, 2026".
 - Open-ended: "November 25 until further notice".
+- End only: "Until August 21", "Until September 14" (a list head whose
+  children run up to that date; To set, From zero).
+- Weekday sets with a dash: "Monday - Thursday: Closed", "Saturday and
+  Sunday - 10 am to 5 pm" (the dash after a complete set is a separator).
 - Garbled: "Monday, July 6 to 10 Friday, July 10".
 - Prose-embedded: "The facility will close at 4:30 pm, Thursday, June 11,
   and reopen at noon, Friday, June 12.", "Facility is closed between

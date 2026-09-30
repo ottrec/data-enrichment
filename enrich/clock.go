@@ -161,7 +161,9 @@ func clockCandidates(a, b string) ([]schema.ClockRange, bool) {
 var (
 	endAtRe       = regexp.MustCompile(`(?i)\b(?:will end|ends|ending)\s+(?:at|by)\s+(` + clockTokenPat + `)`)
 	closedUntilRe = regexp.MustCompile(`(?i)\b(closed|will be closed)\s+until\s+(` + clockTokenPat + `)`)
-	closedAtRe    = regexp.MustCompile(`(?i)\b(closed|closes|will close)\s+at\s+(` + clockTokenPat + `)`)
+	closedAtRe    = regexp.MustCompile(`(?i)\b(closed|closes|closing|will close)\s+at\s+(` + clockTokenPat + `)`)
+	// a late opening is a closure until then
+	openAtRe = regexp.MustCompile(`(?i)\b(will open|opens|opening)\s+at\s+(` + clockTokenPat + `)`)
 )
 
 // findSingleEnded extracts single-ended time mentions ("The pool is closed
@@ -178,6 +180,8 @@ func findSingleEnded(s string) ([]clockMention, string) {
 			openStart, keepKeyword = true, true
 		} else if m = closedAtRe.FindStringSubmatchIndex(s); m != nil {
 			keepKeyword = true
+		} else if m = openAtRe.FindStringSubmatchIndex(s); m != nil {
+			openStart, keepKeyword = true, true
 		} else if m = endAtRe.FindStringSubmatchIndex(s); m != nil {
 			endEarly = true
 		} else {

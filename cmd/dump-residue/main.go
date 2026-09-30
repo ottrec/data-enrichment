@@ -3,7 +3,7 @@
 // candidate set for an LLM (or manual) residue pass. Items are deduplicated
 // by text and grouped by failure category.
 //
-//	go run ./cmd/dump-residue [-versions 0] > notes/residue.txt
+//	go run ./cmd/dump-residue [-versions 0] [-since 2026-08-01] > notes/residue.txt
 package main
 
 import (
@@ -13,6 +13,7 @@ import (
 	"os"
 	"slices"
 	"strings"
+	"time"
 
 	"github.com/ottrec/data-enrichment/enrich"
 	"github.com/ottrec/data-enrichment/internal/dataver"
@@ -22,6 +23,7 @@ import (
 var (
 	cachePath = flag.String("cache", "/tmp/ottrec-data.db", "ottrecdata cache path")
 	nVersions = flag.Int("versions", 0, "number of most recent versions to process (0 = all)")
+	since     = flag.String("since", "", "only versions updated on or after this date (YYYY-MM-DD)")
 )
 
 // categories, in priority order, of ambiguity markers whose items would
@@ -74,11 +76,22 @@ func main() {
 		e.facilities[facility] = true
 	}
 
+	var sinceT time.Time
+	if *since != "" {
+		var err error
+		if sinceT, err = time.Parse("2006-01-02", *since); err != nil {
+			panic(err)
+		}
+	}
+
 	versions := 0
 	var err error
 	for ver, data := range dataver.Each(ctx, *cachePath)(&err) {
 		if *nVersions > 0 && versions >= *nVersions {
 			break
+		}
+		if !sinceT.IsZero() && ver.Updated.Before(sinceT) {
+			break // newest first
 		}
 		versions++
 

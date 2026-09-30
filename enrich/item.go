@@ -24,14 +24,17 @@ var (
 	seeRe = regexp.MustCompile(`(?i)\bsee\s+(?:the\s+)?(.{0,80}?schedule)s?\b`)
 	// whole-facility closure sentences ("The facility is closed and all
 	// programs cancelled."); also sets the closure context for following items
-	facilityRe = regexp.MustCompile(`^(?:the )?facility\b.*\b(closed|close|not available|unavailable)\b`)
+	facilityRe = regexp.MustCompile(`^(?:(?:the )?facility\b.*\b(closed|close|closing|not available|unavailable|will open|opens|opening)\b|closing\b)`)
 	// "All drop-ins cancelled" (whole posted scope)
 	allDropinsRe = regexp.MustCompile(`^(?:all|both) (?:drop ?ins?|programs)(?: are)?(?: cancelled)?$`)
 	// "All <classes> drop-ins" (capture: the class phrase, e.g. "skating and
 	// ice sports"), resolved by resolveClass
 	allClassRe = regexp.MustCompile(`^(?:all|both) (?:drop ?in )?(.+?)(?: drop ?ins?| programs| sessions| activities)?$`)
 	// "Regular season, <date range>" seasonal operating statements
-	seasonRe     = regexp.MustCompile(`(?i)^(regular season|pre-? ?season)\b[ ,]*`)
+	seasonRe     = regexp.MustCompile(`(?i)^(regular season|pre-? ?season|post-? ?season)\b[ ,]*`)
+	// an hours label riding with a clock range ("Modified hours, 6 am to 8
+	// pm", "Monday, August 3, 8 am to 4 pm, facility hours")
+	hoursClauseRe = regexp.MustCompile(`^(?:modified |facility |regular |holiday )?(?:facility )?hours$`)
 	closedSeason = regexp.MustCompile(`^closed for the season`)
 	// a reason the city sometimes appends after the effect word ("cancelled
 	// due to annual maintenance"), which otherwise hides the keyword from the
@@ -78,7 +81,8 @@ var amenityCore = map[string]bool{
 	"lawn": true, "hill": true, "room": true, "rooms": true, "ice": true,
 	"heater": true, "centre": true, "center": true,
 	"track": true, "tracks": true, "field": true, "fields": true,
-	"entrance": true, "entrances": true,
+	"entrance": true, "entrances": true, "studio": true, "studios": true,
+	"ramp": true, "ramps": true,
 }
 
 var amenityQualifier = map[string]bool{
@@ -90,7 +94,7 @@ var amenityQualifier = map[string]bool{
 	"25m": true, "50m": true, "1m": true, "3m": true, "m": true, "metre": true,
 	"meter": true, "1": true, "3": true, "25": true, "50": true, "pool": true,
 	"customer": true, "service": true, "athletics": true, "cross": true,
-	"country": true, "ski": true,
+	"country": true, "ski": true, "dance": true, "wheelchair": true,
 }
 
 // processItem parses one extracted line/item and emits objects for it.
@@ -226,6 +230,14 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		}
 		n.Scope = scope{Level: defaultLevel, MatchQuality: matchScopePhrase}
 		emit()
+		return
+	}
+
+	// a bare pointer elsewhere ("See Outdoor Pools for more information.",
+	// "Details: Outdoor pools") carries nothing of its own
+	if supplementaryRe.MatchString(strings.TrimSpace(working)) && len(links) > 0 {
+		b.out.Stats["ignored/supplementary"]++
+		b.add("ignored", "supplementary", n, off, nil, false)
 		return
 	}
 
@@ -370,6 +382,10 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			n.Effects.TimeChange = true
 			continue
 		}
+		if hoursClauseRe.MatchString(fc) {
+			n.Effects.ModifiedHours = true
+			continue
+		}
 		if strings.HasSuffix(fc, " only") && len(phraseParts) > 0 {
 			n.Effects.Restriction = strings.Trim(normText(clause), " .")
 			continue
@@ -436,7 +452,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		switch {
 		case n.Effects.any():
 			n.Scope.Level = defaultLevel
-			if !n.Effects.Closure && !n.Effects.Cancelled {
+			if !n.Effects.Closure && !n.Effects.Cancelled && !n.Effects.ModifiedHours {
 				n.Ambiguities = append(n.Ambiguities, ambNoSubject)
 			}
 		case spec != nil && len(clocks) > 0:
