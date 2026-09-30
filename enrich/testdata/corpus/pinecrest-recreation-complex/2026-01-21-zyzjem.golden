@@ -1,9 +1,10 @@
 == Pinecrest Recreation Complex schedule_changes "Drop-in schedule - swim and aquafitness"
 - NOTICE "The pool is closed and programs are cancelled until further notice."
     dates: open-ended
-    effects: closure
+    effects: cancelled, closure
     match: SCOPE_PHRASE
     phrase: "pool"
+    amenity: "pool"
     sources: schedule_changes special_hours
     at: group "Drop-in schedule - swim and aquafitness"
 
@@ -12,5 +13,6 @@
     dates: open-ended
     match: SCOPE_PHRASE
     phrase: "pool"
+    amenity: "pool"
     duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "The pool is closed and programs are cancelled until further notice."
     at: facility

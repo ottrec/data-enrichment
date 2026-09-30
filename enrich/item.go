@@ -60,8 +60,10 @@ var (
 	subjectClosedRe = regexp.MustCompile(`^(.+?)(?: is| are| was| were| will be| will remain| remains?)?(?: temporarily| now| also| currently| still)? (?:closed|closes|closing|will close|not available|unavailable)\b`)
 	// "... and all programs cancelled" riding on a subject closure, which
 	// upgrades it to a cancellation (capture: the class it names, if any,
-	// "group fitness " in "all group fitness drop ins are cancelled")
-	allProgramsRe = regexp.MustCompile(`\ball (.{0,40}?)(?:drop ?ins?|programs)(?: are)? cancelled\b`)
+	// "group fitness " in "all group fitness drop ins are cancelled"). The
+	// city also writes it without "all" ("The pool is closed and programs
+	// are cancelled"), which names no class.
+	allProgramsRe = regexp.MustCompile(`\b(?:all (.{0,40}?)|)(?:drop ?ins?|programs)(?: are)? cancelled\b`)
 	// "All changerooms closed for maintenance": an amenity closure phrased
 	// through the "all X" form (capture: the amenity phrase)
 	allAmenityClosedRe = regexp.MustCompile(`^(.+?),? (?:are |is )?closed(?: for .+)?$`)

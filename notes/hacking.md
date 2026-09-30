@@ -397,8 +397,9 @@ above, `TestNearestStmt` the chain, `TestCompleteHead` the notices.
 4. Schedule date ranges are negative-only evidence (they exclude, never
    include) — same as the CLAUDE.md dataset gotcha.
 5. Amenity scope never claims activities. "X is closed and all programs
-   cancelled" posted under a group scopes to that group with the amenity
-   noted. Posted for the whole facility, "all programs" means the part's
+   cancelled" (or "and programs are cancelled": `allProgramsRe` does not
+   need the "all") posted under a group scopes to that group with the
+   amenity noted. Posted for the whole facility, "all programs" means the part's
    programs: a class named in the cancellation resolves as a class, otherwise
    the part claims the groups whose title names it (`groupsForPart`, pool read
    as swim), otherwise nothing (`closed-part-unmatched`). A closure of the

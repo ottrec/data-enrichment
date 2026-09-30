@@ -196,5 +196,46 @@ func TestResolveClosureSubjectStats(t *testing.T) {
 			t.Errorf("unexpected %s = %d", k, fc.out.Stats[k])
 		}
 	}
-	_ = slices.Contains[[]string]
+}
+
+// TestPartProgramsCancelled pins Pinecrest's "The pool is closed and
+// programs are cancelled until further notice.": with or without "all",
+// the cancellation is the pool's programs, the swim group's, and a closure
+// alone cancels nothing.
+func TestPartProgramsCancelled(t *testing.T) {
+	for _, tc := range []struct {
+		text      string
+		cancelled bool
+	}{
+		{"The pool is closed and programs are cancelled until further notice.", true},
+		{"The pool is closed and all programs are cancelled until further notice.", true},
+		{"The pool is closed for maintenance until further notice.", false},
+	} {
+		fac := testFacility(t, "<p>"+tc.text+"</p>")
+		fc := &facCtx{out: &builder{Stats: map[string]int{}}, fac: fac, anchor: fac.GetSourceDate()}
+		fc.matchers = []*groupMatcher{
+			testGroup("Drop-in schedule - swim and aquafitness", "Lane swim"),
+			testGroup("Drop-in schedule - skating", "Public skating"),
+		}
+		fc.processBlock(fac.GetSpecialHoursHTML(), "special_hours", nil)
+		var notices []notice
+		for _, r := range fc.recs {
+			if r.kind == "notice" {
+				notices = append(notices, r.n)
+			}
+		}
+		if len(notices) != 1 {
+			t.Fatalf("%q: %d notices, want 1", tc.text, len(notices))
+		}
+		n := notices[0]
+		if n.Effects.Cancelled != tc.cancelled || !n.Effects.Closure {
+			t.Errorf("%q: effects %+v, want closure and cancelled=%v", tc.text, n.Effects, tc.cancelled)
+		}
+		if n.Scope.Level != "group" || !slices.Equal(n.Scope.Groups, []string{"Drop-in schedule - swim and aquafitness"}) {
+			t.Errorf("%q: scope %s %v, want the swim group", tc.text, n.Scope.Level, n.Scope.Groups)
+		}
+		if want := map[bool]string{true: "pool", false: ""}[tc.cancelled]; n.Scope.Amenity != want {
+			t.Errorf("%q: amenity %q, want %q", tc.text, n.Scope.Amenity, want)
+		}
+	}
 }

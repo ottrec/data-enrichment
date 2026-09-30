@@ -383,6 +383,8 @@ func TestAllProgramsClass(t *testing.T) {
 		"the weight and cardio room is closed and all group fitness drop ins are cancelled": "group fitness",
 		"the pool is closed and all swim and aquafit drop ins are cancelled":                "swim and aquafit",
 		"the gym is closed and all drop in programs cancelled":                              "",
+		"the pool is closed and programs are cancelled until further notice":                "",
+		"the arena is closed and drop ins cancelled":                                        "",
 	} {
 		m := allProgramsRe.FindStringSubmatch(in)
 		if m == nil {
@@ -394,6 +396,11 @@ func TestAllProgramsClass(t *testing.T) {
 		}
 		if want != "" && strings.TrimSpace(m[1]) != want {
 			t.Errorf("%q: class %q, want %q", in, m[1], want)
+		}
+	}
+	for _, in := range []string{"the pool is closed for maintenance", "the pool is closed and programs will resume monday"} {
+		if allProgramsRe.MatchString(in) {
+			t.Errorf("%q: matched", in)
 		}
 	}
 }
