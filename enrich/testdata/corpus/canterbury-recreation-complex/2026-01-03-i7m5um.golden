@@ -25,7 +25,7 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     sources: schedule_changes special_hours
-    at: facility
+    at: group "Drop-in schedule - swim and aquafit"
 
 == Canterbury Recreation Complex schedule_changes "Drop-in schedule - gymnasium sports"
 - NOTICE "Saturday, December 20 to Sunday, January 4 see Winter Break schedule."

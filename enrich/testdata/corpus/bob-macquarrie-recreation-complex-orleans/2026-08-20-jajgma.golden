@@ -49,7 +49,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 - IGNORED date-context "Until September 1"
     at: facility
 - NOTICE "Roger Sénécal Arena is closed for annual maintenance."

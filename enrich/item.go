@@ -368,7 +368,12 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 			b.emitTimesWithSlots(&n, spec, clocks, acts, &sessions, emit)
 			return
 		case subjPart:
-			n.Scope.Amenity = subject
+			if n.Effects.Cancelled {
+				// the closed part beside the cancellation; a closure alone
+				// is the group's, and with an amenity it would read as a
+				// notice about a place
+				n.Scope.Amenity = subject
+			}
 			n.Scope.Level = "group"
 			n.Scope.Groups = sj.Groups
 			n.Scope.MatchQuality = matchScopePhrase

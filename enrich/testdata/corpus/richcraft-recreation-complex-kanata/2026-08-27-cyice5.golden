@@ -97,7 +97,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 - NOTICE "The pool is closed for annual maintenance. All swim drop-ins are cancelled."
     section: "Closures"
     date text: "Tuesday, September 8 to Sunday, September 27"

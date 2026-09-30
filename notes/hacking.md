@@ -145,9 +145,10 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   a distinctive word of the facility's name), posted-group
   (`cancelled-under-group`: a cancelling closure posted under a group),
   class (`class-named`: the class the cancellation names, "all group fitness
-  drop-ins"), part (`part-groups`: a cancelling closure of a part whose
-  groups `groupsForPart` finds, "squash and racquetball courts", "the pool"
-  at a complex), part-unmatched (`part-unmatched`, the marker
+  drop-ins"), part (`part-groups`: a part whose groups `groupsForPart`
+  finds, "squash and racquetball courts" cancelling, "the pool" at a complex
+  closed or cancelling; a closure alone is the groups' and carries no
+  amenity), part-unmatched (`part-unmatched`, the marker
   `closed-part-unmatched`), unit (`unit-of-row`: some of the numbered units
   a row runs on, `subjectNamesUnitOfActivity`), activity (`activity-exact`,
   `-normalized`, `-fuzzy`), amenity (`amenity-core`, `isAmenity`), none
@@ -389,7 +390,9 @@ above, `TestNearestStmt` the chain, `TestCompleteHead` the notices.
    noted. Posted for the whole facility, "all programs" means the part's
    programs: a class named in the cancellation resolves as a class, otherwise
    the part claims the groups whose title names it (`groupsForPart`, pool read
-   as swim), otherwise nothing (`closed-part-unmatched`). A bare amenity
+   as swim), otherwise nothing (`closed-part-unmatched`). A closure of the
+   part alone ("The pool is closed for maintenance." at a complex) is the
+   same groups' closure, not the facility's. A bare amenity
    closure (Roger Sénécal Arena) cancels nothing. A subject naming
    part of what a row runs on is an amenity for the same reason:
    `subjectNamesUnitOfActivity` narrows "Squash court 3" back off the six-court
@@ -667,10 +670,13 @@ Three routes led there and all three are closed:
 - the `subjectClosedRe` cancelled case widened a facility-level item to the
   facility; it now takes the named class, else the part's groups, else nothing
 - `subjectIsFacility` accepts `pool` (and `arena`, `rink`) as the facility,
-  right for Deborah Anne Kirwan Pool and wrong for a complex; a cancelling item
-  whose generic subject names a proper subset of the groups is now a part,
+  right for Deborah Anne Kirwan Pool and wrong for a complex; an item whose
+  generic subject names a proper subset of the groups is now a part,
   group-posted items included (Bob MacQuarrie's July 1 swim-group copy was
-  facility-wide)
+  facility-wide). The first cut applied that only when the item cancelled,
+  so a closure alone ("The pool is closed for annual maintenance.") stayed a
+  facility-wide changes warning on the gym, the arena and the weight room
+  at 15 complexes for another year; the resolver applies it to both
 - `resolveClass`'s facility path recorded no groups for activities it matched
   by class, so placement found no node and hung the object on the facility,
   where a scope phrase reads as the whole facility (Richcraft's

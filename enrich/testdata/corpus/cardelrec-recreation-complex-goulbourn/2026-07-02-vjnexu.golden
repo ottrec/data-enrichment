@@ -38,7 +38,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 - NOTICE "The pool is closed until further notice. All swim and aquafitness drop-ins are cancelled."
     date text: "Wednesday, July 1"
     dates: 2026-07-01 Wed to; open-ended

@@ -5,7 +5,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 
 == CARDELREC Recreation Complex Goulbourn notifications
 - IGNORED boilerplate "Pickleball and badminton can now be found in the gymnasium sports schedule."

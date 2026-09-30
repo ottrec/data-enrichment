@@ -8,7 +8,7 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     sources: schedule_changes special_hours
-    at: facility
+    at: group "Drop-in schedule - swim and aquafit"
 - IGNORED date-context "Saturday, January 24"
     at: group "Drop-in schedule - swim and aquafit"
 - NOTICE "The pool is closed for maintenance until further notice."
@@ -18,7 +18,7 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     sources: schedule_changes special_hours
-    at: facility
+    at: group "Drop-in schedule - swim and aquafit"
 
 == Canterbury Recreation Complex special_hours
 - IGNORED date-context "Friday, November 14"

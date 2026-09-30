@@ -9,4 +9,4 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     ambiguities: meridiem-inferred
-    at: facility
+    at: group "Drop-in schedule - swim and aquafit"

@@ -34,7 +34,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafit"
 - IGNORED date-context "Monday, November 3"
     at: facility
 - IGNORED duplicate "Indoor cycling, 7 to 8 am, cancelled"

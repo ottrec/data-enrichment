@@ -5,7 +5,7 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     sources: schedule_changes special_hours
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 - IGNORED date-context "Monday, February 16"
     at: group "Drop-in schedule - swim and aquafitness"
 - NOTICE "The facility is closed and all programs cancelled."

@@ -22,4 +22,4 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     ambiguities: weekday-mismatch
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"

@@ -104,7 +104,7 @@ func TestResolveClosureSubject(t *testing.T) {
 		// the incidents
 		{"Bob MacQuarrie's courts cancel their own groups (84c17cd)", bobMacQuarrie, "squash and racquetball courts", true, subjPart, "part-groups", "Drop-in schedule - squash and racquetball"},
 		{"the pool of a complex, cancelling", bobMacQuarrie, "pool", true, subjPart, "part-groups", "Drop-in schedule - swim"},
-		{"the pool of a complex, closure only", bobMacQuarrie, "pool", false, subjFacility, "facility-generic", ""},
+		{"the pool of a complex, closure only", bobMacQuarrie, "pool", false, subjPart, "part-groups", "Drop-in schedule - swim"},
 		{"the pool of a pool", kirwan, "pool", false, subjFacility, "facility-generic", ""},
 		{"the pool of a pool, cancelling", kirwan, "pool", true, subjFacility, "facility-generic", ""},
 		{"one arena of two", bobMacQuarrie, "roger sénécal arena", false, subjAmenity, "amenity-core", "roger sénécal arena"},

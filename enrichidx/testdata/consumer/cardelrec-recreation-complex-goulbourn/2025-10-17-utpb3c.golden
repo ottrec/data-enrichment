@@ -1,5 +1,6 @@
 == CARDELREC Recreation Complex Goulbourn, 2025-10-10 Fri to 2025-11-28 Fri
-warning: changes 2025-10-30 Thu
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-10-30 Thu
 group "Drop-in schedule - group fitness"
   warning: changes 2025-10-18 Sat
   2025-10-18 Sat 09:00-10:00 "Cardio and strength": cancelled

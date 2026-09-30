@@ -5,7 +5,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 - NOTICE "The pool is closed for maintenance until Monday, September 21 at 4 pm."
     date text: "until Monday, September 21 at 4 pm"
     dates: 2026-09-21 Mon
@@ -13,7 +13,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 - IGNORED heading "Closure"
     section: "Closure"
     at: facility

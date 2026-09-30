@@ -1,2 +1,4 @@
 == Ray Friel Recreation Complex, 2026-05-25 Mon to 2026-07-13 Mon
-warning: notice 2026-05-25 Mon to 2026-06-07 Sun, changes 2026-06-08 Mon to 2026-06-21 Sun, notice 2026-06-22 Mon to 2026-07-13 Mon
+warning: notice 2026-05-25 Mon to 2026-07-13 Mon
+group "Drop-in schedule - swim and aquafitness"
+  warning: changes 2026-06-08 Mon to 2026-06-21 Sun

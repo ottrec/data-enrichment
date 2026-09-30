@@ -48,9 +48,16 @@ func (b *blockCtx) resolveClosureSubject(subject string, cancelled bool, fremain
 	q, acts, groups, typo := b.matchActivity(subject)
 	s := closureSubject{Typo: typo}
 	isFac, facReason := subjectIsFacility(subject, b.fac.GetName())
+	// a generic word that names only some of the facility's groups ("the
+	// pool" at a complex) is a part of it, not the facility: closed, it
+	// closes the swim group; cancelling, it cancels the part's programs
+	// (invariant 5). At a pool the same word is the facility.
+	part := isFac && namesPartOfFacility(b.matchers, subject)
 	switch {
-	case isFac && !(cancelled && namesPartOfFacility(b.matchers, subject)):
+	case isFac && !part:
 		s.Kind, s.Reason = subjFacility, facReason
+	case part && !cancelled:
+		s.Kind, s.Reason, s.Groups = subjPart, "part-groups", groupsForPart(b.matchers, subject)
 	case cancelled && b.grp != nil:
 		// "the pool is closed and all programs cancelled" posted under a
 		// group: the group is the scope

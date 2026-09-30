@@ -5,7 +5,7 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     sources: schedule_changes special_hours
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 
 == Pinecrest Recreation Complex special_hours
 - IGNORED duplicate "The pool is closed and programs are cancelled until further notice."

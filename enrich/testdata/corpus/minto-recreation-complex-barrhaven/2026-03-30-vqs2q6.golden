@@ -56,7 +56,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 - IGNORED heading "Easter weekend hours"
     section: "Easter weekend hours"
     at: facility

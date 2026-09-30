@@ -29,7 +29,7 @@
     effects: closure
     match: SCOPE_PHRASE
     phrase: "pool"
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 - NOTICE "Labour Day, Monday, September 7, closed"
     date text: "Monday, September 7"
     dates: 2026-09-07 Mon

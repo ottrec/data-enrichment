@@ -1,5 +1,6 @@
 == Minto Recreation Complex - Barrhaven, 2025-10-29 Wed to 2025-12-17 Wed
-warning: changes 2025-11-20 Thu
+group "Drop-in schedule - swim and aquafit"
+  warning: changes 2025-11-20 Thu
 group "Drop-in schedule - racquet sports"
   warning: changes 2025-11-07 Fri
   2025-11-07 Fri 11:45-12:45 "Pickleball": cancelled

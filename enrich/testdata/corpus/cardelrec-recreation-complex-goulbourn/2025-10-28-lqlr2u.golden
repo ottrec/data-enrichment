@@ -9,7 +9,7 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     sources: schedule_changes special_hours
-    at: facility
+    at: group "Drop-in schedule - swim and aquafit"
 
 == CARDELREC Recreation Complex Goulbourn schedule_changes "Drop-in schedule - group fitness"
 - IGNORED date-context "Monday, November 3"

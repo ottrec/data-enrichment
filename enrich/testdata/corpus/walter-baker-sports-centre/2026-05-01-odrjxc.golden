@@ -34,7 +34,7 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     sources: schedule_changes special_hours
-    at: facility
+    at: group "Drop-in schedule - swim and aquafitness"
 
 == Walter Baker Sports Centre special_hours
 - IGNORED date-context "Friday, May 1"
