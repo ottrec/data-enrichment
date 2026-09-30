@@ -11,9 +11,7 @@
     date text: "Wednesday to Sunday"
     dates: weekdays Wed Thu Fri Sat Sun
     time: "10 am to 5 pm" 10:00-17:00 unchecked
-    match: NONE
-    phrase: "from"
-    ambiguities: freeform-item
+    effects: modified-hours
     at: facility
 - NOTICE "Fall season"
     date text: "May 11 - August 31, 2025"
@@ -28,7 +26,5 @@
     date text: "Saturday and Sunday"
     dates: weekdays Sat Sun
     time: "10 am to 5 pm" 10:00-17:00 unchecked
-    match: NONE
-    phrase: "from"
-    ambiguities: freeform-item
+    effects: modified-hours
     at: facility

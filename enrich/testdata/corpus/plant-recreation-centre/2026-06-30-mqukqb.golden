@@ -45,7 +45,7 @@
     dates: 2026-07-01 Wed
     time: "10 am to 5 pm" 10:00-17:00 unchecked
     match: NONE
-    phrase: "Emergency cooling centre will be open from"
+    phrase: "Emergency cooling centre will be open"
     ambiguities: freeform-item
     at: facility
 - IGNORED duplicate "The pool and gymnasium are closed and all programs cancelled."

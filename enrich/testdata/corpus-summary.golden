@@ -20,18 +20,18 @@
     250 added
    3161 cancelled
    3101 closure
-   1222 modified-hours
-    185 restriction
+   1227 modified-hours
+    190 restriction
     204 seasonal-hours
    2681 see-schedule
      31 time-change
 
 ## match
 
-   2330 exact
-    697 fuzzy
+   2338 exact
+    689 fuzzy
     133 multiple
-    628 none
+    621 none
     116 normalized
      61 novel
    5431 scope_phrase
@@ -62,14 +62,14 @@
      12 date-only-item
      91 date-outside-schedule
      11 dog-swim-session
-     56 freeform-item
+     49 freeform-item
      13 head-unparsed
      35 hours-context-unknown
      41 matched-other-group
       3 meridiem-ambiguous
    2338 meridiem-inferred
      92 no-slot-overlap
-    104 possible-activity-time
+    106 possible-activity-time
       8 skating-widened-to-window
     178 weekday-mismatch
 
@@ -162,7 +162,7 @@ A notice that cancels, closes or adds with no date, which applies on every day i
 - Walter Baker Sports Centre: "The whirlpool is temporarily closed." (closure)
     walter-baker-sports-centre/2026-01-11-w5zhys
 
-## no-effect: 22
+## no-effect: 20
 
 A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect word list) and has none, nor does any other sentence of the item.
 
@@ -186,8 +186,6 @@ A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect 
     pinhey-s-point-historic-site/2026-08-20-v4rnus
 - Plant Recreation Centre: "Emergency cooling centre will be open from 10 am to 5 pm." (open)
     plant-recreation-centre/2026-06-30-mqukqb
-- Ray Friel Recreation Complex: "Pick-up hockey 18+, noon to 12:50 pm only" (only)
-    ray-friel-recreation-complex/2026-02-13-4raexg and 1 more
 - Richcraft Recreation Complex-Kanata: "All other areas of the facility and drop-in programs will be closed during the event." (closed)
     richcraft-recreation-complex-kanata/2026-08-12-6hnosn
 - Richcraft Recreation Complex-Kanata: "All other areas of the facility will be closed during the event." (closed)
@@ -198,8 +196,6 @@ A notice or unparsed item that reads as an effect (claude-qc's enrich-no-effect 
     ron-kolbus-lakeside-centre/2026-06-04-pkyzvi and 2 more
 - Sawmill Creek Community Centre and Pool: "All swims at reduced capacity" (reduced)
     sawmill-creek-community-centre-and-pool/2026-07-25-adamty
-- Sawmill Creek Community Centre and Pool: "Public swim, 1:30 to 3 pm only" (only)
-    sawmill-creek-community-centre-and-pool/2026-07-30-6axttc and 2 more
 - Tom Brown Arena: "Emergency cooling centre will be open from 9 am to 8 pm" (open)
     tom-brown-arena/2026-06-30-mqukqb
 - Tony Graham Recreation Complex - Kanata: "The arenas will open*" (open)

@@ -13,6 +13,7 @@ func TestFindClockRanges(t *testing.T) {
 		in       string
 		first    schema.ClockRange // best (first) candidate of the first mention
 		spans    []string          // the text of each mention's span
+		text     string            // the first mention's text, when not its span's words
 		cands    int               // candidates of the first mention
 		inferred bool
 	}{
@@ -24,8 +25,16 @@ func TestFindClockRanges(t *testing.T) {
 		{in: "10 pm to midnight", first: schema.ClockRange{Start: 22 * 60, End: 24 * 60}, spans: []string{"10 pm to midnight"}, cands: 1},
 		{in: "December 13 and 14"},
 		{in: "Lane swim, 12:30 to 1 pm, and 8 to 9 pm.", first: schema.ClockRange{Start: 12*60 + 30, End: 13 * 60}, spans: []string{"12:30 to 1 pm", "8 to 9 pm"}, cands: 1, inferred: true},
+		// the span takes the preposition that introduced the range; the
+		// text is the range
+		{in: "From 11 am to 2 pm, all drop-in programs are cancelled", first: schema.ClockRange{Start: 11 * 60, End: 14 * 60}, spans: []string{"From 11 am to 2 pm"}, text: "11 am to 2 pm", cands: 1},
+		{in: "Saturdays and Sundays from 10 am to 5 pm", first: schema.ClockRange{Start: 10 * 60, End: 17 * 60}, spans: []string{"from 10 am to 5 pm"}, text: "10 am to 5 pm", cands: 1},
+		// "and" joins a range only after "between"
+		{in: "The 25 m pool is closed between 7:30 and 10:30 am.", first: schema.ClockRange{Start: 7*60 + 30, End: 10*60 + 30}, spans: []string{"between 7:30 and 10:30 am"}, text: "7:30 and 10:30 am", cands: 1, inferred: true},
+		{in: "Lane swim at 7 and 8 pm"},
+		{in: "Lane swim at 7 and 8 pm, 9 to 10 pm", first: schema.ClockRange{Start: 21 * 60, End: 22 * 60}, spans: []string{"9 to 10 pm"}, cands: 1, inferred: true},
 		// a match across a blank (a claimed date) is one mention
-		{in: "closed from 5 pm                  to 7 pm", first: schema.ClockRange{Start: 17 * 60, End: 19 * 60}, spans: []string{"5 pm                  to 7 pm"}, cands: 1},
+		{in: "closed from 5 pm                  to 7 pm", first: schema.ClockRange{Start: 17 * 60, End: 19 * 60}, spans: []string{"from 5 pm                  to 7 pm"}, text: "5 pm to 7 pm", cands: 1},
 	} {
 		t.Run(tc.in, func(t *testing.T) {
 			ms := findClockRanges(tc.in)
@@ -43,7 +52,11 @@ func TestFindClockRanges(t *testing.T) {
 				if m.Inferred != tc.inferred {
 					t.Errorf("inferred = %v, want %v", m.Inferred, tc.inferred)
 				}
-				if want := strings.Join(strings.Fields(tc.spans[0]), " "); m.Text != want {
+				want := tc.text
+				if want == "" {
+					want = strings.Join(strings.Fields(tc.spans[0]), " ")
+				}
+				if m.Text != want {
 					t.Errorf("text = %q, want %q", m.Text, want)
 				}
 			}
@@ -66,6 +79,8 @@ func TestOnlyClocks(t *testing.T) {
 		"Noon 1 pm":                    false,
 		"Lane swim, 8 to 9 am":         false,
 		"8 to 9 am and 10 to 11 am":    false,
+		"from 8 to 9 am":               true,
+		"between 9 am and 4 pm":        true,
 		"Friday, October 2, 8 to 9 am": false,
 	} {
 		if got := onlyClocks(in); got != want {

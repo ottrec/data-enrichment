@@ -11,7 +11,5 @@
     date text: "Saturdays and Sundays"
     dates: weekdays Sat Sun
     time: "10 am to 5 pm" 10:00-17:00 unchecked
-    match: NONE
-    phrase: "from"
-    ambiguities: freeform-item
+    effects: modified-hours
     at: facility

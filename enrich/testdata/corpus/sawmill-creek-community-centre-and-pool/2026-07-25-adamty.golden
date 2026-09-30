@@ -3,10 +3,8 @@
     date text: "Monday, July 27 to Friday, July 31"
     dates: 2026-07-27 Mon to 2026-07-31 Fri
     time: "9 am and 4 pm" 09:00-16:00 unchecked
-    match: NONE
-    phrase: "between"
-    ambiguities: freeform-item
-    at: facility
+    ambiguities: possible-activity-time
+    at: group "Drop-in schedule - swim and aquafitness"
 - NOTICE "All swims at reduced capacity"
     date text: "Monday, July 27 to Friday, July 31"
     dates: 2026-07-27 Mon to 2026-07-31 Fri

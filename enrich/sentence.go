@@ -3,7 +3,6 @@ package enrich
 import (
 	"slices"
 	"strings"
-	"unicode"
 )
 
 // A sentence is one sentence of an item together with the byte spans its
@@ -11,8 +10,8 @@ import (
 // single-ended clock mentions. The text is never rewritten. A finder runs
 // over the sentence with the spans claimed so far blanked out (masked), so
 // every match is at its offset in the source, and the rules after the
-// finders read either the masked text or remainder(), the text with the
-// spans taken out under the punctuation rules below.
+// finders read the masked text, remainder() (the text with the spans taken
+// out) or clauses() (the remainder split at its commas and typed).
 type sentence struct {
 	src   string
 	spans []span // sorted by start, never overlapping
@@ -28,7 +27,7 @@ type spanKind uint8
 
 const (
 	spanDate   spanKind = iota + 1 // an embedded date expression, with its preposition
-	spanClock                      // a clock range
+	spanClock                      // a clock range, with its preposition
 	spanSingle                     // a single-ended clock mention, without its keyword
 )
 
@@ -72,59 +71,87 @@ func (s *sentence) masked(kinds ...spanKind) string {
 	return string(b)
 }
 
-// remainder returns the sentence without its spans, for the clause split.
-// Each kind of span takes a fixed amount of the punctuation around it with
-// it, so the clauses around a span are what they were when the finders cut
-// the text instead of claiming it:
-//
-//   - A clock range takes the spaces and commas on both sides. When it had
-//     a comma on each side it was a clause of its own and leaves one comma,
-//     so the clauses around it stay apart ("Public swim, 1 to 3 pm, 25m
-//     pool only" reads "Public swim, 25m pool only"); otherwise the two
-//     sides join with a space ("Lane Swim, daily 11:30 am to 1:30 pm, will
-//     have shared space" reads "Lane Swim, daily will have shared space").
-//     What introduced the range stays behind: a preposition ("From 11 am to
-//     2 pm, all ..." reads "From all ...", which danglingPrepRe takes off
-//     the phrase) or a conjunction ("Lane swim, 12:30 to 1 pm, and 8 to 9
-//     pm" reads "Lane swim, and", a clause the loop skips).
-//   - An embedded date takes the space before it and the spaces and commas
-//     after it and leaves one space; a space left before a period closes up
-//     ("The pool is closed from March 23 to April 12." reads "The pool is
-//     closed.").
-//   - A single-ended mention takes nothing: its keyword stays and the text
-//     closes up over the span ("The pool is closed until noon." reads "The
-//     pool is closed.").
+// remainder returns the sentence without its spans: the masked text with
+// its blanks closed up. A span takes nothing but itself, so every comma
+// the city wrote stays where it was and is a clause boundary wherever it
+// is ("Public swim, 1 to 3 pm, 25m pool only" reads "Public swim,, 25m
+// pool only"; "Lane Swim, daily 11:30 am to 1:30 pm, will have shared
+// space" reads "Lane Swim, daily, will have shared space"), and nothing
+// dangles, since a date span and a clock span hold the preposition that
+// introduced them ("The pool is closed from March 23 to April 12." reads
+// "The pool is closed."; "From 11 am to 2 pm, all drop-in programs are
+// cancelled" reads ", all drop-in programs are cancelled"). A single-ended
+// mention leaves its keyword ("The pool is closed until noon." reads "The
+// pool is closed.").
 func (s *sentence) remainder() string {
-	out := ""
-	pos := 0  // the next source byte not yet consumed
-	seam := 0 // where in out the text since the last clock range begins
-	for _, sp := range s.spans {
-		seg := ""
-		if sp.start > pos {
-			seg = s.src[pos:sp.start]
+	return clauseText(s.masked())
+}
+
+// clauseText closes up the blanks the spans left in a piece of the masked
+// text: runs of spaces become one, and a space before a period or a comma
+// goes.
+func clauseText(s string) string {
+	s = strings.Join(strings.Fields(s), " ")
+	return strings.NewReplacer(" .", ".", " ,", ",").Replace(s)
+}
+
+// A clause is one comma segment of the remainder, typed by what it says.
+type clauseKind uint8
+
+const (
+	clauseSubject     clauseKind = iota // what the notice is about
+	clauseKeyword                       // an effect keyword ("cancelled", "added", "closed"), with or without a reason
+	clauseTimeChange                    // "schedule change"
+	clauseHours                         // an hours label ("Modified hours", "facility hours")
+	clauseRestriction                   // "25m pool only", "moved to 25m warm pool", or a bare "only" after a clock
+	clauseConjunction                   // "and" or "or" alone, or punctuation alone: nothing to read
+)
+
+type clause struct {
+	kind clauseKind
+	text string // the segment with its blanks closed up; for a restriction, the restriction text
+	kw   string // the keyword, for a clauseKeyword
+}
+
+// clauses splits the sentence at its commas, spans blanked, and types each
+// segment; an empty segment (one that was only a span) is left out. A
+// keyword, a time change, an hours label and a conjunction are what they
+// say. A restriction needs a subject before it; that covers "X only" and
+// the note clauses, and a bare "only" left beside a clock span ("Public
+// swim, 1:30 to 3 pm only"), which read as a subject would be matched as
+// an activity of its own. Everything else is a subject.
+func (s *sentence) clauses() []clause {
+	var out []clause
+	subjects := 0
+	masked := s.masked()
+	for start := 0; start <= len(masked); {
+		end := len(masked)
+		if i := strings.IndexByte(masked[start:], ','); i >= 0 {
+			end = start + i
 		}
-		after := s.src[sp.end:]
-		switch sp.kind {
-		case spanDate:
-			out += strings.TrimRightFunc(seg, unicode.IsSpace) + " "
-			pos = max(pos, sp.end+len(after)-len(strings.TrimLeft(after, " ,")))
-		case spanClock:
-			left := strings.TrimRight(out[seam:]+seg, " ")
-			out = out[:seam] + strings.TrimRight(left, " ,")
-			if strings.HasSuffix(left, ",") && strings.HasPrefix(strings.TrimLeft(after, " "), ",") {
-				out += ","
-			}
-			out += " "
-			seam = len(out)
-			pos = max(pos, sp.end+len(after)-len(strings.TrimLeft(after, " ,")))
-		case spanSingle:
-			out += seg
-			pos = max(pos, sp.end)
+		text := clauseText(masked[start:end])
+		clockBefore := slices.ContainsFunc(s.spans, func(sp span) bool { return sp.kind == spanClock && sp.start < end })
+		start = end + 1
+		if text == "" {
+			continue
 		}
+		c := clause{text: text}
+		switch fc := foldText(text); {
+		case fc == "" || fc == "and" || fc == "or":
+			c.kind = clauseConjunction
+		case keywordRe.MatchString(fc):
+			c.kind, c.kw = clauseKeyword, keywordRe.FindStringSubmatch(fc)[1]
+		case fc == "schedule change" || fc == "schedule changes":
+			c.kind = clauseTimeChange
+		case hoursClauseRe.MatchString(fc):
+			c.kind = clauseHours
+		case subjects > 0 && (strings.HasSuffix(fc, " only") || (fc == "only" && clockBefore) || noteClauseRe.MatchString(fc)):
+			c.kind, c.text = clauseRestriction, strings.Trim(normText(text), " .")
+		default:
+			c.kind = clauseSubject
+			subjects++
+		}
+		out = append(out, c)
 	}
-	out += s.src[pos:]
-	if slices.ContainsFunc(s.spans, func(sp span) bool { return sp.kind == spanDate }) {
-		out = strings.ReplaceAll(strings.TrimSpace(strings.ReplaceAll(out, "  ", " ")), " .", ".")
-	}
-	return strings.TrimSpace(out)
+	return out
 }

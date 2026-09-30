@@ -53,8 +53,9 @@
     date text: "Wednesday, February 18"
     dates: 2026-02-18 Wed
     time: "noon to 12:50 pm" 12:00-12:50 within [Wednesday 12:00 - 1:20pm]
-    match: FUZZY
-    phrase: "Pick-up hockey 18+ only"
+    effects: restriction "only"
+    match: EXACT
+    phrase: "Pick-up hockey 18+"
     at: group "Drop-in schedule - skating" activity "Pick-up hockey 18+" sessions 2026-02-18 Wed 12:00-13:20
 
 == Ray Friel Recreation Complex special_hours

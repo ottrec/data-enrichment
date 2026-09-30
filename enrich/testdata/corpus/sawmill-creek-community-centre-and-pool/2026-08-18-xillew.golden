@@ -6,7 +6,7 @@
     dates: to 2026-08-21 Fri
     time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 10:00am - 1:30pm; Friday 11:00am - 2:00pm; Friday 11:30am - 1:30pm; Monday 10:00am - 1:30pm; Monday 11:00am - 2:00pm; Monday 11:30am - 1:30pm; Saturday 11:00am - 1:00pm; Saturday 11:30am - 1:30pm; Saturday 12:00 - 1:00pm; Sunday 11:00am - 1:00pm; Sunday 11:30am - 1:30pm; Sunday 12:00 - 1:00pm; Thursday 11:30am - 1:30pm; Thursday 12:00 - 1:00pm; Thursday 7:00am - 1:30pm; Tuesday 11:30am - 1:00pm; Tuesday 11:30am - 1:30pm; Tuesday 12:00 - 1:00pm; Tuesday 7:00am - 1:30pm; Wednesday 10:00am - 1:30pm; Wednesday 11:00am - 2:00pm; Wednesday 11:30am - 1:30pm]
     match: FUZZY
-    phrase: "Lane Swim, daily will have shared space"
+    phrase: "Lane Swim, daily, will have shared space"
     sources: schedule_changes special_hours
     at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim"
 - IGNORED date-context "Monday, September 7"
@@ -46,6 +46,6 @@
     dates: to 2026-08-21 Fri
     time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 10:00am - 1:30pm; Friday 11:00am - 2:00pm; Friday 11:30am - 1:30pm; Monday 10:00am - 1:30pm; Monday 11:00am - 2:00pm; Monday 11:30am - 1:30pm; Saturday 11:00am - 1:00pm; Saturday 11:30am - 1:30pm; Saturday 12:00 - 1:00pm; Sunday 11:00am - 1:00pm; Sunday 11:30am - 1:30pm; Sunday 12:00 - 1:00pm; Thursday 11:30am - 1:30pm; Thursday 12:00 - 1:00pm; Thursday 7:00am - 1:30pm; Tuesday 11:30am - 1:00pm; Tuesday 11:30am - 1:30pm; Tuesday 12:00 - 1:00pm; Tuesday 7:00am - 1:30pm; Wednesday 10:00am - 1:30pm; Wednesday 11:00am - 2:00pm; Wednesday 11:30am - 1:30pm]
     match: FUZZY
-    phrase: "Lane Swim, daily will have shared space"
+    phrase: "Lane Swim, daily, will have shared space"
     duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane Swim, daily 11:30 am to 1:30 pm, will have shared space"
     at: facility

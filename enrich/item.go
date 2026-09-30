@@ -51,12 +51,6 @@ var (
 	// skating and ice sports cancelled")
 	trailingKwRe  = regexp.MustCompile(`(?i)[ ,]+(?:and |are |is |will be )*(cancelled|canceled|added|closed)` + kwReason + `[. ]*$`)
 	untilNoticeRe = regexp.MustCompile(`(?i)\buntil further notice\b`)
-	// a preposition left at the front of the phrase once the clock range it
-	// introduced was taken out (see sentence.remainder). Only the two that
-	// introduce a clock and nothing else: "beginning"/"starting" introduce
-	// dates too ("Fridays and Sundays beginning July 3"), and stripping those
-	// edits the date language instead.
-	danglingPrepRe = regexp.MustCompile(`(?i)^(?:from|between)\s+`)
 	// the end-of-season dog swim the city adds at outdoor pools, which is
 	// never a row in any published table
 	dogSwimRe = regexp.MustCompile(`(?i)\bdogs?\s+swim`)
@@ -103,14 +97,23 @@ var amenityQualifier = map[string]bool{
 }
 
 // processItem parses one extracted line/item and emits objects for it.
-// text is the source text as posted and becomes RawText; readAs, when not
-// empty, is the sentence the walk composed for it, which the parser reads
-// instead and which becomes Reading.
-func (b *blockCtx) processItem(st *walkState, text, readAs, itemHTML string, off [2]int, links []anchor, extraAmbig []string) {
-	raw := strings.TrimSpace(text)
+// r is the walk's reading of the line: its text as posted, which becomes
+// RawText, and its leading date and the rest, which the walk parsed.
+// readAs, when not empty, is the sentence the walk composed for it, which
+// the parser reads instead of the line, parsing its date here, and which
+// becomes Reading when it differs from the text.
+func (b *blockCtx) processItem(st *walkState, r reading, readAs, itemHTML string, off [2]int, links []anchor, extraAmbig []string) {
+	raw := strings.TrimSpace(r.text)
 	t, reading := raw, ""
-	if s := strings.TrimSpace(readAs); s != "" && s != raw {
-		t, reading = s, s
+	own, working := r.spec, r.rest
+	if s := strings.TrimSpace(readAs); s != "" {
+		t, own, working = s, nil, s
+		if s != raw {
+			reading = s
+		}
+		if sp, rest, ok := parseLeadingDate(s, b.anchor); ok {
+			own, working = &sp, rest
+		}
 	}
 	if t == "" {
 		return
@@ -136,11 +139,9 @@ func (b *blockCtx) processItem(st *walkState, text, readAs, itemHTML string, off
 
 	// dates: the item's own leading date wins over the head context
 	spec := st.head
-	working := t
-	if own, rest, ok := parseLeadingDate(t, b.anchor); ok {
-		spec = &own
+	if own != nil {
+		spec = own
 		n.DateText = own.Raw
-		working = rest
 	}
 	if spec != nil {
 		n.Ambiguities = append(n.Ambiguities, spec.Ambig...)
@@ -299,9 +300,8 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	}
 
 	// the sentence-level patterns read the sentence with only the date
-	// blanked; the clause code reads it without its clocks either
+	// blanked; the subject and clause rules read it without its clocks either
 	working = sent.masked(spanDate)
-	remainder := sent.remainder()
 	fworking := foldText(working)
 
 	// whole-facility closure sentences
@@ -343,7 +343,7 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	// the facility itself, an activity, or an amenity (an amenity closure
 	// makes no claims about activities: e.g. one closed arena of two does
 	// not cancel the skating in the other)
-	fremainder := foldText(remainder)
+	fremainder := foldText(sent.remainder())
 	if m := subjectClosedRe.FindStringSubmatch(fremainder); m != nil && !strings.HasPrefix(fremainder, "all ") {
 		n.Effects.Closure = true
 		n.Effects.Cancelled = allProgramsRe.MatchString(fremainder)
@@ -418,33 +418,21 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 		return
 	}
 
+	// the typed clauses fold into the effects and the subject phrase
 	var phraseParts []string
-	for _, clause := range strings.Split(remainder, ",") {
-		clause = strings.TrimSpace(clause)
-		if clause == "" {
-			continue
-		}
-		fc := foldText(clause)
-		if fc == "" || fc == "and" || fc == "or" {
-			continue // a conjunction a clock range left as a clause of its own (see remainder)
-		}
-		if m := keywordRe.FindStringSubmatch(fc); m != nil {
-			setKeyword(&n.Effects, m[1])
-			continue
-		}
-		if fc == "schedule change" || fc == "schedule changes" {
+	for _, c := range sent.clauses() {
+		switch c.kind {
+		case clauseKeyword:
+			setKeyword(&n.Effects, c.kw)
+		case clauseTimeChange:
 			n.Effects.TimeChange = true
-			continue
-		}
-		if hoursClauseRe.MatchString(fc) {
+		case clauseHours:
 			n.Effects.ModifiedHours = true
-			continue
+		case clauseRestriction:
+			n.Effects.Restriction = c.text
+		case clauseSubject:
+			phraseParts = append(phraseParts, c.text)
 		}
-		if (strings.HasSuffix(fc, " only") || noteClauseRe.MatchString(fc)) && len(phraseParts) > 0 {
-			n.Effects.Restriction = strings.Trim(normText(clause), " .")
-			continue
-		}
-		phraseParts = append(phraseParts, clause)
 	}
 	phrase := strings.Trim(strings.Join(phraseParts, ", "), " .")
 	// keyword glued to the phrase without a comma
@@ -454,13 +442,6 @@ func (b *blockCtx) processSentence(n notice, st *walkState, spec *dateSpec, work
 	}
 	if openEnded && strings.Contains(fworking, "closed") {
 		n.Effects.Closure = true
-	}
-	// a clock range leaves the preposition that introduced it behind (see
-	// remainder): "From 11 am to 2 pm, all drop-in programs are cancelled"
-	// reads "From all drop-in programs", which matches nothing. Only when a
-	// clock was actually taken out.
-	if len(clocks) > 0 {
-		phrase = danglingPrepRe.ReplaceAllString(phrase, "")
 	}
 	n.Scope.Phrase = phrase
 	fphrase := foldText(phrase)

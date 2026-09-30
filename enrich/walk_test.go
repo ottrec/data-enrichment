@@ -160,7 +160,7 @@ leaf clock "11:45 am to 12:45 pm"`,
 		{
 			name: "date head carrying more than the date over statements",
 			html: `<ul><li>Monday, July 27 to Friday, July 31, between 9 am and 4 pm<ul><li>All drop-in programs are cancelled.</li></ul></li></ul>`,
-			want: `item date+stmt "Monday, July 27 to Friday, July 31, between 9 am and 4 pm"
+			want: `item date+clock "Monday, July 27 to Friday, July 31, between 9 am and 4 pm"
   leaf stmt "All drop-in programs are cancelled."`,
 			stats: "dated-head-item=1 leaf=1",
 		},

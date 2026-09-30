@@ -35,7 +35,7 @@
     time: "2:30-3:30 pm" 14:30-15:30 exact [Friday 2:30 - 3:30pm]
     effects: cancelled
     match: EXACT
-    phrase: "Pickleball - rotations -"
+    phrase: "Pickleball - rotations"
     ambiguities: meridiem-inferred
     sources: schedule_changes special_hours
     at: group "Drop-in schedule - racquet sports" activity "Pickleball - rotations" sessions 2025-11-28 Fri 14:30-15:30
@@ -89,7 +89,7 @@
     dates: 2025-11-28 Fri
     time: "2:30-3:30 pm" 14:30-15:30 exact [Friday 2:30 - 3:30pm]
     match: EXACT
-    phrase: "Pickleball - rotations -"
+    phrase: "Pickleball - rotations"
     ambiguities: meridiem-inferred
     duplicate of: schedule_changes "Drop-in schedule - racquet sports" "Pickleball - rotations, 2:30-3:30 pm - cancelled"
     at: facility

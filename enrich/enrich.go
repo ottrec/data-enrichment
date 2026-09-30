@@ -225,12 +225,13 @@ func (fc *facCtx) processBlock(blockHTML, source string, grp *groupMatcher) {
 				if line == "" {
 					continue
 				}
-				if spec, rest, ok := parseLeadingDate(line, fc.anchor); ok && restIsTrivial(rest) {
-					st.head, st.headRaw = &spec, line
+				r := b.read(line)
+				if r.dateOnly() {
+					st.head, st.headRaw = r.spec, line
 					b.addIgnored("date-context", line, part.HTML, part.Off, st, nil)
 					continue
 				}
-				b.processItem(st, line, "", part.HTML, part.Off, part.Links, nil)
+				b.processItem(st, r, "", part.HTML, part.Off, part.Links, nil)
 			}
 		case "list":
 			b.resolve(st, b.flatten(part.Items))
@@ -242,10 +243,13 @@ func (fc *facCtx) processBlock(blockHTML, source string, grp *groupMatcher) {
 // reading is what the walk knows about one line before the sentence parser
 // sees it: a date alone (spec), a date with a rest that is a bare clock
 // (spec and clock) or a statement (spec and stmt), a garbled date
-// (garbled), a bare clock (clock), or a statement (stmt).
+// (garbled), a bare clock (clock), or a statement (stmt). rest is what the
+// sentence parser reads: what followed the date, as written, or the line
+// itself when no date led it.
 type reading struct {
 	text    string    // the line as written
 	spec    *dateSpec // its leading date, when one parsed
+	rest    string    // the line after its leading date, as written
 	garbled []string  // the markers of a date-like line that did not parse
 	clock   string    // the rest after any date, when it is nothing but clock ranges
 	stmt    string    // the rest after any date, otherwise
@@ -254,17 +258,17 @@ type reading struct {
 // dateOnly reports whether the line was only a date.
 func (r reading) dateOnly() bool { return r.spec != nil && r.clock == "" && r.stmt == "" }
 
-// read classifies one line with the walk-level parsers only; processItem
-// parses it again when it becomes an item.
+// read classifies one line with the walk-level parsers; processItem takes
+// the reading, so the line's date is parsed once.
 func (b *blockCtx) read(line string) reading {
-	r := reading{text: line}
+	r := reading{text: line, rest: line}
 	spec, rest, ok := parseLeadingDate(line, b.anchor)
 	switch {
 	case ok && restIsTrivial(rest):
-		r.spec = &spec
+		r.spec, r.rest = &spec, rest
 		return r
 	case ok:
-		r.spec = &spec
+		r.spec, r.rest = &spec, rest
 		rest = strings.Trim(rest, " .,")
 	case len(spec.Ambig) > 0:
 		r.garbled = spec.Ambig
@@ -505,7 +509,7 @@ func (b *blockCtx) resolve(st *walkState, units []unit) {
 			s.headRaw = u.r.text
 			b.addIgnored("date-context", u.r.text, u.html, u.off, s, u.r.garbled)
 		case uItem:
-			b.processItem(s, u.r.text, "", u.html, u.off, u.links, nil)
+			b.processItem(s, u.r, "", u.html, u.off, u.links, nil)
 			s.head, s.headRaw = u.r.spec, u.r.spec.Raw
 		case uHead:
 			if u.completed {
@@ -519,7 +523,7 @@ func (b *blockCtx) resolve(st *walkState, units []unit) {
 			if u.supp {
 				amb = nil
 			}
-			b.processItem(s, u.r.text, "", u.html, u.off, u.links, amb)
+			b.processItem(s, u.r, "", u.html, u.off, u.links, amb)
 		case uLeaf:
 			switch {
 			case u.withHead:
@@ -527,7 +531,7 @@ func (b *blockCtx) resolve(st *walkState, units []unit) {
 			case u.completes:
 				b.complete(s, &units[u.stmt], u)
 			default:
-				b.processItem(s, u.r.text, "", u.html, u.off, u.links, nil)
+				b.processItem(s, u.r, "", u.html, u.off, u.links, nil)
 			}
 		}
 	}
@@ -568,7 +572,7 @@ func (b *blockCtx) completeHead(s *walkState, units []unit, h int) {
 	for i := range specs {
 		local := *s
 		local.head, local.headRaw = &specs[i], specs[i].Raw
-		b.processItem(&local, head.r.text, withStmt(head.statement(), ""), head.html, head.off, head.links, nil)
+		b.processItem(&local, head.r, withStmt(head.statement(), ""), head.html, head.off, head.links, nil)
 	}
 }
 
@@ -584,13 +588,14 @@ func (b *blockCtx) complete(s *walkState, stmt, u *unit) {
 	if u.r.dateOnly() {
 		b.addIgnored("date-context", u.r.text, u.html, u.off, s, nil)
 		s.head, s.headRaw = u.r.spec, u.r.spec.Raw
-		b.processItem(s, stmt.r.text, withStmt(stmt.statement(), ""), stmt.html, stmt.off, stmt.links, nil)
+		b.processItem(s, stmt.r, withStmt(stmt.statement(), ""), stmt.html, stmt.off, stmt.links, nil)
 		return
 	}
 	if u.r.spec != nil {
 		s.head, s.headRaw = u.r.spec, u.r.spec.Raw
 	}
-	b.processItem(s, stmt.r.text+"\n"+u.r.text, withStmt(stmt.statement(), u.r.clock), stmt.html, stmt.off, append(slices.Clone(stmt.links), u.links...), nil)
+	// the two lines as posted are the text; the composed sentence is what is read
+	b.processItem(s, reading{text: stmt.r.text + "\n" + u.r.text}, withStmt(stmt.statement(), u.r.clock), stmt.html, stmt.off, append(slices.Clone(stmt.links), u.links...), nil)
 }
 
 // withStmt is the sentence a completion reads as: the statement without

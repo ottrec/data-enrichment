@@ -26,7 +26,7 @@
     dates: to 2026-08-21 Fri
     time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 11:30am - 1:30pm; Monday 11:30am - 1:30pm; Saturday 11:30am - 1:30pm; Sunday 11:30am - 1:30pm; Thursday 11:30am - 1:30pm; Tuesday 11:30am - 1:30pm; Wednesday 11:30am - 1:30pm]
     match: FUZZY
-    phrase: "Lane Swim, daily will have shared space"
+    phrase: "Lane Swim, daily, will have shared space"
     sources: schedule_changes special_hours
     at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim"
 
@@ -69,6 +69,6 @@
     dates: to 2026-08-21 Fri
     time: "11:30 am to 1:30 pm" 11:30-13:30 exact [Friday 11:30am - 1:30pm; Monday 11:30am - 1:30pm; Saturday 11:30am - 1:30pm; Sunday 11:30am - 1:30pm; Thursday 11:30am - 1:30pm; Tuesday 11:30am - 1:30pm; Wednesday 11:30am - 1:30pm]
     match: FUZZY
-    phrase: "Lane Swim, daily will have shared space"
+    phrase: "Lane Swim, daily, will have shared space"
     duplicate of: schedule_changes "Drop-in schedule - swim and aquafitness" "Lane Swim, daily 11:30 am to 1:30 pm, will have shared space"
     at: facility

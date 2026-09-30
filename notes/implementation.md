@@ -61,7 +61,8 @@ since they are deterministic; anything ambiguous stays higher up.
    context; date-only paragraphs set the date context; paragraph lines
    become candidate notices. A list is flattened into units in document
    order (one per line, with its reading: a date, a date and clock, a date
-   and statement, a garbled date, a clock, a statement) and resolved in
+   and statement, a garbled date, a clock, a statement; the item parser
+   takes the reading, so a line's date is parsed once) and resolved in
    order under a state copied from each unit's parent's. A statement head
    is a context for everything under it, through any number of date
    contexts; a leaf carrying only a date, only a clock, or a date and a
@@ -95,20 +96,20 @@ since they are deterministic; anything ambiguous stays higher up.
 5. **Items** (`item.go`): multi-sentence items split at sentence boundaries
    and parse per sentence (sibling freeform sentences don't add redundant
    unparsed records). A sentence is a `sentence` (`sentence.go`): the
-   embedded date, the clock ranges and the single-ended mentions are
-   claimed as byte spans over the source text; the sentence-level patterns
-   read the text with the date blanked, and the clause split reads
-   `remainder()`, which takes each span out under a fixed punctuation rule
-   (a clock range that was a clause of its own leaves one comma, a date
-   leaves one space, a single-ended mention leaves its keyword). Then
+   embedded date, the clock ranges (each with the "from" or "between" that
+   introduced it) and the single-ended mentions are claimed as byte spans
+   over the source text, which is never rewritten; the sentence-level
+   patterns read the text with the date blanked, and the clause rules read
+   `remainder()`, the text with the spans out and the blanks closed up, in
+   which a comma is a clause boundary wherever the city wrote one. Then
    sentence-level patterns first (see-schedule,
    facility closures, "closed for the season", "Regular season + range",
    "subject is closed" with facility/activity/amenity subject resolution),
-   then comma-clause decomposition (keyword clauses, trailing "only"
-   restriction, subject phrase). ("moved to" / "changed to" items degrade to
-   freeform or fuzzy-matched effectless notices: clock extraction glues the
-   subject onto the clause, and the MovedTo/ChangedTo effects were removed
-   as never-occurring rather than fixed.) Scope phrases ("all
+   then the typed clauses (`clauses()`: keyword, time change, hours label,
+   restriction, conjunction, subject) folded into effects and the subject
+   phrase. ("changed to" items degrade to fuzzy-matched effectless notices;
+   the MovedTo/ChangedTo effects were removed as never-occurring rather than
+   fixed.) Scope phrases ("all
    drop-in skating and ice sports") resolve to whole group / class-matched
    activities / groups by title. Amenity subjects (hot tub, one named arena
    of two, ...) never claim activity effects.

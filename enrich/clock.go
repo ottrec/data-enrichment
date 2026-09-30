@@ -16,7 +16,11 @@ const (
 
 const clockTokenPat = `(?:\d{1,2}(?::\d{2})?(?:\s*(?:a\.?m\.?|p\.?m\.?))?|noon|midnight)`
 
-var clockRangeRe = regexp.MustCompile(`(?i)(?:\b|^)(` + clockTokenPat + `)\s*(?:to|until|through|and|-|–|—)\s*(` + clockTokenPat + `)\b`)
+// clockRangeRe matches a clock range together with the preposition that
+// introduces it, when one does ("from 11 am to 2 pm", "between 7:30 and
+// 10:30 am"). "and" joins a range only after "between" (findClockRanges
+// checks): "7 and 8 pm" is two times.
+var clockRangeRe = regexp.MustCompile(`(?i)(?:\b(from|between)\s+)?\b(` + clockTokenPat + `)\s*(to|until|through|and|-|–|—)\s*(` + clockTokenPat + `)\b`)
 
 var clockSideRe = regexp.MustCompile(`(?i)^(?:(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)?|(noon)|(midnight))$`)
 
@@ -73,8 +77,12 @@ func parseClockSide(s string) (minutes int, explicit bool, ok bool) {
 // findClockRanges finds the clock ranges in s and returns them with their
 // spans; s is left alone. A match must have an explicit meridiem,
 // noon/midnight, or minutes on at least one side (so "December 13 and 14"
-// is not a clock range). s may be a masked sentence, and a match may run
-// across a blank; the mention's text is its words.
+// is not a clock range), and "and" joins the two sides only after
+// "between" ("between 7:30 and 10:30 am"; "Lane swim at 7 and 8 pm" has no
+// range). The span takes the "from" or "between" that introduced the range
+// with it, so the preposition goes with its object; the mention's text is
+// the range's words. s may be a masked sentence, and a match may run
+// across a blank.
 func findClockRanges(s string) []clockMention {
 	var out []clockMention
 	pos := 0
@@ -83,19 +91,22 @@ func findClockRanges(s string) []clockMention {
 		if loc == nil {
 			break
 		}
-		a, b := s[pos+loc[2]:pos+loc[3]], s[pos+loc[4]:pos+loc[5]]
+		prep, a, joiner, b := "", s[pos+loc[4]:pos+loc[5]], s[pos+loc[6]:pos+loc[7]], s[pos+loc[8]:pos+loc[9]]
+		if loc[2] >= 0 {
+			prep = strings.ToLower(s[pos+loc[2] : pos+loc[3]])
+		}
 		var cands []schema.ClockRange
 		var inferred bool
-		if clockish(a) || clockish(b) {
+		if (clockish(a) || clockish(b)) && (strings.ToLower(joiner) != "and" || prep == "between") {
 			cands, inferred = clockCandidates(a, b)
 		}
-		start, end := pos+loc[0], pos+loc[1]
+		start, clockStart, end := pos+loc[0], pos+loc[4], pos+loc[1]
 		pos = end
 		if len(cands) == 0 {
 			continue // not a clock range
 		}
 		out = append(out, clockMention{
-			Text:     strings.Join(strings.Fields(s[start:end]), " "),
+			Text:     strings.Join(strings.Fields(s[clockStart:end]), " "),
 			Span:     span{start, end, spanClock},
 			Cands:    cands,
 			Inferred: inferred,
@@ -105,7 +116,8 @@ func findClockRanges(s string) []clockMention {
 }
 
 // onlyClocks reports whether s is clock ranges and nothing else, punctuation
-// aside ("11:45 am to 12:45 pm", "8 to 9 am, 10 to 11 am").
+// aside ("11:45 am to 12:45 pm", "8 to 9 am, 10 to 11 am", "from 8 to 9
+// am").
 func onlyClocks(s string) bool {
 	clocks := findClockRanges(s)
 	if len(clocks) == 0 {

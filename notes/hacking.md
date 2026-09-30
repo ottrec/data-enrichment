@@ -35,14 +35,24 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   ranges, the single-ended mentions). The text is never rewritten; a finder
   scans `masked()` (the claimed spans blanked to spaces, offsets kept) and
   `claim` records only the unclaimed pieces of a match, so spans never
-  overlap. `remainder()` is the text for the clause split, and its comment
-  is the rule for what each kind of span takes with it: a clock range takes
-  the spaces and commas on both sides and leaves one comma when it had one
-  on each side (a clause of its own) and a space otherwise, leaving the
-  preposition or conjunction that introduced it; a date takes the space
-  before it and the spaces and commas after it and leaves one space; a
-  single-ended mention takes nothing. These are the rules the old string
-  rewrites had as side effects; entry 12 changes them.
+  overlap. `remainder()` is the masked text with its blanks closed up
+  (`clauseText`: runs of spaces become one, a space before a period or a
+  comma goes): a span takes nothing but itself, so a comma is a clause
+  boundary wherever the city wrote it ("Public swim, 1 to 3 pm, 25m pool
+  only" reads "Public swim,, 25m pool only"), and nothing dangles because a
+  date span and a clock span hold the preposition that introduced them
+  ("From 11 am to 2 pm, all drop-in programs are cancelled" reads ", all
+  drop-in programs are cancelled"); a single-ended mention leaves its
+  keyword. `clauses()` splits the remainder at its commas and types each
+  segment: keyword (`keywordRe`, with its reason), time change ("schedule
+  change"), hours label (`hoursClauseRe`), restriction ("X only", a
+  `noteClauseRe` note, or a bare "only" left beside a clock span, each only
+  with a subject before it), conjunction ("and"/"or" or punctuation alone),
+  else subject. The bare "only" is typed because read as a subject it
+  matches "Women's only swim" and the notice claims a second activity.
+  `rewrite_contract_test.go` guards the finders: the spans take exactly the
+  clauses they cover, the remainder's words are the sentence's minus the
+  spans', no "from"/"between" is left behind.
 - `date.go` — `parseLeadingDate(s, anchor) (dateSpec, rest, ok)`. dateSpec
   carries exactly one form: enumerated Dates, From/To range, Weekdays set,
   or OpenEnded; `restIsTrivial` decides "the text was only a date"
@@ -85,16 +95,12 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   rewrites s. A match needs a meridiem/noon/midnight/colon on at least one
   side ("December 13 and 14" is not a clock). Missing meridiems produce
   candidates: >12h readings dropped when a shorter exists, sorted
-  shortest-first, `Inferred` set. What a clock span takes with it is
-  `remainder()`'s rule: a range that was a clause of its own leaves one
-  comma, so the clauses around it stay separate ("Aquafit, 8:05 to 9 am,
-  cancelled" reads "Aquafit, cancelled", which is what lets "Public swim, 1
-  to 3 pm, 25m pool only" reach the restriction clause), and what introduced
-  it stays behind: the clause loop skips the bare conjunction ("Lane swim,
-  12:30 to 1 pm, and 8 to 9 pm") and `danglingPrepRe` takes the preposition
-  off the phrase ("From 11 am to 2 pm, all drop-in programs are
-  cancelled"). `onlyClocks` is the walk's test for a line that is nothing
-  but clock ranges.
+  shortest-first, `Inferred` set. A range's span takes the "from" or
+  "between" that introduced it, so the preposition goes with its object;
+  the mention's text is the range alone. "and" joins a range only after
+  "between" ("between 7:30 and 10:30 am"; "Lane swim at 7 and 8 pm" is two
+  times, not a range). `onlyClocks` is the walk's test for a line that is
+  nothing but clock ranges, prepositions included ("from 8 to 9 am").
 - `match.go` — `groupMatcher` (one per schedule group; actEntry per
   normalized activity name with folded spellings + token sets from label and
   name). `match`: exact folded string → equal token sets → subset either
@@ -132,11 +138,13 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   activity → amenity → none; a generic facility word that names only some of
   the facility's groups, "the pool" at a complex, is a part and not the
   facility when the item cancels) →
-  comma-clause loop (keyword / schedule change / `hoursClauseRe` ("Modified
-  hours", "facility hours" ⇒ ModifiedHours) /
-  trailing "only" restriction, or a `noteClauseRe` note ("moved to 25m
-  warm pool", "reduced capacity", "no instructor") which is a Restriction
-  too / phrase parts) → trailing keyword glued
+  the typed clause fold: `sentence.clauses()` types each comma segment
+  (see sentence.go) and the loop folds them, a keyword into its effect, a
+  time change into TimeChange, an hours label ("Modified hours", "facility
+  hours") into ModifiedHours, a restriction ("25m pool only", "moved to 25m
+  warm pool", "reduced capacity", "no instructor", or a bare "only" after
+  a clock, with the text as written) into Restriction, a subject into the
+  phrase parts; conjunctions are dropped → trailing keyword glued
   without comma → allDropinsRe → allClassRe → empty-phrase branch (bare
   effects, date+clock hours items, date-only items) → activity match →
   amenity → freeform. Bare date+clock items: closureContext ⇒ Closure; in a
@@ -223,7 +231,10 @@ A list is read in two steps. `flatten` turns the `<li>` tree into units in
 document order, one per line (a `<br>` line is a unit of its own), each
 with its `reading` from the walk-level parsers (`parseLeadingDate`,
 `onlyClocks`): a date alone, a date with a rest that is a bare clock or a
-statement, a garbled date, a bare clock, or a statement. A unit's kind
+statement, a garbled date, a bare clock, or a statement. `processItem`
+takes the reading (the paragraph path reads its lines the same way), so a
+line's date is parsed once; a completion's composed sentence is parsed
+there instead, since it is not the line the walk read. A unit's kind
 follows from its reading and whether it has lines under it: a date with
 lines under it is a context (the children inherit the date, the line
 itself is an ignored `date-context`), a date carrying more than the date
@@ -284,7 +295,7 @@ b.md of the structural review) and what the rule does with each:
 | date{stmt{clock}} | 3 | context over a completed head: "<head>, <clock>" under the date ("Pickleball cancelled:" under "Wednesday, September 30") |
 | date{stmt\|stmt{supp}} | 3 | context; the inner head is complete by its cross-references |
 | stmt{supp} | 3 | complete by its cross-references, no marker ("Dogs swim free, 4:30 to 5:30 pm") |
-| date+rest{stmt} | 2 | item that dates its children ("Monday, July 27 to Friday, July 31, between 9 am and 4 pm"); its rest is a statement, so a clock child would complete it |
+| date+rest{stmt} | 2 | item that dates its children; its rest is a statement, so a clock child would complete it. The `<li>` this row counted, Sawmill's "Monday, July 27 to Friday, July 31, between 9 am and 4 pm", reads as a date and clock now that the clock span takes its "between", so it offers no statement |
 | date{stmt{stmt}} | 2 | context over a `head-unparsed` head; the child is an item ("The 25 m pool is closed between 7:30 and 10:30 am.") |
 | date{date+clock} | 2 | context; the child is an item with its own date ("June 20 to 28" over "Monday to Friday, 1:45 to 7 pm") |
 | stmt{stmt} | 1 | `head-unparsed`; the child is an item ("The rink is closed from noon to 4 pm") |
@@ -462,6 +473,15 @@ the parser saw; `cmd/report` renders one version as HTML.
   Friday") and OOM'd the machine — anything iterating weekday/date math
   deserves a bounds check and a capped corpus run.
 - `foldText` removes colons; never fold before clock parsing.
+- The restriction rule ("Public swim, 1 to 3 pm, 25m pool only" carries the
+  restriction "25m pool only") was dead for the corpus's whole life:
+  lifting the clock range out of the sentence took the commas around it
+  with it, so the sentence reached the clause loop as "Public swim 25m pool
+  only", one clause, and the unit test of the day pinned exactly that
+  ("Aquafit, 8:05 to 9 am, cancelled" was expected to read "Aquafit
+  cancelled"). 58dacdd noticed. The spans (`sentence.go`) leave the commas
+  where they are, and the clause contract in `rewrite_contract_test.go`
+  fails on the old join for 9 of 11 sentences.
 - The effect keyword can carry a reason after it ("cancelled due to annual
   maintenance", "closed for maintenance"), and `keywordRe`/`trailingKwRe` are
   end-anchored, so without `kwReason` the effect is lost entirely and the item
