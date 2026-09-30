@@ -1,6 +1,7 @@
 package enrich
 
 import (
+	"cmp"
 	"fmt"
 	"regexp"
 	"slices"
@@ -1288,13 +1289,19 @@ func dedupeStrings(s []string) []string {
 	return slices.Compact(s)
 }
 
-// slotInfo is one concrete schedule slot an item might refer to.
+// slotInfo is one concrete schedule slot an item might refer to, with the
+// schedule it comes from: its effective range, and the group and raw
+// activity label a session on it belongs to.
 type slotInfo struct {
 	label string
 	r     schema.ClockRange
 	wd    time.Weekday
 	hasWd bool
 	fixed schema.Date // non-zero for fixed-date (holiday) slots
+	er    schema.DateRange
+	erOK  bool
+	group string
+	act   string
 }
 
 // gatherSlots collects the matched activities' slots that could fall on the
@@ -1304,12 +1311,14 @@ func gatherSlots(acts []*actEntry, spec *dateSpec) []slotInfo {
 	wds := map[time.Weekday]bool{}
 	all := true
 	if spec != nil {
-		dates = spec.allDates(45)
+		dates = spec.days()
 		for _, d := range dates {
 			wds[d.Weekday()] = true
 		}
-		for _, wd := range spec.Weekdays {
-			wds[wd] = true
+		if len(dates) == 0 {
+			for _, wd := range spec.Weekdays {
+				wds[wd] = true
+			}
 		}
 		all = len(wds) == 0
 	}
@@ -1318,6 +1327,7 @@ func gatherSlots(acts []*actEntry, spec *dateSpec) []slotInfo {
 		for _, ref := range e.refs {
 			sched := ref.Schedule()
 			er, erOK := sched.ComputeEffectiveDateRange()
+			group, act := ref.ScheduleGroup().GetLabel(), ref.GetLabel()
 			for tm := range ref.Times() {
 				r, ok := tm.GetRange()
 				if !ok {
@@ -1327,7 +1337,7 @@ func gatherSlots(acts []*actEntry, spec *dateSpec) []slotInfo {
 					if all || slices.ContainsFunc(dates, func(d time.Time) bool {
 						return schema.MakeDateFromGo(d)/10 == sd/10
 					}) {
-						slots = append(slots, slotInfo{label: fmt.Sprintf("%s %s", sd, r), r: r, fixed: sd})
+						slots = append(slots, slotInfo{label: fmt.Sprintf("%s %s", sd, r), r: r, fixed: sd, group: group, act: act})
 					}
 					continue
 				}
@@ -1345,7 +1355,7 @@ func gatherSlots(acts []*actEntry, spec *dateSpec) []slotInfo {
 						continue
 					}
 				}
-				slots = append(slots, slotInfo{label: fmt.Sprintf("%s %s", wd, r), r: r, wd: wd, hasWd: true})
+				slots = append(slots, slotInfo{label: fmt.Sprintf("%s %s", wd, r), r: r, wd: wd, hasWd: true, er: er, erOK: erOK, group: group, act: act})
 			}
 		}
 	}
@@ -1425,19 +1435,24 @@ func slotLabels(slots []slotInfo) []string {
 }
 
 // explode enumerates the concrete sessions the spec's dates select from the
-// slots (nil when the dates can't be enumerated).
+// slots (nil when the dates can't be enumerated). A weekday slot is taken
+// only on dates its own schedule's effective range allows, so a slot kept
+// for one date of a range is not exploded onto the others.
 func explode(spec *dateSpec, slots []slotInfo) []sessKey {
 	if spec == nil {
 		return nil
 	}
 	var out []sessKey
-	for _, d := range spec.allDates(45) {
+	for _, d := range spec.days() {
 		dd := schema.MakeDateFromGo(d) / 10
 		for _, s := range slots {
 			switch {
-			case s.fixed != 0 && s.fixed/10 == dd, s.hasWd && s.wd == d.Weekday():
-				out = append(out, sessKey{date: schema.MakeDateFromGo(d), start: int(s.r.Start), end: int(s.r.End)})
+			case s.fixed != 0 && s.fixed/10 == dd:
+			case s.hasWd && s.wd == d.Weekday() && !(s.erOK && dateOutsideRange(s.er, d)):
+			default:
+				continue
 			}
+			out = append(out, sessKey{date: schema.MakeDateFromGo(d), start: int(s.r.Start), end: int(s.r.End), group: s.group, label: s.act})
 		}
 	}
 	return dedupeSess(out)
@@ -1450,7 +1465,7 @@ func explodeClock(spec *dateSpec, r schema.ClockRange) []sessKey {
 		return nil
 	}
 	var out []sessKey
-	for _, d := range spec.allDates(45) {
+	for _, d := range spec.days() {
 		out = append(out, sessKey{date: schema.MakeDateFromGo(d), start: int(r.Start), end: int(r.End)})
 	}
 	return dedupeSess(out)
@@ -1458,13 +1473,8 @@ func explodeClock(spec *dateSpec, r schema.ClockRange) []sessKey {
 
 func dedupeSess(s []sessKey) []sessKey {
 	slices.SortFunc(s, func(a, b sessKey) int {
-		if a.date != b.date {
-			return int(a.date - b.date)
-		}
-		if a.start != b.start {
-			return a.start - b.start
-		}
-		return a.end - b.end
+		return cmp.Or(cmp.Compare(a.date, b.date), cmp.Compare(a.start, b.start), cmp.Compare(a.end, b.end),
+			cmp.Compare(a.group, b.group), cmp.Compare(a.label, b.label))
 	})
 	return slices.Compact(s)
 }
@@ -1475,7 +1485,7 @@ func (b *blockCtx) checkDateInSchedules(n *notice, spec *dateSpec, acts []*actEn
 	if spec == nil {
 		return
 	}
-	dates := spec.allDates(45)
+	dates := spec.days()
 	if len(dates) == 0 {
 		return
 	}

@@ -118,8 +118,11 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   whole scope; both of its `class-unmatched` exits try `matchClassVocab`
   first), `gatherSlots` (fixed-date times via `SingleDate` ymd
   equality; weekday times filtered by the spec's weekdays and by schedule
-  effective ranges as negative-only evidence; ranges enumerate ≤45 days,
-  longer ⇒ all weekdays), `clockRelation` (exact > within > covers >
+  effective ranges as negative-only evidence; each `slotInfo` carries its
+  schedule's range, group and raw label), `explode` (sessions on
+  `dateSpec.days()`: the dates, or the range up to 366 days kept to its
+  weekdays; a weekday slot only on dates its own schedule's range allows),
+  `clockRelation` (exact > within > covers >
   overlaps), `maybeDisambiguate` (a `multiple` match narrowed only when
   exactly one candidate has an exact slot), `emitTimesWithSlots` (one
   notice per clock mention; picks the best-relating meridiem candidate).
@@ -151,7 +154,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   matches the per-group copies; effects compare by kind so "25 m" and "25m"
   restrictions match), and `place`
   (converts recs to Objects and builds the reference tree; sessions filled
-  from rec.sessions, `added` vs `objects` split by Effects.Added).
+  from rec.sessions, each only under the group and label whose slot
+  produced it (added times, which no slot produced, under every matched
+  label), `added` vs `objects` split by Effects.Added).
 - `cmd/enrich` — `-versions n` (0=all), `-o` stdout/dir/stats-only,
   `-format json|pb|golden`; stats to stderr, aggregated over versions.
   `internal/dataver` is the shared version-cache iterator (same as the dump
@@ -343,6 +348,18 @@ the parser saw; `cmd/report` renders one version as HTML.
 - The same block HTML can resolve differently under a different anchor year
   or schedule; don't cache on block hash alone (see matching.md).
 - Stats keys are ad-hoc, not API.
+- Enumeration was capped at 45 days: past it a notice got no sessions,
+  `gatherSlots` fell back to every slot with no range filter, and
+  `date-outside-schedule` was not checked, so three consumers disagreed
+  about the same long range. The cap also hid the one long closure that
+  names an activity (Kanata's "The hot tub and sauna are closed.", October
+  31 to March 13). Within the cap, `explode` checked a slot's schedule range
+  per weekday rather than per date, ignored a weekday restriction on a
+  range, and `place` hung every session on every label and group the notice
+  matched: 7,071 refs over the corpus sat on sessions no schedule publishes
+  (a holiday table's label, another spelling, October 5 after the fall
+  table ended), which is what the `session-outside-schedule` property
+  listed. None reached /today, which only enumerates published sessions.
 - "Until further notice" was a sentence flag that only set OpenEnded, so
   under a head date it gave Dates=[head] plus an open end, and enrichidx's
   `applies` reads explicit Dates first: Canterbury's "The pool is closed for

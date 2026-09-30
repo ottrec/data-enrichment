@@ -21,8 +21,8 @@
     effects: cancelled
     match: EXACT
     phrase: "Public skating and figure skating"
-    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-30 Fri 19:15-20:05, 2026-01-30 Fri 20:15-21:05
-    at: group "Drop-in schedule - skating" activity "Figure skating" sessions 2026-01-30 Fri 19:15-20:05, 2026-01-30 Fri 20:15-21:05
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-30 Fri 19:15-20:05
+    at: group "Drop-in schedule - skating" activity "Figure skating" sessions 2026-01-30 Fri 20:15-21:05
 - IGNORED date-context "Sunday, February 1"
     at: facility
 - IGNORED duplicate "Public skating drop-ins, cancelled"

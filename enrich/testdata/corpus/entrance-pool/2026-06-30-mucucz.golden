@@ -41,7 +41,6 @@
     match: EXACT
     phrase: "Public swim"
     ambiguities: weekday-mismatch
-    at: group "Drop-in schedule - Canada Day" activity "Public Swim *Reservations not required." sessions 2026-07-13 Mon 13:00-19:00
     at: group "Drop-in schedule - swimming" activity "Public swim" sessions 2026-07-13 Mon 13:00-19:00
 - IGNORED heading "Summer 2026"
     section: "Summer 2026"

@@ -9,8 +9,8 @@
     match: EXACT
     phrase: "Family skating and public skating"
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-08-31 Mon 16:15-17:05, 2026-08-31 Mon 17:15-18:05
-    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-08-31 Mon 16:15-17:05, 2026-08-31 Mon 17:15-18:05
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-08-31 Mon 16:15-17:05
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-08-31 Mon 17:15-18:05
 - IGNORED date-context "Tuesday, September 15"
     at: group "Drop-in schedule - skating"
 - NOTICE "All drop-in skating and ice sports, cancelled"

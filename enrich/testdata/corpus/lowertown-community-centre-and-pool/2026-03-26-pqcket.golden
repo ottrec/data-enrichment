@@ -88,7 +88,6 @@
     effects: cancelled
     match: EXACT
     phrase: "Pickleball"
-    at: group "Drop-in schedule - Easter weekend" activity "Pickleball *Reservations required." sessions 2026-03-25 Wed 08:30-12:30
     at: group "Drop-in schedule - gymnasium sports" activity "Pickleball *Reservations required." sessions 2026-03-25 Wed 08:30-12:30
 - IGNORED date-context "Thursday March 26"
     at: facility

@@ -20,8 +20,8 @@
     match: FUZZY
     phrase: "Figure skating and hockey 35+"
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - ice sports" activity "Figure Skating (6+)" sessions 2026-12-24 Thu 16:00-16:50, 2026-12-24 Thu 17:00-17:50
-    at: group "Drop-in schedule - ice sports" activity "Hockey 35+" sessions 2026-12-24 Thu 16:00-16:50, 2026-12-24 Thu 17:00-17:50
+    at: group "Drop-in schedule - ice sports" activity "Figure Skating (6+)" sessions 2026-12-24 Thu 16:00-16:50
+    at: group "Drop-in schedule - ice sports" activity "Hockey 35+" sessions 2026-12-24 Thu 17:00-17:50
 - IGNORED date-context "Saturday, December 26"
     at: group "Drop-in schedule - ice sports"
 - NOTICE "All drop-in ice sports, cancelled"
@@ -43,8 +43,8 @@
     match: FUZZY
     phrase: "Figure skating and hockey 35+"
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - ice sports" activity "Figure Skating (6+)" sessions 2026-12-31 Thu 16:00-16:50, 2026-12-31 Thu 17:00-17:50
-    at: group "Drop-in schedule - ice sports" activity "Hockey 35+" sessions 2026-12-31 Thu 16:00-16:50, 2026-12-31 Thu 17:00-17:50
+    at: group "Drop-in schedule - ice sports" activity "Figure Skating (6+)" sessions 2026-12-31 Thu 16:00-16:50
+    at: group "Drop-in schedule - ice sports" activity "Hockey 35+" sessions 2026-12-31 Thu 17:00-17:50
 
 == Bernard Grandmaître Arena schedule_changes "Drop-in schedule - skating"
 - IGNORED date-context "Saturday, November 21"

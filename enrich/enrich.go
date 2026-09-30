@@ -75,10 +75,13 @@ func BlockHash(blockHTML string) string {
 	return hex.EncodeToString(sum[:8])
 }
 
-// sessKey identifies one concrete session: a date plus clock range.
+// sessKey identifies one concrete session: a date plus clock range, and
+// the group and raw activity label of the schedule slot it came from ("" for
+// an added time, which no slot produced).
 type sessKey struct {
-	date       schema.Date // full YYYYMMDDW date
-	start, end int         // minutes from midnight
+	date         schema.Date // full YYYYMMDDW date
+	start, end   int         // minutes from midnight
+	group, label string
 }
 
 // rec is one extracted fragment before placement.
@@ -697,10 +700,22 @@ func (fc *facCtx) place() {
 					if !actsByGroup[gl][label] && !r.novel {
 						continue
 					}
-					a := act(gl, label, r.novel)
-					placedAny = true
 					if len(r.sessions) > 0 {
+						// a session hangs only on the label whose schedule
+						// produced its slot, not on every spelling or group
+						// the notice matched
+						var mine []sessKey
 						for _, sk := range r.sessions {
+							if sk.label == "" || sk.group == gl && sk.label == label {
+								mine = append(mine, sessKey{date: sk.date, start: sk.start, end: sk.end})
+							}
+						}
+						if len(mine) == 0 {
+							continue
+						}
+						a := act(gl, label, r.novel)
+						placedAny = true
+						for _, sk := range mine {
 							s := a.sessions[sk]
 							if s == nil {
 								s = &epb.Session_builder{Date: int32(sk.date), Start: int32(sk.start), End: int32(sk.end)}
@@ -714,6 +729,8 @@ func (fc *facCtx) place() {
 							}
 						}
 					} else {
+						a := act(gl, label, r.novel)
+						placedAny = true
 						a.objects = append(a.objects, r.id)
 					}
 				}

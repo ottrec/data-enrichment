@@ -9,17 +9,10 @@
     match: SCOPE_PHRASE
     phrase: "All group fitness programs"
     ambiguities: matched-other-group
-    at: group "Drop-in schedule - group fitness" activity "Bootcamp" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "Cardio 50+" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "Cardio and strength" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "HIIT" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "Indoor cycling" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "Pilates" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "TRX" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "Yoga" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "Zumba Gold" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
-    at: group "Drop-in schedule - group fitness" activity "Zumba Toning" sessions 2025-10-13 Mon 07:30-08:30, 2025-10-13 Mon 09:30-10:30, 2025-10-13 Mon 18:15-19:15, 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Bootcamp" sessions 2025-10-13 Mon 07:30-08:30
+    at: group "Drop-in schedule - group fitness" activity "Cardio and strength" sessions 2025-10-13 Mon 18:15-19:15
+    at: group "Drop-in schedule - group fitness" activity "Zumba" sessions 2025-10-13 Mon 19:30-20:30
+    at: group "Drop-in schedule - group fitness" activity "Zumba Gold" sessions 2025-10-13 Mon 09:30-10:30
 
 == Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - swim and aquafit"
 - IGNORED date-context "Wednesday, October 8"
@@ -94,9 +87,7 @@
     match: SCOPE_PHRASE
     phrase: "All badminton drop-ins"
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - racquet sports" activity "Badminton - family" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
     at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - adult" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
-    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - all ages" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
 - IGNORED date-context "Saturday, October 11 and Monday, October 13"
     at: group "Drop-in schedule - racquet sports"
 - NOTICE "See Thanksgiving weekend schedule."

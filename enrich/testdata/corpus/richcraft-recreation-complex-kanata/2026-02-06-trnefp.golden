@@ -129,16 +129,10 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     amenity: "pool"
-    at: group "Drop-in schedule - Family Day" activity "Lane swim*Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - Family Day" activity "Public swim *Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim*Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim *Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit Zumba®" sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - Deep" sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - Shallow" sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool swim - leisure pool only *Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim - leisure pool only*Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Reduced lane swim *Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-14 Sat 13:30-16:00, 2026-02-14 Sat 19:00-20:00, 2026-02-15 Sun 08:30-10:30, 2026-02-15 Sun 13:30-16:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim*Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-15 Sun 08:30-10:30
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim *Reservations not required." sessions 2026-02-14 Sat 13:30-16:00, 2026-02-15 Sun 13:30-16:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit Zumba®" sessions 2026-02-14 Sat 19:00-20:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim - leisure pool only*Reservations not required." sessions 2026-02-14 Sat 08:30-09:30, 2026-02-14 Sat 12:30-13:30, 2026-02-15 Sun 08:30-10:30
 - IGNORED heading "Schedule changes"
     section: "Schedule changes"
     at: facility

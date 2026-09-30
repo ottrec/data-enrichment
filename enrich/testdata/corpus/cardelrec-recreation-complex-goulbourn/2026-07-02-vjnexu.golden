@@ -46,12 +46,10 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All swim and aquafitness drop-ins"
-    at: group "Drop-in schedule - swim and aquafitness" activity "50+ swim *Reservations required." sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Shallow/deep combo *Reservations required." sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim *Reservations required." sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool swim" sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool swim (shared pool)" sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim with slide" sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 14:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General - Shallow/deep combo *Reservations required." sessions 2026-07-01 Wed 08:15-09:15, 2026-07-01 Wed 09:15-10:15
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim *Reservations required." sessions 2026-07-01 Wed 07:15-08:15, 2026-07-01 Wed 11:30-12:30, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool swim (shared pool)" sessions 2026-07-01 Wed 08:15-09:15
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim with slide" sessions 2026-07-01 Wed 14:00-16:00
 - IGNORED heading "Modified hours"
     section: "Modified hours"
     at: facility

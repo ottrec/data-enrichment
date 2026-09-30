@@ -9,5 +9,4 @@
     match: EXACT
     phrase: "Public swim, wave tank and warm pool"
     ambiguities: meridiem-inferred
-    at: group "Drop-in schedule - March Break" activity "Public Swim - wave tank and warm pool" sessions 2026-03-10 Tue 16:30-21:00
     at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim - wave tank and warm pool" sessions 2026-03-10 Tue 16:30-21:00

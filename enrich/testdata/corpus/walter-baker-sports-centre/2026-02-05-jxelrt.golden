@@ -72,7 +72,6 @@
     match: EXACT
     phrase: "Lane swim"
     ambiguities: meridiem-inferred
-    at: group "Drop-in schedule - Family Day weekend" activity "Lane swim *Reservations not required." sessions 2026-02-06 Fri 19:30-21:00
     at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-02-06 Fri 19:30-21:00
 - IGNORED heading "Family Day hours"
     section: "Family Day hours"

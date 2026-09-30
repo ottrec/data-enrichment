@@ -38,9 +38,7 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "All badminton drop-ins"
-    at: group "Drop-in schedule - racquet sports" activity "Badminton - family" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
     at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - adult" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
-    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - all ages" sessions 2025-10-10 Fri 11:00-12:00, 2025-10-10 Fri 12:00-13:00
 - IGNORED date-context "Saturday, October 11 and Monday, October 13"
     at: group "Drop-in schedule - racquet sports"
 - NOTICE "See Thanksgiving weekend schedule."

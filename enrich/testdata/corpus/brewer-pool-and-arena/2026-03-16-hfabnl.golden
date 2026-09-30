@@ -18,7 +18,6 @@
     phrase: "All drop-in skating"
     ambiguities: matched-other-group
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-03-21 Sat 19:00-20:50
     at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-03-21 Sat 19:00-20:50
 
 == Brewer Pool and Arena schedule_changes "Drop-in schedule - skating"

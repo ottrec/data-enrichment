@@ -35,7 +35,6 @@
     phrase: "Youth hockey and speed skating"
     sources: schedule_changes special_hours
     at: group "Drop-in schedule - ice sports" activity "Hockey - youth (13 to 17 years)" sessions 2026-09-05 Sat 15:00-15:50
-    at: group "Drop-in schedule - ice sports" activity "Speed skating" sessions 2026-09-05 Sat 15:00-15:50
 - IGNORED date-context "Saturday, September 26"
     at: group "Drop-in schedule - ice sports"
 - NOTICE "Youth hockey and speed skating, cancelled"
@@ -47,7 +46,6 @@
     phrase: "Youth hockey and speed skating"
     sources: schedule_changes special_hours
     at: group "Drop-in schedule - ice sports" activity "Hockey - youth (13 to 17 years)" sessions 2026-09-26 Sat 15:00-15:50
-    at: group "Drop-in schedule - ice sports" activity "Speed skating" sessions 2026-09-26 Sat 15:00-15:50
 - IGNORED date-context "Saturday, December 12"
     at: group "Drop-in schedule - ice sports"
 - NOTICE "Family skating, public skating and figure skating, cancelled"
@@ -70,7 +68,6 @@
     phrase: "Youth hockey and speed skating"
     sources: schedule_changes special_hours
     at: group "Drop-in schedule - ice sports" activity "Hockey - youth (13 to 17 years)" sessions 2026-12-19 Sat 15:00-15:50
-    at: group "Drop-in schedule - ice sports" activity "Speed skating" sessions 2026-12-19 Sat 15:00-15:50
 - IGNORED date-context "Saturday, December 26"
     at: group "Drop-in schedule - ice sports"
 - NOTICE "All drop-in skating and ice sports, cancelled"

@@ -9,11 +9,9 @@
     match: SCOPE_PHRASE
     phrase: "All swim and aquafitness drop-ins"
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit General -Deep/shallow combo*Reservations are required" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim - reduced capacity(shared pool)" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool Swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim" sessions 2026-07-18 Sat 12:00-14:30, 2026-07-18 Sat 14:30-18:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-18 Sat 12:00-14:30
+    at: group "Drop-in schedule - swim and aquafitness" activity "Preschool Swim" sessions 2026-07-18 Sat 12:00-14:30
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public Swim" sessions 2026-07-18 Sat 14:30-18:00
 - NOTICE "Public swim, 11 am to 6 pm, added"
     date text: "Saturday, July 18"
     dates: 2026-07-18 Sat

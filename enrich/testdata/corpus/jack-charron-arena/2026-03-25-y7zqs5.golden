@@ -10,9 +10,8 @@
     phrase: "All skates"
     ambiguities: matched-other-group
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-04-03 Fri 09:00-09:50, 2026-04-03 Fri 10:00-10:50
-    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-04-03 Fri 09:00-09:50, 2026-04-03 Fri 10:00-10:50
-    at: group "Drop-in schedule - skating" activity "Skating 50+" sessions 2026-04-03 Fri 09:00-09:50, 2026-04-03 Fri 10:00-10:50
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-04-03 Fri 10:00-10:50
+    at: group "Drop-in schedule - skating" activity "Skating 50+" sessions 2026-04-03 Fri 09:00-09:50
 - IGNORED date-context "Sunday, April 5"
     at: group "Drop-in schedule - ice sports"
 - NOTICE "All skates cancelled."
@@ -24,9 +23,8 @@
     phrase: "All skates"
     ambiguities: matched-other-group
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-04-05 Sun 15:00-15:50, 2026-04-05 Sun 16:00-16:50
-    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-04-05 Sun 15:00-15:50, 2026-04-05 Sun 16:00-16:50
-    at: group "Drop-in schedule - skating" activity "Skating 50+" sessions 2026-04-05 Sun 15:00-15:50, 2026-04-05 Sun 16:00-16:50
+    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-04-05 Sun 16:00-16:50
+    at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-04-05 Sun 15:00-15:50
 - IGNORED date-context "Friday, April 3"
     at: group "Drop-in schedule - skating"
 - NOTICE "All skates cancelled."

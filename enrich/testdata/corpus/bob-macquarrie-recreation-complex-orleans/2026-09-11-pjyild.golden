@@ -6,7 +6,7 @@
     effects: cancelled
     match: SCOPE_PHRASE
     phrase: "all indoor cycling"
-    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Reservations required" sessions 2026-09-14 Mon 08:30-09:25, 2026-09-15 Tue 06:30-07:25, 2026-09-16 Wed 08:30-09:25, 2026-09-17 Thu 06:30-07:25, 2026-09-18 Fri 08:30-09:25, 2026-09-21 Mon 08:30-09:25, 2026-09-22 Tue 06:30-07:25, 2026-09-23 Wed 08:30-09:25, 2026-09-24 Thu 06:30-07:25, 2026-09-25 Fri 08:30-09:25, 2026-09-28 Mon 08:30-09:25, 2026-09-29 Tue 06:30-07:25, 2026-09-30 Wed 08:30-09:25, 2026-10-01 Thu 06:30-07:25, 2026-10-02 Fri 08:30-09:25, 2026-10-05 Mon 08:30-09:25
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Reservations required" sessions 2026-09-14 Mon 08:30-09:25, 2026-09-15 Tue 06:30-07:25, 2026-09-16 Wed 08:30-09:25, 2026-09-17 Thu 06:30-07:25, 2026-09-18 Fri 08:30-09:25, 2026-09-21 Mon 08:30-09:25, 2026-09-22 Tue 06:30-07:25, 2026-09-23 Wed 08:30-09:25, 2026-09-24 Thu 06:30-07:25, 2026-09-25 Fri 08:30-09:25, 2026-09-28 Mon 08:30-09:25, 2026-09-29 Tue 06:30-07:25, 2026-09-30 Wed 08:30-09:25, 2026-10-01 Thu 06:30-07:25, 2026-10-02 Fri 08:30-09:25
 
 == Bob MacQuarrie Recreation Complex - Orléans schedule_changes "Drop-in schedule - skating"
 - IGNORED date-context "Friday, September 18"
@@ -89,7 +89,7 @@
     effects: cancelled
     match: FUZZY
     phrase: "Indoor cycling, all drop-ins"
-    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Reservations required" sessions 2026-09-14 Mon 08:30-09:25, 2026-09-15 Tue 06:30-07:25, 2026-09-16 Wed 08:30-09:25, 2026-09-17 Thu 06:30-07:25, 2026-09-18 Fri 08:30-09:25, 2026-09-21 Mon 08:30-09:25, 2026-09-22 Tue 06:30-07:25, 2026-09-23 Wed 08:30-09:25, 2026-09-24 Thu 06:30-07:25, 2026-09-25 Fri 08:30-09:25, 2026-09-28 Mon 08:30-09:25, 2026-09-29 Tue 06:30-07:25, 2026-09-30 Wed 08:30-09:25, 2026-10-01 Thu 06:30-07:25, 2026-10-02 Fri 08:30-09:25, 2026-10-05 Mon 08:30-09:25
+    at: group "Drop-in schedule - group fitness" activity "Indoor cycling *Reservations required" sessions 2026-09-14 Mon 08:30-09:25, 2026-09-15 Tue 06:30-07:25, 2026-09-16 Wed 08:30-09:25, 2026-09-17 Thu 06:30-07:25, 2026-09-18 Fri 08:30-09:25, 2026-09-21 Mon 08:30-09:25, 2026-09-22 Tue 06:30-07:25, 2026-09-23 Wed 08:30-09:25, 2026-09-24 Thu 06:30-07:25, 2026-09-25 Fri 08:30-09:25, 2026-09-28 Mon 08:30-09:25, 2026-09-29 Tue 06:30-07:25, 2026-09-30 Wed 08:30-09:25, 2026-10-01 Thu 06:30-07:25, 2026-10-02 Fri 08:30-09:25
 - IGNORED date-context "Friday, September 18"
     section: "Schedule changes"
     at: facility

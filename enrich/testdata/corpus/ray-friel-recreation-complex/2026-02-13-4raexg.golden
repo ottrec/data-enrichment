@@ -134,5 +134,4 @@
     effects: cancelled
     match: EXACT
     phrase: "Pick-up hockey 18+"
-    at: group "Drop-in schedule - Family Day weekend" activity "Pick-up hockey 18+" sessions 2026-02-18 Wed 12:00-13:20
     at: group "Drop-in schedule - skating" activity "Pick-up hockey 18+" sessions 2026-02-18 Wed 12:00-13:20

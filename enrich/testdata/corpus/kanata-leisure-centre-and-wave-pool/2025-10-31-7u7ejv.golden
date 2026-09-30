@@ -4,11 +4,11 @@
 - NOTICE "The hot tub and sauna are closed."
     date text: "October 31, 2025 to March 13, 2026"
     dates: 2025-10-31 Fri to 2026-03-13 Fri
-    time: "" covers [Friday 5:00 - 9:00pm; Friday 8:00am - 1:00pm; Monday 5:00 - 9:00pm; Monday 8:00am - 1:00pm; Saturday 8:30am - 5:00pm; Sunday 8:30am - 5:00pm; Thursday 11:00am - 1:00pm; Thursday 5:00 - 9:00pm; Thursday 8:00 - 10:00am; Tuesday 10:00am - 1:00pm; Tuesday 5:00 - 9:00pm; Tuesday 8:00 - 9:00am; Wednesday 5:00 - 9:00pm; Wednesday 8:00am - 1:00pm]
+    time: "" covers [Friday 5:00 - 9:00pm; Friday 8:00am - 1:00pm; Monday 5:00 - 9:00pm; Monday 8:00am - 1:00pm; Saturday 8:30am - 5:00pm; Sunday 8:30am - 5:00pm]
     effects: closure
     match: EXACT
     phrase: "hot tub and sauna"
-    at: group "Drop-in schedules - swim and aquafit" activity "Hot tub and sauna"
+    at: group "Drop-in schedules - swim and aquafit" activity "Hot tub and sauna" sessions 2025-10-31 Fri 08:00-13:00, 2025-10-31 Fri 17:00-21:00, 2025-11-01 Sat 08:30-17:00, 2025-11-02 Sun 08:30-17:00, 2025-11-03 Mon 08:00-13:00, 2025-11-03 Mon 17:00-21:00
 - IGNORED date-context "November 4 to 11"
     at: facility
 - NOTICE "The facility will be closed for annual maintenance."

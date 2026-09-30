@@ -9,7 +9,6 @@
     match: SCOPE_PHRASE
     phrase: "All pickleball drop-ins"
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - Racquet sports" activity "Pickleball - adult" sessions 2025-11-13 Thu 12:00-13:00, 2025-11-13 Thu 13:00-14:00
     at: group "Drop-in schedule - Racquet sports" activity "Pickleball - adult - intermediate" sessions 2025-11-13 Thu 12:00-13:00, 2025-11-13 Thu 13:00-14:00
 
 == Hunt Club-Riverside Park Community Centre special_hours

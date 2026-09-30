@@ -21,7 +21,6 @@
     ambiguities: meridiem-inferred skating-widened-to-window
     sources: schedule_changes special_hours
     at: group "Drop-in schedule - skating" activity "Family skating" sessions 2026-01-01 Thu 16:00-16:50
-    at: group "Drop-in schedule - skating" activity "Public skating" sessions 2026-01-01 Thu 16:00-16:50
 
 == Metcalfe Community Centre and Larry Robinson Arena special_hours
 - IGNORED date-context "Thursday, January 1"

@@ -43,7 +43,6 @@
     match: EXACT
     phrase: "Public swim"
     ambiguities: meridiem-inferred
-    at: group "Drop-in schedule - March Break" activity "Public swim" sessions 2026-03-26 Thu 17:00-19:30
     at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-03-26 Thu 17:00-19:30
 - IGNORED heading "Notice"
     section: "Notice"

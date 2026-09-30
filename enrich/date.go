@@ -2,6 +2,7 @@ package enrich
 
 import (
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -53,6 +54,23 @@ func (d dateSpec) allDates(max int) []time.Time {
 		return out
 	}
 	return nil
+}
+
+// maxEnumDays bounds date enumeration. A longer range is not a schedule
+// change, and the schedules' own ranges bound the sessions anyway.
+const maxEnumDays = 366
+
+// days enumerates the dates the spec selects: its dates, or its range up to
+// maxEnumDays, kept to its weekdays when it has both ("August 3 to 16,
+// Mondays").
+func (d dateSpec) days() []time.Time {
+	out := d.allDates(maxEnumDays)
+	if len(d.Weekdays) == 0 || len(out) == 0 {
+		return out
+	}
+	return slices.DeleteFunc(slices.Clone(out), func(t time.Time) bool {
+		return !slices.Contains(d.Weekdays, t.Weekday())
+	})
 }
 
 var weekdayNames = map[string]time.Weekday{

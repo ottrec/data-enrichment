@@ -9,9 +9,9 @@
     match: SCOPE_PHRASE
     phrase: "pool"
     amenity: "pool"
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit general" sessions 2026-07-01 Wed 07:30-08:30, 2026-07-01 Wed 08:35-09:30, 2026-07-01 Wed 09:35-10:30, 2026-07-01 Wed 11:30-13:00, 2026-07-01 Wed 13:00-15:00, 2026-07-01 Wed 15:00-16:00, 2026-07-01 Wed 20:00-21:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-01 Wed 07:30-08:30, 2026-07-01 Wed 08:35-09:30, 2026-07-01 Wed 09:35-10:30, 2026-07-01 Wed 11:30-13:00, 2026-07-01 Wed 13:00-15:00, 2026-07-01 Wed 15:00-16:00, 2026-07-01 Wed 20:00-21:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-07-01 Wed 07:30-08:30, 2026-07-01 Wed 08:35-09:30, 2026-07-01 Wed 09:35-10:30, 2026-07-01 Wed 11:30-13:00, 2026-07-01 Wed 13:00-15:00, 2026-07-01 Wed 15:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit general" sessions 2026-07-01 Wed 08:35-09:30, 2026-07-01 Wed 09:35-10:30
+    at: group "Drop-in schedule - swim and aquafitness" activity "Lane swim" sessions 2026-07-01 Wed 07:30-08:30, 2026-07-01 Wed 11:30-13:00, 2026-07-01 Wed 15:00-16:00, 2026-07-01 Wed 20:00-21:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Public swim" sessions 2026-07-01 Wed 13:00-15:00
 - IGNORED heading "Schedule changes"
     section: "Schedule changes"
     at: facility

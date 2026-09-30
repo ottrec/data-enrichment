@@ -64,7 +64,6 @@
     effects: closure
     match: EXACT
     phrase: "hot tub and steam room"
-    at: group "Drop-in schedule - March Break" activity "Hot tub and steam room" sessions 2026-03-06 Fri 18:00-21:00
     at: group "Drop-in schedule - swim and aquafitness" activity "Hot tub and steam room" sessions 2026-03-06 Fri 18:00-21:00
 - IGNORED heading "Schedule change"
     section: "Schedule change"

@@ -21,10 +21,8 @@
     match: SCOPE_PHRASE
     phrase: "All badminton and pickleball"
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - racquet sports" activity "Badminton - family" sessions 2025-11-07 Fri 07:30-08:30, 2025-11-07 Fri 08:30-09:30, 2025-11-07 Fri 09:30-10:30, 2025-11-07 Fri 11:00-12:00, 2025-11-07 Fri 12:00-13:00, 2025-11-07 Fri 13:30-14:30, 2025-11-07 Fri 14:30-15:30
-    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - adult" sessions 2025-11-07 Fri 07:30-08:30, 2025-11-07 Fri 08:30-09:30, 2025-11-07 Fri 09:30-10:30, 2025-11-07 Fri 11:00-12:00, 2025-11-07 Fri 12:00-13:00, 2025-11-07 Fri 13:30-14:30, 2025-11-07 Fri 14:30-15:30
-    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - all ages" sessions 2025-11-07 Fri 07:30-08:30, 2025-11-07 Fri 08:30-09:30, 2025-11-07 Fri 09:30-10:30, 2025-11-07 Fri 11:00-12:00, 2025-11-07 Fri 12:00-13:00, 2025-11-07 Fri 13:30-14:30, 2025-11-07 Fri 14:30-15:30
-    at: group "Drop-in schedule - racquet sports" activity "Pickleball - rotations" sessions 2025-11-07 Fri 07:30-08:30, 2025-11-07 Fri 08:30-09:30, 2025-11-07 Fri 09:30-10:30, 2025-11-07 Fri 11:00-12:00, 2025-11-07 Fri 12:00-13:00, 2025-11-07 Fri 13:30-14:30, 2025-11-07 Fri 14:30-15:30
+    at: group "Drop-in schedule - racquet sports" activity "Badminton doubles - adult" sessions 2025-11-07 Fri 11:00-12:00, 2025-11-07 Fri 12:00-13:00
+    at: group "Drop-in schedule - racquet sports" activity "Pickleball - rotations" sessions 2025-11-07 Fri 07:30-08:30, 2025-11-07 Fri 08:30-09:30, 2025-11-07 Fri 09:30-10:30, 2025-11-07 Fri 13:30-14:30, 2025-11-07 Fri 14:30-15:30
 
 == Richcraft Recreation Complex-Kanata schedule_changes "Drop-in schedule - sports"
 - IGNORED date-context "Friday, November 7"

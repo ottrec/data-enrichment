@@ -21,9 +21,9 @@
     match: SCOPE_PHRASE
     phrase: "All Aquafit drop-ins"
     sources: schedule_changes special_hours
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - Deep" sessions 2026-06-25 Thu 08:30-09:30, 2026-06-25 Thu 09:30-10:30, 2026-06-25 Thu 13:00-14:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - Shallow" sessions 2026-06-25 Thu 08:30-09:30, 2026-06-25 Thu 09:30-10:30, 2026-06-25 Thu 13:00-14:00
-    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit Zumba®" sessions 2026-06-25 Thu 08:30-09:30, 2026-06-25 Thu 09:30-10:30, 2026-06-25 Thu 13:00-14:00
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - Deep" sessions 2026-06-25 Thu 08:30-09:30, 2026-06-25 Thu 09:30-10:30
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit - Shallow" sessions 2026-06-25 Thu 08:30-09:30, 2026-06-25 Thu 09:30-10:30
+    at: group "Drop-in schedule - swim and aquafitness" activity "Aquafit Zumba®" sessions 2026-06-25 Thu 13:00-14:00
 - NOTICE "Sauna, 4 to 7:30 pm, closed"
     date text: "Thursday, June 25"
     dates: 2026-06-25 Thu

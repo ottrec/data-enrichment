@@ -37,7 +37,6 @@
     match: EXACT
     phrase: "Public skating"
     ambiguities: meridiem-inferred
-    at: group "Drop-in schedule - Winter Break" activity "Public skating" sessions 2025-12-12 Fri 10:00-11:50
     at: group "Drop-in schedule - skating" activity "Public Skating" sessions 2025-12-12 Fri 10:00-11:50
 - NOTICE "Pick-up hockey 18+, noon to 1:30 pm, cancelled"
     date text: "Friday, December 12"
@@ -46,5 +45,4 @@
     effects: cancelled
     match: EXACT
     phrase: "Pick-up hockey 18+"
-    at: group "Drop-in schedule - Winter Break" activity "Pick-up hockey 18+" sessions 2025-12-12 Fri 12:00-13:30
     at: group "Drop-in schedule - skating" activity "Pick-up hockey 18+" sessions 2025-12-12 Fri 12:00-13:30
