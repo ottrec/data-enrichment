@@ -61,7 +61,7 @@ func TestResolveClosureSubject(t *testing.T) {
 	bobMacQuarrie := testClosureCtx(t, "Bob MacQuarrie Recreation Complex - Orléans", []*groupMatcher{
 		testGroup("Drop-in schedule - swim", "Lane swim", "Public swim"),
 		testGroup("Drop-in schedule - squash and racquetball", "Squash courts 1, 2, 3, 5, 7 and 9", "Racquetball"),
-		testGroup("Drop-in schedule - skating", "Public skating"),
+		testGroup("Drop-in schedule - skating", "Public skating", "Figure skating"),
 	})
 	kirwan := testClosureCtx(t, "Deborah Anne Kirwan Pool", []*groupMatcher{
 		testGroup("Drop-in schedule - swim", "Lane swim", "Public swim"),
@@ -112,6 +112,8 @@ func TestResolveClosureSubject(t *testing.T) {
 		{"the pool of a pool, cancelling", kirwan, "pool", true, subjFacility, "facility-generic", ""},
 		{"one arena of two", bobMacQuarrie, "roger sénécal arena", false, subjAmenity, "amenity-core", "roger sénécal arena"},
 		{"one court of a six-court row", bobMacQuarrie, "squash court 3", false, subjUnit, "unit-of-row", "squash court"},
+		{"an arena named for an activity", bobMacQuarrie, "elizabeth manley figure skating arena", false, subjAmenity, "amenity-core", "elizabeth manley figure skate arena"},
+		{"an activity with a qualifier", bobMacQuarrie, "figure skating 18+", false, subjActivity, "activity-fuzzy", "Figure skating"},
 		{"a court that is a row of its own", nepean, "squash court 3", false, subjActivity, "activity-exact", "Squash court 3"},
 		{"the wave pool of a wave pool", splash, "wave pool", false, subjFacility, "facility-name-token", ""},
 		{"a multiple match is an amenity, not candidates", kanata, "steam room", false, subjAmenity, "amenity-core", "steam room"},

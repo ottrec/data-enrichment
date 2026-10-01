@@ -139,6 +139,7 @@
     date text: "Saturday, May 2 to Sunday, May 10"
     dates: 2026-05-02 Sat to 2026-05-10 Sun
     effects: closure
-    match: FUZZY
+    match: NONE
     phrase: "elizabeth manley figure skating arena"
-    at: group "Drop-in schedule - skating" activity "Figure skating"
+    amenity: "elizabeth manley figure skate arena"
+    at: facility

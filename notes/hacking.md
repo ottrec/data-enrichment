@@ -158,7 +158,9 @@ corpus numbers; this file is the code map, the invariants, and the workflow.
   amenity), part-unmatched (`part-unmatched`, the marker
   `closed-part-unmatched`), unit (`unit-of-row`: some of the numbered units
   a row runs on, `subjectNamesUnitOfActivity`), activity (`activity-exact`,
-  `-normalized`, `-fuzzy`), other-facility (`other-facility`: every
+  `-normalized`, `-fuzzy`; not a fuzzy match on a place named for the
+  activity, `placeNamedForActivity`: "Elizabeth Manley Figure Skating
+  Arena" is an amenity, not Figure skating), other-facility (`other-facility`: every
   distinctive token of another facility's name, at least two of them,
   `namesOtherFacility` over the version's names; "Meridian Theatres @
   Centrepointe" at Ben Franklin Place is an amenity named after that

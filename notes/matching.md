@@ -259,7 +259,7 @@ reads the objects; it is not in the output.
 | part | `part-groups` | a generic subject naming only some of the groups, or a cancelling closure whose part's words name some group titles (`groupsForPart`, pool read as swim) | "The pool is closed for maintenance." at a complex; "Squash and racquetball courts are closed and all drop-ins cancelled." |
 | part-unmatched | `part-unmatched` | cancelling, no title names the part; marked `closed-part-unmatched` | "The arena is closed and all programs cancelled." at a complex with no arena group |
 | unit | `unit-of-row` | some of the numbered units the matched row runs on (`subjectNamesUnitOfActivity`) | "Squash court 3" against "Squash courts 1, 2, 3, 5, 7 and 9" |
-| activity | `activity-exact`, `-normalized`, `-fuzzy` | one activity of the schedule | "Squash court 3" at Nepean Sportsplex, a row of its own |
+| activity | `activity-exact`, `-normalized`, `-fuzzy` | one activity of the schedule, unless the match is fuzzy and the subject is the activity's words plus more ending in a core amenity noun the activity lacks (`placeNamedForActivity`), which is the amenity | "Squash court 3" at Nepean Sportsplex, a row of its own; not "Elizabeth Manley Figure Skating Arena" against Figure skating |
 | other-facility | `other-facility` | every distinctive token of another facility's name, at least two; the amenity is that facility's name | "Meridian Theatres @ Centrepointe will remain closed" at Ben Franklin Place |
 | amenity | `amenity-core` | qualifiers up to a core amenity noun (`isAmenity`) | "Roger Sénécal Arena", "the steam room", "the pool's wheelchair ramp" |
 | none | `unmatched` | nothing above; marked `activity-unmatched` | "The museum" at Billings Estate |
@@ -355,12 +355,11 @@ warning on every group, no strike. `amenityCore:entrance` has Bob
 MacQuarrie's "The Main Entrance will be closed due to construction. Please
 use the West Entrance.", whose second sentence is an amenity notice
 ("please use west entrance") with no effect. Reading the candidate phrases
-turned up one more that no row uses: the `skating` stem makes Bob
+turned up one more, since fixed: with the `skating` stem, Bob
 MacQuarrie's "Elizabeth Manley Figure Skating Arena is closed for annual
-maintenance." a closure of the Figure skating activity (its tokens hold
-"figure skate"), where without the stem it is an amenity. No Figure
-skating session in the consumer golden falls in the closure's dates, so
-nothing is struck there.
+maintenance." held every token of "Figure skating" and was a closure of
+that activity. A fuzzy match on a subject that adds words ending in a core
+amenity noun is now the amenity (`placeNamedForActivity`, subject.go).
 
 68 entries were deleted in the structural review (d.md's D3) because no
 phrase in the cache's history resolves differently without them: without

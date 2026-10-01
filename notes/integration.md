@@ -191,6 +191,12 @@ with a go.mod bump:
   again. `facility-except-programs` (likely) marks a facility closure
   with an exception, at Cumberland and Fairfields today, which publish no
   drop-ins.
+- A place named for an activity (no API or schema change, the bump alone).
+  Bob MacQuarrie's "Elizabeth Manley Figure Skating Arena is closed for
+  annual maintenance." is an amenity closure (WarnNotice, the notices list)
+  instead of a closure of Figure skating, so the skating group's changes
+  warning for those dates goes and the skating pages stop listing it. No
+  session's answer changes.
 
 ## Open decisions
 

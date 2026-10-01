@@ -87,7 +87,7 @@ func (b *blockCtx) resolveClosureSubject(subject string, cancelled bool, fremain
 		// one court of six: the row keeps running on the rest, so this
 		// closes a place and not a programme
 		s.Kind, s.Reason, s.Amenity = subjUnit, "unit-of-row", amenityName(subject)
-	case q == matchExact || q == matchNormalized || q == matchFuzzy:
+	case q == matchExact || q == matchNormalized || (q == matchFuzzy && !placeNamedForActivity(subject, acts)):
 		s.Kind, s.Reason = subjActivity, "activity-"+q
 		s.Acts, s.Groups, s.Quality = acts, groups, q
 	case b.namesOtherFacility(subject) != "":
@@ -203,4 +203,18 @@ func (b *blockCtx) namesOtherFacility(subject string) string {
 		}
 	}
 	return ""
+}
+
+// placeNamedForActivity reports whether a subject is a place named for the
+// activity it matched: every token of the activity, more words, and a core
+// amenity noun the activity does not have at the end ("Elizabeth Manley
+// Figure Skating Arena" against "Figure skating"). Closing the arena is
+// not the activity's closure; the subject is the amenity.
+func placeNamedForActivity(subject string, acts []*actEntry) bool {
+	st := tokens(subject)
+	if len(acts) != 1 || len(st) == 0 {
+		return false
+	}
+	last := st[len(st)-1]
+	return amenityCore[last] && !acts[0].toks[last] && subset(acts[0].toks, tokenSet(subject))
 }
